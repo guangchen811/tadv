@@ -16,6 +16,12 @@ nbconvert = "^7.16.4"
 ipython = "^7.16"
 
 
+[tool.poetry.group.test]
+optional = true
+
+[tool.poetry.group.test.dependencies]
+pytest = "^8.3.3"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
