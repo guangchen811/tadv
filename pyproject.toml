@@ -12,6 +12,8 @@ langchain = "^0.3.2"
 dspy-ai = "^2.5.3"
 pydeequ = "^1.4.0"
 kaggle = "^1.6.17"
+nbconvert = "^7.16.4"
+ipython = "^7.16"
 
 
 [build-system]
