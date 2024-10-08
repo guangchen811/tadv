@@ -1,0 +1,1 @@
+# if some of the columns are detected as categorical, we delete some of the categorical values.
