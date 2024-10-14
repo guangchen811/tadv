@@ -9,6 +9,6 @@ def test_prompt_building():
     assert isinstance(chain.llm, ChatOpenAI)
     assert chain.llm.model_name == "gpt-3.5-turbo"
 
-    chain = LangChainCADV(model="gpt-4o")
+    chain = LangChainCADV(model="GPT-4o mini")
     assert isinstance(chain.llm, ChatOpenAI)
-    assert chain.llm.model_name == "gpt-4o"
+    assert chain.llm.model_name == "GPT-4o mini"
