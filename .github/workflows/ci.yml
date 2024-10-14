@@ -3,6 +3,7 @@ on: push
 
 jobs:
     ci:
+        environment: LLM APPLICATION
         strategy:
             fail-fast: false
             matrix:

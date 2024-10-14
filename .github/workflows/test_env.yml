@@ -2,6 +2,7 @@ name: test_env
 on: push
 jobs:
     test_env:
+        environment: LLM APPLICATION
         runs-on: ubuntu-latest
         steps:
         - name: Check GITHUB_TOKEN
