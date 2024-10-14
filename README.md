@@ -1,3 +1,5 @@
+[![codecov](https://codecov.io/gh/guangchen811/cadv-exploration/graph/badge.svg?token=UC6B33P10M)](https://codecov.io/gh/guangchen811/cadv-exploration)
+
 # Thoughts
 
 If we can use provenance techniques to build a dataset that labels which columns are used by which queries or codes. We can use it to train a model that can predict which columns are likely to be used by a new query or code.
