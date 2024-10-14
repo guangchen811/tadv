@@ -1,0 +1,10 @@
+name: test_env
+on: push
+jobs:
+    test_env:
+        runs-on: ubuntu-latest
+        steps:
+        - name: Check CODECOV_TOKEN
+          run: echo "Codecov token starts with ${CODECOV_TOKEN:0:4}***"
+          env:
+                CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
