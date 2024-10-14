@@ -4,7 +4,7 @@ jobs:
     test_env:
         runs-on: ubuntu-latest
         steps:
-        - name: Check CODECOV_TOKEN
-          run: echo "Codecov token starts with ${CODECOV_TOKEN:0:4}***"
+        - name: Check GITHUB_TOKEN
+          run: echo "Codecov token starts with ${GITHUB_TOKEN:0:4}***"
           env:
-                CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
