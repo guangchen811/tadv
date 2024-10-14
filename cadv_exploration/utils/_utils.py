@@ -5,7 +5,6 @@ Some useful utils for the project
 from pathlib import Path
 
 import dotenv
-import numpy
 
 
 def get_project_root() -> Path:
