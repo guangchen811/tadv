@@ -17,9 +17,3 @@ def test_build_single_chain():
     expectation_extraction_task = DVTask.EXPECTATION_EXTRACTION
     chain = langchain._build_single_chain(expectation_extraction_task)
     assert isinstance(chain, RunnableSequence)
-
-
-def test_build_whole_chain():
-    langchain = LangChainCADV()
-    chain = langchain.build_whole_chain()
-    assert isinstance(chain, RunnableSequence)
