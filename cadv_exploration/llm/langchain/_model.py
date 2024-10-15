@@ -49,25 +49,13 @@ class LangChainCADV:
         if task == DVTask.RELEVENT_COLUMN_TARGET:
             prompt = self.build_prompt(task)
             parser = CommaSeparatedListOutputParser()
-            single_chain = prompt | parser
+            single_chain = prompt | self.llm | parser
         elif task == DVTask.EXPECTATION_EXTRACTION:
             prompt = self.build_prompt(task)
             parser = JsonOutputParser()
-            single_chain = prompt | parser
+            single_chain = prompt | self.llm | parser
         elif task == DVTask.CHECK_FORMULATION:
             raise NotImplementedError("Check formulation task not yet implemented")
         else:
             raise ValueError(f"Unknown task {task}")
         return single_chain
-
-    def build_whole_chain(self):
-        relevant_column_target_chain = self._build_single_chain(
-            DVTask.RELEVENT_COLUMN_TARGET
-        )
-        expectation_extraction_chain = self._build_single_chain(
-            DVTask.EXPECTATION_EXTRACTION
-        )
-        whole_chain = {
-            "relevant_columns": relevant_column_target_chain
-        } | expectation_extraction_chain
-        return whole_chain
