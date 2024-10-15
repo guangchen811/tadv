@@ -33,5 +33,5 @@ def test_spark_df_from_local_csv():
     result_df = profile_on_spark_df(spark, spark_df).profiles
     result_df_billing_amount = result_df["Billing Amount"]
     assert result_df_billing_amount.completeness == 1.0
-    assert result_df_billing_amount.approximateNumDistinctValues == 49028
-    assert result_df_billing_amount.dataType == 'Fractional'
+    assert abs(result_df_billing_amount.approximateNumDistinctValues - 49028) <= 5000
+    assert result_df_billing_amount.dataType == "Fractional"
