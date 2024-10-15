@@ -1,0 +1,38 @@
+import os
+import pandas as pd
+
+os.environ["SPARK_VERSION"] = "3.5"
+from cadv_exploration.deequ import spark_df_from_pandas_df
+
+from pydeequ.checks import *
+from pydeequ.verification import *
+
+
+def test_profiling_on_small_dataset():
+    df = pd.DataFrame({"a": ["foo", "bar", "baz"], "b": [1, 2, 3], "c": [5, 6, None]})
+    spark_df, spark = spark_df_from_pandas_df(df)
+
+    check = Check(spark, CheckLevel.Warning, "Review Check")
+
+    added_checks = [
+        check.hasSize(lambda x: x >= 3),
+        check.hasMin("b", lambda x: x == 0),
+        check.isComplete("c"),
+        check.isUnique("a"),
+        check.isContainedIn("a", ["foo", "bar", "baz"]),
+        check.isNonNegative("b"),
+    ]
+
+    for added_check in added_checks:
+        check.addConstraint(added_check)
+    checkResult = VerificationSuite(spark).onData(spark_df).addCheck(check).run()
+
+    checkResult = VerificationResult.checkResultsAsDataFrame(
+        spark, checkResult
+    ).collect()
+    assert checkResult[0]["constraint_status"] == "Success"
+    assert checkResult[1]["constraint_status"] == "Failure"
+    assert checkResult[2]["constraint_status"] == "Success"
+    assert checkResult[3]["constraint_status"] == "Success"
+    assert checkResult[4]["constraint_status"] == "Success"
+    assert checkResult[5]["constraint_status"] == "Success"
