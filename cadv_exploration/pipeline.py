@@ -31,12 +31,14 @@ def prepare_chain_and_data():
     expectation_extraction_chain = lang_chain._build_single_chain(
         DVTask.EXPECTATION_EXTRACTION
     )
+    rule_generation_chain = lang_chain._build_single_chain(DVTask.RULE_GENERATION)
 
     return (
         column_desc,
         scripts,
         relevent_column_target_chain,
         expectation_extraction_chain,
+        rule_generation_chain,
         spark,
         spark_df,
     )

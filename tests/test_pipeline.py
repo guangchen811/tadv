@@ -11,6 +11,7 @@ def test_prepare_chain_and_data():
         scripts,
         relevent_column_target_chain,
         expectation_extraction_chain,
+        rule_generation_chain,
         spark,
         spark_df,
     ) = prepare_chain_and_data()
@@ -22,6 +23,9 @@ def test_prepare_chain_and_data():
         "code_snippet",
         "columns",
         "relevant_columns",
+    ]
+    assert rule_generation_chain.first.input_variables == [
+        "expectations",
     ]
     relevant_columns_list = relevent_column_target_chain.invoke(
         {"code_snippet": scripts[0], "columns": column_desc}
@@ -36,3 +40,7 @@ def test_prepare_chain_and_data():
         }
     )
     assert isinstance(expectations, dict)
+    assert len(expectations) > 0
+    rules = rule_generation_chain.invoke({"expectations": expectations})
+    assert isinstance(rules, dict)
+    assert len(rules) > 0

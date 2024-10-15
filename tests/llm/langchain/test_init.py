@@ -7,8 +7,8 @@ from cadv_exploration.llm._tasks import DVTask
 def test_prompt_building():
     chain = LangChainCADV()
     assert isinstance(chain.llm, ChatOpenAI)
-    assert chain.llm.model_name == "gpt-3.5-turbo"
+    assert chain.llm.model_name == "gpt-4o-mini"
 
-    chain = LangChainCADV(model="GPT-4o mini")
+    chain = LangChainCADV(model="gpt-4o-mini")
     assert isinstance(chain.llm, ChatOpenAI)
-    assert chain.llm.model_name == "GPT-4o mini"
+    assert chain.llm.model_name == "gpt-4o-mini"
