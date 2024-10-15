@@ -22,5 +22,5 @@ def spark_df_from_pandas_df(pandas_df):
         .config("spark.jars.excludes", pydeequ.f2j_maven_coord)
         .getOrCreate()
     )
-    df = spark.createDataFrame(pandas_df)
-    return df, spark
+    spark_df = spark.createDataFrame(pandas_df)
+    return spark_df, spark
