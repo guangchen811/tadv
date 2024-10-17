@@ -1,6 +1,6 @@
-import os
+from cadv_exploration.utils import load_dotenv
 
-os.environ["SPARK_VERSION"] = "3.5"
+load_dotenv()
 
 
 from cadv_exploration.deequ import spark_df_from_pandas_df

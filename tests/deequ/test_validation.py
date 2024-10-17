@@ -1,9 +1,10 @@
+from cadv_exploration.utils import load_dotenv
+
+load_dotenv()
 import gc
-import os
 
 import pandas as pd
 
-os.environ["SPARK_VERSION"] = "3.5"
 from pydeequ.checks import *
 from pydeequ.verification import *
 
