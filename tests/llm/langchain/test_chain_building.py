@@ -1,9 +1,9 @@
-from cadv_exploration.utils import load_dotenv
 from langchain.prompts import ChatPromptTemplate
-
-from cadv_exploration.llm.langchain._model import LangChainCADV
-from cadv_exploration.llm._tasks import DVTask
 from langchain_core.runnables.base import RunnableSequence
+
+from cadv_exploration.llm._tasks import DVTask
+from cadv_exploration.llm.langchain._model import LangChainCADV
+from cadv_exploration.utils import load_dotenv
 
 
 def test_build_single_chain():

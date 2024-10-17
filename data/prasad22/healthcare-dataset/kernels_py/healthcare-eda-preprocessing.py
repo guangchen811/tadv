@@ -4,11 +4,10 @@
 # In[ ]:
 
 
-import pandas as pd
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
 import seaborn as sns
-
 
 # In[ ]:
 
@@ -151,6 +150,7 @@ plt.boxplot(df["Billing Amount"])
 
 
 import category_encoders as ce
+
 encoder = ce.BinaryEncoder()
 df_encoded = encoder.fit_transform(df)
 df_encoded

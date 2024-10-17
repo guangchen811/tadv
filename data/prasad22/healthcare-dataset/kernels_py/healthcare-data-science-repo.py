@@ -8,13 +8,14 @@
 # It is defined by the kaggle/python Docker image: https://github.com/kaggle/docker-python
 # For example, here's several helpful packages to load
 
-import numpy as np # linear algebra
-import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
+import os
+
+import numpy as np  # linear algebra
+import pandas as pd  # data processing, CSV file I/O (e.g. pd.read_csv)
 
 # Input data files are available in the read-only "../input/" directory
 # For example, running this (by clicking run or pressing Shift+Enter) will list all files under the input directory
 
-import os
 for dirname, _, filenames in os.walk('/kaggle/input'):
     for filename in filenames:
         print(os.path.join(dirname, filename))
@@ -26,34 +27,29 @@ for dirname, _, filenames in os.walk('/kaggle/input'):
 # In[ ]:
 
 
-# for operation in data 
-import pandas as pd 
-import numpy as np 
-
 # for visualization 
-import matplotlib.pyplot as plt 
-import seaborn as sns 
-
-# for preprocessing 
-from sklearn.preprocessing import StandardScaler , LabelEncoder 
-from sklearn.preprocessing import LabelEncoder , OneHotEncoder ,MinMaxScaler
+import matplotlib.pyplot as plt
+import numpy as np
+# for operation in data 
+import pandas as pd
+import seaborn as sns
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.impute import SimpleImputer
-
-# to split data
-from sklearn.model_selection import train_test_split
-
-# for evaluation 
-from sklearn.metrics import accuracy_score,precision_score,recall_score
-from sklearn.metrics import confusion_matrix,classification_report ,f1_score
-
 # models 
 from sklearn.linear_model import LogisticRegression
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.tree import DecisionTreeClassifier
+# for evaluation 
+from sklearn.metrics import (accuracy_score, classification_report,
+                             confusion_matrix, f1_score, precision_score,
+                             recall_score)
+# to split data
+from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import GaussianNB
 from sklearn.neighbors import KNeighborsClassifier
+# for preprocessing 
+from sklearn.preprocessing import (LabelEncoder, MinMaxScaler, OneHotEncoder,
+                                   StandardScaler)
 from sklearn.svm import SVC
-
+from sklearn.tree import DecisionTreeClassifier
 
 # In[ ]:
 

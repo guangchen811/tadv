@@ -1,12 +1,13 @@
 import os
+
 import pandas as pd
 
 os.environ["SPARK_VERSION"] = "3.5"
-from cadv_exploration.deequ import spark_df_from_pandas_df, analyze_on_spark_df
+from pydeequ.analyzers import *
+
+from cadv_exploration.deequ import analyze_on_spark_df, spark_df_from_pandas_df
 from cadv_exploration.loader import load_csv, load_csvs
 from cadv_exploration.utils import get_project_root
-
-from pydeequ.analyzers import *
 
 
 def test_analyzing_on_small_dataset():

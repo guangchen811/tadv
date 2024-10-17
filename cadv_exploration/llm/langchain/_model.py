@@ -1,24 +1,19 @@
 import os
 
+from langchain_core.output_parsers import (CommaSeparatedListOutputParser,
+                                           JsonOutputParser)
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_openai import ChatOpenAI
-from langchain_core.output_parsers import (
-    CommaSeparatedListOutputParser,
-    JsonOutputParser,
-)
 
+from cadv_exploration.llm._tasks import DVTask
+from cadv_exploration.llm.langchain._prompt import (
+    EXPECTATION_EXTRACTION_PROMPT, RELEVENT_COLUMN_TARGET_PROMPT,
+    RULE_GENERATION_PROMPT, SYSTEM_TASK_DESCRIPTION)
 
 # from cadv_exploration.utils import get_project_root
 # from cadv_exploration.utils import load_dotenv
 
-from cadv_exploration.llm.langchain._prompt import (
-    SYSTEM_TASK_DESCRIPTION,
-    RELEVENT_COLUMN_TARGET_PROMPT,
-    EXPECTATION_EXTRACTION_PROMPT,
-    RULE_GENERATION_PROMPT,
-)
 
-from cadv_exploration.llm._tasks import DVTask
 
 
 class LangChainCADV:

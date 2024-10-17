@@ -1,7 +1,5 @@
-from langchain_core.output_parsers import (
-    CommaSeparatedListOutputParser,
-    JsonOutputParser,
-)
+from langchain_core.output_parsers import (CommaSeparatedListOutputParser,
+                                           JsonOutputParser)
 
 
 def test_CommaSeparatedListOutputParser():

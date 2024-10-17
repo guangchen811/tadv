@@ -1,6 +1,7 @@
 import os
-import pandas as pd
 from typing import List
+
+import pandas as pd
 
 
 def load_csvs(dir_path: List[str]) -> List[pd.DataFrame]:

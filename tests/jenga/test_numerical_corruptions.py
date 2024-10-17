@@ -1,6 +1,6 @@
-from jenga.corruptions.numerical import GaussianNoise
 import numpy as np
 import pandas as pd
+from jenga.corruptions.numerical import GaussianNoise
 
 
 def test_gaussian_noise():

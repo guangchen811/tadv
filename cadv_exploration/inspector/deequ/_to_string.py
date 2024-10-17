@@ -1,5 +1,5 @@
-import yaml
 import pandas as pd
+import yaml
 
 from cadv_exploration.deequ import profile_on_spark_df
 

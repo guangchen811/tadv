@@ -1,12 +1,13 @@
-import os, gc
+import gc
+import os
+
 import pandas as pd
 
 os.environ["SPARK_VERSION"] = "3.5"
-from cadv_exploration.deequ import spark_df_from_pandas_df
-
 from pydeequ.checks import *
 from pydeequ.verification import *
 
+from cadv_exploration.deequ import spark_df_from_pandas_df
 
 # def test_validation_on_small_dataset():
 #     df = pd.DataFrame({"a": ["foo", "bar", "baz"], "b": [1, 2, 3], "c": [5, 6, None]})
@@ -46,4 +47,3 @@ from pydeequ.verification import *
 
 #     # Force garbage collection (optional)
 #     gc.collect()
-

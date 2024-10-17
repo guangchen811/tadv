@@ -1,6 +1,7 @@
 import os
-from pyspark.sql import SparkSession, Row
+
 import pydeequ
+from pyspark.sql import Row, SparkSession
 
 
 def init_files():

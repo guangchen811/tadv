@@ -3,10 +3,10 @@ import os
 os.environ["SPARK_VERSION"] = "3.5"
 
 
+from cadv_exploration.deequ import spark_df_from_pandas_df
+from cadv_exploration.inspector.deequ._to_string import spark_df_to_column_desc
 from cadv_exploration.loader import load_csv
 from cadv_exploration.utils import get_project_root
-from cadv_exploration.inspector.deequ._to_string import spark_df_to_column_desc
-from cadv_exploration.deequ import spark_df_from_pandas_df
 
 
 def test_spark_df_to_column_desc():
