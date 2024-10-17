@@ -24,11 +24,13 @@ from cadv_exploration.llm._tasks import DVTask
 class LangChainCADV:
     def __init__(self, model: str = None):
         if model is None:
-            self.llm = ChatOpenAI(model="gpt-4o-mini")
+            self.model = ChatOpenAI(model="gpt-4o-mini")
         else:
-            self.llm = ChatOpenAI(model=model)
+            self.model = ChatOpenAI(model=model)
 
-    def build_prompt(self, task: DVTask) -> ChatPromptTemplate:
+        self._build_chain()
+
+    def _build_prompt(self, task: DVTask) -> ChatPromptTemplate:
         if task == DVTask.RELEVENT_COLUMN_TARGET:
             return ChatPromptTemplate.from_messages(
                 [
@@ -53,17 +55,43 @@ class LangChainCADV:
 
     def _build_single_chain(self, task: DVTask):
         if task == DVTask.RELEVENT_COLUMN_TARGET:
-            prompt = self.build_prompt(task)
+            prompt = self._build_prompt(task)
             parser = CommaSeparatedListOutputParser()
-            single_chain = prompt | self.llm | parser
+            single_chain = prompt | self.model | parser
         elif task == DVTask.EXPECTATION_EXTRACTION:
-            prompt = self.build_prompt(task)
+            prompt = self._build_prompt(task)
             parser = JsonOutputParser()
-            single_chain = prompt | self.llm | parser
+            single_chain = prompt | self.model | parser
         elif task == DVTask.RULE_GENERATION:
-            prompt = self.build_prompt(task)
+            prompt = self._build_prompt(task)
             parser = JsonOutputParser()
-            single_chain = prompt | self.llm | parser
+            single_chain = prompt | self.model | parser
         else:
             raise ValueError(f"Unknown task {task}")
         return single_chain
+
+    def _build_chain(self):
+        self.relevent_column_target_chain = self._build_single_chain(
+            DVTask.RELEVENT_COLUMN_TARGET
+        )
+        self.expectation_extraction_chain = self._build_single_chain(
+            DVTask.EXPECTATION_EXTRACTION
+        )
+        self.rule_generation_chain = self._build_single_chain(DVTask.RULE_GENERATION)
+
+    def invoke(self, input_variables: dict):
+        relevant_columns_list = self.relevent_column_target_chain.invoke(
+            {
+                "code_snippet": input_variables["script"],
+                "columns": input_variables["column_desc"],
+            }
+        )
+        expectations = self.expectation_extraction_chain.invoke(
+            {
+                "code_snippet": input_variables["script"],
+                "columns": input_variables["column_desc"],
+                "relevant_columns": str(relevant_columns_list),
+            }
+        )
+        rules = self.rule_generation_chain.invoke({"expectations": expectations})
+        return relevant_columns_list, expectations, rules
