@@ -10,11 +10,6 @@ from cadv_exploration.llm.langchain._prompt import (
     EXPECTATION_EXTRACTION_PROMPT, RELEVENT_COLUMN_TARGET_PROMPT,
     RULE_GENERATION_PROMPT, SYSTEM_TASK_DESCRIPTION)
 
-# from cadv_exploration.utils import get_project_root
-# from cadv_exploration.utils import load_dotenv
-
-
-
 
 class LangChainCADV:
     def __init__(self, model: str = None):
