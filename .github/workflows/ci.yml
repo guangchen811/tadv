@@ -13,7 +13,7 @@ jobs:
         runs-on: ${{ matrix.os }}
         env:
             OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-            HF_KEY: ${{ secrets.HF_KEY }}
+            HF_TOKEN: ${{ secrets.HF_TOKEN }}
         steps:
             - uses: actions/checkout@v4
             - uses: actions/setup-python@v4
@@ -28,7 +28,8 @@ jobs:
             - name: create dotenv file
               run: |
                 echo "OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}" > .env
-                echo "HF_KEY=${{ secrets.HF_KEY }}" >> .env
+                echo "HF_TOKEN=${{ secrets.HF_TOKEN }}" >> .env
+                echo "SPARK_VERSION=3.5" >> .env
                 echo ".env file created successfully"
             - name: Run tests
               run: poetry run pytest --cov=. tests/ --cov-report=xml
