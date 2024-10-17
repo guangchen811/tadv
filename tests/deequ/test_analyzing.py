@@ -2,7 +2,6 @@ from cadv_exploration.utils import load_dotenv
 
 load_dotenv()
 import pandas as pd
-
 from pydeequ.analyzers import *
 
 from cadv_exploration.deequ import analyze_on_spark_df, spark_df_from_pandas_df

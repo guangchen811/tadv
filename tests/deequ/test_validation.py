@@ -4,7 +4,6 @@ load_dotenv()
 import gc
 
 import pandas as pd
-
 from pydeequ.checks import *
 from pydeequ.verification import *
 
