@@ -1,6 +1,6 @@
-import os
+from cadv_exploration.utils import load_dotenv
 
-os.environ["SPARK_VERSION"] = "3.5"
+load_dotenv()
 import argparse
 import logging
 
