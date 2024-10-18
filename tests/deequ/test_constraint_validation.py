@@ -4,8 +4,8 @@ from pydeequ.verification import *
 
 # https://github.com/awslabs/python-deequ/issues/198
 # import gc
-from cadv_exploration.deequ import validate_suggestions
-from cadv_exploration.deequ import spark_df_from_pandas_df
+from cadv_exploration.deequ import (spark_df_from_pandas_df,
+                                    validate_suggestions)
 
 
 def test_constraint_validation():
