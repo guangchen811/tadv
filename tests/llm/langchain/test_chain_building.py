@@ -2,7 +2,7 @@ from langchain.prompts import ChatPromptTemplate
 from langchain_core.runnables.base import RunnableSequence
 
 from cadv_exploration.llm._tasks import DVTask
-from cadv_exploration.llm.langchain._model import LangChainCADV
+from cadv_exploration.llm.langchain import LangChainCADV
 from cadv_exploration.utils import load_dotenv
 
 

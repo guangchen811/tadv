@@ -1,8 +1,6 @@
 from cadv_exploration.utils import load_dotenv
 
 load_dotenv()
-
-
 from cadv_exploration.deequ import spark_df_from_pandas_df
 from cadv_exploration.inspector.deequ._to_string import spark_df_to_column_desc
 from cadv_exploration.loader import load_csv

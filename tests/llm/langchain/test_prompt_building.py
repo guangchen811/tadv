@@ -1,7 +1,7 @@
 from langchain.prompts import ChatPromptTemplate
 
 from cadv_exploration.llm._tasks import DVTask
-from cadv_exploration.llm.langchain._model import LangChainCADV
+from cadv_exploration.llm.langchain import LangChainCADV
 
 
 def test_prompt_building():
