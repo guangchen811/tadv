@@ -22,8 +22,7 @@ def docker_exists():
 
 
 @pytest.mark.skipif(not docker_exists(), reason="Docker is not available")
-def test_runnable():
-
+def test_runnable_on_personal_dataset():
     executor = KaggleExecutor()
     project_root = get_project_root()
     data_path = Path(
@@ -32,12 +31,28 @@ def test_runnable():
         / "prasad22"
         / "healthcare-dataset"
         / "files"
-        / "healthcare_dataset.csv"
     )
     script_dir = Path(
         project_root / "data" / "prasad22" / "healthcare-dataset" / "kernels_py"
     )
 
     script_paths = load_py_files(script_dir, return_files=False)
-    result = executor.run(data_path.parent.parent, script_paths[0])
+    result = executor.run(data_path.parent, script_paths[0], is_competition=False)
+    assert result is not None
+
+
+def test_runnable_on_competition_dataset():
+    executor = KaggleExecutor()
+    project_root = get_project_root()
+    data_path = Path(
+        project_root
+        / "data"
+        / "santander-value-prediction-challenge"
+        / "files"
+    )
+    script_dir = Path(
+        project_root / "data" / "santander-value-prediction-challenge" / "kernels_py"
+    )
+    script_paths = load_py_files(script_dir, return_files=False)
+    result = executor.run(data_path.parent, script_paths[0], is_competition=True)
     assert result is not None
