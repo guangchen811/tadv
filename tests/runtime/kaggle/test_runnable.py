@@ -41,6 +41,7 @@ def test_runnable_on_personal_dataset():
     assert result is not None
 
 
+@pytest.mark.skipif(not docker_exists(), reason="Docker is not available")
 def test_runnable_on_competition_dataset():
     executor = KaggleExecutor()
     project_root = get_project_root()
