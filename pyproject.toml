@@ -15,7 +15,7 @@ ipython = "^7.16"
 pyspark = "^3.5.3"
 langchain-openai = "^0.2.2"
 pyyaml = "^6.0.2"
-
+nbconvert = "^7.16.4"
 
 [tool.poetry.group.test]
 optional = true
@@ -29,7 +29,6 @@ optional = true
 
 [tool.poetry.group.download.dependencies]
 kaggle = "^1.6.17"
-nbconvert = "^7.16.4"
 
 [build-system]
 requires = ["poetry-core"]
