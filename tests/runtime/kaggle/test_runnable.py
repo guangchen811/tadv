@@ -24,7 +24,7 @@ def docker_exists():
 
 
 @pytest.mark.skipif(not docker_exists(), reason="Docker is not available")
-def test_runnable_on_personal_dataset():
+def test_runnable_on_personal_dataset(tmp_path):
     executor = KaggleExecutor()
     project_root = get_project_root()
     data_path = Path(
@@ -37,14 +37,14 @@ def test_runnable_on_personal_dataset():
     script_dir = Path(
         project_root / "data" / "prasad22" / "healthcare-dataset" / "kernels_py"
     )
-
+    output_path = tmp_path / "output"
     script_paths = load_py_files(script_dir, return_files=False)
-    result = executor.run_py_script(data_path.parent, script_paths[0], is_competition=False)
+    result = executor.run(data_path.parent, script_paths[0], output_path, is_competition=False)
     assert result is not None
 
 
 @pytest.mark.skipif(not docker_exists(), reason="Docker is not available")
-def test_runnable_on_competition_dataset():
+def test_runnable_on_competition_dataset(tmp_path):
     executor = KaggleExecutor()
     project_root = get_project_root()
     data_path = Path(
@@ -57,12 +57,13 @@ def test_runnable_on_competition_dataset():
         project_root / "data" / "santander-value-prediction-challenge" / "kernels_py"
     )
     script_paths = load_py_files(script_dir, return_files=False)
-    result = executor.run_py_script(data_path.parent, script_paths[0], is_competition=True)
+    output_path = tmp_path / "output"
+    result = executor.run(data_path.parent, script_paths[0], output_path, is_competition=True)
     assert result is not None
 
 
 @pytest.mark.skipif(not docker_exists(), reason="Docker is not available")
-def test_runnable_on_personal_dataset_with_ipynb():
+def test_runnable_on_personal_dataset_with_ipynb(tmp_path):
     executor = KaggleExecutor()
     project_root = get_project_root()
     data_path = Path(
@@ -75,14 +76,14 @@ def test_runnable_on_personal_dataset_with_ipynb():
     script_dir = Path(
         project_root / "data" / "prasad22" / "healthcare-dataset" / "kernels_ipynb"
     )
-
+    output_path = tmp_path / "output"
     script_paths = load_py_files(script_dir, return_files=False)
-    result = executor.run(data_path.parent, script_paths[0], is_competition=False)
+    result = executor.run(data_path.parent, script_paths[0], output_path, is_competition=False)
     assert result is not None
 
 
 @pytest.mark.skipif(not docker_exists(), reason="Docker is not available")
-def test_runnable_on_competition_dataset_with_ipynb():
+def test_runnable_on_competition_dataset_with_ipynb(tmp_path):
     executor = KaggleExecutor()
     project_root = get_project_root()
     data_path = Path(
@@ -95,10 +96,12 @@ def test_runnable_on_competition_dataset_with_ipynb():
         project_root / "data" / "santander-value-prediction-challenge" / "kernels_ipynb"
     )
     script_paths = load_py_files(script_dir, return_files=False)
-    result = executor.run(data_path.parent, script_paths[1], is_competition=True)
+    output_path = tmp_path / "output"
+    result = executor.run(data_path.parent, script_paths[1], output_path, is_competition=True)
     assert result is not None
 
 
+@pytest.mark.skipif(not docker_exists(), reason="Docker is not available")
 def test_runnable_on_small_test_dataset_with_ipynb(tmp_path):
     executor = KaggleExecutor()
     project_root = get_project_root()

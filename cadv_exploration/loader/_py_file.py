@@ -1,5 +1,6 @@
 import os
 from typing import List
+from pathlib import Path
 
 
 def load_py_file(file_path: str, return_file: bool = True) -> str:
@@ -8,7 +9,7 @@ def load_py_file(file_path: str, return_file: bool = True) -> str:
         with open(file_path, "r") as file:
             return file.read()
     else:
-        return file_path
+        return Path(file_path)
 
 
 def load_py_files(dir_path: str, return_files: bool = True) -> List[str]:
