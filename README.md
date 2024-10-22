@@ -30,15 +30,15 @@ The errors are shown in the following table:
 |-------------------------------|------------------------------------------------------------------------------------|
 | Data formatting               | Change the format of data in the original dataset (e.g., DD/MM/YYYY vs MM/DD/YYYY) |
 | Missing categorical value     | Delete some values when recognizing a categorical column.                          |
-| Violated attribute dependency | Create columns that conflict with attribute dependency.                            |
+| Violated attribute dependency | Change the value of one column based on the value of another column.               |
 
 ## runtime environments
 
-We use kaggle as the first runtime environment to evaluate the generated data validation rules. The kaggle runtime
-environment is downloaded from their [official github repository](https://github.com/Kaggle/docker-python). As shown in
-the following figure, we run the user ipynb codes on the kaggle dataset with kaggle runtime environment. The output
-contains two parts, a new notebook with the outputs and the submission csv file. You can look
-at [this test case](./tests/runtime/kaggle/test_runnable.py) for more details.
+We use Kaggle as the first runtime environment to evaluate the generated data validation rules. The Kaggle runtime
+environment is downloaded from their [official GitHub repository](https://github.com/Kaggle/docker-python). The figure
+shows that we run the user ipynb codes on the Kaggle dataset with the Kaggle runtime environment. The output
+contains two parts: a new notebook with the outputs and the submission CSV file. For more details, you can look
+at [this test case](./tests/runtime/kaggle/test_runnable.py).
 
 <img src="./assets/runtime_environments.png" alt="runtime_environments" width="50%"/>
 
@@ -62,7 +62,8 @@ As shown in the following figure, we decompose the data validation task into two
 
 <img src="./assets/llm_framework.png" alt="llm_framework" width="50%"/>
 
-The prompts during the API calls can be found [here](./cadv_exploration/llm/langchain/_prompt.py).
+The prompts during the API calls can be found [here](./cadv_exploration/llm/langchain/_prompt.py). For more details, you
+can look at the [test case](./tests/llm/langchain).
 
 # Other Thoughts
 
