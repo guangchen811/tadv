@@ -18,7 +18,7 @@ This repository contains the following components:
 
 ## error injection
 
-<img src="./assets/error_injection.png" alt="error_injection" width="30%"/>
+<img src="./assets/error_injection.png" alt="error_injection" width="500px"/>
 
 The error injection module is built based on [Jenga](https://github.com/schelterlabs/jenga), a library for injecting
 errors into datasets. We plan to extend the error injection methods into more real world scenarios where we often need
@@ -40,7 +40,7 @@ shows that we run the user ipynb codes on the Kaggle dataset with the Kaggle run
 contains two parts: a new notebook with the outputs and the submission CSV file. For more details, you can look
 at [this test case](./tests/runtime/kaggle/test_runnable.py).
 
-<img src="./assets/runtime_environments.png" alt="runtime_environments" width="50%"/>
+<img src="./assets/runtime_environments.png" alt="runtime_environments" width="500px"/>
 
 ## inspector
 
@@ -60,7 +60,7 @@ As shown in the following figure, we decompose the data validation task into two
 - Rule generation: generate formal rules in the form
   of [deequ](https://github.com/awslabs/python-deequ/blob/master/pydeequ/checks.py) for evaluation.
 
-<img src="./assets/llm_framework.png" alt="llm_framework" width="50%"/>
+<img src="./assets/llm_framework.png" alt="llm_framework" width="500px"/>
 
 The prompts during the API calls can be found [here](./cadv_exploration/llm/langchain/_prompt.py). For more details, you
 can look at the [test case](./tests/llm/langchain).
