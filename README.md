@@ -83,3 +83,5 @@ Raha paper gives me some references about how to classify errors in data. It is 
 context is given to make the task more formal.
 
 I should also see how context can be helpful for the error type that already mentioned in raha.
+
+Maybe I need to design a new component for llm to write queries on the table to check some information.
