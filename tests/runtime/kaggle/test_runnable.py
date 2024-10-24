@@ -9,21 +9,33 @@ from cadv_exploration.loader._py_file import load_py_files
 from cadv_exploration.runtime_environments.kaggle import KaggleExecutor
 from cadv_exploration.utils import get_project_root
 
+def docker_image_exists(image_name="kaggle-env/python:1.0.0"):
+    """
+    Check if the specified Docker image exists locally.
 
-def docker_exists():
+    Args:
+    - image_name (str): The name and tag of the Docker image to check.
+
+    Returns:
+    - bool: True if the image exists, False otherwise.
+    """
     try:
-        subprocess.run(
-            ["docker", "--version"],
+        result = subprocess.run(
+            ["docker", "image", "inspect", image_name],
             check=True,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
         )
-        return True
+        return result.returncode == 0
     except (subprocess.CalledProcessError, FileNotFoundError):
         return False
 
 
-@pytest.mark.skipif(not docker_exists(), reason="Docker is not available")
+def test_docker_exists():
+    assert docker_image_exists() == True
+
+
+@pytest.mark.skipif(not docker_image_exists(), reason="Docker is not available")
 def test_runnable_on_personal_dataset(tmp_path):
     executor = KaggleExecutor()
     project_root = get_project_root()
@@ -43,7 +55,7 @@ def test_runnable_on_personal_dataset(tmp_path):
     assert result is not None
 
 
-@pytest.mark.skipif(not docker_exists(), reason="Docker is not available")
+@pytest.mark.skipif(not docker_image_exists(), reason="Docker is not available")
 def test_runnable_on_competition_dataset(tmp_path):
     executor = KaggleExecutor()
     project_root = get_project_root()
@@ -62,7 +74,7 @@ def test_runnable_on_competition_dataset(tmp_path):
     assert result is not None
 
 
-@pytest.mark.skipif(not docker_exists(), reason="Docker is not available")
+@pytest.mark.skipif(not docker_image_exists(), reason="Docker is not available")
 def test_runnable_on_personal_dataset_with_ipynb(tmp_path):
     executor = KaggleExecutor()
     project_root = get_project_root()
@@ -82,7 +94,7 @@ def test_runnable_on_personal_dataset_with_ipynb(tmp_path):
     assert result is not None
 
 
-@pytest.mark.skipif(not docker_exists(), reason="Docker is not available")
+@pytest.mark.skipif(not docker_image_exists(), reason="Docker is not available")
 def test_runnable_on_competition_dataset_with_ipynb(tmp_path):
     executor = KaggleExecutor()
     project_root = get_project_root()
@@ -101,7 +113,7 @@ def test_runnable_on_competition_dataset_with_ipynb(tmp_path):
     assert result is not None
 
 
-@pytest.mark.skipif(not docker_exists(), reason="Docker is not available")
+@pytest.mark.skipif(not docker_image_exists(), reason="Docker is not available")
 def test_runnable_on_small_test_dataset_with_ipynb(tmp_path):
     executor = KaggleExecutor()
     project_root = get_project_root()
