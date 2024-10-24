@@ -1,12 +1,12 @@
 import pandas as pd
 
 from cadv_exploration.error_injection import MissingCategoricalValueCorruption
-from cadv_exploration.utils import get_project_root
+from cadv_exploration.utils import get_project_root, get_current_folder
 from cadv_exploration.loader import load_csv
 
 
 def test_on_small_dataset():
-    df = pd.read_csv("./example_table.csv")
+    df = pd.read_csv(get_current_folder() / "example_table.csv")
 
     missing_categorical_value_corruption_to_nan = MissingCategoricalValueCorruption(columns=["BloodType"],
                                                                                     severity=0.001,
