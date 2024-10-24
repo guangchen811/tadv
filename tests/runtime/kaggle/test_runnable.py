@@ -9,6 +9,7 @@ from cadv_exploration.loader._py_file import load_py_files
 from cadv_exploration.runtime_environments.kaggle import KaggleExecutor
 from cadv_exploration.utils import get_project_root
 
+
 def docker_image_exists(image_name="kaggle-env/python:1.0.0"):
     """
     Check if the specified Docker image exists locally.
@@ -29,10 +30,6 @@ def docker_image_exists(image_name="kaggle-env/python:1.0.0"):
         return result.returncode == 0
     except (subprocess.CalledProcessError, FileNotFoundError):
         return False
-
-
-def test_docker_exists():
-    assert docker_image_exists() == True
 
 
 @pytest.mark.skipif(not docker_image_exists(), reason="Docker is not available")
