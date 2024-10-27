@@ -9,7 +9,7 @@ class DataCorruption(ABC):
         pass
 
     @abstractmethod
-    def corrupt(self, data):
+    def transform(self, data):
         pass
 
 
@@ -19,7 +19,7 @@ class TabularCorruption(DataCorruption):
         self.columns = columns
 
     @abstractmethod
-    def corrupt(self, dataframe):
+    def transform(self, dataframe):
         pass
 
     @abstractmethod

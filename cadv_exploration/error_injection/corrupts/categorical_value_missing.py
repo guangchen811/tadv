@@ -31,7 +31,7 @@ class MissingCategoricalValueCorruption(TabularCorruption):
 
         return categorical_columns
 
-    def corrupt(self, dataframe):
+    def transform(self, dataframe):
         self.validate_data(dataframe)
         if self.columns is None:
             self.columns = self.identify_columns(dataframe)
