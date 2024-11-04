@@ -7,7 +7,7 @@ from langchain_openai import ChatOpenAI
 
 from cadv_exploration.llm._tasks import DVTask
 from cadv_exploration.llm.langchain._prompt import (
-    EXPECTATION_EXTRACTION_PROMPT, RELEVENT_COLUMN_TARGET_PROMPT,
+    EXPECTATION_EXTRACTION_PROMPT, RELEVANT_COLUMN_TARGET_PROMPT,
     RULE_GENERATION_PROMPT, SYSTEM_TASK_DESCRIPTION)
 
 
@@ -25,7 +25,7 @@ class LangChainCADV:
             return ChatPromptTemplate.from_messages(
                 [
                     ("system", SYSTEM_TASK_DESCRIPTION),
-                    ("human", RELEVENT_COLUMN_TARGET_PROMPT),
+                    ("human", RELEVANT_COLUMN_TARGET_PROMPT),
                 ],
             )
         elif task == DVTask.EXPECTATION_EXTRACTION:
@@ -61,7 +61,7 @@ class LangChainCADV:
         return single_chain
 
     def _build_chain(self):
-        self.relevent_column_target_chain = self._build_single_chain(
+        self.relevant_column_target_chain = self._build_single_chain(
             DVTask.RELEVENT_COLUMN_TARGET
         )
         self.expectation_extraction_chain = self._build_single_chain(
@@ -70,7 +70,7 @@ class LangChainCADV:
         self.rule_generation_chain = self._build_single_chain(DVTask.RULE_GENERATION)
 
     def invoke(self, input_variables: dict):
-        relevant_columns_list = self.relevent_column_target_chain.invoke(
+        relevant_columns_list = self.relevant_column_target_chain.invoke(
             {
                 "code_snippet": input_variables["script"],
                 "columns": input_variables["column_desc"],

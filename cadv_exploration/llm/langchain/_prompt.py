@@ -6,7 +6,7 @@ The system contains the following components:
 3. *Rule Generation*: Given a dataset described by name, columns with corresponding downstream code, the relevant columns and the user's assumptions. This component generates formal validation rules for the dataset.
 """
 
-RELEVENT_COLUMN_TARGET_PROMPT = """You are part of a context-aware data validation system.
+RELEVANT_COLUMN_TARGET_PROMPT = """You are part of a context-aware data validation system.
 You serve as the *Relevant Column Target* component. You are asked to find the columns used in the code snippet.
 The dataset is a CSV file with the following columns:
 {columns}
