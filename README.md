@@ -85,6 +85,52 @@ poetry run pytest
 shell ./cadv_exploration/scripts/shell/download_competition_dataset.sh
 ```
 
+### Kaggle File Structure
+
+To make the code from kaggle work on the local machine, this project binds the local directory to the kaggle directory
+in the following way:
+
+```python
+f"{local_project_path / 'files'}:/kaggle/input/{dataset_name}/",
+f"{script_path.parent}:/kaggle/script/",
+f"{output_path}:/kaggle/output/",
+```
+
+These bindings require the kaggle code meets the following requirements:
+
+1. They should read the input data from `/kaggle/input/{dataset_name}/` instead of `/kaggle/input/`.
+2. The submission file should be written to `/kaggle/output/` instead of `/kaggle/output/` instead of the working
+   directory.
+
+A typical local dataset structure should be like this:
+
+```
+.
+└── healthcare-dataset
+    ├── files
+    │    ├── healthcare_dataset.csv
+         ├── healthcare_dataset_with_errors.csv
+    ├── kernels_ipynb
+    │    ├── graduation-project-m1e.ipynb
+    │    ├── healthcare-data-science-repo.ipynb
+    ├── kernels_py
+    │    ├── graduation-project-m1e.py
+    │    ├── healthcare-data-science-repo.py
+    └── output
+        ├── graduation-project-m1e
+        │    ├── graduation-project-m1e.ipynb
+        │    ├── <submission_file if competition>
+        │    ├── validation_result
+        │    │    ├── langchain.json
+        │    │    ├── deequ.json   
+        ├── healthcare-data-science-repo
+        │    ├── healthcare-data-science-repo.ipynb
+        │    ├── <submission_file if competition>
+        │    ├── validation_result
+        │    │    ├── langchain.json
+        │    │    ├── deequ.json
+```
+
 ### TODO
 
 1. change kaggle docker image.
