@@ -48,7 +48,7 @@ def test_runnable_on_personal_dataset(tmp_path):
     )
     output_path = tmp_path / "output"
     script_paths = load_py_files(script_dir, return_files=False)
-    result = executor.run(data_path.parent, script_paths[0], output_path, is_competition=False)
+    result = executor.run(data_path.parent, script_paths[0], output_path)
     assert result is not None
 
 
@@ -56,18 +56,17 @@ def test_runnable_on_personal_dataset(tmp_path):
 def test_runnable_on_competition_dataset(tmp_path):
     executor = KaggleExecutor()
     project_root = get_project_root()
-    data_path = Path(
+    local_project_path = Path(
         project_root
         / "data"
         / "santander-value-prediction-challenge"
-        / "files"
     )
     script_dir = Path(
-        project_root / "data" / "santander-value-prediction-challenge" / "kernels_py"
+        local_project_path / "kernels_py"
     )
     script_paths = load_py_files(script_dir, return_files=False)
     output_path = tmp_path / "output"
-    result = executor.run(data_path.parent, script_paths[0], output_path, is_competition=True)
+    result = executor.run(local_project_path, script_paths[0], output_path)
     assert result is not None
 
 
@@ -75,19 +74,18 @@ def test_runnable_on_competition_dataset(tmp_path):
 def test_runnable_on_personal_dataset_with_ipynb(tmp_path):
     executor = KaggleExecutor()
     project_root = get_project_root()
-    data_path = Path(
+    local_project_path = Path(
         project_root
         / "data"
         / "prasad22"
         / "healthcare-dataset"
-        / "files"
     )
     script_dir = Path(
-        project_root / "data" / "prasad22" / "healthcare-dataset" / "kernels_ipynb"
+        local_project_path / "kernels_ipynb"
     )
     output_path = tmp_path / "output"
     script_paths = load_py_files(script_dir, return_files=False)
-    result = executor.run(data_path.parent, script_paths[0], output_path, is_competition=False)
+    result = executor.run(local_project_path, script_paths[0], output_path)
     assert result is not None
 
 
@@ -95,18 +93,17 @@ def test_runnable_on_personal_dataset_with_ipynb(tmp_path):
 def test_runnable_on_competition_dataset_with_ipynb(tmp_path):
     executor = KaggleExecutor()
     project_root = get_project_root()
-    data_path = Path(
+    local_project_path = Path(
         project_root
         / "data"
         / "santander-value-prediction-challenge"
-        / "files"
     )
     script_dir = Path(
-        project_root / "data" / "santander-value-prediction-challenge" / "kernels_ipynb"
+        local_project_path / "kernels_ipynb"
     )
     script_paths = load_py_files(script_dir, return_files=False)
     output_path = tmp_path / "output"
-    result = executor.run(data_path.parent, script_paths[1], output_path, is_competition=True)
+    result = executor.run(local_project_path, script_paths[0], output_path)
     assert result is not None
 
 
@@ -114,23 +111,21 @@ def test_runnable_on_competition_dataset_with_ipynb(tmp_path):
 def test_runnable_on_small_test_dataset_with_ipynb(tmp_path):
     executor = KaggleExecutor()
     project_root = get_project_root()
-    data_path = Path(
-        project_root / "tests" / "data"
+    local_project_path = Path(
+        project_root / "tests" / "resources" / "example_dataset_1"
     )
     script_dir = Path(
-        project_root
-        / "tests"
-        / "data"
+        local_project_path
         / "kernel_ipynb"
         / "example_notebook.ipynb"
     )
     output_path = tmp_path / "output"
-    _ = executor.run(data_path, script_dir, output_path, is_competition=True)
+    _ = executor.run(local_project_path, script_dir, output_path)
 
     assert os.path.exists(output_path)
     assert len(list(output_path.iterdir())) == 1
-    assert (output_path / "output.ipynb").exists()
-    with open(output_path / "output.ipynb", "r") as f:
+    assert (output_path / "example_notebook.ipynb").exists()
+    with open(output_path / "example_notebook.ipynb", "r") as f:
         nb = nbformat.read(f, as_version=4)
         assert len(nb.cells) == 5
         assert nb.cells[0].cell_type == "markdown"
