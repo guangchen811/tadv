@@ -65,6 +65,33 @@ As shown in the following figure, we decompose the data validation task into two
 The prompts during the API calls can be found [here](./cadv_exploration/llm/langchain/_prompt.py). For more details, you
 can look at the [test case](./tests/llm/langchain).
 
+## Get Started
+
+### Install the package
+
+```shell
+poetry install
+```
+
+### Run the tests
+
+```shell
+poetry run pytest
+```
+
+### Collect the competition data
+
+```shell
+shell ./cadv_exploration/scripts/shell/download_competition_dataset.sh
+```
+
+### TODO
+
+1. change kaggle docker image.
+2. change working directory in kaggle docker image to the notebook directory.
+3. select 30 scripts from the competition dataset.
+4. try samp if I have to.
+
 # Other Thoughts
 
 If we can use provenance techniques to build a dataset that labels which columns are used by which queries or codes. We
