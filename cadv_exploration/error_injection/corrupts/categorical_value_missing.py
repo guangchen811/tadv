@@ -1,6 +1,4 @@
 import numpy as np
-import pandas as pd
-from numpy.ma.core import masked
 
 from cadv_exploration.error_injection.basis import TabularCorruption
 
