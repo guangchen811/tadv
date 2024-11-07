@@ -9,7 +9,7 @@ def validate_suggestions(spark, spark_df, check):
     return check_result_df
 
 
-def apply_checks_from_strings(check, check_strings, spark, spark_df):
+def apply_checks_from_strings(check_strings, spark, spark_df):
     final_check_result = []
     for check_str in check_strings:
         check_result = single_check(check_str, spark, spark_df)
