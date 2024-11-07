@@ -8,4 +8,5 @@ def get_suggestion_for_spark_df(spark, spark_df):
         .addConstraintRule(DEFAULT())
         .run()
     )
-    return result
+    constraint_suggestions = result['constraint_suggestions']
+    return constraint_suggestions
