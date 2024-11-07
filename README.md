@@ -110,11 +110,13 @@ A typical local dataset structure should be like this:
     ├── files
     │    ├── healthcare_dataset.csv
     ├── broken_files    
-    │    ├── orignal
+    │    ├── orignal_train
     │    │      ├── healthcare_dataset.csv
-    │    ├── before_broken
+    │    ├── original_validation
     │    │      ├── healthcare_dataset.csv
-    │    ├── after_broken
+    │    ├── pre_corruption
+    │    │      ├── healthcare_dataset.csv
+    │    ├── post_corruption
     │    │      ├── healthcare_dataset.csv
     ├── kernels_ipynb
     │    ├── graduation-project-m1e.ipynb
