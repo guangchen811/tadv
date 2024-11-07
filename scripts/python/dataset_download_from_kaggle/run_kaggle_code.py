@@ -11,11 +11,13 @@ def run_kaggle_code():
     local_project_path = (
             project_root
             / "data"
-            / "santander-value-prediction-challenge"
+            / "prasad22"
+            / "healthcare-dataset"
     )
-    notebooks = find_notebooks_with_to_csv()
-    idx = 11
-    script_name = notebooks[idx].split(".")[0]
+
+    # notebooks = find_notebooks_with_to_csv(local_project_path=local_project_path)
+    # idx =
+    script_name = "healthcare-eda-preprocessing"
     print(f"Running script: {script_name}")
     script_path = local_project_path / "kernels_ipynb" / f"{script_name}.ipynb"
     output_path = local_project_path / "output" / script_name
@@ -23,17 +25,14 @@ def run_kaggle_code():
     print(result)
 
 
-def find_notebooks_with_to_csv():
+def find_notebooks_with_to_csv(local_project_path):
     # List to store notebooks with .to_csv( calls
     notebooks_with_tocsv = []
     project_root = get_project_root()
     local_script_dir = (
             project_root
-            / "data"
-            / "santander-value-prediction-challenge"
             / "kernels_ipynb"
     )
-
     # Iterate through files in the directory
     for filename in os.listdir(local_script_dir):
         if filename.endswith(".ipynb"):
