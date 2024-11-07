@@ -50,12 +50,12 @@ def test_validation_on_small_dataset():
     check = Check(spark, CheckLevel.Warning, "Review Check")
 
     check_strings = [
-        "hasSize(lambda x: x >= 3)",
-        "hasMin('b', lambda x: x == 0)",
-        "isComplete('c')",
-        "isUnique('a')",
-        "isContainedIn('a', ['foo', 'bar', 'baz'])",
-        "isNonNegative('b')"
+        ".hasSize(lambda x: x >= 3)",
+        ".hasMin('b', lambda x: x == 0)",
+        ".isComplete('c')",
+        ".isUnique('a')",
+        ".isContainedIn('a', ['foo', 'bar', 'baz'])",
+        ".isNonNegative('b')"
     ]
 
     check_result = apply_checks_from_strings(check, check_strings, spark, spark_df)
