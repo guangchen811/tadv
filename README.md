@@ -109,7 +109,13 @@ A typical local dataset structure should be like this:
 └── healthcare-dataset
     ├── files
     │    ├── healthcare_dataset.csv
-         ├── healthcare_dataset_with_errors.csv
+    ├── broken_files    
+    │    ├── orignal
+    │    │      ├── healthcare_dataset.csv
+    │    ├── before_broken
+    │    │      ├── healthcare_dataset.csv
+    │    ├── after_broken
+    │    │      ├── healthcare_dataset.csv
     ├── kernels_ipynb
     │    ├── graduation-project-m1e.ipynb
     │    ├── healthcare-data-science-repo.ipynb
@@ -137,6 +143,8 @@ A typical local dataset structure should be like this:
 2. change working directory in kaggle docker image to the notebook directory.
 3. select 30 scripts from the competition dataset.
 4. try samp if I have to.
+5. make some slides to explain the results.
+6. split a small validation dataset from the main dataset.
 
 # Other Thoughts
 
