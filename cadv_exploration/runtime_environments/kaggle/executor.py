@@ -50,21 +50,15 @@ class KaggleExecutor:
                 subprocess.run(["docker", "rm", "-f", container_id])
             print(f"Script {script_path} took too long to execute and was terminated.")
             return None
-        except nbclient.exceptions.CellExecutionError as e:
-            # write the exception to error.log file in the output directory
-            log_file = os.path.join(output_path, "error.log")
-            logging.basicConfig(filename=log_file, level=logging.ERROR,
-                                format='%(asctime)s - %(levelname)s - %(message)s')
-            print(f"Unexpected error occurred. Writing the error to {log_file}")
-            logging.error(f"{e}")
-            return None
 
         if result.returncode == 0:
             print("Execution successful!")
-            print(result.stdout.decode())
         else:
-            print("Execution failed:")
-            print(result.stderr.decode())
+            log_file = os.path.join(output_path, "error.log")
+            logging.basicConfig(filename=log_file, level=logging.ERROR,
+                                format='%(asctime)s - %(levelname)s - %(message)s')
+            logging.error(f"{result.stderr.decode('utf-8')}")
+            print(f"Execution failed! Writing the error to {log_file}")
         return result
 
     @staticmethod
@@ -78,7 +72,7 @@ class KaggleExecutor:
         # https://nbconvert.readthedocs.io/en/latest/execute_api.html# module-nbconvert.preprocessors
         command = command_prefix + ["jupyter", "nbconvert", "--to", "notebook", "--output",
                                     f"/kaggle/output/{script_file_name}", "--execute",
-                                    f"/kaggle/script/{script_file_name}"]
+                                    f"/kaggle/script/{script_file_name}", "--allow-errors"]
         return command
 
     @staticmethod
