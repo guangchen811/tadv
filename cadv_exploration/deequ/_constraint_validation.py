@@ -40,3 +40,16 @@ def single_check(check_str, spark, spark_df):
 #         spark, check_result
 #     ).collect()
 #     return check_result
+
+def validate_on_df(code_list_for_constraints, spark, spark_df, logger):
+    check_result_on_post_corruption_df = apply_checks_from_strings(code_list_for_constraints,
+                                                                   spark, spark_df)
+    status_on_post_corruption_df = [item['constraint_status'] if
+                                    item is not None else None for item in check_result_on_post_corruption_df]
+    success_on_post_corruption_df = status_on_post_corruption_df.count("Success")
+    failure_check_on_post_corruption_df = [item.constraint for item in check_result_on_post_corruption_df if
+                                           item['constraint_status'] == 'Failure']
+    failure_check_output_on_post_corruption_df = "\n".join(failure_check_on_post_corruption_df)
+    logger.info(f"Check result on after broken data: {check_result_on_post_corruption_df}")
+    logger.info(f"Success on after broken data: {success_on_post_corruption_df} / {len(status_on_post_corruption_df)}")
+    logger.info(f"Failure check on after broken data: {failure_check_output_on_post_corruption_df}")

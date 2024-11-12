@@ -1,0 +1,13 @@
+Constraints:
+  - column: "loan_intent"
+    constraint: "hasNumberOfDistinctValues('loan_intent', 6)"
+    explaination: "The column loan_intent should have 6 distinct values."
+  - column: "loan_grade"
+    constraint: "hasNumberOfDistinctValues('loan_grade', 7)"
+    explaination: "The column loan_grade should have 7 distinct values."
+  - column: "person_home_ownership"
+    constraint: "hasNumberOfDistinctValues('person_home_ownership', 4)"
+    explaination: "The column person_home_ownership should have 4 distinct values."
+  - column: "loan_status"
+    constraint: "hasNumberOfDistinctValues('loan_status', 2)"
+    explaination: "The column loan_status should have 2 distinct values."

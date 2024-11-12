@@ -1,16 +1,36 @@
 import os
+import signal
 import subprocess
 from pathlib import Path
+import logging
+
+import nbclient
 import nbformat
 from nbconvert.preprocessors import ExecutePreprocessor
+
+
+class TimeoutException(Exception):
+    pass
+
+
+def timeout_handler(signum, frame):
+    raise TimeoutException("Execution time exceeded 2 minutes")
+
+
+def extract_container_id(command):
+    """Extract container ID from the command to reference it if needed."""
+    try:
+        return command[command.index("--name") + 1]  # Assuming `--name <container_id>` is in the command
+    except (ValueError, IndexError):
+        return None
 
 
 class KaggleExecutor:
     def __init__(self):
         pass
 
-    def run(self, local_project_path: Path, script_path: Path, output_path: Path):
-        command_prefix = self._prepare_prefix(local_project_path, script_path, output_path)
+    def run(self, local_project_path: Path, input_path: Path, script_path: Path, output_path: Path, timeout: int = 120):
+        command_prefix = self._prepare_prefix(local_project_path, input_path, script_path, output_path)
         script_file_name = os.path.basename(script_path)
         # script_file_path =
         if str(script_path).endswith(".py"):
@@ -19,8 +39,26 @@ class KaggleExecutor:
             command = self._compsoe_ipynb_command(command_prefix, script_file_name)
         else:
             raise ValueError("Invalid script type")
+        signal.signal(signal.SIGALRM, timeout_handler)
+        try:
+            signal.alarm(timeout)
+            result = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            signal.alarm(0)
+        except TimeoutException as e:
+            container_id = extract_container_id(command)
+            if container_id:
+                subprocess.run(["docker", "rm", "-f", container_id])
+            print(f"Script {script_path} took too long to execute and was terminated.")
+            return None
+        except nbclient.exceptions.CellExecutionError as e:
+            # write the exception to error.log file in the output directory
+            log_file = os.path.join(output_path, "error.log")
+            logging.basicConfig(filename=log_file, level=logging.ERROR,
+                                format='%(asctime)s - %(levelname)s - %(message)s')
+            print(f"Unexpected error occurred. Writing the error to {log_file}")
+            logging.error(f"{e}")
+            return None
 
-        result = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         if result.returncode == 0:
             print("Execution successful!")
             print(result.stdout.decode())
@@ -44,8 +82,9 @@ class KaggleExecutor:
         return command
 
     @staticmethod
-    def _prepare_prefix(local_project_path: Path, script_path: Path, output_path: Path):
+    def _prepare_prefix(local_project_path: Path, input_path: Path, script_path: Path, output_path: Path):
         docker_data_path = f"/kaggle/input/{local_project_path.name}/"
+        script_name = script_path.name.split(".")[0]
         if str(script_path).endswith(".py"):
             script_type = "py"
         elif str(script_path).endswith(".ipynb"):
@@ -53,9 +92,11 @@ class KaggleExecutor:
         command = [
             "docker",
             "run",
+            "--name",
+            f"kaggle-{script_name}-executor",
             "--rm",
             "-v",
-            f"{local_project_path / 'files'}:{docker_data_path}",
+            f"{input_path}:{docker_data_path}",
             "-v",
             f"{script_path.parent}:/kaggle/script/",
             "-v",

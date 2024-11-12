@@ -47,8 +47,6 @@ def test_validation_on_small_dataset():
     df = pd.DataFrame({"a": ["foo", "bar", "baz"], "b": [1, 2, 3], "c": [5, 6, None]})
     spark_df, spark = spark_df_from_pandas_df(df)
 
-    check = Check(spark, CheckLevel.Warning, "Review Check")
-
     check_strings = [
         ".hasSize(lambda x: x >= 3)",
         ".hasMin('b', lambda x: x == 0)",
@@ -58,7 +56,7 @@ def test_validation_on_small_dataset():
         ".isNonNegative('b')"
     ]
 
-    check_result = apply_checks_from_strings(check, check_strings, spark, spark_df)
+    check_result = apply_checks_from_strings(check_strings, spark, spark_df)
 
     assert check_result[0]["constraint_status"] == "Success"
     assert check_result[1]["constraint_status"] == "Failure"

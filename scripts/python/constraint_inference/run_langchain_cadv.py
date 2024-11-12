@@ -5,12 +5,13 @@ import argparse
 import logging
 
 from pydeequ import Check, CheckLevel
+from cadv_exploration.deequ._constraint_validation import validate_on_df
 from cadv_exploration.deequ import spark_df_from_pandas_df
 from cadv_exploration.inspector.deequ._to_string import spark_df_to_column_desc
 from cadv_exploration.llm.langchain import LangChainCADV
 from cadv_exploration.loader import load_csv, load_py_files
 from cadv_exploration.utils import get_project_root
-from scripts.python.constraint_inference.utils import validate_on_df, filter_constraints
+from scripts.python.constraint_inference.utils import filter_constraints
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)

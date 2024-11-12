@@ -4,7 +4,7 @@ from cadv_exploration.error_injection.corrupts import Scaling, MissingCategorica
 from cadv_exploration.loader import load_csv
 from cadv_exploration.utils import get_project_root
 
-
+# This case can be treated as context information for script execution. (the test data needs to be validated)
 def error_injection():
     project_root = get_project_root()
     file_path = (
