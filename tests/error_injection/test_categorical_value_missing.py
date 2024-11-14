@@ -1,8 +1,8 @@
 import pandas as pd
 
 from cadv_exploration.error_injection import MissingCategoricalValueCorruption
-from cadv_exploration.utils import get_project_root, get_current_folder
 from cadv_exploration.loader import load_csv
+from cadv_exploration.utils import get_project_root, get_current_folder
 
 
 def test_on_small_dataset():

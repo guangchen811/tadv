@@ -2,7 +2,6 @@ from cadv_exploration.utils import load_dotenv
 
 load_dotenv()
 import pandas as pd
-from pydeequ.analyzers import *
 
 from cadv_exploration.deequ import profile_on_spark_df, spark_df_from_pandas_df
 from cadv_exploration.loader import load_csv
@@ -21,12 +20,12 @@ def test_profiling_on_small_dataset():
 def test_spark_df_from_local_csv():
     project_root = get_project_root()
     file_path = (
-        project_root
-        / "data"
-        / "prasad22"
-        / "healthcare-dataset"
-        / "files"
-        / "healthcare_dataset.csv"
+            project_root
+            / "data"
+            / "prasad22"
+            / "healthcare-dataset"
+            / "files"
+            / "healthcare_dataset.csv"
     )
     df = load_csv(file_path)
     spark_df, spark = spark_df_from_pandas_df(df)

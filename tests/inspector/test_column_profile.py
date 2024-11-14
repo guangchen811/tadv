@@ -10,12 +10,12 @@ from cadv_exploration.utils import get_project_root
 def test_spark_df_to_column_desc():
     project_root = get_project_root()
     file_path = (
-        project_root
-        / "data"
-        / "prasad22"
-        / "healthcare-dataset"
-        / "files"
-        / "healthcare_dataset.csv"
+            project_root
+            / "data"
+            / "prasad22"
+            / "healthcare-dataset"
+            / "files"
+            / "healthcare_dataset.csv"
     )
 
     df = load_csv(file_path)

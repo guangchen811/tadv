@@ -1,4 +1,3 @@
-from langchain.prompts import ChatPromptTemplate
 from langchain_core.runnables.base import RunnableSequence
 
 from cadv_exploration.llm._tasks import DVTask

@@ -5,7 +5,7 @@ load_dotenv()
 import pandas as pd
 
 from cadv_exploration.deequ import spark_df_from_pandas_df
-from cadv_exploration.loader import load_csv, load_csvs
+from cadv_exploration.loader import load_csv
 from cadv_exploration.utils import get_project_root
 
 
@@ -21,12 +21,12 @@ def test_spark_df_from_pandas_df():
 def test_spark_df_from_local_csv():
     project_root = get_project_root()
     file_path = (
-        project_root
-        / "data"
-        / "prasad22"
-        / "healthcare-dataset"
-        / "files"
-        / "healthcare_dataset.csv"
+            project_root
+            / "data"
+            / "prasad22"
+            / "healthcare-dataset"
+            / "files"
+            / "healthcare_dataset.csv"
     )
     df = load_csv(file_path)
     spark_df, _ = spark_df_from_pandas_df(df)

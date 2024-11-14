@@ -1,9 +1,10 @@
+import os
 import subprocess
 from pathlib import Path
-import os
-import pytest
+
 import nbformat
 import pandas as pd
+import pytest
 
 from cadv_exploration.loader._py_file import load_py_files
 from cadv_exploration.runtime_environments.kaggle import KaggleExecutor
