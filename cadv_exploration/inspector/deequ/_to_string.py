@@ -4,7 +4,7 @@ import yaml
 from cadv_exploration.deequ import profile_on_spark_df
 
 
-def spark_df_to_column_desc(spark, spark_df):
+def spark_df_to_column_desc(spark_df, spark):
     result = profile_on_spark_df(spark, spark_df)
     column_names = list(result.profiles.keys())
     result_dict = {}

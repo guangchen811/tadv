@@ -1,7 +1,7 @@
 from pydeequ.suggestions import *
 
 
-def get_suggestion_for_spark_df(spark, spark_df):
+def get_suggestion_for_spark_df(spark_df, spark):
     result = (
         ConstraintSuggestionRunner(spark)
         .onData(spark_df)

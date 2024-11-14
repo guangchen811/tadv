@@ -25,9 +25,10 @@ def error_injection():
     validation_data['id'] = validation_data['id'] + len(train_data)
     test_data['id'] = test_data['id'] + len(train_data) + len(validation_data)
 
-    test_data.drop(columns=[target_column], inplace=True)
+    ground_truth = test_data[["id", target_column]].copy()
     sample_submission = test_data[["id"]].copy()
     sample_submission[target_column] = 0.5
+    test_data.drop(columns=[target_column], inplace=True)
 
     # Inject errors on the test data
     scaler = Scaling(columns=['person_age'], severity=0.2)
@@ -47,13 +48,16 @@ def error_injection():
 
     train_data.to_csv(files_with_clean_test_data_path / "train.csv", index=False)
     validation_data.to_csv(files_with_clean_test_data_path / "validation.csv", index=False)
-    sample_submission.to_csv(files_with_clean_test_data_path / "sample_submission.csv", index=False)
     test_data.to_csv(files_with_clean_test_data_path / "test.csv", index=False)
+    ground_truth.to_csv(files_with_clean_test_data_path / "ground_truth.csv", index=False)
+    sample_submission.to_csv(files_with_clean_test_data_path / "sample_submission.csv", index=False)
+
 
     train_data.to_csv(files_with_corrupted_test_data_path / "train.csv", index=False)
     validation_data.to_csv(files_with_corrupted_test_data_path / "validation.csv", index=False)
-    sample_submission.to_csv(files_with_corrupted_test_data_path / "sample_submission.csv", index=False)
     post_corruption_test_data.to_csv(files_with_corrupted_test_data_path / "test.csv", index=False)
+    ground_truth.to_csv(files_with_corrupted_test_data_path / "ground_truth.csv", index=False)
+    sample_submission.to_csv(files_with_corrupted_test_data_path / "sample_submission.csv", index=False)
 
 
 def split_dataset(full_data):

@@ -61,7 +61,7 @@ def main():
     spark_pre_corruption_df, spark_pre_corruption = spark_df_from_pandas_df(pre_corruption_df)
     spark_post_corruption_df, spark_post_corruption = spark_df_from_pandas_df(post_corruption_df)
 
-    column_desc = spark_df_to_column_desc(spark_original_train, spark_original_train_df)
+    column_desc = spark_df_to_column_desc(spark_original_train_df, spark_original_train)
 
     dir_path = project_root / "data" / "prasad22" / "healthcare-dataset" / "kernels_py"
     scripts = load_py_files(dir_path)

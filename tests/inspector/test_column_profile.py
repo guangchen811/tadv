@@ -20,5 +20,5 @@ def test_spark_df_to_column_desc():
 
     df = load_csv(file_path)
     spark_df, spark = spark_df_from_pandas_df(df)
-    yaml_string = spark_df_to_column_desc(spark, spark_df)
+    yaml_string = spark_df_to_column_desc(spark_df, spark)
     print(yaml_string)

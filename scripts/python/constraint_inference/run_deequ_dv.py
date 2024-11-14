@@ -58,7 +58,7 @@ def main():
     spark_pre_corruption_df, spark_pre_corruption = spark_df_from_pandas_df(pre_corruption_df)
     spark_post_corruption_df, spark_post_corruption = spark_df_from_pandas_df(post_corruption_df)
 
-    suggestion = get_suggestion_for_spark_df(spark_original_train, spark_original_train_df)
+    suggestion = get_suggestion_for_spark_df(spark_original_train_df, spark_original_train)
     code_list_for_constraints = [item["code_for_constraint"] for item in suggestion]
 
     filter_constraints(code_list_for_constraints, spark_original_validation, spark_original_validation_df, logger)

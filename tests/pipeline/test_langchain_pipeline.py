@@ -23,7 +23,7 @@ def test_runnable():
     )
     df = load_csv(file_path)
     spark_df, spark = spark_df_from_pandas_df(df)
-    column_desc = spark_df_to_column_desc(spark, spark_df)
+    column_desc = spark_df_to_column_desc(spark_df, spark)
 
     dir_path = project_root / "data" / "prasad22" / "healthcare-dataset" / "kernels_py"
     scripts = load_py_files(dir_path)

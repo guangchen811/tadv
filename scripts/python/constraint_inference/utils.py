@@ -31,5 +31,3 @@ def filter_constraints(code_list_for_constraints, spark_original_validation, spa
                                  status_on_original_validation_df[i] == "Success"]
     logger.info(f"Filtered Code list for constraints: {code_list_for_constraints}")
     return code_list_for_constraints
-
-
