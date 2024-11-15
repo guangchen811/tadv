@@ -1,0 +1,132 @@
+constraints:
+  person_home_ownership:
+    code:
+    - - .isContainedIn('person_home_ownership', ['OWN', 'MORTGAGE', 'RENT', 'OTHER'])
+      - Valid
+    - - .hasUniqueValueRatio(['person_home_ownership'], 0.5)
+      - Invalid
+    assumptions:
+    - 'The ''person_home_ownership'' column should contain valid categories: ''OWN'',
+      ''MORTGAGE'', ''RENT'', and ''OTHER''.'
+    - The majority of entries in 'person_home_ownership' should be either 'RENT' or
+      'MORTGAGE'.
+  loan_grade:
+    code:
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    - - .hasUniqueValueRatio(['loan_grade'], 0.5)
+      - Invalid
+    assumptions:
+    - 'The ''loan_grade'' column should have values within the set: ''A'', ''B'',
+      ''C'', ''D'', ''E'', ''F'', ''G''.'
+    - Higher grades (A, B) should have a greater representation compared to lower
+      grades (F, G).
+  loan_intent:
+    code:
+    - - .isContainedIn('loan_intent', ['EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL',
+        'DEBTCONSOLIDATION', 'MEDICAL', 'VENTURE'])
+      - Valid
+    - - .hasUniqueValueRatio(['loan_intent'], 0.5)
+      - Invalid
+    assumptions:
+    - The 'loan_intent' column should contain categories such as 'EDUCATION', 'HOMEIMPROVEMENT',
+      'PERSONAL', 'DEBTCONSOLIDATION', 'MEDICAL', and 'VENTURE'.
+    - The distribution of loan intents should reflect common patterns, with 'DEBTCONSOLIDATION'
+      and 'PERSONAL' being significant.
+  cb_person_cred_hist_length:
+    code:
+    - - .isGreaterThanOrEqualTo('cb_person_cred_hist_length', 0)
+      - Invalid
+    - - .isLessThanOrEqualTo('cb_person_cred_hist_length', 30)
+      - Invalid
+    assumptions:
+    - The 'cb_person_cred_hist_length' should have a reasonable range of values, typically
+      between 0 and 30 years.
+    - The values in 'cb_person_cred_hist_length' should not contain negative numbers.
+  person_age:
+    code:
+    - - .isGreaterThanOrEqualTo('person_age', 18)
+      - Invalid
+    - - .isLessThanOrEqualTo('person_age', 100)
+      - Invalid
+    assumptions:
+    - The 'person_age' values should typically range from 18 to 100 years.
+    - The 'person_age' column should not contain negative or unrealistic values.
+  person_income:
+    code:
+    - - .isNonNegative('person_income')
+      - Valid
+    - - .hasMax('person_income', realistic_value_threshold)
+      - Invalid
+    assumptions:
+    - The 'person_income' should be a non-negative integer representing the annual
+      income.
+    - There should not be any absurdly high values in 'person_income' that are unrealistic
+      for the population.
+  loan_status:
+    code:
+    - - .isContainedIn('loan_status', [0, 1])
+      - Invalid
+    - - .hasCompleteness('loan_status', 0.5)
+      - Invalid
+    assumptions:
+    - 'The ''loan_status'' must only contain two possible values: 0 (not approved)
+      and 1 (approved).'
+    - The majority of the loans should not be approved (0) to reflect typical loan
+      approval rates.
+  id:
+    code: []
+    assumptions: []
+  cb_person_default_on_file:
+    code:
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    - - .hasCompleteness('cb_person_default_on_file', 0.5)
+      - Invalid
+    assumptions:
+    - The 'cb_person_default_on_file' column should contain only 'Y' or 'N' values.
+    - Most entries in 'cb_person_default_on_file' should be 'N', indicating no default
+      on file.
+  loan_int_rate:
+    code:
+    - - .isPositive('loan_int_rate')
+      - Valid
+    - - .isLessThanOrEqualTo('loan_int_rate', 0.3)
+      - Invalid
+    assumptions:
+    - The 'loan_int_rate' must be a positive fractional value.
+    - The interest rates should not exceed common market thresholds, typically no
+      more than 30%.
+  loan_percent_income:
+    code:
+    - - .isGreaterThanOrEqualTo('loan_percent_income', 0)
+      - Invalid
+    - - .isLessThanOrEqualTo('loan_percent_income', 100)
+      - Invalid
+    assumptions:
+    - The 'loan_percent_income' should represent a percentage and thus range from
+      0 to 100.
+    - The values in 'loan_percent_income' should not exceed 100%, as this implies
+      borrowing more than the income.
+  person_emp_length:
+    code:
+    - - .isGreaterThanOrEqualTo('person_emp_length', 0)
+      - Invalid
+    - - .isLessThanOrEqualTo('person_emp_length', 30)
+      - Invalid
+    assumptions:
+    - The 'person_emp_length' values should be non-negative and typically range from
+      0 to 30 years.
+    - There should not be extreme values in 'person_emp_length' that do not make sense
+      for employment history.
+  loan_amnt:
+    code:
+    - - .isPositive('loan_amnt')
+      - Valid
+    - - .isLessThanOrEqualTo('loan_amnt', 50000)
+      - Invalid
+    assumptions:
+    - The 'loan_amnt' should be a positive integer representing the total loan amount
+      requested.
+    - The values in 'loan_amnt' should generally fall within a reasonable range, typically
+      not exceeding $50,000.
