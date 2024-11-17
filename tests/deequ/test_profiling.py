@@ -4,7 +4,7 @@ load_dotenv()
 import pandas as pd
 
 from cadv_exploration.deequ import profile_on_spark_df, spark_df_from_pandas_df
-from cadv_exploration.loader import load_csv
+from cadv_exploration.loader import FileLoader
 from cadv_exploration.utils import get_project_root
 
 
@@ -27,7 +27,7 @@ def test_spark_df_from_local_csv():
             / "files"
             / "healthcare_dataset.csv"
     )
-    df = load_csv(file_path)
+    df = FileLoader.load_csv(file_path)
     spark_df, spark = spark_df_from_pandas_df(df)
     result_df = profile_on_spark_df(spark, spark_df).profiles
     result_df_billing_amount = result_df["Billing Amount"]

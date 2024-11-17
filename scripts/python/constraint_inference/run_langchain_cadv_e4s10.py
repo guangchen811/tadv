@@ -12,7 +12,7 @@ from cadv_exploration.deequ._constraint_validation import validate_on_df
 from cadv_exploration.deequ import spark_df_from_pandas_df
 from cadv_exploration.inspector.deequ._to_string import spark_df_to_column_desc
 from cadv_exploration.llm.langchain import LangChainCADV
-from cadv_exploration.loader import load_csv, load_py_files
+from cadv_exploration.loader import FileLoader
 from cadv_exploration.utils import get_project_root
 from scripts.python.constraint_inference.utils import filter_constraints
 
@@ -44,8 +44,8 @@ def main():
     train_file_path = local_project_path / "files_with_clean_test_data" / "train.csv"
     validation_file_path = train_file_path.parent.parent / "files_with_clean_test_data" / "validation.csv"
 
-    train_data = load_csv(train_file_path)
-    validation_data = load_csv(validation_file_path)
+    train_data = FileLoader.load_csv(train_file_path)
+    validation_data = FileLoader.load_csv(validation_file_path)
 
     spark_train_data, spark_train = spark_df_from_pandas_df(train_data)
     spark_validation_data, spark_validation = spark_df_from_pandas_df(validation_data)

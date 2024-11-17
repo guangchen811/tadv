@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 from cadv_exploration.error_injection.corrupts import Scaling, MissingCategoricalValueCorruption
-from cadv_exploration.loader import load_csv
+from cadv_exploration.loader import FileLoader
 from cadv_exploration.utils import get_project_root
 
 # This case can be treated as context information for script execution. (the test data needs to be validated)
@@ -15,7 +15,7 @@ def error_injection():
             / "files"
             / "healthcare_dataset.csv"
     )
-    df = load_csv(file_path)
+    df = FileLoader.load_csv(file_path)
     original_df = df.sample(frac=0.7, random_state=1).reset_index(drop=True)
     original_train_df = original_df.sample(frac=0.9, random_state=1).reset_index(drop=True)
     original_validation_df = original_df.drop(original_train_df.index).reset_index(drop=True)

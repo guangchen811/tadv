@@ -5,7 +5,7 @@ import pandas as pd
 from pydeequ.analyzers import *
 
 from cadv_exploration.deequ import analyze_on_spark_df, spark_df_from_pandas_df
-from cadv_exploration.loader import load_csv
+from cadv_exploration.loader import FileLoader
 from cadv_exploration.utils import get_project_root
 
 
@@ -30,7 +30,7 @@ def test_analyzing_on_large_dataset():
             / "files"
             / "healthcare_dataset.csv"
     )
-    df = load_csv(file_path)
+    df = FileLoader.load_csv(file_path)
     spark_df, spark = spark_df_from_pandas_df(df)
     analyzers = [Size(), Completeness("Age"), Mean("Billing Amount")]
     result_df = analyze_on_spark_df(spark, spark_df, analyzers=analyzers)

@@ -4,12 +4,11 @@ load_dotenv()
 import argparse
 import logging
 
-from pydeequ import Check, CheckLevel
 from cadv_exploration.deequ._constraint_validation import validate_on_df
 from cadv_exploration.deequ import spark_df_from_pandas_df
 from cadv_exploration.inspector.deequ._to_string import spark_df_to_column_desc
 from cadv_exploration.llm.langchain import LangChainCADV
-from cadv_exploration.loader import load_csv, load_py_files
+from cadv_exploration.loader import FileLoader
 from cadv_exploration.utils import get_project_root
 from scripts.python.constraint_inference.utils import filter_constraints
 
@@ -51,10 +50,10 @@ def main():
     pre_corruption_file_path = original_train_file_path.parent.parent / "pre_corruption" / "healthcare_dataset.csv"
     post_corruption_file_path = original_train_file_path.parent.parent / "post_corruption" / "healthcare_dataset.csv"
 
-    original_train_df = load_csv(original_train_file_path)
-    original_validation_df = load_csv(original_validation_file_path)
-    pre_corruption_df = load_csv(pre_corruption_file_path)
-    post_corruption_df = load_csv(post_corruption_file_path)
+    original_train_df = FileLoader.load_csv(original_train_file_path)
+    original_validation_df = FileLoader.load_csv(original_validation_file_path)
+    pre_corruption_df = FileLoader.load_csv(pre_corruption_file_path)
+    post_corruption_df = FileLoader.load_csv(post_corruption_file_path)
 
     spark_original_train_df, spark_original_train = spark_df_from_pandas_df(original_train_df)
     spark_original_validation_df, spark_original_validation = spark_df_from_pandas_df(original_validation_df)
@@ -64,7 +63,7 @@ def main():
     column_desc = spark_df_to_column_desc(spark_original_train_df, spark_original_train)
 
     dir_path = project_root / "data" / "prasad22" / "healthcare-dataset" / "kernels_py"
-    scripts = load_py_files(dir_path)
+    scripts = FileLoader.load_py_files(dir_path)
 
     input_variables = {
         "column_desc": column_desc,

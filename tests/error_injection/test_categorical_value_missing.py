@@ -1,7 +1,7 @@
 import pandas as pd
 
 from cadv_exploration.error_injection import MissingCategoricalValueCorruption
-from cadv_exploration.loader import load_csv
+from cadv_exploration.loader import FileLoader
 from cadv_exploration.utils import get_project_root, get_current_folder
 
 
@@ -51,7 +51,7 @@ def test_on_large_dataset():
             / "healthcare_dataset.csv"
     )
 
-    df = load_csv(file_path)
+    df = FileLoader.load_csv(file_path)
     missing_categorical_value_corruption_to_random = MissingCategoricalValueCorruption(columns=["Blood Type"],
                                                                                        severity=0.001,
                                                                                        corrupt_strategy="to_random")

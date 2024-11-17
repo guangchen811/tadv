@@ -7,7 +7,7 @@ import oyaml as yaml
 
 from cadv_exploration.deequ import spark_df_from_pandas_df
 from cadv_exploration.deequ import get_suggestion_for_spark_df
-from cadv_exploration.loader import load_csv
+from cadv_exploration.loader import FileLoader
 from cadv_exploration.utils import get_project_root
 
 from scripts.python.constraint_inference.utils import filter_constraints
@@ -39,8 +39,8 @@ def main():
 
     output_path = local_project_path / "output" / "deequ_constraints.yaml"
 
-    train_data = load_csv(train_file_path)
-    validation_data = load_csv(validation_file_path)
+    train_data = FileLoader.load_csv(train_file_path)
+    validation_data = FileLoader.load_csv(validation_file_path)
 
     spark_train_data, spark_train = spark_df_from_pandas_df(train_data)
     spark_validation_data, spark_validation = spark_df_from_pandas_df(validation_data)
