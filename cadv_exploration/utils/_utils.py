@@ -2,11 +2,10 @@
 Some useful utils for the project
 """
 
+import inspect
 from pathlib import Path
 
 import dotenv
-import inspect
-import os
 
 
 def get_project_root() -> Path:

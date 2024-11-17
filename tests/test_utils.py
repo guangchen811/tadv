@@ -1,6 +1,6 @@
 import os
 
-from cadv_exploration.utils import get_project_root, load_dotenv
+from cadv_exploration.utils import get_project_root, load_dotenv, get_current_folder
 
 
 def test_get_project_root():
@@ -18,3 +18,7 @@ def test_load_dotenv():
     assert (
             "SPARK_VERSION" in os.environ.keys()
     ), "SPARK_VERSION not found in environment variables"
+
+
+def test_get_current_folder():
+    assert get_current_folder().name == "tests"

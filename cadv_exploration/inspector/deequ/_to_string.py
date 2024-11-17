@@ -1,11 +1,11 @@
-import pandas as pd
 import yaml
 
-from cadv_exploration.deequ import profile_on_spark_df
+from cadv_exploration.deequ_wrapper import DeequWrapper
 
 
 def spark_df_to_column_desc(spark_df, spark):
-    result = profile_on_spark_df(spark, spark_df)
+    deequ_wrapper = DeequWrapper()
+    result = deequ_wrapper.profile_on_spark_df(spark, spark_df)
     column_names = list(result.profiles.keys())
     result_dict = {}
     for column_name in column_names:

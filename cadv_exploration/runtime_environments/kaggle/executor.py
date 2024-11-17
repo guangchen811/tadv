@@ -1,12 +1,8 @@
+import logging
 import os
 import signal
 import subprocess
 from pathlib import Path
-import logging
-
-import nbclient
-import nbformat
-from nbconvert.preprocessors import ExecutePreprocessor
 
 
 class TimeoutException(Exception):

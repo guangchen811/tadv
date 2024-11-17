@@ -4,10 +4,7 @@ load_dotenv()
 import argparse
 import logging
 
-from pydeequ import Check, CheckLevel
-from cadv_exploration.deequ._constraint_validation import validate_on_df
-from cadv_exploration.deequ import spark_df_from_pandas_df
-from cadv_exploration.deequ import get_suggestion_for_spark_df
+from cadv_exploration.deequ_wrapper import DeequWrapper
 from cadv_exploration.loader import FileLoader
 from cadv_exploration.utils import get_project_root
 
@@ -34,6 +31,8 @@ def main():
     parser = argparse.ArgumentParser()
     args = parser.parse_args()
 
+    deequ_wrapper = DeequWrapper()
+
     project_root = get_project_root()
     original_train_file_path = (
             project_root
@@ -53,20 +52,21 @@ def main():
     pre_corruption_df = FileLoader.load_csv(pre_corruption_file_path)
     post_corruption_df = FileLoader.load_csv(post_corruption_file_path)
 
-    spark_original_train_df, spark_original_train = spark_df_from_pandas_df(original_train_df)
-    spark_original_validation_df, spark_original_validation = spark_df_from_pandas_df(original_validation_df)
-    spark_pre_corruption_df, spark_pre_corruption = spark_df_from_pandas_df(pre_corruption_df)
-    spark_post_corruption_df, spark_post_corruption = spark_df_from_pandas_df(post_corruption_df)
+    spark_original_train_df, spark_original_train = deequ_wrapper.spark_df_from_pandas_df(original_train_df)
+    spark_original_validation_df, spark_original_validation = deequ_wrapper.spark_df_from_pandas_df(
+        original_validation_df)
+    spark_pre_corruption_df, spark_pre_corruption = deequ_wrapper.spark_df_from_pandas_df(pre_corruption_df)
+    spark_post_corruption_df, spark_post_corruption = deequ_wrapper.spark_df_from_pandas_df(post_corruption_df)
 
-    suggestion = get_suggestion_for_spark_df(spark_original_train_df, spark_original_train)
+    suggestion = deequ_wrapper.get_suggestion_for_spark_df(spark_original_train, spark_original_train_df)
     code_list_for_constraints = [item["code_for_constraint"] for item in suggestion]
 
     filter_constraints(code_list_for_constraints, spark_original_validation, spark_original_validation_df, logger)
     # Validate the constraints on the before broken data
-    validate_on_df(code_list_for_constraints, spark_pre_corruption, spark_pre_corruption_df, logger)
+    deequ_wrapper.validate_on_df(spark_pre_corruption, spark_pre_corruption_df, code_list_for_constraints)
 
     # Validate the constraints on the after broken data
-    validate_on_df(code_list_for_constraints, spark_post_corruption, spark_post_corruption_df, logger)
+    deequ_wrapper.validate_on_df(spark_post_corruption, spark_post_corruption_df, code_list_for_constraints)
 
     spark_pre_corruption.sparkContext._gateway.shutdown_callback_server()
     spark_post_corruption.sparkContext._gateway.shutdown_callback_server()

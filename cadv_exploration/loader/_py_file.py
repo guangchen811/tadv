@@ -1,6 +1,6 @@
 import os
-from typing import List
 from pathlib import Path
+from typing import List
 
 
 def load_py_file(file_path: str, return_file) -> str:

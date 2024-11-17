@@ -1,5 +1,3 @@
-import numpy as np
-import pandas as pd
 from cadv_exploration.error_injection.corrupts import Scaling, MissingCategoricalValueCorruption
 from cadv_exploration.loader import FileLoader
 from cadv_exploration.utils import get_project_root
