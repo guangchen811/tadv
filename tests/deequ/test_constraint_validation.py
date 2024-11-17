@@ -1,16 +1,18 @@
+from cadv_exploration.utils import load_dotenv
+
+load_dotenv()
+
 import pandas as pd
 from pydeequ.checks import *
 from pydeequ.verification import *
 
-# https://github.com/awslabs/python-deequ/issues/198
-# import gc
-from cadv_exploration.deequ import (spark_df_from_pandas_df,
-                                    validate_suggestions)
+from cadv_exploration.deequ_wrapper import DeequWrapper
 
 
-def test_constraint_validation():
+def test_constraint_validation(deequ_wrapper):
+    deequ_wrapper = DeequWrapper()
     df = pd.DataFrame({"a": ["foo", "bar", "baz"], "b": [1, 2, 3], "c": [5, 6, None]})
-    spark_df, spark = spark_df_from_pandas_df(df)
+    spark_df, spark = deequ_wrapper.spark_df_from_pandas_df(df)
 
     check = Check(spark, CheckLevel.Warning, "Review Check")
     check.hasSize(lambda x: x >= 3)
@@ -23,7 +25,7 @@ def test_constraint_validation():
         check.isNonNegative("b"),
     ]
     check.addConstraints(added_checks)
-    result_df = validate_suggestions(spark, spark_df, check)
+    result_df = deequ_wrapper.validate_suggestions(spark, spark_df, check)
     assert result_df.collect()[0]["constraint_status"] == "Success"
 
     spark.sparkContext._gateway.shutdown_callback_server()

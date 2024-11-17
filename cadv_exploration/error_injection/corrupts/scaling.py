@@ -1,5 +1,6 @@
-from cadv_exploration.error_injection.basis import TabularCorruption
 import numpy as np
+
+from cadv_exploration.error_injection.basis import TabularCorruption
 
 
 class Scaling(TabularCorruption):

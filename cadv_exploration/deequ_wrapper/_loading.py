@@ -1,5 +1,3 @@
-import os
-
 import pydeequ
 from pyspark.sql import Row, SparkSession
 
@@ -21,6 +19,8 @@ def spark_df_from_pandas_df(pandas_df):
     spark = (
         SparkSession.builder.config("spark.jars.packages", pydeequ.deequ_maven_coord)
         .config("spark.jars.excludes", pydeequ.f2j_maven_coord)
+        .config("spark.driver.host", "localhost")
+        .config("spark.driver.bindAddress", "localhost")
         .getOrCreate()
     )
     spark_df = spark.createDataFrame(pandas_df)

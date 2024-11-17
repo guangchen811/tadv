@@ -6,7 +6,7 @@ import nbformat
 import pandas as pd
 import pytest
 
-from cadv_exploration.loader._py_file import load_py_files
+from cadv_exploration.loader import FileLoader
 from cadv_exploration.runtime_environments.kaggle import KaggleExecutor
 from cadv_exploration.utils import get_project_root
 
@@ -48,8 +48,8 @@ def test_runnable_on_personal_dataset(tmp_path):
         project_root / "data" / "prasad22" / "healthcare-dataset" / "kernels_py"
     )
     output_path = tmp_path / "output"
-    script_paths = load_py_files(script_dir, return_files=False)
-    result = executor.run(data_path.parent, script_paths[0], output_path)
+    script_paths = FileLoader.load_py_files(script_dir, return_files=False)
+    result = executor.run(data_path.parent, data_path, script_paths[0], output_path)
     assert result is not None
 
 
@@ -62,12 +62,15 @@ def test_runnable_on_competition_dataset(tmp_path):
         / "data"
         / "santander-value-prediction-challenge"
     )
+    input_path = Path(
+        local_project_path / "files"
+    )
     script_dir = Path(
         local_project_path / "kernels_py"
     )
-    script_paths = load_py_files(script_dir, return_files=False)
+    script_paths = FileLoader.load_py_files(script_dir, return_files=False)
     output_path = tmp_path / "output"
-    result = executor.run(local_project_path, script_paths[0], output_path)
+    result = executor.run(local_project_path, input_path, script_paths[0], output_path)
     assert result is not None
 
 
@@ -81,12 +84,15 @@ def test_runnable_on_personal_dataset_with_ipynb(tmp_path):
         / "prasad22"
         / "healthcare-dataset"
     )
+    input_path = Path(
+        local_project_path / "files"
+    )
     script_dir = Path(
         local_project_path / "kernels_ipynb"
     )
     output_path = tmp_path / "output"
-    script_paths = load_py_files(script_dir, return_files=False)
-    result = executor.run(local_project_path, script_paths[0], output_path)
+    script_paths = FileLoader.load_py_files(script_dir, return_files=False)
+    result = executor.run(local_project_path, input_path, script_paths[0], output_path)
     assert result is not None
 
 
@@ -99,12 +105,15 @@ def test_runnable_on_competition_dataset_with_ipynb(tmp_path):
         / "data"
         / "santander-value-prediction-challenge"
     )
+    input_path = Path(
+        local_project_path / "files"
+    )
     script_dir = Path(
         local_project_path / "kernels_ipynb"
     )
-    script_paths = load_py_files(script_dir, return_files=False)
+    script_paths = FileLoader.load_py_files(script_dir, return_files=False)
     output_path = tmp_path / "output"
-    result = executor.run(local_project_path, script_paths[0], output_path)
+    result = executor.run(local_project_path, input_path, script_paths[0], output_path)
     assert result is not None
 
 
@@ -115,13 +124,16 @@ def test_runnable_on_small_test_dataset_with_ipynb(tmp_path):
     local_project_path = Path(
         project_root / "tests" / "resources" / "example_dataset_1"
     )
+    input_path = Path(
+        local_project_path / "files"
+    )
     script_dir = Path(
         local_project_path
         / "kernel_ipynb"
         / "example_notebook.ipynb"
     )
     output_path = tmp_path / "output"
-    _ = executor.run(local_project_path, script_dir, output_path)
+    _ = executor.run(local_project_path, input_path, script_dir, output_path)
 
     assert os.path.exists(output_path)
     assert len(list(output_path.iterdir())) == 1

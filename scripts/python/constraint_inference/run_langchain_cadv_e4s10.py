@@ -1,15 +1,13 @@
 from nbconvert import PythonExporter
 
 from cadv_exploration.utils import load_dotenv
+from deequ import DeequWrapper
 
 load_dotenv()
 import argparse
 import logging
 import oyaml as yaml
 
-from pydeequ import Check, CheckLevel
-from cadv_exploration.deequ._constraint_validation import validate_on_df
-from cadv_exploration.deequ import spark_df_from_pandas_df
 from cadv_exploration.inspector.deequ._to_string import spark_df_to_column_desc
 from cadv_exploration.llm.langchain import LangChainCADV
 from cadv_exploration.loader import FileLoader
@@ -40,6 +38,8 @@ def main():
     logging.info(f"Model: {args.model}")
     logging.info(f"Script ID: {args.script_id}")
 
+    deequ_wrapper = DeequWrapper()
+
     local_project_path = get_project_root() / "data" / "playground-series-s4e10"
     train_file_path = local_project_path / "files_with_clean_test_data" / "train.csv"
     validation_file_path = train_file_path.parent.parent / "files_with_clean_test_data" / "validation.csv"
@@ -47,8 +47,8 @@ def main():
     train_data = FileLoader.load_csv(train_file_path)
     validation_data = FileLoader.load_csv(validation_file_path)
 
-    spark_train_data, spark_train = spark_df_from_pandas_df(train_data)
-    spark_validation_data, spark_validation = spark_df_from_pandas_df(validation_data)
+    spark_train_data, spark_train = deequ_wrapper.spark_df_from_pandas_df(train_data)
+    spark_validation_data, spark_validation = deequ_wrapper.spark_df_from_pandas_df(validation_data)
 
     column_desc = spark_df_to_column_desc(spark_train_data, spark_train)
 
@@ -100,16 +100,6 @@ def main():
 
         with open(output_path, "w") as f:
             yaml.dump(yaml_dict, f)
-    # # Validate the constraints on the before broken data
-    # validate_on_df(code_list_for_constraints, spark_pre_corruption, spark_pre_corruption_df, logger)
-    #
-    # # Validate the constraints on the after broken data
-    # validate_on_df(code_list_for_constraints, spark_post_corruption, spark_post_corruption_df, logger)
-    #
-    # spark_pre_corruption.sparkContext._gateway.shutdown_callback_server()
-    # spark_post_corruption.sparkContext._gateway.shutdown_callback_server()
-    # spark_pre_corruption.stop()
-    # spark_post_corruption.stop()
 
 
 if __name__ == "__main__":

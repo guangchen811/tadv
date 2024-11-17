@@ -5,8 +5,7 @@ import argparse
 import logging
 import oyaml as yaml
 
-from cadv_exploration.deequ import spark_df_from_pandas_df
-from cadv_exploration.deequ import get_suggestion_for_spark_df
+from cadv_exploration.deequ_wrapper import DeequWrapper
 from cadv_exploration.loader import FileLoader
 from cadv_exploration.utils import get_project_root
 
@@ -33,6 +32,8 @@ def main():
     parser = argparse.ArgumentParser()
     args = parser.parse_args()
 
+    deequ_wrapper = DeequWrapper()
+
     local_project_path = get_project_root() / "data" / "playground-series-s4e10"
     train_file_path = local_project_path / "files_with_clean_test_data" / "train.csv"
     validation_file_path = train_file_path.parent.parent / "files_with_clean_test_data" / "validation.csv"
@@ -42,10 +43,10 @@ def main():
     train_data = FileLoader.load_csv(train_file_path)
     validation_data = FileLoader.load_csv(validation_file_path)
 
-    spark_train_data, spark_train = spark_df_from_pandas_df(train_data)
-    spark_validation_data, spark_validation = spark_df_from_pandas_df(validation_data)
+    spark_train_data, spark_train = deequ_wrapper.spark_df_from_pandas_df(train_data)
+    spark_validation_data, spark_validation = deequ_wrapper.spark_df_from_pandas_df(validation_data)
 
-    suggestion = get_suggestion_for_spark_df(spark_train_data, spark_train)
+    suggestion = deequ_wrapper.get_suggestion_for_spark_df(spark_train, spark_train_data)
     code_list_for_constraints = [item["code_for_constraint"] for item in suggestion]
     columns_set = set([item["column_name"] for item in suggestion])
     code_list_for_constraints_valid = filter_constraints(code_list_for_constraints, spark_validation,

@@ -1,5 +1,3 @@
-from typing import List
-
 import pandas as pd
 from pydeequ.profiles import *
 

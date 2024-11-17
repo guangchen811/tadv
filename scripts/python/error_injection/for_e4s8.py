@@ -1,6 +1,6 @@
 from error_injection import MissingCategoricalValueCorruption
 from error_injection.corrupts import Scaling
-from loader import load_csv
+from cadv_exploration.loader import FileLoader
 from utils import get_project_root
 
 
@@ -13,7 +13,7 @@ def error_injection():
     project_root = get_project_root()
     local_data_path = project_root / "data" / "playground-series-s4e8"
     file_path = local_data_path / "files"
-    full_train_data = load_csv(file_path / "train.csv")
+    full_train_data = FileLoader.load_csv(file_path / "train.csv")
     sampled_data = full_train_data.sample(frac=smapling_ratio, random_state=1).reset_index(drop=True)
     sampled_data.drop(columns=["id"], inplace=True)
 
