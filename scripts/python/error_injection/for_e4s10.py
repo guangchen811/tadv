@@ -1,7 +1,7 @@
 from cadv_exploration.loader import FileLoader
 from error_injection import MissingCategoricalValueCorruption
 from error_injection.corrupts import Scaling
-from utils import get_project_root
+from cadv_exploration.utils import get_project_root
 
 
 # This case can be treated as context information for ml inference. (the test data needs to be validated)

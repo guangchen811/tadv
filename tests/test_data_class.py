@@ -1,9 +1,9 @@
 import pytest
 import yaml
 
+from cadv_exploration.utils import get_project_root
 from cadv_exploration.utils.data_class import CodeEntry, Constraint, \
     Constraints
-from utils import get_project_root
 
 
 @pytest.fixture
