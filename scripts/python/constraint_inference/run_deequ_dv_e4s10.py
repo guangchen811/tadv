@@ -5,8 +5,6 @@ import argparse
 import logging
 import oyaml as yaml
 
-from pydeequ import Check, CheckLevel
-from cadv_exploration.deequ._constraint_validation import validate_on_df
 from cadv_exploration.deequ import spark_df_from_pandas_df
 from cadv_exploration.deequ import get_suggestion_for_spark_df
 from cadv_exploration.loader import load_csv
@@ -49,28 +47,27 @@ def main():
 
     suggestion = get_suggestion_for_spark_df(spark_train_data, spark_train)
     code_list_for_constraints = [item["code_for_constraint"] for item in suggestion]
-
+    columns_set = set([item["column_name"] for item in suggestion])
     code_list_for_constraints_valid = filter_constraints(code_list_for_constraints, spark_validation,
                                                          spark_validation_data, logger)
-    yaml_dict = {"constraints": []}
-    for code in code_list_for_constraints:
+
+    yaml_dict = {"constraints": {f"{column}": {"code": [], "assumptions": []} for column in
+                                 columns_set}}
+    for item in suggestion:
+        code = item["code_for_constraint"]
+        column_name = item["column_name"]
         if code in code_list_for_constraints_valid:
-            yaml_dict["constraints"].append([code, "Valid"])
+            yaml_dict["constraints"][column_name]["code"].append([code, "Valid"])
         else:
-            yaml_dict["constraints"].append([code, "Invalid"])
+            yaml_dict["constraints"][column_name]["code"].append([code, "Invalid"])
 
     with open(output_path, "w") as file:
         yaml.dump(yaml_dict, file)
-    # Validate the constraints on the before broken data
-    # validate_on_df(code_list_for_constraints, spark_pre_corruption, spark_pre_corruption_df, logger)
-    #
-    # # Validate the constraints on the after broken data
-    # validate_on_df(code_list_for_constraints, spark_post_corruption, spark_post_corruption_df, logger)
 
-    # spark_pre_corruption.sparkContext._gateway.shutdown_callback_server()
-    # spark_post_corruption.sparkContext._gateway.shutdown_callback_server()
-    # spark_pre_corruption.stop()
-    # spark_post_corruption.stop()
+    spark_train.sparkContext._gateway.shutdown_callback_server()
+    spark_validation.sparkContext._gateway.shutdown_callback_server()
+    spark_train.stop()
+    spark_validation.stop()
 
 
 if __name__ == "__main__":

@@ -20,6 +20,12 @@ class Constraint:
 class Constraints:
     constraints: Dict[str, Constraint] = field(default_factory=dict)
 
+    @classmethod
+    def from_yaml(cls, input_path: str):
+        constraints = cls()
+        constraints.load_from_yaml(input_path)
+        return constraints
+
     def to_dict(self):
         # Convert the dataclass structure to a dictionary that yaml.dump can use
         return {

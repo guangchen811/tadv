@@ -6,16 +6,18 @@ from utils import get_project_root
 
 # This case can be treated as context information for ml inference. (the test data needs to be validated)
 def error_injection():
-    target_column = "loan_status"
-    sample_default_value = 0.5
+    target_column = "class"
+    sample_default_value = 'e'
+    smapling_ratio = 0.2
 
     project_root = get_project_root()
-    local_data_path = project_root / "data" / "playground-series-s4e10"
+    local_data_path = project_root / "data" / "playground-series-s4e8"
     file_path = local_data_path / "files"
     full_train_data = load_csv(file_path / "train.csv")
-    full_train_data.drop(columns=["id"], inplace=True)
+    sampled_data = full_train_data.sample(frac=smapling_ratio, random_state=1).reset_index(drop=True)
+    sampled_data.drop(columns=["id"], inplace=True)
 
-    train_data, validation_data, test_data = split_dataset(full_train_data)
+    train_data, validation_data, test_data = split_dataset(sampled_data)
 
     train_data.reset_index(drop=False, inplace=True)
     train_data.rename(columns={"index": "id"}, inplace=True)
@@ -31,16 +33,17 @@ def error_injection():
     sample_submission[target_column] = sample_default_value
     test_data.drop(columns=[target_column], inplace=True)
 
-    # Inject errors on the test data
-    scaler = Scaling(columns=['person_age'], severity=0.2)
-    missing_to_majority = MissingCategoricalValueCorruption(columns=['person_home_ownership'], severity=0.1,
-                                                            corrupt_strategy="to_majority")
-    missing_to_remove = MissingCategoricalValueCorruption(columns=['cb_person_default_on_file'], severity=0.1,
-                                                          corrupt_strategy="to_random")
+    # # Inject errors on the test data
+    # scaler = Scaling(columns=['person_age'], severity=0.2)
+    # missing_to_majority = MissingCategoricalValueCorruption(columns=['person_home_ownership'], severity=0.1,
+    #                                                         corrupt_strategy="to_majority")
+    # missing_to_remove = MissingCategoricalValueCorruption(columns=['cb_person_default_on_file'], severity=0.1,
+    #                                                       corrupt_strategy="to_random")
 
-    post_corruption_test_data = scaler.transform(test_data)
-    post_corruption_test_data = missing_to_majority.transform(post_corruption_test_data)
-    post_corruption_test_data = missing_to_remove.transform(post_corruption_test_data)
+    post_corruption_test_data = test_data.copy()
+    # post_corruption_test_data = scaler.transform(post_corruption_test_data)
+    # post_corruption_test_data = missing_to_majority.transform(post_corruption_test_data)
+    # post_corruption_test_data = missing_to_remove.transform(post_corruption_test_data)
 
     files_with_clean_test_data_path = local_data_path / "files_with_clean_test_data"
     files_with_corrupted_test_data_path = local_data_path / "files_with_corrupted_test_data"
@@ -52,6 +55,7 @@ def error_injection():
     test_data.to_csv(files_with_clean_test_data_path / "test.csv", index=False)
     ground_truth.to_csv(files_with_clean_test_data_path / "ground_truth.csv", index=False)
     sample_submission.to_csv(files_with_clean_test_data_path / "sample_submission.csv", index=False)
+
 
     train_data.to_csv(files_with_corrupted_test_data_path / "train.csv", index=False)
     validation_data.to_csv(files_with_corrupted_test_data_path / "validation.csv", index=False)

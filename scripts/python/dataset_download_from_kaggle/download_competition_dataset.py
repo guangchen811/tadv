@@ -6,7 +6,7 @@ def main():
     #     'hotness', 'commentCount', 'dateCreated', 'dateRun', 'relevance',
     #     'scoreAscending', 'scoreDescending', 'viewCount', 'voteCount'
     # ]
-    download_competition("playground-series-s4e10", page_size=100, sort_by="scoreAscending")
+    download_competition("playground-series-s4e8", page_size=100, sort_by="scoreAscending")
 
 
 if __name__ == "__main__":
