@@ -1,7 +1,6 @@
 from nbconvert import PythonExporter
 
 from cadv_exploration.utils import load_dotenv
-from deequ import DeequWrapper
 
 load_dotenv()
 import argparse
@@ -9,6 +8,7 @@ import logging
 import oyaml as yaml
 
 from cadv_exploration.inspector.deequ._to_string import spark_df_to_column_desc
+from cadv_exploration.deequ_wrapper import DeequWrapper
 from cadv_exploration.llm.langchain import LangChainCADV
 from cadv_exploration.loader import FileLoader
 from cadv_exploration.utils import get_project_root
@@ -29,19 +29,18 @@ file_handler.setFormatter(formatter)
 logger.addHandler(file_handler)
 
 
-def main():
+def run_langchain_cadv(processed_data_idx):
     argparse.ArgumentParser(description="Run LangChainCADV")
     parser = argparse.ArgumentParser()
     parser.add_argument("--model", type=str, help="Model to use", default="gpt-4o-mini")
-    parser.add_argument("--script-id", type=int, help="Script ID", default=2)
     args = parser.parse_args()
     logging.info(f"Model: {args.model}")
-    logging.info(f"Script ID: {args.script_id}")
 
     deequ_wrapper = DeequWrapper()
 
-    local_project_path = get_project_root() / "data" / "playground-series-s4e10"
-    train_file_path = local_project_path / "files_with_clean_test_data" / "train.csv"
+    original_data_path = get_project_root() / "data" / "playground-series-s4e10"
+    processed_data_path = get_project_root() / "data_processed" / "playground-series-s4e10" / f"{processed_data_idx}"
+    train_file_path = processed_data_path / "files_with_clean_test_data" / "train.csv"
     validation_file_path = train_file_path.parent.parent / "files_with_clean_test_data" / "validation.csv"
 
     train_data = FileLoader.load_csv(train_file_path)
@@ -52,14 +51,13 @@ def main():
 
     column_desc = spark_df_to_column_desc(spark_train_data, spark_train)
 
-    scripts_path_dir = local_project_path / "kernels_ipynb_selected"
+    scripts_path_dir = original_data_path / "kernels_ipynb_selected"
     export = PythonExporter()
     for script_path in scripts_path_dir.iterdir():
-        output_path = local_project_path / "output" / f"{script_path.name.split('.')[0]}" / "cadv_constraints.yaml"
         if not script_path.name.endswith(".ipynb"):
             continue
-        if output_path.exists():
-            continue
+        result_path = processed_data_path / "constraints" / f"{script_path.name.split('.')[0]}" / "cadv_constraints.yaml"
+        result_path.parent.mkdir(parents=True, exist_ok=True)
         script_context = export.from_filename(script_path)[0]
 
         input_variables = {
@@ -98,9 +96,9 @@ def main():
             for expectation in expectations:
                 yaml_dict["constraints"][suggested_column]["assumptions"].append(expectation)
 
-        with open(output_path, "w") as f:
+        with open(result_path, "w") as f:
             yaml.dump(yaml_dict, f)
 
 
 if __name__ == "__main__":
-    main()
+    run_langchain_cadv(processed_data_idx=0)

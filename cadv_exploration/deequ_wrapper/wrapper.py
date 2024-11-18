@@ -20,7 +20,7 @@ class DeequWrapper():
     def profile_on_spark_df(self, spark, spark_df):
         return profile_on_spark_df(spark, spark_df)
 
-    def get_suggestion_for_spark_df(self, spark, spark_df, rules):
+    def get_suggestion_for_spark_df(self, spark, spark_df):
         return get_suggestion_for_spark_df(spark, spark_df)
 
     def validate_suggestions(self, spark, spark_df, check):

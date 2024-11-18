@@ -1,7 +1,7 @@
 from cadv_exploration.loader import FileLoader
+from cadv_exploration.utils import get_project_root
 from error_injection import MissingCategoricalValueCorruption
 from error_injection.corrupts import Scaling
-from cadv_exploration.utils import get_project_root
 
 
 # This case can be treated as context information for ml inference. (the test data needs to be validated)
@@ -12,6 +12,14 @@ def error_injection():
     project_root = get_project_root()
     local_data_path = project_root / "data" / "playground-series-s4e10"
     file_path = local_data_path / "files"
+    processed_data_dir = project_root / "data_processed" / "playground-series-s4e10"
+    processed_data_dir.mkdir(parents=True, exist_ok=True)
+    processed_data_idx = len(list(processed_data_dir.iterdir()))
+    processed_data_path = processed_data_dir / f"{processed_data_idx}"
+    processed_data_path.mkdir(parents=True, exist_ok=True)
+    result_path = processed_data_path / "result"
+    result_path.mkdir(parents=True, exist_ok=True)
+
     full_train_data = FileLoader.load_csv(file_path / "train.csv")
     full_train_data.drop(columns=["id"], inplace=True)
 
@@ -42,8 +50,8 @@ def error_injection():
     post_corruption_test_data = missing_to_majority.transform(post_corruption_test_data)
     post_corruption_test_data = missing_to_remove.transform(post_corruption_test_data)
 
-    files_with_clean_test_data_path = local_data_path / "files_with_clean_test_data"
-    files_with_corrupted_test_data_path = local_data_path / "files_with_corrupted_test_data"
+    files_with_clean_test_data_path = processed_data_path / "files_with_clean_test_data"
+    files_with_corrupted_test_data_path = processed_data_path / "files_with_corrupted_test_data"
     files_with_clean_test_data_path.mkdir(parents=True, exist_ok=True)
     files_with_corrupted_test_data_path.mkdir(parents=True, exist_ok=True)
 

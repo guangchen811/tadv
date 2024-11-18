@@ -1,21 +1,20 @@
 import os
+
 import nbformat
 
 from cadv_exploration.runtime_environments.kaggle import KaggleExecutor
 from cadv_exploration.utils import get_project_root
 
 
-def run_kaggle_code():
+def run_kaggle_code(processed_idx):
     executor = KaggleExecutor()
     project_root = get_project_root()
-    local_project_path = (
-            project_root
-            / "data"
-            / "playground-series-s4e10"
-    )
-    script_dir = local_project_path / "kernels_ipynb_selected"
-    input_path_with_clean_test_data = local_project_path / "files_with_clean_test_data"
-    input_path_with_corrupted_test_data = local_project_path / "files_with_corrupted_test_data"
+    original_data_path = project_root / "data" / "playground-series-s4e10"
+    script_dir = original_data_path / "kernels_ipynb_selected"
+
+    processed_data_path = project_root / "data_processed" / "playground-series-s4e10" / f"{processed_idx}"
+    input_path_with_clean_test_data = processed_data_path / "files_with_clean_test_data"
+    input_path_with_corrupted_test_data = processed_data_path / "files_with_corrupted_test_data"
 
     notebooks = find_notebooks_with_to_csv(scirpt_dir=script_dir)
 
@@ -23,15 +22,15 @@ def run_kaggle_code():
         script_name = notebooks[idx].split(".")[0]
 
         print(f"Running script: {script_name}")
-        script_path = local_project_path / script_dir / f"{script_name}.ipynb"
+        script_path = processed_data_path / script_dir / f"{script_name}.ipynb"
         print("on clean test data")
-        output_path_on_clean_test_data = local_project_path / "output" / script_name / "results_on_clean_test_data"
-        result_on_clean_test_data = executor.run(local_project_path=local_project_path,
+        output_path_on_clean_test_data = processed_data_path / "output" / script_name / "results_on_clean_test_data"
+        result_on_clean_test_data = executor.run(local_project_path=processed_data_path.parent,
                                                  input_path=input_path_with_clean_test_data, script_path=script_path,
                                                  output_path=output_path_on_clean_test_data)
         print("on corrupted test data")
-        output_path_on_corrupted_test_data = local_project_path / "output" / script_name / "results_on_corrupted_test_data"
-        result_on_corrupted_test_data = executor.run(local_project_path=local_project_path,
+        output_path_on_corrupted_test_data = processed_data_path / "output" / script_name / "results_on_corrupted_test_data"
+        result_on_corrupted_test_data = executor.run(local_project_path=processed_data_path.parent,
                                                      input_path=input_path_with_corrupted_test_data,
                                                      script_path=script_path,
                                                      output_path=output_path_on_corrupted_test_data)
@@ -55,4 +54,4 @@ def find_notebooks_with_to_csv(scirpt_dir):
 
 
 if __name__ == "__main__":
-    run_kaggle_code()
+    run_kaggle_code(processed_idx=0)

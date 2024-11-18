@@ -1,7 +1,6 @@
 from cadv_exploration.utils import load_dotenv
 
 load_dotenv()
-import argparse
 import logging
 import oyaml as yaml
 
@@ -27,18 +26,15 @@ file_handler.setFormatter(formatter)
 logger.addHandler(file_handler)
 
 
-def main():
-    argparse.ArgumentParser(description="Run Deequ")
-    parser = argparse.ArgumentParser()
-    args = parser.parse_args()
-
+def run_deequ_dv(processed_data_idx):
     deequ_wrapper = DeequWrapper()
 
-    local_project_path = get_project_root() / "data" / "playground-series-s4e10"
-    train_file_path = local_project_path / "files_with_clean_test_data" / "train.csv"
+    processed_project_path = get_project_root() / "data_processed" / "playground-series-s4e10" / f"{processed_data_idx}"
+    train_file_path = processed_project_path / "files_with_clean_test_data" / "train.csv"
     validation_file_path = train_file_path.parent.parent / "files_with_clean_test_data" / "validation.csv"
 
-    output_path = local_project_path / "output" / "deequ_constraints.yaml"
+    result_path = processed_project_path / "constraints" / "deequ_constraints.yaml"
+    result_path.parent.mkdir(parents=True, exist_ok=True)
 
     train_data = FileLoader.load_csv(train_file_path)
     validation_data = FileLoader.load_csv(validation_file_path)
@@ -62,7 +58,7 @@ def main():
         else:
             yaml_dict["constraints"][column_name]["code"].append([code, "Invalid"])
 
-    with open(output_path, "w") as file:
+    with open(result_path, "w") as file:
         yaml.dump(yaml_dict, file)
 
     spark_train.sparkContext._gateway.shutdown_callback_server()
@@ -72,4 +68,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    run_deequ_dv(processed_data_idx=0)
