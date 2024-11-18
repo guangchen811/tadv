@@ -11,14 +11,14 @@ class CodeEntry:
 
 
 @dataclass
-class Constraint:
+class ColumnConstraints:
     code: List[CodeEntry] = field(default_factory=list)
     assumptions: List[str] = field(default_factory=list)
 
 
 @dataclass
 class Constraints:
-    constraints: Dict[str, Constraint] = field(default_factory=dict)
+    constraints: Dict[str, ColumnConstraints] = field(default_factory=dict)
 
     def get_suggestions_code_column_map(self, valid_only=False):
         return {
@@ -51,7 +51,7 @@ class Constraints:
         with open(input_path, "r") as f:
             data = yaml.safe_load(f)
             for column, constraint in data["constraints"].items():
-                self.constraints[column] = Constraint(
+                self.constraints[column] = ColumnConstraints(
                     code=[CodeEntry(suggestion=suggestion, validity=validity) for suggestion, validity in
                           constraint["code"]],
                     assumptions=constraint["assumptions"]

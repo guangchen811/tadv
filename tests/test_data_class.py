@@ -2,7 +2,7 @@ import pytest
 import yaml
 
 from cadv_exploration.utils import get_project_root
-from cadv_exploration.data_models import CodeEntry, Constraint, \
+from cadv_exploration.data_models import CodeEntry, ColumnConstraints, \
     Constraints
 
 
@@ -12,8 +12,8 @@ def constraints_instance():
         CodeEntry(suggestion="Use a non-null constraint", validity="Valid"),
         CodeEntry(suggestion="Ensure unique values", validity="Invalid"),
     ]
-    constraint = Constraint(code=code_entries, assumptions=["Assumption 1", "Assumption 2"])
-    constraints = Constraints(constraints={"column1": constraint})
+    column_constraints = ColumnConstraints(code=code_entries, assumptions=["Assumption 1", "Assumption 2"])
+    constraints = Constraints(constraints={"column1": column_constraints})
     return constraints
 
 

@@ -1,7 +1,7 @@
-from cadv_exploration.data_models.constraints import CodeEntry, Constraint, Constraints
+from cadv_exploration.data_models.constraints import CodeEntry, ColumnConstraints, Constraints
 
 __all__ = [
     "CodeEntry",
-    "Constraint",
+    "ColumnConstraints",
     "Constraints",
 ]
