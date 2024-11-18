@@ -20,12 +20,6 @@ class ColumnConstraints:
 class Constraints:
     constraints: Dict[str, ColumnConstraints] = field(default_factory=dict)
 
-    def get_suggestions_code_column_map(self, valid_only=False):
-        return {
-            code.suggestion: column for column, constraint in self.constraints.items() for code in constraint.code if
-            not valid_only or code.validity == "Valid"
-        }
-
     @classmethod
     def from_yaml(cls, input_path: str):
         constraints = cls()
@@ -56,3 +50,9 @@ class Constraints:
                           constraint["code"]],
                     assumptions=constraint["assumptions"]
                 )
+
+    def get_suggestions_code_column_map(self, valid_only=False):
+        return {
+            code.suggestion: column for column, constraint in self.constraints.items() for code in constraint.code if
+            not valid_only or code.validity == "Valid"
+        }

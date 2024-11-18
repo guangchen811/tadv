@@ -1,7 +1,7 @@
 import pandas as pd
 
 from cadv_exploration.utils import load_dotenv
-from data_models import Constraints
+from data_models import Constraints, ValidationResults
 
 load_dotenv()
 
@@ -17,81 +17,94 @@ def evaluate_playground_series_s4e10(processed_data_idx):
     project_root = get_project_root()
     processed_data_path = project_root / "data_processed" / "playground-series-s4e10" / f"{processed_data_idx}"
     ground_truth = FileLoader.load_csv(processed_data_path / "files_with_clean_test_data" / "ground_truth.csv")
-    scripts_output_dir = processed_data_path / "constraints"
+    output_dir = processed_data_path / "output"
+    constraints_dir = processed_data_path / "constraints"
     clean_test_data = FileLoader.load_csv(processed_data_path / "files_with_clean_test_data" / "test.csv")
     corrupted_test_data = FileLoader.load_csv(processed_data_path / "files_with_corrupted_test_data" / "test.csv")
 
-    deequ_suggestion_file_path = scripts_output_dir / "deequ_constraints.yaml"
-    status_on_clean_text_data_deequ, status_on_corrupted_text_data_deequ = validate_on_both_test_data(
+    deequ_suggestion_file_path = constraints_dir / "deequ_constraints.yaml"
+    validation_results_on_clean_text_data_deequ, validation_results_on_corrupted_text_data_deequ = validate_on_both_test_data(
         deequ_suggestion_file_path,
         clean_test_data,
         corrupted_test_data,
         deequ_wrapper)
 
-    for script_output_dir in scripts_output_dir.iterdir():
-        if script_output_dir.is_file():
+    validation_results_on_clean_text_data_deequ.save_to_yaml(
+        output_dir / "validation_results_on_clean_text_data_deequ.yaml")
+    validation_results_on_corrupted_text_data_deequ.save_to_yaml(
+        output_dir / "validation_results_on_corrupted_text_data_deequ.yaml")
+
+    for script_constraints_dir in constraints_dir.iterdir():
+        if script_constraints_dir.is_file():
             continue
-        print(f"evaluating script: {script_output_dir.name}")
-        cadv_suggestion_file_path = script_output_dir / "cadv_constraints.yaml"
-        status_on_clean_text_data, status_on_corrupted_text_data = validate_on_both_test_data(
+        print(f"evaluating script: {script_constraints_dir.name}")
+        cadv_suggestion_file_path = script_constraints_dir / "cadv_constraints.yaml"
+        validation_results_on_clean_text_data_cadv, validation_results_on_corrupted_text_data_cadv = validate_on_both_test_data(
             cadv_suggestion_file_path,
             clean_test_data,
             corrupted_test_data,
             deequ_wrapper)
 
+        validation_results_on_clean_text_data_cadv.save_to_yaml(
+            output_dir / script_constraints_dir.name / "validation_results_on_clean_text_data_cadv.yaml")
+        validation_results_on_corrupted_text_data_cadv.save_to_yaml(
+            output_dir / script_constraints_dir.name / "validation_results_on_corrupted_text_data_cadv.yaml")
+
         result_on_clean_test_data = FileLoader.load_csv(
-            script_output_dir.parent.parent / "output" / script_output_dir.name / "results_on_clean_test_data" / "submission.csv")
+            script_constraints_dir.parent.parent / "output" / script_constraints_dir.name / "results_on_clean_test_data" / "submission.csv")
         auc_on_clean_test_data = roc_auc_score(np.where(ground_truth['loan_status'].to_numpy() > 0.5, 1, 0),
                                                result_on_clean_test_data.iloc[:, 1].to_numpy())
         try:
             result_on_corrupted_test_data = FileLoader.load_csv(
-                script_output_dir.parent.parent / "output" / script_output_dir.name / "results_on_corrupted_test_data" / "submission.csv")
+                script_constraints_dir.parent.parent / "output" / script_constraints_dir.name / "results_on_corrupted_test_data" / "submission.csv")
             auc_on_corrupted_test_data = roc_auc_score(np.where(ground_truth['loan_status'].to_numpy() > 0.5, 1, 0),
                                                        result_on_corrupted_test_data.iloc[:, 1].to_numpy())
         except Exception as e:
             auc_on_corrupted_test_data = np.nan
-        print(
-            f"AUC on clean test data: {auc_on_clean_test_data}")
-        print(
-            f"AUC on corrupted test data: {auc_on_corrupted_test_data}")
-        print(status_on_clean_text_data.count("Success") / len(status_on_clean_text_data))
-        print(status_on_corrupted_text_data.count("Success") / len(status_on_corrupted_text_data))
-
-        print(status_on_clean_text_data_deequ.count("Success") / len(status_on_clean_text_data_deequ))
-        print(status_on_corrupted_text_data_deequ.count("Success") / len(status_on_corrupted_text_data_deequ))
-
-        evaluate_file_path = script_output_dir.parent.parent / "output" / script_output_dir.name / "evaluation.csv"
-        pd.DataFrame({
+        model_performance = pd.DataFrame({
             "auc_on_clean_test_data": [auc_on_clean_test_data],
             "auc_on_corrupted_test_data": [auc_on_corrupted_test_data],
-            "status_on_clean_text_data": [status_on_clean_text_data.count("Success") / len(status_on_clean_text_data)],
-            "status_on_corrupted_text_data": [
-                status_on_corrupted_text_data.count("Success") / len(status_on_corrupted_text_data)],
-            "status_on_clean_text_data_deequ": [
-                status_on_clean_text_data_deequ.count("Success") / len(status_on_clean_text_data_deequ)],
-            "status_on_corrupted_text_data_deequ": [
-                status_on_corrupted_text_data_deequ.count("Success") / len(status_on_corrupted_text_data_deequ)]
-        }).to_csv(evaluate_file_path, index=False)
+        })
+        model_performance.to_csv(output_dir / script_constraints_dir.name / "model_performance.csv", index=False)
 
 
 def validate_on_both_test_data(suggestion_file_path, clean_test_data, corrupted_test_data, deequ_wrapper):
-    deequ_constraints = Constraints.from_yaml(suggestion_file_path)
-    deequ_valid_code_column_map = deequ_constraints.get_suggestions_code_column_map(valid_only=True)
-    code_list_for_deequ_constraints = [item for item in deequ_valid_code_column_map.keys()]
+    constraints = Constraints.from_yaml(suggestion_file_path)
+    valid_code_column_map = constraints.get_suggestions_code_column_map(valid_only=True)
+    code_list_for_constraints = [item for item in valid_code_column_map.keys()]
     # Validate the constraints on the before broken data
     spark_clean_test_data, spark_clean_test = deequ_wrapper.spark_df_from_pandas_df(clean_test_data)
-    status_on_clean_text_data_deequ = deequ_wrapper.validate_on_df(spark_clean_test, spark_clean_test_data,
-                                                                   code_list_for_deequ_constraints)
+    status_on_clean_text_data = deequ_wrapper.validate_on_df(spark_clean_test, spark_clean_test_data,
+                                                             code_list_for_constraints)
+    validation_results_dict_on_clean_text_data = build_validation_results_dict(code_list_for_constraints,
+                                                                               status_on_clean_text_data,
+                                                                               valid_code_column_map)
+    validation_results_on_clean_text_data = ValidationResults.from_dict(validation_results_dict_on_clean_text_data)
     # Validate the constraints on the after broken data
     spark_corrupted_test_data, spark_corrupted_test = deequ_wrapper.spark_df_from_pandas_df(corrupted_test_data)
-    status_on_corrupted_text_data_deequ = deequ_wrapper.validate_on_df(spark_corrupted_test,
-                                                                       spark_corrupted_test_data,
-                                                                       code_list_for_deequ_constraints)
+    status_on_corrupted_text_data = deequ_wrapper.validate_on_df(spark_corrupted_test,
+                                                                 spark_corrupted_test_data,
+                                                                 code_list_for_constraints)
+    validation_results_dict_on_corrupted_text_data = build_validation_results_dict(code_list_for_constraints,
+                                                                                   status_on_corrupted_text_data,
+                                                                                   valid_code_column_map)
+    validation_results_on_corrupted_text_data = ValidationResults.from_dict(
+        validation_results_dict_on_corrupted_text_data)
     spark_clean_test.sparkContext._gateway.shutdown_callback_server()
     spark_corrupted_test.sparkContext._gateway.shutdown_callback_server()
     spark_clean_test.stop()
     spark_corrupted_test.stop()
-    return status_on_clean_text_data_deequ, status_on_corrupted_text_data_deequ
+    return validation_results_on_clean_text_data, validation_results_on_corrupted_text_data
+
+
+def build_validation_results_dict(code_list_for_constraints, status_on_clean_text_data, valid_code_column_map):
+    code_status_map = {code_list_for_constraints[i]: status_on_clean_text_data[i] for i in
+                       range(len(code_list_for_constraints))}
+    validation_results_dict = {"results": {column: [] for column in valid_code_column_map.values()}}
+    for code, column in valid_code_column_map.items():
+        validation_results_dict["results"][column].append(
+            [code, "Passed" if code_status_map[code] == "Success" else "Failed"])
+    return validation_results_dict
 
 
 if __name__ == "__main__":
