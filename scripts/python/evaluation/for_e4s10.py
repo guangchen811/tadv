@@ -1,6 +1,7 @@
 import pandas as pd
 
 from cadv_exploration.utils import load_dotenv
+from data_models import Constraints
 
 load_dotenv()
 
@@ -24,10 +25,9 @@ def evaluate_playground_series_s4e10(processed_data_idx):
         print(f"evaluating script: {script_output_dir.name}")
 
         cadv_suggestion_file_path = script_output_dir / "cadv_constraints.yaml"
-        with open(cadv_suggestion_file_path, "r") as file:
-            cadv_suggestions = yaml.safe_load(file)
-        code_list_for_cadv_constraints = [item for k, v in cadv_suggestions['constraints'].items() for item in v['code']]
-        code_list_for_cadv_constraints = [item[0] for item in code_list_for_cadv_constraints if item[1] == "Valid"]
+        cadv_constraints = Constraints.from_yaml(cadv_suggestion_file_path)
+        valid_code_column_map = cadv_constraints.get_suggestions_code_column_map(valid_only=True)
+        code_list_for_cadv_constraints = [item for item in valid_code_column_map.keys()]
         # Validate the constraints on the before broken data
         spark_clean_test_data, spark_clean_test = deequ_wrapper.spark_df_from_pandas_df(clean_test_data)
         status_on_clean_text_data = deequ_wrapper.validate_on_df(spark_clean_test, spark_clean_test_data,
@@ -43,11 +43,9 @@ def evaluate_playground_series_s4e10(processed_data_idx):
         spark_corrupted_test.stop()
 
         deequ_suggestion_file_path = script_output_dir.parent / "deequ_constraints.yaml"
-        with open(deequ_suggestion_file_path, "r") as file:
-            deequ_suggestions = yaml.safe_load(file)
-        code_list_for_deequ_constraints = [item for k, v in deequ_suggestions['constraints'].items() for item in v['code']]
-        code_list_for_deequ_constraints = [item[0] for item in code_list_for_deequ_constraints if item[1] == "Valid"]
-
+        deequ_constraints = Constraints.from_yaml(deequ_suggestion_file_path)
+        deequ_valid_code_column_map = deequ_constraints.get_suggestions_code_column_map(valid_only=True)
+        code_list_for_deequ_constraints = [item for item in deequ_valid_code_column_map.keys()]
         # Validate the constraints on the before broken data
         spark_clean_test_data, spark_clean_test = deequ_wrapper.spark_df_from_pandas_df(clean_test_data)
         status_on_clean_text_data_deequ = deequ_wrapper.validate_on_df(spark_clean_test, spark_clean_test_data,

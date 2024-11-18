@@ -2,7 +2,7 @@ import pytest
 import yaml
 
 from cadv_exploration.utils import get_project_root
-from cadv_exploration.utils.data_class import CodeEntry, Constraint, \
+from cadv_exploration.data_models import CodeEntry, Constraint, \
     Constraints
 
 
