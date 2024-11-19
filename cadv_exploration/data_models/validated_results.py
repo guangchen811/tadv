@@ -41,14 +41,14 @@ class ValidationResults:
         with open(input_path, "r") as f:
             data = yaml.safe_load(f)
             results = cls()
-            for column, result in data["results"].items():
+            for column, code_entry in data["results"].items():
                 results.results[column] = ColumnValidationResults(
                     code=[
                         ValidationCodeEntry(
-                            suggestion=entry["suggestion"],
-                            status=entry["status"],
+                            suggestion=entry[0],
+                            status=entry[1],
                         )
-                        for entry in result["code"]
+                        for entry in code_entry['code']
                     ]
                 )
             return results
