@@ -1,6 +1,10 @@
 # from pydeequ.checks import *
+import warnings
+
 from pydeequ import CheckLevel
 from pydeequ.verification import *
+
+warnings.filterwarnings("ignore", message="DataFrame constructor is internal.*")
 
 
 def validate_suggestions(spark, spark_df, check):
