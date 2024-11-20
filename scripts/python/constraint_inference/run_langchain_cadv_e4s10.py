@@ -5,13 +5,13 @@ from cadv_exploration.utils import load_dotenv
 load_dotenv()
 import argparse
 import logging
-import oyaml as yaml
 
 from cadv_exploration.inspector.deequ._to_string import spark_df_to_column_desc
 from cadv_exploration.deequ_wrapper import DeequWrapper
 from cadv_exploration.llm.langchain import LangChainCADV
 from cadv_exploration.loader import FileLoader
 from cadv_exploration.utils import get_project_root
+from cadv_exploration.data_models import Constraints
 from scripts.python.constraint_inference.utils import filter_constraints
 from langchain_core.exceptions import OutputParserException
 
@@ -69,7 +69,6 @@ def run_langchain_cadv(processed_data_idx):
 
         lc = LangChainCADV(model=args.model)
 
-
         max_retries = args.max_retries
         attempt = 0
         while attempt < max_retries:
@@ -88,33 +87,15 @@ def run_langchain_cadv(processed_data_idx):
                 logger.error("An unexpected error occurred.")
                 raise e  # Raise any other unexpected exceptions
 
-        logger.info(f"Relevant columns: {relevant_columns_list}")
-        logger.info(f"Expectations: {expectations}")
-        logger.info(f"Suggestions: {suggestions}")
-
         code_list_for_constraints = [item for v in suggestions.values() for item in v]
 
         # Validate the constraints on the original data to see if they are grammarly correct
         code_list_for_constraints_valid = filter_constraints(code_list_for_constraints, spark_validation,
                                                              spark_validation_data, logger)
-        yaml_dict = {"constraints": {f"{relevant_column}": {"code": [], "assumptions": []} for relevant_column in
-                                     relevant_columns_list}}
-        for suggested_column, suggestions in suggestions.items():
-            if suggested_column not in relevant_columns_list:
-                continue
-            for suggestion in suggestions:
-                if suggestion in code_list_for_constraints_valid:
-                    yaml_dict["constraints"][suggested_column]["code"].append([suggestion, "Valid"])
-                else:
-                    yaml_dict["constraints"][suggested_column]["code"].append([suggestion, "Invalid"])
-        for suggested_column, expectations in expectations.items():
-            if suggested_column not in relevant_columns_list:
-                continue
-            for expectation in expectations:
-                yaml_dict["constraints"][suggested_column]["assumptions"].append(expectation)
+        constraints = Constraints.from_llm_output(relevant_columns_list, expectations, suggestions,
+                                                  code_list_for_constraints_valid)
 
-        with open(result_path, "w") as f:
-            yaml.dump(yaml_dict, f)
+        constraints.save_to_yaml(result_path)
         print(f"Saved to {result_path}")
 
     spark_train.sparkContext._gateway.shutdown_callback_server()

@@ -37,6 +37,36 @@ class Constraints:
             }
         }
 
+    @classmethod
+    def from_llm_output(cls, relevant_columns_list, expectations, suggestions, code_list_for_constraints_valid):
+        yaml_dict = {"constraints": {f"{relevant_column}": {"code": [], "assumptions": []} for relevant_column in
+                                     relevant_columns_list}}
+        for suggested_column, suggestions in suggestions.items():
+            if suggested_column not in relevant_columns_list:
+                continue
+            for suggestion in suggestions:
+                if suggestion in code_list_for_constraints_valid:
+                    yaml_dict["constraints"][suggested_column]["code"].append([suggestion, "Valid"])
+                else:
+                    yaml_dict["constraints"][suggested_column]["code"].append([suggestion, "Invalid"])
+        for suggested_column, expectations in expectations.items():
+            if suggested_column not in relevant_columns_list:
+                continue
+            for expectation in expectations:
+                yaml_dict["constraints"][suggested_column]["assumptions"].append(expectation)
+        return cls.from_dict(yaml_dict)
+
+    @classmethod
+    def from_dict(cls, data):
+        constraints = cls()
+        for column, constraint in data["constraints"].items():
+            constraints.constraints[column] = ColumnConstraints(
+                code=[CodeEntry(suggestion=suggestion, validity=validity) for suggestion, validity in
+                      constraint["code"]],
+                assumptions=constraint["assumptions"]
+            )
+        return constraints
+
     def save_to_yaml(self, output_path: str):
         with open(output_path, "w") as f:
             yaml.dump(self.to_dict(), f)
