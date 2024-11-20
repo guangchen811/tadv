@@ -63,7 +63,7 @@ class ValidationResults:
                         suggestion=entry[0],
                         status=entry[1],
                     )
-                    for entry in result
+                    for entry in result["code"]
                 ],
             )
         return results

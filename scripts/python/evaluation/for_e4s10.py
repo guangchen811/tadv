@@ -100,9 +100,9 @@ def validate_on_both_test_data(suggestion_file_path, clean_test_data, corrupted_
 def build_validation_results_dict(code_list_for_constraints, status_on_clean_test_data, valid_code_column_map):
     code_status_map = {code_list_for_constraints[i]: status_on_clean_test_data[i] for i in
                        range(len(code_list_for_constraints))}
-    validation_results_dict = {"results": {column: [] for column in valid_code_column_map.values()}}
+    validation_results_dict = {"results": {column: {"code": []} for column in valid_code_column_map.values()}}
     for code, column in valid_code_column_map.items():
-        validation_results_dict["results"][column].append(
+        validation_results_dict["results"][column]["code"].append(
             [code, "Passed" if code_status_map[code] == "Success" else "Failed"])
     return validation_results_dict
 

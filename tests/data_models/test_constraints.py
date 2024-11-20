@@ -1,9 +1,9 @@
 import pytest
-import yaml
+import oyaml as yaml
 
-from cadv_exploration.utils import get_project_root
 from cadv_exploration.data_models import CodeEntry, ColumnConstraints, \
     Constraints
+from cadv_exploration.utils import get_project_root
 
 
 @pytest.fixture
@@ -78,3 +78,44 @@ def test_load_from_local_yaml():
 
     assert "person_home_ownership" in constraints.constraints
     assert constraints.constraints["person_home_ownership"].code[0].validity == "Valid"
+
+
+def test_from_llm_output():
+    relevant_columns_list = ["column1", "column2"]
+    suggestions = {
+        "column1": [".hasCompleteness('column1', lambda x: x > 0.9)"],
+        "column2": [".hasMax('column2', lambda x: x < 100)"]
+    }
+    code_list_for_constraints_valid = [".hasCompleteness('column1', lambda x: x > 0.9)"]
+    expectations = {
+        "column1": ["Assumption 1"],
+        "column2": ["Assumption 2"]
+    }
+
+    constraints = Constraints.from_llm_output(relevant_columns_list, expectations, suggestions,
+                                              code_list_for_constraints_valid)
+
+    assert "column1" in constraints.constraints
+    assert constraints.constraints["column1"].code[0].suggestion == ".hasCompleteness('column1', lambda x: x > 0.9)"
+    assert constraints.constraints["column1"].code[0].validity == "Valid"
+    assert constraints.constraints["column1"].assumptions == ["Assumption 1"]
+
+
+def test_from_dict():
+    data = {
+        "constraints": {
+            "column1": {
+                "code": [
+                    [".hasCompleteness('column1', lambda x: x > 0.9)", "Valid"]
+                ],
+                "assumptions": ["Assumption 1"]
+            }
+        }
+    }
+
+    constraints = Constraints.from_dict(data)
+
+    assert "column1" in constraints.constraints
+    assert constraints.constraints["column1"].code[0].suggestion == ".hasCompleteness('column1', lambda x: x > 0.9)"
+    assert constraints.constraints["column1"].code[0].validity == "Valid"
+    assert constraints.constraints["column1"].assumptions == ["Assumption 1"]
