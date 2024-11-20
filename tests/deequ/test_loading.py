@@ -5,7 +5,6 @@ load_dotenv()
 import pandas as pd
 
 from cadv_exploration.loader import FileLoader
-from cadv_exploration.utils import get_project_root
 
 
 def test_spark_df_from_pandas_df(deequ_wrapper):
@@ -17,16 +16,13 @@ def test_spark_df_from_pandas_df(deequ_wrapper):
     assert spark_df.collect()[0].b == "foo"
 
 
-def test_spark_df_from_local_csv(deequ_wrapper):
-    project_root = get_project_root()
+def test_spark_df_from_local_csv(deequ_wrapper, resources_path):
     file_path = (
-            project_root
-            / "data"
-            / "prasad22"
-            / "healthcare-dataset"
+            resources_path
+            / "example_dataset_1"
             / "files"
-            / "healthcare_dataset.csv"
+            / "example_table.csv"
     )
     df = FileLoader.load_csv(file_path)
     spark_df, _ = deequ_wrapper.spark_df_from_pandas_df(df)
-    assert spark_df.count() == 55500
+    assert spark_df.count() == 5

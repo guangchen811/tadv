@@ -4,8 +4,8 @@ from cadv_exploration.error_injection.basis import TabularCorruption
 
 
 class MissingCategoricalValueCorruption(TabularCorruption):
-    def __init__(self, columns: object = None, severity: object = 0.1, corrupt_strategy: object = "to_nan",
-                 **kwargs: object) -> object:
+    def __init__(self, columns: object = None, severity: int = 0.1, corrupt_strategy: object = "to_nan",
+                 **kwargs: object):
         super().__init__(columns, **kwargs)
         self.severity = severity
         self.max_unique_num = 30

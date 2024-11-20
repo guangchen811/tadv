@@ -1,8 +1,7 @@
 import pandas as pd
 
 from cadv_exploration.error_injection import MissingCategoricalValueCorruption
-from cadv_exploration.loader import FileLoader
-from cadv_exploration.utils import get_project_root, get_current_folder
+from cadv_exploration.utils import get_current_folder
 
 
 def test_on_small_dataset():
@@ -38,32 +37,3 @@ def test_on_small_dataset():
     assert df.shape[0] > corrupted_df_remove.shape[0]
     assert corrupted_df_remove["BloodType"].isnull().sum() == 0
     assert len(corrupted_df_remove["BloodType"].unique()) < len(df["BloodType"].unique())
-
-
-def test_on_large_dataset():
-    project_root = get_project_root()
-    file_path = (
-            project_root
-            / "data"
-            / "prasad22"
-            / "healthcare-dataset"
-            / "files"
-            / "healthcare_dataset.csv"
-    )
-
-    df = FileLoader.load_csv(file_path)
-    missing_categorical_value_corruption_to_random = MissingCategoricalValueCorruption(columns=["Blood Type"],
-                                                                                       severity=0.001,
-                                                                                       corrupt_strategy="to_random")
-    corrupted_df_to_random = missing_categorical_value_corruption_to_random.transform(df)
-    assert df.shape[0] == corrupted_df_to_random.shape[0]
-    assert corrupted_df_to_random["Blood Type"].isnull().sum() == 0
-    assert len(corrupted_df_to_random["Blood Type"].unique()) < len(df["Blood Type"].unique())
-
-    missing_categorical_value_corruption_to_majority = MissingCategoricalValueCorruption(columns=["Blood Type"],
-                                                                                         severity=0.999,
-                                                                                         corrupt_strategy="to_majority")
-    corrupted_df_to_majority = missing_categorical_value_corruption_to_majority.transform(df)
-    assert df.shape[0] == corrupted_df_to_majority.shape[0]
-    assert corrupted_df_to_majority["Blood Type"].isnull().sum() == 0
-    assert len(corrupted_df_to_majority["Blood Type"].unique()) == 1

@@ -5,31 +5,25 @@ load_dotenv()
 from cadv_exploration.inspector.deequ._to_string import spark_df_to_column_desc
 from cadv_exploration.llm.langchain import LangChainCADV
 from cadv_exploration.loader import FileLoader
-from cadv_exploration.utils import get_project_root
 
 
-def test_runnable(deequ_wrapper):
-    script_id = 0
-
-    project_root = get_project_root()
+def test_runnable(deequ_wrapper, resources_path):
     file_path = (
-            project_root
-            / "data"
-            / "prasad22"
-            / "healthcare-dataset"
+            resources_path
+            / "example_dataset_1"
             / "files"
-            / "healthcare_dataset.csv"
+            / "example_table.csv"
     )
     df = FileLoader.load_csv(file_path)
     spark_df, spark = deequ_wrapper.spark_df_from_pandas_df(df)
     column_desc = spark_df_to_column_desc(spark_df, spark)
 
-    dir_path = project_root / "data" / "prasad22" / "healthcare-dataset" / "kernels_py"
+    dir_path = resources_path / "example_dataset_1" / "kernel_py"
     scripts = FileLoader.load_py_files(dir_path)
 
     input_variables = {
         "column_desc": column_desc,
-        "script": scripts[script_id],
+        "script": scripts[0],
     }
     lc = LangChainCADV(model="gpt-4o-mini")
 

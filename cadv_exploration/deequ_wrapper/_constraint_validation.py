@@ -12,12 +12,12 @@ def validate_suggestions(spark, spark_df, check):
 def apply_checks_from_strings(spark, spark_df, check_strings):
     final_check_result = []
     for check_str in check_strings:
-        check_result = single_check(check_str, spark, spark_df)
+        check_result = single_check(spark, spark_df, check_str)
         final_check_result.append(check_result)
     return final_check_result
 
 
-def single_check(check_str, spark, spark_df):
+def single_check(spark, spark_df, check_str):
     check = Check(spark, CheckLevel.Warning, "Check for data")
     try:
         if check_str.startswith("."):

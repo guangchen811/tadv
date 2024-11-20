@@ -6,7 +6,6 @@ import nbformat
 import pandas as pd
 import pytest
 
-from cadv_exploration.loader import FileLoader
 from cadv_exploration.runtime_environments.kaggle import KaggleExecutor
 from cadv_exploration.utils import get_project_root
 
@@ -31,90 +30,6 @@ def docker_image_exists(image_name="kaggle-env/python:1.0.0"):
         return result.returncode == 0
     except (subprocess.CalledProcessError, FileNotFoundError):
         return False
-
-
-@pytest.mark.skipif(not docker_image_exists(), reason="Docker is not available")
-def test_runnable_on_personal_dataset(tmp_path):
-    executor = KaggleExecutor()
-    project_root = get_project_root()
-    data_path = Path(
-        project_root
-        / "data"
-        / "prasad22"
-        / "healthcare-dataset"
-        / "files"
-    )
-    script_dir = Path(
-        project_root / "data" / "prasad22" / "healthcare-dataset" / "kernels_py"
-    )
-    output_path = tmp_path / "output"
-    script_paths = FileLoader.load_py_files(script_dir, return_files=False)
-    result = executor.run(data_path.parent, data_path, script_paths[0], output_path)
-    assert result is not None
-
-
-@pytest.mark.skipif(not docker_image_exists(), reason="Docker is not available")
-def test_runnable_on_competition_dataset(tmp_path):
-    executor = KaggleExecutor()
-    project_root = get_project_root()
-    local_project_path = Path(
-        project_root
-        / "data"
-        / "santander-value-prediction-challenge"
-    )
-    input_path = Path(
-        local_project_path / "files"
-    )
-    script_dir = Path(
-        local_project_path / "kernels_py"
-    )
-    script_paths = FileLoader.load_py_files(script_dir, return_files=False)
-    output_path = tmp_path / "output"
-    result = executor.run(local_project_path, input_path, script_paths[0], output_path)
-    assert result is not None
-
-
-@pytest.mark.skipif(not docker_image_exists(), reason="Docker is not available")
-def test_runnable_on_personal_dataset_with_ipynb(tmp_path):
-    executor = KaggleExecutor()
-    project_root = get_project_root()
-    local_project_path = Path(
-        project_root
-        / "data"
-        / "prasad22"
-        / "healthcare-dataset"
-    )
-    input_path = Path(
-        local_project_path / "files"
-    )
-    script_dir = Path(
-        local_project_path / "kernels_ipynb"
-    )
-    output_path = tmp_path / "output"
-    script_paths = FileLoader.load_py_files(script_dir, return_files=False)
-    result = executor.run(local_project_path, input_path, script_paths[0], output_path)
-    assert result is not None
-
-
-@pytest.mark.skipif(not docker_image_exists(), reason="Docker is not available")
-def test_runnable_on_competition_dataset_with_ipynb(tmp_path):
-    executor = KaggleExecutor()
-    project_root = get_project_root()
-    local_project_path = Path(
-        project_root
-        / "data"
-        / "santander-value-prediction-challenge"
-    )
-    input_path = Path(
-        local_project_path / "files"
-    )
-    script_dir = Path(
-        local_project_path / "kernels_ipynb"
-    )
-    script_paths = FileLoader.load_py_files(script_dir, return_files=False)
-    output_path = tmp_path / "output"
-    result = executor.run(local_project_path, input_path, script_paths[0], output_path)
-    assert result is not None
 
 
 @pytest.mark.skipif(not docker_image_exists(), reason="Docker is not available")

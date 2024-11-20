@@ -13,6 +13,7 @@ from cadv_exploration.llm.langchain import LangChainCADV
 from cadv_exploration.loader import FileLoader
 from cadv_exploration.utils import get_project_root
 from scripts.python.constraint_inference.utils import filter_constraints
+from langchain_core.exceptions import OutputParserException
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -32,7 +33,8 @@ logger.addHandler(file_handler)
 def run_langchain_cadv(processed_data_idx):
     argparse.ArgumentParser(description="Run LangChainCADV")
     parser = argparse.ArgumentParser()
-    parser.add_argument("--model", type=str, help="Model to use", default="gpt-4o-mini")
+    parser.add_argument("--model", type=str, help="Model to use", default="gpt-4o")
+    parser.add_argument("--max-retries", type=int, help="Maximum number of retries", default=3)
     args = parser.parse_args()
     logging.info(f"Model: {args.model}")
 
@@ -67,9 +69,24 @@ def run_langchain_cadv(processed_data_idx):
 
         lc = LangChainCADV(model=args.model)
 
-        relevant_columns_list, expectations, suggestions = lc.invoke(
-            input_variables=input_variables
-        )
+
+        max_retries = args.max_retries
+        attempt = 0
+        while attempt < max_retries:
+            try:
+                relevant_columns_list, expectations, suggestions = lc.invoke(
+                    input_variables=input_variables
+                )
+                break  # Exit the loop if successful
+            except OutputParserException as e:
+                attempt += 1
+                logger.error(f"Attempt {attempt} failed with error: {e}")
+                if attempt >= max_retries:
+                    logger.error("All retry attempts failed.")
+                    raise e
+            except Exception as e:
+                logger.error("An unexpected error occurred.")
+                raise e  # Raise any other unexpected exceptions
 
         logger.info(f"Relevant columns: {relevant_columns_list}")
         logger.info(f"Expectations: {expectations}")
@@ -98,7 +115,13 @@ def run_langchain_cadv(processed_data_idx):
 
         with open(result_path, "w") as f:
             yaml.dump(yaml_dict, f)
+        print(f"Saved to {result_path}")
+
+    spark_train.sparkContext._gateway.shutdown_callback_server()
+    spark_validation.sparkContext._gateway.shutdown_callback_server()
+    spark_train.stop()
+    spark_validation.stop()
 
 
 if __name__ == "__main__":
-    run_langchain_cadv(processed_data_idx=0)
+    run_langchain_cadv(processed_data_idx=2)

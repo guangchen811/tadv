@@ -141,12 +141,10 @@ A typical local dataset structure should be like this:
 
 ### TODO
 
-1. change kaggle docker image.
-2. change working directory in kaggle docker image to the notebook directory.
-3. select 30 scripts from the competition dataset.
-4. try samp if I have to.
-5. make some slides to explain the results.
-6. split a small validation dataset from the main dataset.
+
+1. change working directory in kaggle docker image to the notebook directory.
+2. unused columns as an example.
+3. fix deequ functions.
 
 # Other Thoughts
 
