@@ -6,7 +6,7 @@ from langchain_openai import ChatOpenAI
 from cadv_exploration.llm._tasks import DVTask
 from cadv_exploration.llm.langchain._prompt import (
     EXPECTATION_EXTRACTION_PROMPT, RELEVANT_COLUMN_TARGET_PROMPT,
-    RULE_GENERATION_PROMPT, SYSTEM_TASK_DESCRIPTION)
+    RULE_GENERATION_PROMPT, SYSTEM_TASK_DESCRIPTION, ML_INFERENCE_TASK_DESCRIPTION)
 
 
 class LangChainCADV:
@@ -20,25 +20,28 @@ class LangChainCADV:
 
     def _build_prompt(self, task: DVTask) -> ChatPromptTemplate:
         if task == DVTask.RELEVENT_COLUMN_TARGET:
-            return ChatPromptTemplate.from_messages(
+            return ChatPromptTemplate(
                 [
                     ("system", SYSTEM_TASK_DESCRIPTION),
                     ("human", RELEVANT_COLUMN_TARGET_PROMPT),
                 ],
+                partial_variables={"downstream_task_description": ML_INFERENCE_TASK_DESCRIPTION},
             )
         elif task == DVTask.EXPECTATION_EXTRACTION:
-            return ChatPromptTemplate.from_messages(
+            return ChatPromptTemplate(
                 [
                     ("system", SYSTEM_TASK_DESCRIPTION),
                     ("human", EXPECTATION_EXTRACTION_PROMPT),
                 ],
+                partial_variables={"downstream_task_description": ML_INFERENCE_TASK_DESCRIPTION},
             )
         elif task == DVTask.RULE_GENERATION:
-            return ChatPromptTemplate.from_messages(
+            return ChatPromptTemplate(
                 [
                     ("system", SYSTEM_TASK_DESCRIPTION),
                     ("human", RULE_GENERATION_PROMPT),
                 ],
+                partial_variables={"downstream_task_description": ML_INFERENCE_TASK_DESCRIPTION},
             )
 
     def _build_single_chain(self, task: DVTask):
@@ -81,5 +84,7 @@ class LangChainCADV:
                 "relevant_columns": str(relevant_columns_list),
             }
         )
-        rules = self.rule_generation_chain.invoke({"expectations": expectations})
+        rules = self.rule_generation_chain.invoke(
+            {"expectations": expectations, "relevant_columns": relevant_columns_list,
+             "code_snippet": input_variables["script"]})
         return relevant_columns_list, expectations, rules
