@@ -5,8 +5,9 @@ from langchain_openai import ChatOpenAI
 
 from cadv_exploration.llm._tasks import DVTask
 from cadv_exploration.llm.langchain._prompt import (
-    EXPECTATION_EXTRACTION_PROMPT, RELEVANT_COLUMN_TARGET_PROMPT,
-    RULE_GENERATION_PROMPT, SYSTEM_TASK_DESCRIPTION, ML_INFERENCE_TASK_DESCRIPTION)
+    ASSUMPTIONS_EXTRACTION_PROMPT, RELEVANT_COLUMN_TARGET_PROMPT,
+    RULE_GENERATION_PROMPT, SYSTEM_TASK_DESCRIPTION)
+from cadv_exploration.llm.langchain._downstream_task_prompt import ML_INFERENCE_TASK_DESCRIPTION
 
 
 class LangChainCADV:
@@ -31,7 +32,7 @@ class LangChainCADV:
             return ChatPromptTemplate(
                 [
                     ("system", SYSTEM_TASK_DESCRIPTION),
-                    ("human", EXPECTATION_EXTRACTION_PROMPT),
+                    ("human", ASSUMPTIONS_EXTRACTION_PROMPT),
                 ],
                 partial_variables={"downstream_task_description": ML_INFERENCE_TASK_DESCRIPTION},
             )
@@ -74,17 +75,17 @@ class LangChainCADV:
         relevant_columns_list = self.relevant_column_target_chain.invoke(
             {
                 "code_snippet": input_variables["script"],
-                "columns": input_variables["column_desc"],
+                "columns_desc": input_variables["column_desc"],
             }
         )
         expectations = self.expectation_extraction_chain.invoke(
             {
                 "code_snippet": input_variables["script"],
-                "columns": input_variables["column_desc"],
+                "columns_desc": input_variables["column_desc"],
                 "relevant_columns": str(relevant_columns_list),
             }
         )
         rules = self.rule_generation_chain.invoke(
-            {"expectations": expectations, "relevant_columns": relevant_columns_list,
+            {"assumptions": expectations, "relevant_columns": relevant_columns_list,
              "code_snippet": input_variables["script"]})
         return relevant_columns_list, expectations, rules

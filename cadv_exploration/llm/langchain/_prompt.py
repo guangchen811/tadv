@@ -1,20 +1,41 @@
 from inspect import cleandoc
 
-ML_INFERENCE_TASK_DESCRIPTION = cleandoc("""The code is written for ML Inference task. After training a model on the training data, the model would be used to make predictions on the test data.
-you are asked to generate constraints on the upcomming *test* data to ensure that the code can run without any errors and the predictions are meaningful.""")
+SYSTEM_TASK_DESCRIPTION = cleandoc("""Context-aware data validation aims to generate data validation constraints on the dataset where the downstream task is run. "Context" here refers to the downstream code. The system should generate effective and efficient constraints on the data.
+*Effective*: The constraints should reflect whether the data is harmful to the downstream code. Constraints should fail if the data is harmful to the downstream code. Additionally, the constraints should be precise to reduce false positive alerts, meaning the constraints should not fail if the data is not harmful to the downstream task.
+*Efficient*: The constraints should only be applied to relevant columns used by the code. Constraints on unused columns would lead to redundant calculations and false positive alerts.
 
-SYSTEM_TASK_DESCRIPTION = cleandoc("""The system is designed to generate context-aware validation rules for a dataset which is used for multiple downstream tasks including machine learning pipeline, data analysis, business intelligence, etc. Context-aware means that the system should be able to understand the user's intuitions and generate validation rules that meet the user's expectations to ensure the data meets the user's expectations.
-
-The system contains the following components:
-1. *Relevant Column Target*: Given a dataset described by name, columns with corresponding downstream code. This component finds the columns that are used in the code snippet.
-2. *Expectation Extraction*: Given a dataset described by name, columns with corresponding downstream code and the relevant columns. This component generates user's assumptions about these columns.
-3. *Rule Generation*: Given a dataset described by name, columns with corresponding downstream code, the relevant columns and the user's assumptions. This component generates formal validation rules for the dataset.
+The context-aware data validation system consists of the following components:
+1. *Relevant Column Target*:
+Input: 
+    Statistics of the columns in the dataset.
+    Downstream code snippet.
+Output:
+    Relevant columns used by the downstream code snippet.
+Given a dataset and the downstream code, this component finds the columns that are used in the code snippet. These columns are the relevant columns for the downstream task.
+2. *Assumptions Extraction*:
+Input:
+    Statistics of the columns in the dataset.
+    Relevant columns used by the downstream code snippet.
+    Downstream code snippet.
+Output:
+    User's assumptions about the relevant columns.
+Given the relevant columns, the dataset statistics, and the downstream code, this component extracts the code's assumptions and requirements about the relevant columns. These assumptions are used to generate executable validation rules, ensuring the data meets the user's expectations.
+3. *Rule Generation*:
+Input:
+    Statistics of the columns in the dataset.
+    Relevant columns used by the downstream code snippet.
+    Code's assumptions about the relevant columns.
+    Downstream code snippet.
+Output:
+    Validation rules in PyDeequ format.
+Given a dataset described by name, columns with corresponding downstream code, the relevant columns and the user's assumptions. This component converts the code's assumptions and requirements into formal validation rules to ensure the data meets the code's expectations. The rules are generated in PyDeequ format.
 """)
 
-RELEVANT_COLUMN_TARGET_PROMPT = cleandoc("""You are part of a context-aware data validation system.
-You serve as the *Relevant Column Target* component. You are asked to find the columns that need to add validation rules to ensure the data meets the user's expectations.
+RELEVANT_COLUMN_TARGET_PROMPT = cleandoc("""You are part of the context-aware data validation system. You serve as the *Relevant Column Target* component.
+Given a dataset and the downstream code, you are asked to find the columns that are used in the code snippet. These columns are the relevant columns for the downstream task to ensure that the constraints are only applied to relevant columns.
+
 The dataset is a CSV file with the following columns:
-{columns}
+{columns_desc}
 
 The user writes the code snippet below:
 {code_snippet}
@@ -27,17 +48,17 @@ eg: `foo, bar, baz` or `foo,bar,baz`
 """)
 
 # https://github.com/awslabs/python-deequ/blob/master/pydeequ/checks.py
-EXPECTATION_EXTRACTION_PROMPT = cleandoc("""You are part of a context-aware data validation system.
-Given that the user may not have a complete understanding of the dataset, you should find the user's intuitions. These intuitions would then be used to generate validation rules to ensure the data meets the user's expectations.
+ASSUMPTIONS_EXTRACTION_PROMPT = cleandoc("""You are part of a context-aware data validation system. You serve as the *Assumptions Extraction* component.
+Given that the code written for the downstream task may be not robust enough to handle all possible data scenarios, you should find the code's assumptions and requirements about the relevant columns. These assumptions would then be used to generate validation rules to ensure the data meets the code's expectations and requirements.
 
 
 Here are the things you need to consider:
 1. Make sure the assumptions are only about the relevant columns generated by the *Relevant Column Target* component.
-2. You can generate assumptions for both individual columns and relationships between columns.
-3. The assumptions should be in a human-readable format.
+2. You can generate assumptions for both individual columns, i.e., the column named 'age' should be greater than 18, and relationships between columns, i.e., the column named 'age' should be greater than the column named 'min_age'.
+3. The assumptions should be in a human-readable format and would be converted into formal validation rules in the next step.
 
 The dataset is a CSV file with the following columns:
-{columns}
+{columns_desc}
 
 The user writes the code snippet below:
 {code_snippet}
@@ -52,54 +73,53 @@ Please generate validation rules as a JSON object with the column names as keys 
 e.g., ```{{'column_name_1': ['assumption_1', 'assumption_2', ...], 'column_name_2': ['assumption_1', 'assumption_2', ...], ...}}```
 """)
 
-RULE_GENERATION_PROMPT = cleandoc("""You are part of a context-aware data validation system.
-You are asked to transform the user's intuitions into formal validation rules to ensure the data meets the user's expectations. We are using PyDeequ as the validation library so the rules should be in PyDeequ format.
+RULE_GENERATION_PROMPT = cleandoc("""You are part of a context-aware data validation system. You serve as the *Rule Generation* component.
+You are asked to transform the code's assumptions into formal validation rules to ensure the data meets the user's assumptions and requirements. The rules should be generated in PyDeequ format.
 
-The function signature is as follows:
-    def hasSize(self, assertion, hint=None):
-    def isComplete(self, column, hint=None):
-    def hasCompleteness(self, column, assertion, hint=None):
-    def areComplete(self, columns, hint=None):
-    def haveCompleteness(self, columns, assertion, hint=None):
-    def areAnyComplete(self, columns, hint=None):
-    def haveAnyCompleteness(self, columns, assertion, hint=None):
-    def isUnique(self, column, hint=None):
-    def isPrimaryKey(self, column, *columns, hint=None):
-    def hasUniqueness(self, columns, assertion, hint=None):
-    def hasDistinctness(self, columns, assertion, hint=None):
-    def hasUniqueValueRatio(self, columns, assertion, hint=None):
-    def hasNumberOfDistinctValues(self, column, assertion, binningUdf, maxBins, hint=None):
-    def hasHistogramValues(self, column, assertion, binningUdf, maxBins, hint=None):
-    def kllSketchSatisfies(self, column, assertion, kllParameters=None, hint=None):
-    def _isNewestPointNonAnomalous(self):
-    def hasEntropy(self, column, assertion, hint=None):
-    def hasMutualInformation(self, columnA, columnB, assertion, hint=None):
-    def hasApproxQuantile(self, column, quantile, assertion, hint=None):
-    def hasMinLength(self, column, assertion, hint=None):
-    def hasMaxLength(self, column, assertion, hint=None):
-    def hasMin(self, column, assertion, hint=None):
-    def hasMax(self, column, assertion, hint=None):
-    def hasMean(self, column, assertion, hint=None):
-    def hasSum(self, column, assertion, hint=None):
-    def hasStandardDeviation(self, column, assertion, hint=None):
-    def hasApproxCountDistinct(self, column, assertion, hint=None):
-    def hasCorrelation(self, columnA, columnB, assertion, hint=None):
-    def satisfies(self, columnCondition, constraintName, assertion=None, hint=None):
-    def hasPattern(self, column, pattern, assertion=None, name=None, hint=None):
-    def containsCreditCardNumber(self, column, assertion=None, hint=None):
-    def containsEmail(self, column, assertion=None, hint=None):
-    def containsURL(self, column, assertion=None, hint=None):
-    def containsSocialSecurityNumber(self, column, assertion=None, hint=None):
-    def hasDataType(self, column, datatype: ConstrainableDataTypes, assertion=None, hint=None):
-    def isNonNegative(self, column, assertion=None, hint=None):
-    def isPositive(self, column, assertion=None, hint=None):
-    def isLessThan(self, columnA, columnB, assertion=None, hint=None):
-    def isLessThanOrEqualTo(self, columnA, columnB, assertion=None, hint=None):
-    def isGreaterThan(self, columnA, columnB, assertion=None, hint=None):
-    def isGreaterThanOrEqualTo(self, columnA, columnB, assertion=None, hint=None):
-    def isContainedIn(self, column, allowed_values, assertion=None, hint=None):
+The function signature for PyDeequ constraints is as follows:
+    hasSize(assertion)
+    isComplete(column)
+    hasCompleteness(column, assertion)
+    areComplete(columns)
+    haveCompleteness(columns, assertion)
+    areAnyComplete(columns)
+    haveAnyCompleteness(columns, assertion)
+    isUnique(column)
+    isPrimaryKey(column, *columns)
+    hasUniqueness(columns, assertion)
+    hasDistinctness(columns, assertion)
+    hasUniqueValueRatio(columns, assertion)
+    hasNumberOfDistinctValues(column, assertion, binningUdf, maxBins)
+    hasHistogramValues(column, assertion, binningUdf, maxBins)
+    hasEntropy(column, assertion)
+    hasMutualInformation(columnA, columnB, assertion)
+    hasApproxQuantile(column, quantile, assertion)
+    hasMinLength(column, assertion)
+    hasMaxLength(column, assertion)
+    hasMin(column, assertion)
+    hasMax(column, assertion)
+    hasMean(column, assertion)
+    hasSum(column, assertion)
+    hasStandardDeviation(column, assertion)
+    hasApproxCountDistinct(column, assertion)
+    hasCorrelation(columnA, columnB, assertion)
+    satisfies(columnCondition, constraintName, assertion=None)
+    hasPattern(column, pattern, assertion=None, name=None)
+    containsCreditCardNumber(column, assertion=None)
+    containsEmail(column, assertion=None)
+    containsURL(column, assertion=None)
+    containsSocialSecurityNumber(column, assertion=None)
+    isNonNegative(column, assertion=None)
+    isPositive(column, assertion=None)
+    isLessThan(columnA, columnB, assertion=None)
+    isLessThanOrEqualTo(columnA, columnB, assertion=None)
+    isGreaterThan(columnA, columnB, assertion=None)
+    isGreaterThanOrEqualTo(columnA, columnB, assertion=None)
+    isContainedIn(column, allowed_values, assertion=None)
+    
+The assertions should be a lambda function that returns a boolean value. For example, `lambda x: x > 18` or `lambda x: x == 1.0`. You don't need to provide the assertion variable if it is optional.
 
-To help you understand the signature, here are the valid PyDeequ constraints:
+To help you understand the signature, here are some examples:
 
     .hasMin('person_age', lambda x: x > 18)
     .hasMax('person_age', lambda x: x < 120)
@@ -131,16 +151,16 @@ The above code snippet is used for the following downstream task:
 The relevant columns generated by the *Relevant Column Target* component are:
 {relevant_columns}
 
-The Intuitions generated by the *Expectation Extraction* component are:
-{expectations}
+The Intuitions generated by the *Assumption Extraction* component are:
+{assumptions}
 
 
 Please generate validation rules as a JSON object with the column names as keys and a list of assumptions as values.
 e.g., ```
 {{
-    "column_name_1": ["code_for_assumption_1", "code_for_assumption_1", ...],
-    "column_name_2": ["code_for_assumption_1", "code_for_assumption_1", ...],
+    "column_name_1": ["pydeequ_constraint_1", "pydeequ_constraint_2", ...],
+    "column_name_2": ["pydeequ_constraint_1", "pydeequ_constraint_2", ...],
     ...
 }}```
-Each assumption should be a PyDeequ constraint. For example, `.isComplete("column_name")` or `.isContainedIn("column_name", ["value_1", "value_2"])`.
+The pydeequ_constraint_i should be replaced with the PyDeequ constraints, for example, `.isComplete("column_name")` or `.isContainedIn("column_name", ["value_1", "value_2"])`.
 """)
