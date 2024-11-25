@@ -1,6 +1,6 @@
 import pandas as pd
 
-from cadv_exploration.error_injection import MissingCategoricalValueCorruption
+from cadv_exploration.error_injection.corrupts import MissingCategoricalValueCorruption
 from cadv_exploration.utils import get_current_folder
 
 

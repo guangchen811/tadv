@@ -18,7 +18,6 @@ class MissingCategoricalValueCorruption(TabularCorruption):
         This is based on the number of unique values in proportion to the total number of rows.
         """
         categorical_columns = []
-        total_rows = len(dataframe)
 
         for col in dataframe.columns:
             # Check if the column is of object type or has relatively few unique values

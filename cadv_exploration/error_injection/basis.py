@@ -22,7 +22,7 @@ class TabularCorruption(DataCorruption):
         self.sampling = 'CAR' if sampling is None else sampling
 
     @abstractmethod
-    def transform(self, dataframe):
+    def transform(self, dataframe: pd.DataFrame):
         pass
 
     @abstractmethod
@@ -30,7 +30,7 @@ class TabularCorruption(DataCorruption):
         pass
 
     @staticmethod
-    def validate_data(dataframe):
+    def validate_data(dataframe: pd.DataFrame):
         if not isinstance(dataframe, pd.DataFrame):
             raise TypeError("Input data must be a pandas DataFrame.")
 
@@ -44,16 +44,12 @@ class TabularCorruption(DataCorruption):
             n_values_to_discard = int(len(data) * min(self.severity, 1.0))
             perc_lower_start = np.random.randint(0, len(data) - n_values_to_discard)
             perc_idx = range(perc_lower_start, perc_lower_start + n_values_to_discard)
-
             # Not At Random
             if self.sampling.endswith('NAR'):
-                # pick a random percentile of values in this column
-                rows = data[self.column].sort_values().iloc[perc_idx].index
-
+                rows = data[self.columns].sort_values().iloc[perc_idx].index
             # At Random
             elif self.sampling.endswith('AR'):
-                depends_on_col = np.random.choice(list(set(data.columns) - {self.column}))
-                # pick a random percentile of values in other column
+                depends_on_col = np.random.choice(list(set(data.columns) - {self.columns}))
                 rows = data[depends_on_col].sort_values().iloc[perc_idx].index
 
         else:
