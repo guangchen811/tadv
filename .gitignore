@@ -139,3 +139,5 @@ dmypy.json
 
 data/santander-value-prediction-challenge/*
 data_processed/*
+
+*.drawio.bkp
