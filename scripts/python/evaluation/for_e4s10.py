@@ -108,4 +108,4 @@ def build_validation_results_dict(code_list_for_constraints, status_on_clean_tes
 
 
 if __name__ == "__main__":
-    evaluate_playground_series_s4e10(processed_data_idx=3)
+    evaluate_playground_series_s4e10(processed_data_idx=7)

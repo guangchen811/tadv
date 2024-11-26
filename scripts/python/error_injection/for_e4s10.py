@@ -1,7 +1,6 @@
 from cadv_exploration.loader import FileLoader
 from cadv_exploration.utils import get_project_root
-from error_injection import MissingCategoricalValueCorruption
-from error_injection.corrupts import Scaling
+from error_injection.corrupts import *
 
 
 # This case can be treated as context information for ml inference. (the test data needs to be validated)
@@ -17,8 +16,6 @@ def error_injection():
     processed_data_idx = len(list(processed_data_dir.iterdir()))
     processed_data_path = processed_data_dir / f"{processed_data_idx}"
     processed_data_path.mkdir(parents=True, exist_ok=True)
-    result_path = processed_data_path / "result"
-    result_path.mkdir(parents=True, exist_ok=True)
 
     full_train_data = FileLoader.load_csv(file_path / "train.csv")
     full_train_data.drop(columns=["id"], inplace=True)
@@ -40,15 +37,11 @@ def error_injection():
     test_data.drop(columns=[target_column], inplace=True)
 
     # Inject errors on the test data
-    scaler = Scaling(columns=['person_age'], severity=0.2)
-    missing_to_majority = MissingCategoricalValueCorruption(columns=['person_home_ownership'], severity=0.1,
-                                                            corrupt_strategy="to_majority")
-    missing_to_remove = MissingCategoricalValueCorruption(columns=['cb_person_default_on_file'], severity=0.1,
-                                                          corrupt_strategy="to_random")
+    error_injectors = build_error_injectors()
 
-    post_corruption_test_data = scaler.transform(test_data)
-    post_corruption_test_data = missing_to_majority.transform(post_corruption_test_data)
-    post_corruption_test_data = missing_to_remove.transform(post_corruption_test_data)
+    post_corruption_test_data = test_data.copy(deep=True)
+    for error_injector in error_injectors:
+        post_corruption_test_data = error_injector.transform(post_corruption_test_data)
 
     files_with_clean_test_data_path = processed_data_path / "files_with_clean_test_data"
     files_with_corrupted_test_data_path = processed_data_path / "files_with_corrupted_test_data"
@@ -66,6 +59,22 @@ def error_injection():
     post_corruption_test_data.to_csv(files_with_corrupted_test_data_path / "test.csv", index=False)
     ground_truth.to_csv(files_with_corrupted_test_data_path / "ground_truth.csv", index=False)
     sample_submission.to_csv(files_with_corrupted_test_data_path / "sample_submission.csv", index=False)
+
+
+def build_error_injectors():
+    error_injectors = []
+    error_injectors.append(Scaling(columns=['loan_amnt'], severity=0.2))
+    error_injectors.append(MissingCategoricalValueCorruption(columns=['person_home_ownership'], severity=0.1,
+                                                             corrupt_strategy="to_majority"))
+    error_injectors.append(MissingCategoricalValueCorruption(columns=['cb_person_default_on_file'], severity=0.1,
+                                                             corrupt_strategy="to_random"))
+    error_injectors.append(GaussianNoise(columns=['person_income'], severity=0.2))
+    error_injectors.append(GaussianNoise(columns=['person_emp_length'], severity=0.2))
+    error_injectors.append(ColumnInserting(columns=['loan_intent'], severity=0.1, corrupt_strategy="add_prefix"))
+    error_injectors.append(
+        ColumnInserting(columns=['person_home_ownership', 'person_age'], severity=0.1, corrupt_strategy="concatenate"))
+    error_injectors.append(MaskValues(columns=['loan_grade'], severity=0.1))
+    return error_injectors
 
 
 def split_dataset(full_data):
