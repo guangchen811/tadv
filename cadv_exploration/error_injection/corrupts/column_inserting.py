@@ -7,7 +7,7 @@ from cadv_exploration.error_injection.basis import TabularCorruption
 
 
 class ColumnInserting(TabularCorruption):
-    def __init__(self, columns: Union[str, List[str]], severity: int = 1, corrupt_strategy: str = None, **kwargs):
+    def __init__(self, columns: Union[str, List[str]], severity: float = 1, corrupt_strategy: str = None, **kwargs):
         super().__init__(columns, **kwargs)
         self.severity = severity
         if corrupt_strategy is None:
@@ -37,7 +37,7 @@ class ColumnInserting(TabularCorruption):
             dataframe[new_column] = dataframe[column].apply(lambda x: prefix + x)
         elif self.corrupt_strategy == "concatenate":
             new_column = "_".join(self.columns)
-            dataframe[new_column] = dataframe[self.columns[0]] + "_" + dataframe[self.columns[1]]
+            dataframe[new_column] = dataframe[self.columns[0]].apply(str) + "_" + dataframe[self.columns[1]].apply(str)
         elif self.corrupt_strategy == "sanitize_to_identifier":
             new_column = column + "_sanitized"
             dataframe[new_column] = dataframe[column].apply(self._sanitize_to_identifier)

@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import List, Dict
+from pathlib import Path
+from typing import List, Dict, Union
 
 import oyaml as yaml
 
@@ -21,7 +22,7 @@ class Constraints:
     constraints: Dict[str, ColumnConstraints] = field(default_factory=dict)
 
     @classmethod
-    def from_yaml(cls, input_path: str):
+    def from_yaml(cls, input_path: Union[str, Path]):
         constraints = cls()
         constraints.load_from_yaml(input_path)
         return constraints
