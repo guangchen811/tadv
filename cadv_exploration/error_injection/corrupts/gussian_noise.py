@@ -2,6 +2,7 @@ import random
 
 import numpy as np
 import pandas as pd
+from numpy import dtype
 
 from cadv_exploration.error_injection.basis import TabularCorruption
 
@@ -27,5 +28,7 @@ class GaussianNoise(TabularCorruption):
         if self.severity > 0:
             rows = self.sample_rows(dataframe)
             noise = np.random.normal(0, scale * stddev, size=len(rows))
+            if dataframe[column].dtype == dtype('int64'):
+                noise = noise.astype(int)
             dataframe.loc[rows, column] += noise
         return dataframe

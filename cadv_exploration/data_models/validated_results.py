@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import List, Dict
+from pathlib import Path
+from typing import List, Dict, Union
 
 import oyaml as yaml
 
@@ -37,7 +38,7 @@ class ValidationResults:
             yaml.dump(self.to_dict(), f)
 
     @classmethod
-    def from_yaml(cls, input_path: str):
+    def from_yaml(cls, input_path: Union[str, Path]):
         with open(input_path, "r") as f:
             data = yaml.safe_load(f)
             results = cls()
