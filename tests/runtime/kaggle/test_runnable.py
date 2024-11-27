@@ -48,7 +48,7 @@ def test_runnable_on_small_test_dataset_with_ipynb(tmp_path):
         / "example_notebook.ipynb"
     )
     output_path = tmp_path / "output"
-    _ = executor.run(local_project_path, input_path, script_dir, output_path)
+    _ = executor.run(local_project_path.name, input_path, script_dir, output_path)
 
     assert os.path.exists(output_path)
     assert len(list(output_path.iterdir())) == 1

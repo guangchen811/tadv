@@ -25,12 +25,12 @@ def run_kaggle_code(processed_idx):
         script_path = processed_data_path / script_dir / f"{script_name}.ipynb"
         print("on clean test data")
         output_path_on_clean_test_data = processed_data_path / "output" / script_name / "results_on_clean_test_data"
-        result_on_clean_test_data = executor.run(local_project_path=processed_data_path.parent,
+        result_on_clean_test_data = executor.run(project_name=processed_data_path.parent.name,
                                                  input_path=input_path_with_clean_test_data, script_path=script_path,
                                                  output_path=output_path_on_clean_test_data)
         print("on corrupted test data")
         output_path_on_corrupted_test_data = processed_data_path / "output" / script_name / "results_on_corrupted_test_data"
-        result_on_corrupted_test_data = executor.run(local_project_path=processed_data_path.parent,
+        result_on_corrupted_test_data = executor.run(project_name=processed_data_path.parent.name,
                                                      input_path=input_path_with_corrupted_test_data,
                                                      script_path=script_path,
                                                      output_path=output_path_on_corrupted_test_data)
