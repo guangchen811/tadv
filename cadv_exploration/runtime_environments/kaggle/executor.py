@@ -4,6 +4,8 @@ import signal
 import subprocess
 from pathlib import Path
 
+from cadv_exploration.runtime_environments.basis import ExecutorBase
+
 
 class TimeoutException(Exception):
     pass
@@ -21,12 +23,12 @@ def extract_container_id(command):
         return None
 
 
-class KaggleExecutor:
+class KaggleExecutor(ExecutorBase):
     def __init__(self):
-        pass
+        super().__init__()
 
-    def run(self, local_project_path: Path, input_path: Path, script_path: Path, output_path: Path, timeout: int = 120):
-        command_prefix = self._prepare_prefix(local_project_path, input_path, script_path, output_path)
+    def run(self, project_name: str, input_path: Path, script_path: Path, output_path: Path, timeout: int = 120):
+        command_prefix = self._prepare_prefix(project_name, input_path, script_path, output_path)
         script_file_name = os.path.basename(script_path)
         # script_file_path =
         if str(script_path).endswith(".py"):
@@ -72,8 +74,8 @@ class KaggleExecutor:
         return command
 
     @staticmethod
-    def _prepare_prefix(local_project_path: Path, input_path: Path, script_path: Path, output_path: Path):
-        docker_data_path = f"/kaggle/input/{local_project_path.name}/"
+    def _prepare_prefix(project_name: str, input_path: Path, script_path: Path, output_path: Path):
+        docker_data_path = f"/kaggle/input/{project_name}/"
         script_name = script_path.name.split(".")[0]
         if str(script_path).endswith(".py"):
             script_type = "py"

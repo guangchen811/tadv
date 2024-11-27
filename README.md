@@ -168,3 +168,6 @@ I should also see how context can be helpful for the error type that already men
 Maybe I need to design a new component for llm to write queries on the table to check some information.
 
 Data Provenance method can be used to find which columns are used by a script.
+
+
+auto EDA
