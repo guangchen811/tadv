@@ -4,29 +4,30 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_openai import ChatOpenAI
 
 from cadv_exploration.llm._tasks import DVTask
+from cadv_exploration.llm.langchain._downstream_task_prompt import ML_INFERENCE_TASK_DESCRIPTION
 from cadv_exploration.llm.langchain._prompt import (
     ASSUMPTIONS_EXTRACTION_PROMPT, RELEVANT_COLUMN_TARGET_PROMPT,
     RULE_GENERATION_PROMPT, SYSTEM_TASK_DESCRIPTION)
-from cadv_exploration.llm.langchain._downstream_task_prompt import ML_INFERENCE_TASK_DESCRIPTION
 
 
 class LangChainCADV:
-    def __init__(self, model: str = None):
+    def __init__(self, model: str = None, downstream_task_description: str = ML_INFERENCE_TASK_DESCRIPTION):
         if model is None:
             self.model = ChatOpenAI(model="gpt-4o-mini")
         else:
             self.model = ChatOpenAI(model=model)
 
-        self._build_chain()
+        self._build_chain(downstream_task_description)
 
-    def _build_prompt(self, task: DVTask) -> ChatPromptTemplate:
+    def _build_prompt(self, task: DVTask,
+                      downstream_task_description: str = ML_INFERENCE_TASK_DESCRIPTION) -> ChatPromptTemplate:
         if task == DVTask.RELEVENT_COLUMN_TARGET:
             return ChatPromptTemplate(
                 [
                     ("system", SYSTEM_TASK_DESCRIPTION),
                     ("human", RELEVANT_COLUMN_TARGET_PROMPT),
                 ],
-                partial_variables={"downstream_task_description": ML_INFERENCE_TASK_DESCRIPTION},
+                partial_variables={"downstream_task_description": downstream_task_description},
             )
         elif task == DVTask.EXPECTATION_EXTRACTION:
             return ChatPromptTemplate(
@@ -34,7 +35,7 @@ class LangChainCADV:
                     ("system", SYSTEM_TASK_DESCRIPTION),
                     ("human", ASSUMPTIONS_EXTRACTION_PROMPT),
                 ],
-                partial_variables={"downstream_task_description": ML_INFERENCE_TASK_DESCRIPTION},
+                partial_variables={"downstream_task_description": downstream_task_description},
             )
         elif task == DVTask.RULE_GENERATION:
             return ChatPromptTemplate(
@@ -42,12 +43,12 @@ class LangChainCADV:
                     ("system", SYSTEM_TASK_DESCRIPTION),
                     ("human", RULE_GENERATION_PROMPT),
                 ],
-                partial_variables={"downstream_task_description": ML_INFERENCE_TASK_DESCRIPTION},
+                partial_variables={"downstream_task_description": downstream_task_description},
             )
 
-    def _build_single_chain(self, task: DVTask):
+    def _build_single_chain(self, task: DVTask, downstream_task_description: str = ML_INFERENCE_TASK_DESCRIPTION):
         if task == DVTask.RELEVENT_COLUMN_TARGET:
-            prompt = self._build_prompt(task)
+            prompt = self._build_prompt(task, downstream_task_description)
             parser = CommaSeparatedListOutputParser()
             single_chain = prompt | self.model | parser
         elif task == DVTask.EXPECTATION_EXTRACTION:
@@ -62,14 +63,16 @@ class LangChainCADV:
             raise ValueError(f"Unknown task {task}")
         return single_chain
 
-    def _build_chain(self):
+    def _build_chain(self, downstream_task_description: str = ML_INFERENCE_TASK_DESCRIPTION):
         self.relevant_column_target_chain = self._build_single_chain(
-            DVTask.RELEVENT_COLUMN_TARGET
+            DVTask.RELEVENT_COLUMN_TARGET, downstream_task_description
         )
         self.expectation_extraction_chain = self._build_single_chain(
-            DVTask.EXPECTATION_EXTRACTION
+            DVTask.EXPECTATION_EXTRACTION, downstream_task_description
         )
-        self.rule_generation_chain = self._build_single_chain(DVTask.RULE_GENERATION)
+        self.rule_generation_chain = self._build_single_chain(
+            DVTask.RULE_GENERATION, downstream_task_description
+        )
 
     def invoke(self, input_variables: dict):
         relevant_columns_list = self.relevant_column_target_chain.invoke(

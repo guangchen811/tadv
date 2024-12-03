@@ -14,8 +14,12 @@ class DuckDBExecutor(ExecutorBase):
         db = duckdb.connect(':memory:')
         for csv_file in csv_files:
             db.sql(f"CREATE TABLE {csv_file.stem} AS SELECT * FROM read_csv_auto('{csv_file}')")
-        output = db.sql(script_path.read_text()).fetchdf()
+        try:
+            output = db.sql(script_path.read_text()).fetchdf()
+            print(f"Output:\n {output}")
+            output.to_csv(output_path / "output.csv", index=False)
+        except Exception as e:
+            print(f"Error: {e}, writing error to {output_path / 'error.txt'}")
+            with open(output_path / "error.txt", "w") as f:
+                f.write(str(e))
         db.close()
-        print(f"Output:\n {output}")
-        output.to_csv(output_path / "output.csv", index=False)
-        return output

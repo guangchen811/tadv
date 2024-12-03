@@ -68,4 +68,4 @@ def run_deequ_dv(processed_data_idx):
 
 
 if __name__ == "__main__":
-    run_deequ_dv(processed_data_idx=7)
+    run_deequ_dv(processed_data_idx=8)

@@ -74,6 +74,7 @@ def build_error_injectors():
     error_injectors.append(
         ColumnInserting(columns=['person_home_ownership', 'person_age'], severity=0.1, corrupt_strategy="concatenate"))
     error_injectors.append(MaskValues(columns=['loan_grade'], severity=0.1))
+    error_injectors.append(ColumnDropping(columns=['person_income'], severity=0.1))
     return error_injectors
 
 
