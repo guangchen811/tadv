@@ -22,4 +22,6 @@ class DuckDBExecutor(ExecutorBase):
             print(f"Error: {e}, writing error to {output_path / 'error.txt'}")
             with open(output_path / "error.txt", "w") as f:
                 f.write(str(e))
+            output = None
         db.close()
+        return output
