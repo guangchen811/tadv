@@ -142,9 +142,12 @@ A typical local dataset structure should be like this:
 ### TODO
 
 
-1. change working directory in kaggle docker image to the notebook directory.
-2. unused columns as an example.
-3. fix deequ functions.
+1. add ml pipeline as the example.
+2. unified abstract representation for constraints.
+3. new metrics for sql pipeline.
+4. data test for the project. https://github.com/sscdotopen/lester/blob/main/lester/benchmark/amazonreviews_dataprep.py
+5. dspy
+6. auto EDA
 
 # Other Thoughts
 
