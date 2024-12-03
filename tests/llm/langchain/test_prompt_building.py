@@ -16,3 +16,8 @@ def test_prompt_building():
     prompt = lang_chain._build_prompt(task)
     assert isinstance(prompt, ChatPromptTemplate)
     assert prompt.input_variables == ["code_snippet", "columns_desc", "relevant_columns"]
+
+    task = DVTask.RULE_GENERATION
+    prompt = lang_chain._build_prompt(task)
+    assert isinstance(prompt, ChatPromptTemplate)
+    assert prompt.input_variables == ["assumptions", "code_snippet", "relevant_columns"]

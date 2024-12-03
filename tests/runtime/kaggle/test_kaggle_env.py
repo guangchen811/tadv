@@ -6,7 +6,7 @@ import nbformat
 import pandas as pd
 import pytest
 
-from cadv_exploration.runtime_environments.kaggle import KaggleExecutor
+from cadv_exploration.runtime_environments import KaggleExecutor
 from cadv_exploration.utils import get_project_root
 
 
