@@ -40,7 +40,7 @@ shows that we run the user ipynb codes on the Kaggle dataset with the Kaggle run
 contains two parts: a new notebook with the outputs and the submission CSV file. For more details, you can look
 at [this test case](./tests/runtime/kaggle/test_runnable.py).
 
-<img src="./assets/runtime_environments.png" alt="runtime_environments" width="500px"/>
+<img src="./assets/runtime_environments.png" alt="runtime_environments" width="432px"/>
 
 ## inspector
 
@@ -141,11 +141,10 @@ A typical local dataset structure should be like this:
 
 ### TODO
 
-
-1. add ml pipeline as the example.
+1. add ml pipeline as the example. [done]
+4. data test for the project. https://github.com/sscdotopen/lester/blob/main/lester/benchmark/amazonreviews_dataprep.py [done]
 2. unified abstract representation for constraints.
 3. new metrics for sql pipeline.
-4. data test for the project. https://github.com/sscdotopen/lester/blob/main/lester/benchmark/amazonreviews_dataprep.py
 5. dspy
 6. auto EDA
 
@@ -171,6 +170,3 @@ I should also see how context can be helpful for the error type that already men
 Maybe I need to design a new component for llm to write queries on the table to check some information.
 
 Data Provenance method can be used to find which columns are used by a script.
-
-
-auto EDA
