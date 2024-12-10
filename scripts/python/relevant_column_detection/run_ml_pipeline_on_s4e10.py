@@ -64,11 +64,9 @@ def run_langchain_cadv(processed_data_idx):
         module = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(module)
 
-        class_name = "KaggleLoanColumnDetectionTask"
-        if hasattr(module, class_name):
-            task_class = getattr(module, class_name)
-            task_instance = task_class()
-            script_context = task_instance.original_code
+        task_class = getattr(module, "KaggleLoanColumnDetectionTask")
+        task_instance = task_class()
+        script_context = task_instance.original_code
         input_variables = {
             "column_desc": column_desc,
             "script": script_context,
@@ -85,6 +83,7 @@ def run_langchain_cadv(processed_data_idx):
         relevant_columns_list = sorted(relevant_columns_list, key=lambda x: x.lower())
         print(f"Ground Truth:\n{ground_truth}")
         print(f"Relevant Columns:\n{relevant_columns_list}")
+        print('')
 
 
 if __name__ == "__main__":

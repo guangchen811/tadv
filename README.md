@@ -146,7 +146,11 @@ A typical local dataset structure should be like this:
 2. unified abstract representation for constraints.
 3. new metrics for sql pipeline.
 5. dspy
-6. auto EDA
+6. other downstream tasks
+   - auto EDA
+   - shell script
+7. simple baselines:
+   - look at the code and find the column names appear in the code.
 
 # Other Thoughts
 
