@@ -1,3 +1,4 @@
+from langchain_core.exceptions import OutputParserException
 from langchain_core.output_parsers import (CommaSeparatedListOutputParser,
                                            JsonOutputParser)
 from langchain_core.prompts import ChatPromptTemplate
@@ -11,12 +12,13 @@ from cadv_exploration.llm.langchain._prompt import (
 
 
 class LangChainCADV:
-    def __init__(self, model: str = None, downstream_task_description: str = ML_INFERENCE_TASK_DESCRIPTION):
+    def __init__(self, model: str = None, downstream_task_description: str = ML_INFERENCE_TASK_DESCRIPTION,
+                 logger=None):
         if model is None:
             self.model = ChatOpenAI(model="gpt-4o-mini")
         else:
             self.model = ChatOpenAI(model=model)
-
+        self.logger = logger
         self._build_chain(downstream_task_description)
 
     def _build_prompt(self, task: DVTask,
@@ -74,21 +76,51 @@ class LangChainCADV:
             DVTask.RULE_GENERATION, downstream_task_description
         )
 
-    def invoke(self, input_variables: dict):
+    def single_invoke(self, input_variables: dict, num_stages: int = 3):
+        """
+        Args:
+            input_variables (dict): Input variables for the pipeline.
+            num_stages (int): Number of stages to run in the pipeline.
+        """
         relevant_columns_list = self.relevant_column_target_chain.invoke(
             {
                 "code_snippet": input_variables["script"],
                 "columns_desc": input_variables["column_desc"],
             }
         )
-        expectations = self.expectation_extraction_chain.invoke(
-            {
-                "code_snippet": input_variables["script"],
-                "columns_desc": input_variables["column_desc"],
-                "relevant_columns": str(relevant_columns_list),
-            }
-        )
-        rules = self.rule_generation_chain.invoke(
-            {"assumptions": expectations, "relevant_columns": relevant_columns_list,
-             "code_snippet": input_variables["script"]})
+        if num_stages > 1:
+            expectations = self.expectation_extraction_chain.invoke(
+                {
+                    "code_snippet": input_variables["script"],
+                    "columns_desc": input_variables["column_desc"],
+                    "relevant_columns": str(relevant_columns_list),
+                }
+            )
+        else:
+            expectations = None
+        if num_stages > 2:
+            rules = self.rule_generation_chain.invoke(
+                {"assumptions": expectations, "relevant_columns": relevant_columns_list,
+                 "code_snippet": input_variables["script"]})
+        else:
+            rules = None
         return relevant_columns_list, expectations, rules
+
+    def invoke(self, input_variables: dict, num_stages: int = 3, max_retries: int = 3):
+        attempt = 0
+        while attempt < max_retries:
+            try:
+                relevant_columns_list, expectations, suggestions = self.single_invoke(
+                    input_variables=input_variables, num_stages=num_stages
+                )
+                break  # Exit the loop if successful
+            except OutputParserException as e:
+                attempt += 1
+                self.logger.error(f"Attempt {attempt} failed with error: {e}")
+                if attempt >= max_retries:
+                    self.logger.error("All retry attempts failed.")
+                    raise e
+            except Exception as e:
+                self.logger.error("An unexpected error occurred.")
+                raise e  # Raise any other unexpected exceptions
+        return relevant_columns_list, expectations, suggestions
