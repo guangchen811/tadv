@@ -32,7 +32,7 @@ logger.addHandler(file_handler)
 def run_langchain_cadv(processed_data_idx):
     argparse.ArgumentParser(description="Run LangChainCADV")
     parser = argparse.ArgumentParser()
-    parser.add_argument("--model", type=str, help="Model to use", default="gpt-4o")
+    parser.add_argument("--model", type=str, help="Model to use", default="gpt-4o-mini")
     parser.add_argument("--max-retries", type=int, help="Maximum number of retries", default=3)
     args = parser.parse_args()
     logging.info(f"Model: {args.model}")
