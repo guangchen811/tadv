@@ -13,7 +13,6 @@ from cadv_exploration.loader import FileLoader
 from cadv_exploration.utils import get_project_root
 from cadv_exploration.data_models import Constraints
 from scripts.python.constraint_inference.utils import filter_constraints
-from langchain_core.exceptions import OutputParserException
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -70,22 +69,9 @@ def run_langchain_cadv(processed_data_idx):
         lc = LangChainCADV(model=args.model)
 
         max_retries = args.max_retries
-        attempt = 0
-        while attempt < max_retries:
-            try:
-                relevant_columns_list, expectations, suggestions = lc.invoke(
-                    input_variables=input_variables
-                )
-                break  # Exit the loop if successful
-            except OutputParserException as e:
-                attempt += 1
-                logger.error(f"Attempt {attempt} failed with error: {e}")
-                if attempt >= max_retries:
-                    logger.error("All retry attempts failed.")
-                    raise e
-            except Exception as e:
-                logger.error("An unexpected error occurred.")
-                raise e  # Raise any other unexpected exceptions
+        relevant_columns_list, expectations, suggestions = lc.invoke(
+            input_variables=input_variables, num_stages=3, max_retries=max_retries
+        )
 
         code_list_for_constraints = [item for v in suggestions.values() for item in v]
 

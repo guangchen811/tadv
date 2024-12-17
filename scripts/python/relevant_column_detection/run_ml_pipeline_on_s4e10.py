@@ -1,4 +1,5 @@
 from cadv_exploration.utils import load_dotenv
+from scripts.python.relevant_column_detection.metrics import RelevantColumnDetectionMetric
 
 load_dotenv()
 
@@ -31,7 +32,7 @@ logger.addHandler(file_handler)
 def run_langchain_cadv(processed_data_idx):
     argparse.ArgumentParser(description="Run LangChainCADV")
     parser = argparse.ArgumentParser()
-    parser.add_argument("--model", type=str, help="Model to use", default="gpt-4o")
+    parser.add_argument("--model", type=str, help="Model to use", default="gpt-4o-mini")
     parser.add_argument("--max-retries", type=int, help="Maximum number of retries", default=3)
     args = parser.parse_args()
     logger.info(f"Model: {args.model}")
@@ -49,10 +50,14 @@ def run_langchain_cadv(processed_data_idx):
     spark_train_data, spark_train = deequ_wrapper.spark_df_from_pandas_df(train_data)
     spark_validation_data, spark_validation = deequ_wrapper.spark_df_from_pandas_df(validation_data)
 
+    column_list = sorted(spark_validation_data.columns, key=lambda x: x.lower())
+
     column_desc = spark_df_to_column_desc(spark_train_data, spark_train)
 
     scripts_path_dir = original_data_path / "scripts_ml"
 
+    all_ground_truth_vectors = []
+    all_relevant_columns_vectors = []
     for script_path in sorted(scripts_path_dir.iterdir(), key=lambda x: x.name):
         if not script_path.name.endswith(".py"):
             continue
@@ -81,9 +86,14 @@ def run_langchain_cadv(processed_data_idx):
         print(module_name)
         ground_truth = sorted(task_instance.target_columns(), key=lambda x: x.lower())
         relevant_columns_list = sorted(relevant_columns_list, key=lambda x: x.lower())
-        print(f"Ground Truth:\n{ground_truth}")
-        print(f"Relevant Columns:\n{relevant_columns_list}")
-        print('')
+
+        metric_evaluator = RelevantColumnDetectionMetric(average='macro')
+        ground_truth_vector, relevant_columns_vector = metric_evaluator.binary_vectorize(column_list,
+                                                                                         ground_truth,
+                                                                                         relevant_columns_list)
+        all_ground_truth_vectors.append(ground_truth_vector)
+        all_relevant_columns_vectors.append(relevant_columns_vector)
+    print(metric_evaluator.evaluate(all_ground_truth_vectors, all_relevant_columns_vectors))
 
 
 if __name__ == "__main__":

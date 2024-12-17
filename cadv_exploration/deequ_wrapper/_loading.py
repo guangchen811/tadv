@@ -17,11 +17,14 @@ def init_files():
 
 def spark_df_from_pandas_df(pandas_df):
     spark = (
-        SparkSession.builder.config("spark.jars.packages", pydeequ.deequ_maven_coord)
+        SparkSession.builder
+        .config("spark.jars.ivy.log", "none")
+        .config("spark.hadoop.native.lib", "false")
+        .config("spark.jars.packages", pydeequ.deequ_maven_coord)
         .config("spark.jars.excludes", pydeequ.f2j_maven_coord)
         .config("spark.driver.host", "localhost")
-        .config("spark.driver.bindAddress", "localhost")
         .getOrCreate()
     )
+    # spark.sparkContext.setLogLevel("ERROR")
     spark_df = spark.createDataFrame(pandas_df)
     return spark_df, spark

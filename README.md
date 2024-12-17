@@ -102,42 +102,17 @@ These bindings require the kaggle code meets the following requirements:
 2. The submission file should be written to `/kaggle/output/` instead of `/kaggle/output/` instead of the working
    directory.
 
-A typical local dataset structure should be like this:
-
-```
-.
-└── healthcare-dataset
-    ├── files
-    │    ├── healthcare_dataset.csv
-    ├── broken_files    
-    │    ├── orignal_train
-    │    │      ├── healthcare_dataset.csv
-    │    ├── original_validation
-    │    │      ├── healthcare_dataset.csv
-    │    ├── pre_corruption
-    │    │      ├── healthcare_dataset.csv
-    │    ├── post_corruption
-    │    │      ├── healthcare_dataset.csv
-    ├── kernels_ipynb
-    │    ├── graduation-project-m1e.ipynb
-    │    ├── healthcare-data-science-repo.ipynb
-    ├── kernels_py
-    │    ├── graduation-project-m1e.py
-    │    ├── healthcare-data-science-repo.py
-    └── output
-        ├── graduation-project-m1e
-        │    ├── graduation-project-m1e.ipynb
-        │    ├── <submission_file if competition>
-        │    ├── validation_result
-        │    │    ├── langchain.json
-        │    │    ├── deequ.json   
-        ├── healthcare-data-science-repo
-        │    ├── healthcare-data-science-repo.ipynb
-        │    ├── <submission_file if competition>
-        │    ├── validation_result
-        │    │    ├── langchain.json
-        │    │    ├── deequ.json
-```
+### Plan for Dec 16th
+1. refactoring the dataset import function in python scripts.
+2. Paper architecture
+   - type: reports on applications and tools or preliminary results, interesting use cases, problems, datasets, benchmarks, visionary ideas, and descriptions of system components and tools related to end-to-end ML pipelines.
+   - introduction
+   - methods
+   - evaluation
+     - dataset building
+     - experiments
+       - tasks
+3. virtulization for ml relevant column validation.
 
 ### TODO
 
