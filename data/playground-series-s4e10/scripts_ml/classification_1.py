@@ -1,5 +1,8 @@
 class KaggleLoanColumnDetectionTask:
 
+    def code_type(self):
+        return "python"
+
     @property
     def original_code(self):
         return """
@@ -119,8 +122,13 @@ submission = pd.DataFrame({"id": test_data["id"], "loan_status": predictions})
 submission.to_csv("/kaggle/output/submission.csv", index=False)
 """
 
-    def target_columns(self):
+    def required_columns(self):
         # Ground truth for columns used in the ML pipeline
+        return ['cb_person_cred_hist_length', 'cb_person_default_on_file', 'loan_amnt', 'loan_grade', 'loan_int_rate',
+                'loan_intent', 'loan_percent_income', 'person_age', 'person_emp_length', 'person_home_ownership',
+                'person_income']
+
+    def used_columns(self):
         return ['cb_person_cred_hist_length', 'cb_person_default_on_file', 'loan_amnt', 'loan_grade', 'loan_int_rate',
                 'loan_intent', 'loan_percent_income', 'person_age', 'person_emp_length', 'person_home_ownership',
                 'person_income']

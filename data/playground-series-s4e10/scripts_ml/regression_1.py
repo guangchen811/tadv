@@ -141,7 +141,7 @@ submission.to_csv("/kaggle/output/submission.csv", index=False)
 print("Submission saved.")
 """
 
-    def target_columns(self):
+    def required_columns(self):
         # Ground truth for columns used in the ML pipeline
         return ['cb_person_cred_hist_length', 'cb_person_default_on_file', 'loan_amnt', 'loan_grade', 'loan_int_rate',
                 'loan_intent', 'loan_percent_income', 'loan_status', 'person_age', 'person_emp_length',
