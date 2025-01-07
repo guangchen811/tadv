@@ -32,7 +32,7 @@ logger.addHandler(file_handler)
 def run_langchain_cadv(processed_data_idx):
     argparse.ArgumentParser(description="Run LangChainCADV")
     parser = argparse.ArgumentParser()
-    parser.add_argument("--model", type=str, help="Model to use", default="gpt-4o-mini")
+    parser.add_argument("--model", type=str, help="Model to use", default="gpt-4o")
     parser.add_argument("--max-retries", type=int, help="Maximum number of retries", default=3)
     args = parser.parse_args()
     logger.info(f"Model: {args.model}")
@@ -58,6 +58,8 @@ def run_langchain_cadv(processed_data_idx):
 
     all_ground_truth_vectors = []
     all_relevant_columns_vectors = []
+    metric_evaluator = RelevantColumnDetectionMetric(average='macro')
+
     for script_path in sorted(scripts_path_dir.iterdir(), key=lambda x: x.name):
         if not script_path.name.endswith(".py"):
             continue
@@ -84,10 +86,9 @@ def run_langchain_cadv(processed_data_idx):
             input_variables=input_variables, num_stages=1, max_retries=max_retries
         )
         print(module_name)
-        ground_truth = sorted(task_instance.target_columns(), key=lambda x: x.lower())
+        ground_truth = sorted(task_instance.required_columns(), key=lambda x: x.lower())
         relevant_columns_list = sorted(relevant_columns_list, key=lambda x: x.lower())
 
-        metric_evaluator = RelevantColumnDetectionMetric(average='macro')
         ground_truth_vector, relevant_columns_vector = metric_evaluator.binary_vectorize(column_list,
                                                                                          ground_truth,
                                                                                          relevant_columns_list)
