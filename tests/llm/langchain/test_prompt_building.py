@@ -7,7 +7,7 @@ from cadv_exploration.llm.langchain import LangChainCADV
 def test_prompt_building():
     lang_chain = LangChainCADV()
 
-    task = DVTask.RELEVENT_COLUMN_TARGET
+    task = DVTask.RELEVANT_COLUMN_TARGET
     prompt = lang_chain._build_prompt(task)
     assert isinstance(prompt, ChatPromptTemplate)
     assert prompt.input_variables == ["code_snippet", "columns_desc"]

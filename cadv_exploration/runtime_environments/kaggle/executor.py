@@ -32,9 +32,9 @@ class KaggleExecutor(ExecutorBase):
         script_file_name = os.path.basename(script_path)
         # script_file_path =
         if str(script_path).endswith(".py"):
-            command = self._compsoe_py_command(command_prefix, script_file_name)
+            command = self._compose_py_command(command_prefix, script_file_name)
         elif str(script_path).endswith(".ipynb"):
-            command = self._compsoe_ipynb_command(command_prefix, script_file_name)
+            command = self._compose_ipynb_command(command_prefix, script_file_name)
         else:
             raise ValueError("Invalid script type")
         signal.signal(signal.SIGALRM, timeout_handler)
@@ -60,13 +60,13 @@ class KaggleExecutor(ExecutorBase):
         return result
 
     @staticmethod
-    def _compsoe_py_command(command_prefix: list, script_file_name: str) -> list:
+    def _compose_py_command(command_prefix: list, script_file_name: str) -> list:
         # Run the Kaggle environment in Docker
         command = command_prefix + ["python", f"/kaggle/script/{script_file_name}"]
         return command
 
     @staticmethod
-    def _compsoe_ipynb_command(command_prefix: list, script_file_name: str) -> list:
+    def _compose_ipynb_command(command_prefix: list, script_file_name: str) -> list:
         # https://nbconvert.readthedocs.io/en/latest/execute_api.html# module-nbconvert.preprocessors
         command = command_prefix + ["jupyter", "nbconvert", "--to", "notebook", "--output",
                                     f"/kaggle/output/{script_file_name}", "--execute",

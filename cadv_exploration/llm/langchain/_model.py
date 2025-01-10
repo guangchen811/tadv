@@ -23,7 +23,7 @@ class LangChainCADV:
 
     def _build_prompt(self, task: DVTask,
                       downstream_task_description: str = ML_INFERENCE_TASK_DESCRIPTION) -> ChatPromptTemplate:
-        if task == DVTask.RELEVENT_COLUMN_TARGET:
+        if task == DVTask.RELEVANT_COLUMN_TARGET:
             return ChatPromptTemplate(
                 [
                     ("system", SYSTEM_TASK_DESCRIPTION),
@@ -49,7 +49,7 @@ class LangChainCADV:
             )
 
     def _build_single_chain(self, task: DVTask, downstream_task_description: str = ML_INFERENCE_TASK_DESCRIPTION):
-        if task == DVTask.RELEVENT_COLUMN_TARGET:
+        if task == DVTask.RELEVANT_COLUMN_TARGET:
             prompt = self._build_prompt(task, downstream_task_description)
             parser = CommaSeparatedListOutputParser()
             single_chain = prompt | self.model | parser
@@ -67,7 +67,7 @@ class LangChainCADV:
 
     def _build_chain(self, downstream_task_description: str = ML_INFERENCE_TASK_DESCRIPTION):
         self.relevant_column_target_chain = self._build_single_chain(
-            DVTask.RELEVENT_COLUMN_TARGET, downstream_task_description
+            DVTask.RELEVANT_COLUMN_TARGET, downstream_task_description
         )
         self.expectation_extraction_chain = self._build_single_chain(
             DVTask.EXPECTATION_EXTRACTION, downstream_task_description

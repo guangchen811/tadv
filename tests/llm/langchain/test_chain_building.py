@@ -9,7 +9,7 @@ def test_build_single_chain():
     load_dotenv()
     langchain = LangChainCADV()
 
-    relevent_column_target_task = DVTask.RELEVENT_COLUMN_TARGET
+    relevent_column_target_task = DVTask.RELEVANT_COLUMN_TARGET
     chain = langchain._build_single_chain(relevent_column_target_task)
     assert isinstance(chain, RunnableSequence)
 
