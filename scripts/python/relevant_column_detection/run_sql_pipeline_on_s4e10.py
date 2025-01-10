@@ -7,7 +7,7 @@ import argparse
 import importlib.util
 import logging
 
-from deequ_wrapper import DeequWrapper
+from dq_manager import DeequDataQualityManager
 from inspector.deequ._to_string import spark_df_to_column_desc
 from llm.langchain import LangChainCADV
 from llm.langchain._downstream_task_prompt import SQL_QUERY_TASK_DESCRIPTION
@@ -37,7 +37,7 @@ def run_langchain_cadv(processed_data_idx):
     args = parser.parse_args()
     print("Model:", args.model)
 
-    deequ_wrapper = DeequWrapper()
+    dq_manager = DeequDataQualityManager()
 
     original_data_path = get_project_root() / "data" / "playground-series-s4e10"
     processed_data_path = get_project_root() / "data_processed" / "playground-series-s4e10" / f"{processed_data_idx}"
@@ -47,8 +47,8 @@ def run_langchain_cadv(processed_data_idx):
     train_data = FileLoader.load_csv(train_file_path)
     validation_data = FileLoader.load_csv(validation_file_path)
 
-    spark_train_data, spark_train = deequ_wrapper.spark_df_from_pandas_df(train_data)
-    spark_validation_data, spark_validation = deequ_wrapper.spark_df_from_pandas_df(validation_data)
+    spark_train_data, spark_train = dq_manager.spark_df_from_pandas_df(train_data)
+    spark_validation_data, spark_validation = dq_manager.spark_df_from_pandas_df(validation_data)
 
     column_list = sorted(spark_train_data.columns, key=lambda x: x.lower())
 

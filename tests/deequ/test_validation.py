@@ -7,9 +7,9 @@ from pydeequ.checks import *
 from pydeequ.verification import *
 
 
-def test_validation_on_small_dataset(deequ_wrapper):
+def test_validation_on_small_dataset(dq_manager):
     df = pd.DataFrame({"a": ["foo", "bar", "baz"], "b": [1, 2, 3], "c": [5, 6, None]})
-    spark_df, spark = deequ_wrapper.spark_df_from_pandas_df(df)
+    spark_df, spark = dq_manager.spark_df_from_pandas_df(df)
 
     check = Check(spark, CheckLevel.Warning, "Review Check")
 
@@ -41,9 +41,9 @@ def test_validation_on_small_dataset(deequ_wrapper):
     spark.stop()
 
 
-def test_validation_on_small_dataset(deequ_wrapper):
+def test_validation_on_small_dataset(dq_manager):
     df = pd.DataFrame({"a": ["foo", "bar", "baz"], "b": [1, 2, 3], "c": [5, 6, None]})
-    spark_df, spark = deequ_wrapper.spark_df_from_pandas_df(df)
+    spark_df, spark = dq_manager.spark_df_from_pandas_df(df)
 
     check_strings = [
         ".hasSize(lambda x: x >= 3)",
@@ -54,7 +54,7 @@ def test_validation_on_small_dataset(deequ_wrapper):
         ".isNonNegative('b')"
     ]
 
-    check_result = deequ_wrapper.apply_checks_from_strings(spark, spark_df, check_strings)
+    check_result = dq_manager.apply_checks_from_strings(spark, spark_df, check_strings)
 
     assert check_result[0]["constraint_status"] == "Success"
     assert check_result[1]["constraint_status"] == "Failure"

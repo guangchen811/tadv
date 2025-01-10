@@ -2,17 +2,17 @@ from cadv_exploration.utils import load_dotenv
 
 load_dotenv()
 
-from cadv_exploration.deequ_wrapper import DeequWrapper
+from cadv_exploration.dq_manager import DeequDataQualityManager
 from cadv_exploration.loader import FileLoader
 from utils import get_project_root
 
 
 def main():
-    deequ_wrapper = DeequWrapper()
+    dq_manager = DeequDataQualityManager()
     project_root = get_project_root()
     processed_data_path = project_root / "data_processed" / "playground-series-s4e10" / "0"
     train_data = FileLoader.load_csv(processed_data_path / "files_with_clean_test_data" / "train.csv")
-    spark_train_data, spark_train = deequ_wrapper.spark_df_from_pandas_df(train_data)
+    spark_train_data, spark_train = dq_manager.spark_df_from_pandas_df(train_data)
     check_strings = [
         ".hasMin('person_age', lambda x: x > 18)",
         ".hasMax('person_age', lambda x: x < 120)",
@@ -35,7 +35,7 @@ def main():
         ".isPositive('person_income')",
         ".isGreaterThan('person_income', 'loan_amnt', lambda x: x > 0.8)",
     ]
-    check_results = deequ_wrapper.apply_checks_from_strings(spark_train, spark_train_data,
+    check_results = dq_manager.apply_checks_from_strings(spark_train, spark_train_data,
                                                             check_strings)
     for check_result in check_results:
         print(check_result)

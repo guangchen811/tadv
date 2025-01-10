@@ -1,11 +1,11 @@
-from cadv_exploration.deequ_wrapper import DeequWrapper
+from cadv_exploration.dq_manager import DeequDataQualityManager
 
 
 def filter_constraints(code_list_for_constraints, spark_original_validation, spark_original_validation_df, logger):
-    deequ_wrapper = DeequWrapper()
+    dq_manager = DeequDataQualityManager()
 
     logger.info(f"Suggested Code list for constraints: {code_list_for_constraints}")
-    check_result_on_original_validation_df = deequ_wrapper.apply_checks_from_strings(spark_original_validation,
+    check_result_on_original_validation_df = dq_manager.apply_checks_from_strings(spark_original_validation,
                                                                                      spark_original_validation_df,
                                                                                      code_list_for_constraints)
     status_on_original_validation_df = [item['constraint_status'] if

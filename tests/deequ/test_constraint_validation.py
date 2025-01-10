@@ -6,13 +6,13 @@ import pandas as pd
 from pydeequ.checks import *
 from pydeequ.verification import *
 
-from cadv_exploration.deequ_wrapper import DeequWrapper
+from cadv_exploration.dq_manager import DeequDataQualityManager
 
 
-def test_constraint_validation(deequ_wrapper):
-    deequ_wrapper = DeequWrapper()
+def test_constraint_validation(dq_manager):
+    dq_manager = DeequDataQualityManager()
     df = pd.DataFrame({"a": ["foo", "bar", "baz"], "b": [1, 2, 3], "c": [5, 6, None]})
-    spark_df, spark = deequ_wrapper.spark_df_from_pandas_df(df)
+    spark_df, spark = dq_manager.spark_df_from_pandas_df(df)
 
     check = Check(spark, CheckLevel.Warning, "Review Check")
     check.hasSize(lambda x: x >= 3)
@@ -25,7 +25,7 @@ def test_constraint_validation(deequ_wrapper):
         check.isNonNegative("b"),
     ]
     check.addConstraints(added_checks)
-    result_df = deequ_wrapper.validate_suggestions(spark, spark_df, check)
+    result_df = dq_manager.validate_suggestions(spark, spark_df, check)
     assert result_df.collect()[0]["constraint_status"] == "Success"
 
     spark.sparkContext._gateway.shutdown_callback_server()

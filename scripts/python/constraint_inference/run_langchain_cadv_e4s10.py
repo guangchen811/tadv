@@ -7,7 +7,7 @@ import argparse
 import logging
 
 from cadv_exploration.inspector.deequ._to_string import spark_df_to_column_desc
-from cadv_exploration.deequ_wrapper import DeequWrapper
+from cadv_exploration.dq_manager import DeequDataQualityManager
 from cadv_exploration.llm.langchain import LangChainCADV
 from cadv_exploration.loader import FileLoader
 from cadv_exploration.utils import get_project_root
@@ -37,7 +37,7 @@ def run_langchain_cadv(processed_data_idx):
     args = parser.parse_args()
     logging.info(f"Model: {args.model}")
 
-    deequ_wrapper = DeequWrapper()
+    dq_manager = DeequDataQualityManager()
 
     original_data_path = get_project_root() / "data" / "playground-series-s4e10"
     processed_data_path = get_project_root() / "data_processed" / "playground-series-s4e10" / f"{processed_data_idx}"
@@ -47,8 +47,8 @@ def run_langchain_cadv(processed_data_idx):
     train_data = FileLoader.load_csv(train_file_path)
     validation_data = FileLoader.load_csv(validation_file_path)
 
-    spark_train_data, spark_train = deequ_wrapper.spark_df_from_pandas_df(train_data)
-    spark_validation_data, spark_validation = deequ_wrapper.spark_df_from_pandas_df(validation_data)
+    spark_train_data, spark_train = dq_manager.spark_df_from_pandas_df(train_data)
+    spark_validation_data, spark_validation = dq_manager.spark_df_from_pandas_df(validation_data)
 
     column_desc = spark_df_to_column_desc(spark_train_data, spark_train)
 

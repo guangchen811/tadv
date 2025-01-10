@@ -4,12 +4,12 @@ from cadv_exploration.utils import load_dotenv
 load_dotenv()
 
 import pytest
-from cadv_exploration.deequ_wrapper import DeequWrapper
+from cadv_exploration.dq_manager import DeequDataQualityManager
 
 
 @pytest.fixture
-def deequ_wrapper():
-    return DeequWrapper()
+def dq_manager():
+    return DeequDataQualityManager()
 
 
 @pytest.fixture

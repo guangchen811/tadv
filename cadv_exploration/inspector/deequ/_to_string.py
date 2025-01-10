@@ -1,11 +1,11 @@
 import yaml
 
-from cadv_exploration.deequ_wrapper import DeequWrapper
+from cadv_exploration.dq_manager import DeequDataQualityManager
 
 
 def spark_df_to_column_desc(spark_df, spark):
-    deequ_wrapper = DeequWrapper()
-    result = deequ_wrapper.profile_on_spark_df(spark, spark_df)
+    dq_manager = DeequDataQualityManager()
+    result = dq_manager.profile_on_spark_df(spark, spark_df)
     column_names = list(result.profiles.keys())
     result_dict = {}
     for column_name in column_names:
