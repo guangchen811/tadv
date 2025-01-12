@@ -1354,13 +1354,13 @@ trio = ["trio (>=0.22.0,<1.0)"]
 
 [[package]]
 name = "httpx"
-version = "0.28.1"
+version = "0.27.2"
 description = "The next generation HTTP client."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "httpx-0.28.1-py3-none-any.whl", hash = "sha256:d909fcccc110f8c7faf814ca82a9a4d816bc5a6dbfea25d6591d6985b8ba59ad"},
-    {file = "httpx-0.28.1.tar.gz", hash = "sha256:75e98c5f16b0f35b567856f597f06ff2270a374470a5c2392242528e3e3e42fc"},
+    {file = "httpx-0.27.2-py3-none-any.whl", hash = "sha256:7bb2708e112d8fdd7829cd4243970f0c223274051cb35ee80c03301ee29a3df0"},
+    {file = "httpx-0.27.2.tar.gz", hash = "sha256:f7c2be1d2f3c3c3160d441802406b206c2b76f5947b11115e6df10c6c65e66c2"},
 ]
 
 [package.dependencies]
@@ -1368,6 +1368,7 @@ anyio = "*"
 certifi = "*"
 httpcore = "==1.*"
 idna = "*"
+sniffio = "*"
 
 [package.extras]
 brotli = ["brotli", "brotlicffi"]
@@ -1956,18 +1957,18 @@ tenacity = ">=8.1.0,<8.4.0 || >8.4.0,<10"
 
 [[package]]
 name = "langchain-core"
-version = "0.3.22"
+version = "0.3.29"
 description = "Building applications with LLMs through composability"
 optional = false
 python-versions = "<4.0,>=3.9"
 files = [
-    {file = "langchain_core-0.3.22-py3-none-any.whl", hash = "sha256:b40b036b3bd4abc1dfc820e149f5a3c4abef2fee83eb807c4310a41a064580e0"},
-    {file = "langchain_core-0.3.22.tar.gz", hash = "sha256:c61c6d62f137dff2a1ec785473a3225e4fa237e53eac88f5359fda664dc5d91c"},
+    {file = "langchain_core-0.3.29-py3-none-any.whl", hash = "sha256:817db1474871611a81105594a3e4d11704949661008e455a10e38ca9ff601a1a"},
+    {file = "langchain_core-0.3.29.tar.gz", hash = "sha256:773d6aeeb612e7ce3d996c0be403433d8c6a91e77bbb7a7461c13e15cfbe5b06"},
 ]
 
 [package.dependencies]
 jsonpatch = ">=1.33,<2.0"
-langsmith = ">=0.1.125,<0.2.0"
+langsmith = ">=0.1.125,<0.3"
 packaging = ">=23.2,<25"
 pydantic = [
     {version = ">=2.5.2,<3.0.0", markers = "python_full_version < \"3.12.4\""},
@@ -1976,6 +1977,21 @@ pydantic = [
 PyYAML = ">=5.3"
 tenacity = ">=8.1.0,<8.4.0 || >8.4.0,<10.0.0"
 typing-extensions = ">=4.7"
+
+[[package]]
+name = "langchain-ollama"
+version = "0.2.2"
+description = "An integration package connecting Ollama and LangChain"
+optional = false
+python-versions = "<4.0,>=3.9"
+files = [
+    {file = "langchain_ollama-0.2.2-py3-none-any.whl", hash = "sha256:8a1ee72dbb6ea3b3ace1d9dd317e472d667a8ed491328550da59f4893a6796f8"},
+    {file = "langchain_ollama-0.2.2.tar.gz", hash = "sha256:2d9bcb06ffdbe43c7c6906c46e710d36d33b6b99cd4975cbf54060f13e51c875"},
+]
+
+[package.dependencies]
+langchain-core = ">=0.3.27,<0.4.0"
+ollama = ">=0.4.4,<1"
 
 [[package]]
 name = "langchain-openai"
@@ -2555,6 +2571,21 @@ files = [
     {file = "numpy-2.0.2-pp39-pypy39_pp73-win_amd64.whl", hash = "sha256:a46288ec55ebbd58947d31d72be2c63cbf839f0a63b49cb755022310792a3385"},
     {file = "numpy-2.0.2.tar.gz", hash = "sha256:883c987dee1880e2a864ab0dc9892292582510604156762362d9326444636e78"},
 ]
+
+[[package]]
+name = "ollama"
+version = "0.4.5"
+description = "The official Python client for Ollama."
+optional = false
+python-versions = "<4.0,>=3.8"
+files = [
+    {file = "ollama-0.4.5-py3-none-any.whl", hash = "sha256:74936de89a41c87c9745f09f2e1db964b4783002188ac21241bfab747f46d925"},
+    {file = "ollama-0.4.5.tar.gz", hash = "sha256:e7fb71a99147046d028ab8b75e51e09437099aea6f8f9a0d91a71f787e97439e"},
+]
+
+[package.dependencies]
+httpx = ">=0.27.0,<0.28.0"
+pydantic = ">=2.9.0,<3.0.0"
 
 [[package]]
 name = "openai"
@@ -4827,4 +4858,4 @@ type = ["pytest-mypy"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.9.0"
-content-hash = "c8e526bef0bb35357edf1f0c100eb0c6093457bcf420922a6751394461f2a1cf"
+content-hash = "cbee72a7e2e7c4ddf8175e6ed4ae0eaeff85ce6ac8dceccaefcb32c60da2c6ad"
