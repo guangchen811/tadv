@@ -2,6 +2,7 @@ from pathlib import Path
 
 from cadv_exploration.error_injection.abstract_error_injection_manager import AbstractErrorInjectionManager
 from cadv_exploration.loader import FileLoader
+from cadv_exploration.loader.dataset.kaggle_dataset_loader import KaggleDatasetLoader
 
 
 class KaggleSingleTableErrorInjectionManager(AbstractErrorInjectionManager):
@@ -39,19 +40,15 @@ class KaggleSingleTableErrorInjectionManager(AbstractErrorInjectionManager):
         self.post_corruption_test_data = post_corruption_test_data
 
     def save_data(self):
-        def save_files(base_path, test_data):
-            base_path.mkdir(parents=True, exist_ok=True)
-            self.train_data.to_csv(base_path / "train.csv", index=False)
-            self.validation_data.to_csv(base_path / "validation.csv", index=False)
-            test_data.to_csv(base_path / "test.csv", index=False)
-            self.ground_truth.to_csv(base_path / "ground_truth.csv", index=False)
-            self.sample_submission.to_csv(base_path / "sample_submission.csv", index=False)
-
-        files_with_clean_test_data_path = self.processed_data_path / "files_with_clean_test_data"
-        files_with_corrupted_test_data_path = self.processed_data_path / "files_with_corrupted_test_data"
-
-        save_files(files_with_clean_test_data_path, self.test_data)
-        save_files(files_with_corrupted_test_data_path, self.post_corruption_test_data)
+        KaggleDatasetLoader().save_data(
+            self.processed_data_path,
+            self.train_data,
+            self.validation_data,
+            self.test_data,
+            self.post_corruption_test_data,
+            self.ground_truth,
+            self.sample_submission
+        )
 
     def _create_processed_data_path(self):
         self.processed_data_dir.mkdir(parents=True, exist_ok=True)
