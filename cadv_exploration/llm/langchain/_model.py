@@ -21,7 +21,8 @@ class LangChainCADV:
         self.logger = logger
         self._build_chain(downstream_task_description)
 
-    def _build_prompt(self, task: DVTask,
+    @staticmethod
+    def _build_prompt(task: DVTask,
                       downstream_task_description: str = ML_INFERENCE_TASK_DESCRIPTION) -> ChatPromptTemplate:
         if task == DVTask.RELEVANT_COLUMN_TARGET:
             return ChatPromptTemplate(
