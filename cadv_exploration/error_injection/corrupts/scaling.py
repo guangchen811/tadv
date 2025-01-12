@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 
-from cadv_exploration.error_injection.basis import TabularCorruption
+from cadv_exploration.error_injection.abstract_corruption import TabularCorruption
 
 
 class Scaling(TabularCorruption):

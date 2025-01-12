@@ -1,6 +1,6 @@
 import numpy as np
 
-from cadv_exploration.error_injection.basis import TabularCorruption
+from cadv_exploration.error_injection.abstract_corruption import TabularCorruption
 
 
 class MissingCategoricalValueCorruption(TabularCorruption):
