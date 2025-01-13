@@ -6,7 +6,7 @@ from langchain_ollama import ChatOllama
 from langchain_openai import ChatOpenAI
 
 from cadv_exploration.llm._tasks import DVTask
-from cadv_exploration.llm.langchain._downstream_task_prompt import ML_INFERENCE_TASK_DESCRIPTION
+from cadv_exploration.llm.langchain.downstream_task_prompt import ML_INFERENCE_TASK_DESCRIPTION
 from cadv_exploration.llm.langchain._prompt import (
     ASSUMPTIONS_EXTRACTION_PROMPT, RELEVANT_COLUMN_TARGET_PROMPT,
     RULE_GENERATION_PROMPT, SYSTEM_TASK_DESCRIPTION)

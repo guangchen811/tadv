@@ -10,7 +10,7 @@ import logging
 from dq_manager import DeequDataQualityManager
 from cadv_exploration.inspector.deequ.deequ_inspector_manager import DeequInspectorManager
 from llm.langchain import LangChainCADV
-from llm.langchain._downstream_task_prompt import ML_INFERENCE_TASK_DESCRIPTION
+from cadv_exploration.llm.langchain.downstream_task_prompt import ML_INFERENCE_TASK_DESCRIPTION
 from loader import FileLoader
 from utils import get_project_root
 
