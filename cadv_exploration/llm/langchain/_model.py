@@ -9,9 +9,10 @@ from cadv_exploration.llm.langchain._downstream_task_prompt import ML_INFERENCE_
 from cadv_exploration.llm.langchain._prompt import (
     ASSUMPTIONS_EXTRACTION_PROMPT, RELEVANT_COLUMN_TARGET_PROMPT,
     RULE_GENERATION_PROMPT, SYSTEM_TASK_DESCRIPTION)
+from cadv_exploration.llm.langchain.abstract import AbstractLangChainCADV
 
 
-class LangChainCADV:
+class LangChainCADV(AbstractLangChainCADV):
     def __init__(self, model: str = None, downstream_task_description: str = ML_INFERENCE_TASK_DESCRIPTION,
                  logger=None):
         if model is None:
@@ -108,6 +109,7 @@ class LangChainCADV:
         return relevant_columns_list, expectations, rules
 
     def invoke(self, input_variables: dict, num_stages: int = 3, max_retries: int = 3):
+        relevant_columns_list, expectations, suggestions = None, None, None
         attempt = 0
         while attempt < max_retries:
             try:
