@@ -6,7 +6,7 @@ from scripts.python.utils import load_train_and_test_spark_data
 
 import importlib.util
 
-from dq_manager import DeequDataQualityManager
+from cadv_exploration.dq_manager import DeequDataQualityManager
 from cadv_exploration.inspector.deequ.deequ_inspector_manager import DeequInspectorManager
 from llm.langchain import LangChainCADV
 from cadv_exploration.llm.langchain.downstream_task_prompt import SQL_QUERY_TASK_DESCRIPTION

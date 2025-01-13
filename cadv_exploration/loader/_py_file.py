@@ -1,9 +1,9 @@
 import os
 from pathlib import Path
-from typing import List
+from typing import List, Union
 
 
-def load_py_file(file_path: str, return_file) -> str:
+def load_py_file(file_path: str, return_file) -> Union[str, Path]:
     """Load a Python file into a string."""
     if return_file:
         with open(file_path, "r") as file:

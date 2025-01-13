@@ -35,6 +35,7 @@ class TabularCorruption(DataCorruption):
             raise TypeError("Input data must be a pandas DataFrame.")
 
     def sample_rows(self, data):
+
         if self.severity == 1.0:
             rows = data.index
         # Completely At Random
@@ -53,6 +54,6 @@ class TabularCorruption(DataCorruption):
                 rows = data[depends_on_col].sort_values().iloc[perc_idx].index
 
         else:
-            ValueError(f"sampling type '{self.sampling}' not recognized")
+            raise ValueError(f"sampling type '{self.sampling}' not recognized")
 
         return rows

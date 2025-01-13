@@ -14,6 +14,7 @@ class KaggleSingleTableErrorInjectionManager(AbstractErrorInjectionManager):
                  processed_data_dir: Path,
                  submission_default_value: Union[str, float]
                  ):
+        self.post_corruption_test_data = None
         self.raw_file_path = raw_file_path
         self.target_table_name = target_table_name
         self.target_column_name = target_column_name

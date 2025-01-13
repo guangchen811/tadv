@@ -1,7 +1,7 @@
 import oyaml as yaml
 
-from dq_manager import DeequDataQualityManager
-from inspector.abstract_inspector_manager import AbstractInspectorManager
+from cadv_exploration.dq_manager import DeequDataQualityManager
+from cadv_exploration.inspector.abstract_inspector_manager import AbstractInspectorManager
 
 
 class DeequInspectorManager(AbstractInspectorManager):
@@ -18,7 +18,8 @@ class DeequInspectorManager(AbstractInspectorManager):
         yaml_string = yaml.dump(result_dict, default_flow_style=False, sort_keys=False)
         return yaml_string
 
-    def _profile_to_dict(self, column_profile):
+    @staticmethod
+    def _profile_to_dict(column_profile):
         if column_profile.histogram is None:
             histogram = None
         elif len(column_profile.histogram) > 10:

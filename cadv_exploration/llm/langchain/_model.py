@@ -23,7 +23,8 @@ class LangChainCADV(AbstractLangChainCADV):
         self.logger = logger
         self._build_chain(downstream_task_description)
 
-    def _get_langchain_model(self, model_name: str):
+    @staticmethod
+    def _get_langchain_model(model_name: str):
         model_name_package_map = {
             "gpt-4o-mini": ChatOpenAI(model="gpt-4o-mini"),
             "gpt-4o": ChatOpenAI(model="gpt-4o"),
