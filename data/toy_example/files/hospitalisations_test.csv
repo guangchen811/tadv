@@ -1,0 +1,4 @@
+ssn,gender,race,bloodtype,diagnosis,admission_day,discharge_day,insurance,cost,complications
+221-04-XXXX,1,black,AB neg,stroke,21,21,UHG,0,N
+434-29-XXXX,NULL,asian,O pos,NULL,NULL,22,KP,1000,Y
+212-56-XXXX,1,white,O pos,bloodknot,22,29,UHG,1000,N

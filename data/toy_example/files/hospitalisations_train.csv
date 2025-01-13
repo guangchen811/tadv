@@ -1,0 +1,5 @@
+ssn,gender,race,bloodtype,diagnosis,admission_day,discharge_day,insurance,cost,complications
+420-64-XXXX,1,white,A pos,cough,10,10,UHG,10,N
+423-33-XXXX,1,asian,O pos,fraction,10,12,KP,1000,N
+545-31-XXXX,2,white,A pos,fraction,17,19,UHG,1000,N
+222-24-XXXX,1,hispanic,O pos,cancer,20,25,CG,10000,N
