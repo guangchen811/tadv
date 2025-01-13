@@ -8,7 +8,7 @@ from cadv_exploration.llm.langchain import LangChainCADV
 from cadv_exploration.utils import get_project_root
 from cadv_exploration.data_models import Constraints
 from cadv_exploration.llm.langchain.downstream_task_prompt import SQL_QUERY_TASK_DESCRIPTION
-from scripts.python.constraint_inference.utils import filter_constraints, setup_logger, parse_arguments, \
+from scripts.python.utils import filter_constraints, setup_logger, parse_arguments, \
     load_train_and_test_spark_data
 
 

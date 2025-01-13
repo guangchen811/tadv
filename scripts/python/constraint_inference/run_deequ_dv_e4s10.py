@@ -6,7 +6,7 @@ load_dotenv()
 from cadv_exploration.dq_manager import DeequDataQualityManager
 from cadv_exploration.utils import get_project_root
 
-from scripts.python.constraint_inference.utils import filter_constraints, setup_logger, load_train_and_test_spark_data
+from scripts.python.utils import filter_constraints, setup_logger, load_train_and_test_spark_data
 
 
 def run_deequ_dv(data_name, processed_data_idx):

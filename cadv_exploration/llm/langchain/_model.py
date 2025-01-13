@@ -6,11 +6,11 @@ from langchain_ollama import ChatOllama
 from langchain_openai import ChatOpenAI
 
 from cadv_exploration.llm._tasks import DVTask
-from cadv_exploration.llm.langchain.downstream_task_prompt import ML_INFERENCE_TASK_DESCRIPTION
 from cadv_exploration.llm.langchain._prompt import (
     ASSUMPTIONS_EXTRACTION_PROMPT, RELEVANT_COLUMN_TARGET_PROMPT,
     RULE_GENERATION_PROMPT, SYSTEM_TASK_DESCRIPTION)
 from cadv_exploration.llm.langchain.abstract import AbstractLangChainCADV
+from cadv_exploration.llm.langchain.downstream_task_prompt import ML_INFERENCE_TASK_DESCRIPTION
 
 
 class LangChainCADV(AbstractLangChainCADV):
@@ -28,7 +28,7 @@ class LangChainCADV(AbstractLangChainCADV):
             "gpt-4o-mini": ChatOpenAI(model="gpt-4o-mini"),
             "gpt-4o": ChatOpenAI(model="gpt-4o"),
             "llama3.2:1b": ChatOllama(model="llama3.2:1b"),
-            "llama3.2:3b": ChatOllama(model="llama3.2:3b")
+            "llama3.2": ChatOllama(model="llama3.2")
         }
 
         try:

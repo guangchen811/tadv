@@ -1,54 +1,27 @@
 from cadv_exploration.utils import load_dotenv
-from scripts.python.relevant_column_detection.metrics import RelevantColumnDetectionMetric
 
 load_dotenv()
+from scripts.python.relevant_column_detection.metrics import RelevantColumnDetectionMetric
+from scripts.python.utils import load_train_and_test_spark_data
 
-import argparse
 import importlib.util
-import logging
 
-from dq_manager import DeequDataQualityManager
+from cadv_exploration.dq_manager import DeequDataQualityManager
 from cadv_exploration.inspector.deequ.deequ_inspector_manager import DeequInspectorManager
 from llm.langchain import LangChainCADV
 from cadv_exploration.llm.langchain.downstream_task_prompt import ML_INFERENCE_TASK_DESCRIPTION
-from loader import FileLoader
-from utils import get_project_root
-
-logger = logging.getLogger()
-logger.setLevel(logging.INFO)
-
-# Create a file handler with write-plus mode
-file_handler = logging.FileHandler("langchain_cadv_relevant_column_inference.log", mode="a")
-file_handler.setLevel(logging.INFO)
-
-# Define the log format
-formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
-file_handler.setFormatter(formatter)
-
-# Add the handler to the logger
-logger.addHandler(file_handler)
+from cadv_exploration.utils import get_project_root
 
 
-def run_langchain_cadv(processed_data_idx):
-    argparse.ArgumentParser(description="Run LangChainCADV")
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--model", type=str, help="Model to use", default="gpt-4o")
-    parser.add_argument("--max-retries", type=int, help="Maximum number of retries", default=3)
-    args = parser.parse_args()
-    logger.info(f"Model: {args.model}")
-
+def run_langchain_cadv_on_single_model(model_name, data_name, processed_data_idx):
     dq_manager = DeequDataQualityManager()
 
-    original_data_path = get_project_root() / "data" / "playground-series-s4e10"
-    processed_data_path = get_project_root() / "data_processed" / "playground-series-s4e10" / f"{processed_data_idx}"
-    train_file_path = processed_data_path / "files_with_clean_test_data" / "train.csv"
-    validation_file_path = train_file_path.parent.parent / "files_with_clean_test_data" / "validation.csv"
+    original_data_path = get_project_root() / "data" / f"{data_name}"
+    processed_data_path = get_project_root() / "data_processed" / f"{data_name}" / f"{processed_data_idx}"
 
-    train_data = FileLoader.load_csv(train_file_path)
-    validation_data = FileLoader.load_csv(validation_file_path)
-
-    spark_train_data, spark_train = dq_manager.spark_df_from_pandas_df(train_data)
-    spark_validation_data, spark_validation = dq_manager.spark_df_from_pandas_df(validation_data)
+    spark_train_data, spark_train, spark_validation_data, spark_validation = load_train_and_test_spark_data(
+        data_name=data_name, processed_data_idx=processed_data_idx, dq_manager=dq_manager
+    )
 
     column_list = sorted(spark_validation_data.columns, key=lambda x: x.lower())
 
@@ -79,13 +52,12 @@ def run_langchain_cadv(processed_data_idx):
             "script": script_context,
         }
 
-        lc = LangChainCADV(model_name=args.model, downstream_task_description=ML_INFERENCE_TASK_DESCRIPTION)
+        lc = LangChainCADV(model_name=model_name, downstream_task_description=ML_INFERENCE_TASK_DESCRIPTION)
 
-        max_retries = args.max_retries
+        max_retries = 3
         relevant_columns_list, expectations, suggestions = lc.invoke(
             input_variables=input_variables, num_stages=1, max_retries=max_retries
         )
-        print(module_name)
         ground_truth = sorted(task_instance.required_columns(), key=lambda x: x.lower())
         relevant_columns_list = sorted(relevant_columns_list, key=lambda x: x.lower())
 
@@ -94,8 +66,21 @@ def run_langchain_cadv(processed_data_idx):
                                                                                          relevant_columns_list)
         all_ground_truth_vectors.append(ground_truth_vector)
         all_relevant_columns_vectors.append(relevant_columns_vector)
-    print(metric_evaluator.evaluate(all_ground_truth_vectors, all_relevant_columns_vectors))
+    result = metric_evaluator.evaluate(all_ground_truth_vectors, all_relevant_columns_vectors)
+    return result
+
+
+def run_langchain_cadv_on_all_models(model_names, data_name, processed_data_idx):
+    result_each_model = {}
+    for model_name in model_names:
+        result_each_model[model_name] = run_langchain_cadv_on_single_model(model_name, data_name, processed_data_idx)
+    return result_each_model
 
 
 if __name__ == "__main__":
-    run_langchain_cadv(7)
+    model_names = ["llama3.2:1b", "llama3.2", "gpt-4o-mini", "gpt-4o"]
+    data_name = "playground-series-s4e10"
+    processed_data_idx = 8
+    result_each_model = run_langchain_cadv_on_all_models(model_names, data_name, processed_data_idx)
+    metric_evaluator = RelevantColumnDetectionMetric(average='macro')
+    metric_evaluator.plot_model_metrics(result_each_model, picture_name="ml_metrics.png")

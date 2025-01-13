@@ -10,7 +10,7 @@ from cadv_exploration.dq_manager import DeequDataQualityManager
 from cadv_exploration.llm.langchain import LangChainCADV
 from cadv_exploration.utils import get_project_root
 from cadv_exploration.data_models import Constraints
-from scripts.python.constraint_inference.utils import filter_constraints, setup_logger, parse_arguments, \
+from scripts.python.utils import filter_constraints, setup_logger, parse_arguments, \
     load_train_and_test_spark_data
 
 
@@ -46,7 +46,6 @@ def run_langchain_cadv(data_name, processed_data_idx):
             "script": script_context,
         }
 
-        max_retries = args.max_retries
         relevant_columns_list, expectations, suggestions = lc.invoke(
             input_variables=input_variables, num_stages=3, max_retries=max_retries
         )

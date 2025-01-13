@@ -1,4 +1,5 @@
 import numpy as np
+from matplotlib import pyplot as plt
 from sklearn.metrics import (
     accuracy_score, hamming_loss, precision_score, recall_score, f1_score
 )
@@ -50,11 +51,11 @@ class RelevantColumnDetectionMetric:
 
         # Compute mean and standard deviation for each metric
         metrics_with_stats = {
-            "Accuracy": f"{np.mean(accuracy_list):.4f} ± {np.std(accuracy_list):.4f}",
-            "Hamming Loss": f"{np.mean(hamming_list):.4f} ± {np.std(hamming_list):.4f}",
-            f"Precision ({self.average})": f"{np.mean(precision_list):.4f} ± {np.std(precision_list):.4f}",
-            f"Recall ({self.average})": f"{np.mean(recall_list):.4f} ± {np.std(recall_list):.4f}",
-            f"F1 Score ({self.average})": f"{np.mean(f1_list):.4f} ± {np.std(f1_list):.4f}"
+            "Accuracy": f"{np.mean(accuracy_list):.4f} ± {np.var(accuracy_list):.4f}",
+            "Hamming Loss": f"{np.mean(hamming_list):.4f} ± {np.var(hamming_list):.4f}",
+            f"Precision ({self.average})": f"{np.mean(precision_list):.4f} ± {np.var(precision_list):.4f}",
+            f"Recall ({self.average})": f"{np.mean(recall_list):.4f} ± {np.var(recall_list):.4f}",
+            f"F1 Score ({self.average})": f"{np.mean(f1_list):.4f} ± {np.var(f1_list):.4f}"
         }
         return metrics_with_stats
 
@@ -63,6 +64,48 @@ class RelevantColumnDetectionMetric:
         relevant_columns_vector = [1 if col in relevant_columns else 0 for col in all_columns]
 
         return ground_truth_vector, relevant_columns_vector
+
+    def plot_model_metrics(self, metrics_dict, picture_name):
+        """
+        Plot the performance metrics for one or more models.
+
+        Parameters:
+        - metrics_dict (dict): A dictionary where the key is the model name and the value is a metrics_with_stats dictionary.
+        """
+        # Extract unique metrics from the first model
+        metric_names = list(next(iter(metrics_dict.values())).keys())
+        colors = plt.get_cmap("tab10")(np.linspace(0, 1, len(metrics_dict)))
+        # Initialize figure and axes
+        fig, axes = plt.subplots(len(metric_names), 1, figsize=(10, len(metric_names) * 4))
+        if len(metric_names) == 1:
+            axes = [axes]  # Ensure axes is iterable for a single subplot
+
+        # Plot each metric
+        for ax, metric_name in zip(axes, metric_names):
+            model_names = []
+            means = []
+            stds = []
+
+            # Collect data for each model
+            for model_name, metrics in metrics_dict.items():
+                model_names.append(model_name)
+                mean, std = map(float, metrics[metric_name].split(" ± "))
+                means.append(mean)
+                stds.append(std)
+
+            # Plot with error bars
+            ax.bar(model_names, means, yerr=stds, capsize=5, alpha=0.7, color=colors, edgecolor='black')
+            ax.set_title(metric_name, fontsize=14)
+            ax.set_ylabel("Value", fontsize=12)
+            if metric_names != "Hamming Loss":
+                ax.set_ylim(0, 1.2)
+            else:
+                ax.set_ylim(0, 0.1)
+            ax.grid(axis='y', linestyle='--', alpha=0.7)
+
+        # Adjust layout
+        plt.tight_layout()
+        plt.savefig(f"./figs/{picture_name}")
 
 
 # Example usage
