@@ -58,6 +58,20 @@ class Constraints:
         return cls.from_dict(yaml_dict)
 
     @classmethod
+    def from_deequ_output(cls, suggestion, code_list_for_constraints_valid):
+        relevant_columns_list = list(set([item["column_name"] for item in suggestion]))
+        yaml_dict = {"constraints": {f"{relevant_column}": {"code": [], "assumptions": []} for relevant_column in
+                                     relevant_columns_list}}
+        for item in suggestion:
+            code = item["code_for_constraint"]
+            column_name = item["column_name"]
+            if code in code_list_for_constraints_valid:
+                yaml_dict["constraints"][column_name]["code"].append([code, "Valid"])
+            else:
+                yaml_dict["constraints"][column_name]["code"].append([code, "Invalid"])
+        return cls.from_dict(yaml_dict)
+
+    @classmethod
     def from_dict(cls, data):
         constraints = cls()
         for column, constraint in data["constraints"].items():

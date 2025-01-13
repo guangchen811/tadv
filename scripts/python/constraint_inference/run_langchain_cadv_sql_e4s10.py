@@ -1,7 +1,6 @@
 from cadv_exploration.utils import load_dotenv
 
 load_dotenv()
-import logging
 
 from cadv_exploration.inspector.deequ.deequ_inspector_manager import DeequInspectorManager
 from cadv_exploration.dq_manager import DeequDataQualityManager
@@ -13,22 +12,24 @@ from scripts.python.constraint_inference.utils import filter_constraints, setup_
     load_train_and_test_spark_data
 
 
-def run_langchain_cadv(processed_data_idx):
-    logger = setup_logger("./langchain_cadv")
-    args = parse_arguments(description="Run LangChain CADV")
+def run_langchain_cadv(data_name, processed_data_idx):
+    logger = setup_logger("./langchain_cadv.log")
+    args = parse_arguments(description="Run LangChain CADV on sql tasks")
     dq_manager = DeequDataQualityManager()
 
-    logging.info(f"Model: {args.model}")
-    data_name = "playground-series-s4e10"
+    logger.info(f"Model: {args.model}")
 
     original_data_path = get_project_root() / "data" / f"{data_name}"
-    processed_data_path = get_project_root() / "data_processed" / f"{data_name}"
+    processed_data_path = get_project_root() / "data_processed" / f"{data_name}" / f"{processed_data_idx}"
 
     spark_train_data, spark_train, spark_validation_data, spark_validation = load_train_and_test_spark_data(
         data_name=data_name, processed_data_idx=processed_data_idx, dq_manager=dq_manager
     )
 
     column_desc = DeequInspectorManager().spark_df_to_column_desc(spark_train_data, spark_train)
+
+    max_retries = args.max_retries
+    lc = LangChainCADV(model_name=args.model, downstream_task_description=SQL_QUERY_TASK_DESCRIPTION)
 
     scripts_path_dir = original_data_path / "scripts_sql"
     for script_path in sorted(scripts_path_dir.iterdir(), key=lambda x: x.name):
@@ -43,9 +44,6 @@ def run_langchain_cadv(processed_data_idx):
             "script": script_context,
         }
 
-        lc = LangChainCADV(model_name=args.model, downstream_task_description=SQL_QUERY_TASK_DESCRIPTION)
-
-        max_retries = args.max_retries
         relevant_columns_list, expectations, suggestions = lc.invoke(
             input_variables=input_variables, num_stages=3, max_retries=max_retries
         )
@@ -57,9 +55,8 @@ def run_langchain_cadv(processed_data_idx):
                                                              spark_validation_data, logger)
         constraints = Constraints.from_llm_output(relevant_columns_list, expectations, suggestions,
                                                   code_list_for_constraints_valid)
-
         constraints.save_to_yaml(result_path)
-        print(f"Saved to {result_path}")
+        logger.info(f"Saved constraints to {result_path}")
 
     spark_train.sparkContext._gateway.shutdown_callback_server()
     spark_validation.sparkContext._gateway.shutdown_callback_server()
@@ -68,4 +65,4 @@ def run_langchain_cadv(processed_data_idx):
 
 
 if __name__ == "__main__":
-    run_langchain_cadv(processed_data_idx=8)
+    run_langchain_cadv(data_name="playground-series-s4e10", processed_data_idx=8)

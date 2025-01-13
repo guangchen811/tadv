@@ -1,59 +1,39 @@
 from nbconvert import PythonExporter
 
 from cadv_exploration.utils import load_dotenv
+from llm.langchain.downstream_task_prompt import ML_INFERENCE_TASK_DESCRIPTION
 
 load_dotenv()
-import argparse
-import logging
 
 from cadv_exploration.inspector.deequ.deequ_inspector_manager import DeequInspectorManager
 from cadv_exploration.dq_manager import DeequDataQualityManager
 from cadv_exploration.llm.langchain import LangChainCADV
-from cadv_exploration.loader import FileLoader
 from cadv_exploration.utils import get_project_root
 from cadv_exploration.data_models import Constraints
-from scripts.python.constraint_inference.utils import filter_constraints
-
-logger = logging.getLogger()
-logger.setLevel(logging.INFO)
-
-# Create a file handler with write-plus mode
-file_handler = logging.FileHandler("langchain_cadv.log", mode="a")
-file_handler.setLevel(logging.INFO)
-
-# Define the log format
-formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
-file_handler.setFormatter(formatter)
-
-# Add the handler to the logger
-logger.addHandler(file_handler)
+from scripts.python.constraint_inference.utils import filter_constraints, setup_logger, parse_arguments, \
+    load_train_and_test_spark_data
 
 
-def run_langchain_cadv(processed_data_idx):
-    argparse.ArgumentParser(description="Run LangChainCADV")
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--model", type=str, help="Model to use", default="gpt-4o")
-    parser.add_argument("--max-retries", type=int, help="Maximum number of retries", default=3)
-    args = parser.parse_args()
-    logging.info(f"Model: {args.model}")
-
+def run_langchain_cadv(data_name, processed_data_idx):
+    logger = setup_logger("./langchain_cadv.log")
+    args = parse_arguments(description="Run LangChain CADV on ML tasks")
     dq_manager = DeequDataQualityManager()
+    logger.info(f"Model: {args.model}")
 
-    original_data_path = get_project_root() / "data" / "playground-series-s4e10"
-    processed_data_path = get_project_root() / "data_processed" / "playground-series-s4e10" / f"{processed_data_idx}"
-    train_file_path = processed_data_path / "files_with_clean_test_data" / "train.csv"
-    validation_file_path = train_file_path.parent.parent / "files_with_clean_test_data" / "validation.csv"
+    original_data_path = get_project_root() / "data" / f"{data_name}"
+    processed_data_path = get_project_root() / "data_processed" / f"{data_name}" / f"{processed_data_idx}"
 
-    train_data = FileLoader.load_csv(train_file_path)
-    validation_data = FileLoader.load_csv(validation_file_path)
-
-    spark_train_data, spark_train = dq_manager.spark_df_from_pandas_df(train_data)
-    spark_validation_data, spark_validation = dq_manager.spark_df_from_pandas_df(validation_data)
+    spark_train_data, spark_train, spark_validation_data, spark_validation = load_train_and_test_spark_data(
+        data_name=data_name, processed_data_idx=processed_data_idx, dq_manager=dq_manager
+    )
 
     column_desc = DeequInspectorManager().spark_df_to_column_desc(spark_train_data, spark_train)
 
+    max_retries = args.max_retries
+    lc = LangChainCADV(model_name=args.model, downstream_task_description=ML_INFERENCE_TASK_DESCRIPTION)
     scripts_path_dir = original_data_path / "kernels_ipynb_selected"
     export = PythonExporter()
+
     for script_path in scripts_path_dir.iterdir():
         if not script_path.name.endswith(".ipynb"):
             continue
@@ -65,8 +45,6 @@ def run_langchain_cadv(processed_data_idx):
             "column_desc": column_desc,
             "script": script_context,
         }
-
-        lc = LangChainCADV(model_name=args.model)
 
         max_retries = args.max_retries
         relevant_columns_list, expectations, suggestions = lc.invoke(
@@ -82,7 +60,7 @@ def run_langchain_cadv(processed_data_idx):
                                                   code_list_for_constraints_valid)
 
         constraints.save_to_yaml(result_path)
-        print(f"Saved to {result_path}")
+        logger.info(f"Saved constraints to {result_path}")
 
     spark_train.sparkContext._gateway.shutdown_callback_server()
     spark_validation.sparkContext._gateway.shutdown_callback_server()
@@ -91,4 +69,4 @@ def run_langchain_cadv(processed_data_idx):
 
 
 if __name__ == "__main__":
-    run_langchain_cadv(processed_data_idx=7)
+    run_langchain_cadv(data_name="playground-series-s4e10", processed_data_idx=8)
