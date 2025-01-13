@@ -1,4 +1,5 @@
 from pathlib import Path
+from typing import Union
 
 from cadv_exploration.error_injection.abstract_error_injection_manager import AbstractErrorInjectionManager
 from cadv_exploration.loader import FileLoader
@@ -11,7 +12,7 @@ class KaggleSingleTableErrorInjectionManager(AbstractErrorInjectionManager):
                  target_table_name: str,
                  target_column_name: str,
                  processed_data_dir: Path,
-                 submission_default_value: float,
+                 submission_default_value: Union[str, float]
                  ):
         self.raw_file_path = raw_file_path
         self.target_table_name = target_table_name
