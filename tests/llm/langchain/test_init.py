@@ -19,4 +19,4 @@ def test_prompt_building():
 
     chain = LangChainCADV(model_name="llama3.2:3b")
     assert isinstance(chain.model, ChatOllama)
-    assert chain.model.model == "llama3.2:3b"
+    assert chain.model.model == "llama3.2"

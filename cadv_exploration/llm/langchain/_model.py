@@ -28,7 +28,8 @@ class LangChainCADV(AbstractLangChainCADV):
             "gpt-4o-mini": ChatOpenAI(model="gpt-4o-mini"),
             "gpt-4o": ChatOpenAI(model="gpt-4o"),
             "llama3.2:1b": ChatOllama(model="llama3.2:1b"),
-            "llama3.2": ChatOllama(model="llama3.2")
+            "llama3.2": ChatOllama(model="llama3.2"),
+            "llama3.2:3b": ChatOllama(model="llama3.2"),
         }
 
         try:
