@@ -8,7 +8,7 @@ import importlib.util
 import logging
 
 from dq_manager import DeequDataQualityManager
-from inspector.deequ._to_string import spark_df_to_column_desc
+from cadv_exploration.inspector.deequ.deequ_inspector_manager import DeequInspectorManager
 from llm.langchain import LangChainCADV
 from llm.langchain._downstream_task_prompt import ML_INFERENCE_TASK_DESCRIPTION
 from loader import FileLoader
@@ -52,7 +52,7 @@ def run_langchain_cadv(processed_data_idx):
 
     column_list = sorted(spark_validation_data.columns, key=lambda x: x.lower())
 
-    column_desc = spark_df_to_column_desc(spark_train_data, spark_train)
+    column_desc = DeequInspectorManager().spark_df_to_column_desc(spark_train_data, spark_train)
 
     scripts_path_dir = original_data_path / "scripts_ml"
 
@@ -79,7 +79,7 @@ def run_langchain_cadv(processed_data_idx):
             "script": script_context,
         }
 
-        lc = LangChainCADV(model=args.model, downstream_task_description=ML_INFERENCE_TASK_DESCRIPTION)
+        lc = LangChainCADV(model_name=args.model, downstream_task_description=ML_INFERENCE_TASK_DESCRIPTION)
 
         max_retries = args.max_retries
         relevant_columns_list, expectations, suggestions = lc.invoke(

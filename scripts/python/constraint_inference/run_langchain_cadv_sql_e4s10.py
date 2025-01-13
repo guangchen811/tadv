@@ -1,55 +1,34 @@
 from cadv_exploration.utils import load_dotenv
 
 load_dotenv()
-import argparse
 import logging
 
-from cadv_exploration.inspector.deequ._to_string import spark_df_to_column_desc
+from cadv_exploration.inspector.deequ.deequ_inspector_manager import DeequInspectorManager
 from cadv_exploration.dq_manager import DeequDataQualityManager
 from cadv_exploration.llm.langchain import LangChainCADV
-from cadv_exploration.loader import FileLoader
 from cadv_exploration.utils import get_project_root
 from cadv_exploration.data_models import Constraints
 from cadv_exploration.llm.langchain._downstream_task_prompt import SQL_QUERY_TASK_DESCRIPTION
-from scripts.python.constraint_inference.utils import filter_constraints
-
-logger = logging.getLogger()
-logger.setLevel(logging.INFO)
-
-# Create a file handler with write-plus mode
-file_handler = logging.FileHandler("langchain_cadv.log", mode="a")
-file_handler.setLevel(logging.INFO)
-
-# Define the log format
-formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
-file_handler.setFormatter(formatter)
-
-# Add the handler to the logger
-logger.addHandler(file_handler)
+from scripts.python.constraint_inference.utils import filter_constraints, setup_logger, parse_arguments, \
+    load_train_and_test_spark_data
 
 
 def run_langchain_cadv(processed_data_idx):
-    argparse.ArgumentParser(description="Run LangChainCADV")
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--model", type=str, help="Model to use", default="gpt-4o-mini")
-    parser.add_argument("--max-retries", type=int, help="Maximum number of retries", default=3)
-    args = parser.parse_args()
-    logging.info(f"Model: {args.model}")
-
+    logger = setup_logger("./langchain_cadv")
+    args = parse_arguments(description="Run LangChain CADV")
     dq_manager = DeequDataQualityManager()
 
-    original_data_path = get_project_root() / "data" / "playground-series-s4e10"
-    processed_data_path = get_project_root() / "data_processed" / "playground-series-s4e10" / f"{processed_data_idx}"
-    train_file_path = processed_data_path / "files_with_clean_test_data" / "train.csv"
-    validation_file_path = train_file_path.parent.parent / "files_with_clean_test_data" / "validation.csv"
+    logging.info(f"Model: {args.model}")
+    data_name = "playground-series-s4e10"
 
-    train_data = FileLoader.load_csv(train_file_path)
-    validation_data = FileLoader.load_csv(validation_file_path)
+    original_data_path = get_project_root() / "data" / f"{data_name}"
+    processed_data_path = get_project_root() / "data_processed" / f"{data_name}"
 
-    spark_train_data, spark_train = dq_manager.spark_df_from_pandas_df(train_data)
-    spark_validation_data, spark_validation = dq_manager.spark_df_from_pandas_df(validation_data)
+    spark_train_data, spark_train, spark_validation_data, spark_validation = load_train_and_test_spark_data(
+        data_name=data_name, processed_data_idx=processed_data_idx, dq_manager=dq_manager
+    )
 
-    column_desc = spark_df_to_column_desc(spark_train_data, spark_train)
+    column_desc = DeequInspectorManager().spark_df_to_column_desc(spark_train_data, spark_train)
 
     scripts_path_dir = original_data_path / "scripts_sql"
     for script_path in sorted(scripts_path_dir.iterdir(), key=lambda x: x.name):
@@ -64,7 +43,7 @@ def run_langchain_cadv(processed_data_idx):
             "script": script_context,
         }
 
-        lc = LangChainCADV(model=args.model, downstream_task_description=SQL_QUERY_TASK_DESCRIPTION)
+        lc = LangChainCADV(model_name=args.model, downstream_task_description=SQL_QUERY_TASK_DESCRIPTION)
 
         max_retries = args.max_retries
         relevant_columns_list, expectations, suggestions = lc.invoke(

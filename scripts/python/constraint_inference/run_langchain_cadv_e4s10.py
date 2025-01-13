@@ -6,7 +6,7 @@ load_dotenv()
 import argparse
 import logging
 
-from cadv_exploration.inspector.deequ._to_string import spark_df_to_column_desc
+from cadv_exploration.inspector.deequ.deequ_inspector_manager import DeequInspectorManager
 from cadv_exploration.dq_manager import DeequDataQualityManager
 from cadv_exploration.llm.langchain import LangChainCADV
 from cadv_exploration.loader import FileLoader
@@ -50,7 +50,7 @@ def run_langchain_cadv(processed_data_idx):
     spark_train_data, spark_train = dq_manager.spark_df_from_pandas_df(train_data)
     spark_validation_data, spark_validation = dq_manager.spark_df_from_pandas_df(validation_data)
 
-    column_desc = spark_df_to_column_desc(spark_train_data, spark_train)
+    column_desc = DeequInspectorManager().spark_df_to_column_desc(spark_train_data, spark_train)
 
     scripts_path_dir = original_data_path / "kernels_ipynb_selected"
     export = PythonExporter()
@@ -66,7 +66,7 @@ def run_langchain_cadv(processed_data_idx):
             "script": script_context,
         }
 
-        lc = LangChainCADV(model=args.model)
+        lc = LangChainCADV(model_name=args.model)
 
         max_retries = args.max_retries
         relevant_columns_list, expectations, suggestions = lc.invoke(

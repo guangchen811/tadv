@@ -2,6 +2,7 @@ from langchain_core.exceptions import OutputParserException
 from langchain_core.output_parsers import (CommaSeparatedListOutputParser,
                                            JsonOutputParser)
 from langchain_core.prompts import ChatPromptTemplate
+from langchain_ollama import ChatOllama
 from langchain_openai import ChatOpenAI
 
 from cadv_exploration.llm._tasks import DVTask
@@ -13,14 +14,28 @@ from cadv_exploration.llm.langchain.abstract import AbstractLangChainCADV
 
 
 class LangChainCADV(AbstractLangChainCADV):
-    def __init__(self, model: str = None, downstream_task_description: str = ML_INFERENCE_TASK_DESCRIPTION,
+    def __init__(self, model_name: str = None, downstream_task_description: str = ML_INFERENCE_TASK_DESCRIPTION,
                  logger=None):
-        if model is None:
+        if model_name is None:
             self.model = ChatOpenAI(model="gpt-4o-mini")
         else:
-            self.model = ChatOpenAI(model=model)
+            self.model = self._get_langchain_model(model_name)
         self.logger = logger
         self._build_chain(downstream_task_description)
+
+    def _get_langchain_model(self, model_name: str):
+        model_name_package_map = {
+            "gpt-4o-mini": ChatOpenAI(model="gpt-4o-mini"),
+            "gpt-4o": ChatOpenAI(model="gpt-4o"),
+            "llama3.2:1b": ChatOllama(model="llama3.2:1b"),
+            "llama3.2:3b": ChatOllama(model="llama3.2:3b")
+        }
+
+        try:
+            model_api = model_name_package_map[model_name]
+        except KeyError:
+            raise ValueError(f"Invalid model name: {model_name}")
+        return model_api
 
     @staticmethod
     def _build_prompt(task: DVTask,
