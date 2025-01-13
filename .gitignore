@@ -137,7 +137,9 @@ dmypy.json
 # VS Code
 .vscode
 
-data/santander-value-prediction-challenge/*
 data_processed/*
 
 *.drawio.bkp
+
+data/playground-series-s4e10/*
+data/healthcare_dataset/*
