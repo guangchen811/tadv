@@ -1,6 +1,7 @@
 from cadv_exploration.utils import load_dotenv
 
 load_dotenv()
+from scripts.python.relevant_column_detection.string_matching import run_string_matching
 from scripts.python.relevant_column_detection.metrics import RelevantColumnDetectionMetric
 from scripts.python.utils import load_train_and_test_spark_data
 
@@ -47,20 +48,13 @@ def run_langchain_cadv_on_single_model(model_name, data_name, processed_data_idx
         task_class = getattr(module, "KaggleLoanColumnDetectionTask")
         task_instance = task_class()
         script_context = task_instance.original_code
-        input_variables = {
-            "column_desc": column_desc,
-            "script": script_context,
-        }
 
-        lc = LangChainCADV(model_name=model_name, downstream_task_description=ML_INFERENCE_TASK_DESCRIPTION)
+        if model_name == "string-matching":
+            relevant_columns_list = run_string_matching(column_list, script_context)
+        else:
+            relevant_columns_list = run_llm(column_desc, model_name, module_name, script_context)
 
-        max_retries = 3
-        relevant_columns_list, expectations, suggestions = lc.invoke(
-            input_variables=input_variables, num_stages=1, max_retries=max_retries
-        )
         ground_truth = sorted(task_instance.required_columns(), key=lambda x: x.lower())
-        relevant_columns_list = sorted(relevant_columns_list, key=lambda x: x.lower())
-
         ground_truth_vector, relevant_columns_vector = metric_evaluator.binary_vectorize(column_list,
                                                                                          ground_truth,
                                                                                          relevant_columns_list)
@@ -68,6 +62,21 @@ def run_langchain_cadv_on_single_model(model_name, data_name, processed_data_idx
         all_relevant_columns_vectors.append(relevant_columns_vector)
     result = metric_evaluator.evaluate(all_ground_truth_vectors, all_relevant_columns_vectors)
     return result
+
+
+def run_llm(column_desc, model_name, module_name, script_context):
+    input_variables = {
+        "column_desc": column_desc,
+        "script": script_context,
+    }
+    lc = LangChainCADV(model_name=model_name, downstream_task_description=ML_INFERENCE_TASK_DESCRIPTION)
+    max_retries = 3
+    relevant_columns_list, expectations, suggestions = lc.invoke(
+        input_variables=input_variables, num_stages=1, max_retries=max_retries
+    )
+    print(module_name)
+    relevant_columns_list = sorted(relevant_columns_list, key=lambda x: x.lower())
+    return relevant_columns_list
 
 
 def run_langchain_cadv_on_all_models(model_names, data_name, processed_data_idx):
@@ -78,7 +87,7 @@ def run_langchain_cadv_on_all_models(model_names, data_name, processed_data_idx)
 
 
 if __name__ == "__main__":
-    model_names = ["llama3.2:1b", "llama3.2", "gpt-4o-mini", "gpt-4o"]
+    model_names = ["string-matching", "llama3.2:1b", "llama3.2", "gpt-4o-mini", "gpt-4o"]
     data_name = "playground-series-s4e10"
     processed_data_idx = 8
     result_each_model = run_langchain_cadv_on_all_models(model_names, data_name, processed_data_idx)
