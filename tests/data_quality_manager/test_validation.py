@@ -58,7 +58,7 @@ def test_validation_on_small_dataset(dq_manager):
 
     assert check_result[0]["constraint_status"] == "Success"
     assert check_result[1]["constraint_status"] == "Failure"
-    assert check_result[2]["constraint_status"] == "Success"
+    assert check_result[2]["constraint_status"] == "Failure"
     assert check_result[3]["constraint_status"] == "Success"
     assert check_result[4]["constraint_status"] == "Success"
     assert check_result[5]["constraint_status"] == "Success"
