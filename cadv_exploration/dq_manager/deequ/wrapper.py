@@ -30,5 +30,5 @@ class DeequDataQualityManager(AbstractDataQualityManager):
     def apply_checks_from_strings(self, spark, spark_df, check_strings):
         return apply_checks_from_strings(spark, spark_df, check_strings)
 
-    def validate_on_spark_df(self, spark, spark_df, code_list_for_constraints):
-        return validate_on_df(spark, spark_df, code_list_for_constraints)
+    def validate_on_spark_df(self, spark, spark_df, code_list_for_constraints, return_raw=False):
+        return validate_on_df(spark, spark_df, code_list_for_constraints, return_raw)

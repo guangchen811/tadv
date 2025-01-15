@@ -11,8 +11,8 @@ class FileLoader:
         pass
 
     @classmethod
-    def load_csv(cls, file_path):
-        return load_csv(file_path)
+    def load_csv(cls, file_path, **kwargs):
+        return load_csv(file_path, **kwargs)
 
     @classmethod
     def load_csvs(cls, dir_path):

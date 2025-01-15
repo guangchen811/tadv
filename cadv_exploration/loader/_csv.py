@@ -10,6 +10,6 @@ def load_csvs(dir_path: str) -> List[pd.DataFrame]:
     return [load_csv(file) for file in file_path]
 
 
-def load_csv(file_path: str) -> pd.DataFrame:
+def load_csv(file_path: str, **kwargs) -> pd.DataFrame:
     """Load a CSV file into a pandas DataFrame."""
-    return pd.read_csv(file_path)
+    return pd.read_csv(file_path, **kwargs)

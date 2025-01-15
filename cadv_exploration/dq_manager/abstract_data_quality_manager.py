@@ -49,7 +49,7 @@ class AbstractDataQualityManager(ABC):
         pass
 
     @abstractmethod
-    def validate_on_spark_df(self, spark, spark_df, code_list_for_constraints):
+    def validate_on_spark_df(self, spark, spark_df, code_list_for_constraints, return_raw=False):
         """
         Validate a Spark DataFrame against specified constraints.
         """

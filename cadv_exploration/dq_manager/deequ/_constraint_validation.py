@@ -46,8 +46,10 @@ def single_check(spark, spark_df, check_str):
 #     ).collect()
 #     return check_result
 
-def validate_on_df(spark, spark_df, code_list_for_constraints):
+def validate_on_df(spark, spark_df, code_list_for_constraints, return_raw):
     check_result_on_post_corruption_df = apply_checks_from_strings(spark, spark_df, code_list_for_constraints)
+    if return_raw:
+        return check_result_on_post_corruption_df
     status_on_post_corruption_df = [item['constraint_status'] if
                                     item is not None else None for item in check_result_on_post_corruption_df]
     # success_on_post_corruption_df = status_on_post_corruption_df.count("Success")
