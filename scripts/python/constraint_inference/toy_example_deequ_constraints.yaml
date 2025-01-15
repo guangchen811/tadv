@@ -1,0 +1,67 @@
+constraints:
+  complications:
+    code:
+    - - .isContainedIn("complications", ["N"])
+      - Invalid
+    - - .isComplete("complications")
+      - Valid
+    assumptions: []
+  ssn:
+    code:
+    - - .isComplete("ssn")
+      - Valid
+    - - .isUnique("ssn")
+      - Valid
+    assumptions: []
+  diagnosis:
+    code:
+    - - .isComplete("diagnosis")
+      - Invalid
+    assumptions: []
+  admission_day:
+    code:
+    - - .isComplete("admission_day")
+      - Invalid
+    - - .isNonNegative("admission_day")
+      - Valid
+    assumptions: []
+  bloodtype:
+    code:
+    - - .isContainedIn("bloodtype", ["A pos", "O pos"])
+      - Invalid
+    - - .isComplete("bloodtype")
+      - Valid
+    assumptions: []
+  cost:
+    code:
+    - - .isComplete("cost")
+      - Valid
+    - - .isNonNegative("cost")
+      - Valid
+    assumptions: []
+  insurance:
+    code:
+    - - .isComplete("insurance")
+      - Valid
+    assumptions: []
+  gender:
+    code:
+    - - .isComplete("gender")
+      - Invalid
+    - - .isNonNegative("gender")
+      - Valid
+    assumptions: []
+  discharge_day:
+    code:
+    - - .isComplete("discharge_day")
+      - Valid
+    - - .isNonNegative("discharge_day")
+      - Valid
+    - - .isUnique("discharge_day")
+      - Valid
+    assumptions: []
+  race:
+    code:
+    - - .isComplete("race")
+      - Valid
+    assumptions: []
