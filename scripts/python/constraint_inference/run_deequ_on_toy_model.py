@@ -19,10 +19,11 @@ def main():
     dq_manager = DeequDataQualityManager()
     train_file_path = get_project_root() / "data" / "toy_example" / "files" / "hospitalisations_train.csv"
     test_file_path = get_project_root() / "data" / "toy_example" / "files" / "hospitalisations_test.csv"
-    train_data = FileLoader.load_csv(train_file_path)
-    test_data = FileLoader.load_csv(test_file_path)
+    train_data = FileLoader.load_csv(train_file_path, na_values=["NULL"])
+    test_data = FileLoader.load_csv(test_file_path, na_values=["NULL"])
     spark_train_data, spark_train = dq_manager.spark_df_from_pandas_df(train_data)
     spark_validation_data, spark_validation = dq_manager.spark_df_from_pandas_df(test_data)
+
     suggestion = dq_manager.get_suggestion_for_spark_df(spark_train, spark_train_data)
     code_list_for_constraints = [item["code_for_constraint"] for item in suggestion]
     code_list_for_constraints_valid = filter_constraints(code_list_for_constraints, spark_validation,
@@ -30,6 +31,15 @@ def main():
 
     constraints = Constraints.from_deequ_output(suggestion, code_list_for_constraints_valid)
     constraints.save_to_yaml(result_path)
+
+    code_column_map = constraints.get_suggestions_code_column_map(valid_only=False)
+    code_list = [item for item in code_column_map.keys()]
+    spark_test_data, spark_test = dq_manager.spark_df_from_pandas_df(test_data)
+    status_on_test_data = dq_manager.validate_on_spark_df(spark_test, spark_test_data, code_list,
+                                                          return_raw=True)
+    result_readable = "\n".join([str(list(record)[3:]) for record in status_on_test_data])
+    with open("./toy_example_deequ_result.txt", "w") as f:
+        f.write(result_readable)
 
     column_desc = DeequInspectorManager().spark_df_to_column_desc(spark_train_data, spark_train)
     context = """
