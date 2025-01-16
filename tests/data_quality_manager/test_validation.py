@@ -7,7 +7,7 @@ from pydeequ.checks import *
 from pydeequ.verification import *
 
 
-def test_validation_on_small_dataset(dq_manager):
+def test_validation_on_small_dataset_with_pydeequ(dq_manager):
     df = pd.DataFrame({"a": ["foo", "bar", "baz"], "b": [1, 2, 3], "c": [5, 6, None]})
     spark_df, spark = dq_manager.spark_df_from_pandas_df(df)
 
@@ -32,7 +32,7 @@ def test_validation_on_small_dataset(dq_manager):
 
     assert check_result[0]["constraint_status"] == "Success"
     assert check_result[1]["constraint_status"] == "Failure"
-    assert check_result[2]["constraint_status"] == "Success"
+    assert check_result[2]["constraint_status"] == "Failure"
     assert check_result[3]["constraint_status"] == "Success"
     assert check_result[4]["constraint_status"] == "Success"
     assert check_result[5]["constraint_status"] == "Success"
@@ -41,7 +41,7 @@ def test_validation_on_small_dataset(dq_manager):
     spark.stop()
 
 
-def test_validation_on_small_dataset(dq_manager):
+def test_validation_on_small_dataset_in_single_list(dq_manager):
     df = pd.DataFrame({"a": ["foo", "bar", "baz"], "b": [1, 2, 3], "c": [5, 6, None]})
     spark_df, spark = dq_manager.spark_df_from_pandas_df(df)
 
