@@ -54,3 +54,11 @@ class AbstractDataQualityManager(ABC):
         Validate a Spark DataFrame against specified constraints.
         """
         pass
+
+    @abstractmethod
+    def filter_constraints(self, code_list_for_constraints, spark_original_validation, spark_original_validation_df,
+                           logger):
+        """
+        Filter constraints based on validation results.
+        """
+        pass

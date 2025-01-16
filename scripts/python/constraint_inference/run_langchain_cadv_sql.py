@@ -8,7 +8,7 @@ from cadv_exploration.llm.langchain import LangChainCADV
 from cadv_exploration.utils import get_project_root
 from cadv_exploration.data_models import Constraints
 from cadv_exploration.llm.langchain.downstream_task_prompt import SQL_QUERY_TASK_DESCRIPTION
-from scripts.python.utils import filter_constraints, setup_logger, parse_arguments, \
+from scripts.python.utils import setup_logger, parse_arguments, \
     load_train_and_test_spark_data
 
 
@@ -51,8 +51,8 @@ def run_langchain_cadv(data_name, processed_data_idx):
         code_list_for_constraints = [item for v in suggestions.values() for item in v]
 
         # Validate the constraints on the original data to see if they are grammarly correct
-        code_list_for_constraints_valid = filter_constraints(code_list_for_constraints, spark_validation,
-                                                             spark_validation_data, logger)
+        code_list_for_constraints_valid = dq_manager.filter_constraints(code_list_for_constraints, spark_validation,
+                                                                        spark_validation_data, logger)
         constraints = Constraints.from_llm_output(relevant_columns_list, expectations, suggestions,
                                                   code_list_for_constraints_valid)
         constraints.save_to_yaml(result_path)

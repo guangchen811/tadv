@@ -120,4 +120,4 @@ if __name__ == "__main__":
 
     # Print the results
     for metric_name, value in results.items():
-        print(f"{metric_name}: {value:.4f}")
+        print(f"{metric_name}: {value}")

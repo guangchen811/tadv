@@ -5,7 +5,7 @@ load_dotenv()
 from inspector.deequ.deequ_inspector_manager import DeequInspectorManager
 from llm.langchain import LangChainCADV
 from data_models import Constraints
-from scripts.python.utils import filter_constraints, setup_logger
+from scripts.python.utils import setup_logger
 
 from loader import FileLoader
 
@@ -63,8 +63,8 @@ generate_report(strokes_total, strokes_for_rare_bloodtypes)"""
     code_list_for_constraints = [item for v in suggestions.values() for item in v]
 
     # Validate the constraints on the original data to see if they are grammarly correct
-    code_list_for_constraints_valid = filter_constraints(code_list_for_constraints, spark_validation,
-                                                         spark_validation_data, logger)
+    code_list_for_constraints_valid = dq_manager.filter_constraints(code_list_for_constraints, spark_validation,
+                                                                    spark_validation_data, logger)
     constraints = Constraints.from_llm_output(relevant_columns_list, expectations, suggestions,
                                               code_list_for_constraints_valid)
 

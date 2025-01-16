@@ -6,7 +6,7 @@ load_dotenv()
 from cadv_exploration.dq_manager import DeequDataQualityManager
 from cadv_exploration.utils import get_project_root
 
-from scripts.python.utils import filter_constraints, setup_logger, load_train_and_test_spark_data
+from scripts.python.utils import setup_logger, load_train_and_test_spark_data
 
 
 def run_deequ_dv(data_name, processed_data_idx):
@@ -25,8 +25,8 @@ def run_deequ_dv(data_name, processed_data_idx):
     suggestion = dq_manager.get_suggestion_for_spark_df(spark_train, spark_train_data)
 
     code_list_for_constraints = [item["code_for_constraint"] for item in suggestion]
-    code_list_for_constraints_valid = filter_constraints(code_list_for_constraints, spark_validation,
-                                                         spark_validation_data, logger)
+    code_list_for_constraints_valid = dq_manager.filter_constraints(code_list_for_constraints, spark_validation,
+                                                                    spark_validation_data, logger)
 
     constraints = Constraints.from_deequ_output(suggestion, code_list_for_constraints_valid)
     constraints.save_to_yaml(result_path)
