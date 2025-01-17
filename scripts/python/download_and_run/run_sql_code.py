@@ -5,9 +5,10 @@ from cadv_exploration.utils import get_project_root
 def run_sql_code(processed_idx, single_script=""):
     executor = DuckDBExecutor()
     project_root = get_project_root()
-    original_data_path = project_root / "data" / "playground-series-s4e10"
-    processed_data_path = project_root / "data_processed" / "playground-series-s4e10" / f"{processed_idx}"
-    script_dir = original_data_path / "scripts_sql"
+    dataset_name = "playground-series-s4e10"
+    original_data_path = project_root / "data" / dataset_name
+    processed_data_path = project_root / "data_processed" / dataset_name / f"{processed_idx}"
+    script_dir = original_data_path / "scripts" / "sql"
     for script_path in sorted(script_dir.iterdir(), key=lambda x: x.name, reverse=True):
         if len(single_script) > 0 and single_script not in script_path.name:
             continue

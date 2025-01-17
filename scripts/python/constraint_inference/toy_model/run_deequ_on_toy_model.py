@@ -14,8 +14,8 @@ from cadv_exploration.utils import get_project_root
 
 
 def main():
-    logger = setup_logger("./toy_example.log")
-    result_path = "./toy_example_deequ_constraints.yaml"
+    logger = setup_logger("toy_example.log")
+    result_path = "toy_example_deequ_constraints.yaml"
     dq_manager = DeequDataQualityManager()
     train_file_path = get_project_root() / "data" / "toy_example" / "files" / "hospitalisations_train.csv"
     test_file_path = get_project_root() / "data" / "toy_example" / "files" / "hospitalisations_test.csv"
@@ -38,7 +38,7 @@ def main():
     status_on_test_data = dq_manager.validate_on_spark_df(spark_test, spark_test_data, code_list,
                                                           return_raw=True)
     result_readable = "\n".join([str(list(record)[3:]) for record in status_on_test_data])
-    with open("./toy_example_deequ_result.txt", "w") as f:
+    with open("toy_example_deequ_result.txt", "w") as f:
         f.write(result_readable)
 
     column_desc = DeequInspectorManager().spark_df_to_column_desc(spark_train_data, spark_train)
@@ -52,7 +52,7 @@ strokes_for_rare_bloodtypes = duckdb.sql("SELECT COUNT(*)
 FROM hosp_df WHERE diagnosis = 'stroke'
 AND bloodtype IN ('AB negative', 'B negative')").fetch()
 generate_report(strokes_total, strokes_for_rare_bloodtypes)"""
-    result_path_cadv = "./toy_example_cadv_constraints.yaml"
+    result_path_cadv = "toy_example_cadv_constraints.yaml"
     lc = LangChainCADV(model_name="gpt-4o", downstream_task_description=CD_TASK_DESCRIPTION)
 
     relevant_columns_list, expectations, suggestions = lc.invoke(
