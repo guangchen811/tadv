@@ -60,7 +60,7 @@ class KaggleSingleTableErrorInjectionManager(AbstractErrorInjectionManager):
         return processed_data_path
 
     def _split_dataset_for_kaggle(self, full_data):
-        full_data.drop(columns=["id"], inplace=True)
+        full_data.drop(columns=["id"], inplace=True) if "id" in full_data.columns else None
         full_data_shuffled = full_data.sample(frac=1, random_state=1).reset_index(drop=True)
         train_data_size = int(len(full_data_shuffled) * 0.6)
         validation_data_size = int(len(full_data_shuffled) * 0.1)

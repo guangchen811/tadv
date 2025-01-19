@@ -18,7 +18,6 @@ def run_langchain_cadv_on_single_model(model_name, data_name, processed_data_idx
     dq_manager = DeequDataQualityManager()
 
     original_data_path = get_project_root() / "data" / f"{data_name}"
-    processed_data_path = get_project_root() / "data_processed" / f"{data_name}" / f"{processed_data_idx}"
 
     spark_train_data, spark_train, spark_validation_data, spark_validation = load_train_and_test_spark_data(
         data_name=data_name, processed_data_idx=processed_data_idx, dq_manager=dq_manager
@@ -39,8 +38,6 @@ def run_langchain_cadv_on_single_model(model_name, data_name, processed_data_idx
             if task_type not in script_path.name:
                 continue
             task_instance = get_task_instance(script_path)
-            result_path = processed_data_path / "constraints" / f"{script_path.stem}" / "cadv_constraints.yaml"
-            result_path.parent.mkdir(parents=True, exist_ok=True)
 
             if model_name == "string-matching":
                 relevant_columns_list = run_string_matching(column_list, task_instance.original_code)
@@ -97,9 +94,9 @@ def run_langchain_cadv_on_all_models(data_name, model_names, processed_data_idx)
 
 
 if __name__ == "__main__":
-    data_name = "playground-series-s4e10"
+    data_name = "healthcare_dataset"
     model_names = ["string-matching", "gpt-4o-mini", "gpt-4o", "llama3.2:1b", "llama3.2"]
-    processed_data_idx = 8
+    processed_data_idx = 0
     all_results = run_langchain_cadv_on_all_models(data_name, model_names, processed_data_idx)
     # reverse the order of the keys
     for task_type in ['bi', 'dev', 'exclude_clause', 'feature_engineering', 'classification', 'regression']:
@@ -109,5 +106,5 @@ if __name__ == "__main__":
         }
         RelevantColumnDetectionMetric().plot_model_metrics(
             result_each_model,
-            picture_name=f"sql_metrics_{task_type}.png"
+            picture_name=f"{data_name}/sql_metrics_{task_type}.png"
         )
