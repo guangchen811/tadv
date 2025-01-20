@@ -2,6 +2,7 @@ from cadv_exploration.utils import load_dotenv
 
 load_dotenv()
 
+from cadv_exploration.llm.langchain.downstream_task_prompt import ML_INFERENCE_TASK_DESCRIPTION
 from cadv_exploration.inspector.deequ.deequ_inspector_manager import DeequInspectorManager
 from cadv_exploration.llm.langchain import LangChainCADV
 from cadv_exploration.loader import FileLoader
@@ -25,7 +26,7 @@ def test_runnable(dq_manager, resources_path):
         "column_desc": column_desc,
         "script": scripts[0],
     }
-    lc = LangChainCADV(model_name="gpt-4o-mini")
+    lc = LangChainCADV(model_name="gpt-4o-mini", downstream_task_description=ML_INFERENCE_TASK_DESCRIPTION)
 
     relevant_columns_list, expectations, rules = lc.invoke(
         input_variables=input_variables
