@@ -1,4 +1,3 @@
-from cadv_exploration.data_models import Constraints
 from cadv_exploration.utils import load_dotenv
 
 load_dotenv()
@@ -22,13 +21,8 @@ def run_deequ_dv(data_name, processed_data_idx):
         data_name=data_name, processed_data_idx=processed_data_idx, dq_manager=dq_manager
     )
 
-    suggestion = dq_manager.get_suggestion_for_spark_df(spark_train, spark_train_data)
-
-    code_list_for_constraints = [item["code_for_constraint"] for item in suggestion]
-    code_list_for_constraints_valid = dq_manager.filter_constraints(code_list_for_constraints, spark_validation,
-                                                                    spark_validation_data, logger)
-
-    constraints = Constraints.from_deequ_output(suggestion, code_list_for_constraints_valid)
+    constraints = dq_manager.get_constraints_for_spark_df(spark_train, spark_train_data, spark_validation,
+                                                          spark_validation_data)
     constraints.save_to_yaml(result_path)
 
     spark_train.sparkContext._gateway.shutdown_callback_server()

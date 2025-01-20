@@ -54,7 +54,7 @@ def run_langchain_cadv(data_name, processed_data_idx):
 
         # Validate the constraints on the original data to see if they are grammarly correct
         code_list_for_constraints_valid = dq_manager.filter_constraints(code_list_for_constraints, spark_validation,
-                                                                        spark_validation_data, logger)
+                                                                        spark_validation_data)
         constraints = Constraints.from_llm_output(relevant_columns_list, expectations, suggestions,
                                                   code_list_for_constraints_valid)
 

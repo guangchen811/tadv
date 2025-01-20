@@ -14,7 +14,7 @@ from cadv_exploration.llm.langchain.downstream_task_prompt import ML_INFERENCE_T
 
 
 class LangChainCADV(AbstractLangChainCADV):
-    def __init__(self, model_name: str = None, downstream_task_description: str = ML_INFERENCE_TASK_DESCRIPTION,
+    def __init__(self, model_name: str = None, downstream_task_description: str = None,
                  logger=None):
         if model_name is None:
             self.model = ChatOpenAI(model="gpt-4o-mini")
@@ -67,7 +67,9 @@ class LangChainCADV(AbstractLangChainCADV):
                 partial_variables={"downstream_task_description": downstream_task_description},
             )
 
-    def _build_single_chain(self, task: DVTask, downstream_task_description: str = ML_INFERENCE_TASK_DESCRIPTION):
+    def _build_single_chain(self, task: DVTask, downstream_task_description: str = None):
+        if downstream_task_description is None:
+            raise ValueError("Downstream task description is required.")
         if task == DVTask.RELEVANT_COLUMN_TARGET:
             prompt = self._build_prompt(task, downstream_task_description)
             parser = CommaSeparatedListOutputParser()
@@ -84,7 +86,7 @@ class LangChainCADV(AbstractLangChainCADV):
             raise ValueError(f"Unknown task {task}")
         return single_chain
 
-    def _build_chain(self, downstream_task_description: str = ML_INFERENCE_TASK_DESCRIPTION):
+    def _build_chain(self, downstream_task_description: str = None):
         self.relevant_column_target_chain = self._build_single_chain(
             DVTask.RELEVANT_COLUMN_TARGET, downstream_task_description
         )
