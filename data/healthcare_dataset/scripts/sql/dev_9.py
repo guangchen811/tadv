@@ -1,0 +1,23 @@
+class ColumnDetectionTask:
+
+    @property
+    def original_code(self):
+        return """
+SELECT
+    "id",
+    "Name",
+    "Age",
+    "Medical Condition",
+    CASE
+        WHEN "Age" >= 65 OR "Medical Condition" IN ('Cancer', 'Diabetes') THEN 'High'
+        WHEN "Age" BETWEEN 40 AND 64 THEN 'Medium'
+        ELSE 'Low'
+    END AS risk_level
+FROM train
+ORDER BY "id" ASC
+LIMIT 100;
+"""
+
+    def required_columns(self):
+        # Ground truth for columns used in the ML pipeline
+        return []
