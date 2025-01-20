@@ -24,12 +24,8 @@ def main():
     spark_train_data, spark_train = dq_manager.spark_df_from_pandas_df(train_data)
     spark_validation_data, spark_validation = dq_manager.spark_df_from_pandas_df(test_data)
 
-    suggestion = dq_manager.get_suggestion_for_spark_df(spark_train, spark_train_data)
-    code_list_for_constraints = [item["code_for_constraint"] for item in suggestion]
-    code_list_for_constraints_valid = filter_constraints(code_list_for_constraints, spark_validation,
-                                                         spark_validation_data, logger)
-
-    constraints = Constraints.from_deequ_output(suggestion, code_list_for_constraints_valid)
+    constraints = dq_manager.get_constraints_for_spark_df(spark_train, spark_train_data, spark_validation,
+                                                          spark_validation_data)
     constraints.save_to_yaml(result_path)
 
     code_column_map = constraints.get_suggestions_code_column_map(valid_only=False)
@@ -37,9 +33,14 @@ def main():
     spark_test_data, spark_test = dq_manager.spark_df_from_pandas_df(test_data)
     status_on_test_data = dq_manager.validate_on_spark_df(spark_test, spark_test_data, code_list,
                                                           return_raw=True)
-    result_readable = "\n".join([str(list(record)[3:]) for record in status_on_test_data])
+    code_list_for_constraints = [
+        (code_list[i], status_on_test_data[i].constraint_status, status_on_test_data[i].constraint_message) for i
+        in
+        range(len(code_list))]
+    writable_code_list_for_constraints = [f"{item[0]}, {item[1]}, {item[2]}" for item in code_list_for_constraints]
     with open("toy_example_deequ_result.txt", "w") as f:
-        f.write(result_readable)
+        f.write("\n".join(["column_name, constraint_status, constraint_message"]))
+        f.write("\n".join(writable_code_list_for_constraints))
 
     column_desc = DeequInspectorManager().spark_df_to_column_desc(spark_train_data, spark_train)
     context = """
@@ -64,7 +65,7 @@ generate_report(strokes_total, strokes_for_rare_bloodtypes)"""
 
     # Validate the constraints on the original data to see if they are grammarly correct
     code_list_for_constraints_valid = dq_manager.filter_constraints(code_list_for_constraints, spark_validation,
-                                                                    spark_validation_data, logger)
+                                                                    spark_validation_data)
     constraints = Constraints.from_llm_output(relevant_columns_list, expectations, suggestions,
                                               code_list_for_constraints_valid)
 

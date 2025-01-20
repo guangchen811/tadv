@@ -37,23 +37,10 @@ def single_check(spark, spark_df, check_str):
     return check_result
 
 
-# def apply_checks_from_strings(check, check_strings, spark, spark_df):
-#     for check_str in check_strings:
-#         exec(f"check.addConstraint(check.{check_str})")
-#     check_result = VerificationSuite(spark).onData(spark_df).addCheck(check).run()
-#     check_result = VerificationResult.checkResultsAsDataFrame(
-#         spark, check_result
-#     ).collect()
-#     return check_result
-
 def validate_on_df(spark, spark_df, code_list_for_constraints, return_raw):
     check_result_on_post_corruption_df = apply_checks_from_strings(spark, spark_df, code_list_for_constraints)
     if return_raw:
         return check_result_on_post_corruption_df
     status_on_post_corruption_df = [item['constraint_status'] if
                                     item is not None else None for item in check_result_on_post_corruption_df]
-    # success_on_post_corruption_df = status_on_post_corruption_df.count("Success")
-    # failure_check_on_post_corruption_df = [item.constraint for item in check_result_on_post_corruption_df if
-    #                                        item['constraint_status'] == 'Failure']
-    # failure_check_output_on_post_corruption_df = "\n".join(failure_check_on_post_corruption_df)
     return status_on_post_corruption_df

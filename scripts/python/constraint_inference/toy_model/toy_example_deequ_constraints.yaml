@@ -6,17 +6,21 @@ constraints:
     - - .isComplete("complications")
       - Valid
     assumptions: []
+  discharge_day:
+    code:
+    - - .isComplete("discharge_day")
+      - Valid
+    - - .isNonNegative("discharge_day")
+      - Valid
+    - - .isUnique("discharge_day")
+      - Valid
+    assumptions: []
   ssn:
     code:
     - - .isComplete("ssn")
       - Valid
     - - .isUnique("ssn")
       - Valid
-    assumptions: []
-  diagnosis:
-    code:
-    - - .isComplete("diagnosis")
-      - Invalid
     assumptions: []
   admission_day:
     code:
@@ -32,16 +36,14 @@ constraints:
     - - .isComplete("bloodtype")
       - Valid
     assumptions: []
-  cost:
-    code:
-    - - .isComplete("cost")
-      - Valid
-    - - .isNonNegative("cost")
-      - Valid
-    assumptions: []
   insurance:
     code:
     - - .isComplete("insurance")
+      - Valid
+    assumptions: []
+  race:
+    code:
+    - - .isComplete("race")
       - Valid
     assumptions: []
   gender:
@@ -51,17 +53,15 @@ constraints:
     - - .isNonNegative("gender")
       - Valid
     assumptions: []
-  discharge_day:
+  cost:
     code:
-    - - .isComplete("discharge_day")
+    - - .isComplete("cost")
       - Valid
-    - - .isNonNegative("discharge_day")
-      - Valid
-    - - .isUnique("discharge_day")
+    - - .isNonNegative("cost")
       - Valid
     assumptions: []
-  race:
+  diagnosis:
     code:
-    - - .isComplete("race")
-      - Valid
+    - - .isComplete("diagnosis")
+      - Invalid
     assumptions: []

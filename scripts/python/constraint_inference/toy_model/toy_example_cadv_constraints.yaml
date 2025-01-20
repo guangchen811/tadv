@@ -1,19 +1,13 @@
 constraints:
   diagnosis:
     code:
-    - - .isComplete('diagnosis')
-      - Valid
-    - - .isContainedIn('diagnosis', ['stroke', ...])
+    - - .isContainedIn('diagnosis', ['stroke'])
       - Invalid
     assumptions:
-    - Values should include 'stroke' as an option since the code checks for diagnosis
-      = 'stroke'.
+    - should include the value 'stroke'
   bloodtype:
     code:
-    - - .isComplete('bloodtype')
-      - Valid
-    - - .isContainedIn('bloodtype', ['AB negative', 'B negative', ...])
+    - - .isContainedIn('bloodtype', ['AB negative', 'B negative'])
       - Invalid
     assumptions:
-    - Values should include 'AB negative' and 'B negative' since the code checks for
-      these specific blood types.
+    - should include the values 'AB negative' and 'B negative'

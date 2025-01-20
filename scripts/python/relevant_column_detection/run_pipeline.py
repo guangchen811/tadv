@@ -5,7 +5,7 @@ from scripts.python.relevant_column_detection.string_matching import run_string_
 from scripts.python.relevant_column_detection.metrics import RelevantColumnDetectionMetric
 from scripts.python.utils import load_train_and_test_spark_data
 
-from cadv_exploration.utils._utils import get_task_instance
+from cadv_exploration.utils import get_task_instance
 from cadv_exploration.dq_manager import DeequDataQualityManager
 from cadv_exploration.inspector.deequ.deequ_inspector_manager import DeequInspectorManager
 from llm.langchain import LangChainCADV

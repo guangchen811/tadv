@@ -1,7 +1,6 @@
-from nbconvert import PythonExporter
-
 from cadv_exploration.utils import load_dotenv
 from llm.langchain.downstream_task_prompt import ML_INFERENCE_TASK_DESCRIPTION
+from utils import get_task_instance
 
 load_dotenv()
 
@@ -15,9 +14,9 @@ from scripts.python.utils import setup_logger, parse_arguments, \
 
 
 def run_langchain_cadv(data_name, processed_data_idx):
+    dq_manager = DeequDataQualityManager()
     logger = setup_logger("./langchain_cadv.log")
     args = parse_arguments(description="Run LangChain CADV on ML tasks")
-    dq_manager = DeequDataQualityManager()
     logger.info(f"Model: {args.model}")
 
     original_data_path = get_project_root() / "data" / f"{data_name}"
@@ -29,25 +28,21 @@ def run_langchain_cadv(data_name, processed_data_idx):
 
     column_desc = DeequInspectorManager().spark_df_to_column_desc(spark_train_data, spark_train)
 
-    max_retries = args.max_retries
     lc = LangChainCADV(model_name=args.model, downstream_task_description=ML_INFERENCE_TASK_DESCRIPTION)
-    scripts_path_dir = original_data_path / "kernels_ipynb_selected"
-    export = PythonExporter()
+    scripts_path_dir = original_data_path / "scripts" / "ml"
 
-    for script_path in scripts_path_dir.iterdir():
-        if not script_path.name.endswith(".ipynb"):
-            continue
-        result_path = processed_data_path / "constraints" / f"{script_path.name.split('.')[0]}" / "cadv_constraints.yaml"
+    for script_path in sorted(scripts_path_dir.iterdir(), key=lambda x: x.name):
+        result_path = processed_data_path / "constraints" / f"{script_path.stem}" / "cadv_constraints.yaml"
         result_path.parent.mkdir(parents=True, exist_ok=True)
-        script_context = export.from_filename(script_path)[0]
+        task_instance = get_task_instance(script_path)
 
         input_variables = {
             "column_desc": column_desc,
-            "script": script_context,
+            "script": task_instance.original_code,
         }
 
         relevant_columns_list, expectations, suggestions = lc.invoke(
-            input_variables=input_variables, num_stages=3, max_retries=max_retries
+            input_variables=input_variables, num_stages=3, max_retries=args.max_retries
         )
 
         code_list_for_constraints = [item for v in suggestions.values() for item in v]

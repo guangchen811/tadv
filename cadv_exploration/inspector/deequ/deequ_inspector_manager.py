@@ -18,6 +18,9 @@ class DeequInspectorManager(AbstractInspectorManager):
         yaml_string = yaml.dump(result_dict, default_flow_style=False, sort_keys=False)
         return yaml_string
 
+    def deequ_result_desc(self, spark_df, spark):
+        raise NotImplementedError("TODO")
+
     @staticmethod
     def _profile_to_dict(column_profile):
         if column_profile.histogram is None:
