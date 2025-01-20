@@ -1,10 +1,10 @@
 from inspect import cleandoc
 
-SYSTEM_TASK_DESCRIPTION = cleandoc("""Context-aware data validation aims to generate data validation constraints on the dataset where the downstream task is run. "Context" here refers to the downstream code. The system should generate effective and efficient constraints on the data.
+SYSTEM_TASK_DESCRIPTION = cleandoc("""Task-aware data validation aims to generate data validation constraints on the dataset where the downstream task is run. "Task" here refers to the downstream code. The system should generate effective and efficient constraints on the data.
 *Effective*: The constraints should reflect whether the data is harmful to the downstream code. Constraints should fail if the data is harmful to the downstream code. Additionally, the constraints should be precise to reduce false positive alerts, meaning the constraints should not fail if the data is not harmful to the downstream task.
 *Efficient*: The constraints should only be applied to relevant columns used by the code. Constraints on unused columns would lead to redundant calculations and false positive alerts.
 
-The context-aware data validation system consists of the following components:
+The task-aware data validation system consists of the following components:
 1. *Relevant Column Target*:
 Input: 
     Statistics of the columns in the dataset.
@@ -31,7 +31,7 @@ Output:
 Given a dataset described by name, columns with corresponding downstream code, the relevant columns and the user's assumptions. This component converts the code's assumptions and requirements into formal validation rules to ensure the data meets the code's expectations. The rules are generated in PyDeequ format.
 """)
 
-RELEVANT_COLUMN_TARGET_PROMPT = cleandoc("""You are part of the context-aware data validation system. You serve as the *Relevant Column Target* component.
+RELEVANT_COLUMN_TARGET_PROMPT = cleandoc("""You are part of the task-aware data validation system. You serve as the *Relevant Column Target* component.
 Given a dataset and the downstream code, you are asked to find the columns that are used in the code snippet. These columns are the relevant columns for the downstream task to ensure that the constraints are only applied to relevant columns.
 
 The dataset is a CSV file with the following columns:
@@ -48,7 +48,7 @@ eg: `foo, bar, baz` or `foo,bar,baz`
 """)
 
 # https://github.com/awslabs/python-deequ/blob/master/pydeequ/checks.py
-ASSUMPTIONS_EXTRACTION_PROMPT = cleandoc("""You are part of a context-aware data validation system. You serve as the *Assumptions Extraction* component.
+ASSUMPTIONS_EXTRACTION_PROMPT = cleandoc("""You are part of a task-aware data validation system. You serve as the *Assumptions Extraction* component.
 Given that the code written for the downstream task may be not robust enough to handle all possible data scenarios, you should find the code's assumptions and requirements about the relevant columns. These assumptions would then be used to generate validation rules to ensure the data meets the code's expectations and requirements.
 
 
@@ -73,7 +73,7 @@ Please generate validation rules as a JSON object with the column names as keys 
 e.g., ```{{'column_name_1': ['assumption_1', 'assumption_2', ...], 'column_name_2': ['assumption_1', 'assumption_2', ...], ...}}```
 """)
 
-RULE_GENERATION_PROMPT = cleandoc("""You are part of a context-aware data validation system. You serve as the *Rule Generation* component.
+RULE_GENERATION_PROMPT = cleandoc("""You are part of a task-aware data validation system. You serve as the *Rule Generation* component.
 You are asked to transform the code's assumptions into formal validation rules to ensure the data meets the user's assumptions and requirements. The rules should be generated in PyDeequ format.
 
 The function signature for PyDeequ constraints is as follows:

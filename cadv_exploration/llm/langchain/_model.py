@@ -68,9 +68,9 @@ class LangChainCADV(AbstractLangChainCADV):
             )
 
     def _build_single_chain(self, task: DVTask, downstream_task_description: str = None):
-        if downstream_task_description is None:
-            raise ValueError("Downstream task description is required.")
         if task == DVTask.RELEVANT_COLUMN_TARGET:
+            if downstream_task_description is None:
+                raise ValueError("Downstream task description is required.")
             prompt = self._build_prompt(task, downstream_task_description)
             parser = CommaSeparatedListOutputParser()
             single_chain = prompt | self.model | parser
