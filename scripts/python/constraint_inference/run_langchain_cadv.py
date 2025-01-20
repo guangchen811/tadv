@@ -1,5 +1,4 @@
 from cadv_exploration.utils import load_dotenv
-from llm.langchain.downstream_task_prompt import ML_INFERENCE_TASK_DESCRIPTION
 from utils import get_task_instance
 
 load_dotenv()
@@ -9,15 +8,15 @@ from cadv_exploration.dq_manager import DeequDataQualityManager
 from cadv_exploration.llm.langchain import LangChainCADV
 from cadv_exploration.utils import get_project_root
 from cadv_exploration.data_models import Constraints
-from scripts.python.utils import setup_logger, parse_arguments, \
-    load_train_and_test_spark_data
+from scripts.python.utils import setup_logger, load_train_and_test_spark_data
+from cadv_exploration.llm.langchain.downstream_task_prompt import ML_INFERENCE_TASK_DESCRIPTION, \
+    SQL_QUERY_TASK_DESCRIPTION
 
 
-def run_langchain_cadv(data_name, processed_data_idx):
+def run_langchain_cadv(data_name, model_name, processed_data_idx, script_name=None):
     dq_manager = DeequDataQualityManager()
     logger = setup_logger("./langchain_cadv.log")
-    args = parse_arguments(description="Run LangChain CADV on ML tasks")
-    logger.info(f"Model: {args.model}")
+    logger.info(f"Model: {model_name}")
 
     original_data_path = get_project_root() / "data" / f"{data_name}"
     processed_data_path = get_project_root() / "data_processed" / f"{data_name}" / f"{processed_data_idx}"
@@ -28,33 +27,44 @@ def run_langchain_cadv(data_name, processed_data_idx):
 
     column_desc = DeequInspectorManager().spark_df_to_column_desc(spark_train_data, spark_train)
 
-    lc = LangChainCADV(model_name=args.model, downstream_task_description=ML_INFERENCE_TASK_DESCRIPTION)
-    scripts_path_dir = original_data_path / "scripts" / "ml"
+    for group_name in ["sql", "ml"]:
+        scripts_path_dir = original_data_path / "scripts" / group_name
+        for script_path in sorted(scripts_path_dir.iterdir(), key=lambda x: x.name):
+            if script_name is not None and script_name != script_path.stem:
+                continue
 
-    for script_path in sorted(scripts_path_dir.iterdir(), key=lambda x: x.name):
-        result_path = processed_data_path / "constraints" / f"{script_path.stem}" / "cadv_constraints.yaml"
-        result_path.parent.mkdir(parents=True, exist_ok=True)
-        task_instance = get_task_instance(script_path)
+            result_path = processed_data_path / "constraints" / f"{script_path.stem}" / "cadv_constraints.yaml"
+            result_path.parent.mkdir(parents=True, exist_ok=True)
+            task_instance = get_task_instance(script_path)
 
-        input_variables = {
-            "column_desc": column_desc,
-            "script": task_instance.original_code,
-        }
+            task_type = script_path.stem.split("_")[0]
+            task_group = task_group_mapping(task_type)
+            if task_group == 'sql':
+                lc = LangChainCADV(model_name=model_name, downstream_task_description=SQL_QUERY_TASK_DESCRIPTION)
+            elif task_group == 'ml':
+                lc = LangChainCADV(model_name=model_name, downstream_task_description=ML_INFERENCE_TASK_DESCRIPTION)
+            else:
+                raise ValueError(f"Invalid task group: {task_group}")
 
-        relevant_columns_list, expectations, suggestions = lc.invoke(
-            input_variables=input_variables, num_stages=3, max_retries=args.max_retries
-        )
+            input_variables = {
+                "column_desc": column_desc,
+                "script": task_instance.original_code,
+            }
 
-        code_list_for_constraints = [item for v in suggestions.values() for item in v]
+            relevant_columns_list, expectations, suggestions = lc.invoke(
+                input_variables=input_variables, num_stages=3, max_retries=3
+            )
 
-        # Validate the constraints on the original data to see if they are grammarly correct
-        code_list_for_constraints_valid = dq_manager.filter_constraints(code_list_for_constraints, spark_validation,
-                                                                        spark_validation_data)
-        constraints = Constraints.from_llm_output(relevant_columns_list, expectations, suggestions,
-                                                  code_list_for_constraints_valid)
+            code_list_for_constraints = [item for v in suggestions.values() for item in v]
 
-        constraints.save_to_yaml(result_path)
-        logger.info(f"Saved constraints to {result_path}")
+            # Validate the constraints on the original data to see if they are grammarly correct
+            code_list_for_constraints_valid = dq_manager.filter_constraints(code_list_for_constraints, spark_validation,
+                                                                            spark_validation_data)
+            constraints = Constraints.from_llm_output(relevant_columns_list, expectations, suggestions,
+                                                      code_list_for_constraints_valid)
+
+            constraints.save_to_yaml(result_path)
+            logger.info(f"Saved constraints to {result_path}")
 
     spark_train.sparkContext._gateway.shutdown_callback_server()
     spark_validation.sparkContext._gateway.shutdown_callback_server()
@@ -62,5 +72,19 @@ def run_langchain_cadv(data_name, processed_data_idx):
     spark_validation.stop()
 
 
+def task_group_mapping(task_type):
+    return {
+        'bi': 'sql',
+        'dev': 'sql',
+        'exclude_clause': 'sql',
+        'feature_engineering': 'sql',
+        'classification': 'ml',
+        'regression': 'ml'
+    }[task_type]
+
+
 if __name__ == "__main__":
-    run_langchain_cadv(data_name="playground-series-s4e10", processed_data_idx=8)
+    data_name = "healthcare_dataset"
+    model_name = "gpt-4o"
+    # run_langchain_cadv(data_name=data_name, model_name=model_name, processed_data_idx=0, script_name="bi_1")
+    run_langchain_cadv(data_name=data_name, model_name=model_name, processed_data_idx=0, script_name="dev_7")

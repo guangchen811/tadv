@@ -14,7 +14,7 @@ from cadv_exploration.llm.langchain.downstream_task_prompt import SQL_QUERY_TASK
 from utils import get_project_root
 
 
-def run_langchain_cadv_on_single_model(model_name, data_name, processed_data_idx):
+def run_langchain_cadv_on_single_model(data_name, model_name, processed_data_idx):
     dq_manager = DeequDataQualityManager()
 
     original_data_path = get_project_root() / "data" / f"{data_name}"
@@ -89,7 +89,7 @@ def run_langchain_cadv_on_all_models(data_name, model_names, processed_data_idx)
     result_each_model = {}
     for model_name in model_names:
         print(model_name)
-        result_each_model[model_name] = run_langchain_cadv_on_single_model(model_name, data_name, processed_data_idx)
+        result_each_model[model_name] = run_langchain_cadv_on_single_model(data_name, model_name, processed_data_idx)
     return result_each_model
 
 
