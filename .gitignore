@@ -138,3 +138,6 @@ dmypy.json
 .vscode
 
 *.drawio.bkp
+
+data_processed/*/files*/*
+data_processed/*/output*/*
