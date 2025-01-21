@@ -1,0 +1,20 @@
+constraints:
+  billing_amount:
+    code:
+    - - .isComplete('billing_amount')
+      - Invalid
+    - - .isNonNegative('billing_amount')
+      - Invalid
+    assumptions:
+    - The column should contain only numeric values.
+    - The column should have no missing values.
+    - The values in the column should be non-negative.
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The column should contain unique integer values.
+    - The column should have no missing values.

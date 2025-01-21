@@ -1,0 +1,59 @@
+constraints:
+  billing_amount:
+    code:
+    - - .isComplete('billing_amount')
+      - Invalid
+    - - .isNonNegative('billing_amount')
+      - Invalid
+    assumptions:
+    - billing_amount should be a fractional number as it is processed as numeric data.
+    - billing_amount should be non-negative as billing amounts are typically non-negative.
+  medical_condition:
+    code:
+    - - .isComplete('medical_condition')
+      - Invalid
+    - - .isContainedIn('medical_condition', ['Hypertension', 'Cancer', 'Obesity',
+        'Arthritis', 'Diabetes', 'Asthma'])
+      - Invalid
+    assumptions:
+    - 'medical_condition should be one of the known categories: [''Hypertension'',
+      ''Cancer'', ''Obesity'', ''Arthritis'', ''Diabetes'', ''Asthma''] as it is used
+      in categorical encoding.'
+  admission_date:
+    code:
+    - - .isComplete('admission_date')
+      - Invalid
+    - - .satisfies('admission_date > 0', 'admission_date valid timestamp')
+      - Invalid
+    assumptions:
+    - admission_date should be a valid date format convertible by pd.to_datetime,
+      as it is converted to a numeric timestamp.
+  Age:
+    code:
+    - - .isComplete('Age')
+      - Valid
+    - - .isNonNegative('Age')
+      - Valid
+    - - '.hasMax(''Age'', lambda x: x <= 120)'
+      - Valid
+    assumptions:
+    - Age should be a non-negative integer, as age cannot be negative.
+    - Age should be a reasonable human age, typically between 0 and 120.
+  Gender:
+    code:
+    - - .isComplete('Gender')
+      - Valid
+    - - .isContainedIn('Gender', ['Male', 'Female'])
+      - Valid
+    assumptions:
+    - 'Gender should be one of the known categories: [''Male'', ''Female''] as it
+      is used in categorical encoding.'
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - id should be a unique integer identifier for each record, as it is used to map
+      test predictions back to original records.

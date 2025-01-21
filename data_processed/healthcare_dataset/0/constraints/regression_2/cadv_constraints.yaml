@@ -1,0 +1,35 @@
+constraints:
+  billing_amount:
+    code:
+    - - .isComplete('billing_amount')
+      - Invalid
+    assumptions:
+    - The column 'billing_amount' should be of type Fractional.
+    - The column 'billing_amount' should not contain missing values.
+  admission_dt:
+    code:
+    - - .isComplete('admission_dt')
+      - Invalid
+    - - .satisfies('admission_dt IS NOT NULL', 'admission_dt should be convertible
+        to datetime')
+      - Invalid
+    assumptions:
+    - The column 'admission_dt' should be convertible to datetime format.
+    - The column 'admission_dt' should not contain missing values.
+  discharge_dt:
+    code:
+    - - .isComplete('discharge_dt')
+      - Invalid
+    - - .satisfies('discharge_dt IS NOT NULL', 'discharge_dt should be convertible
+        to datetime')
+      - Invalid
+    assumptions:
+    - The column 'discharge_dt' should be convertible to datetime format.
+    - The column 'discharge_dt' should not contain missing values.
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    assumptions:
+    - The column 'id' should be of type Integral.
+    - The column 'id' should not contain missing values.

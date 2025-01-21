@@ -1,0 +1,24 @@
+constraints:
+  Medical Condition:
+    code:
+    - - .isComplete('Medical Condition')
+      - Valid
+    - - .isContainedIn('Medical Condition', ['Cancer', 'Diabetes', 'Hypertension',
+        'Obesity', 'Arthritis', 'Asthma'])
+      - Valid
+    assumptions:
+    - The column 'Medical Condition' should be complete, meaning every record must
+      have a non-null value.
+    - 'The column ''Medical Condition'' should only contain values: ''Cancer'', ''Diabetes'',
+      ''Hypertension'', ''Obesity'', ''Arthritis'', ''Asthma''.'
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The column 'id' should be complete, meaning every record must have a non-null
+      value.
+    - The column 'id' should have unique values for each record since it is used for
+      grouping.

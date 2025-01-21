@@ -1,0 +1,27 @@
+constraints:
+  Date of Admission:
+    code:
+    - - .hasPattern('Date of Admission', '\\d{4}-\\d{2}-\\d{2}')
+      - Valid
+    - - .isComplete('Date of Admission')
+      - Valid
+    assumptions:
+    - Date of Admission should be a valid date format to ensure successful casting
+      to DATE type.
+    - Date of Admission should not be null as it is used in calculating the length
+      of stay.
+  Discharge Date:
+    code:
+    - - .hasPattern('Discharge Date', '\\d{4}-\\d{2}-\\d{2}')
+      - Valid
+    - - .isComplete('Discharge Date')
+      - Valid
+    - - .isGreaterThanOrEqualTo('Discharge Date', 'Date of Admission')
+      - Invalid
+    assumptions:
+    - Discharge Date should be a valid date format to ensure successful casting to
+      DATE type.
+    - Discharge Date should not be null as it is used in calculating the length of
+      stay.
+    - Discharge Date should be greater than or equal to Date of Admission to ensure
+      the length of stay is non-negative.

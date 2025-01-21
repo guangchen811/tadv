@@ -1,0 +1,34 @@
+constraints:
+  Billing Amount:
+    code:
+    - - '.hasApproxCountDistinct(''Billing Amount'', lambda x: x > 30000)'
+      - Invalid
+    - - .isComplete('Billing Amount')
+      - Valid
+    - - .satisfies('Billing Amount >= 0', 'Billing Amount should be non-negative')
+      - Invalid
+    assumptions:
+    - The column 'Billing Amount' should be complete (no missing values).
+    - The column 'Billing Amount' should be a numeric type (Fractional).
+    - The column 'Billing Amount' should have a wide range of values, as suggested
+      by the approximateNumDistinctValues of 32079.
+  Doctor:
+    code:
+    - - '.hasApproxCountDistinct(''Doctor'', lambda x: x > 20000)'
+      - Invalid
+    - - .isComplete('Doctor')
+      - Valid
+    assumptions:
+    - The column 'Doctor' should be complete (no missing values).
+    - The column 'Doctor' should have a high cardinality, as suggested by the approximateNumDistinctValues
+      of 25476.
+  Hospital:
+    code:
+    - - '.hasApproxCountDistinct(''Hospital'', lambda x: x > 25000)'
+      - Invalid
+    - - .isComplete('Hospital')
+      - Valid
+    assumptions:
+    - The column 'Hospital' should be complete (no missing values).
+    - The column 'Hospital' should have a high cardinality, as suggested by the approximateNumDistinctValues
+      of 26773.

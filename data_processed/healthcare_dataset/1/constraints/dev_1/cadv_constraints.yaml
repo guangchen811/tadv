@@ -1,0 +1,20 @@
+constraints:
+  Date of Admission:
+    code:
+    - - .isComplete('Date of Admission')
+      - Valid
+    - - .satisfies('CAST(`Date of Admission` AS DATE) IS NOT NULL', 'Date of Admission
+        should be a valid date')
+      - Valid
+    - - .satisfies('`Date of Admission` = LEAD(`Date of Admission`, 1) OVER (ORDER
+        BY `Date of Admission` ASC) OR LEAD(`Date of Admission`, 1) OVER (ORDER BY
+        `Date of Admission` ASC) IS NULL', 'Date of Admission should be in chronological
+        order')
+      - Invalid
+    assumptions:
+    - The 'Date of Admission' column must be complete, meaning no missing values are
+      allowed.
+    - The 'Date of Admission' column should be convertible to a date format, ensuring
+      valid date entries.
+    - The 'Date of Admission' entries should be in chronological order when used in
+      the code's window function for calculating the rolling 7-day average.

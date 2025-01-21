@@ -1,0 +1,30 @@
+constraints:
+  Date of Admission:
+    code:
+    - - .isComplete('Date of Admission')
+      - Valid
+    - - .satisfies('CAST(`Date of Admission` AS DATE) IS NOT NULL', 'valid_date_format_Date_of_Admission')
+      - Valid
+    assumptions:
+    - The 'Date of Admission' column should be complete (no missing values).
+    - The 'Date of Admission' should be a valid date format to allow correct CAST
+      operation.
+  Discharge Date:
+    code:
+    - - .isComplete('Discharge Date')
+      - Valid
+    - - .satisfies('CAST(`Discharge Date` AS DATE) IS NOT NULL', 'valid_date_format_Discharge_Date')
+      - Valid
+    assumptions:
+    - The 'Discharge Date' column should be complete (no missing values).
+    - The 'Discharge Date' should be a valid date format to allow correct CAST operation.
+  Test Results:
+    code:
+    - - .isComplete('Test Results')
+      - Valid
+    - - .isContainedIn('Test Results', ['Abnormal', 'Normal', 'Inconclusive'])
+      - Valid
+    assumptions:
+    - The 'Test Results' column should be complete (no missing values).
+    - The 'Test Results' should only contain the values ['Abnormal', 'Normal', 'Inconclusive']
+      for accurate grouping.

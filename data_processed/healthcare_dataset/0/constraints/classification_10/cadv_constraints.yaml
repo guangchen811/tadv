@@ -1,0 +1,73 @@
+constraints:
+  Room Number:
+    code: []
+    assumptions: []
+  Hospital:
+    code: []
+    assumptions: []
+  Insurance Provider:
+    code:
+    - - .isContainedIn('Insurance Provider', ['Aetna', 'Blue Cross', 'UnitedHealthcare',
+        'Cigna', 'Medicare'])
+      - Valid
+    assumptions:
+    - Insurance Provider should be one of ['Aetna', 'Blue Cross', 'UnitedHealthcare',
+      'Cigna', 'Medicare']
+  Billing Amount:
+    code:
+    - - .isNonNegative('Billing Amount')
+      - Invalid
+    assumptions:
+    - Billing Amount should be a non-negative number
+  Discharge Date:
+    code: []
+    assumptions: []
+  Medication:
+    code:
+    - - .isContainedIn('Medication', ['Aspirin', 'Paracetamol', 'Ibuprofen', 'Penicillin',
+        'Lipitor'])
+      - Valid
+    assumptions:
+    - Medication should be one of ['Aspirin', 'Paracetamol', 'Ibuprofen', 'Penicillin',
+      'Lipitor']
+  Admission Type:
+    code:
+    - - .isContainedIn('Admission Type', ['Emergency', 'Urgent', 'Elective'])
+      - Valid
+    assumptions:
+    - Admission Type should be one of ['Emergency', 'Urgent', 'Elective']
+  Medical Condition:
+    code:
+    - - .isContainedIn('Medical Condition', ['Hypertension', 'Cancer', 'Obesity',
+        'Arthritis', 'Diabetes', 'Asthma'])
+      - Valid
+    assumptions:
+    - Medical Condition should be one of ['Hypertension', 'Cancer', 'Obesity', 'Arthritis',
+      'Diabetes', 'Asthma']
+  Age:
+    code:
+    - - .isNonNegative('Age')
+      - Valid
+    - - '.hasMax(''Age'', lambda x: x < 120)'
+      - Valid
+    assumptions:
+    - Age should be a non-negative integer
+    - Age should be a reasonable human age, e.g., less than 120
+  Date of Admission:
+    code: []
+    assumptions: []
+  Blood Type:
+    code:
+    - - .isContainedIn('Blood Type', ['A+', 'O+', 'B+', 'AB+', 'A-', 'O-', 'B-', 'AB-'])
+      - Valid
+    assumptions:
+    - Blood Type should be one of ['A+', 'O+', 'B+', 'AB+', 'A-', 'O-', 'B-', 'AB-']
+  Gender:
+    code:
+    - - .isContainedIn('Gender', ['Male', 'Female'])
+      - Valid
+    assumptions:
+    - Gender should be one of ['Male', 'Female']
+  Doctor:
+    code: []
+    assumptions: []

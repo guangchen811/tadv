@@ -1,0 +1,33 @@
+constraints:
+  age:
+    code:
+    - - .isPositive('age')
+      - Valid
+    assumptions:
+    - Age should be greater than 0 when calculating cost_per_year_of_age feature.
+  gender:
+    code:
+    - - .isContainedIn('gender', ['Male', 'Female', 'Other'])
+      - Valid
+    assumptions:
+    - Gender should only contain values that are consistent with the encoded form
+      (e.g., 'Male', 'Female') or any other categories that might exist in the dataset.
+  billing_amount:
+    code:
+    - - .isNonNegative('billing_amount')
+      - Invalid
+    assumptions:
+    - Billing amount should be a non-negative number.
+  test_results:
+    code:
+    - - .isContainedIn('test_results', ['Abnormal', 'Normal', 'Inconclusive'])
+      - Invalid
+    assumptions:
+    - 'Test results should only contain the known categories: ''Abnormal'', ''Normal'',
+      ''Inconclusive''.'
+  id:
+    code:
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - ID should be unique across rows in the dataset.

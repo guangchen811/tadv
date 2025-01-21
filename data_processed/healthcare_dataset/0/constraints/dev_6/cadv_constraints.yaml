@@ -1,0 +1,55 @@
+constraints:
+  Admission Type:
+    code:
+    - - .isComplete('Admission Type')
+      - Valid
+    - - .isContainedIn('Admission Type', ['Emergency', 'Urgent', 'Elective'])
+      - Valid
+    assumptions:
+    - Admission Type should only contain values ['Emergency', 'Urgent', 'Elective']
+      as indicated by the dataset histogram.
+    - Admission Type should be non-null to ensure completeness.
+  Gender:
+    code:
+    - - .isComplete('Gender')
+      - Valid
+    - - .isContainedIn('Gender', ['Male', 'Female'])
+      - Valid
+    assumptions:
+    - Gender should only contain values ['Male', 'Female'] as indicated by the dataset
+      histogram.
+    - Gender should be non-null to ensure completeness.
+  Insurance Provider:
+    code:
+    - - .isComplete('Insurance Provider')
+      - Valid
+    - - .isContainedIn('Insurance Provider', ['Aetna', 'Blue Cross', 'UnitedHealthcare',
+        'Cigna', 'Medicare'])
+      - Valid
+    assumptions:
+    - Insurance Provider should only contain values ['Aetna', 'Blue Cross', 'UnitedHealthcare',
+      'Cigna', 'Medicare'] as indicated by the dataset histogram.
+    - Insurance Provider should be non-null to ensure completeness.
+  Medical Condition:
+    code:
+    - - .isComplete('Medical Condition')
+      - Valid
+    - - .isContainedIn('Medical Condition', ['Hypertension', 'Cancer', 'Obesity',
+        'Arthritis', 'Diabetes', 'Asthma'])
+      - Valid
+    assumptions:
+    - Medical Condition should only contain values ['Hypertension', 'Cancer', 'Obesity',
+      'Arthritis', 'Diabetes', 'Asthma'] as indicated by the dataset histogram.
+    - Medical Condition should be non-null to ensure completeness.
+  Name:
+    code:
+    - - .isComplete('Name')
+      - Valid
+    assumptions:
+    - Name should be a non-null string to ensure completeness.
+  id:
+    code:
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - id must be unique to correctly order the results and prevent duplicate entries.

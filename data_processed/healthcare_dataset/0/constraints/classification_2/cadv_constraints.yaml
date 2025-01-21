@@ -1,0 +1,57 @@
+constraints:
+  id:
+    code:
+    - - .isUnique('id')
+      - Valid
+    - - .isComplete('id')
+      - Valid
+    assumptions:
+    - The id column should be distinct for each record and not contain any duplicate
+      values.
+    - The id column should be complete, with no missing values.
+  Test Results:
+    code:
+    - - .isContainedIn('Test Results', ['Abnormal', 'Normal', 'Inconclusive'])
+      - Valid
+    - - .isComplete('Test Results')
+      - Valid
+    assumptions:
+    - 'The Test Results column should be categorical with expected values: ''Abnormal'',
+      ''Normal'', ''Inconclusive''.'
+    - The Test Results column should be complete, with no missing values.
+  Name:
+    code:
+    - - .isComplete('Name')
+      - Valid
+    assumptions:
+    - The Name column should be complete, with no missing values.
+  Hospital:
+    code:
+    - - .isComplete('Hospital')
+      - Valid
+    assumptions:
+    - The Hospital column should be complete, with no missing values.
+  Room Number:
+    code:
+    - - .isComplete('Room Number')
+      - Valid
+    assumptions:
+    - The Room Number column should be complete, with no missing values.
+  Doctor:
+    code:
+    - - .isComplete('Doctor')
+      - Valid
+    assumptions:
+    - The Doctor column should be complete, with no missing values.
+  Date of Admission:
+    code:
+    - - .isComplete('Date of Admission')
+      - Valid
+    assumptions:
+    - The Date of Admission column should be complete, with no missing values.
+  Discharge Date:
+    code:
+    - - .isComplete('Discharge Date')
+      - Valid
+    assumptions:
+    - The Discharge Date column should be complete, with no missing values.

@@ -1,0 +1,62 @@
+constraints:
+  Admission Type:
+    code:
+    - - .isComplete('Admission Type')
+      - Valid
+    - - .isContainedIn('Admission Type', ['Urgent', 'Elective', 'Emergency'])
+      - Valid
+    assumptions:
+    - The column 'Admission Type' should be complete, meaning no missing values.
+    - 'The column ''Admission Type'' should only contain values from the predefined
+      set: [''Urgent'', ''Elective'', ''Emergency''].'
+  Gender:
+    code:
+    - - .isComplete('Gender')
+      - Valid
+    - - .isContainedIn('Gender', ['Male', 'Female'])
+      - Valid
+    assumptions:
+    - The column 'Gender' should be complete, meaning no missing values.
+    - 'The column ''Gender'' should only contain values from the predefined set: [''Male'',
+      ''Female''].'
+  Insurance Provider:
+    code:
+    - - .isComplete('Insurance Provider')
+      - Valid
+    - - .isContainedIn('Insurance Provider', ['Cigna', 'Medicare', 'UnitedHealthcare',
+        'Blue Cross', 'Aetna'])
+      - Valid
+    assumptions:
+    - The column 'Insurance Provider' should be complete, meaning no missing values.
+    - 'The column ''Insurance Provider'' should only contain values from the predefined
+      set: [''Cigna'', ''Medicare'', ''UnitedHealthcare'', ''Blue Cross'', ''Aetna''].'
+  Medical Condition:
+    code:
+    - - .isComplete('Medical Condition')
+      - Valid
+    - - .isContainedIn('Medical Condition', ['Diabetes', 'Asthma', 'Obesity', 'Hypertension',
+        'Arthritis', 'Cancer'])
+      - Valid
+    assumptions:
+    - The column 'Medical Condition' should be complete, meaning no missing values.
+    - 'The column ''Medical Condition'' should only contain values from the predefined
+      set: [''Diabetes'', ''Asthma'', ''Obesity'', ''Hypertension'', ''Arthritis'',
+      ''Cancer''].'
+  Name:
+    code:
+    - - .isComplete('Name')
+      - Valid
+    assumptions:
+    - The column 'Name' should be complete, meaning no missing values.
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isNonNegative('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The column 'id' should be complete, meaning no missing values.
+    - The column 'id' should be unique, ensuring each entry is distinct.
+    - The column 'id' should be non-negative, as IDs are typically positive integers.

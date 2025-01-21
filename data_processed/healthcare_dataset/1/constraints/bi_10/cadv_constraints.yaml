@@ -1,0 +1,34 @@
+constraints:
+  Age:
+    code:
+    - - '.hasMax(''Age'', lambda x: x <= 120)'
+      - Valid
+    - - '.hasMin(''Age'', lambda x: x >= 0)'
+      - Valid
+    - - .isComplete('Age')
+      - Valid
+    - - .isNonNegative('Age')
+      - Valid
+    assumptions:
+    - The 'Age' column should be complete, meaning there are no missing values.
+    - The 'Age' column should contain only non-negative integer values.
+    - The values in the 'Age' column should be within a reasonable range, such as
+      between 0 and 120, to ensure realistic ages.
+  Billing Amount:
+    code:
+    - - '.hasMax(''Billing Amount'', lambda x: x <= 100000)'
+      - Valid
+    - - '.hasMin(''Billing Amount'', lambda x: x >= 0)'
+      - Invalid
+    - - .isComplete('Billing Amount')
+      - Valid
+    - - .isNonNegative('Billing Amount')
+      - Invalid
+    assumptions:
+    - The 'Billing Amount' column should be complete, meaning there are no missing
+      values.
+    - The 'Billing Amount' column should contain only non-negative fractional values,
+      as billing amounts should not be negative.
+    - The values in the 'Billing Amount' column should be within a reasonable range,
+      reflecting realistic billing amounts, such as between 0 and a plausible upper
+      limit for hospital billing.

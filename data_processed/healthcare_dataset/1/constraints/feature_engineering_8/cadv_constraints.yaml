@@ -1,0 +1,36 @@
+constraints:
+  Billing Amount:
+    code:
+    - - .isComplete('Billing Amount')
+      - Valid
+    - - .isNonNegative('Billing Amount')
+      - Invalid
+    - - '.satisfies(''CAST(Billing Amount AS FLOAT) = Billing Amount'', ''Billing
+        Amount should be numeric'', lambda x: x == 1.0)'
+      - Invalid
+    assumptions:
+    - Billing Amount should be complete (no missing values).
+    - Billing Amount should be non-negative.
+    - Billing Amount should be numeric (fractional).
+  Date of Admission:
+    code:
+    - - .hasPattern('Date of Admission', '\\d{4}-\\d{2}-\\d{2}')
+      - Valid
+    - - .isComplete('Date of Admission')
+      - Valid
+    - - '.isLessThanOrEqualTo(''Date of Admission'', ''Date of Admission'', lambda
+        x: True)'
+      - Invalid
+    assumptions:
+    - Date of Admission should be complete (no missing values).
+    - Date of Admission should be in a valid date format.
+    - Date of Admission should be in chronological order within each id.
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - Each id should be complete (no missing values).
+    - id should be unique.

@@ -1,0 +1,79 @@
+constraints:
+  Date of Admission:
+    code:
+    - - .hasPattern('Date of Admission', '\d{4}-\d{2}-\d{2}')
+      - Valid
+    - - .isComplete('Date of Admission')
+      - Valid
+    assumptions:
+    - The 'Date of Admission' column must be complete, meaning no missing values are
+      allowed.
+    - Dates in the 'Date of Admission' column should be valid dates in 'YYYY-MM-DD'
+      format.
+  Discharge Date:
+    code:
+    - - .hasPattern('Discharge Date', '\d{4}-\d{2}-\d{2}')
+      - Valid
+    - - .isComplete('Discharge Date')
+      - Valid
+    - - .isGreaterThan('Discharge Date', 'Date of Admission')
+      - Invalid
+    assumptions:
+    - The 'Discharge Date' column must be complete, meaning no missing values are
+      allowed.
+    - Dates in the 'Discharge Date' column should be valid dates in 'YYYY-MM-DD' format.
+    - Discharge dates should be after the corresponding 'Date of Admission'.
+  Doctor:
+    code:
+    - - .isComplete('Doctor')
+      - Valid
+    - - .isUnique('Doctor')
+      - Invalid
+    assumptions:
+    - The 'Doctor' column must be complete, meaning no missing values are allowed.
+    - Values in the 'Doctor' column should be unique, as each doctor entry should
+      uniquely identify a practitioner.
+  Name:
+    code:
+    - - .isComplete('Name')
+      - Valid
+    - - .isUnique('Name')
+      - Invalid
+    assumptions:
+    - The 'Name' column must be complete, meaning no missing values are allowed.
+    - Values in the 'Name' column should be unique, as each patient must have a unique
+      name.
+  Test Results:
+    code:
+    - - .isComplete('Test Results')
+      - Valid
+    - - .isContainedIn('Test Results', ['Abnormal', 'Normal', 'Inconclusive'])
+      - Valid
+    assumptions:
+    - The 'Test Results' column must be complete, meaning no missing values are allowed.
+    - 'Values in the ''Test Results'' column should be one of the predefined categories:
+      ''Abnormal'', ''Normal'', or ''Inconclusive''.'
+  billing_amount:
+    code:
+    - - .isComplete('billing_amount')
+      - Invalid
+    - - .isNonNegative('billing_amount')
+      - Invalid
+    assumptions:
+    - The 'billing_amount' column must be complete, meaning no missing values are
+      allowed.
+    - Values in the 'billing_amount' column should be non-negative as billing amounts
+      cannot be negative.
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isNonNegative('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The 'id' column must be complete, meaning no missing values are allowed.
+    - The 'id' column should contain unique values to serve as a unique identifier
+      for each record.
+    - Values in the 'id' column should be non-negative as IDs cannot be negative.

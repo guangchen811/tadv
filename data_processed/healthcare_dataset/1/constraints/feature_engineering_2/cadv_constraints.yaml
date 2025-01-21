@@ -1,0 +1,31 @@
+constraints:
+  Age:
+    code:
+    - - '.hasMax(''Age'', lambda x: x <= 120)'
+      - Valid
+    - - .isComplete('Age')
+      - Valid
+    - - .isNonNegative('Age')
+      - Valid
+    - - .satisfies('Age < 18 OR (Age >= 18 AND Age <= 30) OR (Age >= 31 AND Age <=
+        50) OR (Age >= 51 AND Age <= 64) OR Age > 64', 'Age bucketing alignment')
+      - Valid
+    assumptions:
+    - Each 'Age' should be complete, meaning no missing values are allowed.
+    - '''Age'' should be a non-negative integer, as it represents a person''s age.'
+    - '''Age'' should fall within the range of valid ages (e.g., 0-120).'
+    - 'The ''Age'' value should align with the defined buckets: ''Age'' < 18 is ''child'',
+      ''Age'' between 18 and 30 is ''young_adult'', ''Age'' between 31 and 50 is ''adult'',
+      ''Age'' between 51 and 64 is ''mid_senior'', and ''Age'' > 64 is ''senior''.'
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isNonNegative('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - Each 'id' should be complete, meaning no missing values are allowed.
+    - '''id'' should be unique across all records.'
+    - '''id'' should be non-negative, as it represents a unique identifier.'

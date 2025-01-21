@@ -1,0 +1,34 @@
+constraints:
+  Date of Admission:
+    code:
+    - - .isComplete('Date of Admission')
+      - Valid
+    - - .satisfies('CAST(Date of Admission AS DATE) IS NOT NULL', 'valid_date_format_Date_of_Admission')
+      - Invalid
+    assumptions:
+    - The 'Date of Admission' column should be complete.
+    - The 'Date of Admission' should be a valid date format.
+  Discharge Date:
+    code:
+    - - .isComplete('Discharge Date')
+      - Valid
+    - - .isGreaterThanOrEqualTo('Discharge Date', 'Date of Admission')
+      - Invalid
+    - - .satisfies('CAST(Discharge Date AS DATE) IS NOT NULL', 'valid_date_format_Discharge_Date')
+      - Invalid
+    assumptions:
+    - The 'Discharge Date' column should be complete.
+    - The 'Discharge Date' should be a valid date format.
+    - The 'Discharge Date' should be on or after the 'Date of Admission'.
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isNonNegative('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The 'id' column should be complete.
+    - The 'id' column should have unique entries.
+    - The 'id' column should be non-negative.

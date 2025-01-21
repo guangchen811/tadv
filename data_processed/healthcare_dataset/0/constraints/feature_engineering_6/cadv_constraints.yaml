@@ -1,0 +1,25 @@
+constraints:
+  Date of Admission:
+    code:
+    - - .isComplete('Date of Admission')
+      - Valid
+    - - .satisfies('CAST(`Date of Admission` AS DATE) IS NOT NULL', 'Date of Admission
+        format check')
+      - Valid
+    - - '.satisfies(''DATEDIFF(`Date of Admission`, LAG(`Date of Admission`, 1) OVER
+        (PARTITION BY `id` ORDER BY `Date of Admission`)) >= 0'', ''Chronological
+        order check'', lambda x: x >= 0)'
+      - Invalid
+    assumptions:
+    - 'Assumption: ''Date of Admission'' should be a valid date format.'
+    - 'Assumption: ''Date of Admission'' should be in chronological order for each
+      ''id''.'
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - 'Assumption: Each ''id'' should uniquely identify a patient, implying that records
+      with the same ''id'' pertain to the same patient.'

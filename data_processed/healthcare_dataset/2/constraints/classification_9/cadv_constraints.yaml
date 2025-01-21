@@ -1,0 +1,96 @@
+constraints:
+  admission_dt:
+    code:
+    - - .isComplete('admission_dt')
+      - Invalid
+    assumptions:
+    - admission_dt should be a valid date format
+  admission_type:
+    code:
+    - - .isComplete('admission_type')
+      - Invalid
+    - - .isContainedIn('admission_type', ['Emergency', 'Urgent', 'Elective'])
+      - Invalid
+    assumptions:
+    - admission_type should be one of ['Emergency', 'Urgent', 'Elective']
+    - admission_type should not be null
+  age:
+    code:
+    - - .isNonNegative('age')
+      - Valid
+    - - .isPositive('age')
+      - Valid
+    assumptions:
+    - age should be greater than 0 to avoid division by zero in cost_age_ratio calculation
+    - age should be a non-negative integer
+  billing_amount:
+    code:
+    - - .isNonNegative('billing_amount')
+      - Invalid
+    - - .satisfies('billing_amount > 0 WHERE length_of_stay > 0', 'Billing amount
+        greater than zero when length_of_stay is positive')
+      - Invalid
+    assumptions:
+    - billing_amount should be a non-negative number
+    - billing_amount should be greater than 0 if length_of_stay is greater than 0
+      to ensure valid cost_per_day calculation
+  blood_type:
+    code:
+    - - .isComplete('blood_type')
+      - Invalid
+    - - .isContainedIn('blood_type', ['A+', 'O+', 'B+', 'AB+', 'A-', 'O-', 'B-', 'AB-'])
+      - Invalid
+    assumptions:
+    - blood_type should be one of ['A+', 'O+', 'B+', 'AB+', 'A-', 'O-', 'B-', 'AB-']
+    - blood_type should not be null
+  discharge_dt:
+    code:
+    - - .isComplete('discharge_dt')
+      - Invalid
+    - - .satisfies('discharge_dt >= admission_dt', 'Discharge date should not be earlier
+        than admission date')
+      - Invalid
+    assumptions:
+    - discharge_dt should be a valid date format
+    - discharge_dt should not be earlier than admission_dt
+  gender:
+    code:
+    - - .isComplete('gender')
+      - Valid
+    - - .isContainedIn('gender', ['Male', 'Female'])
+      - Valid
+    assumptions:
+    - gender should be one of ['Male', 'Female']
+    - gender should not be null
+  hospital:
+    code:
+    - - .isComplete('hospital')
+      - Valid
+    assumptions:
+    - hospital should not be null
+  id:
+    code:
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - id should be unique as it is used as an identifier
+  medical_condition:
+    code:
+    - - .isComplete('medical_condition')
+      - Invalid
+    - - .isContainedIn('medical_condition', ['Hypertension', 'Cancer', 'Obesity',
+        'Arthritis', 'Diabetes', 'Asthma'])
+      - Invalid
+    assumptions:
+    - medical_condition should be one of ['Hypertension', 'Cancer', 'Obesity', 'Arthritis',
+      'Diabetes', 'Asthma']
+    - medical_condition should not be null
+  test_results:
+    code:
+    - - .isComplete('test_results')
+      - Invalid
+    - - .isContainedIn('test_results', ['Abnormal', 'Normal', 'Inconclusive'])
+      - Invalid
+    assumptions:
+    - test_results should be one of ['Abnormal', 'Normal', 'Inconclusive']
+    - test_results should not be null

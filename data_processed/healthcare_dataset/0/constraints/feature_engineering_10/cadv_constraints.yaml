@@ -1,0 +1,29 @@
+constraints:
+  Date of Admission:
+    code:
+    - - '.hasPattern(''Date of Admission'', ''^(\d{4}-\d{2}-\d{2})$'', lambda x: x
+        == 1.0)'
+      - Valid
+    - - .isComplete('Date of Admission')
+      - Valid
+    assumptions:
+    - '''Date of Admission'' should be a valid date format.'
+    - '''Date of Admission'' should be before or the same as ''Discharge Date'' for
+      each row.'
+  Discharge Date:
+    code:
+    - - '.hasPattern(''Discharge Date'', ''^(\d{4}-\d{2}-\d{2})$'', lambda x: x ==
+        1.0)'
+      - Valid
+    - - .isComplete('Discharge Date')
+      - Valid
+    assumptions:
+    - '''Discharge Date'' should be a valid date format.'
+    - '''Discharge Date'' should be after or the same as ''Date of Admission'' for
+      each row.'
+  id:
+    code:
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - Each 'id' value should be unique per row within the context of this task.

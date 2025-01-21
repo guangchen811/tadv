@@ -1,0 +1,55 @@
+constraints:
+  Admission Type:
+    code:
+    - - .isComplete('Admission Type')
+      - Valid
+    - - .isContainedIn('Admission Type', ['Urgent', 'Elective', 'Emergency'])
+      - Valid
+    assumptions:
+    - Admission Type should be present and complete (no missing values).
+    - Admission Type should only contain values from the set [Urgent, Elective, Emergency].
+  Age:
+    code:
+    - - .isComplete('Age')
+      - Valid
+    - - '.isLessThanOrEqualTo(''Age'', ''billing_amount'', lambda x: x <= 120)'
+      - Invalid
+    - - .isNonNegative('Age')
+      - Valid
+    assumptions:
+    - Age should be present and complete (no missing values).
+    - Age should be a non-negative integer.
+    - Age should be within a realistic human age range (0 to 120).
+  Blood Type:
+    code:
+    - - .isComplete('Blood Type')
+      - Valid
+    - - .isContainedIn('Blood Type', ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+',
+        'O-'])
+      - Valid
+    assumptions:
+    - Blood Type should be present and complete (no missing values).
+    - Blood Type should only contain values from the set [A+, A-, B+, B-, AB+, AB-,
+      O+, O-].
+  billing_amount:
+    code:
+    - - .isComplete('billing_amount')
+      - Invalid
+    - - .isNonNegative('billing_amount')
+      - Invalid
+    assumptions:
+    - Billing Amount should be present and complete (no missing values).
+    - Billing Amount should be a numeric value.
+    - Billing Amount should be non-negative.
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isNonNegative('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - id should be present and complete (no missing values).
+    - id should be unique.
+    - id should be a non-negative integer.

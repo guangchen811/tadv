@@ -1,0 +1,74 @@
+constraints:
+  age:
+    code:
+    - - .isPositive('age')
+      - Valid
+    assumptions:
+    - Age should be greater than 0 to avoid division by zero in cost_age_ratio calculation.
+  billing_amount:
+    code:
+    - - .isNonNegative('billing_amount')
+      - Invalid
+    assumptions:
+    - Billing Amount should be non-negative.
+  medical_condition:
+    code:
+    - - .isContainedIn('medical_condition', ['Hypertension', 'Cancer', 'Obesity',
+        'Arthritis', 'Diabetes', 'Asthma'])
+      - Invalid
+    assumptions:
+    - 'Medical Condition should be one of the predefined categories: Hypertension,
+      Cancer, Obesity, Arthritis, Diabetes, Asthma.'
+  admission_type:
+    code:
+    - - .isContainedIn('admission_type', ['Emergency', 'Urgent', 'Elective'])
+      - Invalid
+    assumptions:
+    - 'Admission Type should be one of the predefined categories: Emergency, Urgent,
+      Elective.'
+  blood_type:
+    code:
+    - - .isContainedIn('blood_type', ['A+', 'O+', 'B+', 'AB+', 'A-', 'O-', 'B-', 'AB-'])
+      - Invalid
+    assumptions:
+    - 'Blood Type should be one of the predefined categories: A+, O+, B+, AB+, A-,
+      O-, B-, AB-.'
+  gender:
+    code:
+    - - .isContainedIn('gender', ['Male', 'Female'])
+      - Valid
+    assumptions:
+    - Gender should be either Male or Female.
+  hospital:
+    code:
+    - - .isComplete('hospital')
+      - Valid
+    assumptions:
+    - Hospital should be a non-empty string.
+  admission_dt:
+    code:
+    - - .isComplete('admission_dt')
+      - Invalid
+    assumptions:
+    - Admission Date must be a valid date.
+    - Admission Date should not be after Discharge Date.
+  discharge_dt:
+    code:
+    - - .isComplete('discharge_dt')
+      - Invalid
+    assumptions:
+    - Discharge Date must be a valid date.
+    - Discharge Date should not be before Admission Date.
+  id:
+    code:
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - ID should be unique.
+  test_results:
+    code:
+    - - .isContainedIn('test_results', ['Abnormal', 'Normal', 'Inconclusive'])
+      - Invalid
+    assumptions:
+    - 'Test Results should be one of the predefined categories: Abnormal, Normal,
+      Inconclusive.'

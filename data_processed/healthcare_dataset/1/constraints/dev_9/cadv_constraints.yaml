@@ -1,0 +1,42 @@
+constraints:
+  Age:
+    code:
+    - - .isComplete('Age')
+      - Valid
+    - - .isNonNegative('Age')
+      - Valid
+    - - .satisfies('CAST(Age AS INTEGER) = Age', 'Age should be an integer')
+      - Valid
+    assumptions:
+    - Age should be complete
+    - Age should be non-negative
+    - Age should be an integer
+  Medical Condition:
+    code:
+    - - .isComplete('Medical Condition')
+      - Valid
+    - - .isContainedIn('Medical Condition', ['Diabetes', 'Asthma', 'Obesity', 'Hypertension',
+        'Arthritis', 'Cancer'])
+      - Valid
+    assumptions:
+    - Medical Condition should be complete
+    - Medical Condition should be contained in ['Diabetes', 'Asthma', 'Obesity', 'Hypertension',
+      'Arthritis', 'Cancer']
+  Name:
+    code:
+    - - .isComplete('Name')
+      - Valid
+    assumptions:
+    - Name should be complete
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isNonNegative('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - id should be complete
+    - id should be unique
+    - id should be non-negative

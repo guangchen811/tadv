@@ -1,0 +1,51 @@
+constraints:
+  Billing Amount:
+    code:
+    - - .isNonNegative('Billing Amount')
+      - Invalid
+    assumptions:
+    - Billing Amount should be a non-negative fractional number.
+  Age:
+    code:
+    - - .isNonNegative('Age')
+      - Valid
+    assumptions:
+    - Age should be a non-negative integral number.
+  Blood Type:
+    code:
+    - - .isContainedIn('Blood Type', ['A+', 'O+', 'B+', 'AB+', 'A-', 'O-', 'B-', 'AB-'])
+      - Valid
+    assumptions:
+    - 'Blood Type should be one of the following: [''A+'', ''O+'', ''B+'', ''AB+'',
+      ''A-'', ''O-'', ''B-'', ''AB-''].'
+  Medical Condition:
+    code:
+    - - .isContainedIn('Medical Condition', ['Hypertension', 'Cancer', 'Obesity',
+        'Arthritis', 'Diabetes', 'Asthma'])
+      - Valid
+    assumptions:
+    - 'Medical Condition should be one of the following: [''Hypertension'', ''Cancer'',
+      ''Obesity'', ''Arthritis'', ''Diabetes'', ''Asthma''].'
+  Date of Admission:
+    code:
+    - - .isComplete('Date of Admission')
+      - Valid
+    assumptions:
+    - Date of Admission should be a valid date format.
+  Discharge Date:
+    code:
+    - - .isComplete('Discharge Date')
+      - Valid
+    - - .isGreaterThan('Discharge Date', 'Date of Admission')
+      - Invalid
+    assumptions:
+    - Discharge Date should be a valid date format.
+    - Discharge Date should be after Date of Admission.
+  id:
+    code:
+    - - .isUnique('id')
+      - Valid
+    - - .isNonNegative('id')
+      - Valid
+    assumptions:
+    - id should be a unique integral number.

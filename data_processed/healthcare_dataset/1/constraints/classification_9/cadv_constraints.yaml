@@ -1,0 +1,75 @@
+constraints:
+  admission_type:
+    code:
+    - - .isContainedIn('admission_type', ['Urgent', 'Elective', 'Emergency'])
+      - Invalid
+    assumptions:
+    - 'Admission Type should be one of the known categories: [''Urgent'', ''Elective'',
+      ''Emergency''].'
+  age:
+    code:
+    - - .isNonNegative('age')
+      - Valid
+    - - .isPositive('age')
+      - Valid
+    assumptions:
+    - Age should be non-negative.
+    - Age should be greater than 0 to compute cost_age_ratio.
+  billing_amount:
+    code:
+    - - .isNonNegative('billing_amount')
+      - Invalid
+    - - .isPositive('billing_amount')
+      - Invalid
+    assumptions:
+    - Billing Amount should be non-negative.
+    - Billing Amount should be greater than 0 to compute cost_per_day and cost_age_ratio.
+  blood_type:
+    code:
+    - - .isContainedIn('blood_type', ['A-', 'B-', 'B+', 'AB-', 'A+', 'O+', 'O-', 'AB+'])
+      - Invalid
+    assumptions:
+    - 'Blood Type should be one of the known categories: [''A-'', ''B-'', ''B+'',
+      ''AB-'', ''A+'', ''O+'', ''O-'', ''AB+''].'
+  gender:
+    code:
+    - - .isContainedIn('gender', ['Male', 'Female'])
+      - Valid
+    assumptions:
+    - 'Gender should be one of the known categories: [''Male'', ''Female''].'
+  hospital:
+    code:
+    - - .isComplete('hospital')
+      - Valid
+    assumptions:
+    - Hospital should be complete (no missing values).
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isNonNegative('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - ID should be unique.
+    - ID should be non-negative.
+    - ID should be complete (no missing values).
+  medical_condition:
+    code:
+    - - .isContainedIn('medical_condition', ['Diabetes', 'Asthma', 'Obesity', 'Hypertension',
+        'Arthritis', 'Cancer'])
+      - Invalid
+    assumptions:
+    - 'Medical Condition should be one of the known categories: [''Diabetes'', ''Asthma'',
+      ''Obesity'', ''Hypertension'', ''Arthritis'', ''Cancer''].'
+  test_results:
+    code:
+    - - .isComplete('test_results')
+      - Invalid
+    - - .isContainedIn('test_results', ['Abnormal', 'Normal', 'Inconclusive'])
+      - Invalid
+    assumptions:
+    - 'Test Results should be one of the known categories: [''Abnormal'', ''Normal'',
+      ''Inconclusive''].'
+    - Test Results should be complete (no missing values).

@@ -1,0 +1,26 @@
+constraints:
+  Billing Amount:
+    code:
+    - - .isComplete('Billing Amount')
+      - Valid
+    - - .satisfies('Billing Amount >= 0', 'Billing Amount should be non-negative')
+      - Invalid
+    assumptions:
+    - Billing Amount should be a numeric value since it is used for averaging.
+    - Billing Amount should not contain null values as completeness is 1.0.
+  Insurance Provider:
+    code:
+    - - .isContainedIn('Insurance Provider', ['Aetna', 'Blue Cross', 'UnitedHealthcare',
+        'Cigna', 'Medicare'])
+      - Valid
+    assumptions:
+    - 'Insurance Provider values should be one of the distinct values present in the
+      histogram: Aetna, Blue Cross, UnitedHealthcare, Cigna, Medicare.'
+  Medical Condition:
+    code:
+    - - .isContainedIn('Medical Condition', ['Hypertension', 'Cancer', 'Obesity',
+        'Arthritis', 'Diabetes', 'Asthma'])
+      - Valid
+    assumptions:
+    - 'Medical Condition values should be one of the distinct values present in the
+      histogram: Hypertension, Cancer, Obesity, Arthritis, Diabetes, Asthma.'

@@ -1,0 +1,19 @@
+constraints:
+  Date of Admission:
+    code:
+    - - .hasPattern('Date of Admission', '\d{4}-\d{2}-\d{2}')
+      - Valid
+    - - .isComplete('Date of Admission')
+      - Valid
+    assumptions:
+    - NOT NULL
+    - DATE FORMAT
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - NOT NULL
+    - UNIQUE

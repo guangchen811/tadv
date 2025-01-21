@@ -1,0 +1,33 @@
+constraints:
+  id:
+    code:
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The id column should have unique values.
+  Test Results:
+    code:
+    - - .isComplete('Test Results')
+      - Valid
+    assumptions:
+    - The Test Results column should not have missing values.
+  Date of Admission:
+    code:
+    - - '.hasPattern(''Date of Admission'', ''\d{4}-\d{2}-\d{2}'', lambda x: x > 0.99)'
+      - Valid
+    - - '.isLessThan(''Date of Admission'', ''Discharge Date'', lambda x: x > 0.99)'
+      - Invalid
+    assumptions:
+    - The Date of Admission column should contain valid date strings.
+    - The Discharge Date column should be after the Date of Admission column to ensure
+      a positive length of stay.
+  Discharge Date:
+    code:
+    - - '.hasPattern(''Discharge Date'', ''\d{4}-\d{2}-\d{2}'', lambda x: x > 0.99)'
+      - Valid
+    - - '.isGreaterThan(''Discharge Date'', ''Date of Admission'', lambda x: x > 0.99)'
+      - Invalid
+    assumptions:
+    - The Discharge Date column should contain valid date strings.
+    - The Discharge Date column should be after the Date of Admission column to ensure
+      a positive length of stay.

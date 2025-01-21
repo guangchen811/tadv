@@ -1,0 +1,40 @@
+constraints:
+  Billing Amount:
+    code:
+    - - .isComplete('Billing Amount')
+      - Valid
+    - - .isNonNegative('Billing Amount')
+      - Invalid
+    assumptions:
+    - The 'Billing Amount' column should be complete with no missing values.
+    - The 'Billing Amount' column should contain non-negative values.
+    - The 'Billing Amount' column is used to calculate cumulative distribution, so
+      it should be numeric and not null.
+  Insurance Provider:
+    code:
+    - - .isComplete('Insurance Provider')
+      - Valid
+    - - .isContainedIn('Insurance Provider', ['Cigna', 'Medicare', 'UnitedHealthcare',
+        'Blue Cross', 'Aetna'])
+      - Valid
+    assumptions:
+    - The 'Insurance Provider' column should be complete with no missing values.
+    - 'The ''Insurance Provider'' column should only contain values from the set:
+      [''Cigna'', ''Medicare'', ''UnitedHealthcare'', ''Blue Cross'', ''Aetna''].'
+  Medical Condition:
+    code:
+    - - .isComplete('Medical Condition')
+      - Valid
+    - - .isContainedIn('Medical Condition', ['Diabetes', 'Asthma', 'Obesity', 'Hypertension',
+        'Arthritis', 'Cancer'])
+      - Valid
+    assumptions:
+    - The 'Medical Condition' column should be complete with no missing values.
+    - 'The ''Medical Condition'' column should only contain values from the set: [''Diabetes'',
+      ''Asthma'', ''Obesity'', ''Hypertension'', ''Arthritis'', ''Cancer''].'
+  Name:
+    code:
+    - - .isComplete('Name')
+      - Valid
+    assumptions:
+    - The 'Name' column should be complete with no missing values.

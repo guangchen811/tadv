@@ -1,0 +1,39 @@
+constraints:
+  billing_amount:
+    code:
+    - - .isComplete('billing_amount')
+      - Invalid
+    - - .isNonNegative('billing_amount')
+      - Invalid
+    assumptions:
+    - should not contain missing values
+    - should be non-negative
+  Age:
+    code:
+    - - .satisfies('Age != 0', 'Age should not contain zero values')
+      - Valid
+    - - .isComplete('Age')
+      - Valid
+    assumptions:
+    - should not contain zero values
+    - should not contain missing values after zero replacement
+  Room Number:
+    code:
+    - - .satisfies('Room Number IS NOT NULL', 'Room Number should not contain missing
+        values')
+      - Invalid
+    - - '.satisfies(''Room Number >= 0'', ''Room Number should be numeric'', lambda
+        x: True)'
+      - Invalid
+    assumptions:
+    - should be numeric
+    - should not contain missing values when used
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - should contain unique values
+    - should not contain missing values

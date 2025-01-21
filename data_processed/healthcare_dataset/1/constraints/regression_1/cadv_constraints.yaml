@@ -1,0 +1,62 @@
+constraints:
+  Age:
+    code:
+    - - '.hasMin(''Age'', lambda x: x > 0)'
+      - Valid
+    - - .isComplete('Age')
+      - Valid
+    - - .isPositive('Age')
+      - Valid
+    assumptions:
+    - The 'Age' column should be complete.
+    - The 'Age' column should contain positive values, as age cannot be zero or negative.
+    - The 'Age' column should not contain zero, as zeros are replaced with NaN to
+      avoid division by zero in cost_age_ratio calculation.
+  Billing Amount:
+    code:
+    - - .isComplete('Billing Amount')
+      - Valid
+    - - .isPositive('Billing Amount')
+      - Invalid
+    assumptions:
+    - The 'Billing Amount' column should be complete.
+    - The 'Billing Amount' column should contain positive values, as billing amounts
+      are typically non-negative.
+  Hospital:
+    code:
+    - - .isComplete('Hospital')
+      - Valid
+    assumptions:
+    - The 'Hospital' column should be complete.
+  Medical Condition:
+    code:
+    - - .isComplete('Medical Condition')
+      - Valid
+    - - .isContainedIn('Medical Condition', ['Diabetes', 'Asthma', 'Hypertension',
+        'Other'])
+      - Invalid
+    assumptions:
+    - The 'Medical Condition' column should be complete.
+    - The 'Medical Condition' column should contain values from a predefined set of
+      known conditions such as Diabetes, Asthma, etc.
+  Room Number:
+    code:
+    - - .isComplete('Room Number')
+      - Valid
+    - - .isNonNegative('Room Number')
+      - Invalid
+    assumptions:
+    - The 'Room Number' column should be complete.
+    - The 'Room Number' column should be non-negative, as room numbers cannot be negative.
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isNonNegative('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The 'id' column should be complete.
+    - The 'id' column should be unique.
+    - The 'id' column should contain non-negative values.

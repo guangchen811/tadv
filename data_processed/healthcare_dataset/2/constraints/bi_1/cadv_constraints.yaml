@@ -1,0 +1,22 @@
+constraints:
+  Date of Admission:
+    code:
+    - - .isComplete('Date of Admission')
+      - Valid
+    - - .satisfies('CAST(Date of Admission AS DATE) IS NOT NULL', 'valid_date_string')
+      - Invalid
+    assumptions:
+    - NOT NULL
+    - Should be a valid date string
+  Discharge Date:
+    code:
+    - - .isComplete('Discharge Date')
+      - Valid
+    - - .isGreaterThanOrEqualTo('Discharge Date', 'Date of Admission')
+      - Invalid
+    - - .satisfies('CAST(Discharge Date AS DATE) IS NOT NULL', 'valid_date_string')
+      - Invalid
+    assumptions:
+    - NOT NULL
+    - Should be a valid date string
+    - Should be greater than or equal to Date of Admission

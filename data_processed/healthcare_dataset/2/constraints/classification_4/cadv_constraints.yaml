@@ -1,0 +1,45 @@
+constraints:
+  Admission Type:
+    code:
+    - - .isContainedIn('Admission Type', ['Emergency', 'Urgent', 'Elective'])
+      - Valid
+    assumptions:
+    - The column should contain values ['Emergency', 'Urgent', 'Elective'].
+  Age:
+    code:
+    - - .isPositive('Age')
+      - Valid
+    - - .satisfies('Age > 0', 'Age should be greater than zero')
+      - Valid
+    assumptions:
+    - The column should be a positive integer.
+    - The column should not contain zero values.
+  Billing Amount:
+    code:
+    - - .isNonNegative('Billing Amount')
+      - Invalid
+    - - .satisfies('Billing Amount > 0', 'Billing Amount should be greater than zero')
+      - Invalid
+    assumptions:
+    - The column should be a non-negative fractional value.
+    - The column should not contain zero values.
+  Medical Condition:
+    code:
+    - - .isContainedIn('Medical Condition', ['Hypertension', 'Cancer', 'Obesity',
+        'Arthritis', 'Diabetes', 'Asthma'])
+      - Valid
+    assumptions:
+    - The column should contain values ['Hypertension', 'Cancer', 'Obesity', 'Arthritis',
+      'Diabetes', 'Asthma'].
+  Test Results:
+    code:
+    - - .isContainedIn('Test Results', ['Abnormal', 'Normal', 'Inconclusive'])
+      - Valid
+    assumptions:
+    - The column should contain values ['Abnormal', 'Normal', 'Inconclusive'].
+  id:
+    code:
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The column should have unique values.

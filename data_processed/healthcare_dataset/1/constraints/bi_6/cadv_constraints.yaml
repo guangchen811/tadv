@@ -1,0 +1,21 @@
+constraints:
+  Blood Type:
+    code:
+    - - .isComplete("Blood Type")
+      - Valid
+    - - .isContainedIn("Blood Type", ["A+", "O+", "B+", "AB+", "A-", "O-", "B-", "AB-"])
+      - Valid
+    assumptions:
+    - Blood Type should be complete.
+    - 'Blood Type should only contain the values: A+, O+, B+, AB+, A-, O-, B-, AB-.'
+  Medical Condition:
+    code:
+    - - .isComplete("Medical Condition")
+      - Valid
+    - - .isContainedIn("Medical Condition", ["Hypertension", "Cancer", "Obesity",
+        "Arthritis", "Diabetes", "Asthma"])
+      - Valid
+    assumptions:
+    - Medical Condition should be complete.
+    - 'Medical Condition should only contain the values: Hypertension, Cancer, Obesity,
+      Arthritis, Diabetes, Asthma.'

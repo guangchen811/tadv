@@ -1,0 +1,46 @@
+constraints:
+  Age:
+    code:
+    - - .isNonNegative('Age')
+      - Valid
+    assumptions:
+    - Age should be a non-negative integer.
+  Doctor:
+    code:
+    - - '.hasCompleteness(''Doctor'', lambda x: x == 1.0)'
+      - Valid
+    - - .isComplete('Doctor')
+      - Valid
+    assumptions:
+    - Doctor should be a non-empty string.
+  Hospital:
+    code:
+    - - '.hasCompleteness(''Hospital'', lambda x: x == 1.0)'
+      - Valid
+    - - .isComplete('Hospital')
+      - Valid
+    assumptions:
+    - Hospital should be a non-empty string.
+  Medical Condition:
+    code:
+    - - '.hasCompleteness(''Medical Condition'', lambda x: x == 1.0)'
+      - Valid
+    - - .isComplete('Medical Condition')
+      - Valid
+    assumptions:
+    - Medical Condition should be a non-empty string.
+  Name:
+    code:
+    - - '.hasCompleteness(''Name'', lambda x: x == 1.0)'
+      - Valid
+    - - .isComplete('Name')
+      - Valid
+    assumptions:
+    - Name should be a non-empty string.
+    - Name should be unique or consistently formatted for sorting.
+  id:
+    code:
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - id should be unique, given it is likely a primary key.

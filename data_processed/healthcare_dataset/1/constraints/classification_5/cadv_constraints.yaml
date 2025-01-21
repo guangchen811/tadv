@@ -1,0 +1,75 @@
+constraints:
+  Age:
+    code:
+    - - .isComplete('Age')
+      - Valid
+    - - .isNonNegative('Age')
+      - Valid
+    assumptions:
+    - The 'Age' column should be complete, with no missing values.
+    - The 'Age' column should contain non-negative values.
+  Billing Amount:
+    code:
+    - - .isComplete('Billing Amount')
+      - Valid
+    - - .isNonNegative('Billing Amount')
+      - Invalid
+    assumptions:
+    - The 'Billing Amount' column should be complete, with no missing values.
+    - The 'Billing Amount' column should contain non-negative values.
+  Blood Type:
+    code:
+    - - .isComplete('Blood Type')
+      - Valid
+    - - .isContainedIn('Blood Type', ['A+', 'O+', 'B+', 'AB+', 'A-', 'O-', 'B-', 'AB-'])
+      - Valid
+    assumptions:
+    - The 'Blood Type' column should be complete, with no missing values.
+    - 'The ''Blood Type'' column should only contain values from the set: {''A+'',
+      ''O+'', ''B+'', ''AB+'', ''A-'', ''O-'', ''B-'', ''AB-''}.'
+  Date of Admission:
+    code:
+    - - .isComplete('Date of Admission')
+      - Valid
+    - - .satisfies('Date of Admission IS NOT NULL', 'Date of Admission is convertible
+        to datetime')
+      - Invalid
+    assumptions:
+    - The 'Date of Admission' column should be complete, with no missing values.
+    - The 'Date of Admission' column should be convertible to a datetime format.
+  Discharge Date:
+    code:
+    - - .isComplete('Discharge Date')
+      - Valid
+    - - .isGreaterThanOrEqualTo('Discharge Date', 'Date of Admission')
+      - Invalid
+    - - .satisfies('Discharge Date IS NOT NULL', 'Discharge Date is convertible to
+        datetime')
+      - Invalid
+    assumptions:
+    - The 'Discharge Date' column should be complete, with no missing values.
+    - The 'Discharge Date' column should be convertible to a datetime format.
+    - The 'Discharge Date' should be greater than or equal to 'Date of Admission'.
+  Medical Condition:
+    code:
+    - - .isComplete('Medical Condition')
+      - Valid
+    - - .isContainedIn('Medical Condition', ['Hypertension', 'Cancer', 'Obesity',
+        'Arthritis', 'Diabetes', 'Asthma'])
+      - Valid
+    assumptions:
+    - The 'Medical Condition' column should be complete, with no missing values.
+    - 'The ''Medical Condition'' column should only contain values from the set: {''Hypertension'',
+      ''Cancer'', ''Obesity'', ''Arthritis'', ''Diabetes'', ''Asthma''}.'
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isNonNegative('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The 'id' column should be complete, with no missing values.
+    - The 'id' column should contain unique values.
+    - The 'id' column should contain only non-negative values.

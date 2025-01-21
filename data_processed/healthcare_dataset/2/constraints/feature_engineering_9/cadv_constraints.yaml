@@ -1,0 +1,49 @@
+constraints:
+  Admission Type:
+    code:
+    - - .isContainedIn('Admission Type', ['Emergency', 'Urgent', 'Elective'])
+      - Valid
+    assumptions:
+    - The column 'Admission Type' should have values within ['Emergency', 'Urgent',
+      'Elective'].
+  Billing Amount:
+    code:
+    - - '.hasMean(''Billing Amount'', lambda x: True)'
+      - Valid
+    - - '.hasStandardDeviation(''Billing Amount'', lambda x: True)'
+      - Valid
+    - - .isNonNegative('Billing Amount')
+      - Invalid
+    assumptions:
+    - The column 'Billing Amount' should be non-negative.
+    - The column 'Billing Amount' should have a mean and standard deviation constraint.
+  Date of Admission:
+    code:
+    - - .satisfies('try_cast(Date of Admission as date) IS NOT NULL', 'Date of Admission
+        is a valid date')
+      - Invalid
+    assumptions:
+    - The column 'Date of Admission' should be convertible to a DATE type.
+    - Ensure 'Date of Admission' contains valid and logical date values.
+  Discharge Date:
+    code:
+    - - .satisfies('try_cast(Discharge Date as date) IS NOT NULL', 'Discharge Date
+        is a valid date')
+      - Invalid
+    assumptions:
+    - The column 'Discharge Date' should be convertible to a DATE type.
+    - Ensure 'Discharge Date' contains valid and logical date values.
+  Medical Condition:
+    code:
+    - - .isContainedIn('Medical Condition', ['Hypertension', 'Cancer', 'Obesity',
+        'Arthritis', 'Diabetes', 'Asthma'])
+      - Valid
+    assumptions:
+    - The column 'Medical Condition' should have values within ['Hypertension', 'Cancer',
+      'Obesity', 'Arthritis', 'Diabetes', 'Asthma'].
+  id:
+    code:
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The column 'id' should have unique values.

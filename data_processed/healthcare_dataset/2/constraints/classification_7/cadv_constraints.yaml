@@ -1,0 +1,44 @@
+constraints:
+  Age:
+    code:
+    - - '.hasMin(''age'', lambda x: x > 0)'
+      - Valid
+    - - .isComplete('age')
+      - Valid
+    - - .isNonNegative('age')
+      - Valid
+    assumptions:
+    - The 'age' column should be greater than 0 to avoid division by zero in 'cost_per_year_of_age'
+      calculation.
+    - The 'age' column should be complete (NOT NULL).
+    - The 'age' column is expected to contain non-negative values.
+  Billing Amount:
+    code:
+    - - .isComplete('billing_amount')
+      - Invalid
+    - - .isNonNegative('billing_amount')
+      - Invalid
+    assumptions:
+    - The 'billing_amount' column should be complete (NOT NULL).
+    - The 'billing_amount' column is expected to contain non-negative values.
+  Gender:
+    code:
+    - - .isComplete('gender')
+      - Valid
+    - - .isContainedIn('gender', ['Male', 'Female'])
+      - Valid
+    assumptions:
+    - 'The ''gender'' column should be one of the known categories: ''Male'' or ''Female''.'
+    - The 'gender' column should be complete (NOT NULL).
+  Hospita:
+    code: []
+    assumptions: []
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The 'id' column should be unique for each record.
+    - The 'id' column should be complete (NOT NULL).

@@ -1,0 +1,48 @@
+constraints:
+  Age:
+    code:
+    - - '.hasMax(''Age'', lambda x: x <= realistic_max_age)'
+      - Invalid
+    - - '.hasMean(''Age'', lambda x: x == expected_mean_age)'
+      - Invalid
+    - - '.hasMin(''Age'', lambda x: x >= realistic_min_age)'
+      - Invalid
+    - - '.hasStandardDeviation(''Age'', lambda x: x == expected_std_dev_age)'
+      - Invalid
+    - - .isComplete('Age')
+      - Valid
+    - - .isNonNegative('Age')
+      - Valid
+    assumptions:
+    - The column 'Age' should be complete (NOT NULL).
+    - The column 'Age' should have a minimum value constraint, determined by the realistic
+      minimum age for the dataset.
+    - The column 'Age' should have a maximum value constraint, determined by the realistic
+      maximum age for the dataset.
+    - The column 'Age' should have a mean and standard deviation constraint to capture
+      expected distribution.
+    - The column 'Age' should be non-negative, as age cannot be negative.
+  Billing Amount:
+    code:
+    - - '.hasMax(''Billing Amount'', lambda x: x <= realistic_max_billing_amount)'
+      - Invalid
+    - - '.hasMean(''Billing Amount'', lambda x: x == expected_mean_billing_amount)'
+      - Invalid
+    - - '.hasMin(''Billing Amount'', lambda x: x >= 0)'
+      - Invalid
+    - - '.hasStandardDeviation(''Billing Amount'', lambda x: x == expected_std_dev_billing_amount)'
+      - Invalid
+    - - .isComplete('Billing Amount')
+      - Valid
+    - - .isNonNegative('Billing Amount')
+      - Invalid
+    assumptions:
+    - The column 'Billing Amount' should be complete (NOT NULL).
+    - The column 'Billing Amount' should have a minimum value constraint, assuming
+      no negative billing amounts.
+    - The column 'Billing Amount' should have a maximum value constraint determined
+      by the realistic maximum billing amount.
+    - The column 'Billing Amount' should have a mean and standard deviation constraint
+      to capture expected distribution.
+    - The column 'Billing Amount' should be non-negative, as billing amounts cannot
+      be negative.

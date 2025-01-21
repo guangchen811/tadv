@@ -1,0 +1,58 @@
+constraints:
+  Admission Type:
+    code:
+    - - .isComplete('Admission Type')
+      - Valid
+    - - .isContainedIn('Admission Type', ['Emergency', 'Urgent', 'Elective'])
+      - Valid
+    assumptions:
+    - The 'Admission Type' column should have values within the range ['Emergency',
+      'Urgent', 'Elective'].
+    - The 'Admission Type' column should not be NULL.
+  Gender:
+    code:
+    - - .isComplete('Gender')
+      - Valid
+    - - .isContainedIn('Gender', ['Male', 'Female'])
+      - Valid
+    assumptions:
+    - The 'Gender' column should have values within the range ['Male', 'Female'].
+    - The 'Gender' column should not be NULL.
+  Insurance Provider:
+    code:
+    - - .isComplete('Insurance Provider')
+      - Valid
+    - - .isContainedIn('Insurance Provider', ['Aetna', 'Blue Cross', 'UnitedHealthcare',
+        'Cigna', 'Medicare'])
+      - Valid
+    assumptions:
+    - The 'Insurance Provider' column should have values within the range ['Aetna',
+      'Blue Cross', 'UnitedHealthcare', 'Cigna', 'Medicare'].
+    - The 'Insurance Provider' column should not be NULL.
+  Medical Condition:
+    code:
+    - - .isComplete('Medical Condition')
+      - Valid
+    - - .isContainedIn('Medical Condition', ['Hypertension', 'Cancer', 'Obesity',
+        'Arthritis', 'Diabetes', 'Asthma'])
+      - Valid
+    assumptions:
+    - The 'Medical Condition' column should have values within the range ['Hypertension',
+      'Cancer', 'Obesity', 'Arthritis', 'Diabetes', 'Asthma'].
+    - The 'Medical Condition' column should not be NULL.
+  Name:
+    code:
+    - - .isComplete('Name')
+      - Valid
+    assumptions:
+    - The 'Name' column should not be NULL.
+    - The 'Name' column should be of type String.
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The 'id' column should have unique values.
+    - The 'id' column should not be NULL.

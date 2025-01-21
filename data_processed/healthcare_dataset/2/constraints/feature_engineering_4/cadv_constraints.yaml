@@ -1,0 +1,49 @@
+constraints:
+  Billing Amount:
+    code:
+    - - '.hasMean(''Billing Amount'', lambda x: x is not None)'
+      - Valid
+    - - '.hasStandardDeviation(''Billing Amount'', lambda x: x is not None)'
+      - Valid
+    - - .isComplete('Billing Amount')
+      - Valid
+    - - .isNonNegative('Billing Amount')
+      - Invalid
+    assumptions:
+    - The column 'Billing Amount' is complete and should have a NOT NULL constraint.
+    - The column 'Billing Amount' should have a mean and standard deviation constraint
+      due to its numeric nature.
+    - The column 'Billing Amount' should have an IS NON NEGATIVE constraint since
+      it is likely to represent financial data.
+  Gender:
+    code:
+    - - .isComplete('Gender')
+      - Valid
+    - - .isContainedIn('Gender', ['Male', 'Female'])
+      - Valid
+    assumptions:
+    - 'The column ''Gender'' should have values within the categorical range: [''Male'',
+      ''Female''].'
+    - The column 'Gender' is complete and should have a NOT NULL constraint.
+  Medical Condition:
+    code:
+    - - .isComplete('Medical Condition')
+      - Valid
+    - - .isContainedIn('Medical Condition', ['Hypertension', 'Cancer', 'Obesity',
+        'Arthritis', 'Diabetes', 'Asthma'])
+      - Valid
+    assumptions:
+    - 'The column ''Medical Condition'' should have values within the categorical
+      range: [''Hypertension'', ''Cancer'', ''Obesity'', ''Arthritis'', ''Diabetes'',
+      ''Asthma''].'
+    - The column 'Medical Condition' is complete and should have a NOT NULL constraint.
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The column 'id' is complete and should have a NOT NULL constraint.
+    - The column 'id' should have a UNIQUE constraint since the approximate num distinct
+      values is close to the number of records, indicating it might be a unique identifier.

@@ -1,0 +1,28 @@
+constraints:
+  Billing Amount:
+    code:
+    - - .isComplete("Billing Amount")
+      - Valid
+    - - .isPositive("Billing Amount")
+      - Invalid
+    assumptions:
+    - Billing Amount should not be null
+    - Billing Amount should be a positive number
+  Hospital:
+    code:
+    - - .hasPattern("Hospital", "^.+$")
+      - Valid
+    - - .isComplete("Hospital")
+      - Valid
+    assumptions:
+    - Hospital should not be null
+    - Hospital should be a valid string
+  Medical Condition:
+    code:
+    - - .hasPattern("Medical Condition", "^.+$")
+      - Valid
+    - - .isComplete("Medical Condition")
+      - Valid
+    assumptions:
+    - Medical Condition should not be null
+    - Medical Condition should be a valid string

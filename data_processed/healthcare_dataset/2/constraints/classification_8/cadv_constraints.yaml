@@ -1,0 +1,49 @@
+constraints:
+  Date of Admission:
+    code:
+    - - .isComplete('Date of Admission')
+      - Valid
+    - - .satisfies('Date of Admission IS NOT NULL AND Date of Admission != ""', 'Parsable
+        Date Check')
+      - Invalid
+    assumptions:
+    - The 'Date of Admission' column should be parsable as dates, as it is converted
+      to datetime.
+    - The 'Date of Admission' column should be complete, as it is used in calculating
+      'length_of_stay'.
+  Discharge Date:
+    code:
+    - - .isComplete('Discharge Date')
+      - Valid
+    - - .isGreaterThanOrEqualTo('Discharge Date', 'Date of Admission')
+      - Invalid
+    - - .satisfies('Discharge Date IS NOT NULL AND Discharge Date != ""', 'Parsable
+        Date Check')
+      - Invalid
+    assumptions:
+    - The 'Discharge Date' column should be parsable as dates, as it is converted
+      to datetime.
+    - The 'Discharge Date' column should be complete, as it is used in calculating
+      'length_of_stay'.
+    - The 'Discharge Date' should not be earlier than the 'Date of Admission'.
+  Test Results:
+    code:
+    - - .isComplete('Test Results')
+      - Valid
+    - - .isContainedIn('Test Results', ['Abnormal', 'Normal', 'Inconclusive'])
+      - Valid
+    assumptions:
+    - 'The ''Test Results'' column should only contain values within the predefined
+      categories: ''Abnormal'', ''Normal'', ''Inconclusive'', as seen in the histogram.'
+    - The 'Test Results' column should be complete, as it is the target variable for
+      the machine learning model.
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The 'id' column should be complete, as it is used to track individual records.
+    - The 'id' column should have unique values, as it is used to identify each record
+      uniquely.

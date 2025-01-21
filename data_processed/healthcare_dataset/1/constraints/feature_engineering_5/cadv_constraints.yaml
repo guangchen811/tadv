@@ -1,0 +1,145 @@
+constraints:
+  Admission Type:
+    code:
+    - - .isComplete('Admission Type')
+      - Valid
+    - - .isContainedIn('Admission Type', ['Emergency', 'Urgent', 'Elective'])
+      - Valid
+    assumptions:
+    - Admission Type should be complete and not null.
+    - 'Admission Type should be one of: ''Emergency'', ''Urgent'', ''Elective''.'
+  Age:
+    code:
+    - - '.hasMax(''Age'', lambda x: x <= 120)'
+      - Valid
+    - - .isComplete('Age')
+      - Valid
+    - - .isNonNegative('Age')
+      - Valid
+    assumptions:
+    - Age should be complete and not null.
+    - Age should be a non-negative integer.
+    - Age should be a reasonable human age (e.g., between 0 and 120).
+  Billing Amount:
+    code:
+    - - .isComplete('Billing Amount')
+      - Valid
+    - - .isPositive('Billing Amount')
+      - Invalid
+    assumptions:
+    - Billing Amount should be complete and not null.
+    - Billing Amount should be a positive number.
+  Blood Type:
+    code:
+    - - .isComplete('Blood Type')
+      - Valid
+    - - .isContainedIn('Blood Type', ['A+', 'O+', 'B+', 'AB+', 'A-', 'O-', 'B-', 'AB-'])
+      - Valid
+    assumptions:
+    - Blood Type should be complete and not null.
+    - 'Blood Type should be one of: ''A+'', ''O+'', ''B+'', ''AB+'', ''A-'', ''O-'',
+      ''B-'', ''AB-''.'
+  Date of Admission:
+    code:
+    - - .isComplete('Date of Admission')
+      - Valid
+    assumptions:
+    - Date of Admission should be complete and not null.
+    - Date of Admission should be in a valid date format.
+  Discharge Date:
+    code:
+    - - .isComplete('Discharge Date')
+      - Valid
+    assumptions:
+    - Discharge Date should be complete and not null.
+    - Discharge Date should be in a valid date format.
+  Doctor:
+    code:
+    - - .isComplete('Doctor')
+      - Valid
+    assumptions:
+    - Doctor should be complete and not null.
+  Gender:
+    code:
+    - - .isComplete('Gender')
+      - Valid
+    - - .isContainedIn('Gender', ['Male', 'Female'])
+      - Valid
+    assumptions:
+    - Gender should be complete and not null.
+    - 'Gender should be one of: ''Male'', ''Female''.'
+  Hospital:
+    code:
+    - - .isComplete('Hospital')
+      - Valid
+    assumptions:
+    - Hospital should be complete and not null.
+  Insurance Provider:
+    code:
+    - - .isComplete('Insurance Provider')
+      - Valid
+    - - .isContainedIn('Insurance Provider', ['Aetna', 'Blue Cross', 'UnitedHealthcare',
+        'Cigna', 'Medicare'])
+      - Valid
+    assumptions:
+    - Insurance Provider should be complete and not null.
+    - 'Insurance Provider should be one of: ''Aetna'', ''Blue Cross'', ''UnitedHealthcare'',
+      ''Cigna'', ''Medicare''.'
+  Medical Condition:
+    code:
+    - - .isComplete('Medical Condition')
+      - Valid
+    - - .isContainedIn('Medical Condition', ['Hypertension', 'Cancer', 'Obesity',
+        'Arthritis', 'Diabetes', 'Asthma'])
+      - Valid
+    assumptions:
+    - Medical Condition should be complete and not null.
+    - 'Medical Condition should be one of: ''Hypertension'', ''Cancer'', ''Obesity'',
+      ''Arthritis'', ''Diabetes'', ''Asthma''.'
+  Medication:
+    code:
+    - - .isComplete('Medication')
+      - Valid
+    - - .isContainedIn('Medication', ['Aspirin', 'Paracetamol', 'Ibuprofen', 'Penicillin',
+        'Lipitor'])
+      - Valid
+    assumptions:
+    - Medication should be complete and not null.
+    - 'Medication should be one of: ''Aspirin'', ''Paracetamol'', ''Ibuprofen'', ''Penicillin'',
+      ''Lipitor''.'
+  Name:
+    code:
+    - - .isComplete('Name')
+      - Valid
+    assumptions:
+    - Name should be complete and not null.
+  Room Number:
+    code:
+    - - .isComplete('Room Number')
+      - Valid
+    - - .isNonNegative('Room Number')
+      - Invalid
+    assumptions:
+    - Room Number should be complete and not null.
+    - Room Number should be non-negative.
+  Test Results:
+    code:
+    - - .isComplete('Test Results')
+      - Valid
+    - - .isContainedIn('Test Results', ['Abnormal', 'Normal', 'Inconclusive'])
+      - Valid
+    assumptions:
+    - Test Results should be complete and not null.
+    - 'Test Results should be one of: ''Abnormal'', ''Normal'', ''Inconclusive''.'
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isNonNegative('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - id should be complete and not null.
+    - id should be unique.
+    - id should be non-negative.

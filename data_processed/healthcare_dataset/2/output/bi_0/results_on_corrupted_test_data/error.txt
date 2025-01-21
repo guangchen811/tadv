@@ -1,0 +1,2 @@
+Binder Error: Referenced column "Admission_Type" not found in FROM clause!
+Candidate bindings: "train.Admission Type", "train.Blood Type", "train.Medication", "train.id"

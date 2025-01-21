@@ -1,0 +1,20 @@
+constraints:
+  Medication:
+    code:
+    - - .isComplete('Medication')
+      - Valid
+    - - .isContainedIn('Medication', ['Aspirin', 'Paracetamol', 'Ibuprofen', 'Penicillin',
+        'Lipitor'])
+      - Valid
+    assumptions:
+    - NOT NULL
+    - IS IN ('Aspirin', 'Paracetamol', 'Ibuprofen', 'Penicillin', 'Lipitor')
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - NOT NULL
+    - UNIQUE

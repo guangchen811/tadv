@@ -1,0 +1,126 @@
+constraints:
+  Admission Type:
+    code:
+    - - .isComplete('Admission Type')
+      - Valid
+    - - .isContainedIn('Admission Type', ['Emergency', 'Urgent', 'Elective'])
+      - Valid
+    assumptions:
+    - Column should have string data types.
+    - Values should be within ['Emergency', 'Urgent', 'Elective'].
+    - Values should be non-null.
+  Age:
+    code:
+    - - .isNonNegative('Age')
+      - Valid
+    assumptions:
+    - Column should have integral data types.
+    - Values should be non-negative.
+  Billing Amount:
+    code:
+    - - .isNonNegative('Billing Amount')
+      - Invalid
+    assumptions:
+    - Column should have fractional data types.
+    - Values should be non-negative.
+  Blood Type:
+    code:
+    - - .isComplete('Blood Type')
+      - Valid
+    - - .isContainedIn('Blood Type', ['A+', 'O+', 'B+', 'AB+', 'A-', 'O-', 'B-', 'AB-'])
+      - Valid
+    assumptions:
+    - Column should have string data types.
+    - Values should be within ['A+', 'O+', 'B+', 'AB+', 'A-', 'O-', 'B-', 'AB-'].
+    - Values should be non-null.
+  Date of Admission:
+    code:
+    - - .isComplete('Date of Admission')
+      - Valid
+    assumptions:
+    - Column should have string data types.
+    - Values should be non-null.
+  Discharge Date:
+    code:
+    - - .isComplete('Discharge Date')
+      - Valid
+    assumptions:
+    - Column should have string data types.
+    - Values should be non-null.
+  Doctor:
+    code:
+    - - .isComplete('Doctor')
+      - Valid
+    assumptions:
+    - Column should have string data types.
+    - Values should be non-null.
+  Gender:
+    code:
+    - - .isComplete('Gender')
+      - Valid
+    - - .isContainedIn('Gender', ['Male', 'Female'])
+      - Valid
+    assumptions:
+    - Column should have string data types.
+    - Values should be within ['Male', 'Female'].
+    - Values should be non-null.
+  Hospital:
+    code:
+    - - .isComplete('Hospital')
+      - Valid
+    assumptions:
+    - Column should have string data types.
+    - Values should be non-null.
+  Insurance Provider:
+    code:
+    - - .isComplete('Insurance Provider')
+      - Valid
+    - - .isContainedIn('Insurance Provider', ['Aetna', 'Blue Cross', 'UnitedHealthcare',
+        'Cigna', 'Medicare'])
+      - Valid
+    assumptions:
+    - Column should have string data types.
+    - Values should be within ['Aetna', 'Blue Cross', 'UnitedHealthcare', 'Cigna',
+      'Medicare'].
+    - Values should be non-null.
+  Medical Condition:
+    code:
+    - - .isComplete('Medical Condition')
+      - Valid
+    - - .isContainedIn('Medical Condition', ['Hypertension', 'Cancer', 'Obesity',
+        'Arthritis', 'Diabetes', 'Asthma'])
+      - Valid
+    assumptions:
+    - Column should have string data types.
+    - Values should be within ['Hypertension', 'Cancer', 'Obesity', 'Arthritis', 'Diabetes',
+      'Asthma'].
+    - Values should be non-null.
+  Medication:
+    code:
+    - - .isComplete('Medication')
+      - Valid
+    - - .isContainedIn('Medication', ['Aspirin', 'Paracetamol', 'Ibuprofen', 'Penicillin',
+        'Lipitor'])
+      - Valid
+    assumptions:
+    - Column should have string data types.
+    - Values should be within ['Aspirin', 'Paracetamol', 'Ibuprofen', 'Penicillin',
+      'Lipitor'].
+    - Values should be non-null.
+  Room Number:
+    code:
+    - - .isNonNegative('Room Number')
+      - Invalid
+    assumptions:
+    - Column should have integral data types.
+    - Values should be non-negative.
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - Column should have integral data types.
+    - Values should be unique.
+    - Values should be non-null.

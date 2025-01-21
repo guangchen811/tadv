@@ -1,0 +1,20 @@
+constraints:
+  Billing Amount:
+    code:
+    - - '.hasPattern(''Billing Amount'', r''^\d+(\.\d+)?$'', lambda x: x == 1.0)'
+      - Invalid
+    - - .isComplete('Billing Amount')
+      - Valid
+    - - .isNonNegative('Billing Amount')
+      - Invalid
+    assumptions:
+    - The Billing Amount column should be complete (no missing values).
+    - Values in the Billing Amount column should be non-negative.
+    - Values in the Billing Amount column should be of numeric type, specifically
+      fractional.
+  Doctor:
+    code:
+    - - .isComplete('Doctor')
+      - Valid
+    assumptions:
+    - The Doctor column should be complete (no missing values).

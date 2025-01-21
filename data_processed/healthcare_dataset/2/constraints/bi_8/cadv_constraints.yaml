@@ -1,0 +1,27 @@
+constraints:
+  Age:
+    code:
+    - - '.hasMin(''Age'', lambda x: x >= 65)'
+      - Invalid
+    - - .isComplete('Age')
+      - Valid
+    - - .satisfies('Age == CAST(Age AS INT)', 'Age should be integral')
+      - Valid
+    assumptions:
+    - The column 'Age' should have a minimum value of 65 as the query filters for
+      'Age' >= 65.
+    - The column 'Age' is complete, so it should not contain null values.
+    - The column 'Age' is of Integral type, so it should not contain fractional or
+      string values.
+  Medical Condition:
+    code:
+    - - .isComplete('Medical Condition')
+      - Valid
+    - - .isContainedIn('Medical Condition', ['Hypertension', 'Cancer', 'Obesity',
+        'Arthritis', 'Diabetes', 'Asthma'])
+      - Valid
+    assumptions:
+    - The column 'Medical Condition' has a categorical range which includes 'Hypertension',
+      'Cancer', 'Obesity', 'Arthritis', 'Diabetes', and 'Asthma'. These values should
+      be present in the column.
+    - The column 'Medical Condition' is complete, so it should not contain null values.

@@ -1,0 +1,73 @@
+constraints:
+  Age:
+    code:
+    - - '.hasMean(''Age'', lambda x: True)'
+      - Valid
+    - - '.hasStandardDeviation(''Age'', lambda x: True)'
+      - Valid
+    - - .isComplete('Age')
+      - Valid
+    - - .isNonNegative('Age')
+      - Valid
+    assumptions:
+    - Suggest mean and standard deviation constraints
+    - The column should contain non-negative values only
+    - Completeness should be 100% (NOT NULL constraint)
+  Billing Amount:
+    code:
+    - - '.hasMean(''Billing Amount'', lambda x: True)'
+      - Valid
+    - - '.hasStandardDeviation(''Billing Amount'', lambda x: True)'
+      - Valid
+    - - .isComplete('Billing Amount')
+      - Valid
+    - - .isNonNegative('Billing Amount')
+      - Invalid
+    assumptions:
+    - Suggest mean and standard deviation constraints
+    - The column should contain non-negative values only
+    - Completeness should be 100% (NOT NULL constraint)
+  Blood Type:
+    code:
+    - - .isComplete('Blood Type')
+      - Valid
+    - - .isContainedIn('Blood Type', ['A+', 'O+', 'B+', 'AB+', 'A-', 'O-', 'B-', 'AB-'])
+      - Valid
+    assumptions:
+    - 'The column should have values within the observed range: [''A+'', ''O+'', ''B+'',
+      ''AB+'', ''A-'', ''O-'', ''B-'', ''AB-'']'
+    - Completeness should be 100% (NOT NULL constraint)
+  Date of Admission:
+    code:
+    - - .isComplete('Date of Admission')
+      - Valid
+    assumptions:
+    - The column should be convertible to a datetime format
+    - Completeness should be 100% (NOT NULL constraint)
+  Discharge Date:
+    code:
+    - - .isComplete('Discharge Date')
+      - Valid
+    assumptions:
+    - The column should be convertible to a datetime format
+    - Completeness should be 100% (NOT NULL constraint)
+  Medical Condition:
+    code:
+    - - .isComplete('Medical Condition')
+      - Valid
+    - - .isContainedIn('Medical Condition', ['Hypertension', 'Cancer', 'Obesity',
+        'Arthritis', 'Diabetes', 'Asthma'])
+      - Valid
+    assumptions:
+    - 'The column should have values within the observed range: [''Hypertension'',
+      ''Cancer'', ''Obesity'', ''Arthritis'', ''Diabetes'', ''Asthma'']'
+    - Completeness should be 100% (NOT NULL constraint)
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The column should be unique
+    - Completeness should be 100% (NOT NULL constraint)

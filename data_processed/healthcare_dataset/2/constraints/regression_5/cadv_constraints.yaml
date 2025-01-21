@@ -1,0 +1,40 @@
+constraints:
+  Age:
+    code:
+    - - .isComplete('Age')
+      - Valid
+    - - .isNonNegative('Age')
+      - Valid
+    assumptions:
+    - Column 'Age' should be complete (NOT NULL).
+    - Column 'Age' should be numeric since it is filled with 0 for missing values.
+    - Column 'Age' should be non-negative as it represents an age.
+  Room Number:
+    code:
+    - - .isComplete('Room Number')
+      - Valid
+    - - .isNonNegative('Room Number')
+      - Invalid
+    assumptions:
+    - Column 'Room Number' should be complete (NOT NULL).
+    - Column 'Room Number' should be numeric since it is filled with 0 for missing
+      values.
+  billing_amount:
+    code:
+    - - .isComplete('billing_amount')
+      - Invalid
+    - - .isNonNegative('billing_amount')
+      - Invalid
+    assumptions:
+    - Column 'billing_amount' should be complete (NOT NULL).
+    - Column 'billing_amount' should be numeric as it is used for regression.
+    - Column 'billing_amount' should be non-negative since it represents an amount.
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - Column 'id' should be complete (NOT NULL).
+    - Column 'id' should be unique since it is used as an identifier.

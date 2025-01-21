@@ -1,0 +1,64 @@
+constraints:
+  Date of Admission:
+    code:
+    - - .hasPattern('Date of Admission', '\d{4}-\d{2}-\d{2}')
+      - Valid
+    - - .isComplete('Date of Admission')
+      - Valid
+    assumptions:
+    - The column should be complete (NOT NULL).
+    - The column should have a data type of string representing a date.
+  Discharge Date:
+    code:
+    - - .hasPattern('Discharge Date', '\d{4}-\d{2}-\d{2}')
+      - Valid
+    - - .isComplete('Discharge Date')
+      - Valid
+    assumptions:
+    - The column should be complete (NOT NULL).
+    - The column should have a data type of string representing a date.
+  Doctor:
+    code:
+    - - '.hasMaxLength(''Doctor'', lambda x: x <= 255)'
+      - Valid
+    - - .isComplete('Doctor')
+      - Valid
+    assumptions:
+    - The column should be complete (NOT NULL).
+    - The column should have a maximum length constraint.
+  Name:
+    code:
+    - - '.hasMaxLength(''Name'', lambda x: x <= 255)'
+      - Valid
+    - - .isComplete('Name')
+      - Valid
+    assumptions:
+    - The column should be complete (NOT NULL).
+    - The column should have a maximum length constraint.
+  Test Results:
+    code:
+    - - .isComplete('Test Results')
+      - Valid
+    - - .isContainedIn('Test Results', ['Abnormal', 'Normal', 'Inconclusive'])
+      - Valid
+    assumptions:
+    - The column should be complete (NOT NULL).
+    - The column should have values in ['Abnormal', 'Normal', 'Inconclusive'].
+  billing_amount:
+    code:
+    - - .isComplete('billing_amount')
+      - Invalid
+    - - .isNonNegative('billing_amount')
+      - Invalid
+    assumptions:
+    - The column should be complete (NOT NULL).
+    - The column should have non-negative values.
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The column should be complete (NOT NULL).
+    - The column should have unique values.

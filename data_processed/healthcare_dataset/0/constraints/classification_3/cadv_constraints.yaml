@@ -1,0 +1,52 @@
+constraints:
+  Age:
+    code:
+    - - .isComplete('Age')
+      - Valid
+    - - .isNonNegative('Age')
+      - Valid
+    - - .isLessThanOrEqualTo('Age', '120')
+      - Invalid
+    assumptions:
+    - Age should be an integral value
+    - Age should have a valid range, typically between 0 and 120
+  Billing Amount:
+    code:
+    - - .isComplete('Billing Amount')
+      - Valid
+    - - .isNonNegative('Billing Amount')
+      - Invalid
+    - - .hasPattern('Billing Amount', '^\d*\.?\d+$')
+      - Invalid
+    assumptions:
+    - Billing Amount should be a fractional value
+    - Billing Amount should be non-negative
+  Gender:
+    code:
+    - - .isComplete('Gender')
+      - Valid
+    - - .isContainedIn('Gender', ['Male', 'Female'])
+      - Valid
+    assumptions:
+    - Gender should be either 'Male' or 'Female'
+  Medical Condition:
+    code:
+    - - .isComplete('Medical Condition')
+      - Valid
+    - - .isContainedIn('Medical Condition', ['Hypertension', 'Cancer', 'Obesity',
+        'Arthritis', 'Diabetes', 'Asthma'])
+      - Valid
+    assumptions:
+    - 'Medical Condition should be one of the predefined categories: ''Hypertension'',
+      ''Cancer'', ''Obesity'', ''Arthritis'', ''Diabetes'', or ''Asthma'''
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    - - .hasPattern('id', '^\d+$')
+      - Invalid
+    assumptions:
+    - id should be an integral value
+    - id should be unique across the dataset

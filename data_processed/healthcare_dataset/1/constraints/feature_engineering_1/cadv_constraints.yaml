@@ -1,0 +1,24 @@
+constraints:
+  Medication:
+    code:
+    - - .isComplete('Medication')
+      - Valid
+    - - .isContainedIn('Medication', ['Aspirin', 'Paracetamol', 'Ibuprofen', 'Penicillin',
+        'Lipitor'])
+      - Valid
+    assumptions:
+    - The column 'Medication' should be complete.
+    - 'The column ''Medication'' should contain only the values: [''Aspirin'', ''Paracetamol'',
+      ''Ibuprofen'', ''Penicillin'', ''Lipitor''].'
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isNonNegative('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The column 'id' should be complete.
+    - The column 'id' should be non-negative.
+    - The column 'id' should be unique.

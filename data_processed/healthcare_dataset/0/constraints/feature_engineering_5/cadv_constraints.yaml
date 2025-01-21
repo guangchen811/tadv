@@ -1,0 +1,20 @@
+constraints:
+  I cannot accurately determine the relevant columns used by the downstream task.:
+    code: []
+    assumptions: []
+  ? I would need to analyze the provided SQL code snippet to determine which columns
+    from the dataset are used in the query. However
+  : code: []
+    assumptions: []
+  I'd be able to assist further.:
+    code: []
+    assumptions: []
+  If you can provide the missing SQL code snippet:
+    code: []
+    assumptions: []
+  To identify the relevant columns:
+    code: []
+    assumptions: []
+  it seems that the code snippet is missing from the prompt. Without the code snippet:
+    code: []
+    assumptions: []

@@ -1,0 +1,23 @@
+constraints:
+  Billing Amount:
+    code:
+    - - .isComplete('Billing Amount')
+      - Valid
+    - - .isNonNegative('Billing Amount')
+      - Invalid
+    assumptions:
+    - The 'Billing Amount' should be complete (i.e., no missing values).
+    - The 'Billing Amount' should be a non-negative number, as billing amounts typically
+      cannot be negative.
+  Doctor:
+    code:
+    - - .isComplete('Doctor')
+      - Valid
+    assumptions:
+    - Every row should have a value for 'Doctor' to ensure accurate counting and grouping.
+  Hospital:
+    code:
+    - - .isComplete('Hospital')
+      - Valid
+    assumptions:
+    - Every row should have a value for 'Hospital' to apply the filter correctly.

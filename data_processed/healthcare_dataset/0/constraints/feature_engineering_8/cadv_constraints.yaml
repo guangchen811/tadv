@@ -1,0 +1,35 @@
+constraints:
+  id:
+    code:
+    - - .isUnique('id')
+      - Valid
+    - - .isComplete('id')
+      - Valid
+    assumptions:
+    - The column 'id' should have unique values for each patient to ensure accurate
+      partitioning.
+    - The column 'id' should contain only non-null values to ensure all records are
+      processed.
+  Date of Admission:
+    code:
+    - - .satisfies('CAST(`Date of Admission` AS DATE) IS NOT NULL', 'Date of Admission
+        is convertible to DATE')
+      - Valid
+    - - .isComplete('Date of Admission')
+      - Valid
+    assumptions:
+    - The column 'Date of Admission' should be convertible to a DATE format without
+      errors.
+    - The column 'Date of Admission' should contain only non-null values to ensure
+      all records are processed in order.
+  Billing Amount:
+    code:
+    - - .isComplete('Billing Amount')
+      - Valid
+    - - .isPositive('Billing Amount')
+      - Invalid
+    assumptions:
+    - The column 'Billing Amount' should contain only non-null values to ensure accurate
+      billing calculations.
+    - The column 'Billing Amount' should contain positive numerical values to ensure
+      billing amounts make sense.

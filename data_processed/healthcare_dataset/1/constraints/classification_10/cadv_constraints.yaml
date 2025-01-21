@@ -1,0 +1,127 @@
+constraints:
+  Admission Type:
+    code:
+    - - .isComplete('Admission Type')
+      - Valid
+    - - .isContainedIn('Admission Type', ['Urgent', 'Elective', 'Emergency'])
+      - Valid
+    assumptions:
+    - Admission Type should be complete.
+    - Admission Type should be one of ['Urgent', 'Elective', 'Emergency'].
+  Age:
+    code:
+    - - .isComplete('Age')
+      - Valid
+    - - .isNonNegative('Age')
+      - Valid
+    - - .satisfies('Age >= 0 AND Age <= 120', 'Age should be between 0 and 120')
+      - Valid
+    assumptions:
+    - Age should be complete.
+    - Age should be non-negative.
+    - Age should typically be between 0 and 120.
+  Billing Amount:
+    code:
+    - - .isComplete('Billing Amount')
+      - Valid
+    - - .isPositive('Billing Amount')
+      - Invalid
+    assumptions:
+    - Billing Amount should be complete.
+    - Billing Amount should be a positive number.
+  Blood Type:
+    code:
+    - - .isComplete('Blood Type')
+      - Valid
+    - - .isContainedIn('Blood Type', ['A+', 'O+', 'B+', 'AB+', 'A-', 'O-', 'B-', 'AB-'])
+      - Valid
+    assumptions:
+    - Blood Type should be complete.
+    - Blood Type should be one of ['A+', 'O+', 'B+', 'AB+', 'A-', 'O-', 'B-', 'AB-'].
+  Date of Admission:
+    code:
+    - - .isComplete('Date of Admission')
+      - Valid
+    assumptions:
+    - Date of Admission should be complete.
+  Discharge Date:
+    code:
+    - - .isComplete('Discharge Date')
+      - Valid
+    assumptions:
+    - Discharge Date should be complete.
+  Doctor:
+    code:
+    - - .isComplete('Doctor')
+      - Valid
+    assumptions:
+    - Doctor should be complete.
+  Gender:
+    code:
+    - - .isComplete('Gender')
+      - Valid
+    - - .isContainedIn('Gender', ['Male', 'Female'])
+      - Valid
+    assumptions:
+    - Gender should be complete.
+    - Gender should be one of ['Male', 'Female'].
+  Hospital:
+    code:
+    - - .isComplete('Hospital')
+      - Valid
+    assumptions:
+    - Hospital should be complete.
+  Insurance Provider:
+    code:
+    - - .isComplete('Insurance Provider')
+      - Valid
+    - - .isContainedIn('Insurance Provider', ['Cigna', 'Medicare', 'UnitedHealthcare',
+        'Blue Cross', 'Aetna'])
+      - Valid
+    assumptions:
+    - Insurance Provider should be complete.
+    - Insurance Provider should be one of ['Cigna', 'Medicare', 'UnitedHealthcare',
+      'Blue Cross', 'Aetna'].
+  Medical Condition:
+    code:
+    - - .isComplete('Medical Condition')
+      - Valid
+    - - .isContainedIn('Medical Condition', ['Diabetes', 'Asthma', 'Obesity', 'Hypertension',
+        'Arthritis', 'Cancer'])
+      - Valid
+    assumptions:
+    - Medical Condition should be complete.
+    - Medical Condition should be one of ['Diabetes', 'Asthma', 'Obesity', 'Hypertension',
+      'Arthritis', 'Cancer'].
+  Medication:
+    code:
+    - - .isComplete('Medication')
+      - Valid
+    - - .isContainedIn('Medication', ['Aspirin', 'Ibuprofen', 'Lipitor', 'Paracetamol',
+        'Penicillin'])
+      - Valid
+    assumptions:
+    - Medication should be complete.
+    - Medication should be one of ['Aspirin', 'Ibuprofen', 'Lipitor', 'Paracetamol',
+      'Penicillin'].
+  Room Number:
+    code:
+    - - .isComplete('Room Number')
+      - Valid
+    - - .isNonNegative('Room Number')
+      - Invalid
+    assumptions:
+    - Room Number should be complete.
+    - Room Number should be non-negative.
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isNonNegative('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - id should be complete.
+    - id should be non-negative.
+    - id should be unique.

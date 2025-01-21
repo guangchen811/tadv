@@ -1,0 +1,53 @@
+constraints:
+  Age:
+    code:
+    - - .isNonNegative('Age')
+      - Valid
+    - - .satisfies('Age % 1 == 0', 'Age should be integral')
+      - Valid
+    assumptions:
+    - The 'Age' column should have non-negative values since age cannot be negative.
+    - The 'Age' column is integral and should only contain whole numbers.
+  Gender:
+    code:
+    - - .isContainedIn('Gender', ['Male', 'Female'])
+      - Valid
+    assumptions:
+    - The 'Gender' column should have values within the range ['Male', 'Female'] as
+      these are the observed categories.
+  admission_date:
+    code:
+    - - .isComplete('admission_date')
+      - Invalid
+    - - .satisfies('admission_date IS NOT NULL', 'admission_date should be convertible
+        to a valid date')
+      - Invalid
+    assumptions:
+    - The 'admission_date' column should be convertible to a valid date format.
+    - The 'admission_date' column should be complete as it is converted to numeric
+      for processing.
+  billing_amount:
+    code:
+    - - .isNonNegative('billing_amount')
+      - Invalid
+    - - .satisfies('billing_amount >= 0', 'billing_amount should be numeric')
+      - Invalid
+    assumptions:
+    - The 'billing_amount' column should have non-negative values as billing amounts
+      cannot be negative.
+    - The 'billing_amount' column is fractional and should contain numeric values.
+  id:
+    code:
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The 'id' column should be unique as it is used to identify records uniquely.
+  medical_condition:
+    code:
+    - - .isContainedIn('medical_condition', ['Hypertension', 'Cancer', 'Obesity',
+        'Arthritis', 'Diabetes', 'Asthma'])
+      - Invalid
+    assumptions:
+    - The 'medical_condition' column should have values within the range ['Hypertension',
+      'Cancer', 'Obesity', 'Arthritis', 'Diabetes', 'Asthma'] as these are the observed
+      categories.

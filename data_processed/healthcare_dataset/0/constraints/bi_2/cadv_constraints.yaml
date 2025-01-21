@@ -1,0 +1,36 @@
+constraints:
+  Billing Amount:
+    code:
+    - - .isComplete('Billing Amount')
+      - Valid
+    assumptions:
+    - Completeness should be 100%.
+    - Data type should be Fractional.
+  Insurance Provider:
+    code:
+    - - .isComplete('Insurance Provider')
+      - Valid
+    - - .isContainedIn('Insurance Provider', ['Aetna', 'Blue Cross', 'UnitedHealthcare',
+        'Cigna', 'Medicare'])
+      - Valid
+    assumptions:
+    - Completeness should be 100%.
+    - 'Values should only be one of the expected categories: [''Aetna'', ''Blue Cross'',
+      ''UnitedHealthcare'', ''Cigna'', ''Medicare''].'
+  Medical Condition:
+    code:
+    - - .isComplete('Medical Condition')
+      - Valid
+    - - .isContainedIn('Medical Condition', ['Hypertension', 'Cancer', 'Obesity',
+        'Arthritis', 'Diabetes', 'Asthma'])
+      - Valid
+    assumptions:
+    - Completeness should be 100%.
+    - 'Values should only be one of the expected categories: [''Hypertension'', ''Cancer'',
+      ''Obesity'', ''Arthritis'', ''Diabetes'', ''Asthma''].'
+  Name:
+    code:
+    - - .isComplete('Name')
+      - Valid
+    assumptions:
+    - Completeness should be 100%.

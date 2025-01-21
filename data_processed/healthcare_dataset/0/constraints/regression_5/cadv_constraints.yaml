@@ -1,0 +1,34 @@
+constraints:
+  billing_amount:
+    code:
+    - - .isNonNegative('billing_amount')
+      - Invalid
+    assumptions:
+    - Should be numeric
+  id:
+    code:
+    - - .isUnique('id')
+      - Valid
+    - - .isNonNegative('id')
+      - Valid
+    assumptions:
+    - Should have unique values
+    - Should be numeric
+  Age:
+    code:
+    - - .isNonNegative('Age')
+      - Valid
+    - - .isComplete('Age')
+      - Valid
+    assumptions:
+    - Should be numeric
+    - Should not have NaN values after filling
+  Room Number:
+    code:
+    - - .isNonNegative('Room Number')
+      - Invalid
+    - - .isComplete('Room Number')
+      - Valid
+    assumptions:
+    - Should be numeric
+    - Should not have NaN values after filling

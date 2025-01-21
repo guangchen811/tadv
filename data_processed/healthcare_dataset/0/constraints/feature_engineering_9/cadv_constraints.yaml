@@ -1,0 +1,53 @@
+constraints:
+  id:
+    code:
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - Each 'id' should be unique.
+  Medical Condition:
+    code:
+    - - .isContainedIn('Medical Condition', ['Hypertension', 'Cancer', 'Obesity',
+        'Arthritis', 'Diabetes', 'Asthma'])
+      - Valid
+    assumptions:
+    - 'The ''Medical Condition'' should be one of the expected values: Hypertension,
+      Cancer, Obesity, Arthritis, Diabetes, or Asthma.'
+  Admission Type:
+    code:
+    - - .isContainedIn('Admission Type', ['Emergency', 'Urgent', 'Elective'])
+      - Valid
+    assumptions:
+    - 'The ''Admission Type'' should be one of the expected values: Emergency, Urgent,
+      or Elective.'
+  Billing Amount:
+    code:
+    - - .isNonNegative('Billing Amount')
+      - Invalid
+    assumptions:
+    - '''Billing Amount'' should be a non-negative number.'
+  Date of Admission:
+    code:
+    - - .isComplete('Date of Admission')
+      - Valid
+    - - .satisfies('CAST(Date of Admission AS DATE) IS NOT NULL', 'Date of Admission
+        is a valid date format')
+      - Invalid
+    assumptions:
+    - '''Date of Admission'' should be a valid date.'
+    - '''Date of Admission'' should be formatted as a date string that can be cast
+      to a date.'
+  Discharge Date:
+    code:
+    - - .isComplete('Discharge Date')
+      - Valid
+    - - .satisfies('CAST(Discharge Date AS DATE) IS NOT NULL', 'Discharge Date is
+        a valid date format')
+      - Invalid
+    - - .isGreaterThanOrEqualTo('Discharge Date', 'Date of Admission')
+      - Invalid
+    assumptions:
+    - '''Discharge Date'' should be a valid date.'
+    - '''Discharge Date'' should be formatted as a date string that can be cast to
+      a date.'
+    - '''Discharge Date'' should be on or after ''Date of Admission''.'

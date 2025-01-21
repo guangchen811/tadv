@@ -1,0 +1,4 @@
+Admission Type,Aspirin_count,Paracetamol_count,Ibuprofen_count,Penicillin_count,Lipitor_count
+Elective,2254.0,2236.0,2283.0,2188.0,2197.0
+Emergency,2202.0,2204.0,2163.0,2185.0,2198.0
+Urgent,2234.0,2207.0,2233.0,2244.0,2272.0

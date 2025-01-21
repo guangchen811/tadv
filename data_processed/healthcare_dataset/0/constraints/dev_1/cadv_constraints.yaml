@@ -1,0 +1,14 @@
+constraints:
+  Date of Admission:
+    code:
+    - - .isComplete('Date of Admission')
+      - Valid
+    - - .isUnique('Date of Admission')
+      - Invalid
+    - - .satisfies('CAST(`Date of Admission` AS DATE) IS NOT NULL', 'Valid date format')
+      - Valid
+    assumptions:
+    - The 'Date of Admission' column should not contain null values.
+    - The 'Date of Admission' column should be convertible to a valid date format.
+    - The 'Date of Admission' column should have unique values for each day to ensure
+      accurate daily counts.
