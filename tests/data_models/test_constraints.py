@@ -1,5 +1,5 @@
-import pytest
 import oyaml as yaml
+import pytest
 
 from cadv_exploration.data_models import CodeEntry, ColumnConstraints, \
     Constraints
@@ -22,8 +22,8 @@ def test_to_dict(constraints_instance):
         "constraints": {
             "column1": {
                 "code": [
-                    ["Use a non-null constraint", "Valid"],
-                    ["Ensure unique values", "Invalid"]
+                    ["Ensure unique values", "Invalid"],
+                    ["Use a non-null constraint", "Valid"]
                 ],
                 "assumptions": ["Assumption 1", "Assumption 2"]
             }
