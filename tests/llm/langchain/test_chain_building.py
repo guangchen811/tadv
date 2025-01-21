@@ -2,8 +2,8 @@ from langchain_core.runnables.base import RunnableSequence
 
 from cadv_exploration.llm._tasks import DVTask
 from cadv_exploration.llm.langchain import LangChainCADV
+from cadv_exploration.llm.langchain.downstream_task_prompt import ML_INFERENCE_TASK_DESCRIPTION
 from cadv_exploration.utils import load_dotenv
-from llm.langchain.downstream_task_prompt import ML_INFERENCE_TASK_DESCRIPTION
 
 
 def test_build_single_chain():

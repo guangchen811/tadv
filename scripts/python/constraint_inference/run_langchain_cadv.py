@@ -41,10 +41,10 @@ def run_langchain_cadv(data_name, model_name, processed_data_idx, assumption_gen
             task_group = task_group_mapping(task_type)
             if task_group == 'sql':
                 lc = LangChainCADV(model_name=model_name, downstream_task_description=SQL_QUERY_TASK_DESCRIPTION,
-                                   assumption_generation_trick=assumption_generation_trick)
+                                   assumption_generation_trick=assumption_generation_trick, logger=logger)
             elif task_group == 'ml':
                 lc = LangChainCADV(model_name=model_name, downstream_task_description=ML_INFERENCE_TASK_DESCRIPTION,
-                                   assumption_generation_trick=assumption_generation_trick)
+                                   assumption_generation_trick=assumption_generation_trick, logger=logger)
             else:
                 raise ValueError(f"Invalid task group: {task_group}")
 
@@ -96,5 +96,9 @@ def task_group_mapping(task_type):
 if __name__ == "__main__":
     data_name = "healthcare_dataset"
     model_name = "gpt-4o"
+    # run_langchain_cadv(data_name=data_name, model_name=model_name, processed_data_idx=0,
+    #                    assumption_generation_trick=None)
+    # run_langchain_cadv(data_name=data_name, model_name=model_name, processed_data_idx=1,
+    #                    assumption_generation_trick="add_deequ")
     run_langchain_cadv(data_name=data_name, model_name=model_name, processed_data_idx=2,
                        assumption_generation_trick="add_experience")
