@@ -1,57 +1,60 @@
 constraints:
-  id:
+  Date of Admission:
     code:
-    - - .isUnique('id')
+    - - .isComplete('Date of Admission')
       - Valid
-    - - .isComplete('id')
+    - - .satisfies('to_date(`Date of Admission`, "yyyy-MM-dd") IS NOT NULL', 'Date
+        of Admission should be valid date')
       - Valid
     assumptions:
-    - The id column should be distinct for each record and not contain any duplicate
-      values.
-    - The id column should be complete, with no missing values.
-  Test Results:
+    - The 'Date of Admission' column is expected to be complete and non-null.
+    - The 'Date of Admission' column should be in a valid date format.
+  Discharge Date:
     code:
-    - - .isContainedIn('Test Results', ['Abnormal', 'Normal', 'Inconclusive'])
+    - - .isComplete('Discharge Date')
       - Valid
-    - - .isComplete('Test Results')
+    - - .satisfies('to_date(`Discharge Date`, "yyyy-MM-dd") IS NOT NULL', 'Discharge
+        Date should be valid date')
       - Valid
     assumptions:
-    - 'The Test Results column should be categorical with expected values: ''Abnormal'',
-      ''Normal'', ''Inconclusive''.'
-    - The Test Results column should be complete, with no missing values.
-  Name:
-    code:
-    - - .isComplete('Name')
-      - Valid
-    assumptions:
-    - The Name column should be complete, with no missing values.
-  Hospital:
-    code:
-    - - .isComplete('Hospital')
-      - Valid
-    assumptions:
-    - The Hospital column should be complete, with no missing values.
-  Room Number:
-    code:
-    - - .isComplete('Room Number')
-      - Valid
-    assumptions:
-    - The Room Number column should be complete, with no missing values.
+    - The 'Discharge Date' column is expected to be complete and non-null.
+    - The 'Discharge Date' column should be in a valid date format.
   Doctor:
     code:
     - - .isComplete('Doctor')
       - Valid
     assumptions:
-    - The Doctor column should be complete, with no missing values.
-  Date of Admission:
+    - The 'Doctor' column is expected to be complete and non-null.
+  Hospital:
     code:
-    - - .isComplete('Date of Admission')
+    - - .isComplete('Hospital')
       - Valid
     assumptions:
-    - The Date of Admission column should be complete, with no missing values.
-  Discharge Date:
+    - The 'Hospital' column is expected to be complete and non-null.
+  Name:
     code:
-    - - .isComplete('Discharge Date')
+    - - .isComplete('Name')
       - Valid
     assumptions:
-    - The Discharge Date column should be complete, with no missing values.
+    - The 'Name' column, although dropped, is expected to be complete and non-null.
+  Room Number:
+    code:
+    - - .isComplete('Room Number')
+      - Valid
+    assumptions:
+    - The 'Room Number' column is expected to be complete and non-null, although it
+      is dropped.
+  Test Results:
+    code:
+    - - .isContainedIn('Test Results', ['Normal', 'Abnormal', 'Inconclusive'])
+      - Valid
+    assumptions:
+    - The 'Test Results' column is expected to be categorical with distinct values
+      like 'Normal', 'Abnormal', and 'Inconclusive'.
+  id:
+    code:
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The 'id' column should have unique values since it's being used to identify
+      records.

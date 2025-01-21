@@ -1,14 +1,44 @@
 constraints:
+  Admission Type:
+    code:
+    - - .isComplete('Admission Type')
+      - Valid
+    - - .isContainedIn('Admission Type', ['Emergency', 'Urgent', 'Elective'])
+      - Valid
+    assumptions:
+    - 'Values should be one of the predefined categories: [''Emergency'', ''Urgent'',
+      ''Elective''].'
+  Age:
+    code:
+    - - .isComplete('Age')
+      - Valid
+    assumptions:
+    - Values should be numeric to avoid coercion to NaN.
+  Blood Type:
+    code:
+    - - .isComplete('Blood Type')
+      - Valid
+    - - .isContainedIn('Blood Type', ['A+', 'O+', 'B+', 'AB+', 'A-', 'O-', 'B-', 'AB-'])
+      - Valid
+    assumptions:
+    - 'Values should be one of the predefined categories: [''A+'', ''O+'', ''B+'',
+      ''AB+'', ''A-'', ''O-'', ''B-'', ''AB-''].'
+  Medication:
+    code:
+    - - .isComplete('Medication')
+      - Valid
+    - - .isContainedIn('Medication', ['Aspirin', 'Paracetamol', 'Ibuprofen', 'Penicillin',
+        'Lipitor'])
+      - Valid
+    assumptions:
+    - 'Values should be one of the predefined categories: [''Aspirin'', ''Paracetamol'',
+      ''Ibuprofen'', ''Penicillin'', ''Lipitor''].'
   billing_amount:
     code:
     - - .isComplete('billing_amount')
       - Invalid
-    - - .isNonNegative('billing_amount')
-      - Invalid
     assumptions:
-    - The column should contain only numeric values.
-    - The column should have no missing values.
-    - The values in the column should be non-negative.
+    - Values should ideally be numeric to avoid coercion to NaN.
   id:
     code:
     - - .isComplete('id')
@@ -16,5 +46,4 @@ constraints:
     - - .isUnique('id')
       - Valid
     assumptions:
-    - The column should contain unique integer values.
-    - The column should have no missing values.
+    - Values should be unique and integral.

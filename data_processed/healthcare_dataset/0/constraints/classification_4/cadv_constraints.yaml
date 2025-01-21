@@ -1,41 +1,33 @@
 constraints:
-  id:
-    code:
-    - - .isUnique('id')
-      - Valid
-    assumptions:
-    - Each value in the 'id' column should be unique.
-  Age:
-    code:
-    - - .isComplete('Age')
-      - Valid
-    - - .isPositive('Age')
-      - Valid
-    assumptions:
-    - Values in the 'Age' column should be greater than 0.
-  Billing Amount:
-    code:
-    - - .isComplete('Billing Amount')
-      - Valid
-    - - .isNonNegative('Billing Amount')
-      - Invalid
-    assumptions:
-    - Values in the 'Billing Amount' column should be non-negative.
-  Medical Condition:
-    code:
-    - - .isComplete('Medical Condition')
-      - Valid
-    - - .isContainedIn('Medical Condition', ['KnownCondition1', 'KnownCondition2',
-        'KnownCondition3'])
-      - Invalid
-    assumptions:
-    - Values in the 'Medical Condition' column should belong to a predefined set of
-      categories.
   Admission Type:
     code:
-    - - .isComplete('Admission Type')
+    - - .isContainedIn('Admission Type', ['Emergency', 'Urgent', 'Elective'])
       - Valid
-    - - .isContainedIn('Admission Type', ['Type1', 'Type2', 'Type3'])
-      - Invalid
     assumptions:
-    - Values in the 'Admission Type' column should belong to a predefined set of categories.
+    - 'The column ''Admission Type'' should only contain values present in the histogram:
+      ''Emergency'', ''Urgent'', ''Elective''.'
+  Age:
+    code:
+    - - .isNonNegative('Age')
+      - Valid
+    - - .satisfies('Age != 0', 'Age should not be zero')
+      - Valid
+    assumptions:
+    - The column 'Age' should contain only non-negative values.
+    - The column 'Age' should not contain zero to avoid division errors in 'bill_age_ratio'
+      calculation.
+  Billing Amount`:
+    code: []
+    assumptions: []
+  Medical Condition:
+    code:
+    - - .isContainedIn('Medical Condition', ['Hypertension', 'Cancer', 'Obesity',
+        'Arthritis', 'Diabetes', 'Asthma'])
+      - Valid
+    assumptions:
+    - 'The column ''Medical Condition'' should only contain values present in the
+      histogram: ''Hypertension'', ''Cancer'', ''Obesity'', ''Arthritis'', ''Diabetes'',
+      ''Asthma''.'
+  '`id':
+    code: []
+    assumptions: []

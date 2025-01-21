@@ -1,33 +1,50 @@
 constraints:
   age:
     code:
-    - - .isPositive('age')
+    - - .isComplete('age')
+      - Valid
+    - - .isNonNegative('age')
+      - Valid
+    - - .satisfies('age > 0', 'age_greater_than_zero')
       - Valid
     assumptions:
-    - Age should be greater than 0 when calculating cost_per_year_of_age feature.
-  gender:
-    code:
-    - - .isContainedIn('gender', ['Male', 'Female', 'Other'])
-      - Valid
-    assumptions:
-    - Gender should only contain values that are consistent with the encoded form
-      (e.g., 'Male', 'Female') or any other categories that might exist in the dataset.
+    - must be greater than 0
+    - must be integral
+    - must be complete
   billing_amount:
     code:
+    - - .isComplete('billing_amount')
+      - Invalid
     - - .isNonNegative('billing_amount')
       - Invalid
     assumptions:
-    - Billing amount should be a non-negative number.
-  test_results:
+    - must be numeric
+    - must be greater than or equal to 0
+    - must be complete
+  gender:
     code:
-    - - .isContainedIn('test_results', ['Abnormal', 'Normal', 'Inconclusive'])
-      - Invalid
+    - - .isComplete('gender')
+      - Valid
+    - - .isContainedIn('gender', ['Male', 'Female'])
+      - Valid
     assumptions:
-    - 'Test results should only contain the known categories: ''Abnormal'', ''Normal'',
-      ''Inconclusive''.'
+    - must have a limited set of distinct values, e.g., ['Male', 'Female']
+    - must be complete
   id:
     code:
+    - - .isComplete('id')
+      - Valid
     - - .isUnique('id')
       - Valid
     assumptions:
-    - ID should be unique across rows in the dataset.
+    - must be unique
+    - must be complete
+  test_results:
+    code:
+    - - .isComplete('test_results')
+      - Invalid
+    - - .isContainedIn('test_results', ['Abnormal', 'Normal', 'Inconclusive'])
+      - Invalid
+    assumptions:
+    - must have a limited set of distinct values, e.g., ['Abnormal', 'Normal', 'Inconclusive']
+    - must be complete

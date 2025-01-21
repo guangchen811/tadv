@@ -1,33 +1,51 @@
 constraints:
-  id:
+  Date of Admission:
     code:
-    - - .isUnique('id')
+    - - .satisfies('admission_dt IS NOT NULL', 'Date of Admission should be convertible
+        to a valid datetime.')
+      - Invalid
+    - - .satisfies('discharge_dt >= admission_dt', 'Discharge Date should be on or
+        after Date of Admission.')
+      - Invalid
+    assumptions:
+    - Date of Admission should be convertible to a valid datetime.
+    - Discharge Date should be on or after Date of Admission.
+  Discharge Date:
+    code:
+    - - .satisfies('discharge_dt >= admission_dt', 'Discharge Date should be on or
+        after Date of Admission.')
+      - Invalid
+    - - .satisfies('discharge_dt IS NOT NULL', 'Discharge Date should be convertible
+        to a valid datetime.')
+      - Invalid
+    assumptions:
+    - Discharge Date should be convertible to a valid datetime.
+    - Discharge Date should be on or after Date of Admission.
+  Insurance Provider:
+    code:
+    - - .isComplete('Insurance Provider')
       - Valid
     assumptions:
-    - The id column should have unique values.
+    - Insurance Provider is expected to have no missing values.
+  Room Number:
+    code: []
+    assumptions:
+    - Room Number is expected to be present but is not used in the downstream task.
   Test Results:
     code:
     - - .isComplete('Test Results')
       - Valid
-    assumptions:
-    - The Test Results column should not have missing values.
-  Date of Admission:
-    code:
-    - - '.hasPattern(''Date of Admission'', ''\d{4}-\d{2}-\d{2}'', lambda x: x > 0.99)'
+    - - .isContainedIn('Test Results', ['Abnormal', 'Normal', 'Inconclusive'])
       - Valid
-    - - '.isLessThan(''Date of Admission'', ''Discharge Date'', lambda x: x > 0.99)'
-      - Invalid
     assumptions:
-    - The Date of Admission column should contain valid date strings.
-    - The Discharge Date column should be after the Date of Admission column to ensure
-      a positive length of stay.
-  Discharge Date:
+    - Test Results should be complete with no missing values.
+    - 'Test Results should only contain categories: Abnormal, Normal, Inconclusive.'
+  id:
     code:
-    - - '.hasPattern(''Discharge Date'', ''\d{4}-\d{2}-\d{2}'', lambda x: x > 0.99)'
+    - - .isComplete('id')
       - Valid
-    - - '.isGreaterThan(''Discharge Date'', ''Date of Admission'', lambda x: x > 0.99)'
-      - Invalid
+    - - .isUnique('id')
+      - Valid
     assumptions:
-    - The Discharge Date column should contain valid date strings.
-    - The Discharge Date column should be after the Date of Admission column to ensure
-      a positive length of stay.
+    - id should be unique for each entry.
+    - id should not have missing values.

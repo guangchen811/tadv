@@ -1,73 +1,76 @@
 constraints:
-  Room Number:
-    code: []
-    assumptions: []
-  Hospital:
-    code: []
-    assumptions: []
-  Insurance Provider:
-    code:
-    - - .isContainedIn('Insurance Provider', ['Aetna', 'Blue Cross', 'UnitedHealthcare',
-        'Cigna', 'Medicare'])
-      - Valid
-    assumptions:
-    - Insurance Provider should be one of ['Aetna', 'Blue Cross', 'UnitedHealthcare',
-      'Cigna', 'Medicare']
-  Billing Amount:
-    code:
-    - - .isNonNegative('Billing Amount')
-      - Invalid
-    assumptions:
-    - Billing Amount should be a non-negative number
-  Discharge Date:
-    code: []
-    assumptions: []
-  Medication:
-    code:
-    - - .isContainedIn('Medication', ['Aspirin', 'Paracetamol', 'Ibuprofen', 'Penicillin',
-        'Lipitor'])
-      - Valid
-    assumptions:
-    - Medication should be one of ['Aspirin', 'Paracetamol', 'Ibuprofen', 'Penicillin',
-      'Lipitor']
   Admission Type:
     code:
-    - - .isContainedIn('Admission Type', ['Emergency', 'Urgent', 'Elective'])
+    - - .isComplete('Admission Type')
       - Valid
-    assumptions:
-    - Admission Type should be one of ['Emergency', 'Urgent', 'Elective']
-  Medical Condition:
-    code:
-    - - .isContainedIn('Medical Condition', ['Hypertension', 'Cancer', 'Obesity',
-        'Arthritis', 'Diabetes', 'Asthma'])
-      - Valid
-    assumptions:
-    - Medical Condition should be one of ['Hypertension', 'Cancer', 'Obesity', 'Arthritis',
-      'Diabetes', 'Asthma']
+    assumptions: []
   Age:
     code:
+    - - .isComplete('Age')
+      - Valid
     - - .isNonNegative('Age')
       - Valid
-    - - '.hasMax(''Age'', lambda x: x < 120)'
+    assumptions: []
+  Billing Amount:
+    code:
+    - - .isComplete('Billing Amount')
       - Valid
-    assumptions:
-    - Age should be a non-negative integer
-    - Age should be a reasonable human age, e.g., less than 120
-  Date of Admission:
-    code: []
+    - - .isNonNegative('Billing Amount')
+      - Invalid
     assumptions: []
   Blood Type:
     code:
-    - - .isContainedIn('Blood Type', ['A+', 'O+', 'B+', 'AB+', 'A-', 'O-', 'B-', 'AB-'])
+    - - .isComplete('Blood Type')
       - Valid
-    assumptions:
-    - Blood Type should be one of ['A+', 'O+', 'B+', 'AB+', 'A-', 'O-', 'B-', 'AB-']
+    assumptions: []
+  Date of Admission:
+    code:
+    - - .isComplete('Date of Admission')
+      - Valid
+    assumptions: []
+  Discharge Date:
+    code:
+    - - .isComplete('Discharge Date')
+      - Valid
+    assumptions: []
+  Doctor:
+    code:
+    - - .isComplete('Doctor')
+      - Valid
+    assumptions: []
   Gender:
     code:
-    - - .isContainedIn('Gender', ['Male', 'Female'])
+    - - .isComplete('Gender')
+      - Valid
+    assumptions: []
+  Hospital:
+    code:
+    - - .isComplete('Hospital')
+      - Valid
+    assumptions: []
+  Insurance Provider:
+    code:
+    - - .isComplete('Insurance Provider')
+      - Valid
+    assumptions: []
+  Medical Condition:
+    code:
+    - - .isComplete('Medical Condition')
+      - Valid
+    assumptions: []
+  Medication:
+    code:
+    - - .isComplete('Medication')
+      - Valid
+    assumptions: []
+  Room Number:
+    code:
+    - - .isComplete('Room Number')
+      - Valid
+    assumptions: []
+  id:
+    code:
+    - - .isUnique('id')
       - Valid
     assumptions:
-    - Gender should be one of ['Male', 'Female']
-  Doctor:
-    code: []
-    assumptions: []
+    - Should contain unique values for each record.

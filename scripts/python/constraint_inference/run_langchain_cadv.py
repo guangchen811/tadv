@@ -96,9 +96,9 @@ def task_group_mapping(task_type):
 if __name__ == "__main__":
     data_name = "healthcare_dataset"
     model_name = "gpt-4o"
-    # run_langchain_cadv(data_name=data_name, model_name=model_name, processed_data_idx=0,
-    #                    assumption_generation_trick=None)
+    run_langchain_cadv(data_name=data_name, model_name=model_name, processed_data_idx=0,
+                       assumption_generation_trick=None)
     # run_langchain_cadv(data_name=data_name, model_name=model_name, processed_data_idx=1,
     #                    assumption_generation_trick="add_deequ")
-    run_langchain_cadv(data_name=data_name, model_name=model_name, processed_data_idx=2,
-                       assumption_generation_trick="add_experience")
+    # run_langchain_cadv(data_name=data_name, model_name=model_name, processed_data_idx=2,
+    #                    assumption_generation_trick="add_experience")

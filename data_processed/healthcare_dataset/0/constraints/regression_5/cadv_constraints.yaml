@@ -1,34 +1,34 @@
 constraints:
-  billing_amount:
+  Age:
     code:
-    - - .isNonNegative('billing_amount')
+    - - .isComplete('Age')
+      - Valid
+    - - .satisfies('Age >= 0', 'Age should be non-negative')
+      - Valid
+    assumptions:
+    - Should be complete (no missing values)
+    - Should be convertible to numeric
+  Room Number:
+    code:
+    - - .isComplete('Room Number')
+      - Valid
+    - - .satisfies('Room Number >= 0', 'Room Number should be non-negative')
       - Invalid
     assumptions:
+    - Should be complete (no missing values)
+    - Should be convertible to numeric
+  billing_amount:
+    code:
+    - - .isComplete('billing_amount')
+      - Invalid
+    - - .satisfies('billing_amount >= 0', 'billing_amount should be non-negative')
+      - Invalid
+    assumptions:
+    - Should be complete (no missing values)
     - Should be numeric
   id:
     code:
     - - .isUnique('id')
       - Valid
-    - - .isNonNegative('id')
-      - Valid
     assumptions:
-    - Should have unique values
-    - Should be numeric
-  Age:
-    code:
-    - - .isNonNegative('Age')
-      - Valid
-    - - .isComplete('Age')
-      - Valid
-    assumptions:
-    - Should be numeric
-    - Should not have NaN values after filling
-  Room Number:
-    code:
-    - - .isNonNegative('Room Number')
-      - Invalid
-    - - .isComplete('Room Number')
-      - Valid
-    assumptions:
-    - Should be numeric
-    - Should not have NaN values after filling
+    - Should be unique within each dataset

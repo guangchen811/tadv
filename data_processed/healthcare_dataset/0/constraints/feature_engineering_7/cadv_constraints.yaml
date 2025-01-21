@@ -1,18 +1,20 @@
 constraints:
-  id:
-    code:
-    - - .isUnique('id')
-      - Valid
-    assumptions:
-    - Each id should be unique and consistently associated with an individual across
-      all records.
   Date of Admission:
     code:
-    - - .isComplete('Date of Admission')
+    - - .isComplete("Date of Admission")
       - Valid
-    - - .satisfies('CAST(Date of Admission AS DATE) IS NOT NULL', 'Date of Admission
-        must be a valid date')
+    - - .satisfies("CAST(Date of Admission AS DATE) IS NOT NULL", "Date of Admission
+        should be convertible to date")
       - Invalid
     assumptions:
-    - Date of Admission should be convertible to a valid date format.
-    - Date of Admission values should reflect the true chronological order of admissions.
+    - The 'Date of Admission' column should be convertible to a valid date format
+      to ensure the CAST operation succeeds.
+    - The 'Date of Admission' column should not have null values as it is essential
+      for calculating the 30-day admission window.
+  id:
+    code:
+    - - .isUnique("id")
+      - Valid
+    assumptions:
+    - The 'id' column should contain unique identifiers for each record to ensure
+      accurate partitioning and counting operations.

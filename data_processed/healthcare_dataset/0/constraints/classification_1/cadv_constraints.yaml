@@ -1,33 +1,4 @@
 constraints:
-  Age:
-    code:
-    - - .isComplete('Age')
-      - Valid
-    - - .isNonNegative('Age')
-      - Valid
-    - - '.hasMax(''Age'', lambda x: x <= 120)'
-      - Valid
-    assumptions:
-    - should be a numeric value
-    - should be within a reasonable range for human ages, e.g., 0 to 120
-  Gender:
-    code:
-    - - .isComplete('Gender')
-      - Valid
-    - - .isContainedIn('Gender', ['Male', 'Female'])
-      - Valid
-    assumptions:
-    - 'should be one of the expected values: Male, Female'
-  Medical Condition:
-    code:
-    - - .isComplete('Medical Condition')
-      - Valid
-    - - .isContainedIn('Medical Condition', ['Hypertension', 'Cancer', 'Obesity',
-        'Arthritis', 'Diabetes', 'Asthma'])
-      - Valid
-    assumptions:
-    - 'should be one of the expected values: Hypertension, Cancer, Obesity, Arthritis,
-      Diabetes, Asthma'
   Admission Type:
     code:
     - - .isComplete('Admission Type')
@@ -35,7 +6,45 @@ constraints:
     - - .isContainedIn('Admission Type', ['Emergency', 'Urgent', 'Elective'])
       - Valid
     assumptions:
-    - 'should be one of the expected values: Emergency, Urgent, Elective'
+    - Should be one of ['Emergency', 'Urgent', 'Elective'] as used for OneHotEncoding.
+    - Should not contain missing values.
+  Age:
+    code:
+    - - .isComplete('Age')
+      - Valid
+    - - .isNonNegative('Age')
+      - Valid
+    assumptions:
+    - Should be a numeric value since it is subjected to StandardScaler.
+    - Should not contain missing values.
+  Billing Amount:
+    code:
+    - - .isComplete('Billing Amount')
+      - Valid
+    - - .isNonNegative('Billing Amount')
+      - Invalid
+    assumptions:
+    - Should be a numeric value since it is subjected to StandardScaler.
+    - Should not contain missing values.
+  Blood Type:
+    code:
+    - - .isComplete('Blood Type')
+      - Valid
+    - - .isContainedIn('Blood Type', ['A+', 'O+', 'B+', 'AB+', 'A-', 'O-', 'B-', 'AB-'])
+      - Valid
+    assumptions:
+    - Should be one of ['A+', 'O+', 'B+', 'AB+', 'A-', 'O-', 'B-', 'AB-'] as used
+      for OneHotEncoding.
+    - Should not contain missing values.
+  Gender:
+    code:
+    - - .isComplete('Gender')
+      - Valid
+    - - .isContainedIn('Gender', ['Male', 'Female'])
+      - Valid
+    assumptions:
+    - Should be one of ['Male', 'Female'] as used for OneHotEncoding.
+    - Should not contain missing values.
   Insurance Provider:
     code:
     - - .isComplete('Insurance Provider')
@@ -44,17 +53,20 @@ constraints:
         'Cigna', 'Medicare'])
       - Valid
     assumptions:
-    - 'should be one of the expected values: Aetna, Blue Cross, UnitedHealthcare,
-      Cigna, Medicare'
-  Billing Amount:
+    - Should be one of ['Aetna', 'Blue Cross', 'UnitedHealthcare', 'Cigna', 'Medicare']
+      as used for OneHotEncoding.
+    - Should not contain missing values.
+  Medical Condition:
     code:
-    - - .isComplete('Billing Amount')
+    - - .isComplete('Medical Condition')
       - Valid
-    - - .isNonNegative('Billing Amount')
-      - Invalid
+    - - .isContainedIn('Medical Condition', ['Hypertension', 'Cancer', 'Obesity',
+        'Arthritis', 'Diabetes', 'Asthma'])
+      - Valid
     assumptions:
-    - should be a numeric value
-    - should be non-negative
+    - Should be one of ['Hypertension', 'Cancer', 'Obesity', 'Arthritis', 'Diabetes',
+      'Asthma'] as used for OneHotEncoding.
+    - Should not contain missing values.
   Medication:
     code:
     - - .isComplete('Medication')
@@ -63,21 +75,12 @@ constraints:
         'Lipitor'])
       - Valid
     assumptions:
-    - 'should be one of the expected values: Aspirin, Paracetamol, Ibuprofen, Penicillin,
-      Lipitor'
-  Blood Type:
-    code:
-    - - .isComplete('Blood Type')
-      - Valid
-    - - .isContainedIn('Blood Type', ['A+', 'O+', 'B+', 'AB+', 'A-', 'O-', 'B-', 'AB-'])
-      - Valid
-    assumptions:
-    - 'should be one of the expected values: A+, O+, B+, AB+, A-, O-, B-, AB-'
+    - Should be one of ['Aspirin', 'Paracetamol', 'Ibuprofen', 'Penicillin', 'Lipitor']
+      as used for OneHotEncoding.
+    - Should not contain missing values.
   id:
     code:
-    - - .isComplete('id')
-      - Valid
     - - .isUnique('id')
       - Valid
     assumptions:
-    - should be unique
+    - Should be unique across all records.

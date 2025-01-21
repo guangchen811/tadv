@@ -1,4 +1,11 @@
 constraints:
+  admission_type:
+    code:
+    - - .isContainedIn('admission_type', ['Emergency', 'Urgent', 'Elective'])
+      - Invalid
+    assumptions:
+    - Admission Type should be one of the predefined categories ('Emergency', 'Urgent',
+      'Elective') as it is used for label encoding.
   age:
     code:
     - - .isPositive('age')
@@ -10,65 +17,43 @@ constraints:
     - - .isNonNegative('billing_amount')
       - Invalid
     assumptions:
-    - Billing Amount should be non-negative.
-  medical_condition:
-    code:
-    - - .isContainedIn('medical_condition', ['Hypertension', 'Cancer', 'Obesity',
-        'Arthritis', 'Diabetes', 'Asthma'])
-      - Invalid
-    assumptions:
-    - 'Medical Condition should be one of the predefined categories: Hypertension,
-      Cancer, Obesity, Arthritis, Diabetes, Asthma.'
-  admission_type:
-    code:
-    - - .isContainedIn('admission_type', ['Emergency', 'Urgent', 'Elective'])
-      - Invalid
-    assumptions:
-    - 'Admission Type should be one of the predefined categories: Emergency, Urgent,
-      Elective.'
+    - Billing Amount should be a non-negative number as it represents a monetary value.
   blood_type:
     code:
     - - .isContainedIn('blood_type', ['A+', 'O+', 'B+', 'AB+', 'A-', 'O-', 'B-', 'AB-'])
       - Invalid
     assumptions:
-    - 'Blood Type should be one of the predefined categories: A+, O+, B+, AB+, A-,
-      O-, B-, AB-.'
+    - Blood Type should be one of the predefined categories ('A+', 'O+', 'B+', 'AB+',
+      'A-', 'O-', 'B-', 'AB-') as it is used for label encoding.
   gender:
     code:
     - - .isContainedIn('gender', ['Male', 'Female'])
       - Valid
     assumptions:
-    - Gender should be either Male or Female.
+    - Gender should be one of the predefined categories ('Male', 'Female') as it is
+      used for label encoding.
   hospital:
     code:
     - - .isComplete('hospital')
       - Valid
     assumptions:
-    - Hospital should be a non-empty string.
-  admission_dt:
-    code:
-    - - .isComplete('admission_dt')
-      - Invalid
-    assumptions:
-    - Admission Date must be a valid date.
-    - Admission Date should not be after Discharge Date.
-  discharge_dt:
-    code:
-    - - .isComplete('discharge_dt')
-      - Invalid
-    assumptions:
-    - Discharge Date must be a valid date.
-    - Discharge Date should not be before Admission Date.
+    - Hospital should be treated as a categorical string as it is used for label encoding.
   id:
     code:
     - - .isUnique('id')
       - Valid
     assumptions:
-    - ID should be unique.
+    - ID should be unique to identify each record in the dataset.
+  medical_condition:
+    code:
+    - - .isComplete('medical_condition')
+      - Invalid
+    assumptions:
+    - Medical Condition should be a categorical string as it is used for label encoding.
   test_results:
     code:
     - - .isContainedIn('test_results', ['Abnormal', 'Normal', 'Inconclusive'])
       - Invalid
     assumptions:
-    - 'Test Results should be one of the predefined categories: Abnormal, Normal,
-      Inconclusive.'
+    - Test Results should be one of the predefined categories ('Abnormal', 'Normal',
+      'Inconclusive') as it is the target variable for the model.

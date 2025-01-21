@@ -1,39 +1,44 @@
 constraints:
-  billing_amount:
-    code:
-    - - .isComplete('billing_amount')
-      - Invalid
-    - - .isNonNegative('billing_amount')
-      - Invalid
-    assumptions:
-    - should not contain missing values
-    - should be non-negative
   Age:
     code:
-    - - .satisfies('Age != 0', 'Age should not contain zero values')
+    - - .isPositive('Age')
       - Valid
-    - - .isComplete('Age')
+    - - .satisfies('Age > 0', 'Age should be greater than 0')
       - Valid
     assumptions:
-    - should not contain zero values
-    - should not contain missing values after zero replacement
+    - Age should be a positive integer (greater than 0)
+    - Age should not contain zeros to avoid NaN generation in cost_age_ratio
+  Billing Amount:
+    code:
+    - - .isNonNegative('Billing Amount')
+      - Invalid
+    assumptions:
+    - Billing Amount should be a non-negative floating-point number
+  Hospital:
+    code:
+    - - .isComplete('Hospital')
+      - Valid
+    assumptions:
+    - Hospital should be a non-empty string indicating a valid hospital name
+  Medical Condition:
+    code:
+    - - .isContainedIn('Medical Condition', ['Hypertension', 'Cancer', 'other_possible_conditions'])
+      - Invalid
+    assumptions:
+    - Medical Condition should be one of the predefined set of conditions (e.g., Hypertension,
+      Cancer, etc.)
   Room Number:
     code:
-    - - .satisfies('Room Number IS NOT NULL', 'Room Number should not contain missing
-        values')
-      - Invalid
-    - - '.satisfies(''Room Number >= 0'', ''Room Number should be numeric'', lambda
-        x: True)'
+    - - .isComplete('Room Number')
+      - Valid
+    - - .isNonNegative('Room Number')
       - Invalid
     assumptions:
-    - should be numeric
-    - should not contain missing values when used
+    - Room Number should be a non-negative integer
+    - Room Number should be present in the test dataframe
   id:
     code:
-    - - .isComplete('id')
-      - Valid
     - - .isUnique('id')
       - Valid
     assumptions:
-    - should contain unique values
-    - should not contain missing values
+    - id should be unique for each entry

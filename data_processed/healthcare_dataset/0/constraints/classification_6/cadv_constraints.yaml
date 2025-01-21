@@ -1,4 +1,33 @@
 constraints:
+  Age:
+    code:
+    - - '.hasMax(''Age'', lambda x: x <= 120)'
+      - Valid
+    - - .isComplete('Age')
+      - Valid
+    - - .isNonNegative('Age')
+      - Valid
+    assumptions:
+    - Age should be a non-negative integer.
+    - Age should be within a reasonable range for human age (e.g., 0 to 120).
+  Gender:
+    code:
+    - - .isComplete('Gender')
+      - Valid
+    - - .isContainedIn('Gender', ['Male', 'Female'])
+      - Valid
+    assumptions:
+    - 'Gender should be one of the predefined categories: ''Male'' or ''Female''.'
+  admission_date:
+    code:
+    - - .isComplete('admission_date')
+      - Invalid
+    - - .satisfies('admission_date >= 0', 'admission_date should be converted to a
+        numeric timestamp')
+      - Invalid
+    assumptions:
+    - admission_date should be a valid date format.
+    - admission_date should be converted to a numeric timestamp for processing.
   billing_amount:
     code:
     - - .isComplete('billing_amount')
@@ -6,8 +35,14 @@ constraints:
     - - .isNonNegative('billing_amount')
       - Invalid
     assumptions:
-    - billing_amount should be a fractional number as it is processed as numeric data.
-    - billing_amount should be non-negative as billing amounts are typically non-negative.
+    - billing_amount should be a non-negative number, representing a valid monetary
+      amount.
+  id:
+    code:
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - id should be unique across all records.
   medical_condition:
     code:
     - - .isComplete('medical_condition')
@@ -16,44 +51,14 @@ constraints:
         'Arthritis', 'Diabetes', 'Asthma'])
       - Invalid
     assumptions:
-    - 'medical_condition should be one of the known categories: [''Hypertension'',
-      ''Cancer'', ''Obesity'', ''Arthritis'', ''Diabetes'', ''Asthma''] as it is used
-      in categorical encoding.'
-  admission_date:
+    - 'medical_condition should be one of the predefined categories: ''Hypertension'',
+      ''Cancer'', ''Obesity'', ''Arthritis'', ''Diabetes'', or ''Asthma''.'
+  test_results:
     code:
-    - - .isComplete('admission_date')
+    - - .isComplete('test_results')
       - Invalid
-    - - .satisfies('admission_date > 0', 'admission_date valid timestamp')
+    - - .isContainedIn('test_results', ['Abnormal', 'Normal', 'Inconclusive'])
       - Invalid
     assumptions:
-    - admission_date should be a valid date format convertible by pd.to_datetime,
-      as it is converted to a numeric timestamp.
-  Age:
-    code:
-    - - .isComplete('Age')
-      - Valid
-    - - .isNonNegative('Age')
-      - Valid
-    - - '.hasMax(''Age'', lambda x: x <= 120)'
-      - Valid
-    assumptions:
-    - Age should be a non-negative integer, as age cannot be negative.
-    - Age should be a reasonable human age, typically between 0 and 120.
-  Gender:
-    code:
-    - - .isComplete('Gender')
-      - Valid
-    - - .isContainedIn('Gender', ['Male', 'Female'])
-      - Valid
-    assumptions:
-    - 'Gender should be one of the known categories: [''Male'', ''Female''] as it
-      is used in categorical encoding.'
-  id:
-    code:
-    - - .isComplete('id')
-      - Valid
-    - - .isUnique('id')
-      - Valid
-    assumptions:
-    - id should be a unique integer identifier for each record, as it is used to map
-      test predictions back to original records.
+    - 'test_results should be one of the predefined categories: ''Abnormal'', ''Normal'',
+      or ''Inconclusive''.'
