@@ -32,9 +32,10 @@ class Constraints:
         return {
             "constraints": {
                 column: {
-                    "code": [[entry.suggestion, entry.validity] for entry in constraint.code],
+                    "code": sorted([[entry.suggestion, entry.validity] for entry in constraint.code],
+                                   key=lambda x: x[0]),
                     "assumptions": constraint.assumptions
-                } for column, constraint in self.constraints.items()
+                } for column, constraint in sorted(self.constraints.items())
             }
         }
 

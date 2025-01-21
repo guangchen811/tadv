@@ -1,3 +1,4 @@
+from cadv_exploration.data_models import Constraints
 from cadv_exploration.dq_manager.abstract_data_quality_manager import AbstractDataQualityManager
 from cadv_exploration.dq_manager.deequ._analyzing import analyze_on_spark_df
 from cadv_exploration.dq_manager.deequ._constraint_suggestion import \
@@ -6,7 +7,6 @@ from cadv_exploration.dq_manager.deequ._constraint_validation import validate_su
     validate_on_df
 from cadv_exploration.dq_manager.deequ._loading import spark_df_from_pandas_df
 from cadv_exploration.dq_manager.deequ._profiling import profile_on_spark_df
-from data_models import Constraints
 
 
 class DeequDataQualityManager(AbstractDataQualityManager):
