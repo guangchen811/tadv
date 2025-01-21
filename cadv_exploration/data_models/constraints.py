@@ -86,6 +86,9 @@ class Constraints:
         with open(output_path, "w") as f:
             yaml.dump(self.to_dict(), f)
 
+    def to_string(self):
+        return yaml.dump(self.to_dict())
+
     def load_from_yaml(self, input_path: str):
         with open(input_path, "r") as f:
             data = yaml.safe_load(f)

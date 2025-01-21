@@ -26,7 +26,8 @@ def test_runnable(dq_manager, resources_path):
         "column_desc": column_desc,
         "script": scripts[0],
     }
-    lc = LangChainCADV(model_name="gpt-4o-mini", downstream_task_description=ML_INFERENCE_TASK_DESCRIPTION)
+    lc = LangChainCADV(model_name="gpt-4o-mini", downstream_task_description=ML_INFERENCE_TASK_DESCRIPTION,
+                       assumption_generation_trick='add_experience')
 
     relevant_columns_list, expectations, rules = lc.invoke(
         input_variables=input_variables
