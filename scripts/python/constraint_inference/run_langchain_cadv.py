@@ -50,7 +50,7 @@ def run_langchain_cadv(data_name, model_name, processed_data_idx, assumption_gen
             else:
                 raise ValueError(f"Invalid task group: {task_group}")
 
-            if assumption_generation_trick == "add_deequ":
+            if assumption_generation_trick == "with_deequ":
                 deequ_assumptions = dq_manager.get_constraints_for_spark_df(spark_train, spark_train_df).to_string()
                 input_variables = {
                     "column_desc": column_desc,
@@ -104,6 +104,6 @@ if __name__ == "__main__":
     # run_langchain_cadv(data_name=data_name, model_name=model_name, processed_data_idx='base_version,
     #                    assumption_generation_trick=None)
     # run_langchain_cadv(data_name=data_name, model_name=model_name, processed_data_idx="with_deequ",
-    #                    assumption_generation_trick="add_deequ")
+    #                    assumption_generation_trick="with_deequ")
     run_langchain_cadv(data_name=data_name, model_name=model_name, processed_data_idx="with_experience",
-                       assumption_generation_trick="add_experience", script_name="bi_1")
+                       assumption_generation_trick="with_experience", script_name="bi_1")

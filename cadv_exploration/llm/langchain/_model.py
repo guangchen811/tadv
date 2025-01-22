@@ -59,11 +59,11 @@ class LangChainCADV(AbstractLangChainCADV):
                 assumptions_extraction_prompt = importlib.import_module(
                     "cadv_exploration.llm.langchain._prompt"
                 ).ASSUMPTIONS_EXTRACTION_PROMPT
-            elif assumption_generation_trick == "add_experience":
+            elif assumption_generation_trick == "with_experience":
                 assumptions_extraction_prompt = importlib.import_module(
                     "cadv_exploration.llm.langchain._prompt_with_experience"
                 ).ASSUMPTIONS_EXTRACTION_PROMPT
-            elif assumption_generation_trick == "add_deequ":
+            elif assumption_generation_trick == "with_deequ":
                 assumptions_extraction_prompt = importlib.import_module(
                     "cadv_exploration.llm.langchain._prompt_with_deequ"
                 ).ASSUMPTIONS_EXTRACTION_PROMPT
@@ -131,7 +131,7 @@ class LangChainCADV(AbstractLangChainCADV):
             }
         )
         if num_stages > 1:
-            if self.assumption_generation_trick == "add_experience" or self.assumption_generation_trick is None:
+            if self.assumption_generation_trick == "with_experience" or self.assumption_generation_trick is None:
                 expectations = self.expectation_extraction_chain.invoke(
                     {
                         "code_snippet": input_variables["script"],
@@ -139,7 +139,7 @@ class LangChainCADV(AbstractLangChainCADV):
                         "relevant_columns": str(relevant_columns_list),
                     }
                 )
-            elif self.assumption_generation_trick == "add_deequ":
+            elif self.assumption_generation_trick == "with_deequ":
                 expectations = self.expectation_extraction_chain.invoke(
                     {
                         "code_snippet": input_variables["script"],
