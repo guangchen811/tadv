@@ -1,0 +1,5 @@
+id
+Date of Admission
+Discharge Date
+Room Number
+Insurance Provider

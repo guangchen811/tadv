@@ -1,0 +1,7 @@
+billing_amount
+medical_condition
+admission_date
+Age
+Gender
+id
+test_results

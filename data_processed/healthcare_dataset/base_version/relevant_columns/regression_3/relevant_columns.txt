@@ -1,0 +1,11 @@
+Billing Amount
+id
+Room Number
+Hospital
+Insurance Provider
+Medication
+Admission Type
+Medical Condition
+Age
+Gender
+Blood Type

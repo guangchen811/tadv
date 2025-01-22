@@ -1,0 +1,5 @@
+Age
+bill_age_ratio
+Medical Condition
+Admission Type
+id

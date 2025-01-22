@@ -1,0 +1,6 @@
+id
+Name
+Age
+Medical Condition
+Doctor
+Hospital

@@ -1,0 +1,6 @@
+id
+Medical Condition
+Admission Type
+Billing Amount
+Date of Admission
+Discharge Date

@@ -1,0 +1,3 @@
+id
+Date of Admission
+Billing Amount

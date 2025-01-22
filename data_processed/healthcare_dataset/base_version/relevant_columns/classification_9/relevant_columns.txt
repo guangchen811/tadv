@@ -1,0 +1,14 @@
+age
+billing_amount
+medical_condition
+admission_type
+blood_type
+gender
+id
+test_results
+admission_dt
+discharge_dt
+hospital
+length_of_stay
+cost_per_day
+cost_age_ratio

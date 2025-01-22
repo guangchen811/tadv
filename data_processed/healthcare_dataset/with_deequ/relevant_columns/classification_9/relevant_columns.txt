@@ -1,0 +1,11 @@
+age
+billing_amount
+medical_condition
+admission_type
+blood_type
+gender
+hospital
+test_results
+id
+date_of_admission
+discharge_date
