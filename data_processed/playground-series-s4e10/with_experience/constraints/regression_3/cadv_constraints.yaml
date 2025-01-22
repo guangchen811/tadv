@@ -1,0 +1,68 @@
+constraints:
+  cb_person_cred_hist_length:
+    code:
+    - - .isComplete('cb_person_cred_hist_length')
+      - Valid
+    - - .isNonNegative('cb_person_cred_hist_length')
+      - Valid
+    assumptions:
+    - cb_person_cred_hist_length should not be null (NOT NULL constraint).
+    - cb_person_cred_hist_length should be greater than or equal to 0 (IS NON NEGATIVE
+      constraint).
+  cb_person_default_on_file:
+    code:
+    - - .isComplete('cb_person_default_on_file')
+      - Valid
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    assumptions:
+    - cb_person_default_on_file should not be null (NOT NULL constraint).
+    - cb_person_default_on_file should be one of the values ['Y', 'N'] (IS IN constraint).
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - id should not be null (NOT NULL constraint).
+    - id should be unique (UNIQUE constraint).
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - loan_amnt should be greater than 0 (IS NON NEGATIVE constraint).
+    - loan_amnt is used in a logarithmic transformation, so it should be positive.
+    - loan_amnt should not be null (NOT NULL constraint).
+  loan_grade:
+    code:
+    - - .isComplete('loan_grade')
+      - Valid
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - loan_grade should not be null (NOT NULL constraint).
+    - loan_grade should be one of the values ['A', 'B', 'C', 'D', 'E', 'F', 'G'] (IS
+      IN constraint).
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - loan_int_rate should not be null (NOT NULL constraint).
+    - loan_int_rate should be greater than or equal to 0 (IS NON NEGATIVE constraint).
+  person_home_ownership:
+    code:
+    - - .isComplete('person_home_ownership')
+      - Valid
+    - - .isContainedIn('person_home_ownership', ['RENT', 'MORTGAGE', 'OWN', 'OTHER'])
+      - Valid
+    assumptions:
+    - person_home_ownership should not be null (NOT NULL constraint).
+    - person_home_ownership should be one of the values ['RENT', 'MORTGAGE', 'OWN',
+      'OTHER'] (IS IN constraint).

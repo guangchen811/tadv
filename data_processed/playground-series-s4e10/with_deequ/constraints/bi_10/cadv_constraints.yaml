@@ -1,0 +1,50 @@
+constraints:
+  loan_grade:
+    code:
+    - - '.hasPattern(''loan_grade'', ''A|B|C|D'', lambda x: x > 0.5)'
+      - Valid
+    - - .isComplete('loan_grade')
+      - Valid
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - The column 'loan_grade' should be complete, meaning no missing values are allowed.
+    - 'The values in ''loan_grade'' should be one of the predefined categories: [''A'',
+      ''B'', ''C'', ''D'', ''E'', ''F'', ''G''].'
+    - The majority of values in 'loan_grade' should be within the categories ['A',
+      'B', 'C', 'D'], reflecting common grades.
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - The column 'loan_int_rate' should be complete, meaning no missing values are
+      allowed.
+    - The values in 'loan_int_rate' should be non-negative, as interest rates cannot
+      be negative.
+  loan_status:
+    code:
+    - - .isComplete('loan_status')
+      - Valid
+    - - .isContainedIn('loan_status', ['0', '1'])
+      - Valid
+    - - .isNonNegative('loan_status')
+      - Valid
+    assumptions:
+    - The column 'loan_status' should be complete, meaning no missing values are allowed.
+    - The values in 'loan_status' should be either '0' or '1', representing loan status
+      as binary.
+    - The values in 'loan_status' should be non-negative.
+  person_emp_length:
+    code:
+    - - .isComplete('person_emp_length')
+      - Valid
+    - - .isNonNegative('person_emp_length')
+      - Valid
+    assumptions:
+    - The column 'person_emp_length' should be complete, meaning no missing values
+      are allowed.
+    - The values in 'person_emp_length' should be non-negative, indicating that employment
+      length cannot be negative.

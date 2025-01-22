@@ -1,0 +1,30 @@
+constraints:
+  loan_amnt:
+    code:
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    - - .isPositive('loan_amnt')
+      - Valid
+    assumptions:
+    - loan_amnt should be a non-negative integer
+    - loan_amnt should logically represent a loan amount, likely greater than 0
+  loan_int_rate:
+    code:
+    - - .isLessThanOrEqualTo('loan_int_rate', '100')
+      - Invalid
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - loan_int_rate should be a non-negative fractional number
+    - loan_int_rate should be within a typical range for interest rates, between 0
+      and 100
+  person_income:
+    code:
+    - - .isNonNegative('person_income')
+      - Valid
+    - - .isPositive('person_income')
+      - Valid
+    assumptions:
+    - person_income should be a non-negative integer
+    - person_income should logically represent an income amount, likely greater than
+      0

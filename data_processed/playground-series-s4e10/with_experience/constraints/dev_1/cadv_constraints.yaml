@@ -1,0 +1,11 @@
+constraints:
+  loan_grade:
+    code:
+    - - .isComplete('loan_grade')
+      - Valid
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - The column 'loan_grade' should only have values within the set {A, B, C, D,
+      E, F, G}.
+    - The column 'loan_grade' should be complete, with no NULL values.

@@ -1,0 +1,58 @@
+constraints:
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - loan_amnt is complete and should not contain NULL values
+    - loan_amnt should be non-negative
+  loan_grade:
+    code:
+    - - .isComplete('loan_grade')
+      - Valid
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - loan_grade should have values within the set {'A', 'B', 'C', 'D', 'E', 'F',
+      'G'}
+    - loan_grade is complete and should not contain NULL values
+  loan_intent:
+    code:
+    - - .isComplete('loan_intent')
+      - Valid
+    - - .isContainedIn('loan_intent', ['EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL',
+        'DEBTCONSOLIDATION', 'MEDICAL', 'VENTURE'])
+      - Valid
+    assumptions:
+    - loan_intent should have values within the set {'EDUCATION', 'HOMEIMPROVEMENT',
+      'PERSONAL', 'DEBTCONSOLIDATION', 'MEDICAL', 'VENTURE'}
+    - loan_intent is complete and should not contain NULL values
+  loan_percent_income:
+    code:
+    - - .isComplete('loan_percent_income')
+      - Valid
+    - - .isNonNegative('loan_percent_income')
+      - Valid
+    assumptions:
+    - loan_percent_income is complete and should not contain NULL values
+    - loan_percent_income should be non-negative
+  loan_status:
+    code:
+    - - .isComplete('loan_status')
+      - Valid
+    - - .isContainedIn('loan_status', [0, 1])
+      - Invalid
+    assumptions:
+    - loan_status should have values within the set {0, 1}
+    - loan_status is complete and should not contain NULL values
+  person_income:
+    code:
+    - - .isComplete('person_income')
+      - Valid
+    - - .isNonNegative('person_income')
+      - Valid
+    assumptions:
+    - person_income is complete and should not contain NULL values
+    - person_income should be non-negative

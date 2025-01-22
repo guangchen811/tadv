@@ -1,0 +1,93 @@
+constraints:
+  cb_person_cred_hist_length:
+    code:
+    - - .isNonNegative('cb_person_cred_hist_length')
+      - Valid
+    assumptions:
+    - The column 'cb_person_cred_hist_length' should be non-negative.
+  cb_person_default_on_file:
+    code:
+    - - .isComplete('cb_person_default_on_file')
+      - Valid
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    assumptions:
+    - The column 'cb_person_default_on_file' should have values within {'Y', 'N'}.
+    - The column 'cb_person_default_on_file' should be NOT NULL.
+  id:
+    code:
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The column 'id' should have unique values.
+  loan_amnt:
+    code:
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - The column 'loan_amnt' should be non-negative.
+  loan_grade:
+    code:
+    - - .isComplete('loan_grade')
+      - Valid
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - The column 'loan_grade' should have values within {'A', 'B', 'C', 'D', 'E',
+      'F', 'G'}.
+    - The column 'loan_grade' should be NOT NULL.
+  loan_int_rate:
+    code:
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - The column 'loan_int_rate' should be non-negative.
+  loan_intent:
+    code:
+    - - .isComplete('loan_intent')
+      - Valid
+    - - .isContainedIn('loan_intent', ['EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL',
+        'DEBTCONSOLIDATION', 'MEDICAL', 'VENTURE'])
+      - Valid
+    assumptions:
+    - The column 'loan_intent' should have values within {'EDUCATION', 'HOMEIMPROVEMENT',
+      'PERSONAL', 'DEBTCONSOLIDATION', 'MEDICAL', 'VENTURE'}.
+    - The column 'loan_intent' should be NOT NULL.
+  loan_percent_income:
+    code:
+    - - .isNonNegative('loan_percent_income')
+      - Valid
+    assumptions:
+    - The column 'loan_percent_income' should be non-negative.
+  person_age:
+    code:
+    - - '.hasMin(''person_age'', lambda x: x >= 18)'
+      - Valid
+    - - .isNonNegative('person_age')
+      - Valid
+    assumptions:
+    - The column 'person_age' should have a minimum value constraint. It might make
+      sense to assume the minimum age is 18.
+    - The column 'person_age' should be non-negative.
+  person_emp_length:
+    code:
+    - - .isNonNegative('person_emp_length')
+      - Valid
+    assumptions:
+    - The column 'person_emp_length' should be non-negative.
+  person_home_ownership:
+    code:
+    - - .isComplete('person_home_ownership')
+      - Valid
+    - - .isContainedIn('person_home_ownership', ['OWN', 'MORTGAGE', 'RENT', 'OTHER'])
+      - Valid
+    assumptions:
+    - The column 'person_home_ownership' should have values within {'OWN', 'MORTGAGE',
+      'RENT', 'OTHER'}.
+    - The column 'person_home_ownership' should be NOT NULL.
+  person_income:
+    code:
+    - - .isNonNegative('person_income')
+      - Valid
+    assumptions:
+    - The column 'person_income' should be non-negative.

@@ -1,0 +1,37 @@
+constraints:
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - loan_amnt should not be null.
+    - loan_amnt should be a non-negative integer.
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - loan_int_rate should not be null.
+    - loan_int_rate should be a non-negative fractional number.
+  loan_intent:
+    code:
+    - - '.hasDistinctness([''loan_intent''], lambda x: x == 1.0)'
+      - Invalid
+    - - .isComplete('loan_intent')
+      - Valid
+    assumptions:
+    - loan_intent should have distinct values for each category of loan intents.
+    - loan_intent should not be null.
+  person_income:
+    code:
+    - - .isComplete('person_income')
+      - Valid
+    - - .isPositive('person_income')
+      - Valid
+    assumptions:
+    - person_income should not be null.
+    - person_income should be a positive integer.

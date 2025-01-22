@@ -1,0 +1,36 @@
+constraints:
+  '`person_home_ownership':
+    code: []
+    assumptions: []
+  cb_person_default_on_file`:
+    code: []
+    assumptions: []
+  loan_grade:
+    code:
+    - - '.hasPattern(''loan_grade'', ''E|F|A|G|B|C|D'', lambda x: x > 0.8)'
+      - Valid
+    - - .isComplete('loan_grade')
+      - Valid
+    - - .isContainedIn('loan_grade', ['E', 'F', 'A', 'G', 'B', 'C', 'D'])
+      - Valid
+    assumptions:
+    - The column should have values within ['E', 'F', 'A', 'G', 'B', 'C', 'D'] or
+      other reasonable values.
+    - The column should not have NULL values.
+    - Most values in the column should be within ['E', 'F', 'A', 'G', 'B', 'C', 'D'].
+  loan_intent:
+    code:
+    - - '.hasPattern(''loan_intent'', ''EDUCATION|HOMEIMPROVEMENT|PERSONAL|DEBTCONSOLIDATION|MEDICAL|VENTURE'',
+        lambda x: x > 0.8)'
+      - Valid
+    - - .isComplete('loan_intent')
+      - Valid
+    - - .isContainedIn('loan_intent', ['EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL',
+        'DEBTCONSOLIDATION', 'MEDICAL', 'VENTURE'])
+      - Valid
+    assumptions:
+    - The column should have values within ['EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL',
+      'DEBTCONSOLIDATION', 'MEDICAL', 'VENTURE'] or other reasonable values.
+    - The column should not have NULL values.
+    - Most values in the column should be within ['EDUCATION', 'HOMEIMPROVEMENT',
+      'PERSONAL', 'DEBTCONSOLIDATION', 'MEDICAL', 'VENTURE'].

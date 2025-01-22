@@ -1,0 +1,15 @@
+constraints:
+  loan_amnt:
+    code:
+    - - .isPositive('loan_amnt')
+      - Valid
+    assumptions:
+    - loan_amnt should be greater than 0, as dividing by zero would cause an error.
+    - loan_amnt should be a positive value, as negative loan amounts are not meaningful.
+  person_income:
+    code:
+    - - .isPositive('person_income')
+      - Valid
+    assumptions:
+    - person_income should be greater than 0, as dividing by zero would cause an error.
+    - person_income should be a positive value, as negative income is not realistic.

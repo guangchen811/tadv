@@ -1,0 +1,27 @@
+constraints:
+  loan_amnt:
+    code:
+    - - '.hasMax(''loan_amnt'', lambda x: x < 1000000)'
+      - Valid
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - Values should be non-negative as loan amount cannot be negative
+    - Values should be within a realistic range, e.g., less than 1,000,000, to avoid
+      erroneous entries
+  loan_grade:
+    code:
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - 'Values should be one of the predefined categories: A, B, C, D, E, F, G'
+  person_income:
+    code:
+    - - '.hasMax(''person_income'', lambda x: x < 1000000)'
+      - Invalid
+    - - .isNonNegative('person_income')
+      - Valid
+    assumptions:
+    - Values should be non-negative as income cannot be negative
+    - Values should be within a realistic range, e.g., less than 1,000,000, to avoid
+      erroneous entries

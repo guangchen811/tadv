@@ -1,0 +1,24 @@
+constraints:
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    - - .satisfies('loan_amnt % 1 == 0', 'loan_amnt should be integer')
+      - Valid
+    assumptions:
+    - The values should be non-negative integers.
+  person_income:
+    code:
+    - - .isComplete('person_income')
+      - Valid
+    - - .isPositive('person_income')
+      - Valid
+    - - .satisfies('person_income != 0', 'person_income should not be zero')
+      - Valid
+    - - .satisfies('person_income % 1 == 0', 'person_income should be integer')
+      - Valid
+    assumptions:
+    - The values should be positive integers.
+    - The values should not be zero to avoid division errors.

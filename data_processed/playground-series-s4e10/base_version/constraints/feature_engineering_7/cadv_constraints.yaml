@@ -1,0 +1,19 @@
+constraints:
+  loan_int_rate:
+    code:
+    - - '.hasMax(''loan_int_rate'', lambda x: x > 20)'
+      - Valid
+    - - '.hasMin(''loan_int_rate'', lambda x: x >= 0)'
+      - Valid
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    - - .satisfies('loan_int_rate < 10 OR loan_int_rate BETWEEN 10 AND 20 OR loan_int_rate
+        > 20', 'loan_int_rate category check')
+      - Valid
+    assumptions:
+    - loan_int_rate should be a valid fractional number
+    - loan_int_rate categorizes into 'Low Rate' if less than 10
+    - loan_int_rate categorizes into 'Medium Rate' if between 10 and 20 inclusive
+    - loan_int_rate categorizes into 'High Rate' if greater than 20

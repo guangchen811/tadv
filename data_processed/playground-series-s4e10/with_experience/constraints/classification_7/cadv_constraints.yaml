@@ -1,0 +1,58 @@
+constraints:
+  cb_person_default_on_file:
+    code:
+    - - .isComplete('cb_person_default_on_file')
+      - Valid
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    assumptions:
+    - Values should be within ['Y', 'N'].
+    - Should not contain NULL values.
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - Should have unique values.
+    - Should not contain NULL values.
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - Values should be non-negative.
+    - Should not contain NULL values.
+  loan_amnt_cat:
+    code:
+    - - .isContainedIn('loan_amnt_cat', ['Low', 'Med', 'High', 'VHigh'])
+      - Invalid
+    assumptions:
+    - Values should be within ['Low', 'Med', 'High', 'VHigh'].
+    - Consistency with derived bins from loan_amnt.
+  loan_grade:
+    code:
+    - - .isComplete('loan_grade')
+      - Valid
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - Values should be within ['A', 'B', 'C', 'D', 'E', 'F', 'G'].
+    - Should not contain NULL values.
+  loan_int_rate:
+    code:
+    - - '.hasMean(''loan_int_rate'', lambda x: x > 0)'
+      - Valid
+    - - '.hasStandardDeviation(''loan_int_rate'', lambda x: x > 0)'
+      - Valid
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - Values should be non-negative.
+    - Should not contain NULL values.
+    - Should have a mean and standard deviation constraint.

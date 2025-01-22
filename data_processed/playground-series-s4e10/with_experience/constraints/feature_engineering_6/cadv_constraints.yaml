@@ -1,0 +1,22 @@
+constraints:
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - The column 'loan_amnt' should not be null.
+    - The column 'loan_amnt' should be non-negative.
+  person_income:
+    code:
+    - - .isComplete('person_income')
+      - Valid
+    - - .isGreaterThan('person_income', 0)
+      - Invalid
+    - - .isNonNegative('person_income')
+      - Valid
+    assumptions:
+    - The column 'person_income' should not be null.
+    - The column 'person_income' should be non-negative.
+    - The column 'person_income' should not be zero to avoid division by zero errors.

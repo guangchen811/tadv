@@ -1,0 +1,36 @@
+constraints:
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - The column 'loan_amnt' should be complete (NOT NULL) as it has a completeness
+      of 1.0.
+    - The column 'loan_amnt' should have non-negative values as it is of data type
+      Integral.
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - The column 'loan_int_rate' should be complete (NOT NULL) as it has a completeness
+      of 1.0.
+    - The column 'loan_int_rate' should have non-negative values as it is of data
+      type Fractional.
+  loan_intent:
+    code:
+    - - .isComplete('loan_intent')
+      - Valid
+    - - .isContainedIn('loan_intent', ['EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL',
+        'DEBTCONSOLIDATION', 'MEDICAL', 'VENTURE'])
+      - Valid
+    assumptions:
+    - 'The column ''loan_intent'' should have values within the observed categories:
+      ''EDUCATION'', ''HOMEIMPROVEMENT'', ''PERSONAL'', ''DEBTCONSOLIDATION'', ''MEDICAL'',
+      ''VENTURE''.'
+    - The column 'loan_intent' should be complete (NOT NULL) as it has a completeness
+      of 1.0.

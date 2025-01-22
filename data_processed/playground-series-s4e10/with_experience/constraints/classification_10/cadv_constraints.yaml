@@ -1,0 +1,53 @@
+constraints:
+  cb_person_default_on_file:
+    code:
+    - - .isComplete('cb_person_default_on_file')
+      - Valid
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    assumptions:
+    - The column 'cb_person_default_on_file' should have values within the set {'Y',
+      'N'}.
+    - The column 'cb_person_default_on_file' is complete and should not have NULL
+      values.
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The column 'id' should have unique values.
+    - The column 'id' is complete and should not have NULL values.
+  loan_amnt:
+    code:
+    - - '.hasMin(''loan_amnt'', lambda x: x > 0)'
+      - Valid
+    - - .isComplete('loan_amnt')
+      - Valid
+    assumptions:
+    - The column 'loan_amnt' should have a minimum value greater than 0.
+    - The column 'loan_amnt' should have a maximum value constraint based on the observed
+      data.
+    - The column 'loan_amnt' is complete and should not have NULL values.
+  loan_grade:
+    code:
+    - - .isComplete('loan_grade')
+      - Valid
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - The column 'loan_grade' should have values within the set {'A', 'B', 'C', 'D',
+      'E', 'F', 'G'}.
+    - The column 'loan_grade' is complete and should not have NULL values.
+  loan_int_rate:
+    code:
+    - - '.hasMin(''loan_int_rate'', lambda x: x > 0)'
+      - Valid
+    - - .isComplete('loan_int_rate')
+      - Valid
+    assumptions:
+    - The column 'loan_int_rate' should have a minimum value greater than 0.
+    - The column 'loan_int_rate' should have a maximum value constraint based on the
+      observed data.
+    - The column 'loan_int_rate' is complete and should not have NULL values.

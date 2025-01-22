@@ -1,0 +1,29 @@
+constraints:
+  cb_person_default_on_file:
+    code:
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    assumptions:
+    - Values should be one of ['Y', 'N'] as these are the only known categories.
+  loan_grade:
+    code:
+    - - .isContainedIn('loan_grade', ['E', 'F', 'A', 'G', 'B', 'C', 'D'])
+      - Valid
+    assumptions:
+    - Values should be one of ['E', 'F', 'A', 'G', 'B', 'C', 'D'] as these are the
+      only known categories.
+  loan_intent:
+    code:
+    - - .isContainedIn('loan_intent', ['EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL',
+        'DEBTCONSOLIDATION', 'MEDICAL', 'VENTURE'])
+      - Valid
+    assumptions:
+    - Values should be one of ['EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL', 'DEBTCONSOLIDATION',
+      'MEDICAL', 'VENTURE'] as these are the only known categories.
+  person_home_ownership:
+    code:
+    - - .isContainedIn('person_home_ownership', ['OTHER', 'OWN', 'MORTGAGE', 'RENT'])
+      - Valid
+    assumptions:
+    - Values should be one of ['OTHER', 'OWN', 'MORTGAGE', 'RENT'] as these are the
+      only known categories.

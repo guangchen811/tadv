@@ -1,0 +1,45 @@
+constraints:
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - The column 'loan_amnt' should be complete, with no missing values.
+    - The values in 'loan_amnt' should be non-negative, as loan amounts cannot be
+      negative.
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - The column 'loan_int_rate' should be complete, with no missing values.
+    - The values in 'loan_int_rate' should be non-negative, as interest rates cannot
+      be negative.
+  loan_status:
+    code:
+    - - .isComplete('loan_status')
+      - Valid
+    - - .isContainedIn('loan_status', [0, 1])
+      - Invalid
+    - - .isNonNegative('loan_status')
+      - Valid
+    assumptions:
+    - The column 'loan_status' should be complete, with no missing values.
+    - The values in 'loan_status' should be contained within the set {0, 1}, representing
+      the loan status as binary indicators.
+    - The values in 'loan_status' should be non-negative, as it represents binary
+      values.
+  person_emp_length:
+    code:
+    - - .isComplete('person_emp_length')
+      - Valid
+    - - .isNonNegative('person_emp_length')
+      - Valid
+    assumptions:
+    - The column 'person_emp_length' should be complete, with no missing values.
+    - The values in 'person_emp_length' should be non-negative because employment
+      length cannot be negative.

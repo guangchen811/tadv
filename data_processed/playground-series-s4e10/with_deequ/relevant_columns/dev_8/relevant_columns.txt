@@ -1,0 +1,4 @@
+loan_intent
+loan_amnt
+loan_int_rate
+person_income

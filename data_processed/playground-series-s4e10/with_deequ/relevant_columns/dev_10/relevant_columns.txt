@@ -1,0 +1,3 @@
+person_income
+loan_amnt
+loan_int_rate

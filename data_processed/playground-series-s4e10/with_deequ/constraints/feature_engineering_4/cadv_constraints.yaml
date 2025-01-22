@@ -1,0 +1,11 @@
+constraints:
+  person_home_ownership:
+    code:
+    - - .isComplete('person_home_ownership')
+      - Valid
+    - - .isContainedIn('person_home_ownership', ['RENT', 'MORTGAGE', 'OWN', 'OTHER'])
+      - Valid
+    assumptions:
+    - The column 'person_home_ownership' should be complete with no missing values.
+    - The column 'person_home_ownership' should only contain the values 'RENT', 'MORTGAGE',
+      'OWN', and 'OTHER'.

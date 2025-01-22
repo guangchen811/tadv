@@ -1,0 +1,20 @@
+constraints:
+  person_emp_length:
+    code:
+    - - '.hasMin(''person_emp_length'', lambda x: x >= 0)'
+      - Valid
+    - - .isComplete('person_emp_length')
+      - Valid
+    - - .isNonNegative('person_emp_length')
+      - Valid
+    - - .satisfies('person_emp_length < 2 OR (person_emp_length >= 2 AND person_emp_length
+        <= 5) OR person_emp_length > 5', 'person_emp_length_range_constraint')
+      - Valid
+    assumptions:
+    - The column 'person_emp_length' is complete, suggesting a NOT NULL constraint.
+    - The value of 'person_emp_length' should be non-negative, suggesting an IS NON
+      NEGATIVE constraint.
+    - The column 'person_emp_length' should have a minimum value of 0, suggesting
+      a MIN constraint.
+    - 'The column ''person_emp_length'' is expected to have values within specific
+      ranges: ''< 2'', ''2 to 5'', ''> 5'', suggesting a range constraint.'

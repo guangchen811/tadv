@@ -1,0 +1,22 @@
+constraints:
+  loan_int_rate:
+    code:
+    - - '.hasMax(''loan_int_rate'', lambda x: x <= 100)'
+      - Valid
+    - - '.hasMin(''loan_int_rate'', lambda x: x >= 0)'
+      - Valid
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - The column 'loan_int_rate' should have no missing values.
+    - The values in 'loan_int_rate' should be non-negative.
+    - The values in 'loan_int_rate' should be categorized as 'Low Rate' for rates
+      less than 10.
+    - The values in 'loan_int_rate' should be categorized as 'Medium Rate' for rates
+      between 10 and 20.
+    - The values in 'loan_int_rate' should be categorized as 'High Rate' for rates
+      greater than 20.
+    - The values in 'loan_int_rate' should fall within a realistic range, e.g., 0
+      to 100.

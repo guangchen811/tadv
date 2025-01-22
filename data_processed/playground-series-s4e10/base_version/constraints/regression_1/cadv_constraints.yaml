@@ -1,0 +1,88 @@
+constraints:
+  cb_person_cred_hist_length:
+    code:
+    - - .isNonNegative('cb_person_cred_hist_length')
+      - Valid
+    - - .satisfies('cb_person_cred_hist_length == floor(cb_person_cred_hist_length)',
+        'cb_person_cred_hist_length should be an integer')
+      - Valid
+    assumptions:
+    - Values should be non-negative integers
+  cb_person_default_on_file:
+    code:
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    assumptions:
+    - Values should be one of ['Y', 'N']
+  loan_amnt:
+    code:
+    - - .isPositive('loan_amnt')
+      - Valid
+    - - .satisfies('loan_amnt > 0', 'loan_amnt should be greater than 0')
+      - Valid
+    assumptions:
+    - Values should be positive integers
+    - Loan amount should be realistic (e.g., greater than 0)
+  loan_grade:
+    code:
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - Values should be one of ['A', 'B', 'C', 'D', 'E', 'F', 'G']
+  loan_int_rate:
+    code:
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - Values should be non-negative
+  loan_intent:
+    code:
+    - - .isContainedIn('loan_intent', ['EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL',
+        'DEBTCONSOLIDATION', 'MEDICAL', 'VENTURE'])
+      - Valid
+    assumptions:
+    - Values should be one of ['EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL', 'DEBTCONSOLIDATION',
+      'MEDICAL', 'VENTURE']
+  loan_percent_income:
+    code:
+    - - .isNonNegative('loan_percent_income')
+      - Valid
+    - - .satisfies('loan_percent_income <= 1', 'loan_percent_income should be less
+        than or equal to 1')
+      - Valid
+    assumptions:
+    - Values should be non-negative and less than or equal to 1 (since it represents
+      a percentage)
+  loan_status:
+    code:
+    - - .isContainedIn('loan_status', [0, 1])
+      - Invalid
+    assumptions:
+    - Values should be either 0 or 1
+  person_age:
+    code:
+    - - .isPositive('person_age')
+      - Valid
+    - - .satisfies('person_age == floor(person_age)', 'person_age should be an integer')
+      - Valid
+    - - .satisfies('person_age >= 18', 'person_age should be at least 18')
+      - Valid
+    assumptions:
+    - Values should be positive integers
+    - Persons should be adults (age >= 18)
+  person_emp_length:
+    code:
+    - - .isNonNegative('person_emp_length')
+      - Valid
+    - - .satisfies('person_emp_length < 100', 'person_emp_length should be less than
+        100 years')
+      - Valid
+    assumptions:
+    - Values should be non-negative
+    - Employment length should be realistic (e.g., less than 100 years)
+  person_home_ownership:
+    code:
+    - - .isContainedIn('person_home_ownership', ['OTHER', 'OWN', 'MORTGAGE', 'RENT'])
+      - Valid
+    assumptions:
+    - Values should be one of ['OTHER', 'OWN', 'MORTGAGE', 'RENT']

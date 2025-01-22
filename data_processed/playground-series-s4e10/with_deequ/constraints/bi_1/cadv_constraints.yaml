@@ -1,0 +1,21 @@
+constraints:
+  cb_person_default_on_file:
+    code:
+    - - .isComplete('cb_person_default_on_file')
+      - Valid
+    - - .isContainedIn('cb_person_default_on_file', ['N', 'Y'])
+      - Valid
+    assumptions:
+    - The column 'cb_person_default_on_file' should be complete with no missing values.
+    - 'The column ''cb_person_default_on_file'' should contain only the values: ''N'',
+      ''Y''.'
+  person_home_ownership:
+    code:
+    - - .isComplete('person_home_ownership')
+      - Valid
+    - - .isContainedIn('person_home_ownership', ['RENT', 'MORTGAGE', 'OWN', 'OTHER'])
+      - Valid
+    assumptions:
+    - The column 'person_home_ownership' should be complete with no missing values.
+    - 'The column ''person_home_ownership'' should contain only the values: ''RENT'',
+      ''MORTGAGE'', ''OWN'', ''OTHER''.'

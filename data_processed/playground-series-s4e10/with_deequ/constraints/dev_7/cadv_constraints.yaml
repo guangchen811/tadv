@@ -1,0 +1,44 @@
+constraints:
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - The column should be complete with no missing values.
+    - Loan amounts should be non-negative, as negative loan amounts do not make logical
+      sense.
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - The column should be complete with no missing values.
+    - Interest rates should be non-negative, as negative interest rates are not typical
+      in financial datasets.
+  loan_status:
+    code:
+    - - .isComplete('loan_status')
+      - Valid
+    - - .isContainedIn('loan_status', [0, 1])
+      - Invalid
+    assumptions:
+    - The column should be complete with no missing values.
+    - Loan status values should be either '0' or '1', where '0' typically indicates
+      a non-defaulted loan and '1' indicates a defaulted loan.
+  person_home_ownership:
+    code:
+    - - '.hasPattern(''person_home_ownership'', ''RENT|MORTGAGE'', lambda x: x >=
+        0.5)'
+      - Valid
+    - - .isComplete('person_home_ownership')
+      - Valid
+    - - .isContainedIn('person_home_ownership', ['RENT', 'MORTGAGE', 'OWN', 'OTHER'])
+      - Valid
+    assumptions:
+    - The column should be complete with no missing values.
+    - Values should be contained within the set ['RENT', 'MORTGAGE', 'OWN', 'OTHER'].
+    - The majority of values are expected to be 'RENT' or 'MORTGAGE', given the distribution.

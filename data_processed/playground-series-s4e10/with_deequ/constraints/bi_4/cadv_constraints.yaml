@@ -1,0 +1,7 @@
+constraints:
+  '`loan_intent':
+    code: []
+    assumptions: []
+  cb_person_default_on_file`:
+    code: []
+    assumptions: []

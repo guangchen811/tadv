@@ -1,0 +1,30 @@
+constraints:
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - The column 'loan_amnt' should not have null values.
+    - The column 'loan_amnt' should only contain non-negative integer values.
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - The column 'loan_int_rate' should not have null values.
+    - The column 'loan_int_rate' should only contain non-negative fractional values.
+  loan_intent:
+    code:
+    - - .isComplete('loan_intent')
+      - Valid
+    - - .isContainedIn('loan_intent', ['EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL',
+        'DEBTCONSOLIDATION', 'MEDICAL', 'VENTURE'])
+      - Valid
+    assumptions:
+    - The column 'loan_intent' should not have null values.
+    - 'The column ''loan_intent'' should have only known categories: EDUCATION, HOMEIMPROVEMENT,
+      PERSONAL, DEBTCONSOLIDATION, MEDICAL, VENTURE.'

@@ -1,0 +1,86 @@
+constraints:
+  cb_person_cred_hist_length:
+    code:
+    - - .isContainedIn('cb_person_cred_hist_length', [2, 3, 4, 5, 6, 7, 8, 9, 10,
+        11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29,
+        30])
+      - Invalid
+    - - .isNonNegative('cb_person_cred_hist_length')
+      - Valid
+    assumptions:
+    - Values should be non-negative
+    - Values should be one of the predefined range [2, 3, ..., 30]
+  cb_person_default_on_file:
+    code:
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    assumptions:
+    - Values should be either 'Y' or 'N'
+  id:
+    code:
+    - - .isNonNegative('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - Values should be unique
+    - Values should be non-negative
+  loan_amnt:
+    code:
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - Values should be non-negative
+  loan_grade:
+    code:
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - Values should be one of ['A', 'B', 'C', 'D', 'E', 'F', 'G']
+  loan_int_rate:
+    code:
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - Values should be non-negative
+  loan_intent:
+    code:
+    - - .isContainedIn('loan_intent', ['EDUCATION', 'MEDICAL', 'PERSONAL', 'VENTURE',
+        'DEBTCONSOLIDATION', 'HOMEIMPROVEMENT'])
+      - Valid
+    assumptions:
+    - Values should be one of ['EDUCATION', 'MEDICAL', 'PERSONAL', 'VENTURE', 'DEBTCONSOLIDATION',
+      'HOMEIMPROVEMENT']
+  loan_percent_income:
+    code:
+    - - .isNonNegative('loan_percent_income')
+      - Valid
+    assumptions:
+    - Values should be non-negative
+  loan_status:
+    code:
+    - - .isContainedIn('loan_status', ['0', '1'])
+      - Valid
+    assumptions:
+    - Values should be either '0' or '1'
+  person_age:
+    code:
+    - - .isContainedIn('person_age', list(range(20, 85)))
+      - Invalid
+    - - .isNonNegative('person_age')
+      - Valid
+    assumptions:
+    - Values should be within a typical age range between 20 and 84
+    - Values should be non-negative
+  person_emp_length:
+    code:
+    - - .isNonNegative('person_emp_length')
+      - Valid
+    assumptions:
+    - Values should be non-negative
+  person_home_ownership:
+    code:
+    - - .isContainedIn('person_home_ownership', ['RENT', 'MORTGAGE', 'OWN', 'OTHER'])
+      - Valid
+    assumptions:
+    - Values should be one of ['RENT', 'MORTGAGE', 'OWN', 'OTHER']

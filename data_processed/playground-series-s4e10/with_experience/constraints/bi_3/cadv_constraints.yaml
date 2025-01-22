@@ -1,0 +1,40 @@
+constraints:
+  cb_person_default_on_file:
+    code:
+    - - .isComplete('cb_person_default_on_file')
+      - Valid
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    assumptions:
+    - The column should have values within the set {'Y', 'N'} as seen in the dataset.
+    - The column should be complete (NOT NULL).
+  loan_grade:
+    code:
+    - - .isComplete('loan_grade')
+      - Valid
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - The column should have values within the set {'A', 'B', 'C', 'D', 'E', 'F',
+      'G'} as seen in the dataset.
+    - The column should be complete (NOT NULL).
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - .isGreaterThan('loan_int_rate', 15.0)
+      - Invalid
+    assumptions:
+    - The column should be complete (NOT NULL).
+    - The column should have values greater than 15.0 as per the WHERE clause in the
+      SQL statement.
+  person_home_ownership:
+    code:
+    - - .isComplete('person_home_ownership')
+      - Valid
+    - - .isContainedIn('person_home_ownership', ['OWN', 'MORTGAGE', 'RENT', 'OTHER'])
+      - Valid
+    assumptions:
+    - The column should have values within the set {'OWN', 'MORTGAGE', 'RENT', 'OTHER'}
+      as seen in the dataset.
+    - The column should be complete (NOT NULL).

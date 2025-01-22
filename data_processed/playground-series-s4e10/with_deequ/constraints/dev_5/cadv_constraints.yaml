@@ -1,0 +1,31 @@
+constraints:
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The 'id' column should be complete, meaning no missing values are allowed.
+    - The 'id' column should contain unique values for each entry.
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - The 'loan_amnt' column should be complete, meaning no missing values are allowed.
+    - The 'loan_amnt' column should contain non-negative values as loan amounts cannot
+      be negative.
+  person_income:
+    code:
+    - - .isComplete('person_income')
+      - Valid
+    - - .isNonNegative('person_income')
+      - Valid
+    assumptions:
+    - The 'person_income' column should be complete, meaning no missing values are
+      allowed.
+    - The 'person_income' column should contain non-negative values as income cannot
+      be negative.

@@ -1,0 +1,72 @@
+constraints:
+  cb_person_default_on_file:
+    code:
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    assumptions:
+    - Must be either 'Y' or 'N'.
+  id:
+    code:
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - Must be a unique integer for each row.
+  loan_amnt:
+    code:
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - Must be a non-negative integer.
+  loan_grade:
+    code:
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - Must be one of 'A', 'B', 'C', 'D', 'E', 'F', or 'G'.
+  loan_int_rate:
+    code:
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - Must be a non-negative number.
+  loan_intent:
+    code:
+    - - .isContainedIn('loan_intent', ['EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL',
+        'DEBTCONSOLIDATION', 'MEDICAL', 'VENTURE'])
+      - Valid
+    assumptions:
+    - Must be one of 'EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL', 'DEBTCONSOLIDATION',
+      'MEDICAL', or 'VENTURE'.
+  loan_percent_income:
+    code:
+    - - .isNonNegative('loan_percent_income')
+      - Valid
+    assumptions:
+    - Must be a non-negative number.
+  person_age:
+    code:
+    - - '.hasMin(''person_age'', lambda x: x > 18)'
+      - Valid
+    - - .isNonNegative('person_age')
+      - Valid
+    assumptions:
+    - Must be a non-negative integer.
+    - Expected to be greater than 18 for typical loan applicants.
+  person_emp_length:
+    code:
+    - - .isNonNegative('person_emp_length')
+      - Valid
+    assumptions:
+    - Must be a non-negative number.
+  person_home_ownership:
+    code:
+    - - .isContainedIn('person_home_ownership', ['OWN', 'MORTGAGE', 'RENT', 'OTHER'])
+      - Valid
+    assumptions:
+    - Must be one of 'OWN', 'MORTGAGE', 'RENT', or 'OTHER'.
+  person_income:
+    code:
+    - - .isNonNegative('person_income')
+      - Valid
+    assumptions:
+    - Must be a non-negative integer.

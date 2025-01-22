@@ -1,0 +1,96 @@
+constraints:
+  cb_person_cred_hist_length:
+    code:
+    - - '.hasMean(''cb_person_cred_hist_length'', lambda x: x > 0)'
+      - Valid
+    - - '.hasStandardDeviation(''cb_person_cred_hist_length'', lambda x: x > 0)'
+      - Valid
+    - - .isNonNegative('cb_person_cred_hist_length')
+      - Valid
+    assumptions:
+    - Should be non-negative (IS NON NEGATIVE)
+    - Should have a mean and standard deviation constraint (MEAN and STD)
+  cb_person_default_on_file:
+    code:
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    assumptions:
+    - Should have values within the set {'Y', 'N'} (IS IN)
+  loan_amnt:
+    code:
+    - - '.hasMean(''loan_amnt'', lambda x: x > 0)'
+      - Valid
+    - - '.hasStandardDeviation(''loan_amnt'', lambda x: x > 0)'
+      - Valid
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - Should be non-negative (IS NON NEGATIVE)
+    - Should have a mean and standard deviation constraint (MEAN and STD)
+  loan_grade:
+    code:
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - Should have values within the set {'A', 'B', 'C', 'D', 'E', 'F', 'G'} (IS IN)
+  loan_int_rate:
+    code:
+    - - '.hasMean(''loan_int_rate'', lambda x: x > 0)'
+      - Valid
+    - - '.hasStandardDeviation(''loan_int_rate'', lambda x: x > 0)'
+      - Valid
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - Should be non-negative (IS NON NEGATIVE)
+    - Should have a mean and standard deviation constraint (MEAN and STD)
+  loan_percent_income:
+    code:
+    - - '.hasMean(''loan_percent_income'', lambda x: x > 0)'
+      - Valid
+    - - '.hasStandardDeviation(''loan_percent_income'', lambda x: x > 0)'
+      - Valid
+    - - .isNonNegative('loan_percent_income')
+      - Valid
+    assumptions:
+    - Should be non-negative (IS NON NEGATIVE)
+    - Should have a mean and standard deviation constraint (MEAN and STD)
+  person_age:
+    code:
+    - - '.hasMean(''person_age'', lambda x: x > 0)'
+      - Valid
+    - - '.hasStandardDeviation(''person_age'', lambda x: x > 0)'
+      - Valid
+    - - .isNonNegative('person_age')
+      - Valid
+    assumptions:
+    - Should be non-negative (IS NON NEGATIVE)
+    - Should have a mean and standard deviation constraint (MEAN and STD)
+  person_emp_length:
+    code:
+    - - '.hasMean(''person_emp_length'', lambda x: x > 0)'
+      - Valid
+    - - '.hasStandardDeviation(''person_emp_length'', lambda x: x > 0)'
+      - Valid
+    - - .isNonNegative('person_emp_length')
+      - Valid
+    assumptions:
+    - Should be non-negative (IS NON NEGATIVE)
+    - Should have a mean and standard deviation constraint (MEAN and STD)
+  person_home_ownership:
+    code:
+    - - .isContainedIn('person_home_ownership', ['OTHER', 'OWN', 'MORTGAGE', 'RENT'])
+      - Valid
+    assumptions:
+    - Should have values within the set {'OTHER', 'OWN', 'MORTGAGE', 'RENT'} (IS IN)
+  person_income:
+    code:
+    - - '.hasMean(''person_income'', lambda x: x > 0)'
+      - Valid
+    - - '.hasStandardDeviation(''person_income'', lambda x: x > 0)'
+      - Valid
+    - - .isNonNegative('person_income')
+      - Valid
+    assumptions:
+    - Should be non-negative (IS NON NEGATIVE)
+    - Should have a mean and standard deviation constraint (MEAN and STD)

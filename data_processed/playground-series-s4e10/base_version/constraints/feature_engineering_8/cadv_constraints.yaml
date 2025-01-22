@@ -1,0 +1,24 @@
+constraints:
+  person_emp_length:
+    code:
+    - - '.hasMax(''person_emp_length'', lambda x: x > 0)'
+      - Valid
+    - - '.hasMax(''person_emp_length'', lambda x: x > 5)'
+      - Valid
+    - - .isNonNegative('person_emp_length')
+      - Valid
+    - - .satisfies('person_emp_length >= 0', 'Non-negative employment length')
+      - Valid
+    - - .satisfies('person_emp_length >= 2 AND person_emp_length <= 5 OR person_emp_length
+        < 2 OR person_emp_length > 5', 'Categorization into Junior, Mid-level, Senior')
+      - Valid
+    assumptions:
+    - The column 'person_emp_length' must contain non-negative values, as negative
+      employment length is not feasible.
+    - The column 'person_emp_length' should have a maximum value greater than 5 to
+      ensure there are entries categorized as 'Senior'.
+    - The column 'person_emp_length' should have values that can be categorized into
+      'Junior', 'Mid-level', and 'Senior' based on the binning criteria (less than
+      2, between 2 and 5, greater than 5).
+    - The column 'person_emp_length' should have a maximum value that can be used
+      for normalization, implying it should not be zero.

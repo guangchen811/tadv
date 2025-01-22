@@ -1,0 +1,43 @@
+constraints:
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - The column 'loan_amnt' should be NOT NULL as it is complete in the sample.
+    - The column 'loan_amnt' should be non-negative because it represents an amount.
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - The column 'loan_int_rate' should be NOT NULL as it is complete in the sample.
+    - The column 'loan_int_rate' should be non-negative because it represents an interest
+      rate.
+  loan_status:
+    code:
+    - - .isComplete('loan_status')
+      - Valid
+    - - .isContainedIn('loan_status', ['0', '1'])
+      - Valid
+    assumptions:
+    - The column 'loan_status' should be NOT NULL as it is complete in the sample.
+    - The column 'loan_status' should have values within the range ['0', '1'], representing
+      the loan status.
+  person_home_ownership:
+    code:
+    - - .isComplete('person_home_ownership')
+      - Valid
+    - - .isContainedIn('person_home_ownership', ['OTHER', 'OWN', 'MORTGAGE', 'RENT',
+        'LEASE', 'NONE'])
+      - Valid
+    assumptions:
+    - The column 'person_home_ownership' should be NOT NULL as it is complete in the
+      sample.
+    - The column 'person_home_ownership' should have values within the range ['OTHER',
+      'OWN', 'MORTGAGE', 'RENT']. Consider allowing additional reasonable values like
+      'LEASE', 'NONE'.

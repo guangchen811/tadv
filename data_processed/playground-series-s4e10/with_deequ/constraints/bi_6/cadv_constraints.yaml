@@ -1,0 +1,61 @@
+constraints:
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - loan_amnt should be non-empty.
+    - loan_amnt should be a non-negative integer.
+  loan_grade:
+    code:
+    - - .isComplete('loan_grade')
+      - Valid
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - loan_grade should be non-empty.
+    - 'loan_grade should be one of the following values: [''A'', ''B'', ''C'', ''D'',
+      ''E'', ''F'', ''G''].'
+  loan_intent:
+    code:
+    - - .isComplete('loan_intent')
+      - Valid
+    - - .isContainedIn('loan_intent', ['EDUCATION', 'MEDICAL', 'PERSONAL', 'VENTURE',
+        'DEBTCONSOLIDATION', 'HOMEIMPROVEMENT'])
+      - Valid
+    assumptions:
+    - loan_intent should be non-empty.
+    - 'loan_intent should be one of the following values: [''EDUCATION'', ''MEDICAL'',
+      ''PERSONAL'', ''VENTURE'', ''DEBTCONSOLIDATION'', ''HOMEIMPROVEMENT''].'
+  loan_percent_income:
+    code:
+    - - .isComplete('loan_percent_income')
+      - Valid
+    - - .isNonNegative('loan_percent_income')
+      - Valid
+    assumptions:
+    - loan_percent_income should be non-empty.
+    - loan_percent_income should be a non-negative fractional value.
+  loan_status:
+    code:
+    - - .isComplete('loan_status')
+      - Valid
+    - - .isContainedIn('loan_status', [0, 1])
+      - Invalid
+    - - .isNonNegative('loan_status')
+      - Valid
+    assumptions:
+    - loan_status should be non-empty.
+    - loan_status should be either 0 or 1.
+    - loan_status should be non-negative as it represents a binary status.
+  person_income:
+    code:
+    - - .isComplete('person_income')
+      - Valid
+    - - .isNonNegative('person_income')
+      - Valid
+    assumptions:
+    - person_income should be non-empty.
+    - person_income should be a non-negative integer.

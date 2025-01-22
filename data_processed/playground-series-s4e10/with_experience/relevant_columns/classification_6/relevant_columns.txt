@@ -1,0 +1,9 @@
+person_age
+person_income
+loan_amnt
+loan_int_rate
+loan_grade
+person_home_ownership
+cb_person_default_on_file
+loan_to_income_ratio
+id

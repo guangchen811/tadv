@@ -1,0 +1,119 @@
+constraints:
+  cb_person_cred_hist_length:
+    code:
+    - - .isComplete('cb_person_cred_hist_length')
+      - Valid
+    - - .satisfies('cb_person_cred_hist_length >= 0', 'cb_person_cred_hist_length
+        should be non-negative')
+      - Valid
+    assumptions:
+    - should be an integer
+    - should have no missing values
+  cb_person_default_on_file:
+    code:
+    - - .isComplete('cb_person_default_on_file')
+      - Valid
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    assumptions:
+    - 'should be one of the known categories: [''Y'', ''N'']'
+    - should have no missing values
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - should be unique
+    - should have no missing values
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .satisfies('loan_amnt > 0', 'loan_amnt should be greater than 0')
+      - Valid
+    assumptions:
+    - should be an integer
+    - should have no missing values
+    - should be greater than 0
+  loan_grade:
+    code:
+    - - .isComplete('loan_grade')
+      - Valid
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - 'should be one of the known categories: [''A'', ''B'', ''C'', ''D'', ''E'',
+      ''F'', ''G'']'
+    - should have no missing values
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - .satisfies('loan_int_rate > 0', 'loan_int_rate should be greater than 0')
+      - Valid
+    assumptions:
+    - should be a fractional number
+    - should have no missing values
+    - should be greater than 0
+  loan_intent:
+    code:
+    - - .isComplete('loan_intent')
+      - Valid
+    - - .isContainedIn('loan_intent', ['EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL',
+        'DEBTCONSOLIDATION', 'MEDICAL', 'VENTURE'])
+      - Valid
+    assumptions:
+    - 'should be one of the known categories: [''EDUCATION'', ''HOMEIMPROVEMENT'',
+      ''PERSONAL'', ''DEBTCONSOLIDATION'', ''MEDICAL'', ''VENTURE'']'
+    - should have no missing values
+  loan_percent_income:
+    code:
+    - - .isComplete('loan_percent_income')
+      - Valid
+    - - .satisfies('loan_percent_income > 0', 'loan_percent_income should be greater
+        than 0')
+      - Invalid
+    assumptions:
+    - should be a fractional number
+    - should have no missing values
+    - should be greater than 0
+  loan_status:
+    code:
+    - - .isComplete('loan_status')
+      - Valid
+    - - .isContainedIn('loan_status', [0, 1])
+      - Invalid
+    assumptions:
+    - 'should be one of the known categories: [0, 1]'
+    - should have no missing values
+  person_age:
+    code:
+    - - .isComplete('person_age')
+      - Valid
+    - - .satisfies('person_age > 0', 'person_age should be greater than 0')
+      - Valid
+    assumptions:
+    - should be an integer
+    - should have no missing values
+    - should be greater than 0
+  person_emp_length:
+    code:
+    - - .isComplete('person_emp_length')
+      - Valid
+    - - .satisfies('person_emp_length >= 0', 'person_emp_length should be non-negative')
+      - Valid
+    assumptions:
+    - should be a fractional number
+    - should have no missing values
+    - should be greater than or equal to 0
+  person_home_ownership:
+    code:
+    - - .isComplete('person_home_ownership')
+      - Valid
+    - - .isContainedIn('person_home_ownership', ['OTHER', 'OWN', 'MORTGAGE', 'RENT'])
+      - Valid
+    assumptions:
+    - 'should be one of the known categories: [''OTHER'', ''OWN'', ''MORTGAGE'', ''RENT'']'
+    - should have no missing values

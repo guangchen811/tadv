@@ -1,0 +1,25 @@
+constraints:
+  id:
+    code:
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - Each id should be unique to ensure correct grouping and aggregation.
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - The loan_amnt should be non-negative.
+    - The loan_amnt should be complete (no missing values).
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - The loan_int_rate should be non-negative.
+    - The loan_int_rate should be complete (no missing values).

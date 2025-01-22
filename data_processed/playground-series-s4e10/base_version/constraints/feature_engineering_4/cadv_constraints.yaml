@@ -1,0 +1,11 @@
+constraints:
+  person_home_ownership:
+    code:
+    - - '.hasPattern(''person_home_ownership'', ''^[A-Za-z]+$'', lambda x: x == 1.0)'
+      - Valid
+    - - .isContainedIn('person_home_ownership', ['RENT', 'MORTGAGE', 'OWN', 'OTHER'])
+      - Valid
+    assumptions:
+    - 'The column should only contain the values: ''RENT'', ''MORTGAGE'', ''OWN'',
+      or ''OTHER''.'
+    - The data type of the column should be String.

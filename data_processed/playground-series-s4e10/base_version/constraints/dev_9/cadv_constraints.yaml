@@ -1,0 +1,37 @@
+constraints:
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isPositive('loan_amnt')
+      - Valid
+    assumptions:
+    - Loan amount should not be null.
+    - Loan amount should be a positive integer.
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - .isPositive('loan_int_rate')
+      - Valid
+    assumptions:
+    - Loan interest rate should not be null.
+    - Loan interest rate should be a positive fractional value.
+  loan_status:
+    code:
+    - - .isComplete('loan_status')
+      - Valid
+    - - .isContainedIn('loan_status', [0, 1])
+      - Invalid
+    assumptions:
+    - Loan status should not be null.
+    - Loan status should be either 0 or 1, indicating a binary status.
+  person_emp_length:
+    code:
+    - - .isComplete('person_emp_length')
+      - Valid
+    - - .isPositive('person_emp_length')
+      - Invalid
+    assumptions:
+    - Employment length should not be null.
+    - Employment length should be a positive value as it represents years or months.
