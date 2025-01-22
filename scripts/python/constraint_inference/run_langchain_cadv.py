@@ -33,8 +33,10 @@ def run_langchain_cadv(data_name, model_name, processed_data_idx, assumption_gen
             if script_name is not None and script_name != script_path.stem:
                 continue
 
-            result_path = processed_data_path / "constraints" / f"{script_path.stem}" / "cadv_constraints.yaml"
-            result_path.parent.mkdir(parents=True, exist_ok=True)
+            constraints_result_path = processed_data_path / "constraints" / f"{script_path.stem}" / "cadv_constraints.yaml"
+            constraints_result_path.parent.mkdir(parents=True, exist_ok=True)
+            relevant_columns_result_path = processed_data_path / "relevant_columns" / f"{script_path.stem}" / "relevant_columns.txt"
+            relevant_columns_result_path.parent.mkdir(parents=True, exist_ok=True)
             task_instance = get_task_instance(script_path)
 
             task_type = script_path.stem.rsplit("_", 1)[0]
@@ -73,8 +75,11 @@ def run_langchain_cadv(data_name, model_name, processed_data_idx, assumption_gen
             constraints = Constraints.from_llm_output(relevant_columns_list, expectations, suggestions,
                                                       code_list_for_constraints_valid)
 
-            constraints.save_to_yaml(result_path)
-            logger.info(f"Saved constraints to {result_path}")
+            with open(relevant_columns_result_path, "w") as f:
+                f.write("\n".join(relevant_columns_list))
+            logger.info(f"Saved relevant columns to {relevant_columns_result_path}")
+            constraints.save_to_yaml(constraints_result_path)
+            logger.info(f"Saved constraints to {constraints_result_path}")
 
     spark_train.sparkContext._gateway.shutdown_callback_server()
     spark_validation.sparkContext._gateway.shutdown_callback_server()
@@ -96,9 +101,9 @@ def task_group_mapping(task_type):
 if __name__ == "__main__":
     data_name = "healthcare_dataset"
     model_name = "gpt-4o"
-    # run_langchain_cadv(data_name=data_name, model_name=model_name, processed_data_idx=0,
+    # run_langchain_cadv(data_name=data_name, model_name=model_name, processed_data_idx='base_version,
     #                    assumption_generation_trick=None)
-    # run_langchain_cadv(data_name=data_name, model_name=model_name, processed_data_idx=1,
+    # run_langchain_cadv(data_name=data_name, model_name=model_name, processed_data_idx="with_deequ",
     #                    assumption_generation_trick="add_deequ")
-    run_langchain_cadv(data_name=data_name, model_name=model_name, processed_data_idx=2,
-                       assumption_generation_trick="add_experience")
+    run_langchain_cadv(data_name=data_name, model_name=model_name, processed_data_idx="with_experience",
+                       assumption_generation_trick="add_experience", script_name="bi_1")
