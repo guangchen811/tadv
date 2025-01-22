@@ -24,7 +24,7 @@ class Constraints:
     @classmethod
     def from_yaml(cls, input_path: Union[str, Path]):
         constraints = cls()
-        constraints.load_from_yaml(input_path)
+        constraints._load_from_yaml(input_path)
         return constraints
 
     def to_dict(self):
@@ -90,7 +90,7 @@ class Constraints:
     def to_string(self):
         return yaml.dump(self.to_dict())
 
-    def load_from_yaml(self, input_path: str):
+    def _load_from_yaml(self, input_path: str):
         with open(input_path, "r") as f:
             data = yaml.safe_load(f)
             for column, constraint in data["constraints"].items():
