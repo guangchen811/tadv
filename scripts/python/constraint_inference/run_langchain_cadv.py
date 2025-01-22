@@ -1,13 +1,14 @@
 from cadv_exploration.utils import load_dotenv
-from utils import get_task_instance
 
 load_dotenv()
+from cadv_exploration.utils import get_task_instance
+
+from cadv_exploration.data_models import Constraints
 
 from cadv_exploration.inspector.deequ.deequ_inspector_manager import DeequInspectorManager
 from cadv_exploration.dq_manager import DeequDataQualityManager
 from cadv_exploration.llm.langchain import LangChainCADV
 from cadv_exploration.utils import get_project_root
-from cadv_exploration.data_models import Constraints
 from scripts.python.utils import setup_logger, load_train_and_test_spark_data
 from cadv_exploration.llm.langchain.downstream_task_prompt import ML_INFERENCE_TASK_DESCRIPTION, \
     SQL_QUERY_TASK_DESCRIPTION
@@ -99,11 +100,12 @@ def task_group_mapping(task_type):
 
 
 if __name__ == "__main__":
-    data_name = "healthcare_dataset"
+    # data_name = "healthcare_dataset"
+    data_name = "playground-series-s4e10"
     model_name = "gpt-4o"
-    # run_langchain_cadv(data_name=data_name, model_name=model_name, processed_data_idx='base_version,
-    #                    assumption_generation_trick=None)
-    # run_langchain_cadv(data_name=data_name, model_name=model_name, processed_data_idx="with_deequ",
-    #                    assumption_generation_trick="with_deequ")
+    run_langchain_cadv(data_name=data_name, model_name=model_name, processed_data_idx='base_version',
+                       assumption_generation_trick=None)
+    run_langchain_cadv(data_name=data_name, model_name=model_name, processed_data_idx="with_deequ",
+                       assumption_generation_trick="with_deequ")
     run_langchain_cadv(data_name=data_name, model_name=model_name, processed_data_idx="with_experience",
-                       assumption_generation_trick="with_experience", script_name="bi_1")
+                       assumption_generation_trick="with_experience")
