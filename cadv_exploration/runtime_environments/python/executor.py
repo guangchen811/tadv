@@ -10,7 +10,6 @@ from utils import get_current_folder
 class PythonExecutor(ExecutorBase):
     env_path = get_current_folder() / "env"
     requirements_path = get_current_folder() / "requirements.txt"
-    python_version = "3.12"
 
     def __init__(self):
         super().__init__()
@@ -19,9 +18,18 @@ class PythonExecutor(ExecutorBase):
 
     def run(self, project_name: str, input_path: Path, script_path: Path, output_path: Path, timeout: int = 120):
         print(f"Running Python script {script_path} with input {input_path} and output {output_path}")
-        # command = [str(self.python_executable), str(script_path), str(input_path), str(output_path)]
-        command = [str(self.python_executable), "-c", f"print('Hello, World!')"]
-        subprocess.run(command, check=True, timeout=timeout)
+        command = [str(self.python_executable), str(script_path), "--input", str(input_path), "--output",
+                   str(output_path)]
+        try:
+            result = subprocess.run(command, check=True, timeout=timeout, capture_output=True, text=True)
+            print(f"Python script {script_path} finished successfully\noutput files: {list(output_path.iterdir())}")
+            return result.stdout  # Return standard output
+        except subprocess.CalledProcessError as e:
+            print(f"Error running script {script_path}: {e.stderr}")
+            return f"Error: {e.stderr}"  # Return the error message
+        except subprocess.TimeoutExpired:
+            print(f"Script {script_path} timed out after {timeout} seconds.")
+            return f"Error: Script {script_path} timed out after {timeout} seconds."
 
     def _get_python_executable(self):
         self._create_or_update_environment()
@@ -43,21 +51,27 @@ class PythonExecutor(ExecutorBase):
         builder.create(self.env_path)
         pip_path = self._get_pip_path()
         print(f"Installing requirements from {self.requirements_path} into {self.env_path}")
+        subprocess.check_call([str(pip_path), "install", "--upgrade", "pip"])
         subprocess.check_call([str(pip_path), "install", "-r", str(self.requirements_path)])
 
     def _update_environment(self):
         pip_path = self._get_pip_path()
         print(f"Updating requirements from {self.requirements_path} into {self.env_path}")
+        subprocess.check_call([str(pip_path), "install", "--upgrade", "pip"])
         subprocess.check_call([str(pip_path), "install", "-r", str(self.requirements_path)])
 
     def _check_env_against_requirements(self):
         reqs = self.requirements_path.read_text().split("\n")
+        reqs = [req.split("==") for req in reqs if req]
+        reqs = [tuple(req) if len(req) == 2 else req[0] for req in reqs]
         if not reqs:
             return True
         pip_path = self._get_pip_path()
         installed = subprocess.check_output([str(pip_path), "freeze"]).decode("utf-8").split("\n")
-        installed = [req.split("==")[0] for req in installed]
-        return all(req in installed for req in reqs)
+        installed = [req.split("==") for req in installed]
+        installed_with_version = [tuple(i) if len(i) == 2 else i[0] for i in installed]
+        installed_wo_version = [i[0] for i in installed]
+        return all((req in installed_with_version or req in installed_wo_version) for req in reqs)
 
     def _get_pip_path(self):
         if platform.system() == "Windows":
