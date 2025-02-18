@@ -1,14 +1,9 @@
-class ColumnDetectionTask:
-
-    @property
-    def original_code(self):
-        return """
 import pandas as pd
-from sklearn.model_selection import train_test_split
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.metrics import accuracy_score
-from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.compose import ColumnTransformer
+from sklearn.metrics import accuracy_score
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from sklearn.tree import DecisionTreeClassifier
 
 # Load Data & Feature Engineering
 train = pd.read_csv("/Kaggle/input/train.csv")
@@ -35,13 +30,3 @@ print(f"Validation Accuracy: {val_acc:.4f}")
 # Predict on Test
 test_preds = clf.predict(X_test)
 pd.DataFrame({"id": test["id"], "loan_status": test_preds}).to_csv("/kaggle/output/submission.csv", index=False)
-"""
-
-    def required_columns(self):
-        # Ground truth for columns used in the ML pipeline
-        return [
-            "loan_amnt", "loan_int_rate", "loan_grade", "cb_person_default_on_file"
-        ]
-
-    def used_columns(self):
-        pass

@@ -1,17 +1,12 @@
-class ColumnDetectionTask:
-
-    @property
-    def original_code(self):
-        return """
-import pandas as pd
 import numpy as np
+import pandas as pd
 import torch
-from torch.utils.data import Dataset, DataLoader
 import torch.nn as nn
 import torch.optim as optim
-from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.compose import ColumnTransformer
 from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from torch.utils.data import Dataset, DataLoader
 
 # Load Data
 train_data = pd.read_csv("/Kaggle/input/train.csv")
@@ -50,8 +45,9 @@ train_data["income_to_loan"] = train_data["income"] / (train_data["loan_amount"]
 test_data["income_to_loan"] = test_data["income"] / (test_data["loan_amount"] + 1e-9)
 
 # Drop some columns that are generally not used as features
-train_data = train_data.drop(columns=["id", "intent", grade"], errors='ignore')
-test_data = test_data.drop(columns=["id", "intent", grade"], errors='ignore')
+# For example, 'id' is not a feature, and 'intent' might be less predictive in this scenario
+train_data = train_data.drop(columns=["id", "intent"], errors='ignore')
+test_data = test_data.drop(columns=["id", "intent"], errors='ignore')
 
 # Let's say we want to drop columns with very low variance (not helpful)
 # This is a common step before modeling
@@ -71,8 +67,8 @@ test_data = test_data.drop(columns=low_var_cols, errors='ignore')
 # If two are highly correlated (> 0.95), drop one to avoid redundancy.
 corr_matrix = train_data.corr().abs()
 upper_triangle = corr_matrix.where(np.triu(np.ones(corr_matrix.shape), k=1).astype(bool))
-high_corr_pairs = [(col1, col2) for col1 in upper_triangle.columns 
-                   for col2 in upper_triangle.columns 
+high_corr_pairs = [(col1, col2) for col1 in upper_triangle.columns
+                   for col2 in upper_triangle.columns
                    if col1 != col2 and upper_triangle.loc[col1, col2] > 0.95]
 
 # Drop the second column in each highly correlated pair to break redundancy
@@ -108,6 +104,7 @@ X_test = preprocessor.transform(X_test)
 # Train-validation split
 X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=42)
 
+
 class LoanDataset(Dataset):
     def __init__(self, features, targets=None):
         self.features = torch.tensor(features, dtype=torch.float32)
@@ -121,6 +118,7 @@ class LoanDataset(Dataset):
             return self.features[idx], self.targets[idx]
         return self.features[idx]
 
+
 train_dataset = LoanDataset(X_train, y_train.values)
 val_dataset = LoanDataset(X_val, y_val.values)
 test_dataset = LoanDataset(X_test)
@@ -128,6 +126,7 @@ test_dataset = LoanDataset(X_test)
 train_loader = DataLoader(train_dataset, batch_size=64, shuffle=True)
 val_loader = DataLoader(val_dataset, batch_size=64)
 test_loader = DataLoader(test_dataset, batch_size=64)
+
 
 # Simple neural network
 class LoanClassifier(nn.Module):
@@ -146,9 +145,11 @@ class LoanClassifier(nn.Module):
     def forward(self, x):
         return self.network(x)
 
+
 model = LoanClassifier(input_dim=X_train.shape[1])
 criterion = nn.BCELoss()
 optimizer = optim.Adam(model.parameters(), lr=0.001)
+
 
 def train_model(model, train_loader, val_loader, epochs=10):
     for epoch in range(epochs):
@@ -172,6 +173,7 @@ def train_model(model, train_loader, val_loader, epochs=10):
                 val_loss += loss.item()
         # In a realistic scenario, we might print or log the losses here
 
+
 train_model(model, train_loader, val_loader)
 
 model.eval()
@@ -191,13 +193,3 @@ if "id" not in test_data.columns:
 
 submission = pd.DataFrame({"id": test_data["id"], "loan_status": predictions})
 submission.to_csv("/kaggle/output/submission.csv", index=False)
-"""
-
-    def required_columns(self):
-        # Ground truth for columns used in the ML pipeline
-        return ['cb_person_cred_hist_length', 'cb_person_default_on_file', 'loan_amnt', 'loan_int_rate',
-                'loan_percent_income', 'person_age', 'person_emp_length', 'person_home_ownership',
-                'person_income']
-
-    def used_columns(self):
-        pass

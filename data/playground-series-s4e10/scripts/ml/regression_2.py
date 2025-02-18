@@ -1,16 +1,12 @@
-class ColumnDetectionTask:
-    @property
-    def original_code(self):
-        return """
-import pandas as pd
 import numpy as np
+import pandas as pd
 import torch
-from torch.utils.data import Dataset, DataLoader
 import torch.nn as nn
 import torch.optim as optim
-from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.compose import ColumnTransformer
 from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from torch.utils.data import Dataset, DataLoader
 
 # Load Data
 train_data = pd.read_csv("/Kaggle/input/train.csv")
@@ -60,7 +56,8 @@ if len(numeric_candidates) > 1:
     upper_triangle = corr_matrix.where(np.triu(np.ones(corr_matrix.shape), k=1).astype(bool))
     # Let's define a correlation threshold
     corr_threshold = 0.95
-    highly_correlated = [col2 for col1 in upper_triangle.columns for col2 in upper_triangle.columns if col1 != col2 and upper_triangle.loc[col1, col2] > corr_threshold]
+    highly_correlated = [col2 for col1 in upper_triangle.columns for col2 in upper_triangle.columns if
+                         col1 != col2 and upper_triangle.loc[col1, col2] > corr_threshold]
     highly_correlated = list(set(highly_correlated))  # unique
     X_train = X_train.drop(columns=highly_correlated, errors='ignore')
     X_test = X_test.drop(columns=highly_correlated, errors='ignore')
@@ -99,6 +96,7 @@ X_test_processed = preprocessor.transform(X_test)
 # Train-validation split
 X_tr, X_val, y_tr, y_val = train_test_split(X_train_processed, y_train, test_size=0.2, random_state=42)
 
+
 # Create Dataset class
 class IncomeDataset(Dataset):
     def __init__(self, features, targets=None):
@@ -113,6 +111,7 @@ class IncomeDataset(Dataset):
             return self.features[idx], self.targets[idx]
         return self.features[idx]
 
+
 train_dataset = IncomeDataset(X_tr, y_tr)
 val_dataset = IncomeDataset(X_val, y_val)
 test_dataset = IncomeDataset(X_test_processed, None)
@@ -120,6 +119,7 @@ test_dataset = IncomeDataset(X_test_processed, None)
 train_loader = DataLoader(train_dataset, batch_size=64, shuffle=True)
 val_loader = DataLoader(val_dataset, batch_size=64)
 test_loader = DataLoader(test_dataset, batch_size=64)
+
 
 # Define a regression model
 class IncomeRegressor(nn.Module):
@@ -137,9 +137,11 @@ class IncomeRegressor(nn.Module):
     def forward(self, x):
         return self.network(x)
 
+
 model = IncomeRegressor(input_dim=X_tr.shape[1])
 criterion = nn.MSELoss()
 optimizer = optim.Adam(model.parameters(), lr=0.001)
+
 
 def train_model(model, train_loader, val_loader, epochs=5):
     for epoch in range(epochs):
@@ -162,7 +164,9 @@ def train_model(model, train_loader, val_loader, epochs=5):
                 loss = criterion(outputs, targets)
                 val_loss += loss.item()
 
-        print(f"Epoch {epoch+1}/{epochs} - Train Loss: {train_loss/len(train_loader):.4f} - Val Loss: {val_loss/len(val_loader):.4f}")
+        print(
+            f"Epoch {epoch + 1}/{epochs} - Train Loss: {train_loss / len(train_loader):.4f} - Val Loss: {val_loss / len(val_loader):.4f}")
+
 
 train_model(model, train_loader, val_loader)
 
@@ -183,11 +187,3 @@ submission = pd.DataFrame({
 })
 submission.to_csv("/kaggle/output/submission.csv", index=False)
 print("Submission saved.")
-"""
-
-    def required_columns(self):
-        # Ground truth for columns used in the ML pipeline
-        return ['cb_person_cred_hist_length', 'cb_person_default_on_file', 'loan_amnt', 'loan_grade', 'loan_int_rate',
-                'loan_intent', 'loan_percent_income', 'loan_status', 'person_age', 'person_emp_length',
-                'person_home_ownership',
-                ]

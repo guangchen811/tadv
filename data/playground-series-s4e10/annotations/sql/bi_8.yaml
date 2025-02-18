@@ -1,0 +1,5 @@
+annotations:
+  required_columns:
+    - 'person_home_ownership'
+    - 'loan_intent'
+    - 'loan_status'

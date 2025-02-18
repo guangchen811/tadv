@@ -1,26 +1,21 @@
-class ColumnDetectionTask:
-
-    @property
-    def original_code(self):
-        return """
-import pandas as pd
 import numpy as np
+import pandas as pd
 import torch
 import torch.nn as nn
 import torch.optim as optim
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import LabelEncoder, StandardScaler
+from sklearn.preprocessing import StandardScaler
 
 train_df = pd.read_csv("train.csv")
-test_df  = pd.read_csv("test.csv")
+test_df = pd.read_csv("test.csv")
 
 # Rename "Billing Amount" -> "billing_amount" for clarity
 train_df = train_df.rename(columns={"Billing Amount": "billing_amount",
                                     "Date of Admission": "admission_dt",
                                     "Discharge Date": "discharge_dt"})
-test_df  = test_df.rename(columns={"Billing Amount": "billing_amount",
-                                   "Date of Admission": "admission_dt",
-                                   "Discharge Date": "discharge_dt"})
+test_df = test_df.rename(columns={"Billing Amount": "billing_amount",
+                                  "Date of Admission": "admission_dt",
+                                  "Discharge Date": "discharge_dt"})
 
 target_col = "billing_amount"
 id_col = "id"
@@ -36,7 +31,7 @@ test_df["length_of_stay"] = (test_df["discharge_dt"] - test_df["admission_dt"]).
 
 # Drop original date columns
 train_df = train_df.drop(columns=["admission_dt", "discharge_dt", "Test Results", "Doctor", "Name"], errors="ignore")
-test_df  = test_df.drop(columns=["admission_dt", "discharge_dt", "Test Results", "Doctor", "Name"], errors="ignore")
+test_df = test_df.drop(columns=["admission_dt", "discharge_dt", "Test Results", "Doctor", "Name"], errors="ignore")
 
 # Fill missing numeric
 train_df["length_of_stay"] = train_df["length_of_stay"].fillna(0)
@@ -65,7 +60,7 @@ for c in X.columns:
 # Convert categorical columns to numeric codes if they exist
 for cat in categorical_cols:
     train_df[cat] = train_df[cat].astype(str)  # just in case
-    test_df[cat] = test_df[cat].astype(str)    # just in case
+    test_df[cat] = test_df[cat].astype(str)  # just in case
     unique_vals = list(set(train_df[cat].unique()).union(set(test_df[cat].unique())))
     enc_map = {val: i for i, val in enumerate(unique_vals)}
     X[cat] = train_df[cat].map(enc_map)
@@ -88,9 +83,10 @@ X_train, X_val, y_train, y_val = train_test_split(X_combined, y, test_size=0.2, 
 
 X_train_t = torch.tensor(X_train, dtype=torch.float32)
 y_train_t = torch.tensor(y_train, dtype=torch.float32).view(-1, 1)
-X_val_t   = torch.tensor(X_val,   dtype=torch.float32)
-y_val_t   = torch.tensor(y_val,   dtype=torch.float32).view(-1, 1)
-X_test_t  = torch.tensor(testX_combined, dtype=torch.float32)
+X_val_t = torch.tensor(X_val, dtype=torch.float32)
+y_val_t = torch.tensor(y_val, dtype=torch.float32).view(-1, 1)
+X_test_t = torch.tensor(testX_combined, dtype=torch.float32)
+
 
 # Simple multi-layer MLP with dropout
 class StayMLP(nn.Module):
@@ -102,8 +98,10 @@ class StayMLP(nn.Module):
             nn.Dropout(0.2),
             nn.Linear(h_dim, 1)  # 1 for regression
         )
+
     def forward(self, x):
         return self.net(x)
+
 
 model = StayMLP(in_dim=X_train_t.shape[1], h_dim=64)
 optimizer = optim.Adam(model.parameters(), lr=0.01)
@@ -121,7 +119,7 @@ for epoch in range(5):
     with torch.no_grad():
         val_preds = model(X_val_t)
         val_loss = criterion(val_preds, y_val_t)
-    print(f"Epoch {epoch+1}: Train Loss={loss.item():.4f}, Val Loss={val_loss.item():.4f}")
+    print(f"Epoch {epoch + 1}: Train Loss={loss.item():.4f}, Val Loss={val_loss.item():.4f}")
 
 model.eval()
 with torch.no_grad():
@@ -132,8 +130,3 @@ submission = pd.DataFrame({
     "Billing Amount": test_preds
 })
 submission.to_csv("submission.csv", index=False)
-"""
-
-    def required_columns(self):
-        # Ground truth for columns used in the ML pipeline
-        return []

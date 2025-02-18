@@ -4,7 +4,7 @@ class ColumnDetectionTask:
         return "python"
 
     @property
-    def original_code(self):
+    def original_script(self):
         return """
 df = pd.read_csv("s3://datalake/latest/hospitalisations.csv")
 df['cost_smoothed'] = np.log(df['cost'])

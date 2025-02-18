@@ -1,19 +1,16 @@
-class ColumnDetectionTask:
-    @property
-    def original_code(self):
-        return """
-import pandas as pd
 import numpy as np
+import pandas as pd
 from sklearn.compose import ColumnTransformer
+from sklearn.ensemble import GradientBoostingRegressor
+from sklearn.metrics import mean_squared_error
+from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
-from sklearn.ensemble import GradientBoostingRegressor
-from sklearn.model_selection import train_test_split, GridSearchCV
-from sklearn.metrics import mean_squared_error
 
 # Load Data
 train_data = pd.read_csv("/Kaggle/input/train.csv")
 test_data = pd.read_csv("/Kaggle/input/test.csv")
+
 
 # Feature Engineering Function
 def add_features(df):
@@ -25,6 +22,7 @@ def add_features(df):
     df["emp_length_income_ratio"] = df["person_emp_length"] / (df["loan_percent_income"] + 1)
     return df
 
+
 # Apply Feature Engineering
 train_data = add_features(train_data)
 test_data = add_features(test_data)
@@ -32,8 +30,8 @@ test_data = add_features(test_data)
 # Define Features and Target
 target = "person_income"
 features = [
-    "log_loan_amnt", "cred_hist_ratio", "loan_amnt_int_rate", 
-    "loan_to_income", "emp_length_income_ratio", "loan_grade", 
+    "log_loan_amnt", "cred_hist_ratio", "loan_amnt_int_rate",
+    "loan_to_income", "emp_length_income_ratio", "loan_grade",
     "cb_person_default_on_file", "person_home_ownership"
 ]
 
@@ -42,7 +40,8 @@ y = train_data[target]
 X_test = test_data[features]
 
 # Preprocessing Pipeline
-numeric_features = ["log_loan_amnt", "cred_hist_ratio", "loan_amnt_int_rate", "loan_to_income", "emp_length_income_ratio"]
+numeric_features = ["log_loan_amnt", "cred_hist_ratio", "loan_amnt_int_rate", "loan_to_income",
+                    "emp_length_income_ratio"]
 categorical_features = ["loan_grade", "cb_person_default_on_file", "person_home_ownership"]
 
 preprocessor = ColumnTransformer(
@@ -89,9 +88,3 @@ submission = pd.DataFrame({
 })
 submission.to_csv("/kaggle/output/submission.csv", index=False)
 print("Submission saved.")
-"""
-
-    def required_columns(self):
-        # Ground truth for columns used in the ML pipeline
-        return ["loan_amnt", "cb_person_cred_hist_length", "person_income", "person_emp_length",
-                "loan_grade", "cb_person_default_on_file", "person_home_ownership"]

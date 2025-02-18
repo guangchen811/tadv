@@ -1,0 +1,8 @@
+annotations:
+  required_columns:
+    - "diagnosis"
+    - "admission_day"
+    - "discharge_day"
+    - "insurance"
+    - "cost"
+    - "complications"

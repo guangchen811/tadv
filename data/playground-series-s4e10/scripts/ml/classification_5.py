@@ -1,18 +1,13 @@
-class ColumnDetectionTask:
-
-    @property
-    def original_code(self):
-        return """
 import pandas as pd
-import numpy as np
 import torch
-from torch.utils.data import Dataset, DataLoader
 import torch.nn as nn
 import torch.optim as optim
-from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.compose import ColumnTransformer
-from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from torch.utils.data import Dataset, DataLoader
+
 
 class DataProcessor:
     def __init__(self, numerical_cols, categorical_cols):
@@ -34,6 +29,7 @@ class DataProcessor:
         X_test = self.preprocessor.transform(X_test)
         return X, y, X_test
 
+
 class LoanDataset(Dataset):
     def __init__(self, features, targets=None):
         self.features = torch.tensor(features, dtype=torch.float32)
@@ -46,6 +42,7 @@ class LoanDataset(Dataset):
         if self.targets is not None:
             return self.features[idx], self.targets[idx]
         return self.features[idx]
+
 
 class LoanClassifier(nn.Module):
     def __init__(self, input_dim):
@@ -61,6 +58,7 @@ class LoanClassifier(nn.Module):
 
     def forward(self, x):
         return self.network(x)
+
 
 class Trainer:
     def __init__(self, model, criterion, optimizer, train_loader, val_loader):
@@ -83,7 +81,8 @@ class Trainer:
                 train_loss += loss.item()
 
             val_loss, val_acc = self.evaluate()
-            print(f"Epoch {epoch+1}/{epochs}, Train Loss: {train_loss:.4f}, Val Loss: {val_loss:.4f}, Val Acc: {val_acc:.4f}")
+            print(
+                f"Epoch {epoch + 1}/{epochs}, Train Loss: {train_loss:.4f}, Val Loss: {val_loss:.4f}, Val Acc: {val_acc:.4f}")
 
     def evaluate(self):
         self.model.eval()
@@ -101,8 +100,10 @@ class Trainer:
         val_acc = accuracy_score(y_true, y_pred)
         return val_loss, val_acc
 
+
 # Configuration
-numerical_cols = ["person_age", "person_income", "person_emp_length", "loan_amnt", "loan_int_rate", "loan_percent_income", "cb_person_cred_hist_length"]
+numerical_cols = ["person_age", "person_income", "person_emp_length", "loan_amnt", "loan_int_rate",
+                  "loan_percent_income", "cb_person_cred_hist_length"]
 categorical_cols = ["person_home_ownership", "loan_intent", "cb_person_default_on_file"]
 target_col = "loan_status"
 id_col = "id"
@@ -141,12 +142,3 @@ with torch.no_grad():
 
 submission = pd.DataFrame({id_col: test_data[id_col], target_col: predictions})
 submission.to_csv("/kaggle/output/submission.csv", index=False)
-"""
-
-    def required_columns(self):
-        # Ground truth for columns used in the ML pipeline
-        return ["person_age", "person_income", "person_emp_length", "loan_amnt", "loan_int_rate", "loan_percent_income",
-                "cb_person_cred_hist_length", "person_home_ownership", "loan_intent", "cb_person_default_on_file"]
-
-    def used_columns(self):
-        pass

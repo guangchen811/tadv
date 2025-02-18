@@ -1,0 +1,4 @@
+annotations:
+  required_columns:
+    - "diagnosis"
+    - "bloodtype"

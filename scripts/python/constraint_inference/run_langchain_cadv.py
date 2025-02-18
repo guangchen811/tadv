@@ -55,13 +55,13 @@ def run_langchain_cadv(data_name, model_name, processed_data_idx, assumption_gen
                 deequ_assumptions = dq_manager.get_constraints_for_spark_df(spark_train, spark_train_df).to_string()
                 input_variables = {
                     "column_desc": column_desc,
-                    "script": task_instance.original_code,
+                    "script": task_instance.original_script,
                     "deequ_assumptions": deequ_assumptions,
                 }
             else:
                 input_variables = {
                     "column_desc": column_desc,
-                    "script": task_instance.original_code,
+                    "script": task_instance.original_script,
                 }
 
             relevant_columns_list, expectations, suggestions = lc.invoke(

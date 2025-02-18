@@ -1,16 +1,12 @@
-class ColumnDetectionTask:
-    @property
-    def original_code(self):
-        return """
-import pandas as pd
 import numpy as np
+import pandas as pd
 import torch
-from torch.utils.data import Dataset, DataLoader
 import torch.nn as nn
 import torch.optim as optim
-from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.compose import ColumnTransformer
 from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from torch.utils.data import Dataset, DataLoader
 
 # Load Data
 train_data = pd.read_csv("/Kaggle/input/train.csv")
@@ -44,6 +40,7 @@ X_test = preprocessor.transform(X_test)
 # Train-validation split
 X_train, X_val, y_train, y_val = train_test_split(X_train, y_train, test_size=0.2, random_state=42)
 
+
 # PyTorch Dataset Class
 class IncomeDataset(Dataset):
     def __init__(self, features, targets=None):
@@ -58,6 +55,7 @@ class IncomeDataset(Dataset):
             return self.features[idx], self.targets[idx]
         return self.features[idx]
 
+
 train_dataset = IncomeDataset(X_train, y_train)
 val_dataset = IncomeDataset(X_val, y_val)
 test_dataset = IncomeDataset(X_test)
@@ -65,6 +63,7 @@ test_dataset = IncomeDataset(X_test)
 train_loader = DataLoader(train_dataset, batch_size=64, shuffle=True)
 val_loader = DataLoader(val_dataset, batch_size=64)
 test_loader = DataLoader(test_dataset, batch_size=64)
+
 
 # Define Regression Model
 class IncomeRegressor(nn.Module):
@@ -82,9 +81,11 @@ class IncomeRegressor(nn.Module):
     def forward(self, x):
         return self.network(x)
 
+
 model = IncomeRegressor(input_dim=X_train.shape[1])
 criterion = nn.MSELoss()
 optimizer = optim.Adam(model.parameters(), lr=0.001)
+
 
 # Train the Model
 def train_model(model, train_loader, val_loader, epochs=10):
@@ -107,7 +108,9 @@ def train_model(model, train_loader, val_loader, epochs=10):
                 loss = criterion(predictions, targets)
                 val_loss += loss.item()
 
-        print(f"Epoch {epoch+1}/{epochs} - Train Loss: {train_loss/len(train_loader):.4f}, Val Loss: {val_loss/len(val_loader):.4f}")
+        print(
+            f"Epoch {epoch + 1}/{epochs} - Train Loss: {train_loss / len(train_loader):.4f}, Val Loss: {val_loss / len(val_loader):.4f}")
+
 
 train_model(model, train_loader, val_loader)
 
@@ -122,9 +125,3 @@ with torch.no_grad():
 submission = pd.DataFrame({"id": test_data.get("id", range(len(test_data))), "predicted_person_income": predictions})
 submission.to_csv("/kaggle/output/submission.csv", index=False)
 print("Submission saved.")
-"""
-
-    def required_columns(self):
-        # Ground truth for columns used in the ML pipeline
-        return ["loan_amnt", "loan_int_rate", "cb_person_cred_hist_length", "loan_grade", "cb_person_default_on_file",
-                "person_home_ownership"]

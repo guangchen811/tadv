@@ -1,11 +1,12 @@
 """
 Some useful utils for the project
 """
-import importlib.util
 import inspect
 from pathlib import Path
 
 import dotenv
+import oyaml as yaml
+from attr import dataclass
 
 
 def get_project_root() -> Path:
@@ -28,11 +29,17 @@ def load_dotenv():
     dotenv.load_dotenv(get_project_root() / ".env")
 
 
+@dataclass
+class TaskInstance:
+    original_script: str
+    script_path: Path
+    annotations: dict
+
+
 def get_task_instance(script_path):
-    module_name = script_path.stem
-    spec = importlib.util.spec_from_file_location(module_name, script_path)
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-    task_class = getattr(module, "ColumnDetectionTask")
-    task_instance = task_class()
+    config_file_path = script_path.parent.parent.parent / "annotations" / script_path.parent.stem / f"{script_path.stem}.yaml"
+    with open(config_file_path, "r") as f:
+        config = yaml.load(f, Loader=yaml.Loader)
+    task_instance = TaskInstance(original_script=script_path.read_text(), script_path=script_path,
+                                 annotations=config["annotations"])
     return task_instance

@@ -1,20 +1,14 @@
-class ColumnDetectionTask:
-
-    @property
-    def original_code(self):
-        return """
-import pandas as pd
 import numpy as np
-
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.pipeline import Pipeline
+import pandas as pd
 from sklearn.compose import ColumnTransformer
-from sklearn.preprocessing import OneHotEncoder, StandardScaler
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
 # 1. Load Data
 train_df = pd.read_csv("train.csv")
-test_df  = pd.read_csv("test.csv")
+test_df = pd.read_csv("test.csv")
 
 # 2. Inspect the Columns
 # print(train_df.head())       # Optional debug
@@ -23,7 +17,7 @@ test_df  = pd.read_csv("test.csv")
 
 # 3. Separate Features (X) and Target (y) in the Training Set
 TARGET_COL = "Test Results"
-ID_COL     = "id"
+ID_COL = "id"
 
 y = train_df[TARGET_COL]
 X = train_df.drop(columns=[TARGET_COL])
@@ -96,8 +90,3 @@ submission = pd.DataFrame({
 submission.to_csv("submission.csv", index=False)
 
 print("Submission file 'submission.csv' has been created.")
-"""
-
-    def required_columns(self):
-        # Ground truth for columns used in the ML pipeline
-        return []

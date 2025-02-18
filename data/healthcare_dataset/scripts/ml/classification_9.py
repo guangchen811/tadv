@@ -1,16 +1,11 @@
-class ColumnDetectionTask:
-
-    @property
-    def original_code(self):
-        return """
-import pandas as pd
 import numpy as np
+import pandas as pd
 import torch
 import torch.nn as nn
 import torch.optim as optim
-from torch.utils.data import Dataset, DataLoader
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
+from torch.utils.data import Dataset, DataLoader
 
 # Read CSVs
 train_df = pd.read_csv("train.csv")
@@ -127,14 +122,17 @@ X_num_train, X_num_val, X_cat_train, X_cat_val, y_train, y_val = train_test_spli
     X_train_num, X_train_cat, y_enc, test_size=0.2, random_state=42, stratify=y_enc
 )
 
+
 # Build a custom PyTorch Dataset
 class HealthDataset(Dataset):
     def __init__(self, numeric_data, cat_data, labels=None):
         self.numeric_data = numeric_data
         self.cat_data = cat_data
         self.labels = labels
+
     def __len__(self):
         return len(self.numeric_data)
+
     def __getitem__(self, idx):
         x_num = self.numeric_data[idx]
         x_cat = self.cat_data[idx]
@@ -144,6 +142,7 @@ class HealthDataset(Dataset):
         else:
             return (x_num, x_cat)
 
+
 train_dataset = HealthDataset(X_num_train, X_cat_train, y_train)
 val_dataset = HealthDataset(X_num_val, X_cat_val, y_val)
 test_dataset = HealthDataset(X_test_num, X_test_cat, labels=None)
@@ -151,6 +150,7 @@ test_dataset = HealthDataset(X_test_num, X_test_cat, labels=None)
 train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True)
 val_loader = DataLoader(val_dataset, batch_size=32)
 test_loader = DataLoader(test_dataset, batch_size=32)
+
 
 # Define an embedding-based model
 # We'll create an embedding for each categorical column and then concatenate them with numeric
@@ -187,6 +187,7 @@ class EmbeddingMLP(nn.Module):
         x = self.relu(self.fc2(x))
         x = self.fc3(x)
         return x
+
 
 cat_info = {}
 for c in cat_cols:
@@ -229,7 +230,7 @@ for epoch in range(epochs):
             correct += (preds == y_b).sum().item()
             total += y_b.size(0)
     val_acc = correct / total if total > 0 else 0
-    print(f"Epoch {epoch+1}, Train Loss: {total_loss:.4f}, Val Acc: {val_acc:.4f}, LR: {scheduler.get_lr()}")
+    print(f"Epoch {epoch + 1}, Train Loss: {total_loss:.4f}, Val Acc: {val_acc:.4f}, LR: {scheduler.get_lr()}")
 
 model.eval()
 all_test_preds = []
@@ -251,8 +252,3 @@ submission_df = pd.DataFrame({
 })
 submission_df.to_csv("submission.csv", index=False)
 print("Advanced script done. submission.csv created!")
-"""
-
-    def required_columns(self):
-        # Ground truth for columns used in the ML pipeline
-        return []

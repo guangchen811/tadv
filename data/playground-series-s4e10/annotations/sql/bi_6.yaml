@@ -1,0 +1,5 @@
+annotations:
+  required_columns:
+    - 'loan_grade'
+    - 'loan_intent'
+    - 'loan_amnt'

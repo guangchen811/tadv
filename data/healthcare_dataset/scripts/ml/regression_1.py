@@ -1,22 +1,16 @@
-class ColumnDetectionTask:
-
-    @property
-    def original_code(self):
-        return """
-import pandas as pd
 import numpy as np
+import pandas as pd
 import torch
 import torch.nn as nn
 import torch.optim as optim
-from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
 train_df = pd.read_csv("train.csv")
-test_df  = pd.read_csv("test.csv")
+test_df = pd.read_csv("test.csv")
 
 # Rename the target
 train_df = train_df.rename(columns={"Billing Amount": "billing_amount"})
-test_df  = test_df.rename(columns={"Billing Amount": "billing_amount"})
+test_df = test_df.rename(columns={"Billing Amount": "billing_amount"})
 
 target_col = "billing_amount"
 id_col = "id"
@@ -25,7 +19,7 @@ id_col = "id"
 # Explanation: "Name" is personal, "Test Results" is unrelated classification, "Doctor" is personal
 drop_cols = ["Name", "Test Results", "Doctor", "Discharge Date", "Date of Admission"]
 train_df = train_df.drop(columns=drop_cols, errors="ignore")
-test_df  = test_df.drop(columns=drop_cols, errors="ignore")
+test_df = test_df.drop(columns=drop_cols, errors="ignore")
 
 # Suppose we keep "Age" and "Hospital" and "Medical Condition" for some variety
 # We'll create a ratio: cost_age_ratio = billing_amount / Age (on train to see correlation)
@@ -71,23 +65,28 @@ X_cat = ohe.fit_transform(X[categorical_cols])
 X_combined = np.hstack([X_num, X_cat])
 
 # For test data
-test_numeric = test_df[numeric_cols].apply(pd.to_numeric, errors="coerce").fillna(0) if set(numeric_cols).issubset(test_df.columns) else pd.DataFrame()
-test_categorical = test_df[categorical_cols].astype(str) if set(categorical_cols).issubset(test_df.columns) else pd.DataFrame()
+test_numeric = test_df[numeric_cols].apply(pd.to_numeric, errors="coerce").fillna(0) if set(numeric_cols).issubset(
+    test_df.columns) else pd.DataFrame()
+test_categorical = test_df[categorical_cols].astype(str) if set(categorical_cols).issubset(
+    test_df.columns) else pd.DataFrame()
 
 testX_num = scaler.transform(test_numeric) if not test_numeric.empty else np.zeros((len(test_df), len(numeric_cols)))
-testX_cat = ohe.transform(test_categorical) if not test_categorical.empty else np.zeros((len(test_df), len(ohe.get_feature_names_out())))
+testX_cat = ohe.transform(test_categorical) if not test_categorical.empty else np.zeros(
+    (len(test_df), len(ohe.get_feature_names_out())))
 
 testX_combined = np.hstack([testX_num, testX_cat])
 
 # Train/val split
 from sklearn.model_selection import train_test_split
+
 X_train, X_val, y_train, y_val = train_test_split(X_combined, y, test_size=0.2, random_state=42)
 
 X_train_t = torch.tensor(X_train, dtype=torch.float32)
 y_train_t = torch.tensor(y_train, dtype=torch.float32).view(-1, 1)
-X_val_t   = torch.tensor(X_val,   dtype=torch.float32)
-y_val_t   = torch.tensor(y_val,   dtype=torch.float32).view(-1, 1)
-X_test_t  = torch.tensor(testX_combined, dtype=torch.float32)
+X_val_t = torch.tensor(X_val, dtype=torch.float32)
+y_val_t = torch.tensor(y_val, dtype=torch.float32).view(-1, 1)
+X_test_t = torch.tensor(testX_combined, dtype=torch.float32)
+
 
 # Two-layer MLP
 class TwoLayerRegressor(nn.Module):
@@ -96,10 +95,12 @@ class TwoLayerRegressor(nn.Module):
         self.fc1 = nn.Linear(input_dim, hidden_dim)
         self.fc2 = nn.Linear(hidden_dim, 1)
         self.relu = nn.ReLU()
+
     def forward(self, x):
         x = self.relu(self.fc1(x))
         x = self.fc2(x)
         return x
+
 
 model = TwoLayerRegressor(input_dim=X_train.shape[1], hidden_dim=64)
 optimizer = optim.Adam(model.parameters(), lr=0.005)
@@ -118,7 +119,7 @@ for epoch in range(5):
     with torch.no_grad():
         val_preds = model(X_val_t)
         val_loss = criterion(val_preds, y_val_t)
-    print(f"Epoch {epoch+1}, Train Loss={loss.item():.4f}, Val Loss={val_loss.item():.4f}")
+    print(f"Epoch {epoch + 1}, Train Loss={loss.item():.4f}, Val Loss={val_loss.item():.4f}")
 
 # Predict
 model.eval()
@@ -130,8 +131,3 @@ submission = pd.DataFrame({
     "Billing Amount": test_preds
 })
 submission.to_csv("submission.csv", index=False)
-"""
-
-    def required_columns(self):
-        # Ground truth for columns used in the ML pipeline
-        return []

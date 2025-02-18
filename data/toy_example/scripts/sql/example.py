@@ -4,7 +4,7 @@ class ColumnDetectionTask:
         return "python"
 
     @property
-    def original_code(self):
+    def original_script(self):
         return """
 nonsensitive_df = duckdb.sql("SELECT * EXCLUDE ssn, gender, race
 FROM 's3://datalake/latest/hospitalisations.csv'").df()

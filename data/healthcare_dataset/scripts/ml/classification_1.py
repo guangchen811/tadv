@@ -1,20 +1,14 @@
-class ColumnDetectionTask:
-
-    @property
-    def original_code(self):
-        return """
-import pandas as pd
 import numpy as np
-
+import pandas as pd
+from sklearn.compose import ColumnTransformer
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import OneHotEncoder, StandardScaler
-from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
 # 1. Load Data
 train_df = pd.read_csv("train.csv")
-test_df  = pd.read_csv("test.csv")
+test_df = pd.read_csv("test.csv")
 
 # 2. Define Columns of Interest
 ID_COL = "id"
@@ -39,7 +33,7 @@ X = train_df[FEATURE_COLS + [ID_COL]]  # Keep ID_COL so we can drop it later
 # 4. Identify Numeric and Categorical Columns
 numeric_cols = ["Age", "Billing Amount"]
 categorical_cols = [
-    "Gender", 
+    "Gender",
     "Medical Condition",
     "Admission Type",
     "Insurance Provider",
@@ -66,10 +60,10 @@ model = Pipeline([
 
 # 7. Split Data for Validation (Optional)
 X_train, X_val, y_train, y_val = train_test_split(
-    X.drop(columns=[ID_COL]), 
-    y, 
-    test_size=0.2, 
-    stratify=y, 
+    X.drop(columns=[ID_COL]),
+    y,
+    test_size=0.2,
+    stratify=y,
     random_state=42
 )
 
@@ -99,8 +93,3 @@ submission = pd.DataFrame({
 # 14. Save to CSV (Kaggle-style)
 submission.to_csv("submission.csv", index=False)
 print("submission.csv has been created!")
-"""
-
-    def required_columns(self):
-        # Ground truth for columns used in the ML pipeline
-        return []

@@ -1,23 +1,17 @@
-class ColumnDetectionTask:
-
-    @property
-    def original_code(self):
-        return """
-import pandas as pd
 import numpy as np
-
-from sklearn.ensemble import RandomForestClassifier
+import pandas as pd
 from sklearn.compose import ColumnTransformer
-from sklearn.preprocessing import OneHotEncoder, StandardScaler
-from sklearn.pipeline import Pipeline
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
 # 1. Load Data
 train_df = pd.read_csv("train.csv")
-test_df  = pd.read_csv("test.csv")
+test_df = pd.read_csv("test.csv")
 
 # 2. Define Key Columns
-ID_COL     = "id"
+ID_COL = "id"
 TARGET_COL = "Test Results"
 
 # 3. Separate Target from Training Data
@@ -26,9 +20,9 @@ y = train_df[TARGET_COL]
 # 4. Drop Columns We Don’t Want (e.g., personal info, ID, or obviously irrelevant fields)
 #    We'll keep "id" for reference during modeling steps and drop it later in the pipeline.
 X = train_df.drop(columns=[
-    TARGET_COL,          # We don't want the label in our features
-    "Name",              # Example of personally identifiable info
-    "Hospital",          # Might be too granular or not relevant for the model
+    TARGET_COL,  # We don't want the label in our features
+    "Name",  # Example of personally identifiable info
+    "Hospital",  # Might be too granular or not relevant for the model
     "Room Number",
     "Doctor",
     "Date of Admission",
@@ -59,10 +53,10 @@ model = Pipeline([
 
 # 8. Create a Training/Validation Split
 X_train, X_val, y_train, y_val = train_test_split(
-    X, 
-    y, 
-    test_size=0.2, 
-    stratify=y, 
+    X,
+    y,
+    test_size=0.2,
+    stratify=y,
     random_state=42
 )
 
@@ -82,9 +76,9 @@ model.fit(X.drop(columns=[ID_COL]), y)
 #    - Drop the same unwanted columns as we did for train
 #    - Make sure order and transformations match
 testX = test_df.drop(columns=[
-    "Name", 
-    "Hospital", 
-    "Room Number", 
+    "Name",
+    "Hospital",
+    "Room Number",
     "Doctor",
     "Date of Admission",
     "Discharge Date"
@@ -100,8 +94,3 @@ submission = pd.DataFrame({
 })
 submission.to_csv("submission.csv", index=False)
 print("Created submission.csv!")
-"""
-
-    def required_columns(self):
-        # Ground truth for columns used in the ML pipeline
-        return []

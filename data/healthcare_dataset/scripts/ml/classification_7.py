@@ -1,15 +1,10 @@
-class ColumnDetectionTask:
-
-    @property
-    def original_code(self):
-        return """
-import pandas as pd
 import numpy as np
+import pandas as pd
 import torch
 import torch.nn as nn
 import torch.optim as optim
-from sklearn.preprocessing import OneHotEncoder, StandardScaler, LabelEncoder
 from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import OneHotEncoder, StandardScaler, LabelEncoder
 
 train_df = pd.read_csv("train.csv")
 test_df = pd.read_csv("test.csv")
@@ -78,10 +73,11 @@ X_train, X_val, y_train, y_val = train_test_split(X_combined, y_enc, test_size=0
 # Convert to torch
 X_train_t = torch.tensor(X_train, dtype=torch.float32)
 y_train_t = torch.tensor(y_train, dtype=torch.long)
-X_val_t   = torch.tensor(X_val,   dtype=torch.float32)
-y_val_t   = torch.tensor(y_val,   dtype=torch.long)
-X_test_t  = torch.tensor(X_test_combined, dtype=torch.float32)
-test_ids  = X_test[id_col].values
+X_val_t = torch.tensor(X_val, dtype=torch.float32)
+y_val_t = torch.tensor(y_val, dtype=torch.long)
+X_test_t = torch.tensor(X_test_combined, dtype=torch.float32)
+test_ids = X_test[id_col].values
+
 
 # Two-layer network
 class TwoLayerNet(nn.Module):
@@ -90,10 +86,12 @@ class TwoLayerNet(nn.Module):
         self.layer1 = nn.Linear(in_dim, hid_dim)
         self.layer2 = nn.Linear(hid_dim, out_dim)
         self.relu = nn.ReLU()
+
     def forward(self, x):
         x = self.relu(self.layer1(x))
         x = self.layer2(x)
         return x
+
 
 model = TwoLayerNet(in_dim=X_train_t.shape[1], hid_dim=32, out_dim=len(lbl.classes_))
 optimizer = optim.Adam(model.parameters(), lr=0.005)
@@ -114,7 +112,7 @@ for ep in range(epochs):
         val_logits = model(X_val_t)
         val_preds = torch.argmax(val_logits, dim=1)
         val_acc = (val_preds == y_val_t).float().mean()
-    print(f"Epoch {ep+1} | Loss={loss.item():.4f} | Val Acc={val_acc.item():.4f}")
+    print(f"Epoch {ep + 1} | Loss={loss.item():.4f} | Val Acc={val_acc.item():.4f}")
 
 # Final inference
 model.eval()
@@ -128,8 +126,3 @@ submission_df = pd.DataFrame({
     "Test Results": test_labels
 })
 submission_df.to_csv("submission.csv", index=False)
-"""
-
-    def required_columns(self):
-        # Ground truth for columns used in the ML pipeline
-        return []

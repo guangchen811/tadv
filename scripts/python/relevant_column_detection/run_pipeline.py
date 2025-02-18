@@ -40,9 +40,9 @@ def run_langchain_cadv_on_single_model(data_name, model_name, processed_data_idx
             task_instance = get_task_instance(script_path)
 
             if model_name == "string-matching":
-                relevant_columns_list = run_string_matching(column_list, task_instance.original_code)
+                relevant_columns_list = run_string_matching(column_list, task_instance.original_script)
             else:
-                relevant_columns_list = run_llm(column_desc, model_name, task_instance.original_code,
+                relevant_columns_list = run_llm(column_desc, model_name, task_instance.original_script,
                                                 task_group_mapping(task_type))
 
             ground_truth = sorted(task_instance.required_columns(), key=lambda x: x.lower())
@@ -96,7 +96,7 @@ def run_langchain_cadv_on_all_models(data_name, model_names, processed_data_idx)
 if __name__ == "__main__":
     data_name = "healthcare_dataset"
     model_names = ["string-matching", "gpt-4o-mini", "gpt-4o", "llama3.2:1b", "llama3.2"]
-    processed_data_idx = 0
+    processed_data_idx = 'base_version'
     all_results = run_langchain_cadv_on_all_models(data_name, model_names, processed_data_idx)
     # reverse the order of the keys
     for task_type in ['bi', 'dev', 'exclude_clause', 'feature_engineering', 'classification', 'regression']:

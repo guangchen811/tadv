@@ -1,15 +1,10 @@
-class ColumnDetectionTask:
-
-    @property
-    def original_code(self):
-        return """
-import pandas as pd
 import numpy as np
+import pandas as pd
 import torch
 import torch.nn as nn
 import torch.optim as optim
-from sklearn.preprocessing import OneHotEncoder, StandardScaler, LabelEncoder
 from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import OneHotEncoder, StandardScaler, LabelEncoder
 
 train_df = pd.read_csv("train.csv")
 test_df = pd.read_csv("test.csv")
@@ -82,10 +77,11 @@ X_train, X_val, y_train, y_val = train_test_split(X_combined, y_enc, test_size=0
 
 X_train_t = torch.tensor(X_train, dtype=torch.float32)
 y_train_t = torch.tensor(y_train, dtype=torch.long)
-X_val_t   = torch.tensor(X_val,   dtype=torch.float32)
-y_val_t   = torch.tensor(y_val,   dtype=torch.long)
-X_test_t  = torch.tensor(X_test_combined, dtype=torch.float32)
-test_ids  = X_test[id_col].values
+X_val_t = torch.tensor(X_val, dtype=torch.float32)
+y_val_t = torch.tensor(y_val, dtype=torch.long)
+X_test_t = torch.tensor(X_test_combined, dtype=torch.float32)
+test_ids = X_test[id_col].values
+
 
 # Define a deeper MLP with dropout
 class DeeperMLP(nn.Module):
@@ -99,8 +95,10 @@ class DeeperMLP(nn.Module):
             nn.ReLU(),
             nn.Linear(h2_dim, out_dim)
         )
+
     def forward(self, x):
         return self.net(x)
+
 
 model = DeeperMLP(in_dim=X_train_t.shape[1], h1_dim=64, h2_dim=32, out_dim=len(lbl.classes_))
 criterion = nn.CrossEntropyLoss()
@@ -121,7 +119,7 @@ for ep in range(epochs):
         val_out = model(X_val_t)
         val_preds = torch.argmax(val_out, dim=1)
         val_acc = (val_preds == y_val_t).float().mean()
-    print(f"Epoch {ep+1} | Loss={loss.item():.4f} | Val Acc={val_acc.item():.4f}")
+    print(f"Epoch {ep + 1} | Loss={loss.item():.4f} | Val Acc={val_acc.item():.4f}")
 
 # Prediction
 model.eval()
@@ -135,8 +133,3 @@ submission_df = pd.DataFrame({
     "Test Results": test_labels
 })
 submission_df.to_csv("submission.csv", index=False)
-"""
-
-    def required_columns(self):
-        # Ground truth for columns used in the ML pipeline
-        return []

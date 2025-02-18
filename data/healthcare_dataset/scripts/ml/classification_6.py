@@ -1,15 +1,10 @@
-class ColumnDetectionTask:
-
-    @property
-    def original_code(self):
-        return """
-import pandas as pd
 import numpy as np
+import pandas as pd
 import torch
 import torch.nn as nn
 import torch.optim as optim
-from sklearn.preprocessing import OneHotEncoder, StandardScaler, LabelEncoder
 from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import OneHotEncoder, StandardScaler, LabelEncoder
 
 # We read the CSV files
 train_df = pd.read_csv("train.csv")
@@ -57,8 +52,8 @@ print("Remaining train columns:", X.columns.tolist())
 
 # Convert admission_date to numeric (e.g. year-month-day ordinal)
 if "admission_date" in X.columns:
-    X["admission_date"] = pd.to_datetime(X["admission_date"], errors="coerce").astype(np.int64) // 10**9
-    test_df["admission_date"] = pd.to_datetime(test_df["admission_date"], errors="coerce").astype(np.int64) // 10**9
+    X["admission_date"] = pd.to_datetime(X["admission_date"], errors="coerce").astype(np.int64) // 10 ** 9
+    test_df["admission_date"] = pd.to_datetime(test_df["admission_date"], errors="coerce").astype(np.int64) // 10 ** 9
 
 # Separate numeric vs categorical
 numeric_cols = []
@@ -97,13 +92,16 @@ y_val_t = torch.tensor(y_val, dtype=torch.long)
 X_test_t = torch.tensor(X_test_combined, dtype=torch.float32)
 test_ids = test_df[id_col].values
 
+
 # Define a single-layer MLP
 class SimpleMLP(nn.Module):
     def __init__(self, input_size, output_size):
         super(SimpleMLP, self).__init__()
         self.fc = nn.Linear(input_size, output_size)
+
     def forward(self, x):
         return self.fc(x)
+
 
 input_dim = X_train_t.shape[1]
 num_classes = len(lbl.classes_)
@@ -128,7 +126,7 @@ for epoch in range(epochs):
         val_out = model(X_val_t)
         val_preds = torch.argmax(val_out, dim=1)
         val_acc = (val_preds == y_val_t).float().mean()
-    print(f"Epoch {epoch+1}: Train Loss={loss.item():.4f}, Val Acc={val_acc.item():.4f}")
+    print(f"Epoch {epoch + 1}: Train Loss={loss.item():.4f}, Val Acc={val_acc.item():.4f}")
 
 # Final inference on test set
 model.eval()
@@ -143,8 +141,3 @@ submission_df = pd.DataFrame({
     "Test Results": test_labels
 })
 submission_df.to_csv("submission.csv", index=False)
-"""
-
-    def required_columns(self):
-        # Ground truth for columns used in the ML pipeline
-        return []

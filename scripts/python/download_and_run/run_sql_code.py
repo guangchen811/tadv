@@ -14,15 +14,15 @@ def run_sql_code(processed_idx, single_script=""):
         if len(single_script) > 0 and single_script not in script_path.name:
             continue
         task_instance = get_task_instance(script_path)
-        print(f"Running script: {task_instance.original_code}")
+        print(f"Running script: {task_instance.original_script}")
         output_path = processed_data_path / "output" / script_path.stem / "results_on_clean_test_data"
         output_path.mkdir(parents=True, exist_ok=True)
-        executor.run_script(project_name=original_data_path.name, script_context=task_instance.original_code,
+        executor.run_script(project_name=original_data_path.name, script_context=task_instance.original_script,
                             input_path=processed_data_path / "files_with_clean_test_data",
                             output_path=processed_data_path / "output" / script_path.stem / "results_on_clean_test_data")
         output_path = processed_data_path / "output" / script_path.stem / "results_on_corrupted_test_data"
         output_path.mkdir(parents=True, exist_ok=True)
-        executor.run_script(project_name=original_data_path.name, script_context=task_instance.original_code,
+        executor.run_script(project_name=original_data_path.name, script_context=task_instance.original_script,
                             input_path=processed_data_path / "files_with_corrupted_test_data",
                             output_path=processed_data_path / "output" / script_path.stem / "results_on_corrupted_test_data")
 

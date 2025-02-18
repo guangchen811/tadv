@@ -1,8 +1,3 @@
-class ColumnDetectionTask:
-
-    @property
-    def original_code(self):
-        return """
 import pandas as pd
 import torch
 import torch.nn as nn
@@ -97,8 +92,3 @@ with torch.no_grad():
 test_labels = label_encoder.inverse_transform(test_preds)
 submission_df = pd.DataFrame({id_col: test_ids, target_col: test_labels})
 submission_df.to_csv("submission.csv", index=False)
-"""
-
-    def required_columns(self):
-        # Ground truth for columns used in the ML pipeline
-        return []

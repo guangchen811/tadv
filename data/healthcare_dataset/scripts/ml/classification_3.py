@@ -1,15 +1,10 @@
-class ColumnDetectionTask:
-
-    @property
-    def original_code(self):
-        return """
+import numpy as np
 import pandas as pd
 import torch
 import torch.nn as nn
 import torch.optim as optim
-from sklearn.preprocessing import OneHotEncoder, StandardScaler, LabelEncoder
 from sklearn.model_selection import train_test_split
-import numpy as np
+from sklearn.preprocessing import OneHotEncoder, StandardScaler, LabelEncoder
 
 # Read CSV files
 train_df = pd.read_csv("train.csv")
@@ -49,14 +44,16 @@ X_combined = np.hstack([X[num_cols].values, X_cat])
 X_test_combined = np.hstack([X_test[num_cols].values, X_test_cat])
 
 # Split for validation
-X_train, X_val, y_train, y_val = train_test_split(X_combined, y_encoded, test_size=0.2, random_state=42, stratify=y_encoded)
+X_train, X_val, y_train, y_val = train_test_split(X_combined, y_encoded, test_size=0.2, random_state=42,
+                                                  stratify=y_encoded)
 
 # Convert to torch Tensors
 X_train_t = torch.tensor(X_train, dtype=torch.float32)
 y_train_t = torch.tensor(y_train, dtype=torch.long)
-X_val_t   = torch.tensor(X_val,   dtype=torch.float32)
-y_val_t   = torch.tensor(y_val,   dtype=torch.long)
-X_test_t  = torch.tensor(X_test_combined, dtype=torch.float32)
+X_val_t = torch.tensor(X_val, dtype=torch.float32)
+y_val_t = torch.tensor(y_val, dtype=torch.long)
+X_test_t = torch.tensor(X_test_combined, dtype=torch.float32)
+
 
 # Define a simple MLP model
 class SimpleMLP(nn.Module):
@@ -65,11 +62,12 @@ class SimpleMLP(nn.Module):
         self.fc1 = nn.Linear(input_dim, hidden_dim)
         self.fc2 = nn.Linear(hidden_dim, num_classes)
         self.relu = nn.ReLU()
-    
+
     def forward(self, x):
         x = self.relu(self.fc1(x))
         x = self.fc2(x)
         return x
+
 
 # Instantiate model
 num_features = X_train_t.shape[1]
@@ -95,7 +93,7 @@ for epoch in range(epochs):
         val_logits = model(X_val_t)
         val_preds = torch.argmax(val_logits, dim=1)
         val_acc = (val_preds == y_val_t).float().mean()
-    print(f"Epoch {epoch+1}/{epochs}, Loss: {loss.item():.4f}, Val Acc: {val_acc.item():.4f}")
+    print(f"Epoch {epoch + 1}/{epochs}, Loss: {loss.item():.4f}, Val Acc: {val_acc.item():.4f}")
 
 # Final inference on test data
 model.eval()
@@ -109,8 +107,3 @@ test_labels = label_encoder.inverse_transform(test_preds)
 # Create submission
 submission_df = pd.DataFrame({id_col: test_ids, target_col: test_labels})
 submission_df.to_csv("submission.csv", index=False)
-"""
-
-    def required_columns(self):
-        # Ground truth for columns used in the ML pipeline
-        return []
