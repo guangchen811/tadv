@@ -8,10 +8,10 @@ from scripts.python.utils import load_train_and_test_spark_data
 from cadv_exploration.utils import get_task_instance
 from cadv_exploration.dq_manager import DeequDataQualityManager
 from cadv_exploration.inspector.deequ.deequ_inspector_manager import DeequInspectorManager
-from llm.langchain import LangChainCADV
+from cadv_exploration.llm.langchain import LangChainCADV
 from cadv_exploration.llm.langchain.downstream_task_prompt import SQL_QUERY_TASK_DESCRIPTION, \
     ML_INFERENCE_TASK_DESCRIPTION
-from utils import get_project_root
+from cadv_exploration.utils import get_project_root
 
 
 def run_langchain_cadv_on_single_model(data_name, model_name, processed_data_idx):

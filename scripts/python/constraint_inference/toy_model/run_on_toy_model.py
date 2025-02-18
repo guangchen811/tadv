@@ -1,9 +1,9 @@
+from cadv_exploration.llm.langchain.downstream_task_prompt import CD_TASK_DESCRIPTION
 from cadv_exploration.utils import load_dotenv
-from llm.langchain.downstream_task_prompt import CD_TASK_DESCRIPTION
 
 load_dotenv()
 from inspector.deequ.deequ_inspector_manager import DeequInspectorManager
-from llm.langchain import LangChainCADV
+from cadv_exploration.llm.langchain import LangChainCADV
 from data_models import Constraints
 from scripts.python.utils import setup_logger
 
