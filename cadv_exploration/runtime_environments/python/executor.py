@@ -31,6 +31,20 @@ class PythonExecutor(ExecutorBase):
             print(f"Script {script_path} timed out after {timeout} seconds.")
             return f"Error: Script {script_path} timed out after {timeout} seconds."
 
+    def run_script(self, project_name: str, input_path: Path, script_context: str, output_path: Path, timeout: int = 120):
+        print(f"Running Python script with context {script_context} with input {input_path} and output {output_path}")
+        script_path = get_current_folder() / "script.py"
+        script_path.write_text(script_context)
+        command = [str(self.python_executable), str(script_path), "--input", str(input_path), "--output",
+                   str(output_path)]
+        try:
+            result = subprocess.run(command, check=True, timeout=timeout, capture_output=True, text=True)
+            print(f"Python script with context finished successfully\noutput files: {list(output_path.iterdir())}")
+            return result.stdout  # Return standard output
+        except subprocess.CalledProcessError as e:
+            print(f"Error running script with context: {e.stderr}")
+            return f"Error: {e.stderr}"
+
     def _get_python_executable(self):
         self._create_or_update_environment()
         if platform.system() == "Windows":

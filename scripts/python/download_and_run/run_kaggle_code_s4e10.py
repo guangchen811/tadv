@@ -54,4 +54,4 @@ def find_notebooks_with_to_csv(scirpt_dir):
 
 
 if __name__ == "__main__":
-    run_kaggle_code(processed_idx=7)
+    run_kaggle_code(processed_idx="7")

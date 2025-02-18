@@ -1,16 +1,18 @@
-class ColumnDetectionTask:
-
-    @property
-    def original_code(self):
-        return """
+import argparse
 
 import pandas as pd
 
+parser = argparse.ArgumentParser()
+parser.add_argument('--input', type=str, required=True)
+parser.add_argument('--output', type=str, required=True)
+
+args = parser.parse_args()
+
 # Read CSV into a DataFrame
-df = pd.read_csv(input_csv)
+df = pd.read_csv(args.input + "/train.csv")
 
 # Filter to rows where person_age > 20
-filtered_df = df[df["person_age"] > 20]
+filtered_df = df[df["Age"] > 20]
 
 # Take only the first 10 rows (or fewer if not enough rows)
 limited_df = filtered_df.head(10)
@@ -23,7 +25,7 @@ table_html = limited_df.to_html(index=False, classes="table table-striped", bord
 stats_df = filtered_df.describe(include="all")
 stats_html = stats_df.to_html(classes="table table-striped", border=0)
 
-html_content = f\"\'"\"
+html_content = f"""
 <!DOCTYPE html>
 <html>
 <head>
@@ -60,14 +62,8 @@ html_content = f\"\'"\"
     {stats_html}
 </body>
 </html>
-\"\"\"
-# Write to an HTML file
-with open(output_html, "w", encoding="utf-8") as f:
-    f.write(html_content)
-print(f"Generated static site: {output_html}")
-
 """
-
-    def required_columns(self):
-        # Ground truth for columns used in the ML pipeline
-        return []
+# Write to an HTML file
+with open(args.output + "/" + 'output.html', "w", encoding="utf-8") as f:
+    f.write(html_content)
+print(f"Generated static site: {args.output}/output.html")

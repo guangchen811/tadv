@@ -28,5 +28,5 @@ def run_sql_code(processed_idx, single_script=""):
 
 
 if __name__ == "__main__":
-    run_sql_code(processed_idx=0)
-    # run_sql_code(processed_idx=0, single_script="dev_5")
+    run_sql_code(processed_idx="0")
+    # run_sql_code(processed_idx="0", single_script="dev_5")
