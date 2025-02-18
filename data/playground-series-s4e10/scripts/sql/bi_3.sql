@@ -1,8 +1,3 @@
-class ColumnDetectionTask:
-
-    @property
-    def original_script(self):
-        return """
 -- Combine multiple risk factors to identify high-risk segments
 SELECT person_home_ownership,
        loan_grade,
@@ -14,8 +9,3 @@ WHERE loan_int_rate > 15.0
 GROUP BY person_home_ownership, loan_grade
 HAVING default_rate > 0.2
 ORDER BY default_rate DESC;
-"""
-
-    def required_columns(self):
-        # Ground truth for columns used in the ML pipeline
-        return ['person_home_ownership', 'loan_grade', 'loan_int_rate', 'cb_person_default_on_file']

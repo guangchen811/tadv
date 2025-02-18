@@ -29,7 +29,7 @@ def run_langchain_cadv_on_single_model(data_name, model_name, processed_data_idx
 
     metric_evaluator = RelevantColumnDetectionMetric(average='macro')
     result_each_type = {}
-    for task_type in ['bi', 'dev', 'exclude_clause', 'feature_engineering', 'classification', 'regression']:
+    for task_type in ['bi', 'dev', 'feature_engineering', 'classification', 'regression']:
         scripts_path_dir = original_data_path / "scripts" / task_group_mapping(task_type)
         print(task_type)
         all_ground_truth_vectors = []
@@ -45,7 +45,7 @@ def run_langchain_cadv_on_single_model(data_name, model_name, processed_data_idx
                 relevant_columns_list = run_llm(column_desc, model_name, task_instance.original_script,
                                                 task_group_mapping(task_type))
 
-            ground_truth = sorted(task_instance.required_columns(), key=lambda x: x.lower())
+            ground_truth = sorted(task_instance.annotations['required_columns'], key=lambda x: x.lower())
             ground_truth_vector, relevant_columns_vector = metric_evaluator.binary_vectorize(column_list,
                                                                                              ground_truth,
                                                                                              relevant_columns_list)
@@ -94,12 +94,12 @@ def run_langchain_cadv_on_all_models(data_name, model_names, processed_data_idx)
 
 
 if __name__ == "__main__":
-    data_name = "healthcare_dataset"
+    data_name = "playground-series-s4e10"
     model_names = ["string-matching", "gpt-4o-mini", "gpt-4o", "llama3.2:1b", "llama3.2"]
     processed_data_idx = 'base_version'
     all_results = run_langchain_cadv_on_all_models(data_name, model_names, processed_data_idx)
     # reverse the order of the keys
-    for task_type in ['bi', 'dev', 'exclude_clause', 'feature_engineering', 'classification', 'regression']:
+    for task_type in ['bi', 'dev', 'feature_engineering', 'classification', 'regression']:
         result_each_model = {
             model_name: all_results[model_name][task_type]
             for model_name in model_names

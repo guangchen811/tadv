@@ -3,7 +3,7 @@ annotations:
     - "person_age"
     - "person_income"
     - "person_emp_length"
-    - "loan_amnt",
+    - "loan_amnt"
     - "loan_int_rate"
     - "loan_percent_income"
     - "person_home_ownership"
