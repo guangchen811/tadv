@@ -3,7 +3,7 @@ from pathlib import Path
 import pandas as pd
 
 from cadv_exploration.runtime_environments import PythonExecutor
-from utils import get_project_root
+from cadv_exploration.utils import get_project_root
 
 
 def test_runnable(tmp_path):
