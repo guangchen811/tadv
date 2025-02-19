@@ -100,8 +100,8 @@ def task_group_mapping(task_type):
 
 
 if __name__ == "__main__":
-    # data_name = "healthcare_dataset"
-    data_name = "playground-series-s4e10"
+    # data_name = "healthcare_dataset_ml_inference"
+    data_name = "playground-series-s4e10_ml_inference"
     model_name = "gpt-4o"
     run_langchain_cadv(data_name=data_name, model_name=model_name, processed_data_idx='base_version',
                        assumption_generation_trick=None)

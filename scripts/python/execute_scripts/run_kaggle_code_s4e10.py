@@ -12,7 +12,7 @@ def run_kaggle_code(processed_idx):
     original_data_path = project_root / "data" / "playground-series-s4e10"
     script_dir = original_data_path / "kernels_ipynb_selected"
 
-    processed_data_path = project_root / "data_processed" / "playground-series-s4e10" / f"{processed_idx}"
+    processed_data_path = project_root / "data_processed" / "playground-series-s4e10_ml_inference" / f"{processed_idx}"
     input_path_with_clean_test_data = processed_data_path / "files_with_clean_test_data"
     input_path_with_corrupted_test_data = processed_data_path / "files_with_corrupted_test_data"
 

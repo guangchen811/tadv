@@ -1,4 +1,4 @@
-class KaggleDatasetLoader:
+class MLInferenceDatasetLoader:
     _instance = None
 
     def __new__(cls, *args, **kwargs):

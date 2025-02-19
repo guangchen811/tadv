@@ -6,7 +6,7 @@ from utils._utils import get_task_instance
 def run_sql_code(processed_idx, single_script=""):
     executor = DuckDBExecutor()
     project_root = get_project_root()
-    dataset_name = "healthcare_dataset"
+    dataset_name = "healthcare_dataset_sql"
     original_data_path = project_root / "data" / dataset_name
     processed_data_path = project_root / "data_processed" / dataset_name / f"{processed_idx}"
     script_dir = original_data_path / "scripts" / "sql"
