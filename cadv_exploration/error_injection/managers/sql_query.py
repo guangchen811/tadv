@@ -1,16 +1,16 @@
 from pathlib import Path
 
-from cadv_exploration.loader.dataset.sql_query_dataset_loader import SQLQueryDatasetLoader
-
 from cadv_exploration.error_injection.abstract_error_injection_manager import AbstractErrorInjectionManager
 from cadv_exploration.loader import FileLoader
+from cadv_exploration.loader.dataset.sql_query_dataset_loader import SQLQueryDatasetLoader
 
 
 class SQLQueryErrorInjectionManager(AbstractErrorInjectionManager):
     def __init__(self,
                  raw_file_path: Path,
                  target_table_name: str,
-                 processed_data_dir: Path
+                 processed_data_dir: Path,
+                 sample_size: float
                  ):
         self.post_corruption_new_data = None
         self.raw_file_path = raw_file_path
@@ -22,7 +22,7 @@ class SQLQueryErrorInjectionManager(AbstractErrorInjectionManager):
         (
             self.previous_data,
             self.new_data
-        ) = self._split_dataset(self.full_data)
+        ) = self._split_dataset(self.full_data, sample_size=sample_size)
 
     def load_data(self):
         return FileLoader.load_csv(self.raw_file_path / f"{self.target_table_name}.csv")
@@ -41,9 +41,9 @@ class SQLQueryErrorInjectionManager(AbstractErrorInjectionManager):
             self.post_corruption_new_data
         )
 
-    def _split_dataset(self, full_data):
+    def _split_dataset(self, full_data, sample_size):
         full_data.drop(columns=["id"], inplace=True) if "id" in full_data.columns else None
-        full_data_shuffled = full_data.sample(frac=1, random_state=1).reset_index(drop=True)
+        full_data_shuffled = full_data.sample(frac=sample_size, random_state=1).reset_index(drop=True)
         previous_data_size = int(len(full_data_shuffled) * 0.6)
         previous_data = full_data_shuffled[:previous_data_size].reset_index(drop=True)
         new_data = full_data_shuffled[previous_data_size:].reset_index(drop=True)

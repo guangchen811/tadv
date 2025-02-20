@@ -1,7 +1,8 @@
 import argparse
-import pandas as pd
 import json
 import os
+
+import pandas as pd
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--input', type=str, required=True)
@@ -15,15 +16,8 @@ df = pd.read_csv(os.path.join(args.input, "new_data.csv"))
 # Ensure Full Name is treated as a string
 df["Full Name"] = df["Name"].astype(str)
 
-# Convert date columns to datetime
-df["Date of Admission"] = pd.to_datetime(df["Date of Admission"], errors='coerce')
-df["Discharge Date"] = pd.to_datetime(df["Discharge Date"], errors='coerce')
-
-# Calculate hospital stay duration
-df["Days Stayed"] = (df["Discharge Date"] - df["Date of Admission"]).dt.days
-
 # Convert to dictionary format for efficient lookup
-data_dict = {row["Full Name"].lower(): {"Age": row["Age"], "Days Stayed": row["Days Stayed"]} for _, row in df.iterrows()}
+data_dict = {row["Full Name"].lower(): row.to_dict() for _, row in df.iterrows()}
 
 # Save as JSON
 json_output_path = os.path.join(args.output, "data.json")
@@ -36,16 +30,24 @@ html_content = f"""
 <html>
 <head>
     <meta charset="utf-8"/>
-    <title>Hospital Stay Query</title>
+    <title>Patient Information Query</title>
     <style>
         body {{
             font-family: Arial, sans-serif;
             margin: 20px;
         }}
-        .result {{
+        .table {{
+            border-collapse: collapse;
+            width: 100%;
             margin-top: 20px;
-            font-size: 18px;
-            font-weight: bold;
+            display: none;
+        }}
+        .table th, .table td {{
+            border: 1px solid #ddd;
+            padding: 8px;
+        }}
+        .table th {{
+            background-color: #f2f2f2;
         }}
     </style>
     <script>
@@ -61,16 +63,23 @@ html_content = f"""
                 .catch(error => console.error("Error loading data:", error));
         }}
 
-        function queryInfo() {{
+        function queryTable() {{
             let input = document.getElementById("nameQuery").value.toLowerCase().trim();
-            let resultDiv = document.getElementById("result");
-            resultDiv.innerHTML = "";
+            let tableBody = document.getElementById("tableBody");
+            let table = document.getElementById("dataTable");
+            tableBody.innerHTML = "";
 
-            if (data[input]) {{
-                let info = data[input];
-                resultDiv.innerHTML = `Age: ${{info["Age"]}} <br> Days Stayed: ${{info["Days Stayed"]}}`;
+            if (input in data) {{
+                let rowData = data[input];
+                let rowHTML = "<tr>";
+                Object.keys(rowData).forEach(key => {{
+                    rowHTML += `<td>${{rowData[key]}}</td>`;
+                }});
+                rowHTML += "</tr>";
+                tableBody.innerHTML = rowHTML;
+                table.style.display = "table";
             }} else {{
-                resultDiv.innerHTML = "No records found.";
+                table.style.display = "none";
             }}
         }}
 
@@ -78,12 +87,21 @@ html_content = f"""
     </script>
 </head>
 <body>
-    <h1>Hospital Stay Query</h1>
+    <h1>Patient Information Query</h1>
 
     <label for="nameQuery">Enter Full Name:</label>
-    <input type="text" id="nameQuery" onkeyup="queryInfo()" placeholder="Type to search...">
+    <input type="text" id="nameQuery" onkeyup="queryTable()" placeholder="Type to search...">
 
-    <div id="result" class="result"></div>
+    <h2>Patient Records</h2>
+    <table id="dataTable" class="table table-striped" border="0">
+        <thead>
+            <tr>
+                {"".join(f'<th>{col}</th>' for col in df.columns)}
+            </tr>
+        </thead>
+        <tbody id="tableBody">
+        </tbody>
+    </table>
 </body>
 </html>
 """

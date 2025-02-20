@@ -10,8 +10,8 @@ def error_injection():
     error_injection_manager = SQLQueryErrorInjectionManager(
         raw_file_path=project_root / "data" / "playground-series-s4e10" / "files",
         target_table_name="train",
-        processed_data_dir=project_root / "data_processed" / "playground-series-s4e10_sql_query",
-        sample_size=1.0
+        processed_data_dir=project_root / "data_processed" / "playground-series-s4e10_web",
+        sample_size=0.1
     )
 
     corrupts = build_corrupts()
