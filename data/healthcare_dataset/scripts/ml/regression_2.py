@@ -1,3 +1,5 @@
+import argparse
+
 import numpy as np
 import pandas as pd
 import torch
@@ -6,8 +8,15 @@ import torch.optim as optim
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 
-train_df = pd.read_csv("train.csv")
-test_df = pd.read_csv("test.csv")
+parser = argparse.ArgumentParser()
+parser.add_argument('--input', type=str, required=True)
+parser.add_argument('--output', type=str, required=True)
+
+args = parser.parse_args()
+
+# 1. Load Data
+train_df = pd.read_csv(f"{args.input}/train.csv")
+test_df = pd.read_csv(f"{args.input}/test.csv")
 
 # Rename "Billing Amount" -> "billing_amount" for clarity
 train_df = train_df.rename(columns={"Billing Amount": "billing_amount",
@@ -129,4 +138,4 @@ submission = pd.DataFrame({
     "id": test_ids,
     "Billing Amount": test_preds
 })
-submission.to_csv("submission.csv", index=False)
+submission.to_csv(f"{args.output}/submission.csv", index=False)

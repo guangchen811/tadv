@@ -11,8 +11,6 @@ def run_web_code(processed_idx, single_script=""):
     for script_path in sorted(script_dir.iterdir(), key=lambda x: x.name, reverse=False):
         if len(single_script) > 0 and single_script not in script_path.name:
             continue
-        # task_instance = get_task_instance(script_path)
-        # print(f"Running script: {task_instance.original_script}")
         output_path = processed_data_path / "output" / script_path.stem / "results_on_clean_new_data"
         output_path.mkdir(parents=True, exist_ok=True)
         executor.run(project_name=original_data_path.name, script_path=script_path,

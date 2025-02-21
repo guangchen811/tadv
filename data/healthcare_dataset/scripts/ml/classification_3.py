@@ -1,3 +1,5 @@
+import argparse
+
 import numpy as np
 import pandas as pd
 import torch
@@ -6,9 +8,15 @@ import torch.optim as optim
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import OneHotEncoder, StandardScaler, LabelEncoder
 
-# Read CSV files
-train_df = pd.read_csv("train.csv")
-test_df = pd.read_csv("test.csv")
+parser = argparse.ArgumentParser()
+parser.add_argument('--input', type=str, required=True)
+parser.add_argument('--output', type=str, required=True)
+
+args = parser.parse_args()
+
+# 1. Load Data
+train_df = pd.read_csv(f"{args.input}/train.csv")
+test_df = pd.read_csv(f"{args.input}/test.csv")
 
 # Prepare target and ID
 target_col = "Test Results"
@@ -35,7 +43,7 @@ X[num_cols] = scaler.fit_transform(X[num_cols])
 X_test[num_cols] = scaler.transform(X_test[num_cols])
 
 # One-hot encode categorical columns
-ohe = OneHotEncoder(sparse=False, handle_unknown="ignore")
+ohe = OneHotEncoder(handle_unknown="ignore")
 X_cat = ohe.fit_transform(X[cat_cols])
 X_test_cat = ohe.transform(X_test[cat_cols])
 
@@ -106,4 +114,4 @@ test_labels = label_encoder.inverse_transform(test_preds)
 
 # Create submission
 submission_df = pd.DataFrame({id_col: test_ids, target_col: test_labels})
-submission_df.to_csv("submission.csv", index=False)
+submission_df.to_csv(f"{args.output}/submission.csv", index=False)

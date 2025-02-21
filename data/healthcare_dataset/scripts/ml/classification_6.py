@@ -1,3 +1,5 @@
+import argparse
+
 import numpy as np
 import pandas as pd
 import torch
@@ -6,9 +8,15 @@ import torch.optim as optim
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import OneHotEncoder, StandardScaler, LabelEncoder
 
-# We read the CSV files
-train_df = pd.read_csv("train.csv")
-test_df = pd.read_csv("test.csv")
+parser = argparse.ArgumentParser()
+parser.add_argument('--input', type=str, required=True)
+parser.add_argument('--output', type=str, required=True)
+
+args = parser.parse_args()
+
+# 1. Load Data
+train_df = pd.read_csv(f"{args.input}/train.csv")
+test_df = pd.read_csv(f"{args.input}/test.csv")
 
 # We'll rename some columns to standard snake_case
 train_df = train_df.rename(columns={
@@ -68,16 +76,16 @@ for c in X.columns:
 
 # We'll scale numeric columns and one-hot encode categorical
 scaler = StandardScaler()
-ohe = OneHotEncoder(sparse=False, handle_unknown="ignore")
+ohe = OneHotEncoder(handle_unknown="ignore")
 
 X_num = scaler.fit_transform(X[numeric_cols])
 X_cat = ohe.fit_transform(X[categorical_cols])
-X_combined = np.hstack([X_num, X_cat])
+X_combined = np.hstack([X_num, X_cat.toarray()])
 
 # Do the same for test data
 test_num = scaler.transform(test_df[numeric_cols])
 test_cat = ohe.transform(test_df[categorical_cols])
-X_test_combined = np.hstack([test_num, test_cat])
+X_test_combined = np.hstack([test_num, test_cat.toarray()])
 
 # Train/validation split
 X_train, X_val, y_train, y_val = train_test_split(
@@ -132,7 +140,7 @@ for epoch in range(epochs):
 model.eval()
 with torch.no_grad():
     test_out = model(X_test_t)
-    test_preds = torch.argmax(test_out, dim=1).numpy()
+    test_preds = np.array(torch.argmax(test_out, dim=1).tolist())
 
 # Convert predictions back to original labels
 test_labels = lbl.inverse_transform(test_preds)
@@ -140,4 +148,4 @@ submission_df = pd.DataFrame({
     id_col: test_ids,
     "Test Results": test_labels
 })
-submission_df.to_csv("submission.csv", index=False)
+submission_df.to_csv(f"{args.output}/submission.csv", index=False)

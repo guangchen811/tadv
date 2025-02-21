@@ -1,3 +1,5 @@
+import argparse
+
 import numpy as np
 import pandas as pd
 import torch
@@ -5,8 +7,15 @@ import torch.nn as nn
 import torch.optim as optim
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
-train_df = pd.read_csv("train.csv")
-test_df = pd.read_csv("test.csv")
+parser = argparse.ArgumentParser()
+parser.add_argument('--input', type=str, required=True)
+parser.add_argument('--output', type=str, required=True)
+
+args = parser.parse_args()
+
+# 1. Load Data
+train_df = pd.read_csv(f"{args.input}/train.csv")
+test_df = pd.read_csv(f"{args.input}/test.csv")
 
 # Rename the target
 train_df = train_df.rename(columns={"Billing Amount": "billing_amount"})
@@ -57,7 +66,7 @@ for c in X.columns:
         categorical_cols.append(c)
 
 scaler = StandardScaler()
-ohe = OneHotEncoder(sparse=False, handle_unknown="ignore")
+ohe = OneHotEncoder(handle_unknown="ignore")
 
 X_num = scaler.fit_transform(X[numeric_cols])
 X_cat = ohe.fit_transform(X[categorical_cols])
@@ -130,4 +139,4 @@ submission = pd.DataFrame({
     "id": test_ids,
     "Billing Amount": test_preds
 })
-submission.to_csv("submission.csv", index=False)
+submission.to_csv(f"{args.output}/submission.csv", index=False)
