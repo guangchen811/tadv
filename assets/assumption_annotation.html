@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disease & Medication Explorer</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1e1e2e;
+            color: #c9d1d9;
+            display: flex;
+            height: 100vh;
+        }
+        .container {
+            display: flex;
+            width: 100%;
+        }
+        .code-section {
+            flex: 2;
+            padding: 20px;
+            background-color: #282a36;
+            overflow: auto;
+        }
+        .assumptions-section {
+            flex: 1;
+            padding: 20px;
+            background-color: #21222c;
+            border-left: 2px solid #44475a;
+        }
+        h2 {
+            font-size: 1.5em;
+            color: #f8f8f2;
+            margin-bottom: 10px;
+        }
+        pre {
+            background: none;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="code-section">
+            <h2>Code</h2>
+            <pre><code class="language-python">import argparse
+import pandas as pd
+import json
+import os
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--input', type=str, required=True)
+parser.add_argument('--output', type=str, required=True)
+
+args = parser.parse_args()
+
+# Read CSV into a DataFrame
+df = pd.read_csv(os.path.join(args.input, "new_data.csv"))
+
+# Ensure necessary columns are treated as strings
+df["Medical Condition"] = df["Medical Condition"].astype(str).str.strip()
+df["Medication"] = df["Medication"].astype(str).str.strip()
+df["Hospital"] = df["Hospital"].astype(str).str.strip()
+df["Age"] = pd.to_numeric(df["Age"], errors='coerce')
+
+# Group data by Medical Condition
+data_dict = {}
+for condition, group in df.groupby("Medical Condition"):
+    most_common_medication = group["Medication"].mode()[0] if not group["Medication"].mode().empty else "Unknown"
+    most_common_hospital = group["Hospital"].mode()[0] if not group["Hospital"].mode().empty else "Unknown"
+    age_distribution = group["Age"].value_counts().sort_index().to_dict()
+
+    data_dict[condition] = {
+        "Most Common Medication": most_common_medication,
+        "Most Common Hospital": most_common_hospital,
+        "Age Distribution": age_distribution
+    }
+
+# Save as JSON
+json_output_path = os.path.join(args.output, "data.json")
+with open(json_output_path, "w", encoding="utf-8") as f:
+    json.dump(data_dict, f, indent=4)
+            </code></pre>
+        </div>
+        <div class="assumptions-section">
+            <h2>Assumptions</h2>
+            <ul>
+                <li><strong>Input Structure:</strong> Assumes `new_data.csv` exists in the specified input directory.</li>
+                <li><strong>Column Integrity:</strong> Assumes `Medical Condition`, `Medication`, `Hospital`, and `Age` columns are present.</li>
+                <li><strong>Data Cleaning:</strong> Strings are stripped, and `Age` is coerced to numeric values.</li>
+                <li><strong>Grouping Logic:</strong> Groups data by `Medical Condition` and extracts mode values.</li>
+                <li><strong>Output Format:</strong> Generates a JSON file with a structured dictionary.</li>
+            </ul>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+</body>
+</html>
