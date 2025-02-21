@@ -22,19 +22,17 @@ def error_injection():
 
 
 def build_corrupts():
-    corrupts = []
-    corrupts.append(Scaling(columns=['loan_amnt'], severity=0.2))
-    corrupts.append(MissingCategoricalValueCorruption(columns=['person_home_ownership'], severity=0.1,
-                                                      corrupt_strategy="to_majority"))
-    corrupts.append(MissingCategoricalValueCorruption(columns=['cb_person_default_on_file'], severity=0.1,
-                                                      corrupt_strategy="to_random"))
-    corrupts.append(GaussianNoise(columns=['person_income'], severity=0.2))
-    corrupts.append(GaussianNoise(columns=['person_emp_length'], severity=0.2))
-    corrupts.append(ColumnInserting(columns=['loan_intent'], severity=0.1, corrupt_strategy="add_prefix"))
-    corrupts.append(
-        ColumnInserting(columns=['person_home_ownership', 'person_age'], severity=0.1, corrupt_strategy="concatenate"))
-    corrupts.append(MaskValues(columns=['loan_grade'], severity=0.1))
-    corrupts.append(ColumnDropping(columns=['person_income'], severity=0.1))
+    corrupts = [Scaling(columns=['loan_amnt'], severity=0.2),
+                MissingCategoricalValueCorruption(columns=['person_home_ownership'], severity=0.1,
+                                                  corrupt_strategy="to_majority"),
+                MissingCategoricalValueCorruption(columns=['cb_person_default_on_file'], severity=0.1,
+                                                  corrupt_strategy="to_random"),
+                GaussianNoise(columns=['person_income'], severity=0.2),
+                GaussianNoise(columns=['person_emp_length'], severity=0.2),
+                ColumnInserting(columns=['loan_intent'], severity=0.1, corrupt_strategy="add_prefix"),
+                ColumnInserting(columns=['person_home_ownership', 'person_age'], severity=0.1,
+                                corrupt_strategy="concatenate"), MaskValues(columns=['loan_grade'], severity=0.1),
+                ColumnDropping(columns=['person_income'], severity=0.1)]
     return corrupts
 
 

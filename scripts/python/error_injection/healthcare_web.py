@@ -1,5 +1,6 @@
 from cadv_exploration.error_injection.managers.sql_query import SQLQueryErrorInjectionManager
 from cadv_exploration.utils import get_project_root
+from error_injection.corrupts import Scaling, MissingCategoricalValueCorruption, MaskValues, ColumnDropping
 
 
 def error_injection():
@@ -21,7 +22,11 @@ def error_injection():
 
 
 def build_corrupts():
-    corrupts = []
+    corrupts = [Scaling(columns=['Age'], severity=0.2),
+                MissingCategoricalValueCorruption(columns=['Blood Type'], severity=0.1,
+                                                  corrupt_strategy="remove"),
+                MaskValues(columns=['Doctor'], severity=0.1), ColumnDropping(columns=['Medication'], severity=0.1)]
+    # TODO: changing data format
     return corrupts
 
 

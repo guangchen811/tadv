@@ -26,6 +26,8 @@ class PythonExecutor(ExecutorBase):
             return result.stdout  # Return standard output
         except subprocess.CalledProcessError as e:
             print(f"Error running script {script_path}: {e.stderr}")
+            with open(output_path / "error.txt", "w") as f:
+                f.write(e.stderr)
             return f"Error: {e.stderr}"  # Return the error message
         except subprocess.TimeoutExpired:
             print(f"Script {script_path} timed out after {timeout} seconds.")
