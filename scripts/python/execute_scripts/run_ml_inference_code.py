@@ -32,6 +32,7 @@ def run_ml_inference(processed_idx, dataset_name, downstream_task_type, single_s
 
 if __name__ == "__main__":
     dataset_name = "playground-series-s4e10"
-    downstream_task_type = "regression"
-    run_ml_inference(processed_idx="base_version", dataset_name=dataset_name, downstream_task_type=downstream_task_type,
-                     single_script="regression_4.py")
+    # dataset_name = "healthcare_dataset"
+    # downstream_task_type = "regression"
+    downstream_task_type = "classification"
+    run_ml_inference(processed_idx="base_version", dataset_name=dataset_name, downstream_task_type=downstream_task_type)
