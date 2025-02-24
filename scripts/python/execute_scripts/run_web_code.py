@@ -2,11 +2,11 @@ from cadv_exploration.runtime_environments import PythonExecutor
 from cadv_exploration.utils import get_project_root
 
 
-def run_web_code(processed_idx, single_script=""):
+def run_web_code(processed_idx, dataset_name, single_script=""):
     executor = PythonExecutor()
     project_root = get_project_root()
-    original_data_path = project_root / "data" / "healthcare_dataset"
-    processed_data_path = project_root / "data_processed" / "healthcare_dataset_web" / f"{processed_idx}"
+    original_data_path = project_root / "data" / dataset_name.split("_web")[0]
+    processed_data_path = project_root / "data_processed" / dataset_name / f"{processed_idx}"
     script_dir = original_data_path / "scripts" / "web"
     for script_path in sorted(script_dir.iterdir(), key=lambda x: x.name, reverse=False):
         if len(single_script) > 0 and single_script not in script_path.name:
@@ -24,4 +24,5 @@ def run_web_code(processed_idx, single_script=""):
 
 
 if __name__ == "__main__":
-    run_web_code(processed_idx="base_version")
+    # run_web_code(processed_idx="base_version", dataset_name="healthcare_dataset_web")
+    run_web_code(processed_idx="base_version", dataset_name="playground-series-s4e10_web")

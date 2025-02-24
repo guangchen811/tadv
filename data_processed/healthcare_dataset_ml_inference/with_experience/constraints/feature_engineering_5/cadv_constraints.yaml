@@ -1,6 +1,0 @@
-constraints:
-  ? I'm unable to determine the relevant columns without the actual SQL code snippet.
-    Please provide the SQL code snippet to identify the relevant columns used in the
-    task.
-  : code: []
-    assumptions: []

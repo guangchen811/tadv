@@ -1,3 +1,0 @@
-person_home_ownership
-loan_intent
-loan_status

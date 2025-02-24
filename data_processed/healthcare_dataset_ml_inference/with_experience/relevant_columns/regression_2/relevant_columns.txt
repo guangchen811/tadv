@@ -1,4 +1,0 @@
-id
-Billing Amount
-Date of Admission
-Discharge Date

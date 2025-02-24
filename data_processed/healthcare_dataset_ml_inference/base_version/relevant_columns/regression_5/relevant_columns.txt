@@ -1,4 +1,0 @@
-billing_amount
-id
-Age
-Room Number

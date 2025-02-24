@@ -1,5 +1,0 @@
-loan_amnt
-loan_int_rate
-loan_grade
-cb_person_default_on_file
-id

@@ -1,3 +1,0 @@
-It seems that the code snippet which should indicate the relevant columns has not been provided. To identify which columns are used in the code snippet
-I need to see the actual code or logic that interacts with the dataset. Once the code snippet is available
-I can determine which columns are relevant for the downstream task. Please provide the code snippet to proceed.

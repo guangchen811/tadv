@@ -1,2 +1,0 @@
-loan_amnt
-person_income

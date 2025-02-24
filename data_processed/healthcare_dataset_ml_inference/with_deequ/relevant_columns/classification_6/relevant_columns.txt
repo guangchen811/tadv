@@ -1,6 +1,0 @@
-id
-Age
-billing_amount
-admission_date
-Gender
-medical_condition

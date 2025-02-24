@@ -1,4 +1,0 @@
-id
-Name
-Medical Condition
-Billing Amount

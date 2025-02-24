@@ -11,30 +11,39 @@ from sklearn.preprocessing import OneHotEncoder, StandardScaler, LabelEncoder
 parser = argparse.ArgumentParser()
 parser.add_argument('--input', type=str, required=True)
 parser.add_argument('--output', type=str, required=True)
-
 args = parser.parse_args()
 
 # 1. Load Data
 train_df = pd.read_csv(f"{args.input}/train.csv")
 test_df = pd.read_csv(f"{args.input}/test.csv")
 
-# Prepare target and ID
-target_col = "Test Results"
-id_col = "id"
-y = train_df[target_col]
-train_ids = train_df[id_col].values
-test_ids = test_df[id_col].values
+# Define key columns
+ID_COL = "id"
+TARGET_COL = "Test Results"
 
-# Simple feature selection: keep only Age, Billing Amount, Gender, Medical Condition
-X = train_df[["Age", "Billing Amount", "Gender", "Medical Condition"]].copy()
-X_test = test_df[["Age", "Billing Amount", "Gender", "Medical Condition"]].copy()
+# Ensure ID column exists
+if ID_COL not in train_df.columns or ID_COL not in test_df.columns:
+    raise ValueError("ID column is missing from the dataset. Check the input files.")
+
+# Retain IDs separately
+train_ids = train_df[ID_COL].values
+test_ids = test_df[ID_COL].values
+
+# Feature Engineering: Create interaction terms
+train_df["Age_Billing_Interaction"] = train_df["Age"] * train_df["Billing Amount"]
+test_df["Age_Billing_Interaction"] = test_df["Age"] * test_df["Billing Amount"]
+
+# Feature Selection
+feature_cols = ["Age", "Billing Amount", "Gender", "Medical Condition", "Age_Billing_Interaction"]
+X = train_df[feature_cols].copy()
+X_test = test_df[feature_cols].copy()
 
 # Encode target
 label_encoder = LabelEncoder()
-y_encoded = label_encoder.fit_transform(y)
+y_encoded = label_encoder.fit_transform(train_df[TARGET_COL])
 
-# Distinguish numeric vs. categorical
-num_cols = ["Age", "Billing Amount"]
+# Identify numerical and categorical columns
+num_cols = ["Age", "Billing Amount", "Age_Billing_Interaction"]
 cat_cols = ["Gender", "Medical Condition"]
 
 # Scale numeric columns
@@ -44,18 +53,18 @@ X_test[num_cols] = scaler.transform(X_test[num_cols])
 
 # One-hot encode categorical columns
 ohe = OneHotEncoder(handle_unknown="ignore")
-X_cat = ohe.fit_transform(X[cat_cols])
-X_test_cat = ohe.transform(X_test[cat_cols])
+X_cat = ohe.fit_transform(X[cat_cols]).toarray()
+X_test_cat = ohe.transform(X_test[cat_cols]).toarray()
 
-# Combine numeric and categorical
+# Combine numeric and categorical features
 X_combined = np.hstack([X[num_cols].values, X_cat])
 X_test_combined = np.hstack([X_test[num_cols].values, X_test_cat])
 
-# Split for validation
+# Train-validation split
 X_train, X_val, y_train, y_val = train_test_split(X_combined, y_encoded, test_size=0.2, random_state=42,
                                                   stratify=y_encoded)
 
-# Convert to torch Tensors
+# Convert data to PyTorch tensors
 X_train_t = torch.tensor(X_train, dtype=torch.float32)
 y_train_t = torch.tensor(y_train, dtype=torch.long)
 X_val_t = torch.tensor(X_val, dtype=torch.float32)
@@ -77,12 +86,12 @@ class SimpleMLP(nn.Module):
         return x
 
 
-# Instantiate model
+# Model initialization
 num_features = X_train_t.shape[1]
 num_classes = len(label_encoder.classes_)
 model = SimpleMLP(input_dim=num_features, hidden_dim=32, num_classes=num_classes)
 
-# Define optimizer and loss
+# Optimizer and loss function
 optimizer = optim.Adam(model.parameters(), lr=0.01)
 criterion = nn.CrossEntropyLoss()
 
@@ -103,15 +112,16 @@ for epoch in range(epochs):
         val_acc = (val_preds == y_val_t).float().mean()
     print(f"Epoch {epoch + 1}/{epochs}, Loss: {loss.item():.4f}, Val Acc: {val_acc.item():.4f}")
 
-# Final inference on test data
+# Inference on test data
 model.eval()
 with torch.no_grad():
     test_logits = model(X_test_t)
-    test_preds = torch.argmax(test_logits, dim=1).numpy()
+    test_preds = np.array(torch.argmax(test_logits, dim=1).tolist())
 
 # Decode predictions
 test_labels = label_encoder.inverse_transform(test_preds)
 
-# Create submission
-submission_df = pd.DataFrame({id_col: test_ids, target_col: test_labels})
+# Save predictions
+submission_df = pd.DataFrame({ID_COL: test_ids, TARGET_COL: test_labels})
 submission_df.to_csv(f"{args.output}/submission.csv", index=False)
+print("Created submission.csv!")

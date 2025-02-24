@@ -1,6 +1,0 @@
-id
-Name
-Date of Admission
-Test Results
-Medical Condition
-Billing Amount

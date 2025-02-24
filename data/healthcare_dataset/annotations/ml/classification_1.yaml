@@ -1,2 +1,5 @@
 annotations:
   required_columns: [ ]
+  assumptions:
+    - column: target
+      evidence: [ ]

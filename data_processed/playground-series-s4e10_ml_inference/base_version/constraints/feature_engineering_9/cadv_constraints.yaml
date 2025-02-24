@@ -1,8 +1,0 @@
-constraints:
-  loan_grade:
-    code:
-    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
-      - Valid
-    assumptions:
-    - 'The column ''loan_grade'' should only contain the values: ''A'', ''B'', ''C'',
-      ''D'', ''E'', ''F'', ''G''.'

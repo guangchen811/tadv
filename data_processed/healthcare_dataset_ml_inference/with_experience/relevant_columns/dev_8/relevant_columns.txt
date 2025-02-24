@@ -1,4 +1,0 @@
-id
-Name
-Age
-Medical Condition

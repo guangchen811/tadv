@@ -1,6 +1,0 @@
-billing_amount
-id
-Age
-Admission Type
-Medication
-Blood Type

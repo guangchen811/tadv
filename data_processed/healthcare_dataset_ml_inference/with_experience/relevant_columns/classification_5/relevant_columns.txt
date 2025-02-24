@@ -1,7 +1,0 @@
-id
-Billing Amount
-Age
-Date of Admission
-Discharge Date
-Blood Type
-Medical Condition

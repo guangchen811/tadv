@@ -1,2 +1,0 @@
-loan_grade
-loan_status

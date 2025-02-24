@@ -1,8 +1,0 @@
-id
-Test Results
-Room Number
-Name
-Hospital
-Doctor
-Date of Admission
-Discharge Date

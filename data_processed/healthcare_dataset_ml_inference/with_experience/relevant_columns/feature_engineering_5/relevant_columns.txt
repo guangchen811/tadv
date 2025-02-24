@@ -1,2 +1,0 @@
-Given that there is no code snippet provided
-I am unable to determine the relevant columns used in the code. Please provide the code snippet so I can identify the columns it utilizes for the downstream task.

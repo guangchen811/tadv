@@ -1,9 +1,0 @@
-Hospital
-Insurance Provider
-Medication
-Admission Type
-Medical Condition
-Age
-Gender
-Blood Type
-Room Number

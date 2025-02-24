@@ -1,7 +1,0 @@
-constraints:
-  '`loan_grade':
-    code: []
-    assumptions: []
-  loan_status`:
-    code: []
-    assumptions: []

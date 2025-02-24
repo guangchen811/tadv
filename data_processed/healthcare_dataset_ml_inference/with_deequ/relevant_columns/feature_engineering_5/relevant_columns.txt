@@ -1,3 +1,0 @@
-It seems that the code snippet itself is missing
-which is necessary to determine the relevant columns used by the downstream task. Without the code snippet
-I cannot identify the specific columns being referenced or used in the SQL query. Please provide the code snippet so that I can accurately identify the relevant columns for the downstream task.

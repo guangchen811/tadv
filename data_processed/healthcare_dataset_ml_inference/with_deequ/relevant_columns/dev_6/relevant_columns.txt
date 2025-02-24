@@ -1,6 +1,0 @@
-id
-Name
-Gender
-Insurance Provider
-Admission Type
-Medical Condition

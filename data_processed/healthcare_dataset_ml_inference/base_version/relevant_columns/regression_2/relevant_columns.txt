@@ -1,4 +1,0 @@
-billing_amount
-admission_dt
-discharge_dt
-id

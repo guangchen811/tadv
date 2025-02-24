@@ -1,6 +1,0 @@
-Billing Amount
-Room Number
-Age
-Hospital
-Medical Condition
-id
