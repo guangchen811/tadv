@@ -1,7 +1,7 @@
 WITH patient_bills AS (SELECT "id",
                               CAST("Date of Admission" AS DATE) AS admission_date,
                               "Billing Amount"                  AS billing
-                       FROM train),
+                       FROM new_data),
      bills_ordered AS (SELECT "id",
                               admission_date,
                               billing,

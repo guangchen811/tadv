@@ -1,3 +1,5 @@
+import argparse
+
 import numpy as np
 import pandas as pd
 import torch
@@ -8,24 +10,27 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from torch.utils.data import Dataset, DataLoader
 
-# Load Data
-train_data = pd.read_csv("/Kaggle/input/train.csv")
-test_data = pd.read_csv("/Kaggle/input/test.csv")
+parser = argparse.ArgumentParser()
+parser.add_argument('--input', type=str, required=True)
+parser.add_argument('--output', type=str, required=True)
+
+args = parser.parse_args()
+
+# 1. Load Data
+train_data = pd.read_csv(f"{args.input}/train.csv")
+test_data = pd.read_csv(f"{args.input}/test.csv")
 
 # Feature Engineering
 for df in [train_data, test_data]:
     df["log_loan_amnt"] = np.log1p(df["loan_amnt"])
     df["cred_hist_ratio"] = df["cb_person_cred_hist_length"] / (df["loan_amnt"] + 1)
     df["loan_amnt_int_rate"] = df["loan_amnt"] * df["loan_int_rate"]
-    df["loan_to_income"] = df["loan_amnt"] / (df["person_income"] + 1)
-    df["emp_length_income_ratio"] = df["person_emp_length"] / (df["loan_percent_income"] + 1)
     df["high_grade"] = df["loan_grade"].apply(lambda x: 1 if x in ["A", "B"] else 0)
     df["is_home_owner"] = df["person_home_ownership"].apply(lambda x: 1 if x == "OWN" else 0)
 
 # Select target and predictors
 target = "person_income"
-numeric_cols = ["log_loan_amnt", "loan_int_rate", "cred_hist_ratio", "loan_amnt_int_rate", "loan_to_income",
-                "emp_length_income_ratio"]
+numeric_cols = ["log_loan_amnt", "loan_int_rate", "cred_hist_ratio", "loan_amnt_int_rate"]
 categorical_cols = ["loan_grade", "cb_person_default_on_file", "person_home_ownership", "high_grade", "is_home_owner"]
 
 X_train = train_data[numeric_cols + categorical_cols]
@@ -129,5 +134,6 @@ with torch.no_grad():
 
 # Save Predictions
 submission = pd.DataFrame({"id": test_data.get("id", range(len(test_data))), "predicted_person_income": predictions})
-submission.to_csv("/kaggle/output/submission.csv", index=False)
-print("Submission saved.")
+submission.to_csv(f"{args.output}/submission.csv", index=False)
+
+print("Submission file 'submission.csv' has been created.")

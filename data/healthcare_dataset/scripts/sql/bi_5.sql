@@ -3,7 +3,7 @@ WITH doctor_metrics AS (
         "Doctor",
         COUNT(*) AS patient_count,
         ROUND(AVG("Billing Amount"), 2) AS avg_billing
-    FROM train
+    FROM new_data
     GROUP BY "Doctor"
 )
 SELECT

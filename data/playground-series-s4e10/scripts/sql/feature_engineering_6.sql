@@ -5,4 +5,4 @@ SELECT ROUND(loan_amnt * 1.0 / person_income, 2) AS loan_to_income_ratio,
            WHEN loan_amnt * 1.0 / person_income BETWEEN 0.1 AND 0.3 THEN 'Moderate Ratio'
            ELSE 'High Ratio'
            END                                   AS loan_to_income_band
-FROM train;
+FROM new_data;

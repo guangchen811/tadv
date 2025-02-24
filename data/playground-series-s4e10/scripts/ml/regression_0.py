@@ -1,3 +1,5 @@
+import argparse
+
 import numpy as np
 import pandas as pd
 from sklearn.compose import ColumnTransformer
@@ -7,9 +9,15 @@ from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 
-# Load Data
-train_data = pd.read_csv("/Kaggle/input/train.csv")
-test_data = pd.read_csv("/Kaggle/input/test.csv")
+parser = argparse.ArgumentParser()
+parser.add_argument('--input', type=str, required=True)
+parser.add_argument('--output', type=str, required=True)
+
+args = parser.parse_args()
+
+# 1. Load Data
+train_data = pd.read_csv(f"{args.input}/train.csv")
+test_data = pd.read_csv(f"{args.input}/test.csv")
 
 
 # Feature Engineering Function
@@ -18,8 +26,6 @@ def add_features(df):
     df["log_loan_amnt"] = np.log1p(df["loan_amnt"])
     df["cred_hist_ratio"] = df["cb_person_cred_hist_length"] / (df["loan_amnt"] + 1)
     df["loan_amnt_int_rate"] = df["loan_amnt"] * df["loan_int_rate"]
-    df["loan_to_income"] = df["loan_amnt"] / (df["person_income"] + 1)
-    df["emp_length_income_ratio"] = df["person_emp_length"] / (df["loan_percent_income"] + 1)
     return df
 
 
@@ -30,8 +36,7 @@ test_data = add_features(test_data)
 # Define Features and Target
 target = "person_income"
 features = [
-    "log_loan_amnt", "cred_hist_ratio", "loan_amnt_int_rate",
-    "loan_to_income", "emp_length_income_ratio", "loan_grade",
+    "log_loan_amnt", "cred_hist_ratio", "loan_amnt_int_rate", "loan_grade",
     "cb_person_default_on_file", "person_home_ownership"
 ]
 
@@ -40,8 +45,7 @@ y = train_data[target]
 X_test = test_data[features]
 
 # Preprocessing Pipeline
-numeric_features = ["log_loan_amnt", "cred_hist_ratio", "loan_amnt_int_rate", "loan_to_income",
-                    "emp_length_income_ratio"]
+numeric_features = ["log_loan_amnt", "cred_hist_ratio", "loan_amnt_int_rate"]
 categorical_features = ["loan_grade", "cb_person_default_on_file", "person_home_ownership"]
 
 preprocessor = ColumnTransformer(
@@ -86,5 +90,4 @@ submission = pd.DataFrame({
     "id": test_data.get("id", range(len(test_data))),
     "predicted_person_income": test_predictions
 })
-submission.to_csv("/kaggle/output/submission.csv", index=False)
-print("Submission saved.")
+submission.to_csv(f"{args.output}/submission.csv", index=False)

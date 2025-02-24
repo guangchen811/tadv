@@ -2,7 +2,7 @@ WITH employment_data AS (SELECT p.person_emp_length AS employment_duration,
                                 p.loan_grade        AS grade_segment,
                                 p.loan_status       AS status,
                                 p.loan_int_rate     AS interest_rate
-                         FROM train p)
+                         FROM new_data p)
 SELECT employment_duration                                                      AS emp_length,
        grade_segment,
        COUNT(*)                                                                 AS total_loans,

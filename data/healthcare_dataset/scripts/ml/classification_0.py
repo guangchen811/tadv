@@ -6,7 +6,7 @@ from sklearn.compose import ColumnTransformer
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import OneHotEncoder, StandardScaler
+from sklearn.preprocessing import OrdinalEncoder, StandardScaler
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--input', type=str, required=True)
@@ -46,13 +46,13 @@ for col in X.columns:
         categorical_cols.append(col)
 
 # 5. Build a Preprocessing Pipeline
-#    - OneHotEncoder for categorical columns
+#    - OrdinalEncoder for categorical columns
 #    - StandardScaler for numeric columns
 #    - Combine them with ColumnTransformer
 preprocessor = ColumnTransformer(
     transformers=[
         ("num", StandardScaler(), numeric_cols),
-        ("cat", OneHotEncoder(handle_unknown="ignore"), categorical_cols)
+        ("cat", OrdinalEncoder(handle_unknown="use_encoded_value", unknown_value=-1), categorical_cols)
     ],
     remainder="drop"
 )

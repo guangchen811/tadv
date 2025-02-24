@@ -6,6 +6,6 @@ SELECT id,
            WHEN person_income > SUM(loan_amnt) * 2 THEN 'Eligible'
            ELSE 'Not Eligible'
            END        AS eligibility_status
-FROM test
+FROM new_data
 WHERE id = 43152
 GROUP BY id, person_income;

@@ -44,6 +44,8 @@ class SQLQueryErrorInjectionManager(AbstractErrorInjectionManager):
     def _split_dataset(self, full_data, sample_size):
         full_data.drop(columns=["id"], inplace=True) if "id" in full_data.columns else None
         full_data_shuffled = full_data.sample(frac=sample_size, random_state=1).reset_index(drop=True)
+        full_data_shuffled.reset_index(drop=False, inplace=True)
+        full_data_shuffled.rename(columns={"index": "id"}, inplace=True)
         previous_data_size = int(len(full_data_shuffled) * 0.6)
         previous_data = full_data_shuffled[:previous_data_size].reset_index(drop=True)
         new_data = full_data_shuffled[previous_data_size:].reset_index(drop=True)

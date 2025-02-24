@@ -1,3 +1,5 @@
+import argparse
+
 import pandas as pd
 import torch
 import torch.nn as nn
@@ -7,9 +9,15 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from torch.utils.data import Dataset, DataLoader
 
-# Load Data & Feature Engineering
-train = pd.read_csv("/Kaggle/input/train.csv")
-test = pd.read_csv("/Kaggle/input/test.csv")
+parser = argparse.ArgumentParser()
+parser.add_argument('--input', type=str, required=True)
+parser.add_argument('--output', type=str, required=True)
+
+args = parser.parse_args()
+
+# 1. Load Data
+train = pd.read_csv(f"{args.input}/train.csv")
+test = pd.read_csv(f"{args.input}/test.csv")
 train["loan_amnt_cat"] = pd.cut(train["loan_amnt"], bins=[0, 5000, 15000, 30000, float('inf')],
                                 labels=["Low", "Med", "High", "VHigh"])
 test["loan_amnt_cat"] = pd.cut(test["loan_amnt"], bins=[0, 5000, 15000, 30000, float('inf')],
@@ -60,4 +68,6 @@ for epoch in range(10):
 # Predict
 model.eval()
 predictions = [1 if p >= 0.5 else 0 for batch in test_loader for p in model(batch).squeeze().detach().numpy()]
-pd.DataFrame({"id": test["id"], "loan_status": predictions}).to_csv("/kaggle/output/submission.csv", index=False)
+pd.DataFrame({"id": test["id"], "loan_status": predictions}).to_csv(f"{args.output}/submission.csv", index=False)
+
+print("Submission file 'submission.csv' has been created.")

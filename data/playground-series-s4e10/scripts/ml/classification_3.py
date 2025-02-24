@@ -1,3 +1,5 @@
+import argparse
+
 import numpy as np
 import pandas as pd
 import torch
@@ -8,9 +10,15 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from torch.utils.data import Dataset, DataLoader
 
-# Load Data
-train_data = pd.read_csv("/Kaggle/input/train.csv")
-test_data = pd.read_csv("/Kaggle/input/test.csv")
+parser = argparse.ArgumentParser()
+parser.add_argument('--input', type=str, required=True)
+parser.add_argument('--output', type=str, required=True)
+
+args = parser.parse_args()
+
+# 1. Load Data
+train_data = pd.read_csv(f"{args.input}/train.csv")
+test_data = pd.read_csv(f"{args.input}/test.csv")
 
 # Rename columns for clarity and consistency
 train_data = train_data.rename(columns={
@@ -63,19 +71,33 @@ for col in numeric_cols_for_variance:
 train_data = train_data.drop(columns=low_var_cols, errors='ignore')
 test_data = test_data.drop(columns=low_var_cols, errors='ignore')
 
-# Check correlation among remaining numeric features
-# If two are highly correlated (> 0.95), drop one to avoid redundancy.
+categorical_cols = train_data.select_dtypes(include=['object']).columns.tolist()
+for col in categorical_cols:
+    train_data[col], _ = train_data[col].factorize()
+    test_data[col] = test_data[col].map({v: i for i, v in enumerate(train_data[col].unique())}).fillna(-1)
+
+# Compute correlation matrix and handle NaN values
 corr_matrix = train_data.corr().abs()
+
+# Fill NaNs with 0 before idxmax() to prevent KeyError
+corr_matrix = corr_matrix.fillna(0)
+
+# Select upper triangle of correlation matrix
 upper_triangle = corr_matrix.where(np.triu(np.ones(corr_matrix.shape), k=1).astype(bool))
+
+# Drop all-NaN columns (those with no correlation info)
+upper_triangle = upper_triangle.dropna(axis=1, how="all")
+
+# Identify highly correlated pairs (correlation > 0.95)
 high_corr_pairs = [(col1, col2) for col1 in upper_triangle.columns
                    for col2 in upper_triangle.columns
                    if col1 != col2 and upper_triangle.loc[col1, col2] > 0.95]
 
-# Drop the second column in each highly correlated pair to break redundancy
+# Drop the second column in each highly correlated pair
 for col1, col2 in high_corr_pairs:
     if col2 in train_data.columns:
-        train_data = train_data.drop(columns=[col2], errors='ignore')
-        test_data = test_data.drop(columns=[col2], errors='ignore')
+        train_data.drop(columns=[col2], errors='ignore', inplace=True)
+        test_data.drop(columns=[col2], errors='ignore', inplace=True)
 
 # At this point, we have a set of numeric and categorical columns left.
 # Let's identify them:
@@ -192,4 +214,4 @@ if "id" not in test_data.columns:
     test_data["id"] = np.arange(len(test_data))
 
 submission = pd.DataFrame({"id": test_data["id"], "loan_status": predictions})
-submission.to_csv("/kaggle/output/submission.csv", index=False)
+submission.to_csv(f"{args.output}/submission.csv", index=False)

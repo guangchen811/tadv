@@ -7,7 +7,7 @@ WITH condition_counts AS (
             PARTITION BY "Blood Type" 
             ORDER BY COUNT(*) DESC
         ) AS condition_rank
-    FROM train
+    FROM new_data
     GROUP BY "Blood Type", "Medical Condition"
 )
 SELECT

@@ -23,5 +23,5 @@ SELECT "id",
                    2
                 )
            END AS cost_per_day
-FROM train
+FROM new_data
 ORDER BY "id";

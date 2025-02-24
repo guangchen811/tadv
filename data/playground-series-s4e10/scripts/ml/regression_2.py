@@ -1,3 +1,5 @@
+import argparse
+
 import numpy as np
 import pandas as pd
 import torch
@@ -8,9 +10,15 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from torch.utils.data import Dataset, DataLoader
 
-# Load Data
-train_data = pd.read_csv("/Kaggle/input/train.csv")
-test_data = pd.read_csv("/Kaggle/input/test.csv")
+parser = argparse.ArgumentParser()
+parser.add_argument('--input', type=str, required=True)
+parser.add_argument('--output', type=str, required=True)
+
+args = parser.parse_args()
+
+# 1. Load Data
+train_data = pd.read_csv(f"{args.input}/train.csv")
+test_data = pd.read_csv(f"{args.input}/test.csv")
 
 # Original columns (for reference, not shown in final code):
 # [
@@ -28,7 +36,7 @@ train_data = train_data.drop(columns=['id'], errors='ignore')
 test_data = test_data.drop(columns=['id'], errors='ignore')
 
 # Now, potential_target should be person_income
-target = potential_target
+target = "person_income"
 y_train = train_data[target]
 X_train = train_data.drop(target, axis=1)
 X_test = test_data.drop(target, axis=1, errors='ignore')
@@ -185,5 +193,6 @@ submission = pd.DataFrame({
     "id": test_data["col_0"],  # assuming col_0 was id-like
     "predicted_person_income": test_predictions
 })
-submission.to_csv("/kaggle/output/submission.csv", index=False)
-print("Submission saved.")
+submission.to_csv(f"{args.output}/submission.csv", index=False)
+
+print("Submission file 'submission.csv' has been created.")

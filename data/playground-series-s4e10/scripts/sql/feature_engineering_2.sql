@@ -6,4 +6,4 @@ SELECT *,
            WHEN person_emp_length > 5 THEN 'Senior'
            ELSE 'Unknown'
            END AS emp_length_category
-FROM test;
+FROM new_data;

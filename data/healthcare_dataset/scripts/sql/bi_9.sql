@@ -6,7 +6,7 @@ WITH stays AS (
                  CAST("Date of Admission" AS DATE), 
                  CAST("Discharge Date" AS DATE)) AS length_of_stay,
         "Test Results"
-    FROM train
+    FROM new_data
 )
 SELECT
     "Test Results",

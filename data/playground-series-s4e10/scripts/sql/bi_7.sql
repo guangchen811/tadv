@@ -6,11 +6,11 @@ WITH loan_data AS (SELECT l.loan_grade          AS grade_col,    -- Aliased loan
                           l.loan_amnt           AS amount_col,   -- Aliased loan amount
                           l.person_income       AS income_col,   -- Aliased borrower income
                           l.loan_percent_income AS percent_col   -- Aliased loan-to-income percentage
-                   FROM train l)
-SELECT grade_col                                                                    AS grade_segment,     -- Display segment by loan grade
-       intent_col                                                                   AS intent_segment,    -- Display segment by loan intent
-       COUNT(*)                                                                     AS total_loans,       -- Total number of loans
-       SUM(CASE WHEN status_col = 1 THEN 1 ELSE 0 END)                              AS total_defaults,    -- Count defaults
+                   FROM new_data l)
+SELECT grade_col                                       AS grade_segment,     -- Display segment by loan grade
+       intent_col                                      AS intent_segment,    -- Display segment by loan intent
+       COUNT(*)                                        AS total_loans,       -- Total number of loans
+       SUM(CASE WHEN status_col = 1 THEN 1 ELSE 0 END) AS total_defaults,    -- Count defaults
        ROUND(SUM(CASE WHEN status_col = 1 THEN 1 ELSE 0 END) * 100.0 / COUNT(*),
              2)                                                                     AS default_rate,      -- Default percentage
        ROUND(AVG(int_rate_col), 2)                                                  AS avg_interest_rate, -- Average interest rate

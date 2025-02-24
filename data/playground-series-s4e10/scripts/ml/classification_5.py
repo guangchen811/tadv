@@ -1,3 +1,5 @@
+import argparse
+
 import pandas as pd
 import torch
 import torch.nn as nn
@@ -7,6 +9,11 @@ from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from torch.utils.data import Dataset, DataLoader
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--input', type=str, required=True)
+parser.add_argument('--output', type=str, required=True)
+args = parser.parse_args()
 
 
 class DataProcessor:
@@ -110,8 +117,10 @@ id_col = "id"
 
 # Data Processing
 data_processor = DataProcessor(numerical_cols, categorical_cols)
-train_data = pd.read_csv("/Kaggle/input/train.csv")
-test_data = pd.read_csv("/Kaggle/input/test.csv")
+
+# 1. Load Data
+train_data = pd.read_csv(f"{args.input}/train.csv")
+test_data = pd.read_csv(f"{args.input}/test.csv")
 
 X, y, X_test = data_processor.fit_transform(train_data, test_data, target_col, id_col)
 X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=42)
@@ -141,4 +150,6 @@ with torch.no_grad():
         predictions.extend((outputs.numpy() >= 0.5).astype(int))
 
 submission = pd.DataFrame({id_col: test_data[id_col], target_col: predictions})
-submission.to_csv("/kaggle/output/submission.csv", index=False)
+submission.to_csv(f"{args.output}/submission.csv", index=False)
+
+print("Submission file 'submission.csv' has been created.")

@@ -6,7 +6,7 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import OneHotEncoder, StandardScaler, LabelEncoder
+from sklearn.preprocessing import OrdinalEncoder, StandardScaler, LabelEncoder
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--input', type=str, required=True)
@@ -72,14 +72,14 @@ X[numeric_cols] = X[numeric_cols].fillna(0)
 X_test[numeric_cols] = X_test[numeric_cols].fillna(0)
 
 scaler = StandardScaler()
-ohe = OneHotEncoder(handle_unknown="ignore")
+oe = OrdinalEncoder(handle_unknown="use_encoded_value", unknown_value=-1)
 
 X_num = scaler.fit_transform(X[numeric_cols])
-X_cat = ohe.fit_transform(X[categorical_cols])
+X_cat = oe.fit_transform(X[categorical_cols]).reshape(-1, len(categorical_cols))
 X_combined = np.hstack([X_num, X_cat])
 
 test_num = scaler.transform(X_test[numeric_cols])
-test_cat = ohe.transform(X_test[categorical_cols])
+test_cat = oe.transform(X_test[categorical_cols]).reshape(-1, len(categorical_cols))
 X_test_combined = np.hstack([test_num, test_cat])
 
 X_train, X_val, y_train, y_val = train_test_split(X_combined, y_enc, test_size=0.2, random_state=42, stratify=y_enc)

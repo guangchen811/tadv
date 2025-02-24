@@ -4,7 +4,7 @@ WITH stays AS (SELECT "id",
                               CAST("Date of Admission" AS DATE),
                               CAST("Discharge Date" AS DATE)
                       ) AS length_of_stay
-               FROM train)
+               FROM new_data)
 SELECT "id",
        COUNT(*)                      AS total_visits,
        SUM(length_of_stay)           AS sum_length_of_stay,

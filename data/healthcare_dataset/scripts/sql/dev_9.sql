@@ -7,5 +7,5 @@ SELECT "id",
            WHEN "Age" BETWEEN 40 AND 64 THEN 'Medium'
            ELSE 'Low'
            END AS risk_level
-FROM train
+FROM new_data
 ORDER BY "id" ASC LIMIT 100;

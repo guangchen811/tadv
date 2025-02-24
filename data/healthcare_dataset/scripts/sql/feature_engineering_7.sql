@@ -5,7 +5,7 @@ WITH admission_windows AS (SELECT "id",
             ORDER BY CAST("Date of Admission" AS DATE)
             RANGE BETWEEN INTERVAL '30' DAY PRECEDING AND CURRENT ROW
         ) AS count_30_day_window
-                           FROM train)
+                           FROM new_data)
 SELECT "id",
        admission_date,
        count_30_day_window,

@@ -9,4 +9,4 @@ SELECT *,
                                                                                                   THEN 'Senior'
                                                                                               ELSE 'Unknown'
     END AS emp_length_category
-FROM test;
+FROM new_data;

@@ -4,11 +4,8 @@ SELECT "id",
        "Insurance Provider",
        "Admission Type",
        "Medical Condition"
-FROM train
-WHERE (:insurance_provider_filter IS NULL
-    OR "Insurance Provider" = :insurance_provider_filter)
-  AND (:gender_filter IS NULL
-    OR "Gender" = :gender_filter)
-  AND (:admission_type_filter IS NULL
-    OR "Admission Type" = :admission_type_filter)
+FROM new_data
+WHERE ('Medicare' IS NULL OR "Insurance Provider" = 'Medicare')
+  AND ('Female' IS NULL OR "Gender" = 'Female')
+  AND ('Emergency' IS NULL OR "Admission Type" = 'Emergency')
 ORDER BY "id" ASC LIMIT 100;

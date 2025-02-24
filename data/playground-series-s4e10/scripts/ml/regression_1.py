@@ -1,3 +1,5 @@
+import argparse
+
 import numpy as np
 import pandas as pd
 import torch
@@ -8,9 +10,15 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from torch.utils.data import Dataset, DataLoader
 
-# Load Data
-train_data = pd.read_csv("/Kaggle/input/train.csv")
-test_data = pd.read_csv("/Kaggle/input/test.csv")
+parser = argparse.ArgumentParser()
+parser.add_argument('--input', type=str, required=True)
+parser.add_argument('--output', type=str, required=True)
+
+args = parser.parse_args()
+
+# 1. Load Data
+train_data = pd.read_csv(f"{args.input}/train.csv")
+test_data = pd.read_csv(f"{args.input}/test.csv")
 
 # Drop columns not needed as features
 # We're predicting person_income, so remove it from the features
@@ -18,7 +26,7 @@ X_train = train_data.drop(["id", "person_income"], axis=1)
 y_train = train_data["person_income"]
 
 # For the test set, we'll generate predictions for person_income
-X_test = test_data.drop(["id", "person_income"], axis=1, errors='ignore')
+X_test = test_data.drop(["id"], axis=1, errors='ignore')
 
 # Identify numerical and categorical columns
 numerical_cols = [
@@ -139,5 +147,6 @@ submission = pd.DataFrame({
     "predicted_person_income": test_predictions
 })
 
-submission.to_csv("/kaggle/output/submission.csv", index=False)
-print("Submission saved.")
+submission.to_csv(f"{args.output}/submission.csv", index=False)
+
+print("Submission file 'submission.csv' has been created.")

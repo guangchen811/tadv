@@ -1,6 +1,3 @@
-from cadv_exploration.error_injection.corrupts import Scaling, MissingCategoricalValueCorruption, GaussianNoise, \
-    ColumnInserting, \
-    MaskValues, ColumnDropping
 from cadv_exploration.error_injection.managers.sql_query import SQLQueryErrorInjectionManager
 from cadv_exploration.utils import get_project_root
 
@@ -22,17 +19,7 @@ def error_injection():
 
 
 def build_corrupts():
-    corrupts = [Scaling(columns=['loan_amnt'], severity=0.2),
-                MissingCategoricalValueCorruption(columns=['person_home_ownership'], severity=0.1,
-                                                  corrupt_strategy="to_majority"),
-                MissingCategoricalValueCorruption(columns=['cb_person_default_on_file'], severity=0.1,
-                                                  corrupt_strategy="to_random"),
-                GaussianNoise(columns=['person_income'], severity=0.2),
-                GaussianNoise(columns=['person_emp_length'], severity=0.2),
-                ColumnInserting(columns=['loan_intent'], severity=0.1, corrupt_strategy="add_prefix"),
-                ColumnInserting(columns=['person_home_ownership', 'person_age'], severity=0.1,
-                                corrupt_strategy="concatenate"), MaskValues(columns=['loan_grade'], severity=0.1),
-                ColumnDropping(columns=['person_income'], severity=0.1)]
+    corrupts = []
     return corrupts
 
 

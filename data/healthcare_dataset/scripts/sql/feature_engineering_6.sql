@@ -1,6 +1,6 @@
 WITH patient_admissions AS (SELECT "id",
                                    CAST("Date of Admission" AS DATE) AS admission_date
-                            FROM train),
+                            FROM new_data),
      admissions_ordered AS (SELECT "id",
                                    admission_date,
                                    LAG(admission_date) OVER (

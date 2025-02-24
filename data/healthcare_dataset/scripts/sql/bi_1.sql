@@ -5,7 +5,7 @@ WITH stay_data AS (
         DATEDIFF('day', 
                  CAST("Date of Admission" AS DATE), 
                  CAST("Discharge Date" AS DATE)) AS length_of_stay
-    FROM train
+    FROM new_data
 )
 SELECT
     strftime('%Y-%m', admission_date) AS month_period,

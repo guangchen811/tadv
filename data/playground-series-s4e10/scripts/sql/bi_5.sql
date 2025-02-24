@@ -7,6 +7,6 @@ SELECT CASE
        loan_grade,
        COUNT(*)       AS total_customers,
        AVG(loan_amnt) AS avg_loan_amount
-FROM test
+FROM new_data
 GROUP BY income_segment, loan_grade
 ORDER BY income_segment, loan_grade;

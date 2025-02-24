@@ -13,7 +13,6 @@ def run_sql_code(processed_idx, dataset_name, single_script=""):
         if len(single_script) > 0 and single_script not in script_path.name:
             continue
         task_instance = get_task_instance(script_path)
-        print(f"Running script: {task_instance.original_script}")
         output_path = processed_data_path / "output" / script_path.stem / "results_on_clean_new_data"
         output_path.mkdir(parents=True, exist_ok=True)
         executor.run_script(project_name=original_data_path.name, script_context=task_instance.original_script,
@@ -27,6 +26,6 @@ def run_sql_code(processed_idx, dataset_name, single_script=""):
 
 
 if __name__ == "__main__":
-    # dataset_name = "healthcare_dataset"
-    dataset_name = "playground-series-s4e10"
+    dataset_name = "healthcare_dataset"
+    # dataset_name = "playground-series-s4e10"
     run_sql_code(processed_idx="base_version", dataset_name=dataset_name)

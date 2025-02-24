@@ -3,7 +3,7 @@ WITH billing_rank AS (SELECT "id",
                              "Medical Condition",
                              "Billing Amount",
                              CUME_DIST() OVER (ORDER BY "Billing Amount" DESC) AS billing_percentile
-                      FROM train)
+                      FROM new_data)
 SELECT "id",
        "Name",
        "Medical Condition",

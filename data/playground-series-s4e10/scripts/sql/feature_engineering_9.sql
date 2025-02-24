@@ -10,4 +10,4 @@ SELECT *,
            WHEN loan_grade = 'G' THEN 7
            ELSE NULL
            END AS grade_numeric
-FROM test;
+FROM new_data;

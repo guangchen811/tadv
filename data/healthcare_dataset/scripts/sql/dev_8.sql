@@ -6,7 +6,7 @@ SELECT "id",
            WHEN "Age" >= 65 OR "Medical Condition" IN ('Cancer', 'Diabetes') THEN 'High'
            ELSE 'Low/Medium'
            END AS risk_level
-FROM train
+FROM new_data
 -- Return only the "High" risk patients
 WHERE (
           "Age" >= 65

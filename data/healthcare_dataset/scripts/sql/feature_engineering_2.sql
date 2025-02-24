@@ -7,5 +7,5 @@ SELECT "id",
            WHEN "Age" BETWEEN 51 AND 64 THEN 'mid_senior'
            ELSE 'senior'
            END AS age_bucket
-FROM train
+FROM new_data
 ORDER BY "id";

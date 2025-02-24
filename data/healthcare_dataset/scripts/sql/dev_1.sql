@@ -1,6 +1,6 @@
 WITH daily_admissions AS (SELECT CAST("Date of Admission" AS DATE) AS admission_date,
                                  COUNT(*)                          AS admissions_count
-                          FROM train
+                          FROM new_data
                           GROUP BY 1)
 SELECT admission_date,
        admissions_count,

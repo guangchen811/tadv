@@ -5,6 +5,6 @@ SELECT person_emp_length                                                        
        ROUND(SUM(CASE WHEN loan_status = 1 THEN 1 ELSE 0 END) * 100.0 / COUNT(*), 2) AS default_rate,
        AVG(loan_amnt)                                                                AS avg_loan_amount,
        AVG(loan_int_rate)                                                            AS avg_interest_rate
-FROM train
+FROM new_data
 GROUP BY person_emp_length
 ORDER BY default_rate DESC;

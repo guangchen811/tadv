@@ -4,8 +4,7 @@ SELECT "id",
        "Test Results",
        "Medical Condition",
        "Billing Amount"
-FROM train
-WHERE CAST("Date of Admission" AS DATE) BETWEEN CAST(:start_date AS DATE)
-    AND CAST(:end_date AS DATE)
-  AND "Test Results" = :test_result
+FROM new_data
+WHERE CAST("Date of Admission" AS DATE) BETWEEN '2020-01-01' AND '2022-12-31'
+  AND "Test Results" = 'Abnormal'
 ORDER BY "Date of Admission" ASC;

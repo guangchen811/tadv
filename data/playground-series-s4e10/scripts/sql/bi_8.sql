@@ -1,7 +1,7 @@
 WITH derived_table AS (SELECT p.person_home_ownership AS home_status,
                               p.loan_intent           AS purpose,
                               p.loan_status           AS repayment_status
-                       FROM train p)
+                       FROM new_data p)
 SELECT home_status                                                                        AS ownership_type,
        purpose                                                                            AS loan_purpose,
        COUNT(*)                                                                           AS loan_count,

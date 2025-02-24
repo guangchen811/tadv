@@ -4,6 +4,6 @@ SELECT "id",
        SUM(CASE WHEN "Medication" = 'Ibuprofen' THEN 1 ELSE 0 END)   AS med_ibuprofen,
        SUM(CASE WHEN "Medication" = 'Penicillin' THEN 1 ELSE 0 END)  AS med_penicillin,
        SUM(CASE WHEN "Medication" = 'Lipitor' THEN 1 ELSE 0 END)     AS med_lipitor
-FROM train
+FROM new_data
 GROUP BY "id"
 ORDER BY "id";

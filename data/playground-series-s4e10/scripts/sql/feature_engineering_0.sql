@@ -11,4 +11,4 @@ SELECT *,
            WHEN person_income BETWEEN 50000 AND 100000 THEN 0.05
            ELSE -0.05
            END AS default_probability_score
-FROM train;
+FROM new_data;
