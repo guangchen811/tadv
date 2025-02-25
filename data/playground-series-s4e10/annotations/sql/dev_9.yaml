@@ -1,7 +1,6 @@
 annotations:
   required_columns:
-    - 'person_emp_length'
-    - 'loan_status'
-    - 'loan_amnt'
-    - 'loan_int_rate'
-    - 'person_emp_length'
+    - loan_amnt
+    - loan_int_rate
+    - loan_status
+    - person_emp_length

@@ -1,5 +1,13 @@
 annotations:
-  required_columns: [ ]
+  required_columns:
+    - Admission Type
+    - Age
+    - Billing Amount
+    - Blood Type
+    - Gender
+    - id
+    - Medication
+    - Test Results
   assumptions:
     - column: target
       evidence: [ ]

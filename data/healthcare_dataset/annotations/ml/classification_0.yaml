@@ -1,2 +1,15 @@
 annotations:
-  required_columns: [ ]
+  required_columns:
+    - Admission Type
+    - Age
+    - Billing Amount
+    - Blood Type
+    - Date of Admission
+    - Discharge Date
+    - Doctor
+    - Gender
+    - Hospital
+    - Insurance Provider
+    - Medical Condition
+    - Medication
+    - Room Number

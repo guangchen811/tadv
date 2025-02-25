@@ -1,6 +1,6 @@
 annotations:
   required_columns:
-    - 'loan_intent'
-    - 'loan_amnt'
-    - 'loan_int_rate'
-    - 'person_income'
+    - loan_amnt
+    - loan_int_rate
+    - loan_intent
+    - person_income

@@ -1,2 +1,5 @@
 annotations:
-  required_columns: [ ]
+  required_columns:
+    - cb_person_default_on_file
+    - loan_grade
+    - loan_intent

@@ -1,2 +1,6 @@
 annotations:
-  required_columns: [ ]
+  required_columns:
+    - Age
+    - Hospital
+    - Medical Condition
+    - Medication

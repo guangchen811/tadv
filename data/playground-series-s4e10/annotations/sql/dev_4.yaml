@@ -1,4 +1,4 @@
 annotations:
   required_columns:
-    - 'loan_amnt'
-    - 'loan_int_rate'
+    - loan_amnt
+    - loan_int_rate

@@ -42,3 +42,22 @@ def load_train_and_test_spark_data(data_name: str, processed_data_idx: int, dq_m
     spark_train_data, spark_train = dq_manager.spark_df_from_pandas_df(train_data)
     spark_validation_data, spark_validation = dq_manager.spark_df_from_pandas_df(validation_data)
     return spark_train_data, spark_train, spark_validation_data, spark_validation
+
+
+def load_previous_and_new_spark_data(data_name: str, processed_data_idx: int, dq_manager) -> tuple:
+    """
+    Load previous and new CSV files into Spark dataframes.
+
+    Returns:
+        spark_previous_data, spark_previous, spark_new_data, spark_new
+    """
+    processed_data_path = get_project_root() / "data_processed" / f"{data_name}" / f"{processed_data_idx}"
+    previous_file_path = processed_data_path / "files_with_clean_new_data" / "previous_data.csv"
+    new_file_path = processed_data_path / "files_with_clean_new_data" / "new_data.csv"
+
+    previous_data = FileLoader.load_csv(previous_file_path)
+    new_data = FileLoader.load_csv(new_file_path)
+
+    spark_previous_data, spark_previous = dq_manager.spark_df_from_pandas_df(previous_data)
+    spark_new_data, spark_new = dq_manager.spark_df_from_pandas_df(new_data)
+    return spark_previous_data, spark_previous, spark_new_data, spark_new

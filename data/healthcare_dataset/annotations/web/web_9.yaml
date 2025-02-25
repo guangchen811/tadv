@@ -1,2 +1,4 @@
 annotations:
-  required_columns: [ ]
+  required_columns:
+    - Admission Type
+    - Date of Admission

@@ -10,7 +10,7 @@ from cadv_exploration.dq_manager import DeequDataQualityManager
 from cadv_exploration.inspector.deequ.deequ_inspector_manager import DeequInspectorManager
 from cadv_exploration.llm.langchain import LangChainCADV
 from cadv_exploration.llm.langchain.downstream_task_prompt import SQL_QUERY_TASK_DESCRIPTION, \
-    ML_INFERENCE_TASK_DESCRIPTION
+    ML_INFERENCE_TASK_DESCRIPTION, WEB_TASK_DESCRIPTION
 from cadv_exploration.utils import get_project_root
 
 
@@ -59,10 +59,11 @@ def task_group_mapping(task_type):
     return {
         'bi': 'sql',
         'dev': 'sql',
-        'exclude_clause': 'sql',
         'feature_engineering': 'sql',
         'classification': 'ml',
-        'regression': 'ml'
+        'regression': 'ml',
+        'web': 'web',
+        'info': 'web'
     }[task_type]
 
 
@@ -75,6 +76,8 @@ def run_llm(column_desc, model_name, script_context, task_group):
         lc = LangChainCADV(model_name=model_name, downstream_task_description=SQL_QUERY_TASK_DESCRIPTION)
     elif task_group == 'ml':
         lc = LangChainCADV(model_name=model_name, downstream_task_description=ML_INFERENCE_TASK_DESCRIPTION)
+    elif task_group == 'web':
+        lc = LangChainCADV(model_name=model_name, downstream_task_description=WEB_TASK_DESCRIPTION)
     else:
         raise ValueError(f"Unknown task group: {task_group}")
     max_retries = 3

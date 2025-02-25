@@ -8,6 +8,9 @@ SQL_QUERY_TASK_DESCRIPTION = cleandoc(
 you are asked to generate constraints on the upcoming *test* data to ensure that the code can run without any errors and the results are meaningful."""
 )
 
+WEB_TASK_DESCRIPTION = cleandoc(
+    """The code is written to generate a static web page. The code is expected to calculate and collect necessary data and store it in a JSON file. Then, the code will generate html file using the JSON file as input.""")
+
 CD_TASK_DESCRIPTION = cleandoc(
     """The code is designed to process the current version of the data and should also work seamlessly with future datasets. Your task is to write constraints that validate abnormalities in the data.
 

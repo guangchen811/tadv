@@ -1,2 +1,8 @@
 annotations:
-  required_columns: [ ]
+  required_columns:
+    - Age
+    - Date of Admission
+    - Discharge Date
+    - Doctor
+    - Medical Condition
+    - Name

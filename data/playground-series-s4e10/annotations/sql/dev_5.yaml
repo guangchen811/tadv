@@ -1,5 +1,5 @@
 annotations:
   required_columns:
-    - 'id'
-    - 'person_income'
-    - 'loan_amnt'
+    - id
+    - loan_amnt
+    - person_income

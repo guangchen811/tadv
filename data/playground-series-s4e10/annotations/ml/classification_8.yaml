@@ -1,9 +1,11 @@
 annotations:
   required_columns:
-    - "loan_amnt"
-    - "loan_int_rate"
-    - "loan_grade"
-    - "loan_percent_income"
-    - "person_home_ownership"
-    - "cb_person_default_on_file"
-    - "cb_person_cred_hist_length"
+    - cb_person_cred_hist_length
+    - cb_person_default_on_file
+    - id
+    - loan_amnt
+    - loan_amnt_category
+    - loan_grade
+    - loan_int_rate
+    - loan_percent_income
+    - person_home_ownership

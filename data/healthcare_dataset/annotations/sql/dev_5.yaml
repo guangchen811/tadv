@@ -1,2 +1,6 @@
 annotations:
-  required_columns: [ ]
+  required_columns:
+    - Billing Amount
+    - id
+    - Medical Condition
+    - Name

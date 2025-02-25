@@ -1,6 +1,6 @@
 annotations:
   required_columns:
-    - 'person_home_ownership'
-    - 'loan_amnt'
-    - 'loan_int_rate'
-    - 'loan_status'
+    - loan_amnt
+    - loan_int_rate
+    - loan_status
+    - person_home_ownership

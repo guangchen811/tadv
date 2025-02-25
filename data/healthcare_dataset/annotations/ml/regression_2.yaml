@@ -1,2 +1,9 @@
 annotations:
-  required_columns: [ ]
+  required_columns:
+    - Billing Amount
+    - Date of Admission
+    - Discharge Date
+    - Doctor
+    - id
+    - Name
+    - Test Results

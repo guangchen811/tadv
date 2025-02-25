@@ -1,2 +1,8 @@
 annotations:
-  required_columns: [ ]
+  required_columns:
+    - Admission Type
+    - Gender
+    - id
+    - Insurance Provider
+    - Medical Condition
+    - Name

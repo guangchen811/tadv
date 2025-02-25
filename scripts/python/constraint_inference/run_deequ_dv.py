@@ -32,4 +32,4 @@ def run_deequ_dv(data_name, processed_data_idx):
 
 
 if __name__ == "__main__":
-    run_deequ_dv(data_name="healthcare_dataset_ml_inference", processed_data_idx=0)
+    run_deequ_dv(data_name="playground-series-s4e10_ml_inference_classification", processed_data_idx="base_version")

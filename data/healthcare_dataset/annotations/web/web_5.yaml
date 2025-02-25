@@ -1,2 +1,6 @@
 annotations:
-  required_columns: [ ]
+  required_columns:
+    - Billing Amount
+    - Blood Type
+    - Gender
+    - Medication

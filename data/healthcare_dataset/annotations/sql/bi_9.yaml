@@ -1,2 +1,5 @@
 annotations:
-  required_columns: [ ]
+  required_columns:
+    - Date of Admission
+    - Discharge Date
+    - Test Results

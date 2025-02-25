@@ -1,2 +1,10 @@
 annotations:
-  required_columns: [ ]
+  required_columns:
+    - Admission Type
+    - Age
+    - billing_amount
+    - Blood Type
+    - Gender
+    - Insurance Provider
+    - Medical Condition
+    - Medication

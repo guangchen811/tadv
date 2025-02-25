@@ -1,2 +1,6 @@
 annotations:
-  required_columns: [ ]
+  required_columns:
+    - Admission Type
+    - Age
+    - Billing Amount
+    - Hospital

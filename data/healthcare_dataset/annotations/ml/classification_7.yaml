@@ -1,2 +1,7 @@
 annotations:
-  required_columns: [ ]
+  required_columns:
+    - age
+    - billing_amount
+    - gender
+    - id
+    - test_results

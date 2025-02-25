@@ -1,5 +1,8 @@
 annotations:
   required_columns:
-    - 'loan_grade'
-    - 'loan_intent'
-    - 'loan_amnt'
+    - loan_amnt
+    - loan_grade
+    - loan_intent
+    - loan_percent_income
+    - loan_status
+    - person_income

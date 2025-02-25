@@ -1,2 +1,8 @@
 annotations:
-  required_columns: [ ]
+  required_columns:
+    - Age
+    - Billing Amount
+    - Gender
+    - id
+    - Medical Condition
+    - Test Results

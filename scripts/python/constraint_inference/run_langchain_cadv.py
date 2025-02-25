@@ -20,7 +20,6 @@ def run_langchain_cadv(data_name, model_name, processed_data_idx, assumption_gen
     logger.info(f"Model: {model_name}")
 
     original_data_path = get_project_root() / "data" / f"{data_name}"
-    processed_data_path = get_project_root() / "data_processed" / f"{data_name}" / f"{processed_data_idx}"
 
     spark_train_df, spark_train, spark_validation_df, spark_validation = load_train_and_test_spark_data(
         data_name=data_name, processed_data_idx=processed_data_idx, dq_manager=dq_manager
@@ -28,12 +27,22 @@ def run_langchain_cadv(data_name, model_name, processed_data_idx, assumption_gen
 
     column_desc = DeequInspectorManager().spark_df_to_column_desc(spark_train_df, spark_train)
 
+    dt_type_mapping = {
+        "bi": "sql_query",
+        "dev": "sql_query",
+        "feature_engineering": "sql_query",
+        "classification": "ml_inference_classification",
+        "regression": "ml_inference_regression",
+        "web": "web",
+    }
+
     for group_name in ["sql", "ml"]:
         scripts_path_dir = original_data_path / "scripts" / group_name
         for script_path in sorted(scripts_path_dir.iterdir(), key=lambda x: x.name):
             if script_name is not None and script_name != script_path.stem:
                 continue
-
+            dt_type = dt_type_mapping[script_path.stem.rsplit("_", 1)[0]]
+            processed_data_path = get_project_root() / "data_processed" / f"{data_name}_{dt_type}" / f"{processed_data_idx}"
             constraints_result_path = processed_data_path / "constraints" / f"{script_path.stem}" / "cadv_constraints.yaml"
             constraints_result_path.parent.mkdir(parents=True, exist_ok=True)
             relevant_columns_result_path = processed_data_path / "relevant_columns" / f"{script_path.stem}" / "relevant_columns.txt"
@@ -105,7 +114,7 @@ if __name__ == "__main__":
     model_name = "gpt-4o"
     run_langchain_cadv(data_name=data_name, model_name=model_name, processed_data_idx='base_version',
                        assumption_generation_trick=None)
-    run_langchain_cadv(data_name=data_name, model_name=model_name, processed_data_idx="with_deequ",
-                       assumption_generation_trick="with_deequ")
-    run_langchain_cadv(data_name=data_name, model_name=model_name, processed_data_idx="with_experience",
-                       assumption_generation_trick="with_experience")
+    # run_langchain_cadv(data_name=data_name, model_name=model_name, processed_data_idx="with_deequ",
+    #                    assumption_generation_trick="with_deequ")
+    # run_langchain_cadv(data_name=data_name, model_name=model_name, processed_data_idx="with_experience",
+    #                    assumption_generation_trick="with_experience")
