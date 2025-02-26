@@ -1,8 +1,42 @@
 annotations:
   required_columns:
+    - id
     - Age
     - Billing Amount
     - Gender
-    - id
     - Medical Condition
-    - Test Results
+  constraints:
+    - id:
+        code:
+          - .isUnique('id')
+        assumptions:
+          - The 'id' column should contain unique identifiers for each row.
+    - Gender:
+        code:
+          - .isComplete('Gender')
+          - .isContained('Gender', ['Female', 'Male'])
+        assumptions:
+          - Gender column should be complete as it is a feature column and missing values can not be handled.
+          - Gender column should contain only 'Female' and 'Male' values.
+    - Age:
+        code:
+          - .isGreaterThan('Age', 0)
+          - .isLessThanOrEqualTo('Age', 120)
+          - .isComplete('Age')
+        assumptions:
+          - The 'Age' values should typically range from 0 to 120 years.
+          - Age column should be complete as it is a feature column and missing values can not be handled.
+    - Billing Amount:
+        code:
+          - .isComplete('Billing Amount')
+          - .isGreaterThan('Billing Amount', 0)
+        assumptions:
+          - The 'Billing Amount' column should be complete as it is a feature column and missing values can not be handled.
+          - log transformation is applied to the 'Billing Amount' column, the values should be greater than 0.
+    - Medical Condition:
+        code:
+          - .isComplete('Medical Condition')
+          - .isContainedIn('Medical Condition', ['Hypertension', 'Cancer', 'Obesity', 'Arthritis', 'Diabetes', 'Asthma'])
+        assumptions:
+          - The model is trained on limited medical conditions, an alter should be triggered if a new medical condition is appeared in the test set.
+          - Medical Condition column should be complete as it is a feature column and missing values can not be handled.

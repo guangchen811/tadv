@@ -42,11 +42,11 @@ X = train_df[FEATURE_COLS].copy()
 test_ids = test_df[ID_COL]
 X_test = test_df[FEATURE_COLS].copy()
 
-# All the Age should be greater than 0 and less than 100.
+# All the Age should be greater than 0 and less than or equal to 100
 assert X["Age"].min() > 0
-assert X["Age"].max() < 100
+assert X["Age"].max() <= 100
 assert X_test["Age"].min() > 0
-assert X_test["Age"].max() < 100
+assert X_test["Age"].max() <= 100
 
 # Define preprocessing steps
 numeric_cols = ["Age", "Billing Amount"]
@@ -58,7 +58,7 @@ categorical_cols = [
 ]
 
 # Handle Blood Type encoding with rare types support
-blood_type_categories = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-", "Rh-null", "Rare"]
+blood_type_categories = ["A", "B", "C", "D", "A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-", "Rh-null", "Rare"]
 
 
 def handle_rare_blood_types(df):

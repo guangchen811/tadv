@@ -1,14 +1,46 @@
 annotations:
   required_columns:
-    - Admission Type
+    - id
     - Age
+    - Gender
+    - Admission Type
     - Billing Amount
     - Blood Type
-    - Gender
-    - id
     - Medication
-    - Test Results
   constraints:
-    - column:
-        - assumptions:
+    - id:
         - code:
+            - .isUnique('id')
+        - assumptions:
+            - The 'id' column should contain unique identifiers for each row.
+    - Age:
+        - code:
+            - .isGreaterThan('Age', 0)
+            - .isLessThanOrEqualTo('Age', 100)
+        - assumptions:
+            - The 'Age' values should typically range from 0 to 100 years.
+    - Billing Amount:
+        - code:
+            - "hasApproxQuantile('Billing Amount', 0.95, lambda x: x < 50000)"
+        - assumptions:
+            - at least 95 percent of the Billing Amount is less than 50000
+    - Blood Type:
+        - code:
+            - .isContainedIn('Blood Type', ['A', 'B', 'C', 'D', 'A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-', 'Rh-null'])
+        - assumptions:
+            - The 'Blood Type' column should contain only valid blood types including 'A', 'B', 'C', 'D', 'A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-', and 'Rh-null'.
+    - Gender:
+        - code:
+            - .isContainedIn('Gender', ['Male', 'Female'])
+        - assumptions:
+            the code have no tolerance for Gender formats. If a new representation is found, an alter should be triggered.
+    - Medical:
+        - code:
+            - .isContainedIn('Medical', ['Aspirin', 'Paracetamol', 'Ibuprofen', 'Penicillin', 'Lipitor'])
+        - assumptions:
+            - The model is trained on limited medical types, an alter should be triggered if a new medical type is appeared in the test set.
+    - Admission Type:
+        - code:
+            - .isContainedIn('Admission Type', ['Emergency', 'Elective', 'Urgent'])
+        - assumptions:
+            - The 'Admission Type' column should contain only valid types including 'Emergency', 'Elective', and 'Urgent'.

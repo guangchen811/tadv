@@ -29,12 +29,18 @@ if ID_COL not in train_df.columns or ID_COL not in test_df.columns:
 train_ids = train_df[ID_COL].values
 test_ids = test_df[ID_COL].values
 
-# Feature Engineering: Create interaction terms
+# Data Preprocessing
+
+train_df["Age"] = train_df["Age"].fillna(train_df["Age"].mean())
+
+# Feature Engineering
 train_df["Age_Billing_Interaction"] = train_df["Age"] * train_df["Billing Amount"]
 test_df["Age_Billing_Interaction"] = test_df["Age"] * test_df["Billing Amount"]
+train_df["Log_Billing"] = np.log1p(train_df["Billing Amount"])
+test_df["Log_Billing"] = np.log1p(test_df["Billing Amount"])
 
 # Feature Selection
-feature_cols = ["Age", "Billing Amount", "Gender", "Medical Condition", "Age_Billing_Interaction"]
+feature_cols = ["Age", "Billing Amount", "Gender", "Medical Condition", "Age_Billing_Interaction", "Log_Billing"]
 X = train_df[feature_cols].copy()
 X_test = test_df[feature_cols].copy()
 
@@ -43,7 +49,7 @@ label_encoder = LabelEncoder()
 y_encoded = label_encoder.fit_transform(train_df[TARGET_COL])
 
 # Identify numerical and categorical columns
-num_cols = ["Age", "Billing Amount", "Age_Billing_Interaction"]
+num_cols = ["Age", "Billing Amount", "Age_Billing_Interaction", "Log_Billing"]
 cat_cols = ["Gender", "Medical Condition"]
 
 # Scale numeric columns

@@ -19,9 +19,9 @@ train_df = pd.read_csv(f"{args.input}/train.csv")
 test_df = pd.read_csv(f"{args.input}/test.csv")
 
 # 2. Inspect the Columns
-# print(train_df.head())       # Optional debug
-# print(train_df.info())       # Optional debug
-# print(train_df['Test Results'].value_counts())  # Optional debug
+print(train_df.head())       # Optional debug
+print(train_df.info())       # Optional debug
+print(train_df['Test Results'].value_counts())  # Optional debug
 
 # 3. Separate Features (X) and Target (y) in the Training Set
 TARGET_COL = "Test Results"

@@ -1,6 +1,40 @@
 annotations:
   required_columns:
-    - Age
-    - Billing Amount
     - id
-    - Test Results
+    - Age
+    - Gender
+    - Blood Type
+    - Medical Condition
+    - Insurance Provider
+    - Admission Date
+    - Medication
+  constraints:
+    - id:
+        - code:
+            - .isUnique('id')
+        - assumptions:
+            - The 'id' column should contain unique identifiers for each row.
+    - Age:
+        - code:
+            - .isGreaterThan('Age', 0)
+            - .isLessThanOrEqualTo('Age', 120)
+        - assumptions:
+            - The 'Age' values should typically range from 0 to 120 years.
+    - Gender:
+        - code:
+            - .isContained('Gender', ['Male', 'Female'])
+    - Blood Type:
+        - code:
+            - .isContainedIn('Blood Type', ['A', 'B', 'C', 'D', 'A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'])
+        - assumptions:
+            - The 'Blood Type' column should contain only valid blood types including 'A', 'B', 'C', 'D', 'A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'.
+    - Medical Condition:
+        - code:
+            - .isContainedIn('Medical Condition', ['Hypertension', 'Cancer', 'Obesity', 'Arthritis', 'Diabetes', 'Asthma'])
+        - assumptions:
+            - The model is trained on limited medical conditions, an alter should be triggered if a new medical condition is appeared in the test set.
+    - Insurance Provider:
+        - code:
+            - .isContainedIn('Insurance Provider', ['Aetna', 'Blue Cross', 'UnitedHealthcare', 'Cigna', 'Medicare'])
+        - assumptions:
+            - The model is trained on limited insurance providers, an alter should be triggered if a new insurance provider is appeared in the test set.
