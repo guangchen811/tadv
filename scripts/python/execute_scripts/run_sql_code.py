@@ -26,6 +26,6 @@ def run_sql_code(processed_idx, dataset_name, single_script=""):
 
 
 if __name__ == "__main__":
-    # dataset_name = "healthcare_dataset"
-    dataset_name = "playground-series-s4e10"
+    dataset_name = "healthcare_dataset"
+    # dataset_name = "playground-series-s4e10"
     run_sql_code(processed_idx="base_version", dataset_name=dataset_name)

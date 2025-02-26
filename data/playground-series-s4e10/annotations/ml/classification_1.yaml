@@ -12,3 +12,8 @@ annotations:
     - person_emp_length
     - person_home_ownership
     - person_income
+  constraints:
+    - column:
+        - assumptions:
+            - ""
+        - code:

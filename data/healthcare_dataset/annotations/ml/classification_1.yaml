@@ -8,6 +8,7 @@ annotations:
     - id
     - Medication
     - Test Results
-  assumptions:
-    - column: target
-      evidence: [ ]
+  constraints:
+    - column:
+        - assumptions:
+        - code:
