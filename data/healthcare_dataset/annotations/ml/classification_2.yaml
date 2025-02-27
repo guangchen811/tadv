@@ -6,7 +6,7 @@ annotations:
     - Blood Type
     - Medical Condition
     - Insurance Provider
-    - Admission Date
+    - Date of Admission
     - Medication
   constraints:
     - id:
