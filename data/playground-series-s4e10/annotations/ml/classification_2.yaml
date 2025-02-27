@@ -8,6 +8,6 @@ annotations:
     - loan_grade
     - loan_amnt
     - loan_int_rate
-    - loan_income_ratio
+    - loan_percent_income
     - cb_person_cred_hist_length
     - cb_person_default_on_file
