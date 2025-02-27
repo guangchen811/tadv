@@ -1,13 +1,10 @@
 annotations:
   required_columns:
-    - admission_dt
-    - admission_type
-    - age
-    - billing_amount
-    - blood_type
-    - discharge_dt
-    - gender
-    - hospital
     - id
-    - medical_condition
-    - test_results
+    - Age
+    - Admission Type
+    - Billing Amount
+    - Blood Type
+    - Discharge Date
+    - Medical Condition
+    - Discharge Date

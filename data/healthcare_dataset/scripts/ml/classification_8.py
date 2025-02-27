@@ -47,6 +47,11 @@ test_df["length_of_stay"] = (test_df["discharge_dt"] - test_df["admission_dt"]).
 train_df = train_df.drop(columns=["admission_dt", "discharge_dt"], errors="ignore")
 test_df = test_df.drop(columns=["admission_dt", "discharge_dt"], errors="ignore")
 
+#
+train_df = train_df.drop(columns=["Blood Type"], errors="ignore")
+test_df = test_df.drop(columns=["Blood Type"], errors="ignore")
+train_df = train_df.dropna()
+
 id_col = "id"
 target_col = "test_results"
 y = train_df[target_col]

@@ -46,7 +46,7 @@ test_data["loan_amnt_category"] = pd.cut(
 selected_cols.append("loan_amnt_category")
 
 # Preprocessing Pipeline
-numerical_cols = ["loan_amnt", "loan_int_rate", "loan_percent_income", "cb_person_cred_hist_length"]
+numerical_cols = ["loan_int_rate", "loan_percent_income", "cb_person_cred_hist_length"]
 categorical_cols = ["loan_grade", "person_home_ownership", "cb_person_default_on_file", "loan_amnt_category"]
 
 preprocessor = ColumnTransformer(

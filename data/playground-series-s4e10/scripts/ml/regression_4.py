@@ -30,8 +30,8 @@ for df in [train_data, test_data]:
 
 # Select target and predictors
 target = "person_income"
-numeric_cols = ["log_loan_amnt", "loan_int_rate", "cred_hist_ratio", "loan_amnt_int_rate"]
-categorical_cols = ["loan_grade", "cb_person_default_on_file", "person_home_ownership", "high_grade", "is_home_owner"]
+numeric_cols = ["log_loan_amnt", "cred_hist_ratio", "loan_amnt_int_rate"]
+categorical_cols = ["cb_person_default_on_file", "high_grade", "is_home_owner"]
 
 X_train = train_data[numeric_cols + categorical_cols]
 y_train = train_data[target]

@@ -1,6 +1,11 @@
 annotations:
   required_columns:
+    - id
+    - Age
     - Date of Admission
     - Discharge Date
-    - id
-    - Test Results
+    - Medical Condition
+    - Hospital
+    - Billing Amount
+    - Admission Type
+    - Medication

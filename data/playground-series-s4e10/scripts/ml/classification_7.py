@@ -6,7 +6,7 @@ import torch.nn as nn
 import torch.optim as optim
 from sklearn.compose import ColumnTransformer
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from sklearn.preprocessing import StandardScaler, OrdinalEncoder
 from torch.utils.data import Dataset, DataLoader
 
 parser = argparse.ArgumentParser()
@@ -22,14 +22,14 @@ train["loan_amnt_cat"] = pd.cut(train["loan_amnt"], bins=[0, 5000, 15000, 30000,
                                 labels=["Low", "Med", "High", "VHigh"])
 test["loan_amnt_cat"] = pd.cut(test["loan_amnt"], bins=[0, 5000, 15000, 30000, float('inf')],
                                labels=["Low", "Med", "High", "VHigh"])
-cols = ["loan_amnt", "loan_int_rate", "loan_grade", "cb_person_default_on_file", "loan_amnt_cat"]
-num, cat = ["loan_amnt", "loan_int_rate"], ["loan_grade", "cb_person_default_on_file", "loan_amnt_cat"]
+cols = ["loan_int_rate", "loan_grade", "cb_person_default_on_file", "loan_amnt_cat"]
+num, cat = ["loan_int_rate"], ["loan_grade", "cb_person_default_on_file", "loan_amnt_cat"]
 
 # Preprocess
 X = train[cols]
 y = train["loan_status"]
 X_test = test[cols]
-pre = ColumnTransformer([("num", StandardScaler(), num), ("cat", OneHotEncoder(drop="first"), cat)])
+pre = ColumnTransformer([("num", StandardScaler(), num), ("cat", OrdinalEncoder(), cat)])
 X, X_test = pre.fit_transform(X), pre.transform(X_test)
 X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=42)
 

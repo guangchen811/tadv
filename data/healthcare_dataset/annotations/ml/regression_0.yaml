@@ -1,6 +1,10 @@
 annotations:
   required_columns:
-    - Age
-    - billing_amount
     - id
+    - Age
+    - Gender
+    - Blood Type
+    - Medical Condition
     - Room Number
+    - Admission Type
+    - Medication

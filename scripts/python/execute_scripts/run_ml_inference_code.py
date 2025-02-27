@@ -31,11 +31,11 @@ def run_ml_inference(processed_idx, dataset_name, downstream_task_type, single_s
 
 
 if __name__ == "__main__":
-    # dataset_name = "playground-series-s4e10"
-    dataset_name = "healthcare_dataset"
+    dataset_name = "playground-series-s4e10"
+    # dataset_name = "healthcare_dataset"
     # downstream_task_type = "regression"
     downstream_task_type = "classification"
-    single_script = "classification_3"
+    single_script = "classification_9"
 
     run_ml_inference(processed_idx="base_version", dataset_name=dataset_name, downstream_task_type=downstream_task_type,
                      single_script=single_script)

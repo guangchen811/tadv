@@ -1,7 +1,7 @@
 annotations:
   required_columns:
-    - cb_person_default_on_file
     - id
     - loan_amnt
     - loan_grade
+    - cb_person_default_on_file
     - loan_int_rate

@@ -1,7 +1,7 @@
 annotations:
   required_columns:
-    - Age
+    - id
     - Billing Amount
     - Gender
-    - id
+    - Age
     - Medical Condition

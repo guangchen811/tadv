@@ -91,7 +91,7 @@ target_encoder = LabelEncoder()
 y_enc = target_encoder.fit_transform(y)
 
 # Identify numeric and categorical columns for a custom embedding approach
-numeric_cols = ["age", "billing_amount", "length_of_stay", "cost_per_day", "cost_age_ratio"]
+numeric_cols = ["age", "billing_amount", "cost_per_day", "cost_age_ratio"]
 cat_cols = ["hospital", "medical_condition", "admission_type", "blood_type", "gender"]
 # Some datasets might not have all these columns; drop if missing
 for c in cat_cols:

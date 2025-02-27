@@ -1,7 +1,11 @@
 annotations:
   required_columns:
-    - age
-    - billing_amount
-    - gender
     - id
-    - test_results
+    - Age
+    - Gender
+    - Blood Type
+    - Medical Condition
+    - Hospital
+    - Insurance Provider
+    - Billing Amount
+    - Medication
