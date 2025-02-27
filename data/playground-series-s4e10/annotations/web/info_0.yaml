@@ -1,9 +1,9 @@
 annotations:
   required_columns:
-    - cb_person_cred_hist_length
+    - person_income
     - loan_amnt
+    - person_emp_length
+    - cb_person_cred_hist_length
     - loan_int_rate
     - loan_percent_income
     - loan_status
-    - person_emp_length
-    - person_income

@@ -9,7 +9,7 @@ def error_injection():
         raw_file_path=project_root / "data" / "healthcare_dataset" / "files",
         target_table_name="healthcare_dataset",
         processed_data_dir=project_root / "data_processed" / "healthcare_dataset_web",
-        sample_size=0.1
+        sample_size=1.0
     )
 
     # Inject errors on the test data

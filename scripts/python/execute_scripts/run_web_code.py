@@ -24,5 +24,5 @@ def run_web_code(processed_idx, dataset_name, single_script=""):
 
 
 if __name__ == "__main__":
-    run_web_code(processed_idx="base_version", dataset_name="healthcare_dataset")
-    # run_web_code(processed_idx="base_version", dataset_name="playground-series-s4e10")
+    # run_web_code(processed_idx="base_version", dataset_name="healthcare_dataset", single_script="info_9")
+    run_web_code(processed_idx="base_version", dataset_name="playground-series-s4e10", single_script="info_4")

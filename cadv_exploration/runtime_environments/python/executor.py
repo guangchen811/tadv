@@ -34,7 +34,7 @@ class PythonExecutor(ExecutorBase):
             return f"Error: Script {script_path} timed out after {timeout} seconds."
 
     def run_script(self, project_name: str, input_path: Path, script_context: str, output_path: Path,
-                   timeout: int = 120):
+                   timeout: int = 1200):
         print(f"Running Python script with context {script_context} with input {input_path} and output {output_path}")
         script_path = get_current_folder() / "script.py"
         script_path.write_text(script_context)
