@@ -31,6 +31,7 @@ def load_dotenv():
 
 @dataclass
 class TaskInstance:
+    script_name: str
     original_script: str
     script_path: Path
     annotations: dict
@@ -40,6 +41,8 @@ def get_task_instance(script_path):
     config_file_path = script_path.parent.parent.parent / "annotations" / script_path.parent.stem / f"{script_path.stem}.yaml"
     with open(config_file_path, "r") as f:
         config = yaml.load(f, Loader=yaml.Loader)
-    task_instance = TaskInstance(original_script=script_path.read_text(), script_path=script_path,
-                                 annotations=config["annotations"])
+    task_instance = TaskInstance(
+        script_name=script_path.stem,
+        original_script=script_path.read_text(), script_path=script_path,
+        annotations=config["annotations"])
     return task_instance
