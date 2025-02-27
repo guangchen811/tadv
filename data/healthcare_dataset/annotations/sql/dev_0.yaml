@@ -1,5 +1,6 @@
 annotations:
   required_columns:
+    - id
     - Admission Type
     - Age
     - Billing Amount
@@ -9,7 +10,6 @@ annotations:
     - Doctor
     - Gender
     - Hospital
-    - id
     - Insurance Provider
     - Medical Condition
     - Medication

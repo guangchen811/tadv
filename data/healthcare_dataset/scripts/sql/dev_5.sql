@@ -1,7 +1,4 @@
-WITH billing_rank AS (SELECT "id",
-                             "Name",
-                             "Medical Condition",
-                             "Billing Amount",
+WITH billing_rank AS (SELECT *,
                              CUME_DIST() OVER (ORDER BY "Billing Amount" DESC) AS billing_percentile
                       FROM new_data)
 SELECT "id",

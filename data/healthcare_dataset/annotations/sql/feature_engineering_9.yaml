@@ -1,8 +1,8 @@
 annotations:
   required_columns:
+    - id
+    - Medical Condition
     - Admission Type
     - Billing Amount
     - Date of Admission
     - Discharge Date
-    - id
-    - Medical Condition
