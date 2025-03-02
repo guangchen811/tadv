@@ -20,7 +20,7 @@ def run_langchain_cadv_on_single_model(data_name, model_name, processed_data_idx
     original_data_path = get_project_root() / "data" / f"{data_name}"
 
     spark_train_data, spark_train, spark_validation_data, spark_validation = load_train_and_test_spark_data(
-        data_name=f"{data_name}_{task_processed_data_mapping('classification')}", processed_data_idx=processed_data_idx,
+        processed_data_name=f"{data_name}_{task_processed_data_mapping('classification')}", processed_data_idx=processed_data_idx,
         dq_manager=dq_manager
     )
 

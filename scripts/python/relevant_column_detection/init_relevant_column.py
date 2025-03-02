@@ -36,12 +36,12 @@ def init_relevant_column(processed_idx, dataset_name, downstream_task_type, sing
 
     if downstream_task_type_script_dir_name_mapping[downstream_task_type] == "ml":
         spark_previous_data, spark_previous, spark_new_data, spark_new = load_train_and_test_spark_data(
-            data_name=f"{dataset_name}_{downstream_task_type_path_mapping[downstream_task_type]}",
+            processed_data_name=f"{dataset_name}_{downstream_task_type_path_mapping[downstream_task_type]}",
             processed_data_idx=processed_idx, dq_manager=dq_manager
         )
     else:
         spark_previous_data, spark_previous, spark_new_data, spark_new = load_previous_and_new_spark_data(
-            data_name=f"{dataset_name}_{downstream_task_type_path_mapping[downstream_task_type]}",
+            processed_data_name=f"{dataset_name}_{downstream_task_type_path_mapping[downstream_task_type]}",
             processed_data_idx=processed_idx, dq_manager=dq_manager)
 
     column_desc = DeequInspectorManager().spark_df_to_column_desc(spark_previous_data, spark_previous)

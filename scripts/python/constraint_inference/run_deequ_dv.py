@@ -18,7 +18,7 @@ def run_deequ_dv(data_name, model_name, processed_data_idx):
     result_path.parent.mkdir(parents=True, exist_ok=True)
 
     spark_train_data, spark_train, spark_validation_data, spark_validation = load_train_and_test_spark_data(
-        data_name=f"{data_name}_{model_name}", processed_data_idx=processed_data_idx, dq_manager=dq_manager
+        processed_data_name=f"{data_name}_{model_name}", processed_data_idx=processed_data_idx, dq_manager=dq_manager
     )
 
     constraints = dq_manager.get_constraints_for_spark_df(spark_train, spark_train_data, spark_validation,

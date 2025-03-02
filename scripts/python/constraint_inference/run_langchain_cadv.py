@@ -23,7 +23,7 @@ def run_langchain_cadv(data_name, task_name, model_name, processed_data_idx, ass
     original_data_path = get_project_root() / "data" / f"{data_name}"
 
     spark_train_df, spark_train, spark_validation_df, spark_validation = load_train_and_test_spark_data(
-        data_name=f"{data_name}_{task_name}", processed_data_idx=processed_data_idx, dq_manager=dq_manager
+        processed_data_name=f"{data_name}_{task_name}", processed_data_idx=processed_data_idx, dq_manager=dq_manager
     )
 
     column_desc = DeequInspectorManager().spark_df_to_column_desc(spark_train_df, spark_train)

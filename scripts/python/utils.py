@@ -25,14 +25,14 @@ def parse_arguments(description: str) -> argparse.Namespace:
     return parser.parse_args()
 
 
-def load_train_and_test_spark_data(data_name: str, processed_data_idx: int, dq_manager) -> tuple:
+def load_train_and_test_spark_data(processed_data_name: str, processed_data_idx: int, dq_manager) -> tuple:
     """
     Load train and validation CSV files into Spark dataframes.
 
     Returns:
         spark_train_data, spark_train, spark_validation_data, spark_validation
     """
-    processed_data_path = get_project_root() / "data_processed" / f"{data_name}" / f"{processed_data_idx}"
+    processed_data_path = get_project_root() / "data_processed" / f"{processed_data_name}" / f"{processed_data_idx}"
     train_file_path = processed_data_path / "files_with_clean_test_data" / "train.csv"
     validation_file_path = processed_data_path / "files_with_clean_test_data" / "validation.csv"
 
@@ -44,14 +44,14 @@ def load_train_and_test_spark_data(data_name: str, processed_data_idx: int, dq_m
     return spark_train_data, spark_train, spark_validation_data, spark_validation
 
 
-def load_previous_and_new_spark_data(data_name: str, processed_data_idx: int, dq_manager) -> tuple:
+def load_previous_and_new_spark_data(processed_data_name: str, processed_data_idx: int, dq_manager) -> tuple:
     """
     Load previous and new CSV files into Spark dataframes.
 
     Returns:
         spark_previous_data, spark_previous, spark_new_data, spark_new
     """
-    processed_data_path = get_project_root() / "data_processed" / f"{data_name}" / f"{processed_data_idx}"
+    processed_data_path = get_project_root() / "data_processed" / f"{processed_data_name}" / f"{processed_data_idx}"
     previous_file_path = processed_data_path / "files_with_clean_new_data" / "previous_data.csv"
     new_file_path = processed_data_path / "files_with_clean_new_data" / "new_data.csv"
 
