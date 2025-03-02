@@ -1,11 +1,13 @@
 import argparse
 import logging
+from pathlib import Path
+from typing import Union
 
 from cadv_exploration.loader import FileLoader
 from cadv_exploration.utils import get_project_root
 
 
-def setup_logger(log_file: str) -> logging.Logger:
+def setup_logger(log_file: Union[str, Path]) -> logging.Logger:
     logger = logging.getLogger(__name__)
     """Set up the logger with file handler and formatter."""
     logger.setLevel(logging.INFO)
