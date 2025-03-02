@@ -1,0 +1,42 @@
+Traceback (most recent call last):
+  File "/Users/haochen/Codebase/cadv-exploration/data/healthcare_dataset/scripts/ml/classification_10.py", line 74, in <module>
+    model.fit(X_train.drop(columns=[ID_COL]), y_train)
+  File "/Users/haochen/Codebase/cadv-exploration/cadv_exploration/runtime_environments/python/env/lib/python3.9/site-packages/sklearn/base.py", line 1389, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+  File "/Users/haochen/Codebase/cadv-exploration/cadv_exploration/runtime_environments/python/env/lib/python3.9/site-packages/sklearn/pipeline.py", line 654, in fit
+    Xt = self._fit(X, y, routed_params, raw_params=params)
+  File "/Users/haochen/Codebase/cadv-exploration/cadv_exploration/runtime_environments/python/env/lib/python3.9/site-packages/sklearn/pipeline.py", line 588, in _fit
+    X, fitted_transformer = fit_transform_one_cached(
+  File "/Users/haochen/Codebase/cadv-exploration/cadv_exploration/runtime_environments/python/env/lib/python3.9/site-packages/joblib/memory.py", line 312, in __call__
+    return self.func(*args, **kwargs)
+  File "/Users/haochen/Codebase/cadv-exploration/cadv_exploration/runtime_environments/python/env/lib/python3.9/site-packages/sklearn/pipeline.py", line 1551, in _fit_transform_one
+    res = transformer.fit_transform(X, y, **params.get("fit_transform", {}))
+  File "/Users/haochen/Codebase/cadv-exploration/cadv_exploration/runtime_environments/python/env/lib/python3.9/site-packages/sklearn/utils/_set_output.py", line 319, in wrapped
+    data_to_wrap = f(self, X, *args, **kwargs)
+  File "/Users/haochen/Codebase/cadv-exploration/cadv_exploration/runtime_environments/python/env/lib/python3.9/site-packages/sklearn/base.py", line 1389, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+  File "/Users/haochen/Codebase/cadv-exploration/cadv_exploration/runtime_environments/python/env/lib/python3.9/site-packages/sklearn/compose/_column_transformer.py", line 1001, in fit_transform
+    result = self._call_func_on_transformers(
+  File "/Users/haochen/Codebase/cadv-exploration/cadv_exploration/runtime_environments/python/env/lib/python3.9/site-packages/sklearn/compose/_column_transformer.py", line 910, in _call_func_on_transformers
+    return Parallel(n_jobs=self.n_jobs)(jobs)
+  File "/Users/haochen/Codebase/cadv-exploration/cadv_exploration/runtime_environments/python/env/lib/python3.9/site-packages/sklearn/utils/parallel.py", line 77, in __call__
+    return super().__call__(iterable_with_config)
+  File "/Users/haochen/Codebase/cadv-exploration/cadv_exploration/runtime_environments/python/env/lib/python3.9/site-packages/joblib/parallel.py", line 1918, in __call__
+    return output if self.return_generator else list(output)
+  File "/Users/haochen/Codebase/cadv-exploration/cadv_exploration/runtime_environments/python/env/lib/python3.9/site-packages/joblib/parallel.py", line 1847, in _get_sequential_output
+    res = func(*args, **kwargs)
+  File "/Users/haochen/Codebase/cadv-exploration/cadv_exploration/runtime_environments/python/env/lib/python3.9/site-packages/sklearn/utils/parallel.py", line 139, in __call__
+    return self.function(*args, **kwargs)
+  File "/Users/haochen/Codebase/cadv-exploration/cadv_exploration/runtime_environments/python/env/lib/python3.9/site-packages/sklearn/pipeline.py", line 1551, in _fit_transform_one
+    res = transformer.fit_transform(X, y, **params.get("fit_transform", {}))
+  File "/Users/haochen/Codebase/cadv-exploration/cadv_exploration/runtime_environments/python/env/lib/python3.9/site-packages/sklearn/utils/_set_output.py", line 319, in wrapped
+    data_to_wrap = f(self, X, *args, **kwargs)
+  File "/Users/haochen/Codebase/cadv-exploration/cadv_exploration/runtime_environments/python/env/lib/python3.9/site-packages/sklearn/base.py", line 921, in fit_transform
+    return self.fit(X, y, **fit_params).transform(X)
+  File "/Users/haochen/Codebase/cadv-exploration/cadv_exploration/runtime_environments/python/env/lib/python3.9/site-packages/sklearn/base.py", line 1382, in wrapper
+    estimator._validate_params()
+  File "/Users/haochen/Codebase/cadv-exploration/cadv_exploration/runtime_environments/python/env/lib/python3.9/site-packages/sklearn/base.py", line 436, in _validate_params
+    validate_parameter_constraints(
+  File "/Users/haochen/Codebase/cadv-exploration/cadv_exploration/runtime_environments/python/env/lib/python3.9/site-packages/sklearn/utils/_param_validation.py", line 98, in validate_parameter_constraints
+    raise InvalidParameterError(
+sklearn.utils._param_validation.InvalidParameterError: The 'handle_unknown' parameter of OrdinalEncoder must be a str among {'error', 'use_encoded_value'}. Got 'ignore' instead.

@@ -1,0 +1,39 @@
+constraints:
+  Age:
+    code:
+    - - .isComplete('Age')
+      - Valid
+    - - .isNonNegative('Age')
+      - Valid
+    - - .satisfies('Age > 0 OR `Billing Amount` = 0', 'age_positive_or_billing_zero')
+      - Valid
+    assumptions:
+    - Values should be non-negative.
+    - Age should not be zero if Billing Amount is greater than zero.
+  Billing Amount:
+    code:
+    - - .isComplete('Billing Amount')
+      - Valid
+    - - .isNonNegative('Billing Amount')
+      - Invalid
+    - - .satisfies('(`Billing Amount` = 0) OR (Age > 0)', 'billing_zero_or_age_positive')
+      - Valid
+    assumptions:
+    - Values should be non-negative numeric values.
+    - Billing Amount should be zero if Age is zero, to avoid division by zero.
+  Gender:
+    code:
+    - - .isComplete('Gender')
+      - Valid
+    - - .isContainedIn('Gender', ['Male', 'Female'])
+      - Valid
+    assumptions:
+    - Values should only contain 'Male' or 'Female'.
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - Values should be unique and non-null.

@@ -1,0 +1,103 @@
+constraints:
+  Admission Type:
+    code:
+    - - .isComplete('Admission Type')
+      - Valid
+    - - .isContainedIn('Admission Type', ['Emergency', 'Urgent', 'Elective'])
+      - Valid
+    assumptions:
+    - Values must be one of ['Emergency', 'Urgent', 'Elective']
+    - Should not contain null values
+  Age:
+    code:
+    - - '.hasMax(''Age'', lambda x: x <= 120)'
+      - Valid
+    - - .isComplete('Age')
+      - Valid
+    - - .isNonNegative('Age')
+      - Valid
+    assumptions:
+    - Values should be non-negative
+    - Values should be less than or equal to 120
+    - Should not contain null values
+  Billing Amount:
+    code:
+    - - .isComplete('Billing Amount')
+      - Valid
+    - - .isNonNegative('Billing Amount')
+      - Invalid
+    assumptions:
+    - Values should be non-negative
+    - Should not contain null values
+  Date of Admission:
+    code:
+    - - .isComplete('Date of Admission')
+      - Valid
+    - - .isLessThanOrEqualTo('Date of Admission', 'Discharge Date')
+      - Invalid
+    - - .satisfies("to_date(`Date of Admission`, 'yyyy-MM-dd') IS NOT NULL", 'Valid
+        Date of Admission')
+      - Valid
+    assumptions:
+    - Values should be valid dates
+    - Should not contain null values
+    - Should be earlier than or equal to 'Discharge Date'
+  Discharge Date:
+    code:
+    - - .isComplete('Discharge Date')
+      - Valid
+    - - .isGreaterThanOrEqualTo('Discharge Date', 'Date of Admission')
+      - Invalid
+    - - .satisfies("to_date(`Discharge Date`, 'yyyy-MM-dd') IS NOT NULL", 'Valid Discharge
+        Date')
+      - Valid
+    assumptions:
+    - Values should be valid dates
+    - Should not contain null values
+    - Should be later than or equal to 'Date of Admission'
+  Hospital:
+    code:
+    - - .isComplete('Hospital')
+      - Valid
+    assumptions:
+    - Should not contain null values
+  Medical Condition:
+    code:
+    - - .isComplete('Medical Condition')
+      - Valid
+    - - .isContainedIn('Medical Condition', ['Hypertension', 'Cancer', 'Obesity',
+        'Arthritis', 'Diabetes', 'Asthma'])
+      - Valid
+    assumptions:
+    - Values must be one of ['Hypertension', 'Cancer', 'Obesity', 'Arthritis', 'Diabetes',
+      'Asthma']
+    - Should not contain null values
+  Medication:
+    code:
+    - - .isComplete('Medication')
+      - Valid
+    - - .isContainedIn('Medication', ['Aspirin', 'Paracetamol', 'Ibuprofen', 'Penicillin',
+        'Lipitor'])
+      - Valid
+    assumptions:
+    - Values must be one of ['Aspirin', 'Paracetamol', 'Ibuprofen', 'Penicillin',
+      'Lipitor']
+    - Should not contain null values
+  Test Results:
+    code:
+    - - .isComplete('Test Results')
+      - Valid
+    - - .isContainedIn('Test Results', ['Abnormal', 'Normal', 'Inconclusive'])
+      - Valid
+    assumptions:
+    - Values must be one of ['Abnormal', 'Normal', 'Inconclusive']
+    - Should not contain null values
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - Values should be unique
+    - Should not contain null values

@@ -20,7 +20,8 @@ def run_langchain_cadv_on_single_model(data_name, model_name, processed_data_idx
     original_data_path = get_project_root() / "data" / f"{data_name}"
 
     spark_train_data, spark_train, spark_validation_data, spark_validation = load_train_and_test_spark_data(
-        data_name=data_name, processed_data_idx=processed_data_idx, dq_manager=dq_manager
+        data_name=f"{data_name}_{task_processed_data_mapping('classification')}", processed_data_idx=processed_data_idx,
+        dq_manager=dq_manager
     )
 
     column_list = sorted(spark_validation_data.columns, key=lambda x: x.lower())
@@ -29,13 +30,13 @@ def run_langchain_cadv_on_single_model(data_name, model_name, processed_data_idx
 
     metric_evaluator = RelevantColumnDetectionMetric(average='macro')
     result_each_type = {}
-    for task_type in ['bi', 'dev', 'feature_engineering', 'classification', 'regression']:
+    for task_type in ['bi', 'dev', 'feature_engineering', 'classification', 'regression', 'web']:
         scripts_path_dir = original_data_path / "scripts" / task_group_mapping(task_type)
-        print(task_type)
+        print(task_type, end=' ')
         all_ground_truth_vectors = []
         all_relevant_columns_vectors = []
         for script_path in sorted(scripts_path_dir.iterdir(), key=lambda x: x.name):
-            if task_type not in script_path.name:
+            if task_type not in script_path.name and task_type != 'web':
                 continue
             task_instance = get_task_instance(script_path)
 
@@ -52,6 +53,7 @@ def run_langchain_cadv_on_single_model(data_name, model_name, processed_data_idx
             all_ground_truth_vectors.append(ground_truth_vector)
             all_relevant_columns_vectors.append(relevant_columns_vector)
         result_each_type[task_type] = metric_evaluator.evaluate(all_ground_truth_vectors, all_relevant_columns_vectors)
+    print("done")
     return result_each_type
 
 
@@ -64,6 +66,17 @@ def task_group_mapping(task_type):
         'regression': 'ml',
         'web': 'web',
         'info': 'web'
+    }[task_type]
+
+
+def task_processed_data_mapping(task_type):
+    return {
+        'bi': 'sql_query',
+        'dev': 'sql_query',
+        'feature_engineering': 'sql_query',
+        'classification': 'ml_inference_classification',
+        'regression': 'ml_inference_regression',
+        'info': 'web',
     }[task_type]
 
 
@@ -91,23 +104,24 @@ def run_llm(column_desc, model_name, script_context, task_group):
 def run_langchain_cadv_on_all_models(data_name, model_names, processed_data_idx):
     result_each_model = {}
     for model_name in model_names:
-        print(model_name)
+        print(model_name, end=': ')
         result_each_model[model_name] = run_langchain_cadv_on_single_model(data_name, model_name, processed_data_idx)
     return result_each_model
 
 
 if __name__ == "__main__":
-    data_name = "playground-series-s4e10"
-    model_names = ["string-matching", "gpt-4o-mini", "gpt-4o", "llama3.2:1b", "llama3.2"]
+    data_name = "healthcare_dataset"
+    # model_names = ["string-matching", "llama3.2:1b", "llama3.2", "gpt-4o-mini", "gpt-4o"]
+    model_names = ["string-matching", "gpt-4o", "gpt-4.5-preview"]
     processed_data_idx = 'base_version'
     all_results = run_langchain_cadv_on_all_models(data_name, model_names, processed_data_idx)
     # reverse the order of the keys
-    for task_type in ['bi', 'dev', 'feature_engineering', 'classification', 'regression']:
+    for task_type in ['bi', 'dev', 'feature_engineering', 'classification', 'regression', 'web']:
         result_each_model = {
             model_name: all_results[model_name][task_type]
             for model_name in model_names
         }
         RelevantColumnDetectionMetric().plot_model_metrics(
             result_each_model,
-            picture_name=f"{data_name}/sql_metrics_{task_type}.png"
+            picture_name=f"{data_name}/{task_group_mapping(task_type)}_metrics_{task_type}.png"
         )
