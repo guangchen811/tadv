@@ -16,7 +16,7 @@ from cadv_exploration.llm.langchain.abstract import AbstractLangChainCADV
 class LangChainCADV(AbstractLangChainCADV):
     def __init__(self, model_name: str = None, downstream_task_description: str = None,
                  assumption_generation_trick: str = None,
-                 logger=None):
+                 logger: object = None) -> object:
         if model_name is None:
             self.model = ChatOpenAI(model="gpt-4o-mini")
         else:
@@ -31,6 +31,7 @@ class LangChainCADV(AbstractLangChainCADV):
         model_name_package_map = {
             "gpt-4o-mini": ChatOpenAI(model="gpt-4o-mini"),
             "gpt-4o": ChatOpenAI(model="gpt-4o"),
+            "gpt-4.5-preview": ChatOpenAI(model="gpt-4.5-preview"),
             "llama3.2:1b": ChatOllama(model="llama3.2:1b"),
             "llama3.2": ChatOllama(model="llama3.2"),
             "llama3.2:3b": ChatOllama(model="llama3.2"),
