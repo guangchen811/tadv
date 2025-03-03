@@ -7,3 +7,47 @@ annotations:
     - loan_int_rate
     - loan_percent_income
     - loan_status
+constraints:
+  cb_person_cred_hist_length:
+    - code:
+        - .isComplete('cb_person_cred_hist_length')
+        - .isNonNegative('cb_person_cred_hist_length')
+        - assumptions:
+        - cb_person_cred_hist_length must be greater than or equal to 0
+  loan_amnt:
+    - code:
+        - .isComplete('loan_amnt')
+        - .isPositive('loan_amnt')
+        - assumptions:
+        - loan_amnt must be greater than 0
+  loan_int_rate:
+    - code:
+        - '.hasMin(''loan_int_rate'', lambda x: x >= 0)'
+        - .isComplete('loan_int_rate')
+        - assumptions:
+        - loan_int_rate must be between 0 and 1 (0% to 100%)
+  loan_percent_income:
+    - code:
+        - '.hasMax(''loan_percent_income'', lambda x: x <= 1)'
+        - '.hasMin(''loan_percent_income'', lambda x: x > 0)'
+        - .isComplete('loan_percent_income')
+        - assumptions:
+        - loan_percent_income must be greater than 0
+        - loan_percent_income should not exceed 1 (100% of income)
+  loan_status:
+    - code:
+        - .isComplete('loan_status')
+        - assumptions:
+        - loan_status should only contain values 0 or 1
+  person_emp_length:
+    - code:
+        - .isComplete('person_emp_length')
+        - .isNonNegative('person_emp_length')
+        - assumptions:
+        - person_emp_length must be greater than or equal to 0
+  person_income:
+    - code:
+        - .isComplete('person_income')
+        - .isPositive('person_income')
+        - assumptions:
+        - person_income must be greater than 0

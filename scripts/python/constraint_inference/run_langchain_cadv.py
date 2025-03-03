@@ -111,21 +111,22 @@ def task_group_mapping(task_type):
     return {
         'bi': 'sql',
         'dev': 'sql',
-        'exclude_clause': 'sql',
         'feature_engineering': 'sql',
         'classification': 'ml',
-        'regression': 'ml'
+        'regression': 'ml',
+        'info': 'web',
     }[task_type]
 
 
 if __name__ == "__main__":
-    data_name = "healthcare_dataset"
+    # data_name = "healthcare_dataset"
+    data_name = "playground-series-s4e10"
+    # task_name = "ml_inference_classification"
     task_name = "ml_inference_classification"
-    # data_name = "playground-series-s4e10_ml_inference_classification"
     model_name = "gpt-4.5-preview"
     run_langchain_cadv(data_name=data_name, task_name=task_name, model_name=model_name,
-                       processed_data_idx='base_version_gpt_4.5',
-                       assumption_generation_trick=None)
+                       processed_data_idx='base_version',
+                       assumption_generation_trick=None, script_name="classification_1")
     # run_langchain_cadv(data_name=data_name, model_name=model_name, processed_data_idx="with_deequ",
     #                    assumption_generation_trick="with_deequ")
     # run_langchain_cadv(data_name=data_name, model_name=model_name, processed_data_idx="with_experience",

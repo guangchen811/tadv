@@ -4,3 +4,36 @@ annotations:
     - Hospital
     - Medical Condition
     - Medication
+  constraints:
+    - Age:
+        - code:
+            - '.hasMax(''Age'', lambda x: x <= 120)'
+            - '.hasMin(''Age'', lambda x: x >= 0)'
+            - .isComplete('Age')
+            - .isNonNegative('Age')
+        - assumptions:
+            - Age should be numeric
+            - Age should not contain null values
+            - Age should be greater than or equal to 0
+            - Age should be less than or equal to 120
+    - Hospital:
+        - code:
+            - '.hasMinLength(''Hospital'', lambda x: x > 0)'
+            - .isComplete('Hospital')
+        - assumptions:
+            - Hospital should not contain null or empty values
+            - Hospital should be of string data type
+    - Medical Condition:
+        - code:
+            - '.hasMinLength(''Medical Condition'', lambda x: x > 0)'
+            - .isComplete('Medical Condition')
+        - assumptions:
+            - Medical Condition should not contain null or empty values
+            - Medical Condition should be of string data type
+    - Medication:
+        - code:
+            - '.hasMinLength(''Medication'', lambda x: x > 0)'
+            - .isComplete('Medication')
+        - assumptions:
+            - Medication should not contain null or empty values
+            - Medication should be of string data type

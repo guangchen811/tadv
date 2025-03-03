@@ -2,3 +2,21 @@ annotations:
   required_columns:
     - loan_intent
     - person_income
+  constraints:
+    - loan_intent:
+        - code:
+            - .isComplete('loan_intent')
+            - .isContainedIn('loan_intent', ['DEBTCONSOLIDATION', 'EDUCATION', 'VENTURE',
+              'HOMEIMPROVEMENT', 'PERSONAL', 'MEDICAL'])
+        - assumptions:
+            - 'loan_intent should only contain the following values: ''DEBTCONSOLIDATION'',
+        ''EDUCATION'', ''VENTURE'', ''HOMEIMPROVEMENT'', ''PERSONAL'', or ''MEDICAL'''
+    - person_income:
+        - code:
+            - '.hasMin(''person_income'', lambda x: x > 0)'
+            - .isComplete('person_income')
+            - .isNonNegative('person_income')
+        - assumptions:
+            - person_income should be a non-negative number
+            - person_income should be realistically within the expected ranges (for example,
+              greater than 0 and less than or equal to a reasonable upper bound, such as 1,000,000)

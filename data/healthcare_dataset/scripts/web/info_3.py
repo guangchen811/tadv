@@ -1,7 +1,8 @@
 import argparse
-import pandas as pd
 import json
 import os
+
+import pandas as pd
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--input', type=str, required=True)

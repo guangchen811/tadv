@@ -4,3 +4,32 @@ annotations:
     - loan_int_rate
     - loan_status
     - person_emp_length
+  constraints:
+    - loan_grade:
+        - code:
+            - .isComplete('loan_grade')
+            - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+        - assumptions:
+            - Loan grade should be one of ['A', 'B', 'C', 'D', 'E', 'F', 'G'].
+            - Loan grade should not have missing values.
+    - loan_int_rate:
+        - code:
+            - '.hasMax(''loan_int_rate'', lambda x: x <= 100)'
+            - '.hasMin(''loan_int_rate'', lambda x: x >= 0)'
+            - .isComplete('loan_int_rate')
+        - assumptions:
+            - Loan interest rate should be between 0 and 100 (as a percentage).
+            - Loan interest rate should not have missing values.
+    - loan_status:
+        - code:
+            - .isComplete('loan_status')
+        - assumptions:
+            - Loan status should be either 0 or 1.
+            - Loan status should not have missing values.
+    - person_emp_length:
+        - code:
+            - .isComplete('person_emp_length')
+            - .isNonNegative('person_emp_length')
+        - assumptions:
+            - Employment length should be non-negative.
+            - Employment length should not have missing values.

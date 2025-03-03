@@ -4,3 +4,44 @@ annotations:
     - Date of Admission
     - Discharge Date
     - Name
+  constraints:
+    - Age:
+        - code:
+            - '.hasMax(''Age'', lambda x: x <= 120)'
+            - '.hasMin(''Age'', lambda x: x >= 0)'
+            - .isComplete('Age')
+            - .isNonNegative('Age')
+            - .satisfies('Age % 1 = 0', 'Age is integer')
+        - assumptions:
+            - Age must not be null.
+            - Age should be a non-negative integer.
+            - Age should be within a reasonable human age range (e.g., 0-120).
+    - Date of Admission:
+        - code:
+            - .isComplete('Date of Admission')
+            - .satisfies('CAST(`Date of Admission` AS DATE) IS NOT NULL', 'Valid Date of
+              Admission')
+            - .satisfies('`Date of Admission` <= `Discharge Date`', 'Admission Date Before
+              or Equal to Discharge Date')
+            - assumptions:
+                - Date of Admission must be a valid date.
+                - Date of Admission must not be null or empty.
+                - Date of Admission should be earlier than or equal to Discharge Date.
+    - Discharge Date:
+        - code:
+            - .isComplete('Discharge Date')
+            - .satisfies('CAST(`Discharge Date` AS DATE) IS NOT NULL', 'Valid Discharge
+              Date')
+            - .satisfies('`Discharge Date` >= `Date of Admission`', 'Discharge Date After
+              or Equal to Admission Date')
+            - assumptions:
+                - Discharge Date must be a valid date.
+                - Discharge Date must not be null or empty.
+                - Discharge Date should be later than or equal to Date of Admission.
+    - Name:
+        - code:
+            - '.hasMinLength(''Name'', lambda x: x > 0)'
+            - .isComplete('Name')
+            - assumptions:
+                - Name must not be null or empty.
+                - Name should be convertible to string.

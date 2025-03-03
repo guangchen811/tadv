@@ -12,3 +12,97 @@ annotations:
     - loan_grade
     - cb_person_default_on_file
     - loan_status
+  constraints:
+    cb_person_cred_hist_length:
+      - code:
+          - '.hasMax(''cb_person_cred_hist_length'', lambda x: x <= 100)'
+          - '.hasMin(''cb_person_cred_hist_length'', lambda x: x >= 0)'
+          - .isComplete('cb_person_cred_hist_length')
+          - .isNonNegative('cb_person_cred_hist_length')
+      - assumptions:
+          - Values should be non-negative integers
+          - Credit history length should be within a reasonable range (e.g., 0 to 100 years)
+    cb_person_default_on_file:
+      - code:
+          - .isComplete('cb_person_default_on_file')
+          - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - assumptions:
+          - Values should only include ['Y', 'N']
+    id:
+      - code:
+          - .isComplete('id')
+          - .isUnique('id')
+      - assumptions:
+          - Values should be unique
+          - Values should be non-null
+    loan_amnt:
+      - code:
+          - '.hasMax(''loan_amnt'', lambda x: x <= 500000)'
+          - '.hasMin(''loan_amnt'', lambda x: x >= 500)'
+          - .isComplete('loan_amnt')
+          - .isPositive('loan_amnt')
+      - assumptions:
+          - Values should be positive integers
+          - Loan amount should be within realistic financial limits (e.g., greater than
+            500 and less than 500,000)
+    loan_grade:
+      - code:
+          - .isComplete('loan_grade')
+          - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - assumptions:
+          - Values should only include ['A', 'B', 'C', 'D', 'E', 'F', 'G']
+    loan_int_rate:
+      - code:
+          - '.hasMax(''loan_int_rate'', lambda x: x <= 100)'
+          - '.hasMin(''loan_int_rate'', lambda x: x > 0)'
+          - .isComplete('loan_int_rate')
+          - .isPositive('loan_int_rate')
+      - assumptions:
+          - Interest rate should be positive
+          - Interest rate should be within realistic bounds (e.g., 0 to 100%)
+    loan_intent:
+      - code:
+          - .isComplete('loan_intent')
+          - .isContainedIn('loan_intent', ['EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL',
+            'DEBTCONSOLIDATION', 'MEDICAL', 'VENTURE'])
+      - assumptions:
+          - Values should only include ['EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL', 'DEBTCONSOLIDATION',
+            'MEDICAL', 'VENTURE']
+    loan_percent_income:
+      - code:
+          - '.hasMax(''loan_percent_income'', lambda x: x <= 100)'
+          - .isComplete('loan_percent_income')
+      - assumptions:
+          - Values should be positive
+          - Loan percent income should be within realistic limits (e.g., greater than 0%
+            and less than or equal to 100%)
+    loan_status:
+      - code:
+          - .isComplete('loan_status')
+      - assumptions:
+          - Values should only include [0, 1]
+    person_age:
+      - code:
+          - '.hasMax(''person_age'', lambda x: x <= 100)'
+          - '.hasMin(''person_age'', lambda x: x >= 18)'
+          - .isComplete('person_age')
+          - .isPositive('person_age')
+      - assumptions:
+          - Values should be positive integers
+          - Values should be within a reasonable human age range (e.g., 18 to 100)
+    person_emp_length:
+      - code:
+          - '.hasMax(''person_emp_length'', lambda x: x <= 60)'
+          - '.hasMin(''person_emp_length'', lambda x: x >= 0)'
+          - .isComplete('person_emp_length')
+          - .isNonNegative('person_emp_length')
+      - assumptions:
+          - Values should be non-negative
+          - Values should fall within a reasonable employment length range (e.g., 0 to 60
+            years)
+    person_home_ownership:
+      - code:
+          - .isComplete('person_home_ownership')
+          - .isContainedIn('person_home_ownership', ['OWN', 'MORTGAGE', 'RENT', 'OTHER'])
+      - assumptions:
+          - Values should only include ['OWN', 'MORTGAGE', 'RENT', 'OTHER']

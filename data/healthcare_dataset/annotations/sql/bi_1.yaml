@@ -1,4 +1,48 @@
 annotations:
   required_columns:
-    - Date of Admission
-    - Discharge Date
+    - id
+    - Age
+    - Gender
+    - Medical Condition
+    - Insurance Provider
+    - Billing Amount
+    - Medication
+    - Admission Type
+    - Test Results
+  constraints:
+    - id:
+        - code:
+            - .isUnique('id')
+        - assumptions:
+            - Each patient should have a unique identifier.
+    - Age:
+        - code:
+            - .isGreaterThan('Age', 0)
+            - .isLessThanOrEqualTo('Age', 120)
+        - assumptions:
+            - Age should be a valid human age range.
+    - Billing Amount:
+        - code:
+            - .isGreaterThan('Billing Amount', 0)
+        - assumptions:
+            - Billing should be within reasonable healthcare costs (no negative values).
+    - Medical Condition:
+        - code:
+            - .isContainedIn('Medical Condition', ['Hypertension', 'Cancer', 'Obesity', 'Arthritis', 'Diabetes', 'Asthma'])
+        - assumptions:
+            - Alerts should be raised if new medical conditions appear in the dataset.
+    - Insurance Provider:
+        - code:
+            - .isContainedIn('Insurance Provider', ['Aetna', 'Blue Cross', 'UnitedHealthcare', 'Cigna', 'Medicare'])
+        - assumptions:
+            - Insurance providers should be from a predefined list.
+    - Admission Type:
+        - code:
+            - .isContainedIn('Admission Type', ['Emergency', 'Urgent', 'Elective'])
+        - assumptions:
+            - Admission types should be correctly categorized.
+    - Test Results:
+        - code:
+            - .isContainedIn('Test Results', ['Normal', 'Abnormal', 'Inconclusive'])
+        - assumptions:
+            - Test results should follow standardized classifications.

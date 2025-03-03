@@ -1,4 +1,32 @@
 annotations:
   required_columns:
+    - id
     - Age
+    - Gender
+    - Medical Condition
+    - Insurance Provider
     - Billing Amount
+    - Medication
+    - Admission Type
+    - Test Results
+  constraints:
+    - id:
+        - code:
+            - .isUnique('id')
+        - assumptions:
+            - Each patient should have a unique identifier.
+    - Billing Amount:
+        - code:
+            - .isGreaterThan('Billing Amount', 0)
+        - assumptions:
+            - Billing should be within reasonable healthcare costs.
+    - Medical Condition:
+        - code:
+            - .isContainedIn('Medical Condition', ['Hypertension', 'Cancer', 'Obesity', 'Arthritis', 'Diabetes', 'Asthma'])
+        - assumptions:
+            - Alerts should be raised if new medical conditions appear in the dataset.
+    - Insurance Provider:
+        - code:
+            - .isContainedIn('Insurance Provider', ['Aetna', 'Blue Cross', 'UnitedHealthcare', 'Cigna', 'Medicare'])
+        - assumptions:
+            - Insurance providers should be from a predefined list.

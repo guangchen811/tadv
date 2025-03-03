@@ -13,7 +13,96 @@ annotations:
     - loan_grade
     - cb_person_default_on_file
   constraints:
-    - column:
-        - assumptions:
-            - ""
-        - code:
+    cb_person_cred_hist_length:
+      - code:
+          - '.hasMax(''cb_person_cred_hist_length'', lambda x: x <= 50)'
+          - .isComplete('cb_person_cred_hist_length')
+          - .isNonNegative('cb_person_cred_hist_length')
+      - assumptions:
+          - cb_person_cred_hist_length should be non-negative
+          - cb_person_cred_hist_length should be within a reasonable range (e.g., 0-50 years)
+    cb_person_default_on_file:
+      - code:
+          - .isComplete('cb_person_default_on_file')
+          - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - assumptions:
+          - cb_person_default_on_file should only contain values ['Y', 'N']
+    id:
+      - code:
+          - .isComplete('id')
+          - .isUnique('id')
+      - assumptions:
+          - id should be unique
+          - id should not contain missing values
+    loan_amnt:
+      - code:
+          - .isComplete('loan_amnt')
+          - .isPositive('loan_amnt')
+          - .satisfies('loan_amnt <= person_income', 'loan_amnt_less_than_or_equal_to_income')
+            - Invalid
+      - assumptions:
+          - loan_amnt should be a positive integer
+          - loan_amnt should be less than or equal to person_income
+    loan_grade:
+      - code:
+          - .isComplete('loan_grade')
+          - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - assumptions:
+          - loan_grade should only contain values ['A', 'B', 'C', 'D', 'E', 'F', 'G']
+    loan_int_rate:
+      - code:
+          - '.hasMax(''loan_int_rate'', lambda x: x <= 100)'
+          - '.hasMin(''loan_int_rate'', lambda x: x > 0)'
+          - .isComplete('loan_int_rate')
+          - .isPositive('loan_int_rate')
+      - assumptions:
+          - loan_int_rate should be positive
+          - loan_int_rate should be between 0 and 100 percent
+    loan_intent:
+      - code:
+          - .isComplete('loan_intent')
+          - .isContainedIn('loan_intent', ['EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL',
+            'DEBTCONSOLIDATION', 'MEDICAL', 'VENTURE'])
+      - assumptions:
+          - loan_intent should only contain values ['EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL',
+            'DEBTCONSOLIDATION', 'MEDICAL', 'VENTURE']
+    loan_percent_income:
+      - code:
+          - '.hasMax(''loan_percent_income'', lambda x: x <= 1)'
+          - '.hasMin(''loan_percent_income'', lambda x: x >= 0)'
+          - .isComplete('loan_percent_income')
+      - assumptions:
+          - loan_percent_income should be positive
+          - loan_percent_income should be realistically between 0 and 1
+    person_age:
+      - code:
+          - '.hasMax(''person_age'', lambda x: x <= 100)'
+          - '.hasMin(''person_age'', lambda x: x >= 18)'
+          - .isComplete('person_age')
+          - .isPositive('person_age')
+      - assumptions:
+          - person_age should be a positive integer
+          - person_age should be within a reasonable range (e.g., 18-100)
+    person_emp_length:
+      - code:
+          - '.hasMax(''person_emp_length'', lambda x: x <= 50)'
+          - .isComplete('person_emp_length')
+          - .isNonNegative('person_emp_length')
+      - assumptions:
+          - person_emp_length should be non-negative
+          - person_emp_length should be within a reasonable range (e.g., 0-50 years)
+    person_home_ownership:
+      - code:
+          - .isComplete('person_home_ownership')
+          - .isContainedIn('person_home_ownership', ['OWN', 'MORTGAGE', 'RENT', 'OTHER'])
+      - assumptions:
+          - person_home_ownership should only contain values ['OWN', 'MORTGAGE', 'RENT',
+            'OTHER']
+    person_income:
+      - code:
+          - '.hasMin(''person_income'', lambda x: x > 0)'
+          - .isComplete('person_income')
+          - .isNonNegative('person_income')
+      - assumptions:
+          - person_income should be a non-negative integer
+          - person_income should be greater than zero

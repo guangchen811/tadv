@@ -1,7 +1,8 @@
 import argparse
-import pandas as pd
 import json
 import os
+
+import pandas as pd
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--input', type=str, required=True)
@@ -23,7 +24,8 @@ df["Discharge Date"] = pd.to_datetime(df["Discharge Date"], errors='coerce')
 df["Days Stayed"] = (df["Discharge Date"] - df["Date of Admission"]).dt.days
 
 # Convert to dictionary format for efficient lookup
-data_dict = {row["Full Name"].lower(): {"Age": row["Age"], "Days Stayed": row["Days Stayed"]} for _, row in df.iterrows()}
+data_dict = {row["Full Name"].lower(): {"Age": row["Age"], "Days Stayed": row["Days Stayed"]} for _, row in
+             df.iterrows()}
 
 # Save as JSON
 json_output_path = os.path.join(args.output, "data.json")

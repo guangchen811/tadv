@@ -3,3 +3,28 @@ annotations:
     - cb_person_default_on_file
     - loan_grade
     - loan_intent
+  constraints:
+    - cb_person_default_on_file:
+        - code:
+            - .isComplete('cb_person_default_on_file')
+            - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+        - assumptions:
+            - Column 'cb_person_default_on_file' should not contain null or missing values.
+            - Column 'cb_person_default_on_file' should contain only the values ['Y', 'N'].
+    - loan_grade:
+        - code:
+            - .isComplete('loan_grade')
+            - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+        - assumptions:
+            - Column 'loan_grade' should not contain null or missing values.
+            - Column 'loan_grade' should contain only the values ['A', 'B', 'C', 'D', 'E',
+              'F', 'G'].
+    - loan_intent:
+        - code:
+            - .isComplete('loan_intent')
+            - .isContainedIn('loan_intent', ['EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL',
+              'DEBTCONSOLIDATION', 'MEDICAL', 'VENTURE'])
+        - assumptions:
+            - Column 'loan_intent' should not contain null or missing values.
+            - Column 'loan_intent' should contain only the values ['EDUCATION', 'HOMEIMPROVEMENT',
+              'PERSONAL', 'DEBTCONSOLIDATION', 'MEDICAL', 'VENTURE'].
