@@ -16,11 +16,11 @@ def evaluate_playground_series_s4e10(processed_data_idx):
     dq_manager = DeequDataQualityManager()
     project_root = get_project_root()
     processed_data_path = project_root / "data_processed" / "playground-series-s4e10_sql" / f"{processed_data_idx}"
-    ground_truth = FileLoader.load_csv(processed_data_path / "files_with_clean_test_data" / "ground_truth.csv")
+    ground_truth = FileLoader.load_csv(processed_data_path / "files_with_clean_new_data" / "ground_truth.csv")
     output_dir = processed_data_path / "output"
     constraints_dir = processed_data_path / "constraints"
-    clean_test_data = FileLoader.load_csv(processed_data_path / "files_with_clean_test_data" / "test.csv")
-    corrupted_test_data = FileLoader.load_csv(processed_data_path / "files_with_corrupted_test_data" / "test.csv")
+    clean_test_data = FileLoader.load_csv(processed_data_path / "files_with_clean_new_data" / "test.csv")
+    corrupted_test_data = FileLoader.load_csv(processed_data_path / "files_with_corrupted_new_data" / "test.csv")
 
     deequ_suggestion_file_path = constraints_dir / "deequ_constraints.yaml"
     validation_results_on_clean_test_data_deequ, validation_results_on_corrupted_test_data_deequ = validate_on_both_test_data(

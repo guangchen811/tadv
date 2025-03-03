@@ -17,8 +17,8 @@ class MLInferenceDatasetLoader:
             ground_truth.to_csv(base_path / "ground_truth.csv", index=False)
             sample_submission.to_csv(base_path / "sample_submission.csv", index=False)
 
-        files_with_clean_test_data_path = processed_data_path / "files_with_clean_test_data"
-        files_with_corrupted_test_data_path = processed_data_path / "files_with_corrupted_test_data"
+        files_with_clean_test_data_path = processed_data_path / "files_with_clean_new_data"
+        files_with_corrupted_test_data_path = processed_data_path / "files_with_corrupted_new_data"
 
         save_files(files_with_clean_test_data_path, test_data)
         save_files(files_with_corrupted_test_data_path, post_corruption_test_data)

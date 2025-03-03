@@ -174,7 +174,7 @@ def plot_model_performance_changes_all(**model_performance_drops_dict):
 def main(processed_version):
     project_root = get_project_root()
     processed_data_path = project_root / 'data_processed' / 'playground-series-s4e10' / f'{processed_version}'
-    train_file_path = processed_data_path / "files_with_clean_test_data" / "train.csv"
+    train_file_path = processed_data_path / "files_with_clean_new_data" / "train.csv"
     constraints_path = processed_data_path / 'constraints'
     output_path = processed_data_path / 'output'
     deequ_constraints = Constraints.from_yaml(input_path=constraints_path / 'deequ_constraints.yaml')

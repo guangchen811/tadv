@@ -18,14 +18,14 @@ def run_ml_inference(processed_idx, dataset_name, downstream_task_type, single_s
         output_path.mkdir(parents=True, exist_ok=True)
         executor.run(project_name=processed_data_path.parent.name,
                      script_path=script_path,
-                     input_path=processed_data_path / "files_with_clean_test_data",
+                     input_path=processed_data_path / "files_with_clean_new_data",
                      output_path=output_path,
                      timeout=timeout)
         output_path = processed_data_path / "output" / script_path.stem / "results_on_corrupted_test_data"
         output_path.mkdir(parents=True, exist_ok=True)
         executor.run(project_name=processed_data_path.parent.name,
                      script_path=script_path,
-                     input_path=processed_data_path / "files_with_corrupted_test_data",
+                     input_path=processed_data_path / "files_with_corrupted_new_data",
                      output_path=output_path,
                      timeout=timeout)
 

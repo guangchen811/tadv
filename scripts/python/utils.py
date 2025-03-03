@@ -35,8 +35,8 @@ def load_train_and_test_spark_data(processed_data_name: str, processed_data_idx:
         spark_train_data, spark_train, spark_validation_data, spark_validation
     """
     processed_data_path = get_project_root() / "data_processed" / f"{processed_data_name}" / f"{processed_data_idx}"
-    train_file_path = processed_data_path / "files_with_clean_test_data" / "train.csv"
-    validation_file_path = processed_data_path / "files_with_clean_test_data" / "validation.csv"
+    train_file_path = processed_data_path / "files_with_clean_new_data" / "train.csv"
+    validation_file_path = processed_data_path / "files_with_clean_new_data" / "validation.csv"
 
     train_data = FileLoader.load_csv(train_file_path)
     validation_data = FileLoader.load_csv(validation_file_path)
