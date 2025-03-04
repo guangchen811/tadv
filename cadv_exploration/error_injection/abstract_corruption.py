@@ -21,6 +21,14 @@ class TabularCorruption(DataCorruption):
         self.severity = 1.0 if severity is None else severity
         self.sampling = 'CAR' if sampling is None else sampling
 
+    def to_dict(self):
+        return {
+            self.__class__.__name__: {
+                "Columns": self.columns,
+                "Params": {k: v for k, v in self.__dict__.items() if k != "columns"},
+            }
+        }
+
     @abstractmethod
     def transform(self, dataframe: pd.DataFrame):
         pass

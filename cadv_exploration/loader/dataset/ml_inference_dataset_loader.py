@@ -24,6 +24,13 @@ class MLInferenceDatasetLoader:
         save_files(files_with_corrupted_test_data_path, post_corruption_test_data)
 
     @staticmethod
+    def save_error_injection_config(processed_data_path, corrupts):
+        import oyaml as yaml
+        config_path = processed_data_path / "error_injection_config.yaml"
+        with open(config_path, "w") as f:
+            yaml.dump([corrupt.to_dict() for corrupt in corrupts], f, default_flow_style=False)
+
+    @staticmethod
     def load_data(processed_data_path, file_dir):
         from loader import FileLoader
         return (

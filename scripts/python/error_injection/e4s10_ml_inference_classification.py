@@ -1,11 +1,9 @@
 from cadv_exploration.error_injection.managers.ml_inference import MLInferenceErrorInjectionManager
-
 from cadv_exploration.utils import get_project_root
-from error_injection.corrupts import *
 
 
 # This case can be treated as context information for ml inference. (the test data needs to be validated)
-def error_injection():
+def error_injection(error_config_file_name):
     project_root = get_project_root()
     error_injection_manager = MLInferenceErrorInjectionManager(
         raw_file_path=project_root / "data" / "playground-series-s4e10" / "files",
@@ -15,29 +13,20 @@ def error_injection():
         submission_default_value=0.5,
     )
 
-    # Inject errors on the test data
-    corrupts = build_corrupts()
+    corrupts = error_injection_manager.load_error_injection_config(
+        error_injection_config_path=project_root / "data" / "playground-series-s4e10" / "errors" / error_config_file_name)
 
     error_injection_manager.error_injection(corrupts)
 
     # Save the corrupted test data
     error_injection_manager.save_data()
 
-
-def build_corrupts():
-    corrupts = [Scaling(columns=['loan_amnt'], severity=0.2),
-                MissingCategoricalValueCorruption(columns=['person_home_ownership'], severity=0.1,
-                                                  corrupt_strategy="to_majority"),
-                MissingCategoricalValueCorruption(columns=['cb_person_default_on_file'], severity=0.1,
-                                                  corrupt_strategy="to_random"),
-                GaussianNoise(columns=['person_income'], severity=0.2),
-                GaussianNoise(columns=['person_emp_length'], severity=0.2),
-                ColumnInserting(columns=['loan_intent'], severity=0.1, corrupt_strategy="add_prefix"),
-                ColumnInserting(columns=['person_home_ownership', 'person_age'], severity=0.1,
-                                corrupt_strategy="concatenate"), MaskValues(columns=['loan_grade'], severity=0.1),
-                ColumnDropping(columns=['person_income'], severity=0.1)]
-    return corrupts
+    # Save the error injection config
+    error_injection_manager.save_error_injection_config(corrupts)
 
 
 if __name__ == "__main__":
-    error_injection()
+    error_config_file_name = "error_injection_config.yaml"
+    error_injection(
+        error_config_file_name=error_config_file_name
+    )

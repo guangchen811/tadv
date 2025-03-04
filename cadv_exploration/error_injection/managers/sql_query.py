@@ -41,6 +41,9 @@ class SQLQueryErrorInjectionManager(AbstractErrorInjectionManager):
             self.post_corruption_new_data
         )
 
+    def save_error_injection_config(self, corrupts):
+        SQLQueryDatasetLoader().save_error_injection_config(self.processed_data_path, corrupts)
+
     def _split_dataset(self, full_data, sample_size):
         full_data.drop(columns=["id"], inplace=True) if "id" in full_data.columns else None
         full_data_shuffled = full_data.sample(frac=sample_size, random_state=1).reset_index(drop=True)

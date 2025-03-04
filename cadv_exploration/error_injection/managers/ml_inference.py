@@ -51,6 +51,9 @@ class MLInferenceErrorInjectionManager(AbstractErrorInjectionManager):
             self.sample_submission
         )
 
+    def save_error_injection_config(self, corrupts):
+        MLInferenceDatasetLoader().save_error_injection_config(self.processed_data_path, corrupts)
+
     def _split_dataset(self, full_data):
         full_data.drop(columns=["id"], inplace=True) if "id" in full_data.columns else None
         full_data_shuffled = full_data.sample(frac=1, random_state=1).reset_index(drop=True)
