@@ -13,13 +13,12 @@ def init_relevant_column(processed_idx, dataset_name, downstream_task_type, sing
     dq_manager = DeequDataQualityManager()
     project_root = get_project_root()
     downstream_task_type_script_dir_name_mapping = {
-        "ml_inference_classification": "ml",
-        "ml_inference_regression": "ml",
-        "dev": "sql",
-        "bi": "sql",
-        "feature_engineering": "sql",
-        "web": "web",
-        "info": "web"
+        "ml_inference_classification": "ml_inference",
+        "ml_inference_regression": "ml_inference",
+        "dev": "sql_query",
+        "bi": "sql_query",
+        "feature_engineering": "sql_query",
+        "info": "webpage_generation"
     }
     downstream_task_type_path_mapping = {
         "ml_inference_classification": "ml_inference_classification",

@@ -5,7 +5,7 @@ from cadv_exploration.loader import FileLoader
 from cadv_exploration.loader.dataset.sql_query_dataset_loader import SQLQueryDatasetLoader
 
 
-class SQLQueryErrorInjectionManager(AbstractErrorInjectionManager):
+class GeneralErrorInjectionManager(AbstractErrorInjectionManager):
     def __init__(self,
                  raw_file_path: Path,
                  target_table_name: str,

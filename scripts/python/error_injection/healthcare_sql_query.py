@@ -1,10 +1,10 @@
-from cadv_exploration.error_injection.managers.sql_query import SQLQueryErrorInjectionManager
+from cadv_exploration.error_injection.managers.sql_query import GeneralErrorInjectionManager
 from cadv_exploration.utils import get_project_root
 
 
 def error_injection():
     project_root = get_project_root()
-    error_injection_manager = SQLQueryErrorInjectionManager(
+    error_injection_manager = GeneralErrorInjectionManager(
         raw_file_path=project_root / "data" / "healthcare_dataset" / "files",
         target_table_name="healthcare_dataset",
         processed_data_dir=project_root / "data_processed" / "healthcare_dataset_sql_query",
