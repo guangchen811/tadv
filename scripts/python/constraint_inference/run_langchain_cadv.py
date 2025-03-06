@@ -14,61 +14,48 @@ from cadv_exploration.llm.langchain.downstream_task_prompt import ML_INFERENCE_T
     SQL_QUERY_TASK_DESCRIPTION, WEB_TASK_DESCRIPTION
 
 
-def run_langchain_cadv(data_name, task_name, model_name, processed_data_label, assumption_generation_trick,
+def run_langchain_cadv(dataset_name, downstream_task, model_name, processed_data_label, assumption_generation_trick,
                        script_name=None):
     dq_manager = DeequDataQualityManager()
     logger = setup_logger(get_project_root() / "logs" / "langchain_cadv.log")
     logger.info(f"Model: {model_name}")
 
-    original_data_path = get_project_root() / "data" / f"{data_name}"
+    original_data_path = get_project_root() / "data" / f"{dataset_name}"
 
     spark_train_df, spark_train, spark_validation_df, spark_validation = load_train_and_test_spark_data(
-        processed_data_name=f"{data_name}_{task_name}", processed_data_label=processed_data_label, dq_manager=dq_manager
+        dataset_name=dataset_name, downstream_task=downstream_task, processed_data_label=processed_data_label,
+        dq_manager=dq_manager
     )
 
     column_desc = DeequInspectorManager().spark_df_to_column_desc(spark_train_df, spark_train)
 
-    dt_type_mapping = {
-        "bi": "sql_query",
-        "dev": "sql_query",
-        "feature_engineering": "sql_query",
-        "classification": "ml_inference_classification",
-        "regression": "ml_inference_regression",
-        "info": "web",
-    }
+    if downstream_task in ["ml_inference_classification", "ml_inference_regression"]:
+        scripts_path_dir = original_data_path / "scripts" / "ml_inference"
+    elif downstream_task in ["sql_query", "webpage_generation"]:
+        scripts_path_dir = original_data_path / "scripts" / downstream_task
+    else:
+        raise ValueError(f"Invalid downstream task: {downstream_task}")
 
-    dt_path_mapping = {
-        "sql_query": "sql",
-        "ml_inference_classification": "ml",
-        "ml_inference_regression": "ml",
-        "web": "web",
-    }
-
-    scripts_path_dir = original_data_path / "scripts" / dt_path_mapping[task_name]
     for script_path in sorted(scripts_path_dir.iterdir(), key=lambda x: x.name):
         if script_name is not None and script_name != script_path.stem:
             continue
-        dt_type = dt_type_mapping[script_path.stem.rsplit("_", 1)[0]]
-        processed_data_path = get_project_root() / "data_processed" / f"{data_name}_{dt_type}" / f"{processed_data_label}"
-        constraints_result_path = processed_data_path / "constraints" / f"{script_path.stem}" / "cadv_constraints.yaml"
+        processed_data_path = get_project_root() / "data_processed" / dataset_name / downstream_task / f"{processed_data_label}"
+        constraints_result_path = processed_data_path / "constraints" / f"{script_path.stem}" / f"tadv_constraints__{model_name}__{assumption_generation_trick}.yaml"
         constraints_result_path.parent.mkdir(parents=True, exist_ok=True)
-        relevant_columns_result_path = processed_data_path / "relevant_columns" / f"{script_path.stem}" / "relevant_columns.txt"
+        relevant_columns_result_path = processed_data_path / "relevant_columns" / f"{script_path.stem}" / f"relevant_columns__{model_name}__{assumption_generation_trick}.txt"
         relevant_columns_result_path.parent.mkdir(parents=True, exist_ok=True)
         task_instance = get_task_instance(script_path)
 
-        task_type = script_path.stem.rsplit("_", 1)[0]
-        task_group = task_group_mapping(task_type)
-        if task_group == 'sql':
-            lc = LangChainCADV(model_name=model_name, downstream_task_description=SQL_QUERY_TASK_DESCRIPTION,
-                               assumption_generation_trick=assumption_generation_trick, logger=logger)
-        elif task_group == 'ml':
-            lc = LangChainCADV(model_name=model_name, downstream_task_description=ML_INFERENCE_TASK_DESCRIPTION,
-                               assumption_generation_trick=assumption_generation_trick, logger=logger)
-        elif task_group == 'web':
-            lc = LangChainCADV(model_name=model_name, downstream_task_description=WEB_TASK_DESCRIPTION,
-                               assumption_generation_trick=assumption_generation_trick, logger=logger)
+        if downstream_task in ["ml_inference_classification", "ml_inference_regression"]:
+            downstream_task_description = ML_INFERENCE_TASK_DESCRIPTION
+        elif downstream_task == "sql_query":
+            downstream_task_description = SQL_QUERY_TASK_DESCRIPTION
+        elif downstream_task == "webpage_generation":
+            downstream_task_description = WEB_TASK_DESCRIPTION
         else:
-            raise ValueError(f"Invalid task group: {task_group}")
+            raise ValueError(f"Invalid downstream task: {downstream_task}")
+        lc = LangChainCADV(model_name=model_name, downstream_task_description=downstream_task_description,
+                           assumption_generation_trick=assumption_generation_trick, logger=logger)
 
         if assumption_generation_trick == "with_deequ":
             deequ_assumptions = dq_manager.get_constraints_for_spark_df(spark_train, spark_train_df).to_string()
@@ -107,27 +94,15 @@ def run_langchain_cadv(data_name, task_name, model_name, processed_data_label, a
     spark_validation.stop()
 
 
-def task_group_mapping(task_type):
-    return {
-        'bi': 'sql',
-        'dev': 'sql',
-        'feature_engineering': 'sql',
-        'classification': 'ml',
-        'regression': 'ml',
-        'info': 'web',
-    }[task_type]
-
-
 if __name__ == "__main__":
-    # data_name = "healthcare_dataset"
-    data_name = "playground-series-s4e10"
-    # task_name = "ml_inference_classification"
-    task_name = "ml_inference_classification"
-    model_name = "gpt-4.5-preview"
-    run_langchain_cadv(data_name=data_name, task_name=task_name, model_name=model_name,
-                       processed_data_label='base_version',
-                       assumption_generation_trick=None, script_name="classification_1")
-    # run_langchain_cadv(data_name=data_name, model_name=model_name, processed_data_label="with_deequ",
-    #                    assumption_generation_trick="with_deequ")
-    # run_langchain_cadv(data_name=data_name, model_name=model_name, processed_data_label="with_experience",
-    #                    assumption_generation_trick="with_experience")
+    dataset_name_options = ["playground-series-s4e10", "healthcare_dataset"]
+    downstream_task_options = ["ml_inference_classification", "ml_inference_regression", "sql_query",
+                               "webpage_generation"]
+    assumption_generation_trick_options = [None, "with_deequ", "with_experience"]
+    model_name_options = ["gpt-4.5-preview", "gpt-4o"]
+    run_langchain_cadv(dataset_name=dataset_name_options[0],
+                       downstream_task=downstream_task_options[0],
+                       model_name=model_name_options[0],
+                       processed_data_label='1',
+                       assumption_generation_trick=assumption_generation_trick_options[0],
+                       script_name="classification_1")

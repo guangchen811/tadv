@@ -1,6 +1,0 @@
-id
-Test Results
-Age
-Billing Amount
-Gender
-Medical Condition

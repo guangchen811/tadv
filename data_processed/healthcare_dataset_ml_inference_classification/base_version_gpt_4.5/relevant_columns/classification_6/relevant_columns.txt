@@ -1,6 +1,0 @@
-Billing Amount
-Medical Condition
-Date of Admission
-id
-Age
-Gender

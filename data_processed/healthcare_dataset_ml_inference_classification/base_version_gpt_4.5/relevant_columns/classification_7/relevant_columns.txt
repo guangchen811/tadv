@@ -1,4 +1,0 @@
-id
-Age
-Gender
-Billing Amount

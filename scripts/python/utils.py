@@ -27,14 +27,15 @@ def parse_arguments(description: str) -> argparse.Namespace:
     return parser.parse_args()
 
 
-def load_train_and_test_spark_data(processed_data_name: str, processed_data_label: int, dq_manager) -> tuple:
+def load_train_and_test_spark_data(dataset_name: str, downstream_task: str, processed_data_label: int,
+                                   dq_manager) -> tuple:
     """
     Load train and validation CSV files into Spark dataframes.
 
     Returns:
         spark_train_data, spark_train, spark_validation_data, spark_validation
     """
-    processed_data_path = get_project_root() / "data_processed" / f"{processed_data_name}" / f"{processed_data_label}"
+    processed_data_path = get_project_root() / "data_processed" / f"{dataset_name}" / f"{downstream_task}" / f"{processed_data_label}"
     train_file_path = processed_data_path / "files_with_clean_new_data" / "train.csv"
     validation_file_path = processed_data_path / "files_with_clean_new_data" / "validation.csv"
 
@@ -46,14 +47,15 @@ def load_train_and_test_spark_data(processed_data_name: str, processed_data_labe
     return spark_train_data, spark_train, spark_validation_data, spark_validation
 
 
-def load_previous_and_new_spark_data(processed_data_name: str, processed_data_label: int, dq_manager) -> tuple:
+def load_previous_and_new_spark_data(dataset_name: str, downstream_task: str, processed_data_label: int,
+                                     dq_manager) -> tuple:
     """
     Load previous and new CSV files into Spark dataframes.
 
     Returns:
         spark_previous_data, spark_previous, spark_new_data, spark_new
     """
-    processed_data_path = get_project_root() / "data_processed" / f"{processed_data_name}" / f"{processed_data_label}"
+    processed_data_path = get_project_root() / "data_processed" / f"{dataset_name}" / f"{downstream_task}" / f"{processed_data_label}"
     previous_file_path = processed_data_path / "files_with_clean_new_data" / "previous_data.csv"
     new_file_path = processed_data_path / "files_with_clean_new_data" / "new_data.csv"
 

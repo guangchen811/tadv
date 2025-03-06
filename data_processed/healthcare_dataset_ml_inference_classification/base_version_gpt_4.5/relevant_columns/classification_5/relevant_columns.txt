@@ -1,8 +1,0 @@
-id
-Test Results
-Date of Admission
-Discharge Date
-Billing Amount
-Age
-Blood Type
-Medical Condition

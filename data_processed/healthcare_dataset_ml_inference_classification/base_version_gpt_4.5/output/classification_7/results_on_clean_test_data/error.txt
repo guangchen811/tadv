@@ -1,6 +1,0 @@
-Traceback (most recent call last):
-  File "/Users/haochen/Codebase/cadv-exploration/data/healthcare_dataset/scripts/ml/classification_7.py", line 72, in <module>
-    X_combined = np.hstack([X_num, X_cat])
-  File "/Users/haochen/Codebase/cadv-exploration/cadv_exploration/runtime_environments/python/env/lib/python3.9/site-packages/numpy/_core/shape_base.py", line 358, in hstack
-    return _nx.concatenate(arrs, 1, dtype=dtype, casting=casting)
-ValueError: all the input arrays must have same number of dimensions, but the array at index 0 has 2 dimension(s) and the array at index 1 has 1 dimension(s)

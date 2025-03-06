@@ -181,14 +181,14 @@ def main(processed_version):
     cadv_constraints_dict = {}
     for cadv_script_constraints_path in sorted(constraints_path.iterdir(), key=lambda x: x.name):
         if cadv_script_constraints_path.is_dir():
-            cadv_constraints = Constraints.from_yaml(input_path=cadv_script_constraints_path / 'cadv_constraints.yaml')
-            cadv_constraints_dict[cadv_script_constraints_path.name] = cadv_constraints
+            tadv_constraints = Constraints.from_yaml(input_path=cadv_script_constraints_path / 'tadv_constraints.yaml')
+            cadv_constraints_dict[cadv_script_constraints_path.name] = tadv_constraints
     train_data = FileLoader.load_csv(train_file_path)
     all_column_names = list(train_data.columns)
     deequ_suggestion_frequency = get_suggestion_frequency(deequ_constraints, all_column_names)
     cadv_suggestion_frequency_dict = {}
-    for script_name, cadv_constraints in cadv_constraints_dict.items():
-        cadv_suggestion_frequency_dict[script_name] = get_suggestion_frequency(cadv_constraints, all_column_names)
+    for script_name, tadv_constraints in cadv_constraints_dict.items():
+        cadv_suggestion_frequency_dict[script_name] = get_suggestion_frequency(tadv_constraints, all_column_names)
     validation_results_on_clean_test_data_deequ = ValidationResults.from_yaml(
         input_path=output_path / 'validation_results_on_clean_test_data_deequ.yaml')
     validation_results_on_corrupted_test_data_deequ = ValidationResults.from_yaml(

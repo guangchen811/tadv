@@ -38,7 +38,7 @@ def evaluate_playground_series_s4e10(processed_data_label):
         if script_constraints_dir.is_file():
             continue
         print(f"evaluating script: {script_constraints_dir.name}")
-        cadv_suggestion_file_path = script_constraints_dir / "cadv_constraints.yaml"
+        cadv_suggestion_file_path = script_constraints_dir / "tadv_constraints.yaml"
         validation_results_on_clean_test_data_cadv, validation_results_on_corrupted_test_data_cadv = validate_on_both_test_data(
             cadv_suggestion_file_path,
             clean_test_data,
