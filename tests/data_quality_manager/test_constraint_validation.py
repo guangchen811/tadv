@@ -1,4 +1,4 @@
-from cadv_exploration.utils import load_dotenv
+from tadv.utils import load_dotenv
 
 load_dotenv()
 
@@ -6,7 +6,7 @@ import pandas as pd
 from pydeequ.checks import *
 from pydeequ.verification import *
 
-from cadv_exploration.dq_manager import DeequDataQualityManager
+from tadv.dq_manager import DeequDataQualityManager
 
 
 def test_constraint_validation(dq_manager):

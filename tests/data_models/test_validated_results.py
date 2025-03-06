@@ -1,6 +1,6 @@
 import pytest
 
-from cadv_exploration.data_models import ValidationResults, ValidationCodeEntry, ColumnValidationResults
+from tadv.data_models import ValidationResults, ValidationCodeEntry, ColumnValidationResults
 
 
 @pytest.fixture

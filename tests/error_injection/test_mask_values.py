@@ -1,7 +1,7 @@
 import pandas as pd
 
-from cadv_exploration.error_injection.corrupts import MaskValues
-from cadv_exploration.utils import get_current_folder
+from tadv.error_injection.corrupts import MaskValues
+from tadv.utils import get_current_folder
 
 
 def test_mask_values():

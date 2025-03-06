@@ -1,4 +1,4 @@
-from cadv_exploration.loader import FileLoader
+from tadv.loader import FileLoader
 
 
 def test_load_csv(resources_path):

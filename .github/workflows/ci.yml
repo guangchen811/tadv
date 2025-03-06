@@ -32,7 +32,7 @@ jobs:
                 echo "SPARK_VERSION=3.5" >> .env
                 echo ".env file created successfully"
             - name: Run tests
-              run: poetry run pytest --cov --cov==cadv_exploration --cov-report=xml --cov-config=.coveragerc
+              run: poetry run pytest --cov --cov==tadv --cov-report=xml --cov-config=.coveragerc
             - name: Upload results to Codecov
               uses: codecov/codecov-action@v4
               with:

@@ -1,12 +1,12 @@
-from cadv_exploration.data_models import CodeEntry, ColumnConstraints, \
+from tadv.data_models import CodeEntry, ColumnConstraints, \
     Constraints
-from cadv_exploration.utils import get_current_folder
-from cadv_exploration.utils import load_dotenv
+from tadv.utils import get_current_folder
+from tadv.utils import load_dotenv
 
 load_dotenv()
 
 import pytest
-from cadv_exploration.dq_manager import DeequDataQualityManager
+from tadv.dq_manager import DeequDataQualityManager
 
 
 @pytest.fixture

@@ -1,9 +1,9 @@
-from cadv_exploration.utils import load_dotenv
+from tadv.utils import load_dotenv
 
 load_dotenv()
-from cadv_exploration.dq_manager import DeequDataQualityManager
-from cadv_exploration.inspector.deequ.deequ_inspector_manager import DeequInspectorManager
-from cadv_exploration.loader import FileLoader
+from tadv.dq_manager import DeequDataQualityManager
+from tadv.inspector.deequ.deequ_inspector_manager import DeequInspectorManager
+from tadv.loader import FileLoader
 
 
 def test_spark_df_to_column_desc(resources_path):

@@ -1,17 +1,17 @@
-from cadv_exploration.utils import load_dotenv
+from tadv.utils import load_dotenv
 
 load_dotenv()
 from scripts.python.relevant_column_detection.string_matching import run_string_matching
 from scripts.python.relevant_column_detection.metrics import RelevantColumnDetectionMetric
 from scripts.python.utils import load_previous_and_new_spark_data
 
-from cadv_exploration.utils import get_task_instance
-from cadv_exploration.dq_manager import DeequDataQualityManager
-from cadv_exploration.inspector.deequ.deequ_inspector_manager import DeequInspectorManager
-from cadv_exploration.llm.langchain import LangChainCADV
-from cadv_exploration.llm.langchain.downstream_task_prompt import SQL_QUERY_TASK_DESCRIPTION, \
+from tadv.utils import get_task_instance
+from tadv.dq_manager import DeequDataQualityManager
+from tadv.inspector.deequ.deequ_inspector_manager import DeequInspectorManager
+from tadv.llm.langchain import LangChainCADV
+from tadv.llm.langchain.downstream_task_prompt import SQL_QUERY_TASK_DESCRIPTION, \
     ML_INFERENCE_TASK_DESCRIPTION, WEB_TASK_DESCRIPTION
-from cadv_exploration.utils import get_project_root
+from tadv.utils import get_project_root
 
 task_group_mapping = {
     'bi': 'sql_query',

@@ -9,12 +9,12 @@ queries, downstream ml pipelines, etc.).
 
 This repository contains the following components:
 
-- [error_injection](./cadv_exploration/error_injection): contains the APIs for injecting errors into datasets.
-- [runtime_environments](./cadv_exploration/runtime_environments): contains the API class for runtime environments,
+- [error_injection](./tadv/error_injection): contains the APIs for injecting errors into datasets.
+- [runtime_environments](./tadv/runtime_environments): contains the API class for runtime environments,
   where datasets can be evaluated on downstream queries or machine learning pipelines.
-- [inspector](./cadv_exploration/inspector): designed to provide dataset information, such as schema and statistics, to
+- [inspector](./tadv/inspector): designed to provide dataset information, such as schema and statistics, to
   help LLMs generate data validation rules.
-- [llms](./cadv_exploration/llm): contains the prompts and classes for making API calls to LLMs.
+- [llms](./tadv/llm): contains the prompts and classes for making API calls to LLMs.
 
 ## error injection
 
@@ -62,7 +62,7 @@ As shown in the following figure, we decompose the data validation task into two
 
 <img src="./assets/llm_framework.png" alt="llm_framework" width="500px"/>
 
-The prompts during the API calls can be found [here](./cadv_exploration/llm/langchain/_prompt.py). For more details, you
+The prompts during the API calls can be found [here](./tadv/llm/langchain/_prompt.py). For more details, you
 can look at the [test case](./tests/llm/langchain).
 
 ## Get Started
@@ -82,7 +82,7 @@ poetry run pytest
 ### Collect the competition data
 
 ```shell
-shell ./cadv_exploration/scripts/shell/download_competition_dataset.sh
+shell ./tadv/scripts/shell/download_competition_dataset.sh
 ```
 
 ### Kaggle File Structure

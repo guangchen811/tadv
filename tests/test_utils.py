@@ -1,6 +1,6 @@
 import os
 
-from cadv_exploration.utils import get_project_root, load_dotenv, get_current_folder
+from tadv.utils import get_project_root, load_dotenv, get_current_folder
 
 
 def test_get_project_root():

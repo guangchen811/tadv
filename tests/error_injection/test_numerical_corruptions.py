@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 
-from cadv_exploration.error_injection.corrupts import Scaling
+from tadv.error_injection.corrupts import Scaling
 
 
 def test_scaling():

@@ -1,15 +1,15 @@
 import pandas as pd
 
-from cadv_exploration.utils import load_dotenv
+from tadv.utils import load_dotenv
 from data_models import Constraints, ValidationResults
 
 load_dotenv()
 
 from sklearn.metrics import roc_auc_score
 import numpy as np
-from cadv_exploration.dq_manager import DeequDataQualityManager
-from cadv_exploration.loader import FileLoader
-from cadv_exploration.utils import get_project_root
+from tadv.dq_manager import DeequDataQualityManager
+from tadv.loader import FileLoader
+from tadv.utils import get_project_root
 
 
 def evaluate_playground_series_s4e10(processed_data_label):

@@ -1,16 +1,16 @@
-from cadv_exploration.utils import load_dotenv
+from tadv.utils import load_dotenv
 
 load_dotenv()
-from cadv_exploration.utils import get_task_instance
+from tadv.utils import get_task_instance
 
-from cadv_exploration.data_models import Constraints
+from tadv.data_models import Constraints
 
-from cadv_exploration.inspector.deequ.deequ_inspector_manager import DeequInspectorManager
-from cadv_exploration.dq_manager import DeequDataQualityManager
-from cadv_exploration.llm.langchain import LangChainCADV
-from cadv_exploration.utils import get_project_root
+from tadv.inspector.deequ.deequ_inspector_manager import DeequInspectorManager
+from tadv.dq_manager import DeequDataQualityManager
+from tadv.llm.langchain import LangChainCADV
+from tadv.utils import get_project_root
 from scripts.python.utils import setup_logger, load_train_and_test_spark_data
-from cadv_exploration.llm.langchain.downstream_task_prompt import ML_INFERENCE_TASK_DESCRIPTION, \
+from tadv.llm.langchain.downstream_task_prompt import ML_INFERENCE_TASK_DESCRIPTION, \
     SQL_QUERY_TASK_DESCRIPTION, WEB_TASK_DESCRIPTION
 
 

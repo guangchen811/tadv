@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 
-from cadv_exploration.error_injection.corrupts import GaussianNoise
+from tadv.error_injection.corrupts import GaussianNoise
 
 
 def test_gaussian_noise():

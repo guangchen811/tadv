@@ -3,8 +3,8 @@ import logging
 from pathlib import Path
 from typing import Union
 
-from cadv_exploration.loader import FileLoader
-from cadv_exploration.utils import get_project_root
+from tadv.loader import FileLoader
+from tadv.utils import get_project_root
 
 
 def setup_logger(log_file: Union[str, Path]) -> logging.Logger:

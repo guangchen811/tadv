@@ -6,9 +6,9 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-from cadv_exploration.data_models import Constraints, ValidationResults
-from cadv_exploration.loader import FileLoader
-from cadv_exploration.utils import get_project_root
+from tadv.data_models import Constraints, ValidationResults
+from tadv.loader import FileLoader
+from tadv.utils import get_project_root
 
 
 def get_suggestion_frequency(constraints: Constraints, all_column_names: list):

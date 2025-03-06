@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from cadv_exploration.loader import FileLoader
+from tadv.loader import FileLoader
 
 
 def test_load_py_file(resources_path):

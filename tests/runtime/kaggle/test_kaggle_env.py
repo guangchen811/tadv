@@ -6,8 +6,8 @@ import nbformat
 import pandas as pd
 import pytest
 
-from cadv_exploration.runtime_environments import KaggleExecutor
-from cadv_exploration.utils import get_project_root
+from tadv.runtime_environments import KaggleExecutor
+from tadv.utils import get_project_root
 
 
 def docker_image_exists(image_name="kaggle-env/python:1.0.0"):

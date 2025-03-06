@@ -6,7 +6,7 @@ from sklearn.metrics import (
     accuracy_score, hamming_loss, precision_score, recall_score, f1_score
 )
 
-from cadv_exploration.utils import get_current_folder
+from tadv.utils import get_current_folder
 
 
 class RelevantColumnDetectionMetric:

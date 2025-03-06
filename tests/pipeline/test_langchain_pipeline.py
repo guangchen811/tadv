@@ -1,13 +1,13 @@
 from unittest.mock import Mock
 
-from cadv_exploration.utils import load_dotenv
+from tadv.utils import load_dotenv
 
 load_dotenv()
 
-from cadv_exploration.llm.langchain.downstream_task_prompt import ML_INFERENCE_TASK_DESCRIPTION
-from cadv_exploration.inspector.deequ.deequ_inspector_manager import DeequInspectorManager
-from cadv_exploration.llm.langchain import LangChainCADV
-from cadv_exploration.loader import FileLoader
+from tadv.llm.langchain.downstream_task_prompt import ML_INFERENCE_TASK_DESCRIPTION
+from tadv.inspector.deequ.deequ_inspector_manager import DeequInspectorManager
+from tadv.llm.langchain import LangChainCADV
+from tadv.loader import FileLoader
 
 
 def test_runnable(dq_manager, resources_path):

@@ -1,6 +1,6 @@
-from cadv_exploration.error_injection.managers.ml_inference import MLInferenceErrorInjectionManager
-from cadv_exploration.error_injection.managers.sql_query import GeneralErrorInjectionManager
-from cadv_exploration.utils import get_project_root
+from tadv.error_injection.managers.ml_inference import MLInferenceErrorInjectionManager
+from tadv.error_injection.managers.sql_query import GeneralErrorInjectionManager
+from tadv.utils import get_project_root
 
 
 # This case can be treated as context information for ml inference. (the test data needs to be validated)

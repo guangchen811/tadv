@@ -1,10 +1,10 @@
-from cadv_exploration.utils import load_dotenv
+from tadv.utils import load_dotenv
 
 load_dotenv()
 
 import pandas as pd
 
-from cadv_exploration.loader import FileLoader
+from tadv.loader import FileLoader
 
 
 def test_spark_df_from_pandas_df(dq_manager):

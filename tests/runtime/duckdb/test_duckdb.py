@@ -1,7 +1,7 @@
 from pathlib import Path
 
-from cadv_exploration.runtime_environments import DuckDBExecutor
-from cadv_exploration.utils import get_project_root
+from tadv.runtime_environments import DuckDBExecutor
+from tadv.utils import get_project_root
 
 
 def test_runnable(tmp_path):

@@ -1,9 +1,9 @@
-from cadv_exploration.utils import load_dotenv
+from tadv.utils import load_dotenv
 
 load_dotenv()
 
-from cadv_exploration.dq_manager import DeequDataQualityManager
-from cadv_exploration.utils import get_project_root
+from tadv.dq_manager import DeequDataQualityManager
+from tadv.utils import get_project_root
 
 from scripts.python.utils import setup_logger, load_train_and_test_spark_data
 

@@ -1,8 +1,8 @@
 import oyaml as yaml
 
-from cadv_exploration.data_models import CodeEntry, ColumnConstraints, \
+from tadv.data_models import CodeEntry, ColumnConstraints, \
     Constraints
-from cadv_exploration.utils import get_project_root
+from tadv.utils import get_project_root
 
 
 def test_from_yaml(constraints_instance, tmp_path):

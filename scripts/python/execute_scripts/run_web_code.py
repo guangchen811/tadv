@@ -1,5 +1,5 @@
-from cadv_exploration.runtime_environments import PythonExecutor
-from cadv_exploration.utils import get_project_root
+from tadv.runtime_environments import PythonExecutor
+from tadv.utils import get_project_root
 
 
 def run_web_code(processed_idx, dataset_name, single_script=""):
