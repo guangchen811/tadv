@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "cadv-exploration"
+name = "tadv-exploration"
 version = "0.1.0"
 description = ""
 authors = ["Hao Chen <hao.chen@tu-berlin.de>"]
