@@ -27,24 +27,22 @@ class ProjectManager(AbstractProjectManager):
         else:
             raise ValueError("Invalid downstream task types, downstream_task_type should be a string")
 
-    def get_result_path(self, subtask_name, version_name):
-        return self.get_processed_data_path(subtask_name, version_name) / "output"
+    def get_result_path(self, subtask_name, processed_data_label):
+        return self.get_processed_data_path(subtask_name, processed_data_label) / "output"
 
-    def get_processed_data_path(self, subtask_name, version_name):
+    def get_processed_data_path(self, subtask_name, processed_data_label):
         downstream_processed_path_list = [item for sublist in self.downstream_processed_path_mapping.values() for item
                                           in (sublist if isinstance(sublist, list) else [sublist])]
         if subtask_name not in downstream_processed_path_list:
             raise ValueError(
                 f"Subtask {subtask_name} is not available in the downstream task type {downstream_processed_path_list}")
-        return self.processed_data_root / f"{subtask_name}_{subtask_name}" / f"{version_name}"
+        return self.processed_data_root / f"{self.dataset_name}" / f"{subtask_name}" / f"{processed_data_label}"
 
-    def get_clean_new_data_path(self, subtask_name, version_name):
-        return self.get_processed_data_path(subtask_name, version_name) / "files_with_clean_new_data"
+    def get_clean_new_data_path(self, subtask_name, processed_data_label):
+        return self.get_processed_data_path(subtask_name, processed_data_label) / "files_with_clean_new_data"
 
-    def get_corrupted_data_path(self, subtask_name, version_name):
-        return self.get_processed_data_path(subtask_name, version_name) / "files_with_corrupted_data"
-
-
+    def get_corrupted_data_path(self, subtask_name, processed_data_label):
+        return self.get_processed_data_path(subtask_name, processed_data_label) / "files_with_corrupted_data"
 
     def prepare_data_for_relevant_columns_detection(self, subtask_name):
         pass
@@ -55,5 +53,6 @@ class ProjectManager(AbstractProjectManager):
 
 if __name__ == '__main__':
     project_manager = ProjectManager(dataset_name="healthcare_dataset",
-                                     downstream_task_type="web")
-    project_manager.get_result_path(subtask_name="ml_inference_classification", version_name="base_version")
+                                     downstream_task_type="webpage_generation")
+    result_path = project_manager.get_result_path(subtask_name="ml_inference_classification",
+                                                  processed_data_label="base_version")

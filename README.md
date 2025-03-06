@@ -1,10 +1,10 @@
 [![codecov](https://codecov.io/gh/guangchen811/cadv-exploration/graph/badge.svg?token=UC6B33P10M)](https://codecov.io/gh/guangchen811/cadv-exploration)
 
-# Context-aware Data Validation
+# Task-aware Data Validation
 
 ## Overview
 
-This repository is designed for exploring the data validation ability of llms with context information (e.g., downstream
+This repository is designed for exploring the data validation ability of LLMs with context information (e.g., downstream
 queries, downstream ml pipelines, etc.).
 
 This repository contains the following components:

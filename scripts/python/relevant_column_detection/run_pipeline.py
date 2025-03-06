@@ -103,7 +103,7 @@ if __name__ == "__main__":
     # model_names = ["string-matching", "llama3.2:1b", "llama3.2", "gpt-4o-mini", "gpt-4o"]
     model_names = ["string-matching", "gpt-4o-mini"]
     processed_data_label = '0'
-    dataset_name = dataset_name_options[1]
+    dataset_name = dataset_name_options[0]
 
     all_results = run_langchain_cadv_on_all_models(dataset_name=dataset_name,
                                                    model_names=model_names,

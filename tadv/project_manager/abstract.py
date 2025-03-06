@@ -15,6 +15,7 @@ class AbstractProjectManager(ABC):
             raise ValueError('dataset_name cannot be None')
         else:
             self.dataset_path = self.project_data_root / dataset_name
+            self.dataset_name = dataset_name
 
     @property
     def project_data_root(self):
