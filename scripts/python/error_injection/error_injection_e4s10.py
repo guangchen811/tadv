@@ -58,6 +58,6 @@ if __name__ == "__main__":
 
     error_injection(
         dataset_name=dataset_name,
-        downstream_task=downstream_task_options[3],
+        downstream_task=downstream_task_options[2],
         error_config_file_name=error_config_file_name_options[0]
     )

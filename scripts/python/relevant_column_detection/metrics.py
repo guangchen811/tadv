@@ -1,8 +1,12 @@
+import os
+
 import numpy as np
 from matplotlib import pyplot as plt
 from sklearn.metrics import (
     accuracy_score, hamming_loss, precision_score, recall_score, f1_score
 )
+
+from cadv_exploration.utils import get_current_folder
 
 
 class RelevantColumnDetectionMetric:
@@ -65,7 +69,7 @@ class RelevantColumnDetectionMetric:
 
         return ground_truth_vector, relevant_columns_vector
 
-    def plot_model_metrics(self, metrics_dict, picture_name):
+    def plot_model_metrics(self, metrics_dict, dataset_name, picture_name):
         """
         Plot the performance metrics for one or more models.
 
@@ -105,7 +109,8 @@ class RelevantColumnDetectionMetric:
 
         # Adjust layout
         plt.tight_layout()
-        plt.savefig(f"./figs/{picture_name}")
+        os.makedirs(get_current_folder() / "figs" / dataset_name, exist_ok=True)
+        plt.savefig(get_current_folder() / "figs" / dataset_name / f"{picture_name}.png")
 
 
 # Example usage
