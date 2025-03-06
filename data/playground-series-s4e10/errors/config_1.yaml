@@ -22,12 +22,6 @@
       corrupt_strategy: to_random
 - GaussianNoise:
     Columns:
-      - person_income
-    Params:
-      severity: 0.2
-      sampling: CAR
-- GaussianNoise:
-    Columns:
       - person_emp_length
     Params:
       severity: 0.2
@@ -50,12 +44,6 @@
 - MaskValues:
     Columns:
       - loan_grade
-    Params:
-      severity: 0.1
-      sampling: CAR
-- ColumnDropping:
-    Columns:
-      - person_income
     Params:
       severity: 0.1
       sampling: CAR

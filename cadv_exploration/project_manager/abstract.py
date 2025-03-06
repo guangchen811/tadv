@@ -43,21 +43,21 @@ class AbstractProjectManager(ABC):
 
     @property
     def downstream_tasks_types(self):
-        return ['ml', 'sql', 'web']
+        return ['ml_inference', 'sql_query', 'webpage_generation']
 
     def downstream_subtask_mapping(self, downstream_task_type):
         return {
-            'ml': ['classification', 'regression'],
-            'sql': ['bi', 'dev', 'feature_engineering'],
-            'web': ['info']
+            'ml_inference': ['classification', 'regression'],
+            'sql_query': ['bi', 'dev', 'feature_engineering'],
+            'webpage_generation': ['info']
         }[downstream_task_type]
 
     @property
     def downstream_processed_path_mapping(self):
         return {
-            'ml': ['ml_inference_classification', 'ml_inference_regression'],
-            'sql': 'sql_query',
-            'web': 'web'
+            'ml_inference': ['ml_inference_classification', 'ml_inference_regression'],
+            'sql_query': 'sql_query',
+            'webpage_generation': 'webpage_generation'
         }
 
     @abstractmethod
