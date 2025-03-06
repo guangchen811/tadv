@@ -14,13 +14,13 @@ from cadv_exploration.llm.langchain.downstream_task_prompt import SQL_QUERY_TASK
 from cadv_exploration.utils import get_project_root
 
 
-def run_langchain_cadv_on_single_model(data_name, model_name, processed_data_idx):
+def run_langchain_cadv_on_single_model(data_name, model_name, processed_data_label):
     dq_manager = DeequDataQualityManager()
 
     original_data_path = get_project_root() / "data" / f"{data_name}"
 
     spark_train_data, spark_train, spark_validation_data, spark_validation = load_train_and_test_spark_data(
-        processed_data_name=f"{data_name}_{task_processed_data_mapping('classification')}", processed_data_idx=processed_data_idx,
+        processed_data_name=f"{data_name}_{task_processed_data_mapping('classification')}", processed_data_label=processed_data_label,
         dq_manager=dq_manager
     )
 
@@ -101,11 +101,11 @@ def run_llm(column_desc, model_name, script_context, task_group):
     return relevant_columns_list
 
 
-def run_langchain_cadv_on_all_models(data_name, model_names, processed_data_idx):
+def run_langchain_cadv_on_all_models(data_name, model_names, processed_data_label):
     result_each_model = {}
     for model_name in model_names:
         print(model_name, end=': ')
-        result_each_model[model_name] = run_langchain_cadv_on_single_model(data_name, model_name, processed_data_idx)
+        result_each_model[model_name] = run_langchain_cadv_on_single_model(data_name, model_name, processed_data_label)
     return result_each_model
 
 
@@ -113,8 +113,8 @@ if __name__ == "__main__":
     data_name = "healthcare_dataset"
     # model_names = ["string-matching", "llama3.2:1b", "llama3.2", "gpt-4o-mini", "gpt-4o"]
     model_names = ["string-matching", "gpt-4o", "gpt-4.5-preview"]
-    processed_data_idx = 'base_version'
-    all_results = run_langchain_cadv_on_all_models(data_name, model_names, processed_data_idx)
+    processed_data_label = 'base_version'
+    all_results = run_langchain_cadv_on_all_models(data_name, model_names, processed_data_label)
     # reverse the order of the keys
     for task_type in ['bi', 'dev', 'feature_engineering', 'classification', 'regression', 'web']:
         result_each_model = {

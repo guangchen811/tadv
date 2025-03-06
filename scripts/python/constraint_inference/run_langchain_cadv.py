@@ -14,7 +14,7 @@ from cadv_exploration.llm.langchain.downstream_task_prompt import ML_INFERENCE_T
     SQL_QUERY_TASK_DESCRIPTION, WEB_TASK_DESCRIPTION
 
 
-def run_langchain_cadv(data_name, task_name, model_name, processed_data_idx, assumption_generation_trick,
+def run_langchain_cadv(data_name, task_name, model_name, processed_data_label, assumption_generation_trick,
                        script_name=None):
     dq_manager = DeequDataQualityManager()
     logger = setup_logger(get_project_root() / "logs" / "langchain_cadv.log")
@@ -23,7 +23,7 @@ def run_langchain_cadv(data_name, task_name, model_name, processed_data_idx, ass
     original_data_path = get_project_root() / "data" / f"{data_name}"
 
     spark_train_df, spark_train, spark_validation_df, spark_validation = load_train_and_test_spark_data(
-        processed_data_name=f"{data_name}_{task_name}", processed_data_idx=processed_data_idx, dq_manager=dq_manager
+        processed_data_name=f"{data_name}_{task_name}", processed_data_label=processed_data_label, dq_manager=dq_manager
     )
 
     column_desc = DeequInspectorManager().spark_df_to_column_desc(spark_train_df, spark_train)
@@ -49,7 +49,7 @@ def run_langchain_cadv(data_name, task_name, model_name, processed_data_idx, ass
         if script_name is not None and script_name != script_path.stem:
             continue
         dt_type = dt_type_mapping[script_path.stem.rsplit("_", 1)[0]]
-        processed_data_path = get_project_root() / "data_processed" / f"{data_name}_{dt_type}" / f"{processed_data_idx}"
+        processed_data_path = get_project_root() / "data_processed" / f"{data_name}_{dt_type}" / f"{processed_data_label}"
         constraints_result_path = processed_data_path / "constraints" / f"{script_path.stem}" / "cadv_constraints.yaml"
         constraints_result_path.parent.mkdir(parents=True, exist_ok=True)
         relevant_columns_result_path = processed_data_path / "relevant_columns" / f"{script_path.stem}" / "relevant_columns.txt"
@@ -125,9 +125,9 @@ if __name__ == "__main__":
     task_name = "ml_inference_classification"
     model_name = "gpt-4.5-preview"
     run_langchain_cadv(data_name=data_name, task_name=task_name, model_name=model_name,
-                       processed_data_idx='base_version',
+                       processed_data_label='base_version',
                        assumption_generation_trick=None, script_name="classification_1")
-    # run_langchain_cadv(data_name=data_name, model_name=model_name, processed_data_idx="with_deequ",
+    # run_langchain_cadv(data_name=data_name, model_name=model_name, processed_data_label="with_deequ",
     #                    assumption_generation_trick="with_deequ")
-    # run_langchain_cadv(data_name=data_name, model_name=model_name, processed_data_idx="with_experience",
+    # run_langchain_cadv(data_name=data_name, model_name=model_name, processed_data_label="with_experience",
     #                    assumption_generation_trick="with_experience")

@@ -8,17 +8,17 @@ from cadv_exploration.utils import get_project_root
 from scripts.python.utils import setup_logger, load_train_and_test_spark_data
 
 
-def run_deequ_dv(data_name, model_name, processed_data_idx):
+def run_deequ_dv(dataset_name, task_name, processed_data_label):
     logger = setup_logger(get_project_root() / "logs" / "deequ_dv.log")
     dq_manager = DeequDataQualityManager()
 
-    processed_data_path = get_project_root() / "data_processed" / f"{data_name}_{model_name}" / f"{processed_data_idx}"
+    processed_data_path = get_project_root() / "data_processed" / dataset_name / task_name / f"{processed_data_label}"
 
     result_path = processed_data_path / "constraints" / "deequ_constraints.yaml"
     result_path.parent.mkdir(parents=True, exist_ok=True)
 
     spark_train_data, spark_train, spark_validation_data, spark_validation = load_train_and_test_spark_data(
-        processed_data_name=f"{data_name}_{model_name}", processed_data_idx=processed_data_idx, dq_manager=dq_manager
+        processed_data_name=dataset_name / task_name, processed_data_label=processed_data_label, dq_manager=dq_manager
     )
 
     constraints = dq_manager.get_constraints_for_spark_df(spark_train, spark_train_data, spark_validation,
@@ -32,5 +32,5 @@ def run_deequ_dv(data_name, model_name, processed_data_idx):
 
 
 if __name__ == "__main__":
-    run_deequ_dv(data_name="playground-series-s4e10", model_name="ml_inference_classification",
-                 processed_data_idx="base_version")
+    run_deequ_dv(dataset_name="playground-series-s4e10", task_name="ml_inference_classification",
+                 processed_data_label="base_version")
