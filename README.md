@@ -1,4 +1,4 @@
-[![codecov](https://codecov.io/gh/guangchen811/cadv-exploration/graph/badge.svg?token=UC6B33P10M)](https://codecov.io/gh/guangchen811/cadv-exploration)
+[![codecov](https://codecov.io/github/guangchen811/tadv/graph/badge.svg?token=UC6B33P10M)](https://codecov.io/github/guangchen811/tadv)
 
 # Task-aware Data Validation
 
