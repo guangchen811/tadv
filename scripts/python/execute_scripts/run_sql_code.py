@@ -7,8 +7,8 @@ def run_sql_code(processed_idx, dataset_name, single_script=""):
     executor = DuckDBExecutor()
     project_root = get_project_root()
     original_data_path = project_root / "data" / f"{dataset_name}"
-    processed_data_path = project_root / "data_processed" / f"{dataset_name}_sql_query" / f"{processed_idx}"
-    script_dir = original_data_path / "scripts" / "sql"
+    processed_data_path = project_root / "data_processed" / f"{dataset_name}" / "sql_query" / f"{processed_idx}"
+    script_dir = original_data_path / "scripts" / "sql_query"
     for script_path in sorted(script_dir.iterdir(), key=lambda x: x.name, reverse=False):
         if len(single_script) > 0 and single_script not in script_path.name:
             continue

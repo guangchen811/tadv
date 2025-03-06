@@ -7,8 +7,8 @@ def run_ml_inference(processed_idx, dataset_name, downstream_task_type, single_s
     executor = PythonExecutor()
     project_root = get_project_root()
     original_data_path = project_root / "data" / f"{dataset_name}"
-    processed_data_path = project_root / "data_processed" / f"{dataset_name}_ml_inference_{downstream_task_type}" / processed_idx
-    script_dir = original_data_path / "scripts" / "ml"
+    processed_data_path = project_root / "data_processed" / f"{dataset_name}_ml_inference" / f"{downstream_task_type}" / processed_idx
+    script_dir = original_data_path / "scripts" / "ml_inference"
     for script_path in sorted(script_dir.iterdir(), key=lambda x: x.name, reverse=False):
         if len(single_script) > 0 and single_script not in script_path.name:
             continue
