@@ -19,9 +19,6 @@ def error_injection():
 
     error_injection_manager.error_injection(corrupts)
 
-    # Save the corrupted test data
-    error_injection_manager.save_data()
-
 
 def build_corrupts():
     corrupts = []

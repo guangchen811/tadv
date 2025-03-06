@@ -39,6 +39,7 @@ class MLInferenceErrorInjectionManager(AbstractErrorInjectionManager):
         for corrupt in corrupts:
             post_corruption_test_data = corrupt.transform(post_corruption_test_data)
         self.post_corruption_test_data = post_corruption_test_data
+        self.corrupts = corrupts
 
     def save_data(self):
         MLInferenceDatasetLoader().save_data(
@@ -50,6 +51,7 @@ class MLInferenceErrorInjectionManager(AbstractErrorInjectionManager):
             self.ground_truth,
             self.sample_submission
         )
+        self.save_error_injection_config(self.corrupts)
 
     def save_error_injection_config(self, corrupts):
         MLInferenceDatasetLoader().save_error_injection_config(self.processed_data_path, corrupts)

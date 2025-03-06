@@ -11,7 +11,7 @@ def error_injection():
         raw_file_path=project_root / "data" / "playground-series-s4e10" / "files",
         target_table_name="train",
         processed_data_dir=project_root / "data_processed" / "playground-series-s4e10_webpage_generation",
-        sample_size=0.1
+        sample_size=1.0
     )
 
     corrupts = build_corrupts()

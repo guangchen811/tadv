@@ -32,6 +32,7 @@ class GeneralErrorInjectionManager(AbstractErrorInjectionManager):
         for corrupt in corrupts:
             post_corruption_new_data = corrupt.transform(post_corruption_new_data)
         self.post_corruption_new_data = post_corruption_new_data
+        self.corrupts = corrupts
 
     def save_data(self):
         SQLQueryDatasetLoader().save_data(
@@ -40,6 +41,7 @@ class GeneralErrorInjectionManager(AbstractErrorInjectionManager):
             self.new_data,
             self.post_corruption_new_data
         )
+        self.save_error_injection_config(self.corrupts)
 
     def save_error_injection_config(self, corrupts):
         SQLQueryDatasetLoader().save_error_injection_config(self.processed_data_path, corrupts)

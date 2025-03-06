@@ -21,9 +21,6 @@ def error_injection(error_config_file_name):
     # Save the corrupted test data
     error_injection_manager.save_data()
 
-    # Save the error injection config
-    error_injection_manager.save_error_injection_config(corrupts)
-
 
 if __name__ == "__main__":
     error_config_file_name = "error_injection_config.yaml"
