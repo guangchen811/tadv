@@ -4,7 +4,7 @@ from tadv.utils import get_project_root, load_dotenv, get_current_folder
 
 
 def test_get_project_root():
-    assert get_project_root().name == "cadv-exploration"
+    assert get_project_root().name == "tadv"
 
 
 def test_load_dotenv():
