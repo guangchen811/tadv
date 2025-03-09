@@ -53,10 +53,10 @@ if __name__ == "__main__":
     dataset_name = "healthcare_dataset"
     downstream_task_options = ["ml_inference_classification", "ml_inference_regression", "sql_query",
                                "webpage_generation"]
-    error_config_file_name_options = ["error_injection_config.yaml"]
+    error_config_file_name_options = ["config_1.yaml"]
 
     error_injection(
         dataset_name=dataset_name,
-        downstream_task=downstream_task_options[0],
+        downstream_task=downstream_task_options[2],
         error_config_file_name=error_config_file_name_options[0]
     )
