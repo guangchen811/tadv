@@ -104,10 +104,11 @@ if __name__ == '__main__':
 
         # Set subplot aesthetics
         ax.set_ylabel("F1 Score", fontsize=16, labelpad=10)
-        ax.set_title(f"F1 Score Comparison on {dataset_name}", fontsize=18, pad=15)
+        if i == 0:
+            ax.set_title(f"F1 Score Comparison on both datasets", fontsize=18, pad=15)
 
         if i == 0:
-            ax.legend(title="Model", title_fontsize=14, fontsize=12, loc="lower left", frameon=True)
+            ax.legend(title="Model", title_fontsize=14, fontsize=12, loc="lower right", frameon=True)
         else:
             ax.legend_.remove()
 
@@ -126,4 +127,4 @@ if __name__ == '__main__':
     plt.tight_layout()
 
     # Save figure in high resolution
-    plt.savefig(result_path / "f1_score_boxplot_combined.png", dpi=300, bbox_inches="tight")
+    plt.savefig(result_path / "f1_score_boxplot_combined.pdf", dpi=300, bbox_inches="tight")
