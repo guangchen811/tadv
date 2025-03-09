@@ -57,7 +57,6 @@ class RelevantColumnDetectionMetric:
     def statistics_calculation(self, y_pred, y_true):
         y_true = np.array(y_true)
         y_pred = np.array(y_pred)
-        print(y_true.shape)
         accuracy_list, hamming_list = [], []
         precision_list, recall_list, f1_list = [], [], []
         for i in range(y_true.shape[0]):
@@ -90,12 +89,3 @@ class RelevantColumnDetectionMetric:
         relevant_columns_vector = [1 if col in relevant_columns else 0 for col in all_columns]
         return ground_truth_vector, relevant_columns_vector
 
-    def plot_f1_boxplot(self, dataset_name, model_f1_scores, model_names):
-        result_path = get_current_folder() / "figs" / dataset_name
-        result_path.mkdir(parents=True, exist_ok=True)
-        plt.figure(figsize=(10, 6))
-        sns.boxplot(data=model_f1_scores)
-        plt.xticks(ticks=range(len(model_names)), labels=model_names, rotation=45)
-        plt.ylabel("F1 Score")
-        plt.grid(True, linestyle='--', alpha=0.6)
-        plt.savefig(result_path / f"f1_score_boxplot__{dataset_name}.png")
