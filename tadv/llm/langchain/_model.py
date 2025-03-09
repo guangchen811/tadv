@@ -29,6 +29,7 @@ class LangChainCADV(AbstractLangChainCADV):
     @staticmethod
     def _get_langchain_model(model_name: str):
         model_name_package_map = {
+            "gpt-3.5-turbo": ChatOpenAI(model="gpt-3.5-turbo"),
             "gpt-4o-mini": ChatOpenAI(model="gpt-4o-mini"),
             "gpt-4o": ChatOpenAI(model="gpt-4o"),
             "gpt-4.5-preview": ChatOpenAI(model="gpt-4.5-preview"),
