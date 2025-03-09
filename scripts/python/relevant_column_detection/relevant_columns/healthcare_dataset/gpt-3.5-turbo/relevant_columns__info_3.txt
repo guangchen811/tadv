@@ -1,0 +1,6 @@
+Age
+Date of Admission
+Days Stayed
+Discharge Date
+Doctor
+Medical Condition

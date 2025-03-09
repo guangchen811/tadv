@@ -1,0 +1,12 @@
+Billing Amount
+Date of Admission
+id
+Medical Condition
+Name
+Test Results
+Billing Amount
+Date of Admission
+id
+Medical Condition
+Name
+Test Results

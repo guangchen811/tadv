@@ -1,0 +1,6 @@
+Age
+Billing Amount
+Gender
+id
+Medical Condition
+Test Results

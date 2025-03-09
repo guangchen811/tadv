@@ -1,0 +1,8 @@
+billing_amount
+Date of Admission
+Discharge Date
+Doctor
+id
+Insurance Provider
+Room Number
+Test Results

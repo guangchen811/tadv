@@ -1,0 +1,4 @@
+Date of Admission
+Discharge Date
+Doctor
+Medical Condition

@@ -1,0 +1,6 @@
+admission_date
+Age
+billing_amount
+Gender
+id
+medical_condition

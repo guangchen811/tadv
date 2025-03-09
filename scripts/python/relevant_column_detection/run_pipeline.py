@@ -87,19 +87,8 @@ if __name__ == "__main__":
     # model_names = ["string-matching", "llama3.2:1b", "llama3.2", "gpt-4o-mini", "gpt-4o"]
     model_names = ["string-matching", "gpt-3.5-turbo", "gpt-4o", "gpt-4.5-preview"]
     processed_data_label = '0'
-    dataset_name = dataset_name_options[1]
+    dataset_name = dataset_name_options[0]
 
     all_results = run_langchain_cadv_on_all_models(dataset_name=dataset_name,
                                                    model_names=model_names,
                                                    processed_data_label=processed_data_label)
-    for task_type in list(all_results[model_names[0]].keys()):
-        result_each_model = {
-            model_name: all_results[model_name][task_type]
-            for model_name in model_names
-        }
-        f1_scores_list = []
-        for model_name in model_names:
-            f1_scores = RelevantColumnDetectionMetric().statistics_calculation(all_results[model_name][task_type][0],
-                                                                               all_results[model_name][task_type][1])
-            f1_scores_list.append(f1_scores['f1_list'])
-        RelevantColumnDetectionMetric().plot_f1_boxplot(dataset_name, f1_scores_list, model_names)

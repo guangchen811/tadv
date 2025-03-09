@@ -1,0 +1,22 @@
+Age
+Billing Amount
+Date of Admission
+Discharge Date
+Doctor
+Hospital
+id
+Insurance Provider
+Name
+Room Number
+Test Results
+Age
+Billing Amount
+Date of Admission
+Discharge Date
+Doctor
+Hospital
+id
+Insurance Provider
+Name
+Room Number
+Test Results

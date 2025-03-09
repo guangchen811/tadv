@@ -1,0 +1,4 @@
+admission_dt
+discharge_dt
+id
+length_of_stay

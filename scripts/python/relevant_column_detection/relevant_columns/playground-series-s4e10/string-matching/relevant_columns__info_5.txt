@@ -1,0 +1,4 @@
+id
+loan_amnt
+loan_status
+person_income

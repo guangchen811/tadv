@@ -1,0 +1,4 @@
+admission_date
+billing_amount
+Gender
+medical_condition

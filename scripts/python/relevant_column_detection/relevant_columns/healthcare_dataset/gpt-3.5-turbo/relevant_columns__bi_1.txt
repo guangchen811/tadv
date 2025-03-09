@@ -1,0 +1,9 @@
+Admission Type
+Age
+Billing Amount
+Gender
+Insurance Provider
+Medical Condition
+Medication
+Name
+Test Results

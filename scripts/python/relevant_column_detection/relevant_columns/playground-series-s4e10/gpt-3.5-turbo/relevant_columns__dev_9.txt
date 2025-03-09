@@ -1,0 +1,4 @@
+loan_amnt
+loan_int_rate
+loan_status
+person_emp_length

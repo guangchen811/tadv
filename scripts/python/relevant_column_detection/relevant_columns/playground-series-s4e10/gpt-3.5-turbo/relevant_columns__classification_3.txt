@@ -1,0 +1,10 @@
+age
+credit_hist_length
+default_flag
+emp_length
+grade
+home_ownership
+income
+interest_rate
+loan_amount
+loan_income_ratio

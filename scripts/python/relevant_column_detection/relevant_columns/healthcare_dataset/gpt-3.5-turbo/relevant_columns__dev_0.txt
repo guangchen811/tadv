@@ -1,0 +1,4 @@
+Admission Type
+Age
+Billing Amount
+Medical Condition

@@ -1,0 +1,8 @@
+Admission Type
+Age
+Billing Amount
+Blood Type
+Gender
+id
+Medication
+Test Results

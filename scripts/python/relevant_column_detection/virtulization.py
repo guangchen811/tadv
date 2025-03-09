@@ -1,5 +1,7 @@
-from matplotlib import pyplot as plt
+import pandas as pd
 import seaborn as sns
+from matplotlib import pyplot as plt
+
 from scripts.python.relevant_column_detection.metrics import RelevantColumnDetectionMetric
 from scripts.python.relevant_column_detection.run_pipeline import task_group_mapping
 from scripts.python.utils import load_previous_and_new_spark_data
@@ -49,28 +51,93 @@ def result_calculation(dataset_name, model_name, processed_data_label):
     return result_each_type
 
 
+# if __name__ == '__main__':
+#     dataset_name_options = ["playground-series-s4e10", "healthcare_dataset"]
+#     model_names = ["string-matching", "gpt-3.5-turbo", "gpt-4o", "gpt-4.5-preview"]
+#     processed_data_label = '0'
+#     dataset_name = dataset_name_options[1]
+#
+#     all_results = {}
+#     for model_name in model_names:
+#         results = result_calculation(dataset_name_options[1], model_name, processed_data_label)
+#         all_results[model_name] = results
+#
+#     for task_type in list(all_results[model_names[0]].keys()):
+#         f1_scores_list = []
+#         for model_name in model_names:
+#             f1_scores = RelevantColumnDetectionMetric().statistics_calculation(all_results[model_name][task_type][0],
+#                                                                                all_results[model_name][task_type][1])
+#             f1_scores_list.append(f1_scores['f1_list'])
+#         result_path = get_current_folder() / "figs" / dataset_name
+#         result_path.mkdir(parents=True, exist_ok=True)
+#         plt.figure(figsize=(10, 6))
+#         sns.boxplot(data=f1_scores_list)
+#         plt.xticks(ticks=range(len(model_names)), labels=model_names, rotation=45)
+#         plt.ylabel("F1 Score")
+#         plt.grid(True, linestyle='--', alpha=0.6)
+#         plt.savefig(result_path / f"f1_score_boxplot__{dataset_name}__{task_type}.png")
+
 if __name__ == '__main__':
     dataset_name_options = ["playground-series-s4e10", "healthcare_dataset"]
     model_names = ["string-matching", "gpt-3.5-turbo", "gpt-4o", "gpt-4.5-preview"]
     processed_data_label = '0'
-    dataset_name = dataset_name_options[1]
+    dataset_name = dataset_name_options[0]
+
+    task_official_name_mapping = {
+        "bi": "Biz Intelligence",
+        "dev": "Development",
+        "feature_engineering": "Feature Eng.",
+        "classification": "Classif.",
+        "regression": "Regression",
+        "info": "Web Gen."
+    }
 
     all_results = {}
     for model_name in model_names:
         results = result_calculation(dataset_name_options[1], model_name, processed_data_label)
         all_results[model_name] = results
 
+    # List to collect data for visualization
+    plot_data = []
+
     for task_type in list(all_results[model_names[0]].keys()):
-        f1_scores_list = []
         for model_name in model_names:
-            f1_scores = RelevantColumnDetectionMetric().statistics_calculation(all_results[model_name][task_type][0],
-                                                                               all_results[model_name][task_type][1])
-            f1_scores_list.append(f1_scores['f1_list'])
-        result_path = get_current_folder() / "figs" / dataset_name
-        result_path.mkdir(parents=True, exist_ok=True)
-        plt.figure(figsize=(10, 6))
-        sns.boxplot(data=f1_scores_list)
-        plt.xticks(ticks=range(len(model_names)), labels=model_names, rotation=45)
-        plt.ylabel("F1 Score")
-        plt.grid(True, linestyle='--', alpha=0.6)
-        plt.savefig(result_path / f"f1_score_boxplot__{dataset_name}__{task_type}.png")
+            f1_scores = RelevantColumnDetectionMetric().statistics_calculation(
+                all_results[model_name][task_type][0],
+                all_results[model_name][task_type][1]
+            )
+            # Convert F1 scores list into long format
+            for score in f1_scores['f1_list']:
+                plot_data.append({"Task Type": task_official_name_mapping[task_type], "Model": model_name, "F1 Score": score})
+
+    # Convert collected data into a DataFrame
+    df = pd.DataFrame(plot_data)
+
+    # Set up the result path
+    result_path = get_current_folder() / "figs" / dataset_name
+    result_path.mkdir(parents=True, exist_ok=True)
+
+    # Set up a professional style
+    sns.set_theme(style="whitegrid", font_scale=1.5, rc={"axes.labelsize": 14, "axes.titlesize": 16})
+    plt.figure(figsize=(12, 6))
+
+    # Create a boxplot
+    ax = sns.boxplot(x="Task Type", y="F1 Score", hue="Model", data=df, width=0.6, linewidth=1.5)
+
+    # Improve aesthetics for a professional look
+
+    ax.set_xlabel("Task Type", fontsize=16, labelpad=10)
+    ax.set_ylabel("F1 Score", fontsize=16, labelpad=10)
+    ax.set_title(f"F1 Score Comparison on {dataset_name}", fontsize=18, pad=15)
+
+    # Adjust legend position and labels
+    ax.legend(title="Model", title_fontsize=14, fontsize=12, loc="lower left", frameon=True)
+
+    # Rotate x-axis labels for better readability
+    plt.xticks(rotation=30, ha="center", fontsize=14)
+
+    # Grid styling
+    plt.grid(axis="y", linestyle="--", alpha=0.7)
+
+    # Save the figure in high resolution
+    plt.savefig(result_path / f"f1_score_boxplot.png", dpi=300, bbox_inches="tight")

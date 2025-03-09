@@ -1,0 +1,14 @@
+Age
+Date of Admission
+Discharge Date
+Doctor
+id
+Medical Condition
+Name
+Age
+Date of Admission
+Discharge Date
+Doctor
+id
+Medical Condition
+Name

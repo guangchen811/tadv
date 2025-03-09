@@ -1,0 +1,10 @@
+Admission Type
+Age
+Billing Amount
+Blood Type
+Date of Admission
+Discharge Date
+Gender
+Hospital
+id
+Medical Condition

@@ -1,0 +1,2 @@
+loan_grade
+person_income

@@ -1,0 +1,10 @@
+cb_person_cred_hist_length
+cb_person_default_on_file
+id
+loan_amnt
+loan_amnt_category
+loan_grade
+loan_int_rate
+loan_percent_income
+loan_status
+person_home_ownership

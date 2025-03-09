@@ -1,0 +1,6 @@
+Admission Type
+Gender
+id
+Insurance Provider
+Medical Condition
+Name

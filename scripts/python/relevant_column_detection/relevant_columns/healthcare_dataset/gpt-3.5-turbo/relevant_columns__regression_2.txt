@@ -1,0 +1,8 @@
+admission_dt
+billing_amount
+discharge_dt
+Doctor
+id
+length_of_stay
+Name
+Test Results

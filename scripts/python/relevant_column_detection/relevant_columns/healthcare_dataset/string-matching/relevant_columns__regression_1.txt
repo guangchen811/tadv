@@ -1,0 +1,16 @@
+Age
+Billing Amount
+Date of Admission
+Discharge Date
+Doctor
+id
+Name
+Test Results
+Age
+Billing Amount
+Date of Admission
+Discharge Date
+Doctor
+id
+Name
+Test Results

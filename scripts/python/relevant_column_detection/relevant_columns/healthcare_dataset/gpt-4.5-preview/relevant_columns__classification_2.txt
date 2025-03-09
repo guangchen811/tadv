@@ -1,0 +1,11 @@
+Admission Type
+Age
+Age_Billing_Interaction
+Billing Amount
+Blood Type
+Gender
+id
+Insurance Provider
+Medical Condition
+Medication
+Test Results

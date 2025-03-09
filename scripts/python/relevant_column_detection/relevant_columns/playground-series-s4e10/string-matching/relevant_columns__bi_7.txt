@@ -1,0 +1,7 @@
+loan_amnt
+loan_grade
+loan_int_rate
+loan_intent
+loan_percent_income
+loan_status
+person_income

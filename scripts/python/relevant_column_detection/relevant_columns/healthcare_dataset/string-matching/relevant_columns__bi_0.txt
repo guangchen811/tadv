@@ -1,0 +1,18 @@
+Billing Amount
+Date of Admission
+Discharge Date
+Doctor
+Hospital
+id
+Insurance Provider
+Medical Condition
+Room Number
+Billing Amount
+Date of Admission
+Discharge Date
+Doctor
+Hospital
+id
+Insurance Provider
+Medical Condition
+Room Number

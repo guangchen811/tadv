@@ -1,0 +1,7 @@
+Admission Type
+Age
+Billing Amount
+id
+Medical Condition
+Medication
+Test Results

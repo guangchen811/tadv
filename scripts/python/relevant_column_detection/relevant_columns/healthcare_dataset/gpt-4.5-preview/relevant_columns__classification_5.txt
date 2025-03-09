@@ -1,0 +1,8 @@
+Age
+Billing Amount
+Blood Type
+Date of Admission
+Discharge Date
+id
+Medical Condition
+Test Results

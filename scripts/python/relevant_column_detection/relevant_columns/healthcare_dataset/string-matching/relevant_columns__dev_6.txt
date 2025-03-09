@@ -1,0 +1,12 @@
+Admission Type
+Gender
+id
+Insurance Provider
+Medical Condition
+Name
+Admission Type
+Gender
+id
+Insurance Provider
+Medical Condition
+Name

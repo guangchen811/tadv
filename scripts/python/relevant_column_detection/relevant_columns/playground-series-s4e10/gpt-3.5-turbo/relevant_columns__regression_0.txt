@@ -1,0 +1,6 @@
+cb_person_default_on_file
+cred_hist_ratio
+loan_amnt_int_rate
+loan_grade
+log_loan_amnt
+person_home_ownership

@@ -1,0 +1,4 @@
+Age
+Date of Admission
+Discharge Date
+Name
