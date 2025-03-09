@@ -1,7 +1,7 @@
-import os
-
 import numpy as np
+import seaborn as sns
 from matplotlib import pyplot as plt
+from scipy.stats import trim_mean, gmean
 from sklearn.metrics import (
     accuracy_score, hamming_loss, precision_score, recall_score, f1_score
 )
@@ -38,20 +38,11 @@ class RelevantColumnDetectionMetric:
         - metrics_with_stats (dict): A dictionary containing metrics with their means and standard deviations.
         """
         # Convert to NumPy arrays
-        y_true = np.array(y_true)
-        y_pred = np.array(y_pred)
 
-        # Initialize list to collect individual metrics for each label
-        accuracy_list, hamming_list = [], []
-        precision_list, recall_list, f1_list = [], [], []
-
-        # Evaluate metrics label by label
-        for i in range(y_true.shape[1]):  # Iterate over each column (label)
-            accuracy_list.append(accuracy_score(y_true[:, i], y_pred[:, i]))
-            hamming_list.append(hamming_loss(y_true[:, i], y_pred[:, i]))
-            precision_list.append(precision_score(y_true[:, i], y_pred[:, i], zero_division=0))
-            recall_list.append(recall_score(y_true[:, i], y_pred[:, i], zero_division=0))
-            f1_list.append(f1_score(y_true[:, i], y_pred[:, i], zero_division=0))
+        statistics = self.statistics_calculation(y_pred,
+                                                 y_true)
+        accuracy_list, f1_list, hamming_list, precision_list, recall_list = statistics["accuracy_list"], statistics[
+            "f1_list"], statistics["hamming_list"], statistics["precision_list"], statistics["recall_list"]
 
         # Compute mean and standard deviation for each metric
         metrics_with_stats = {
@@ -63,66 +54,48 @@ class RelevantColumnDetectionMetric:
         }
         return metrics_with_stats
 
+    def statistics_calculation(self, y_pred, y_true):
+        y_true = np.array(y_true)
+        y_pred = np.array(y_pred)
+        print(y_true.shape)
+        accuracy_list, hamming_list = [], []
+        precision_list, recall_list, f1_list = [], [], []
+        for i in range(y_true.shape[0]):
+            accuracy_list.append(accuracy_score(y_true[i, :], y_pred[i, :]))
+            hamming_list.append(hamming_loss(y_true[i, :], y_pred[i, :]))
+            precision_list.append(precision_score(y_true[i, :], y_pred[i, :], zero_division=0))
+            recall_list.append(recall_score(y_true[i, :], y_pred[i, :], zero_division=0))
+            f1_list.append(f1_score(y_true[i, :], y_pred[i, :], zero_division=0))
+
+        # Compute aggregated metrics for F1 scores
+        median_f1 = np.median(f1_list)
+        trimmed_mean_f1 = trim_mean(f1_list, 0.1)  # Trim 10% from both ends
+        geometric_mean_f1 = gmean(np.maximum(f1_list, 1e-6))  # Avoid zero values for geometric mean
+        harmonic_mean_f1 = len(f1_list) / np.sum(1 / np.maximum(f1_list, 1e-6))  # Avoid division by zero
+        statistics = {
+            "accuracy_list": accuracy_list,
+            "f1_list": f1_list,
+            "hamming_list": hamming_list,
+            "precision_list": precision_list,
+            "recall_list": recall_list,
+            "median_f1": median_f1,
+            "trimmed_mean_f1": trimmed_mean_f1,
+            "geometric_mean_f1": geometric_mean_f1,
+            "harmonic_mean_f1": harmonic_mean_f1,
+        }
+        return statistics
+
     def binary_vectorize(self, all_columns, ground_truth, relevant_columns):
         ground_truth_vector = [1 if col in ground_truth else 0 for col in all_columns]
         relevant_columns_vector = [1 if col in relevant_columns else 0 for col in all_columns]
-
         return ground_truth_vector, relevant_columns_vector
 
-    def plot_model_metrics(self, metrics_dict, dataset_name, picture_name):
-        """
-        Plot the performance metrics for one or more models.
-
-        Parameters:
-        - metrics_dict (dict): A dictionary where the key is the model name and the value is a metrics_with_stats dictionary.
-        """
-        # Extract unique metrics from the first model
-        metric_names = list(next(iter(metrics_dict.values())).keys())
-        colors = plt.get_cmap("tab10")(np.linspace(0, 1, len(metrics_dict)))
-        # Initialize figure and axes
-        fig, axes = plt.subplots(len(metric_names), 1, figsize=(10, len(metric_names) * 4))
-        if len(metric_names) == 1:
-            axes = [axes]  # Ensure axes is iterable for a single subplot
-
-        # Plot each metric
-        for ax, metric_name in zip(axes, metric_names):
-            model_names = []
-            means = []
-            stds = []
-
-            # Collect data for each model
-            for model_name, metrics in metrics_dict.items():
-                model_names.append(model_name)
-                mean, std = map(float, metrics[metric_name].split(" ± "))
-                means.append(mean)
-                stds.append(std)
-
-            # Plot with error bars
-            ax.bar(model_names, means, yerr=stds, capsize=5, alpha=0.7, color=colors, edgecolor='black')
-            ax.set_title(metric_name, fontsize=14)
-            ax.set_ylabel("Value", fontsize=12)
-            if metric_names != "Hamming Loss":
-                ax.set_ylim(0, 1.2)
-            else:
-                ax.set_ylim(0, 0.1)
-            ax.grid(axis='y', linestyle='--', alpha=0.7)
-
-        # Adjust layout
-        plt.tight_layout()
-        os.makedirs(get_current_folder() / "figs" / dataset_name, exist_ok=True)
-        plt.savefig(get_current_folder() / "figs" / dataset_name / f"{picture_name}.png")
-
-
-# Example usage
-if __name__ == "__main__":
-    # Example ground truth and predictions
-    y_true = [[1, 0, 1]]
-    y_pred = [[1, 0, 1]]
-
-    # Instantiate the metric class
-    metric_evaluator = RelevantColumnDetectionMetric(average='macro')
-    results = metric_evaluator.evaluate(y_true, y_pred)
-
-    # Print the results
-    for metric_name, value in results.items():
-        print(f"{metric_name}: {value}")
+    def plot_f1_boxplot(self, dataset_name, model_f1_scores, model_names):
+        result_path = get_current_folder() / "figs" / dataset_name
+        result_path.mkdir(parents=True, exist_ok=True)
+        plt.figure(figsize=(10, 6))
+        sns.boxplot(data=model_f1_scores)
+        plt.xticks(ticks=range(len(model_names)), labels=model_names, rotation=45)
+        plt.ylabel("F1 Score")
+        plt.grid(True, linestyle='--', alpha=0.6)
+        plt.savefig(result_path / f"f1_score_boxplot__{dataset_name}.png")

@@ -1,4 +1,4 @@
-from tadv.utils import load_dotenv
+from tadv.utils import load_dotenv, get_current_folder
 
 load_dotenv()
 from scripts.python.relevant_column_detection.string_matching import run_string_matching
@@ -41,6 +41,9 @@ def run_langchain_cadv_on_single_model(dataset_name, model_name, processed_data_
 
     metric_evaluator = RelevantColumnDetectionMetric(average='macro')
     result_each_type = {}
+
+    result_path = get_current_folder() / "relevant_columns" / f"{dataset_name}" / f"{model_name}"
+    result_path.mkdir(parents=True, exist_ok=True)
     for task_type in ['bi', 'dev', 'feature_engineering', 'classification', 'regression', 'info']:
         scripts_path_dir = original_data_path / "scripts" / task_group_mapping[task_type]
         print(task_type, end=' ')
@@ -57,13 +60,20 @@ def run_langchain_cadv_on_single_model(dataset_name, model_name, processed_data_
                 relevant_columns_list = run_llm(column_desc, model_name, task_instance.original_script,
                                                 task_group_mapping[task_type])
 
+            save_path = result_path / f"relevant_columns__{model_name}.txt"
+            with open(save_path, 'a') as f:
+                f.write(f"{script_path.stem}\n")
+                for column in relevant_columns_list:
+                    f.write(f"{column}\n")
+                f.write("\n")
+
             ground_truth = sorted(task_instance.annotations['required_columns'], key=lambda x: x.lower())
             ground_truth_vector, relevant_columns_vector = metric_evaluator.binary_vectorize(column_list,
                                                                                              ground_truth,
                                                                                              relevant_columns_list)
             all_ground_truth_vectors.append(ground_truth_vector)
             all_relevant_columns_vectors.append(relevant_columns_vector)
-        result_each_type[task_type] = metric_evaluator.evaluate(all_ground_truth_vectors, all_relevant_columns_vectors)
+        result_each_type[task_type] = [all_ground_truth_vectors, all_relevant_columns_vectors]
     print("done")
     return result_each_type
 
@@ -101,21 +111,22 @@ def run_langchain_cadv_on_all_models(dataset_name, model_names, processed_data_l
 if __name__ == "__main__":
     dataset_name_options = ["playground-series-s4e10", "healthcare_dataset"]
     # model_names = ["string-matching", "llama3.2:1b", "llama3.2", "gpt-4o-mini", "gpt-4o"]
-    model_names = ["string-matching", "gpt-4o-mini"]
+    model_names = ["string-matching", "gpt-4o-mini", "gpt-4o", "gpt-4.5-preview"]
     processed_data_label = '0'
-    dataset_name = dataset_name_options[0]
+    dataset_name = dataset_name_options[1]
 
     all_results = run_langchain_cadv_on_all_models(dataset_name=dataset_name,
                                                    model_names=model_names,
                                                    processed_data_label=processed_data_label)
     # reverse the order of the keys
-    for task_type in ['bi', 'dev', 'feature_engineering', 'classification', 'regression', 'info']:
+    for task_type in list(all_results[model_names[0]].keys()):
         result_each_model = {
             model_name: all_results[model_name][task_type]
             for model_name in model_names
         }
-        RelevantColumnDetectionMetric().plot_model_metrics(
-            result_each_model,
-            dataset_name=dataset_name,
-            picture_name=f"{task_group_mapping[task_type]}_{task_type}"
-        )
+        f1_scores_list = []
+        for model_name in model_names:
+            f1_scores = RelevantColumnDetectionMetric().statistics_calculation(all_results[model_name][task_type][0],
+                                                                               all_results[model_name][task_type][1])
+            f1_scores_list.append(f1_scores['f1_list'])
+        RelevantColumnDetectionMetric().plot_f1_boxplot(dataset_name, f1_scores_list, model_names)
