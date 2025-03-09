@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 import oyaml as yaml
 
 from tadv.error_injection.abstract_corruption import DataCorruption
-from error_injection.corrupts import MissingCategoricalValueCorruption, GaussianNoise, Scaling, ColumnInserting, \
+from tadv.error_injection.corrupts import MissingCategoricalValueCorruption, GaussianNoise, Scaling, ColumnInserting, \
     MaskValues, ColumnDropping
 
 
