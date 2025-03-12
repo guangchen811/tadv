@@ -3,11 +3,11 @@ from tadv.utils import get_project_root
 from utils._utils import get_task_instance
 
 
-def run_sql_code(processed_idx, dataset_name, single_script=""):
+def run_sql_code(processed_data_label, dataset_name, single_script=""):
     executor = DuckDBExecutor()
     project_root = get_project_root()
     original_data_path = project_root / "data" / f"{dataset_name}"
-    processed_data_path = project_root / "data_processed" / f"{dataset_name}" / "sql_query" / f"{processed_idx}"
+    processed_data_path = project_root / "data_processed" / f"{dataset_name}" / "sql_query" / f"{processed_data_label}"
     script_dir = original_data_path / "scripts" / "sql_query"
     for script_path in sorted(script_dir.iterdir(), key=lambda x: x.name, reverse=False):
         if len(single_script) > 0 and single_script not in script_path.name:
@@ -28,4 +28,4 @@ def run_sql_code(processed_idx, dataset_name, single_script=""):
 if __name__ == "__main__":
     dataset_name = "healthcare_dataset"
     # dataset_name = "playground-series-s4e10"
-    run_sql_code(processed_idx="base_version", dataset_name=dataset_name, single_script="bi_0")
+    run_sql_code(processed_data_label="base_version", dataset_name=dataset_name, single_script="bi_0")

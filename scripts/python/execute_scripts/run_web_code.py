@@ -2,11 +2,11 @@ from tadv.runtime_environments import PythonExecutor
 from tadv.utils import get_project_root
 
 
-def run_web_code(processed_idx, dataset_name, single_script=""):
+def run_web_code(processed_data_label, dataset_name, single_script=""):
     executor = PythonExecutor()
     project_root = get_project_root()
     original_data_path = project_root / "data" / dataset_name
-    processed_data_path = project_root / "data_processed" / f"{dataset_name}" / "webpage_generation" / f"{processed_idx}"
+    processed_data_path = project_root / "data_processed" / f"{dataset_name}" / "webpage_generation" / f"{processed_data_label}"
     script_dir = original_data_path / "scripts" / "webpage_generation"
     for script_path in sorted(script_dir.iterdir(), key=lambda x: x.name, reverse=False):
         if len(single_script) > 0 and single_script not in script_path.name:
@@ -24,5 +24,5 @@ def run_web_code(processed_idx, dataset_name, single_script=""):
 
 
 if __name__ == "__main__":
-    # run_web_code(processed_idx="base_version", dataset_name="healthcare_dataset", single_script="info_9")
-    run_web_code(processed_idx="0", dataset_name="playground-series-s4e10")
+    # run_web_code(processed_data_label="base_version", dataset_name="healthcare_dataset", single_script="info_9")
+    run_web_code(processed_data_label="0", dataset_name="playground-series-s4e10")
