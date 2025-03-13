@@ -127,4 +127,4 @@ if __name__ == '__main__':
     plt.tight_layout()
 
     # Save figure in high resolution
-    plt.savefig(result_path / "f1_score_boxplot_combined.pdf", dpi=300, bbox_inches="tight")
+    plt.savefig(result_path / "result-rcd.pdf", dpi=300, bbox_inches="tight")
