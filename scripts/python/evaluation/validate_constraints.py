@@ -1,24 +1,21 @@
-import pandas as pd
-
 from tadv.data_models import Constraints, ValidationResults
 from tadv.utils import load_dotenv
 
 load_dotenv()
 
-from sklearn.metrics import roc_auc_score
-import numpy as np
 from tadv.dq_manager import DeequDataQualityManager
 from tadv.loader import FileLoader
 from tadv.utils import get_project_root
 
 
-def evaluate_playground_series_s4e10(processed_data_label):
+def evaluate(dataset_name, downstream_task, processed_data_label):
     dq_manager = DeequDataQualityManager()
     project_root = get_project_root()
-    processed_data_path = project_root / "data_processed" / "playground-series-s4e10_ml_inference" / f"{processed_data_label}"
-    ground_truth = FileLoader.load_csv(processed_data_path / "files_with_clean_new_data" / "ground_truth.csv")
-    output_dir = processed_data_path / "output"
+    processed_data_path = project_root / "data_processed" / dataset_name / downstream_task / f"{processed_data_label}"
+    constraints_validation_dir = processed_data_path / "constraints_validation"
+    constraints_validation_dir.mkdir(parents=True, exist_ok=True)
     constraints_dir = processed_data_path / "constraints"
+
     clean_test_data = FileLoader.load_csv(processed_data_path / "files_with_clean_new_data" / "test.csv")
     corrupted_test_data = FileLoader.load_csv(processed_data_path / "files_with_corrupted_new_data" / "test.csv")
 
@@ -30,42 +27,29 @@ def evaluate_playground_series_s4e10(processed_data_label):
         dq_manager)
 
     validation_results_on_clean_test_data_deequ.save_to_yaml(
-        output_dir / "validation_results_on_clean_test_data_deequ.yaml")
+        constraints_validation_dir / "validation_results_on_clean_test_data_deequ.yaml")
     validation_results_on_corrupted_test_data_deequ.save_to_yaml(
-        output_dir / "validation_results_on_corrupted_test_data_deequ.yaml")
+        constraints_validation_dir / "validation_results_on_corrupted_test_data_deequ.yaml")
 
     for script_constraints_dir in constraints_dir.iterdir():
         if script_constraints_dir.is_file():
             continue
         print(f"evaluating script: {script_constraints_dir.name}")
-        cadv_suggestion_file_path = script_constraints_dir / "tadv_constraints.yaml"
-        validation_results_on_clean_test_data_cadv, validation_results_on_corrupted_test_data_cadv = validate_on_both_test_data(
-            cadv_suggestion_file_path,
-            clean_test_data,
-            corrupted_test_data,
-            dq_manager)
-
-        validation_results_on_clean_test_data_cadv.save_to_yaml(
-            output_dir / script_constraints_dir.name / "validation_results_on_clean_test_data_cadv.yaml")
-        validation_results_on_corrupted_test_data_cadv.save_to_yaml(
-            output_dir / script_constraints_dir.name / "validation_results_on_corrupted_test_data_cadv.yaml")
-
-        result_on_clean_test_data = FileLoader.load_csv(
-            script_constraints_dir.parent.parent / "output" / script_constraints_dir.name / "results_on_clean_test_data" / "submission.csv")
-        auc_on_clean_test_data = roc_auc_score(np.where(ground_truth['loan_status'].to_numpy() > 0.5, 1, 0),
-                                               result_on_clean_test_data.iloc[:, 1].to_numpy())
-        try:
-            result_on_corrupted_test_data = FileLoader.load_csv(
-                script_constraints_dir.parent.parent / "output" / script_constraints_dir.name / "results_on_corrupted_test_data" / "submission.csv")
-            auc_on_corrupted_test_data = roc_auc_score(np.where(ground_truth['loan_status'].to_numpy() > 0.5, 1, 0),
-                                                       result_on_corrupted_test_data.iloc[:, 1].to_numpy())
-        except Exception as e:
-            auc_on_corrupted_test_data = np.nan
-        model_performance = pd.DataFrame({
-            "auc_on_clean_test_data": [auc_on_clean_test_data],
-            "auc_on_corrupted_test_data": [auc_on_corrupted_test_data],
-        })
-        model_performance.to_csv(output_dir / script_constraints_dir.name / "model_performance.csv", index=False)
+        for constraints_file_name in script_constraints_dir.iterdir():
+            if constraints_file_name.suffix != ".yaml":
+                raise ValueError(f"Only yaml files are supported. Found {constraints_file_name.suffix}")
+            tadv_suggestion_file_path = script_constraints_dir / constraints_file_name
+            _, llm_used, strategy_used = constraints_file_name.stem.split("__")
+            validation_results_on_clean_test_data_tadv, validation_results_on_corrupted_test_data_tadv = validate_on_both_test_data(
+                tadv_suggestion_file_path,
+                clean_test_data,
+                corrupted_test_data,
+                dq_manager)
+            (constraints_validation_dir / script_constraints_dir.name).mkdir(parents=True, exist_ok=True)
+            validation_results_on_clean_test_data_tadv.save_to_yaml(
+                constraints_validation_dir / script_constraints_dir.name / f"validation_results_on_clean_test_data_tadv__{llm_used}__{strategy_used}.yaml")
+            validation_results_on_corrupted_test_data_tadv.save_to_yaml(
+                constraints_validation_dir / script_constraints_dir.name / f"validation_results_on_corrupted_test_data_tadv__{llm_used}__{strategy_used}.yaml")
 
 
 def validate_on_both_test_data(suggestion_file_path, clean_test_data, corrupted_test_data, dq_manager):
@@ -108,4 +92,10 @@ def build_validation_results_dict(code_list_for_constraints, status_on_clean_tes
 
 
 if __name__ == "__main__":
-    evaluate_playground_series_s4e10(processed_data_label=6)
+    dataset_name_options = ["playground-series-s4e10", "healthcare_dataset"]
+    downstream_task_type_options = ["ml_inference_classification", "ml_inference_regression", "sql_query",
+                                    "webpage_generation"]
+
+    evaluate(dataset_name=dataset_name_options[0],
+             downstream_task=downstream_task_type_options[0],
+             processed_data_label="0")

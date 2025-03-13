@@ -39,5 +39,5 @@ if __name__ == "__main__":
 
     run_deequ_dv(dataset_name=dataset_name_options[0],
                  downstream_task=downstream_task_options[0],
-                 processed_data_label="1"
+                 processed_data_label="0"
                  )

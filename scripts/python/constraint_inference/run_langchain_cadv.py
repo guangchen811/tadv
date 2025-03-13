@@ -103,6 +103,6 @@ if __name__ == "__main__":
     run_langchain_cadv(dataset_name=dataset_name_options[0],
                        downstream_task=downstream_task_options[0],
                        model_name=model_name_options[0],
-                       processed_data_label='1',
+                       processed_data_label='0',
                        assumption_generation_trick=assumption_generation_trick_options[0],
                        script_name="classification_1")
