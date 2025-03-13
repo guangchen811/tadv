@@ -27,9 +27,9 @@ def evaluate(dataset_name, downstream_task, processed_data_label):
         dq_manager)
 
     validation_results_on_clean_test_data_deequ.save_to_yaml(
-        constraints_validation_dir / "validation_results_on_clean_test_data_deequ.yaml")
+        constraints_validation_dir / "validation_results_on_clean_test_data__deequ.yaml")
     validation_results_on_corrupted_test_data_deequ.save_to_yaml(
-        constraints_validation_dir / "validation_results_on_corrupted_test_data_deequ.yaml")
+        constraints_validation_dir / "validation_results_on_corrupted_test_data__deequ.yaml")
 
     for script_constraints_dir in constraints_dir.iterdir():
         if script_constraints_dir.is_file():
@@ -97,7 +97,7 @@ if __name__ == "__main__":
                                     "webpage_generation"]
 
     dataset_option = 0
-    downstream_task_option = 3
+    downstream_task_option = 0
     processed_data_label = "0"
 
     evaluate(dataset_name=dataset_name_options[dataset_option],
