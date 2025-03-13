@@ -27,7 +27,7 @@ def run_langchain_cadv_on_single_model(dataset_name, model_name, processed_data_
 
     spark_previous_data, spark_previous, _, _ = load_previous_and_new_spark_data(
         dataset_name=dataset_name,
-        downstream_task="sql_query",
+        downstream_task="sql_query", # it doesn't matter what this is set to as long as it's a valid task
         processed_data_label=processed_data_label,
         dq_manager=dq_manager
     )
