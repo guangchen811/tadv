@@ -1,9 +1,9 @@
 from tadv.runtime_environments import DuckDBExecutor
 from tadv.utils import get_project_root
-from utils._utils import get_task_instance
+from tadv.utils._utils import get_task_instance
 
 
-def run_sql_code(processed_data_label, dataset_name, single_script=""):
+def run_sql_code(dataset_name, processed_data_label, single_script=""):
     executor = DuckDBExecutor()
     project_root = get_project_root()
     original_data_path = project_root / "data" / f"{dataset_name}"
@@ -26,6 +26,12 @@ def run_sql_code(processed_data_label, dataset_name, single_script=""):
 
 
 if __name__ == "__main__":
-    dataset_name = "healthcare_dataset"
-    # dataset_name = "playground-series-s4e10"
-    run_sql_code(processed_data_label="base_version", dataset_name=dataset_name, single_script="bi_0")
+    dataset_name_options = ["playground-series-s4e10", "healthcare_dataset"]
+
+    dataset_option = 0
+    processed_data_label = "0"
+    single_script = ""
+
+    run_sql_code(dataset_name=dataset_name_options[dataset_option],
+                 processed_data_label=f"{processed_data_label}",
+                 single_script=single_script)

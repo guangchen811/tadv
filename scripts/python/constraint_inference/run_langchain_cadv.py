@@ -101,7 +101,7 @@ if __name__ == "__main__":
     assumption_generation_trick_options = [None, "with_deequ", "with_experience"]
     model_name_options = ["gpt-4.5-preview", "gpt-4o"]
     run_langchain_cadv(dataset_name=dataset_name_options[0],
-                       downstream_task=downstream_task_options[0],
+                       downstream_task=downstream_task_options[3],
                        model_name=model_name_options[0],
                        processed_data_label='0',
                        assumption_generation_trick=assumption_generation_trick_options[0],

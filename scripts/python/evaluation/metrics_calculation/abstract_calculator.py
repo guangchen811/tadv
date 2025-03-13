@@ -10,5 +10,5 @@ class AbstractMetricsCalculation():
         pass
 
     @abstractmethod
-    def calculate(self, dataset_name, downstream_task, processed_data_label, script_output_dir):
+    def calculate(self, downstream_task, script_output_dir):
         raise NotImplementedError

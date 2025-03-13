@@ -96,6 +96,10 @@ if __name__ == "__main__":
     downstream_task_type_options = ["ml_inference_classification", "ml_inference_regression", "sql_query",
                                     "webpage_generation"]
 
-    evaluate(dataset_name=dataset_name_options[0],
-             downstream_task=downstream_task_type_options[0],
-             processed_data_label="0")
+    dataset_option = 0
+    downstream_task_option = 3
+    processed_data_label = "0"
+
+    evaluate(dataset_name=dataset_name_options[dataset_option],
+             downstream_task=downstream_task_type_options[downstream_task_option],
+             processed_data_label=processed_data_label)

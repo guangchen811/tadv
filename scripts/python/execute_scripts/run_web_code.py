@@ -24,5 +24,12 @@ def run_web_code(processed_data_label, dataset_name, single_script=""):
 
 
 if __name__ == "__main__":
-    # run_web_code(processed_data_label="base_version", dataset_name="healthcare_dataset", single_script="info_9")
-    run_web_code(processed_data_label="0", dataset_name="playground-series-s4e10")
+    dataset_name_options = ["playground-series-s4e10", "healthcare_dataset"]
+
+    dataset_option = 0
+    processed_data_label = "0"
+    single_script = ""
+
+    run_web_code(dataset_name=dataset_name_options[dataset_option],
+                 processed_data_label=f"{processed_data_label}",
+                 single_script=single_script)
