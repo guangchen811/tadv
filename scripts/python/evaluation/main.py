@@ -1,8 +1,7 @@
 import json
 from collections import defaultdict
 
-import oyaml as yaml
-
+from tadv.data_models import ValidationResults
 from tadv.utils import load_dotenv
 
 load_dotenv()
@@ -18,12 +17,13 @@ def results_calculation(dataset_name, downstream_task, processed_data_label):
     constraints_validation_dir = processed_data_path / "constraints_validation"
     output_validation_dir = processed_data_path / "output_validation"
 
+    output_validation_dict = defaultdict(dict)
     for script_output_dir in sorted(output_validation_dir.iterdir()):
         print(f"evaluating script: {script_output_dir.name}")
         output_file = output_validation_dir / f"{script_output_dir.name}"
         with output_file.open("r", encoding="utf-8") as f:
             result = json.load(f)
-            print(result)
+        output_validation_dict[script_output_dir.stem] = result
 
     constraints_validation_dict = defaultdict(dict)
     for script_constraints_dir in sorted(constraints_validation_dir.iterdir()):
@@ -31,8 +31,9 @@ def results_calculation(dataset_name, downstream_task, processed_data_label):
             # read yaml
             new_data_name, _ = script_constraints_dir.stem.split("__")
             constraints_file = constraints_validation_dir / f"{script_constraints_dir.name}"
-            with constraints_file.open("r", encoding="utf-8") as f:
-                constraints_validation_dict["deequ"][f"{new_data_name}__deequ"] = yaml.safe_load(f)
+            constraints_validation_dict["deequ"][f"{new_data_name}__deequ"] = ValidationResults.from_yaml(
+                constraints_file).check_result()
+
 
         else:
             for constraints_file_name in sorted(script_constraints_dir.iterdir()):
@@ -40,9 +41,11 @@ def results_calculation(dataset_name, downstream_task, processed_data_label):
                     raise ValueError(f"Only yaml files are supported. Found {constraints_file_name.suffix}")
                 new_data_name, llm_used, strategy_used = constraints_file_name.stem.split("__")
                 constraints_file = constraints_validation_dir / script_constraints_dir.name / f"{constraints_file_name}"
-                with constraints_file.open("r", encoding="utf-8") as f:
-                    constraints_validation_dict[script_constraints_dir.name][
-                        f"{new_data_name}__{llm_used}__{strategy_used}"] = yaml.safe_load(f)
+                constraints_validation_dict[script_constraints_dir.name][
+                    f"{new_data_name}__{llm_used}__{strategy_used}"] = ValidationResults.from_yaml(
+                    constraints_file).check_result()
+    print(output_validation_dict)
+    print(constraints_validation_dict)
 
 
 if __name__ == "__main__":

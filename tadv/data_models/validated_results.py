@@ -68,3 +68,16 @@ class ValidationResults:
                 ],
             )
         return results
+
+    def check_result(self) -> tuple[int, int]:
+        num_passed = 0
+        num_failed = 0
+
+        for column_result in self.results.values():
+            for entry in column_result.code:
+                if entry.status == "Passed":
+                    num_passed += 1
+                elif entry.status == "Failed":
+                    num_failed += 1
+
+        return num_passed, num_failed
