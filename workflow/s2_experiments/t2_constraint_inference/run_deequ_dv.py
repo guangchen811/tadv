@@ -5,7 +5,7 @@ load_dotenv()
 from tadv.dq_manager import DeequDataQualityManager
 from tadv.utils import get_project_root
 
-from experiments.experiments.utils import setup_logger, load_train_and_test_spark_data
+from workflow.s2_experiments.utils import setup_logger, load_train_and_test_spark_data
 
 
 def run_deequ_dv(dataset_name, downstream_task, processed_data_label):

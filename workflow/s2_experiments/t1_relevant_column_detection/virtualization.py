@@ -2,11 +2,11 @@ import pandas as pd
 import seaborn as sns
 from matplotlib import pyplot as plt
 
-from experiments.experiments.task_001_relevant_column_detection.metrics import RelevantColumnDetectionMetric
-from experiments.experiments.task_001_relevant_column_detection.run_pipeline import task_group_mapping
-from experiments.experiments.utils import load_previous_and_new_spark_data
 from tadv.dq_manager import DeequDataQualityManager
 from tadv.utils import get_project_root, get_current_folder, get_task_instance
+from workflow.s2_experiments.t1_relevant_column_detection.metrics import RelevantColumnDetectionMetric
+from workflow.s2_experiments.t1_relevant_column_detection.run_pipeline import task_group_mapping
+from workflow.s2_experiments.utils import load_previous_and_new_spark_data
 
 
 def result_calculation(dataset_name, model_name, processed_data_label):

@@ -1,6 +1,6 @@
 from tadv.runtime_environments import DuckDBExecutor
 from tadv.utils import get_project_root
-from tadv.utils._utils import get_task_instance
+from tadv.utils import get_task_instance
 
 
 def run_sql_code(dataset_name, processed_data_label, single_script=""):

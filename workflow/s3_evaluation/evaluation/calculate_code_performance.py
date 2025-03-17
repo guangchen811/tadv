@@ -3,7 +3,7 @@ import json
 from tadv.utils import load_dotenv
 
 load_dotenv()
-from experiments.evaluation.evaluation.metrics_calculation.calculator import MetricsCalculation
+from workflow.s3_evaluation.evaluation.metrics_calculation.calculator import MetricsCalculation
 
 from tadv.dq_manager import DeequDataQualityManager
 from tadv.utils import get_project_root
