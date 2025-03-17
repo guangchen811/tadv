@@ -1,9 +1,9 @@
 from tadv.utils import load_dotenv, get_current_folder
 
 load_dotenv()
-from experiments.python.relevant_column_detection.string_matching import run_string_matching_for_rcd, run_llm_for_rcd
-from experiments.python.relevant_column_detection.metrics import RelevantColumnDetectionMetric
-from experiments.python.utils import load_previous_and_new_spark_data
+from experiments.experiments.task_001_relevant_column_detection.string_matching import run_string_matching_for_rcd, run_llm_for_rcd
+from experiments.experiments.task_001_relevant_column_detection.metrics import RelevantColumnDetectionMetric
+from experiments.experiments.utils import load_previous_and_new_spark_data
 
 from tadv.utils import get_task_instance
 from tadv.dq_manager import DeequDataQualityManager

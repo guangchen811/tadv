@@ -1,12 +1,8 @@
 import numpy as np
-import seaborn as sns
-from matplotlib import pyplot as plt
 from scipy.stats import trim_mean, gmean
 from sklearn.metrics import (
     accuracy_score, hamming_loss, precision_score, recall_score, f1_score
 )
-
-from tadv.utils import get_current_folder
 
 
 class RelevantColumnDetectionMetric:
@@ -88,4 +84,3 @@ class RelevantColumnDetectionMetric:
         ground_truth_vector = [1 if col in ground_truth else 0 for col in all_columns]
         relevant_columns_vector = [1 if col in relevant_columns else 0 for col in all_columns]
         return ground_truth_vector, relevant_columns_vector
-

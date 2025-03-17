@@ -74,7 +74,7 @@ def results_calculation(dataset_name, downstream_task, processed_data_label):
     joined_df = pd.merge(output_result_df, constraints_result_df_pivot, how="left", on=["Script"])
     for i in range(joined_df.shape[0]):
         print(joined_df.iloc[i])
-    joined_df.to_csv(Path("./result_tables/") / f"{dataset_name}__{downstream_task}__{processed_data_label}.csv")
+    joined_df.to_csv(Path("result_tables/") / f"{dataset_name}__{downstream_task}__{processed_data_label}.csv")
 
 
 if __name__ == "__main__":
