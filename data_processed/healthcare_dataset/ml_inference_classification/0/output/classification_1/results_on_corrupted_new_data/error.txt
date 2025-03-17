@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/Users/haochen/Codebase/tadv/data/healthcare_dataset/scripts/ml_inference/classification_1.py", line 49, in <module>
+    assert X_test["Age"].max() <= 100
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

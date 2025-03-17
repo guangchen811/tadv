@@ -1,0 +1,37 @@
+[
+    {
+        "Income Bracket":"< $20k",
+        "Total_Loans":168,
+        "Avg_Loan_Amount":1043988.5416666666,
+        "Defaults":100,
+        "Default Rate (%)":59.5238095238
+    },
+    {
+        "Income Bracket":"$20k-$50k",
+        "Total_Loans":8315,
+        "Avg_Loan_Amount":2151985.7155742636,
+        "Defaults":1973,
+        "Default Rate (%)":23.7282020445
+    },
+    {
+        "Income Bracket":"$50k-$100k",
+        "Total_Loans":12251,
+        "Avg_Loan_Amount":2934375.7203493593,
+        "Defaults":1180,
+        "Default Rate (%)":9.6318667864
+    },
+    {
+        "Income Bracket":"$100k-$200k",
+        "Total_Loans":2583,
+        "Avg_Loan_Amount":3942829.2005420052,
+        "Defaults":86,
+        "Default Rate (%)":3.329461866
+    },
+    {
+        "Income Bracket":"> $200k",
+        "Total_Loans":141,
+        "Avg_Loan_Amount":4781050.354609929,
+        "Defaults":4,
+        "Default Rate (%)":2.8368794326
+    }
+]

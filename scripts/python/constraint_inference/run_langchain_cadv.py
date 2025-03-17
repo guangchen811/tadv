@@ -37,7 +37,7 @@ def run_langchain_cadv(dataset_name, downstream_task, model_name, processed_data
         raise ValueError(f"Invalid downstream task: {downstream_task}")
 
     for script_path in sorted(scripts_path_dir.iterdir(), key=lambda x: x.name):
-        if script_name is not None and script_name != script_path.stem:
+        if len(script_name) != 0 and script_name != script_path.stem:
             continue
         processed_data_path = get_project_root() / "data_processed" / dataset_name / downstream_task / f"{processed_data_label}"
         constraints_result_path = processed_data_path / "constraints" / f"{script_path.stem}" / f"tadv_constraints__{model_name}__{assumption_generation_trick}.yaml"
@@ -101,8 +101,8 @@ if __name__ == "__main__":
     assumption_generation_trick_options = [None, "with_deequ", "with_experience"]
     model_name_options = ["gpt-4.5-preview", "gpt-4o"]
     run_langchain_cadv(dataset_name=dataset_name_options[0],
-                       downstream_task=downstream_task_options[3],
+                       downstream_task=downstream_task_options[0],
                        model_name=model_name_options[0],
                        processed_data_label='0',
                        assumption_generation_trick=assumption_generation_trick_options[0],
-                       script_name="classification_1")
+                       script_name="")

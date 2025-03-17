@@ -1,0 +1,47 @@
+constraints:
+  cb_person_default_on_file:
+    code:
+    - - .isComplete('cb_person_default_on_file')
+      - Valid
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    assumptions:
+    - The values in 'cb_person_default_on_file' should only contain 'Y' or 'N'.
+    - The values in 'cb_person_default_on_file' should not contain missing values.
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The values in 'id' should be unique.
+    - The values in 'id' should not contain missing values.
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isPositive('loan_amnt')
+      - Valid
+    assumptions:
+    - The values in 'loan_amnt' should be positive and greater than zero, as logarithmic
+      transformation (log1p) is applied.
+  loan_grade:
+    code:
+    - - .isComplete('loan_grade')
+      - Valid
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - 'The values in ''loan_grade'' should only be one of the valid categories: [''A'',
+      ''B'', ''C'', ''D'', ''E'', ''F'', ''G''].'
+    - The values in 'loan_grade' should not contain missing values.
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - The values in 'loan_int_rate' should be non-negative (greater than or equal
+      to zero).

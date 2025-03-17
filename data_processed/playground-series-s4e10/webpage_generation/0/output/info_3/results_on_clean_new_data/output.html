@@ -1,0 +1,127 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Loan Data Heatmap</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-matrix@1.1.0"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+        .chart-container {
+            width: 70%;
+            height: 500px;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        select {
+            padding: 10px;
+            font-size: 16px;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+    </style>
+    <script>
+        let data = {};
+
+        function loadData() {
+            fetch('data.json')
+                .then(response => response.json())
+                .then(jsonData => {
+                    console.log("Loaded data:", jsonData);
+                    data = jsonData;
+                    populateDropdown();
+                })
+                .catch(error => console.error("Error loading data:", error));
+        }
+
+        function populateDropdown() {
+            let dropdown = document.getElementById("heatmapSelect");
+            dropdown.innerHTML = "<option value='' disabled selected>Choose a heatmap</option>";
+            console.log("Data keys:", Object.keys(data));
+            Object.keys(data).forEach(category => {
+                let option = document.createElement("option");
+                option.value = category;
+                option.textContent = category;
+                dropdown.appendChild(option);
+            });
+        }
+
+        function renderChart() {
+            let category = document.getElementById("heatmapSelect").value;
+            if (!category || !data[category]) return;
+
+            let ctx = document.getElementById("heatmapChart").getContext('2d');
+            let rawData = data[category];
+            let labelsX = Object.keys(rawData);
+            let labelsY = [...new Set(Object.values(rawData).flatMap(row => Object.keys(row)))];
+
+            let matrixData = [];
+            labelsX.forEach((x, i) => {
+                labelsY.forEach((y, j) => {
+                    matrixData.push({
+                        x: i,
+                        y: j,
+                        v: rawData[x]?.[y] || 0
+                    });
+                });
+            });
+
+            if (window.myChart) {
+                window.myChart.destroy();
+            }
+
+            window.myChart = new Chart(ctx, {
+                type: 'matrix',
+                data: {
+                    datasets: [{
+                        label: category,
+                        data: matrixData,
+                        backgroundColor: (ctx) => {
+                            let value = ctx.dataset.data[ctx.dataIndex].v;
+                            return `rgba(255, 99, 132, ${Math.min(value / 100, 1)})`;
+                        },
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1,
+                        width: (ctx) => ctx.chart.chartArea ? Math.min(ctx.chart.chartArea.width / labelsX.length, 40) : 20,
+                        height: (ctx) => ctx.chart.chartArea ? Math.min(ctx.chart.chartArea.height / labelsY.length, 40) : 20
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            type: 'category',
+                            labels: labelsX,
+                            title: { display: true, text: 'X-Axis' }
+                        },
+                        y: {
+                            type: 'category',
+                            labels: labelsY,
+                            title: { display: true, text: 'Y-Axis' }
+                        }
+                    }
+                }
+            });
+        }
+
+        window.onload = loadData;
+    </script>
+</head>
+<body>
+    <h1>Loan Data Heatmap</h1>
+    <label for="heatmapSelect">Select a Heatmap:</label>
+    <select id="heatmapSelect" onchange="renderChart()">
+    </select>
+    <div class="chart-container">
+        <canvas id="heatmapChart"></canvas>
+    </div>
+</body>
+</html>

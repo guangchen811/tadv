@@ -1,0 +1,11 @@
+,Script,Execution Result on Clean Data,Execution Result on Corrupted Data,Model,Passed Constraints (Clean),Passed Constraints (Corrupted),Failed Constraints (Clean),Failed Constraints (Corrupted)
+0,classification_0,0.6954051962322305,error,gpt-4.5-preview,10.0,9.0,0.0,1.0
+1,classification_1,0.8277221686141328,error,gpt-4.5-preview,29.0,26.0,1.0,4.0
+2,classification_2,0.5,0.5,gpt-4.5-preview,26.0,23.0,2.0,5.0
+3,classification_3,0.5,0.5,gpt-4.5-preview,28.0,26.0,1.0,3.0
+4,classification_4,0.8346003041708983,error,,,,,
+5,classification_5,0.8162006648958673,0.7051871556836723,,,,,
+6,classification_6,0.8064138632159402,error,,,,,
+7,classification_7,0.6199079855532114,error,,,,,
+8,classification_8,0.8018860506266041,error,,,,,
+9,classification_9,0.6973553642799278,error,,,,,
