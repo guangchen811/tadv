@@ -1,6 +1,6 @@
 from sklearn.metrics import roc_auc_score
 
-from scripts.python.evaluation.metrics_calculation.abstract_calculator import AbstractMetricsCalculation
+from experiments.python.evaluation.metrics_calculation.abstract_calculator import AbstractMetricsCalculation
 from tadv.loader import FileLoader
 
 

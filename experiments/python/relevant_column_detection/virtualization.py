@@ -2,9 +2,9 @@ import pandas as pd
 import seaborn as sns
 from matplotlib import pyplot as plt
 
-from scripts.python.relevant_column_detection.metrics import RelevantColumnDetectionMetric
-from scripts.python.relevant_column_detection.run_pipeline import task_group_mapping
-from scripts.python.utils import load_previous_and_new_spark_data
+from experiments.python.relevant_column_detection.metrics import RelevantColumnDetectionMetric
+from experiments.python.relevant_column_detection.run_pipeline import task_group_mapping
+from experiments.python.utils import load_previous_and_new_spark_data
 from tadv.dq_manager import DeequDataQualityManager
 from tadv.utils import get_project_root, get_current_folder, get_task_instance
 

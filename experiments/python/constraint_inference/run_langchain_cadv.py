@@ -9,7 +9,7 @@ from tadv.inspector.deequ.deequ_inspector_manager import DeequInspectorManager
 from tadv.dq_manager import DeequDataQualityManager
 from tadv.llm.langchain import LangChainCADV
 from tadv.utils import get_project_root
-from scripts.python.utils import setup_logger, load_train_and_test_spark_data
+from experiments.python.utils import setup_logger, load_train_and_test_spark_data
 from tadv.llm.langchain.downstream_task_prompt import ML_INFERENCE_TASK_DESCRIPTION, \
     SQL_QUERY_TASK_DESCRIPTION, WEB_TASK_DESCRIPTION
 
