@@ -23,6 +23,8 @@ def evaluate(dataset_name, downstream_task, processed_data_label):
         clean_test_data = FileLoader.load_csv(processed_data_path / "files_with_clean_new_data" / "new_data.csv")
         corrupted_test_data = FileLoader.load_csv(
             processed_data_path / "files_with_corrupted_new_data" / "new_data.csv")
+    else:
+        raise ValueError(f"Downstream task {downstream_task} is not supported")
 
     deequ_suggestion_file_path = constraints_dir / "deequ_constraints.yaml"
     validation_results_on_clean_test_data_deequ, validation_results_on_corrupted_test_data_deequ = validate_on_both_test_data(
@@ -52,9 +54,9 @@ def evaluate(dataset_name, downstream_task, processed_data_label):
                 dq_manager)
             (constraints_validation_dir / script_constraints_dir.name).mkdir(parents=True, exist_ok=True)
             validation_results_on_clean_test_data_tadv.save_to_yaml(
-                constraints_validation_dir / script_constraints_dir.name / f"validation_results_on_clean_test_data_tadv__{llm_used}__{strategy_used}.yaml")
+                constraints_validation_dir / script_constraints_dir.name / f"validation_results_on_clean_test_data__{llm_used}__{strategy_used}.yaml")
             validation_results_on_corrupted_test_data_tadv.save_to_yaml(
-                constraints_validation_dir / script_constraints_dir.name / f"validation_results_on_corrupted_test_data_tadv__{llm_used}__{strategy_used}.yaml")
+                constraints_validation_dir / script_constraints_dir.name / f"validation_results_on_corrupted_test_data__{llm_used}__{strategy_used}.yaml")
 
 
 def validate_on_both_test_data(suggestion_file_path, clean_test_data, corrupted_test_data, dq_manager):

@@ -1,0 +1,21 @@
+results:
+  Age:
+    code:
+    - - .isComplete('Age')
+      - Passed
+    - - .isNonNegative('Age')
+      - Passed
+    - - .satisfies('Age <= 120', 'Age should be a reasonable positive integer')
+      - Passed
+  Room Number:
+    code:
+    - - .isComplete('Room Number')
+      - Passed
+  id:
+    code:
+    - - .isComplete('id')
+      - Passed
+    - - .isNonNegative('id')
+      - Passed
+    - - .isUnique('id')
+      - Passed

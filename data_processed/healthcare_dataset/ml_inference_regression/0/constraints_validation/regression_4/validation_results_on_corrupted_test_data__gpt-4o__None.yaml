@@ -1,0 +1,7 @@
+results:
+  id:
+    code:
+    - - '.hasUniqueness([''id''], lambda x: x == 1.0)'
+      - Passed
+    - - .isComplete('id')
+      - Passed

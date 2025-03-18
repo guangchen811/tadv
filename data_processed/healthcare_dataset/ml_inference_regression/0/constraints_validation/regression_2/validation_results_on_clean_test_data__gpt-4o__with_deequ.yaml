@@ -1,0 +1,21 @@
+results:
+  Doctor:
+    code:
+    - - .isComplete('Doctor')
+      - Passed
+  Name:
+    code:
+    - - .isComplete('Name')
+      - Passed
+  Test Results:
+    code:
+    - - .isComplete('Test Results')
+      - Passed
+    - - .isContainedIn('Test Results', ['Abnormal', 'Normal', 'Inconclusive'])
+      - Passed
+  id:
+    code:
+    - - .isComplete('id')
+      - Passed
+    - - .isUnique('id')
+      - Passed

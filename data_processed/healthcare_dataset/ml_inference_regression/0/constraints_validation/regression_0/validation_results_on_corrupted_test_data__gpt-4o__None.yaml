@@ -1,0 +1,17 @@
+results:
+  Age:
+    code:
+    - - .isComplete('Age')
+      - Passed
+    - - .satisfies('Age >= 0', 'Age should be numeric and non-negative')
+      - Passed
+  Room Number:
+    code:
+    - - .isComplete('Room Number')
+      - Passed
+  id:
+    code:
+    - - .isComplete('id')
+      - Passed
+    - - .isUnique('id')
+      - Passed

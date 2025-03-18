@@ -35,28 +35,31 @@ def results_calculation(dataset_name, downstream_task, processed_data_label):
     constraints_validation_dict = defaultdict(dict)
     if not constraints_validation_dir.exists():
         raise FileNotFoundError(f"Constraints validation directory not found: {constraints_validation_dir}")
+    deequ_result = {}
     for script_constraints_dir in sorted(constraints_validation_dir.iterdir()):
         if script_constraints_dir.is_file():
-            # read yaml
             new_data_name, _ = script_constraints_dir.stem.split("__")
             constraints_file = constraints_validation_dir / f"{script_constraints_dir.name}"
-            constraints_validation_dict["deequ"][f"{new_data_name}__deequ__None"] = ValidationResults.from_yaml(
-                constraints_file).check_result()
-        else:
+            deequ_result[new_data_name] = ValidationResults.from_yaml(constraints_file).check_result()
+    for script_constraints_dir in sorted(constraints_validation_dir.iterdir()):
+        if script_constraints_dir.is_dir():
             for constraints_file_name in sorted(script_constraints_dir.iterdir()):
                 if constraints_file_name.suffix != ".yaml":
                     raise ValueError(f"Only yaml files are supported. Found {constraints_file_name.suffix}")
-                new_data_name, llm_used, strategy_used = constraints_file_name.stem.split("__")
+                new_data_name, method_used, strategy_used = constraints_file_name.stem.split("__")
                 constraints_file = constraints_validation_dir / script_constraints_dir.name / f"{constraints_file_name}"
                 constraints_validation_dict[script_constraints_dir.name][
-                    f"{new_data_name}__{llm_used}__{strategy_used}"] = ValidationResults.from_yaml(
+                    f"{new_data_name}__{method_used}__{strategy_used}"] = ValidationResults.from_yaml(
                     constraints_file).check_result()
+            for new_data_name in deequ_result.keys():
+                constraints_validation_dict[script_constraints_dir.name][f"{new_data_name}__deequ__None"] = deequ_result[
+                    new_data_name]
 
     constraints_result_data = []
     for script, results in constraints_validation_dict.items():
         for experiment_config, result in results.items():
-            new_data_name, llm_used, strategy_used = experiment_config.split("__")
-            constraints_result_data.append({"Script": script, "Model": llm_used, "Passed Constraints": result[0],
+            new_data_name, method_used, strategy_used = experiment_config.split("__")
+            constraints_result_data.append({"Script": script, "Model": method_used, "Passed Constraints": result[0],
                                             "Failed Constraints": result[1], "Strategy": strategy_used,
                                             "New Data Type": new_data_name})
     constraints_result_df = pd.DataFrame(constraints_result_data)
@@ -72,10 +75,10 @@ def results_calculation(dataset_name, downstream_task, processed_data_label):
     constraints_result_df_pivot.columns = [f"{col[0]} ({col[1]})" for col in constraints_result_df_pivot.columns]
     constraints_result_df_pivot.reset_index(inplace=True)
 
-    joined_df = pd.merge(output_result_df, constraints_result_df_pivot, how="left", on=["Script"])
+    joined_df = pd.merge(output_result_df, constraints_result_df_pivot, how="outer", on="Script")
     for i in range(joined_df.shape[0]):
         print(joined_df.iloc[i])
-    result_table_path = get_current_folder() / "result_tables/"
+    result_table_path = get_current_folder().parent / "result_tables/"
     result_table_path.mkdir(parents=True, exist_ok=True)
     joined_df.to_csv(result_table_path / f"{dataset_name}__{downstream_task}__{processed_data_label}.csv")
 

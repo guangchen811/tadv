@@ -1,0 +1,59 @@
+results:
+  Admission Type:
+    code:
+    - - '.hasPattern(''Admission Type'', ''.+'', lambda x: x == 1.0)'
+      - Passed
+    - - .isComplete('Admission Type')
+      - Passed
+  Age:
+    code:
+    - - .isComplete('Age')
+      - Passed
+    - - .isNonNegative('Age')
+      - Passed
+  Blood Type:
+    code:
+    - - '.hasPattern(''Blood Type'', ''.+'', lambda x: x == 1.0)'
+      - Passed
+    - - .isComplete('Blood Type')
+      - Passed
+  Gender:
+    code:
+    - - '.hasPattern(''Gender'', ''.+'', lambda x: x == 1.0)'
+      - Passed
+    - - .isComplete('Gender')
+      - Passed
+  Hospital:
+    code:
+    - - '.hasPattern(''Hospital'', ''.+'', lambda x: x == 1.0)'
+      - Passed
+    - - .isComplete('Hospital')
+      - Passed
+  Insurance Provider:
+    code:
+    - - '.hasPattern(''Insurance Provider'', ''.+'', lambda x: x == 1.0)'
+      - Passed
+    - - .isComplete('Insurance Provider')
+      - Passed
+  Medical Condition:
+    code:
+    - - '.hasPattern(''Medical Condition'', ''.+'', lambda x: x == 1.0)'
+      - Passed
+    - - .isComplete('Medical Condition')
+      - Passed
+  Medication:
+    code:
+    - - '.hasPattern(''Medication'', ''.+'', lambda x: x == 1.0)'
+      - Passed
+    - - .isComplete('Medication')
+      - Passed
+  Room Number:
+    code:
+    - - .isComplete('Room Number')
+      - Passed
+  id:
+    code:
+    - - .isComplete('id')
+      - Passed
+    - - .isUnique('id')
+      - Passed
