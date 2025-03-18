@@ -127,6 +127,37 @@ To prepare the dataset for data validation, we need to preprocess the data in tw
 - **Error Injection**: Inject errors into the dataset to simulate real-world data quality issues.
 - **Script Execution**: Execute the downstream scripts to generate the ground truth for data validation.
 
-#### 1.1 Error Injection
+#### 1.1 Remove Existing Preprocessed Data
 
-TBD
+We provide all the preprocessed data in the `data_processed/` folder for paper reviewing. If you want to reproduce the
+results, you need to delete the existing preprocessed data first by running the following command:
+
+```shell
+rm -rf data_processed/*
+```
+
+#### 1.2 Errors Injection
+
+To inject errors into the dataset, run the following command:
+
+```shell
+poetry run python ./workflow/s1_preprocessing/error_injection/main.py --dataset-option "all" --downstream-task-option "all"
+```
+
+This command will inject errors into the dataset in `data/` folder and then save the corrupted dataset in
+`data_processed/` folder. The predefined error injection configurations can be found in `data/<dataset>/errors/`. You
+could also customize the error injection configurations by modifying/adding the error injection scripts in the same
+folder. Please make sure the name of the error injection script is started with `<downstream-task>_`, e.g.,
+`ml_inference_classification_1.yaml`.
+
+#### 1.3 Scripts Execution
+
+To Execute the downstream scripts, run the following command:
+
+```shell
+poetry run python ./workflow/s1_preprocessing/scripts_execution/main.py --dataset-option "all" --downstream-task-option "all" --processed-data-label "0"
+```
+
+This command will execute the downstream scripts in `data/<dataset>/scripts/` and then save the results in the
+`data_processed/<dataset>/<downstream-task>/<processed-data-label>/` folder.
+

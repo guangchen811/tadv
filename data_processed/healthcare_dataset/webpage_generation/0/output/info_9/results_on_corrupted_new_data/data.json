@@ -1,0 +1,123 @@
+{
+    "2019": {
+        "Total Admissions": 2933,
+        "Monthly Distribution": {
+            "5": 269,
+            "6": 377,
+            "7": 387,
+            "8": 414,
+            "9": 372,
+            "10": 386,
+            "11": 358,
+            "12": 370
+        },
+        "Admission Types": {
+            "Urgent": 1008,
+            "Elective": 988,
+            "Emergency": 937
+        }
+    },
+    "2020": {
+        "Total Admissions": 4468,
+        "Monthly Distribution": {
+            "1": 384,
+            "2": 340,
+            "3": 395,
+            "4": 359,
+            "5": 401,
+            "6": 358,
+            "7": 417,
+            "8": 410,
+            "9": 346,
+            "10": 367,
+            "11": 358,
+            "12": 333
+        },
+        "Admission Types": {
+            "Urgent": 1519,
+            "Emergency": 1518,
+            "Elective": 1431
+        }
+    },
+    "2021": {
+        "Total Admissions": 4376,
+        "Monthly Distribution": {
+            "1": 383,
+            "2": 356,
+            "3": 362,
+            "4": 351,
+            "5": 361,
+            "6": 397,
+            "7": 374,
+            "8": 364,
+            "9": 357,
+            "10": 371,
+            "11": 339,
+            "12": 361
+        },
+        "Admission Types": {
+            "Elective": 1529,
+            "Urgent": 1429,
+            "Emergency": 1418
+        }
+    },
+    "2022": {
+        "Total Admissions": 4375,
+        "Monthly Distribution": {
+            "1": 371,
+            "2": 322,
+            "3": 379,
+            "4": 339,
+            "5": 356,
+            "6": 406,
+            "7": 373,
+            "8": 375,
+            "9": 355,
+            "10": 363,
+            "11": 345,
+            "12": 391
+        },
+        "Admission Types": {
+            "Elective": 1524,
+            "Urgent": 1436,
+            "Emergency": 1415
+        }
+    },
+    "2023": {
+        "Total Admissions": 4492,
+        "Monthly Distribution": {
+            "1": 373,
+            "2": 337,
+            "3": 386,
+            "4": 367,
+            "5": 396,
+            "6": 381,
+            "7": 391,
+            "8": 376,
+            "9": 360,
+            "10": 369,
+            "11": 356,
+            "12": 400
+        },
+        "Admission Types": {
+            "Urgent": 1502,
+            "Emergency": 1500,
+            "Elective": 1490
+        }
+    },
+    "2024": {
+        "Total Admissions": 1556,
+        "Monthly Distribution": {
+            "1": 364,
+            "2": 351,
+            "3": 372,
+            "4": 386,
+            "5": 83
+        },
+        "Admission Types": {
+            "Elective": 535,
+            "Emergency": 529,
+            "Urgent": 492
+        }
+    }
+}

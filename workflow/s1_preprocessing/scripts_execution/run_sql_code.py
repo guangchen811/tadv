@@ -24,14 +24,3 @@ def run_sql_code(dataset_name, processed_data_label, single_script=""):
                             input_path=processed_data_path / "files_with_corrupted_new_data",
                             output_path=output_path)
 
-
-if __name__ == "__main__":
-    dataset_name_options = ["playground-series-s4e10", "healthcare_dataset"]
-
-    dataset_option = 0
-    processed_data_label = "0"
-    single_script = ""
-
-    run_sql_code(dataset_name=dataset_name_options[dataset_option],
-                 processed_data_label=f"{processed_data_label}",
-                 single_script=single_script)

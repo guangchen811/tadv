@@ -1,0 +1,66 @@
+{
+    "A+": {
+        "Gender Distribution": {
+            "Female": 1411,
+            "Male": 1365
+        },
+        "Average Billing Amount": 25644.22,
+        "Most Frequent Medication": "Paracetamol"
+    },
+    "A-": {
+        "Gender Distribution": {
+            "Male": 1381,
+            "Female": 1351
+        },
+        "Average Billing Amount": 25885.26,
+        "Most Frequent Medication": "Lipitor"
+    },
+    "AB+": {
+        "Gender Distribution": {
+            "Female": 1471,
+            "Male": 1425
+        },
+        "Average Billing Amount": 25078.91,
+        "Most Frequent Medication": "Penicillin"
+    },
+    "AB-": {
+        "Gender Distribution": {
+            "Female": 1392,
+            "Male": 1369
+        },
+        "Average Billing Amount": 25853.67,
+        "Most Frequent Medication": "Penicillin"
+    },
+    "B+": {
+        "Gender Distribution": {
+            "Male": 1407,
+            "Female": 1353
+        },
+        "Average Billing Amount": 25353.63,
+        "Most Frequent Medication": "Lipitor"
+    },
+    "B-": {
+        "Gender Distribution": {
+            "Male": 1424,
+            "Female": 1329
+        },
+        "Average Billing Amount": 25785.83,
+        "Most Frequent Medication": "Aspirin"
+    },
+    "O+": {
+        "Gender Distribution": {
+            "Male": 1412,
+            "Female": 1361
+        },
+        "Average Billing Amount": 25299.53,
+        "Most Frequent Medication": "Lipitor"
+    },
+    "O-": {
+        "Gender Distribution": {
+            "Female": 1444,
+            "Male": 1305
+        },
+        "Average Billing Amount": 25763.76,
+        "Most Frequent Medication": "Aspirin"
+    }
+}

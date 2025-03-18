@@ -22,14 +22,3 @@ def run_web_code(processed_data_label, dataset_name, single_script=""):
                      input_path=processed_data_path / "files_with_corrupted_new_data",
                      output_path=processed_data_path / "output" / script_path.stem / "results_on_corrupted_new_data")
 
-
-if __name__ == "__main__":
-    dataset_name_options = ["playground-series-s4e10", "healthcare_dataset"]
-
-    dataset_option = 0
-    processed_data_label = "0"
-    single_script = ""
-
-    run_web_code(dataset_name=dataset_name_options[dataset_option],
-                 processed_data_label=f"{processed_data_label}",
-                 single_script=single_script)
