@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from project_manager.abstract import AbstractProjectManager
+from tadv.project_manager.abstract import AbstractProjectManager
 
 
 class ProjectManager(AbstractProjectManager):
