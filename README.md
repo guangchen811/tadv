@@ -28,7 +28,7 @@ The project consists of the following [modules](/tadv):
 The error injection module is built based on [Jenga](https://github.com/schelterlabs/jenga), a library for injecting
 errors into datasets. We extend the error injection methods into more real world scenarios where we often need
 context information to fix the errors. You can find the error injection
-methods [here](/tadv/error_injection/corrupts/).
+methods [here](/tadv/error_injection/corrupts).
 
 The following table lists the error injection methods we support:
 
@@ -36,8 +36,8 @@ The following table lists the error injection methods we support:
 |------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------|
 | [Missing categorical value](/tadv/error_injection/corrupts/categorical_value_missing.py) | Replace one or more types of categorical value with a missing value or other existing values, or delete them. |
 | [Dropping column](/tadv/error_injection/corrupts/column_dropping.py)                     | Drop one or more columns.                                                                                     |
-| [ Inserting column](/tadv/error_injection/corrupts/column_inserting.py)                  | Insert one or more columns by copying existing columns or generating new columns.                             |
-| [Adding gussian noise](/tadv/error_injection/corrupts/gaussian_noise.py)                 | Add Gaussian noise to numerical values.                                                                       |
+| [Inserting column](/tadv/error_injection/corrupts/column_inserting.py)                   | Insert one or more columns by copying existing columns or generating new columns.                             |
+| [Adding gaussian noise](/tadv/error_injection/corrupts/gaussian_noise.py)                | Add Gaussian noise to numerical values.                                                                       |
 | [Masking values](/tadv/error_injection/corrupts/masking_values.py)                       | Mask one or more values in the dataset.                                                                       |
 | [Scaling values](/tadv/error_injection/corrupts/scaling_values.py)                       | Scale numerical values by a factor.                                                                           |
 
@@ -58,8 +58,6 @@ As shown in the following figure, we decompose the data validation task into two
 - Assumption generation: generate assumptions based on the target column and the context information.
 - Rule generation: generate formal rules in the form
   of [deequ](https://github.com/awslabs/python-deequ/blob/master/pydeequ/checks.py) for evaluation.
-
-<img src="/assets/llm_framework.png" alt="llm_framework" width="500px"/>
 
 The prompts during the API calls can be found [here](/tadv/llm/langchain/_prompt.py). For more details, you
 can look at the [test case](/tests/llm/langchain).
