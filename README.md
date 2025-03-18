@@ -1,53 +1,52 @@
-[![codecov](https://codecov.io/github/guangchen811/tadv/graph/badge.svg?token=UC6B33P10M)](https://codecov.io/github/guangchen811/tadv)
+# Task-aware Data Validation (TADV)
 
-# Task-aware Data Validation
+[![codecov](https://codecov.io/github/guangchen811/tadv/graph/badge.svg?token=UC6B33P10M)](https://codecov.io/github/guangchen811/tadv)
 
 ## Overview
 
-This repository is designed for exploring the data validation ability of LLMs with context information (e.g., downstream
-queries, downstream ml pipelines, etc.).
+TADV is a framework for evaluating the data validation capabilities of large language models (LLMs) using contextual
+information, such as downstream queries and machine learning pipelines.
 
-This repository contains the following components:
+### Project Structure
 
-- [error_injection](./tadv/error_injection): contains the APIs for injecting errors into datasets.
-- [runtime_environments](./tadv/runtime_environments): contains the API class for runtime environments,
-  where datasets can be evaluated on downstream queries or machine learning pipelines.
-- [inspector](./tadv/inspector): designed to provide dataset information, such as schema and statistics, to
-  help LLMs generate data validation rules.
-- [llms](./tadv/llm): contains the prompts and classes for making API calls to LLMs.
+The project consists of the following [modules](/tadv):
 
-## error injection
+- **[error_injection](/tadv/error_injection)** – Provides APIs for injecting errors into datasets, enabling robustness
+  testing for validation methods.
+- **[runtime_environments](/tadv/runtime_environments)** – Defines execution environments where datasets are evaluated
+  in the context of downstream queries or machine learning pipelines.
+- **[llm](/tadv/llm)** – Contains classes for interacting with LLM APIs to generate data validation rules. This
+  process follows three key steps:
+    1. **Target Column Detection** – Identifying relevant columns based on downstream context.
+    2. **Assumption Generation** – Inferring data assumptions from provided context and dataset properties.
+    3. **Rule Generation** – Producing executable validation rules to ensure data quality.
+- **[inspector](/tadv/inspector)** – Extracts dataset metadata, including schema and statistics, to aid LLMs in
+  generating informed validation rules.
 
-<img src="./assets/error_injection.png" alt="error_injection" width="500px"/>
+#### Error Injection
 
 The error injection module is built based on [Jenga](https://github.com/schelterlabs/jenga), a library for injecting
-errors into datasets. We plan to extend the error injection methods into more real world scenarios where we often need
-context information to fix the errors.
+errors into datasets. We extend the error injection methods into more real world scenarios where we often need
+context information to fix the errors. You can find the error injection
+methods [here](/tadv/error_injection/corrupts/).
 
-The errors are shown in the following table:
+The following table lists the error injection methods we support:
 
-| **Type**                      | **Explanation**                                                                    |
-|-------------------------------|------------------------------------------------------------------------------------|
-| Data formatting               | Change the format of data in the original dataset (e.g., DD/MM/YYYY vs MM/DD/YYYY) |
-| Missing categorical value     | Delete some values when recognizing a categorical column.                          |
-| Violated attribute dependency | Change the value of one column based on the value of another column.               |
+| **Type**                                                                                 | **Explanation**                                                                                               |
+|------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------|
+| [Missing categorical value](/tadv/error_injection/corrupts/categorical_value_missing.py) | Replace one or more types of categorical value with a missing value or other existing values, or delete them. |
+| [Dropping column](/tadv/error_injection/corrupts/column_dropping.py)                     | Drop one or more columns.                                                                                     |
+| [ Inserting column](/tadv/error_injection/corrupts/column_inserting.py)                  | Insert one or more columns by copying existing columns or generating new columns.                             |
+| [Adding gussian noise](/tadv/error_injection/corrupts/gaussian_noise.py)                 | Add Gaussian noise to numerical values.                                                                       |
+| [Masking values](/tadv/error_injection/corrupts/masking_values.py)                       | Mask one or more values in the dataset.                                                                       |
+| [Scaling values](/tadv/error_injection/corrupts/scaling_values.py)                       | Scale numerical values by a factor.                                                                           |
 
-## runtime environments
+#### Runtime Environments
 
-We use Kaggle as the first runtime environment to evaluate the generated data validation rules. The Kaggle runtime
-environment is downloaded from their [official GitHub repository](https://github.com/Kaggle/docker-python). The figure
-shows that we run the user ipynb codes on the Kaggle dataset with the Kaggle runtime environment. The output
-contains two parts: a new notebook with the outputs and the submission CSV file. For more details, you can look
-at [this test case](./tests/runtime/kaggle/test_runnable.py).
+The runtime environments module provides execution environments for evaluating datasets in the context of downstream.
+TODO: add more details.
 
-<img src="./assets/runtime_environments.png" alt="runtime_environments" width="432px"/>
-
-## inspector
-
-The inspector module is designed to provide dataset information, such as schema and statistics. It is built based
-on [pydeequ](https://github.com/awslabs/python-deequ) and [pandas](https://pandas.pydata.org/).
-
-## llms
+#### LLM
 
 Currently, we use [langchain](https://www.langchain.com/) as the tool for llm api calls. We plan to extend it
 to [dspy](https://dspy-docs.vercel.app/) in the future.
@@ -60,92 +59,76 @@ As shown in the following figure, we decompose the data validation task into two
 - Rule generation: generate formal rules in the form
   of [deequ](https://github.com/awslabs/python-deequ/blob/master/pydeequ/checks.py) for evaluation.
 
-<img src="./assets/llm_framework.png" alt="llm_framework" width="500px"/>
+<img src="/assets/llm_framework.png" alt="llm_framework" width="500px"/>
 
-The prompts during the API calls can be found [here](./tadv/llm/langchain/_prompt.py). For more details, you
-can look at the [test case](./tests/llm/langchain).
+The prompts during the API calls can be found [here](/tadv/llm/langchain/_prompt.py). For more details, you
+can look at the [test case](/tests/llm/langchain).
 
-## Get Started
+TODO: add more details.
+
+#### Inspector
+
+The inspector module is designed to provide dataset information, such as schema and statistics. It is built based
+on [pydeequ](https://github.com/awslabs/python-deequ) and [pandas](https://pandas.pydata.org/). TODO: add more details.
+
+## Provided Datasets
+
+We provide two tabular datasets from Kaggle for testing the framework:
+
+- [Healthcare](https://www.kaggle.com/datasets/prasad22/healthcare-dataset)
+- [Loan Approval Prediction](https://www.kaggle.com/competitions/playground-series-s4e10)
+
+Besides, we also have a [toy dataset](/data/toy_example) for showcasing the whole workflow.
+
+These datasets are available in the [data](/data) directory. In addition to the raw data, we provide scripts that run in
+the [runtime environments](/tadv/runtime_environments) to evaluate the generated data validation rules.
+
+### Example: [Healthcare Dataset](/data/healthcare_dataset)
+
+The dataset is structured as follows:
+
+- **`files/`** – Contains the source data.
+- **`scripts/`** – Includes downstream scripts spanning three domains:
+    - SQL queries
+    - Machine learning pipelines
+    - Website generation
+- **`errors/`** – Stores error configurations used for error injection.
+- **`annotations/`** – Provides dataset annotations, including:
+    - Target columns for all scripts in the three domains
+    - Assumptions associated with the target columns
+
+## Experiment Workflow
+
+We provide the following workflow for evaluating the data validation capabilities of LLMs compared to non-LLM methods.
+You can find the detailed implementation in the [workflow](workflow) directory.
+
+### Step 0: Environment Setup
 
 ### Install the package
+
+We use [poetry](https://python-poetry.org/) to manage the dependencies. If you are not familiar with poetry, we suggest
+you install it with [pipx](https://pipx.pypa.io/stable/) first by following
+the [official documentation](https://python-poetry.org/docs/).
+
+After installing poetry, you can install the dependencies by running the following command:
 
 ```shell
 poetry install
 ```
 
-### Run the tests
+You can then test the installation by running the following command. It will run all the [tests](/tests) in the project.
 
 ```shell
 poetry run pytest
 ```
 
-### Collect the competition data
+### Step 1: Preprocessing
 
-```shell
-shell ./tadv/scripts/shell/download_competition_dataset.sh
-```
+To prepare the dataset for data validation, we need to preprocess the data in two steps:
 
-### Kaggle File Structure
+- **Error Injection**: Inject errors into the dataset to simulate real-world data quality issues.
+- **Script Execution**: Execute the downstream scripts to generate the ground truth for data validation.
 
-To make the code from kaggle work on the local machine, this project binds the local directory to the kaggle directory
-in the following way:
+#### 1.1 Error Injection
 
-```python
-f"{local_project_path / 'files'}:/kaggle/input/{dataset_name}/",
-f"{script_path.parent}:/kaggle/script/",
-f"{output_path}:/kaggle/output/",
-```
-
-These bindings require the kaggle code meets the following requirements:
-
-1. They should read the input data from `/kaggle/input/{dataset_name}/` instead of `/kaggle/input/`.
-2. The submission file should be written to `/kaggle/output/` instead of `/kaggle/output/` instead of the working
-   directory.
-
-### Plan for Dec 16th
-1. refactoring the dataset import function in python scripts.
-2. Paper architecture
-   - type: reports on applications and tools or preliminary results, interesting use cases, problems, datasets, benchmarks, visionary ideas, and descriptions of system components and tools related to end-to-end ML pipelines.
-   - introduction
-   - methods
-   - evaluation
-     - dataset building
-     - experiments
-       - tasks
-3. virtulization for ml relevant column validation.
-
-### TODO
-
-1. add ml pipeline as the example. [done]
-4. data test for the project. https://github.com/sscdotopen/lester/blob/main/lester/benchmark/amazonreviews_dataprep.py [done]
-2. unified abstract representation for constraints.
-3. new metrics for sql pipeline.
-5. dspy
-6. other downstream tasks
-   - auto EDA
-   - shell script
-7. simple baselines:
-   - look at the code and find the column names appear in the code.
-
-# Other Thoughts
-
-If we can use provenance techniques to build a dataset that labels which columns are used by which queries or codes. We
-can use it to train a model that can predict which columns are likely to be used by a new query or code.
-
-How to leverage SchemaPile to train a model to predict which columns are likely to be used to add checks? checks can be
-treated as a node-level classification problem. We can use the schema information to build a graph where each node is a
-column and each edge is (a foreign key relationship or other relationships). We can use the graph to train a model that
-can predict which columns are likely to be used by a new query or code.
-
-Which relations can be used to connect columns into a graph? may be some function dependencies, correlations, semantic
-relationships. What are the node features? column name, data type, and other metadata. What are the edge features?
-foreign key relationships, other relationships.
-
-Raha paper gives me some references about how to classify errors in data. It is a good start point. I can extend it when
-context is given to make the task more formal.
-
-I should also see how context can be helpful for the error type that already mentioned in raha.
-
-Maybe I need to design a new component for llm to write queries on the table to check some information.
-
-Data Provenance method can be used to find which columns are used by a script.
+TBD
