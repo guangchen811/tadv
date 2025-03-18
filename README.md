@@ -161,3 +161,48 @@ poetry run python ./workflow/s1_preprocessing/scripts_execution/main.py --datase
 This command will execute the downstream scripts in `data/<dataset>/scripts/` and then save the results in the
 `data_processed/<dataset>/<downstream-task>/<processed-data-label>/` folder.
 
+### Step 2: Data Validation Rule Generation
+
+#### 2.1 Target Column Detection
+
+To detect the target column, run the following command:
+
+```shell
+poetry run python ./workflow/s2_experiments/t1_target_column_detection/run_langchain_tcd.py --dataset-option "all" --downstream-task-option "all" --processed-data-label "0"
+```
+
+#### 2.2 End-to-End Data Validation Rule Generation
+
+To generate data validation rules, run the following command:
+
+```shell
+poetry run python ./workflow/s2_experiments/t2_constraint_inference/run_deequ.py --dataset-option "all" --downstream-task-option "all" --processed-data-label "0"
+```
+
+```shell
+poetry run python ./workflow/s2_experiments/t2_constraint_inference/run_langchain_tadv.py --dataset-option "all" --downstream-task-option "all" --processed-data-label "0"
+```
+
+### Step 3: Evaluation
+
+#### 3.1 scripts Performance Evaluation
+
+To evaluate the performance of the scripts in the downstream tasks, run the following command:
+
+```shell
+poetry run python ./workflow/s3_evaluation/evaluation/calculate_code_performance.py --dataset-option "all" --downstream-task-option "all" --processed-data-label "0"
+```
+
+The evaluation results will be saved in the `data_processed/<dataset>/<downstream-task>/<processed-data-label>/output_validation/` folder.
+
+```shell
+poetry run python ./workflow/s3_evaluation/evaluation/calculate_code_performance.py --dataset-option "all" --downstream-task-option "all" --processed-data-label "0"
+```
+
+The evaluation results will be saved in the `data_processed/<dataset>/<downstream-task>/<processed-data-label>/constraints_validation/` folder.
+
+Now, you can aggregate the evaluation results by running the following command:
+
+```shell
+poetry run python ./workflow/s3_evaluation/evaluation/main.py --dataset-option "all" --downstream-task-option "all" --processed-data-label "0"
+```

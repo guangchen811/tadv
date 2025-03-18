@@ -5,7 +5,7 @@ load_dotenv()
 from tadv.dq_manager import DeequDataQualityManager
 from tadv.utils import get_project_root
 
-from workflow.s2_experiments.utils import setup_logger, load_train_and_test_spark_data
+from workflow.s2_experiments.utils import setup_logger, load_train_and_test_spark_data, load_previous_and_new_spark_data
 
 
 def run_deequ_dv(dataset_name, downstream_task, processed_data_label):
@@ -17,13 +17,26 @@ def run_deequ_dv(dataset_name, downstream_task, processed_data_label):
     result_path = processed_data_path / "constraints" / "deequ_constraints.yaml"
     result_path.parent.mkdir(parents=True, exist_ok=True)
 
-    spark_train_data, spark_train, spark_validation_data, spark_validation = load_train_and_test_spark_data(
-        dataset_name=dataset_name, downstream_task=downstream_task, processed_data_label=processed_data_label,
-        dq_manager=dq_manager
-    )
+    if downstream_task in ["ml_inference_classification", "ml_inference_regression"]:
+        spark_train_df, spark_train, _, _ = load_train_and_test_spark_data(
+            dataset_name=dataset_name,
+            downstream_task=downstream_task,
+            processed_data_label=processed_data_label,
+            dq_manager=dq_manager
+        )
+    elif downstream_task in ["sql_query", "webpage_generation"]:
+        spark_train_df, spark_train, _, _ = load_previous_and_new_spark_data(
+            dataset_name=dataset_name,
+            downstream_task=downstream_task,
+            processed_data_label=processed_data_label,
+            dq_manager=dq_manager
+        )
+    else:
+        raise ValueError(f"Invalid downstream task: {downstream_task}")
+    spark_validation, spark_validation_df = spark_train, spark_train_df
 
-    constraints = dq_manager.get_constraints_for_spark_df(spark_train, spark_train_data, spark_validation,
-                                                          spark_validation_data)
+    constraints = dq_manager.get_constraints_for_spark_df(spark_train, spark_train_df, spark_validation,
+                                                          spark_validation_df)
     constraints.save_to_yaml(result_path)
 
     spark_train.sparkContext._gateway.shutdown_callback_server()

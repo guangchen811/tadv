@@ -1,0 +1,35 @@
+constraints:
+  cb_person_default_on_file:
+    code:
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    assumptions:
+    - cb_person_default_on_file should be either 'Y' or 'N' to ensure proper one-hot
+      encoding.
+  id:
+    code:
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - id should be unique for each entry to correctly map predictions to test data.
+  loan_amnt:
+    code:
+    - - .isPositive('loan_amnt')
+      - Valid
+    assumptions:
+    - loan_amnt should be a positive integer since it is used to compute the natural
+      logarithm.
+  loan_grade:
+    code:
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - 'loan_grade should be one of the predefined categories: [''A'', ''B'', ''C'',
+      ''D'', ''E'', ''F'', ''G''] to ensure proper one-hot encoding.'
+  loan_int_rate:
+    code:
+    - - .isPositive('loan_int_rate')
+      - Valid
+    assumptions:
+    - loan_int_rate should be a positive fractional value since it is involved in
+      numerical scaling.

@@ -1,0 +1,35 @@
+constraints:
+  Billing Amount:
+    code:
+    - - .isComplete('billing_amount')
+      - Invalid
+    - - .isNonNegative('billing_amount')
+      - Invalid
+    assumptions:
+    - Billing Amount must be a numeric column.
+  Date of Admission:
+    code:
+    - - .isComplete('admission_dt')
+      - Invalid
+    - - .satisfies('admission_dt IS NOT NULL', 'admission_dt should be a valid datetime
+        format')
+      - Invalid
+    assumptions:
+    - Date of Admission should be convertible to a valid datetime format.
+  Discharge Date:
+    code:
+    - - .isComplete('discharge_dt')
+      - Invalid
+    - - .satisfies('discharge_dt IS NOT NULL', 'discharge_dt should be a valid datetime
+        format')
+      - Invalid
+    assumptions:
+    - Discharge Date should be convertible to a valid datetime format.
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - id should be a unique identifier with no duplicates.

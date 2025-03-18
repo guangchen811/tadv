@@ -1,0 +1,12 @@
+age
+income
+home_ownership
+emp_length
+loan_amount
+interest_rate
+loan_income_ratio
+credit_hist_length
+grade
+default_flag
+income_to_loan
+id

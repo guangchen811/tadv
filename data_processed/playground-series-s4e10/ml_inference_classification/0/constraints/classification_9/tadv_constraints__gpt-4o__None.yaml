@@ -1,0 +1,32 @@
+constraints:
+  cb_person_default_on_file:
+    code:
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    assumptions:
+    - Should contain only 'Y' or 'N'
+  id:
+    code:
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - Should contain unique values
+  loan_amnt:
+    code:
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - Values should be greater than or equal to 0
+  loan_grade:
+    code:
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - 'Should contain only the categories: ''A'', ''B'', ''C'', ''D'', ''E'', ''F'',
+      ''G'''
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Valid
+    assumptions:
+    - Should contain valid numerical values suitable for scaling

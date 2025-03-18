@@ -1,7 +1,8 @@
+import pandas as pd
 from sklearn.metrics import roc_auc_score
 
-from workflow.s3_evaluation.evaluation.metrics_calculation.abstract_calculator import AbstractMetricsCalculation
 from tadv.loader import FileLoader
+from workflow.s3_evaluation.evaluation.metrics_calculation.abstract_calculator import AbstractMetricsCalculation
 
 
 class MetricsCalculation(AbstractMetricsCalculation):
@@ -54,12 +55,12 @@ class MetricsCalculation(AbstractMetricsCalculation):
         if isinstance(submission_on_corrupted_new_data, str) and submission_on_corrupted_new_data == "error":
             result_on_corrupted_new_data = "error"
         else:
-            result_on_corrupted_new_data = self._calculate_auc(submission_on_corrupted_new_data, ground_truth_csv)
+            result_on_corrupted_new_data = self._calculate_mse(submission_on_corrupted_new_data, ground_truth_csv)
 
         if isinstance(submission_on_clean_new_data, str) and submission_on_clean_new_data == "error":
             result_on_clean_new_data = "error"
         else:
-            result_on_clean_new_data = self._calculate_auc(submission_on_clean_new_data, ground_truth_csv)
+            result_on_clean_new_data = self._calculate_mse(submission_on_clean_new_data, ground_truth_csv)
 
         return {"result_on_corrupted_new_data": result_on_corrupted_new_data,
                 "result_on_clean_new_data": result_on_clean_new_data}
@@ -113,7 +114,27 @@ class MetricsCalculation(AbstractMetricsCalculation):
 
     @staticmethod
     def _calculate_auc(submission_on_corrupted_new_data, ground_truth_csv):
-        y_true = ground_truth_csv.iloc[:, -1]
-        y_pred_proba = submission_on_corrupted_new_data.iloc[:, -1]
-        auc = roc_auc_score(y_true, y_pred_proba)
+        # Extract unique class labels
+        classes = ground_truth_csv.iloc[:, -1].unique()
+        str_int_mapping = {cls: i for i, cls in enumerate(classes)}
+
+        # Map classes to integers
+        y_true = ground_truth_csv.iloc[:, -1].map(str_int_mapping).copy()
+        y_pred = submission_on_corrupted_new_data.iloc[:, -1].map(str_int_mapping).copy()
+
+        # One-hot encode for multi-class
+        if len(classes) > 2:
+            y_true = pd.get_dummies(y_true).values  # Convert to NumPy array
+            y_pred_proba = pd.get_dummies(y_pred).values  # Convert to NumPy array
+            auc = roc_auc_score(y_true, y_pred_proba, multi_class='ovr')
+        else:
+            auc = roc_auc_score(y_true, y_pred)
+
         return auc
+
+    @staticmethod
+    def _calculate_mse(submission_on_corrupted_new_data, ground_truth_csv):
+        y_true = ground_truth_csv.iloc[:, -1]
+        y_pred = submission_on_corrupted_new_data.iloc[:, -1]
+        mse = ((y_true - y_pred) ** 2).mean()
+        return mse

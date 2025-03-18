@@ -1,0 +1,43 @@
+constraints:
+  Age:
+    code:
+    - - .isComplete('Age')
+      - Valid
+    - - .isPositive('Age')
+      - Valid
+    assumptions:
+    - The column should be complete (no missing values)
+    - The values should be positive
+  Billing Amount:
+    code:
+    - - .isComplete('billing_amount')
+      - Invalid
+    - - .isNonNegative('billing_amount')
+      - Invalid
+    assumptions:
+    - The column should be complete (no missing values)
+    - The values should be non-negative
+  Date of Admission:
+    code: []
+    assumptions: []
+  Discharge Date:
+    code: []
+    assumptions: []
+  Doctor:
+    code: []
+    assumptions: []
+  Name:
+    code: []
+    assumptions: []
+  Test Results:
+    code: []
+    assumptions: []
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The column should be complete (no missing values)
+    - The values should be unique

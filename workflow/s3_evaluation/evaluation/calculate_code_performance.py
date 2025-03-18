@@ -1,3 +1,4 @@
+import argparse
 import json
 
 from tadv.utils import load_dotenv
@@ -32,10 +33,24 @@ if __name__ == "__main__":
     downstream_task_type_options = ["ml_inference_classification", "ml_inference_regression", "sql_query",
                                     "webpage_generation"]
 
-    dataset_option = 0
-    downstream_task_option = 3
-    processed_data_label = "0"
 
-    evaluate(dataset_name=dataset_name_options[dataset_option],
-             downstream_task=downstream_task_type_options[downstream_task_option],
-             processed_data_label=processed_data_label)
+    def parse_multiple_indices(input_str, options_list):
+        """Parses comma-separated indices or 'all'."""
+        if input_str.lower() == "all":
+            return options_list
+        indices = list(map(int, input_str.split(",")))
+        return [options_list[i] for i in indices]
+
+
+    parser = argparse.ArgumentParser(description='calculate code performance')
+    parser.add_argument('--dataset-option', type=str, default="all",
+                        help='Dataset name. Options: 0: playground-series-s4e10, 1: healthcare_dataset')
+    parser.add_argument('--downstream-task-option', type=str, default="all",
+                        help='Downstream task. Options: 0: ml_inference_classification, 1: ml_inference_regression, 2: sql_query, 3: webpage_generation')
+    parser.add_argument('--processed-data-label', type=str, default="0",
+                        help='Version Label of the processed data')
+    args = parser.parse_args()
+    for dataset_name in parse_multiple_indices(args.dataset_option, dataset_name_options):
+        for downstream_task in parse_multiple_indices(args.downstream_task_option, downstream_task_type_options):
+            evaluate(dataset_name=dataset_name, downstream_task=downstream_task,
+                     processed_data_label=args.processed_data_label)

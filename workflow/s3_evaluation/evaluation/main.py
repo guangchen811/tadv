@@ -1,20 +1,17 @@
 import json
 from collections import defaultdict
-from pathlib import Path
 
 import pandas as pd
 
 from tadv.data_models import ValidationResults
-from tadv.utils import load_dotenv
+from tadv.utils import load_dotenv, get_current_folder
 
 load_dotenv()
 
-from tadv.dq_manager import DeequDataQualityManager
 from tadv.utils import get_project_root
 
 
 def results_calculation(dataset_name, downstream_task, processed_data_label):
-    dq_manager = DeequDataQualityManager()
     project_root = get_project_root()
     processed_data_path = project_root / "data_processed" / dataset_name / downstream_task / f"{processed_data_label}"
     constraints_validation_dir = processed_data_path / "constraints_validation"
@@ -36,6 +33,8 @@ def results_calculation(dataset_name, downstream_task, processed_data_label):
     output_result_df = pd.DataFrame(output_result_data)
 
     constraints_validation_dict = defaultdict(dict)
+    if not constraints_validation_dir.exists():
+        raise FileNotFoundError(f"Constraints validation directory not found: {constraints_validation_dir}")
     for script_constraints_dir in sorted(constraints_validation_dir.iterdir()):
         if script_constraints_dir.is_file():
             # read yaml
@@ -63,9 +62,11 @@ def results_calculation(dataset_name, downstream_task, processed_data_label):
     constraints_result_df = pd.DataFrame(constraints_result_data)
 
     # Pivot the table to merge clean and corrupted rows into a single row
-    constraints_result_df['New Data Type'] = constraints_result_df['New Data Type'].apply(lambda x: 'Clean' if 'clean' in x else 'Corrupted')
-    constraints_result_df_pivot = constraints_result_df.pivot(index=['Script', 'Model'], columns='New Data Type',
-                        values=['Passed Constraints', 'Failed Constraints'])
+    constraints_result_df['New Data Type'] = constraints_result_df['New Data Type'].apply(
+        lambda x: 'Clean' if 'clean' in x else 'Corrupted')
+    constraints_result_df_pivot = constraints_result_df.pivot(index=['Script', 'Model', 'Strategy'],
+                                                              columns='New Data Type',
+                                                              values=['Passed Constraints', 'Failed Constraints'])
 
     # Flatten MultiIndex columns
     constraints_result_df_pivot.columns = [f"{col[0]} ({col[1]})" for col in constraints_result_df_pivot.columns]
@@ -74,18 +75,43 @@ def results_calculation(dataset_name, downstream_task, processed_data_label):
     joined_df = pd.merge(output_result_df, constraints_result_df_pivot, how="left", on=["Script"])
     for i in range(joined_df.shape[0]):
         print(joined_df.iloc[i])
-    joined_df.to_csv(Path("result_tables/") / f"{dataset_name}__{downstream_task}__{processed_data_label}.csv")
+    result_table_path = get_current_folder() / "result_tables/"
+    result_table_path.mkdir(parents=True, exist_ok=True)
+    joined_df.to_csv(result_table_path / f"{dataset_name}__{downstream_task}__{processed_data_label}.csv")
 
 
 if __name__ == "__main__":
+    import argparse
+
     dataset_name_options = ["playground-series-s4e10", "healthcare_dataset"]
     downstream_task_type_options = ["ml_inference_classification", "ml_inference_regression", "sql_query",
                                     "webpage_generation"]
 
-    dataset_option = 0
-    downstream_task_option = 0
-    processed_data_label = "0"
 
-    results_calculation(dataset_name=dataset_name_options[dataset_option],
-                        downstream_task=downstream_task_type_options[downstream_task_option],
-                        processed_data_label=processed_data_label)
+    def parse_multiple_indices(input_str, options_list):
+        """Parses comma-separated indices or 'all'."""
+        if input_str.lower() == "all":
+            return options_list
+        indices = list(map(int, input_str.split(",")))
+        return [options_list[i] for i in indices]
+
+
+    parser = argparse.ArgumentParser(description='Results Calculation')
+    parser.add_argument('--dataset-option', type=str, default="all",
+                        help='Dataset name. Options: 0: playground-series-s4e10, 1: healthcare_dataset')
+    parser.add_argument('--downstream-task-option', type=str, default="all",
+                        help='Downstream task. Options: 0: ml_inference_classification, 1: ml_inference_regression, 2: sql_query, 3: webpage_generation')
+    parser.add_argument('--processed-data-label', type=str, default="0",
+                        help='Version Label of the processed data')
+    args = parser.parse_args()
+
+    dataset_selections = parse_multiple_indices(args.dataset_option, dataset_name_options)
+    downstream_task_selections = parse_multiple_indices(args.downstream_task_option, downstream_task_type_options)
+
+    for dataset_name in dataset_selections:
+        for downstream_task in downstream_task_selections:
+            try:
+                results_calculation(dataset_name, downstream_task, args.processed_data_label)
+            except FileNotFoundError as e:
+                print(f"Skipping {dataset_name}__{downstream_task} due to error: {e}")
+                continue

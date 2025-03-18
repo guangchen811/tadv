@@ -1,0 +1,90 @@
+constraints:
+  cb_person_default_on_file:
+    code:
+    - - .isComplete('cb_person_default_on_file')
+      - Valid
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    assumptions:
+    - cb_person_default_on_file should be complete (NOT NULL).
+    - cb_person_default_on_file should have values in ['Y', 'N'].
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - id should be complete (NOT NULL).
+    - id should have unique values (UNIQUE).
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - loan_amnt should be complete (NOT NULL).
+    - loan_amnt should have a minimum value constraint, likely >= 0 (IS NON NEGATIVE).
+  loan_grade:
+    code:
+    - - .isComplete('loan_grade')
+      - Valid
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - loan_grade should be complete (NOT NULL).
+    - loan_grade should have values in ['A', 'B', 'C', 'D', 'E', 'F', 'G'].
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - loan_int_rate should be complete (NOT NULL).
+    - loan_int_rate should have a minimum value constraint, likely >= 0 (IS NON NEGATIVE).
+  loan_status:
+    code:
+    - - .isComplete('loan_status')
+      - Valid
+    - - .isContainedIn('loan_status', [0, 1])
+      - Invalid
+    assumptions:
+    - loan_status should be complete (NOT NULL).
+    - loan_status should have values in [0, 1].
+  loan_to_income_ratio:
+    code:
+    - - .isNonNegative('loan_to_income_ratio')
+      - Invalid
+    assumptions:
+    - loan_to_income_ratio should be derived from loan_amnt / person_income.
+    - loan_to_income_ratio should have a minimum value constraint, likely >= 0 (IS
+      NON NEGATIVE).
+  person_age:
+    code:
+    - - .isComplete('person_age')
+      - Valid
+    - - .isNonNegative('person_age')
+      - Valid
+    assumptions:
+    - person_age should be complete (NOT NULL).
+    - person_age should have a minimum value constraint, likely >= 0 (IS NON NEGATIVE).
+  person_home_ownership:
+    code:
+    - - .isComplete('person_home_ownership')
+      - Valid
+    - - .isContainedIn('person_home_ownership', ['RENT', 'MORTGAGE', 'OWN', 'OTHER'])
+      - Valid
+    assumptions:
+    - person_home_ownership should be complete (NOT NULL).
+    - person_home_ownership should have values in ['RENT', 'MORTGAGE', 'OWN', 'OTHER'].
+  person_income:
+    code:
+    - - .isComplete('person_income')
+      - Valid
+    - - .isNonNegative('person_income')
+      - Valid
+    assumptions:
+    - person_income should be complete (NOT NULL).
+    - person_income should have a minimum value constraint, likely >= 0 (IS NON NEGATIVE).

@@ -1,0 +1,99 @@
+constraints:
+  Admission Type:
+    code:
+    - - '.hasPattern(''Admission Type'', ''.+'', lambda x: x == 1.0)'
+      - Valid
+    - - .isComplete('Admission Type')
+      - Valid
+    assumptions:
+    - The column is treated as categorical and should be converted to integer codes.
+    - Missing values should be filled with 'NA' before conversion.
+  Age:
+    code:
+    - - .isComplete('Age')
+      - Valid
+    - - .isNonNegative('Age')
+      - Valid
+    assumptions:
+    - The column should be numeric.
+    - Missing values should be filled with 0.
+  Blood Type:
+    code:
+    - - '.hasPattern(''Blood Type'', ''.+'', lambda x: x == 1.0)'
+      - Valid
+    - - .isComplete('Blood Type')
+      - Valid
+    assumptions:
+    - The column is treated as categorical and should be converted to integer codes.
+    - Missing values should be filled with 'NA' before conversion.
+  Gender:
+    code:
+    - - '.hasPattern(''Gender'', ''.+'', lambda x: x == 1.0)'
+      - Valid
+    - - .isComplete('Gender')
+      - Valid
+    assumptions:
+    - The column is treated as categorical and should be converted to integer codes.
+    - Missing values should be filled with 'NA' before conversion.
+  Hospital:
+    code:
+    - - '.hasPattern(''Hospital'', ''.+'', lambda x: x == 1.0)'
+      - Valid
+    - - .isComplete('Hospital')
+      - Valid
+    assumptions:
+    - The column is treated as categorical and should be converted to integer codes.
+    - Missing values should be filled with 'NA' before conversion.
+  Insurance Provider:
+    code:
+    - - '.hasPattern(''Insurance Provider'', ''.+'', lambda x: x == 1.0)'
+      - Valid
+    - - .isComplete('Insurance Provider')
+      - Valid
+    assumptions:
+    - The column is treated as categorical and should be converted to integer codes.
+    - Missing values should be filled with 'NA' before conversion.
+  Medical Condition:
+    code:
+    - - '.hasPattern(''Medical Condition'', ''.+'', lambda x: x == 1.0)'
+      - Valid
+    - - .isComplete('Medical Condition')
+      - Valid
+    assumptions:
+    - The column is treated as categorical and should be converted to integer codes.
+    - Missing values should be filled with 'NA' before conversion.
+  Medication:
+    code:
+    - - '.hasPattern(''Medication'', ''.+'', lambda x: x == 1.0)'
+      - Valid
+    - - .isComplete('Medication')
+      - Valid
+    assumptions:
+    - The column is treated as categorical and should be converted to integer codes.
+    - Missing values should be filled with 'NA' before conversion.
+  Room Number:
+    code:
+    - - .isComplete('Room Number')
+      - Valid
+    - - .isNonNegative('Room Number')
+      - Invalid
+    assumptions:
+    - The column should be numeric.
+    - Missing values should be filled with 0.
+  billing_amount:
+    code:
+    - - .isComplete('billing_amount')
+      - Invalid
+    - - .isNonNegative('billing_amount')
+      - Invalid
+    assumptions:
+    - The column should be numeric.
+    - Missing values should be filled with 0.
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The column should contain unique values.

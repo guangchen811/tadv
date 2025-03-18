@@ -1,0 +1,56 @@
+constraints:
+  cb_person_default_on_file:
+    code:
+    - - '.hasCompleteness(''cb_person_default_on_file'', lambda x: x == 1.0)'
+      - Valid
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    assumptions:
+    - The 'cb_person_default_on_file' column should contain only the values ['Y',
+      'N'].
+    - The 'cb_person_default_on_file' column should have a completeness of 1.0 (no
+      missing values).
+  id:
+    code:
+    - - '.hasCompleteness(''id'', lambda x: x == 1.0)'
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    - - .satisfies('id == id', 'id should contain integral values')
+      - Valid
+    assumptions:
+    - The 'id' column should contain unique integral values.
+    - The 'id' column should have a completeness of 1.0 (no missing values).
+  loan_amnt:
+    code:
+    - - '.hasCompleteness(''loan_amnt'', lambda x: x == 1.0)'
+      - Valid
+    - - .isGreaterThan('loan_amnt', 0)
+      - Invalid
+    - - .satisfies('loan_amnt == loan_amnt', 'loan_amnt should contain integral values')
+      - Valid
+    assumptions:
+    - The 'loan_amnt' column should contain integral values.
+    - The 'loan_amnt' column should be greater than 0, as bins are defined starting
+      from 0.
+    - The 'loan_amnt' column should have a completeness of 1.0 (no missing values).
+  loan_grade:
+    code:
+    - - '.hasCompleteness(''loan_grade'', lambda x: x == 1.0)'
+      - Valid
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - The 'loan_grade' column should contain only the values ['A', 'B', 'C', 'D',
+      'E', 'F', 'G'].
+    - The 'loan_grade' column should have a completeness of 1.0 (no missing values).
+  loan_int_rate:
+    code:
+    - - '.hasCompleteness(''loan_int_rate'', lambda x: x == 1.0)'
+      - Valid
+    - - .satisfies('loan_int_rate == loan_int_rate', 'loan_int_rate should contain
+        fractional values')
+      - Valid
+    assumptions:
+    - The 'loan_int_rate' column should contain fractional values.
+    - The 'loan_int_rate' column should have a completeness of 1.0 (no missing values).

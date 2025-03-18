@@ -1,0 +1,81 @@
+constraints:
+  cb_person_cred_hist_length:
+    code:
+    - - .isComplete('cb_person_cred_hist_length')
+      - Valid
+    - - .isNonNegative('cb_person_cred_hist_length')
+      - Valid
+    assumptions:
+    - CB person credit history length should be complete.
+    - CB person credit history length should be non-negative.
+    - CB person credit history length should be within the valid range of credit history
+      lengths.
+  cb_person_default_on_file:
+    code:
+    - - .isComplete('cb_person_default_on_file')
+      - Valid
+    - - .isContainedIn('cb_person_default_on_file', ['N', 'Y'])
+      - Valid
+    assumptions:
+    - CB person default on file should be complete.
+    - CB person default on file should be one of ['N', 'Y'].
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isNonNegative('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - ID should be complete.
+    - ID should be non-negative.
+    - ID should be unique.
+  loan_amnt:
+    code:
+    - - .hasPattern('loan_amnt_category', 'Low|Medium|High|Very High')
+      - Invalid
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - Loan amount should be complete.
+    - Loan amount should be non-negative.
+    - Loan amount should be categorized into 'Low', 'Medium', 'High', or 'Very High'.
+  loan_grade:
+    code:
+    - - .isComplete('loan_grade')
+      - Valid
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - Loan grade should be complete.
+    - Loan grade should be one of ['A', 'B', 'C', 'D', 'E', 'F', 'G'].
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - Loan interest rate should be complete.
+    - Loan interest rate should be non-negative.
+  loan_percent_income:
+    code:
+    - - .isComplete('loan_percent_income')
+      - Valid
+    - - .isNonNegative('loan_percent_income')
+      - Valid
+    assumptions:
+    - Loan percent of income should be complete.
+    - Loan percent of income should be non-negative.
+  person_home_ownership:
+    code:
+    - - .isComplete('person_home_ownership')
+      - Valid
+    - - .isContainedIn('person_home_ownership', ['RENT', 'MORTGAGE', 'OWN', 'OTHER'])
+      - Valid
+    assumptions:
+    - Person home ownership status should be complete.
+    - Person home ownership status should be one of ['RENT', 'MORTGAGE', 'OWN', 'OTHER'].

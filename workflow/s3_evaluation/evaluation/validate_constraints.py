@@ -16,8 +16,13 @@ def evaluate(dataset_name, downstream_task, processed_data_label):
     constraints_validation_dir.mkdir(parents=True, exist_ok=True)
     constraints_dir = processed_data_path / "constraints"
 
-    clean_test_data = FileLoader.load_csv(processed_data_path / "files_with_clean_new_data" / "test.csv")
-    corrupted_test_data = FileLoader.load_csv(processed_data_path / "files_with_corrupted_new_data" / "test.csv")
+    if downstream_task in ["ml_inference_classification", "ml_inference_regression"]:
+        clean_test_data = FileLoader.load_csv(processed_data_path / "files_with_clean_new_data" / "test.csv")
+        corrupted_test_data = FileLoader.load_csv(processed_data_path / "files_with_corrupted_new_data" / "test.csv")
+    elif downstream_task in ["sql_query", "webpage_generation"]:
+        clean_test_data = FileLoader.load_csv(processed_data_path / "files_with_clean_new_data" / "new_data.csv")
+        corrupted_test_data = FileLoader.load_csv(
+            processed_data_path / "files_with_corrupted_new_data" / "new_data.csv")
 
     deequ_suggestion_file_path = constraints_dir / "deequ_constraints.yaml"
     validation_results_on_clean_test_data_deequ, validation_results_on_corrupted_test_data_deequ = validate_on_both_test_data(
@@ -92,14 +97,31 @@ def build_validation_results_dict(code_list_for_constraints, status_on_clean_tes
 
 
 if __name__ == "__main__":
+    import argparse
+
     dataset_name_options = ["playground-series-s4e10", "healthcare_dataset"]
     downstream_task_type_options = ["ml_inference_classification", "ml_inference_regression", "sql_query",
                                     "webpage_generation"]
 
-    dataset_option = 0
-    downstream_task_option = 0
-    processed_data_label = "0"
 
-    evaluate(dataset_name=dataset_name_options[dataset_option],
-             downstream_task=downstream_task_type_options[downstream_task_option],
-             processed_data_label=processed_data_label)
+    def parse_multiple_indices(input_str, options_list):
+        """Parses comma-separated indices or 'all'."""
+        if input_str.lower() == "all":
+            return options_list
+        indices = list(map(int, input_str.split(",")))
+        return [options_list[i] for i in indices]
+
+
+    parser = argparse.ArgumentParser(description='validate constraints')
+    parser.add_argument('--dataset-option', type=str, default="all",
+                        help='Dataset name. Options: 0: playground-series-s4e10, 1: healthcare_dataset')
+    parser.add_argument('--downstream-task-option', type=str, default="all",
+                        help='Downstream task. Options: 0: ml_inference_classification, 1: ml_inference_regression, 2: sql_query, 3: webpage_generation')
+    parser.add_argument('--processed-data-label', type=str, default="0",
+                        help='Version Label of the processed data')
+    args = parser.parse_args()
+
+    for dataset_option in parse_multiple_indices(args.dataset_option, dataset_name_options):
+        for downstream_task_option in parse_multiple_indices(args.downstream_task_option, downstream_task_type_options):
+            evaluate(dataset_name=dataset_option, downstream_task=downstream_task_option,
+                     processed_data_label=args.processed_data_label)

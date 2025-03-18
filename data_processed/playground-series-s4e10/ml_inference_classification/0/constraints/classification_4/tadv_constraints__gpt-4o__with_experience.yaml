@@ -1,0 +1,84 @@
+constraints:
+  cb_person_default_on_file:
+    code:
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    assumptions:
+    - Values should be 'Y' or 'N'.
+  id:
+    code:
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - Values should be unique.
+  loan_amnt:
+    code:
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - Should be non-negative.
+    - Consider suggesting a maximum loan amount constraint based on observed values.
+  loan_grade:
+    code:
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - 'Values should be one of the following: ''A'', ''B'', ''C'', ''D'', ''E'', ''F'',
+      ''G''.'
+  loan_int_rate:
+    code:
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - Should be non-negative.
+    - Consider suggesting a mean and standard deviation constraint based on observed
+      values.
+  loan_intent:
+    code:
+    - - .isContainedIn('loan_intent', ['EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL',
+        'DEBTCONSOLIDATION', 'MEDICAL', 'VENTURE'])
+      - Valid
+    assumptions:
+    - 'Values should be one of the following: ''EDUCATION'', ''HOMEIMPROVEMENT'',
+      ''PERSONAL'', ''DEBTCONSOLIDATION'', ''MEDICAL'', ''VENTURE''.'
+  loan_percent_income:
+    code:
+    - - .isNonNegative('loan_percent_income')
+      - Valid
+    assumptions:
+    - Should be non-negative.
+    - Consider suggesting a mean and standard deviation constraint based on observed
+      values.
+  person_age:
+    code:
+    - - '.hasMin(''person_age'', lambda x: x >= 18)'
+      - Valid
+    - - .isNonNegative('person_age')
+      - Valid
+    assumptions:
+    - Should be non-negative.
+    - Consider suggesting a minimum age constraint, e.g., age should be greater than
+      or equal to 18.
+  person_emp_length:
+    code:
+    - - .isNonNegative('person_emp_length')
+      - Valid
+    assumptions:
+    - Should be non-negative.
+    - Consider suggesting a mean and standard deviation constraint based on observed
+      values.
+  person_home_ownership:
+    code:
+    - - .isContainedIn('person_home_ownership', ['OTHER', 'OWN', 'MORTGAGE', 'RENT'])
+      - Valid
+    assumptions:
+    - 'Values should be one of the following: ''OTHER'', ''OWN'', ''MORTGAGE'', ''RENT''.
+      Consider allowing reasonable values like ''LEASE''.'
+  person_income:
+    code:
+    - - .isNonNegative('person_income')
+      - Valid
+    assumptions:
+    - Should be non-negative.
+    - Consider suggesting a mean and standard deviation constraint based on observed
+      values.

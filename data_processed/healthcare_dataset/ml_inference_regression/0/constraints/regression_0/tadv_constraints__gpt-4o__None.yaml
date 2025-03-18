@@ -1,0 +1,35 @@
+constraints:
+  Age:
+    code:
+    - - .isComplete('Age')
+      - Valid
+    - - .satisfies('Age >= 0', 'Age should be numeric and non-negative')
+      - Valid
+    assumptions:
+    - Column 'Age' should be treated as numeric.
+    - Missing values in 'Age' should be filled with 0.
+  Room Number:
+    code:
+    - - .isComplete('Room Number')
+      - Valid
+    - - .satisfies('Room Number >= 0', 'Room Number should be numeric and non-negative')
+      - Invalid
+    assumptions:
+    - Column 'Room Number' should be treated as numeric.
+    - Missing values in 'Room Number' should be filled with 0.
+  billing_amount:
+    code:
+    - - .isComplete('billing_amount')
+      - Invalid
+    assumptions:
+    - Column 'billing_amount' should be present and used as the target variable for
+      regression.
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - Column 'id' should be present and is used to identify the rows in the dataset.
+    - Column 'id' should not be part of the features used for training the model.

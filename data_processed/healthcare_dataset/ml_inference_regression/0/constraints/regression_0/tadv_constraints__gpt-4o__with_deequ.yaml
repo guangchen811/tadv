@@ -1,0 +1,44 @@
+constraints:
+  Age:
+    code:
+    - - .isComplete('Age')
+      - Valid
+    - - .isNonNegative('Age')
+      - Valid
+    - - .satisfies('Age <= 120', 'Age should be a reasonable positive integer')
+      - Valid
+    assumptions:
+    - The column is complete (no missing values).
+    - The values should be numeric and non-negative.
+    - The age should be a reasonable positive integer.
+  Room Number:
+    code:
+    - - .isComplete('Room Number')
+      - Valid
+    - - .satisfies('Room Number >= 0', 'Room Number should be non-negative')
+      - Invalid
+    assumptions:
+    - The column is complete (no missing values).
+    - The values are integral (numeric).
+    - The values should be non-negative.
+  billing_amount:
+    code:
+    - - .isComplete('billing_amount')
+      - Invalid
+    - - .satisfies('billing_amount >= 0', 'billing_amount should be non-negative')
+      - Invalid
+    assumptions:
+    - The column is complete (no missing values).
+    - The values should be numeric.
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isNonNegative('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The column is complete (no missing values).
+    - The values should be unique.
+    - The values should be non-negative.

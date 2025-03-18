@@ -1,0 +1,71 @@
+constraints:
+  cb_person_cred_hist_length:
+    code:
+    - - .isComplete('cb_person_cred_hist_length')
+      - Valid
+    - - .isNonNegative('cb_person_cred_hist_length')
+      - Valid
+    assumptions:
+    - Column 'cb_person_cred_hist_length' should not contain null values as completeness
+      is 1.0.
+    - Column 'cb_person_cred_hist_length' should be non-negative as it represents
+      credit history length.
+  cb_person_default_on_file:
+    code:
+    - - .isComplete('cb_person_default_on_file')
+      - Valid
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    assumptions:
+    - Column 'cb_person_default_on_file' should not contain null values as completeness
+      is 1.0.
+    - Column 'cb_person_default_on_file' should contain values in ['Y', 'N'] as these
+      are the observed categories.
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - Column 'id' should not contain null values as completeness is 1.0.
+    - Column 'id' should have unique values as it is an identifier for records.
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - Column 'loan_amnt' should not contain null values as completeness is 1.0.
+    - Column 'loan_amnt' should be non-negative as it represents a monetary amount.
+  loan_grade:
+    code:
+    - - .isComplete('loan_grade')
+      - Valid
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - Column 'loan_grade' should not contain null values as completeness is 1.0.
+    - Column 'loan_grade' should contain values in ['A', 'B', 'C', 'D', 'E', 'F',
+      'G'] as these are the observed categories.
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - Column 'loan_int_rate' should not contain null values as completeness is 1.0.
+    - Column 'loan_int_rate' should be non-negative as interest rates cannot be negative.
+  person_home_ownership:
+    code:
+    - - .isComplete('person_home_ownership')
+      - Valid
+    - - .isContainedIn('person_home_ownership', ['OWN', 'MORTGAGE', 'RENT', 'OTHER'])
+      - Valid
+    assumptions:
+    - Column 'person_home_ownership' should not contain null values as completeness
+      is 1.0.
+    - Column 'person_home_ownership' should contain values in ['OWN', 'MORTGAGE',
+      'RENT', 'OTHER'] as these are the observed categories.

@@ -1,0 +1,67 @@
+constraints:
+  cb_person_cred_hist_length:
+    code:
+    - - '.hasMin(''cb_person_cred_hist_length'', lambda x: x >= 0)'
+      - Valid
+    - - .isComplete('cb_person_cred_hist_length')
+      - Valid
+    assumptions:
+    - NOT NULL constraint due to completeness being 1.0
+    - 'MIN constraint: no negative values allowed as it is used in a division'
+  cb_person_default_on_file:
+    code:
+    - - .isComplete('cb_person_default_on_file')
+      - Valid
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    assumptions:
+    - NOT NULL constraint due to completeness being 1.0
+    - 'IS IN constraint: values should be within [''Y'', ''N''] based on histogram'
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - NOT NULL constraint due to completeness being 1.0
+    - 'UNIQUE constraint: high approximate num distinct values suggesting unique identifiers'
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - NOT NULL constraint due to completeness being 1.0
+    - 'MIN constraint: log transformation indicates positive values'
+    - IS NON NEGATIVE constraint as log transformation is applied
+  loan_grade:
+    code:
+    - - .isComplete('loan_grade')
+      - Valid
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - NOT NULL constraint due to completeness being 1.0
+    - 'IS IN constraint: values should be within [''A'', ''B'', ''C'', ''D'', ''E'',
+      ''F'', ''G''] as inferred from operations'
+  loan_int_rate:
+    code:
+    - - '.hasMin(''loan_int_rate'', lambda x: x >= 0)'
+      - Valid
+    - - .isComplete('loan_int_rate')
+      - Valid
+    assumptions:
+    - NOT NULL constraint due to completeness being 1.0
+    - 'MIN constraint: no negative values allowed as it is used in multiplication'
+  person_home_ownership:
+    code:
+    - - .isComplete('person_home_ownership')
+      - Valid
+    - - .isContainedIn('person_home_ownership', ['OWN', 'MORTGAGE', 'RENT', 'OTHER'])
+      - Valid
+    assumptions:
+    - NOT NULL constraint due to completeness being 1.0
+    - 'IS IN constraint: values should be within [''OWN'', ''MORTGAGE'', ''RENT'',
+      ''OTHER''] based on histogram'

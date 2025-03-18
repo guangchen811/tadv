@@ -1,0 +1,93 @@
+constraints:
+  cb_person_cred_hist_length:
+    code:
+    - - '.hasMax(''cb_person_cred_hist_length'', lambda x: x <= 50)'
+      - Valid
+    - - .isNonNegative('cb_person_cred_hist_length')
+      - Valid
+    assumptions:
+    - cb_person_cred_hist_length should be a non-negative integer
+    - cb_person_cred_hist_length typically ranges from 0 to 50 years
+  cb_person_default_on_file:
+    code:
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    assumptions:
+    - cb_person_default_on_file should be either 'Y' or 'N'
+  id:
+    code:
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - id should be a unique integer for each record
+  loan_amnt:
+    code:
+    - - '.hasMax(''loan_amnt'', lambda x: x <= 100000)'
+      - Valid
+    - - .isPositive('loan_amnt')
+      - Valid
+    assumptions:
+    - loan_amnt should be a positive integer
+    - loan_amnt should not exceed reasonable loan limits, typically up to 100000
+  loan_int_rate:
+    code:
+    - - '.hasMax(''loan_int_rate'', lambda x: x <= 100)'
+      - Valid
+    - - '.hasMin(''loan_int_rate'', lambda x: x >= 0)'
+      - Valid
+    - - .isPositive('loan_int_rate')
+      - Valid
+    assumptions:
+    - loan_int_rate should be a positive number
+    - loan_int_rate should be between 0 and 100
+  loan_intent:
+    code:
+    - - .isContainedIn('loan_intent', ['EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL',
+        'DEBTCONSOLIDATION', 'MEDICAL', 'VENTURE'])
+      - Valid
+    assumptions:
+    - loan_intent should be one of 'EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL', 'DEBTCONSOLIDATION',
+      'MEDICAL', 'VENTURE'
+  loan_percent_income:
+    code:
+    - - '.hasMax(''loan_percent_income'', lambda x: x <= 100)'
+      - Valid
+    - - '.hasMin(''loan_percent_income'', lambda x: x >= 0)'
+      - Valid
+    - - .isPositive('loan_percent_income')
+      - Invalid
+    assumptions:
+    - loan_percent_income should be a positive number
+    - loan_percent_income should be between 0 and 100
+  person_age:
+    code:
+    - - '.hasMax(''person_age'', lambda x: x <= 100)'
+      - Valid
+    - - '.hasMin(''person_age'', lambda x: x >= 18)'
+      - Valid
+    - - .isNonNegative('person_age')
+      - Valid
+    assumptions:
+    - person_age should be a non-negative integer
+    - person_age should be a reasonable human age, typically between 18 and 100
+  person_emp_length:
+    code:
+    - - '.hasMax(''person_emp_length'', lambda x: x <= 40)'
+      - Invalid
+    - - .isNonNegative('person_emp_length')
+      - Valid
+    assumptions:
+    - person_emp_length should be a non-negative number
+    - person_emp_length typically ranges from 0 to 40 years
+  person_home_ownership:
+    code:
+    - - .isContainedIn('person_home_ownership', ['OTHER', 'OWN', 'MORTGAGE', 'RENT'])
+      - Valid
+    assumptions:
+    - person_home_ownership should be one of 'OTHER', 'OWN', 'MORTGAGE', 'RENT'
+  person_income:
+    code:
+    - - .isNonNegative('person_income')
+      - Valid
+    assumptions:
+    - person_income should be a non-negative integer

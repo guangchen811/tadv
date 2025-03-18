@@ -1,0 +1,63 @@
+constraints:
+  cb_person_cred_hist_length:
+    code:
+    - - .isComplete('cb_person_cred_hist_length')
+      - Valid
+    - - .isNonNegative('cb_person_cred_hist_length')
+      - Valid
+    assumptions:
+    - NOT NULL constraint is assumed since the column is complete in the dataset.
+    - IS NON NEGATIVE constraint is assumed since the column data type is Integral
+      and no negative values are mentioned.
+  cb_person_default_on_file:
+    code:
+    - - .isComplete('cb_person_default_on_file')
+      - Valid
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    assumptions:
+    - NOT NULL constraint is assumed since the column is complete in the dataset.
+    - The column should have values within the categorical range ['Y', 'N'] as it
+      is used directly in the model.
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - NOT NULL constraint is assumed since the column is complete in the dataset.
+    - IS NON NEGATIVE constraint is assumed since the column data type is Integral
+      and no negative values are mentioned.
+  loan_grade:
+    code:
+    - - .isComplete('loan_grade')
+      - Valid
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - NOT NULL constraint is assumed since the column is complete in the dataset.
+    - The column should have values within the categorical range ['A', 'B', 'C', 'D',
+      'E', 'F', 'G'] as it is used to determine 'high_grade'.
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - NOT NULL constraint is assumed since the column is complete in the dataset.
+    - IS NON NEGATIVE constraint is assumed since the column data type is Fractional
+      and no negative values are mentioned.
+    - The column 'loan_int_rate' is used in a multiplication operation, suggesting
+      it should be a valid fractional number.
+  person_home_ownership:
+    code:
+    - - .isComplete('person_home_ownership')
+      - Valid
+    - - .isContainedIn('person_home_ownership', ['OWN', 'MORTGAGE', 'RENT', 'OTHER'])
+      - Valid
+    assumptions:
+    - NOT NULL constraint is assumed since the column is complete in the dataset.
+    - The column should have values within the categorical range ['OWN', 'MORTGAGE',
+      'RENT', 'OTHER'] as it is used to determine 'is_home_owner'.

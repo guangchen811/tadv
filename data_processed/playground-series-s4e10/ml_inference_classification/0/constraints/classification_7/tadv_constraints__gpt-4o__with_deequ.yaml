@@ -1,0 +1,50 @@
+constraints:
+  cb_person_default_on_file:
+    code:
+    - - .isComplete('cb_person_default_on_file')
+      - Valid
+    - - .isContainedIn('cb_person_default_on_file', ['N', 'Y'])
+      - Valid
+    assumptions:
+    - The 'cb_person_default_on_file' column should be complete (no missing values).
+    - The 'cb_person_default_on_file' column should only contain values 'N' or 'Y'.
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isNonNegative('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The 'id' column should be complete (no missing values).
+    - The 'id' column should contain non-negative values.
+    - The 'id' column should have unique values.
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - The 'loan_amnt' column should be complete (no missing values).
+    - The 'loan_amnt' column should contain non-negative values.
+  loan_grade:
+    code:
+    - - .isComplete('loan_grade')
+      - Valid
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - The 'loan_grade' column should be complete (no missing values).
+    - The 'loan_grade' column should only contain values from the set ['A', 'B', 'C',
+      'D', 'E', 'F', 'G'].
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - The 'loan_int_rate' column should be complete (no missing values).
+    - The 'loan_int_rate' column should contain non-negative values.

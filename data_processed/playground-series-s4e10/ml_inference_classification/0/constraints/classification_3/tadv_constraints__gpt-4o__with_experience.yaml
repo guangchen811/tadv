@@ -1,0 +1,91 @@
+constraints:
+  cb_person_cred_hist_length:
+    code:
+    - - '.hasMin(''cb_person_cred_hist_length'', lambda x: x >= 0)'
+      - Valid
+    - - .isNonNegative('cb_person_cred_hist_length')
+      - Valid
+    assumptions:
+    - Should be non-negative
+    - Should have a minimum value of 0
+  cb_person_default_on_file:
+    code:
+    - - .isComplete('cb_person_default_on_file')
+      - Valid
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    assumptions:
+    - Should be complete (no null values)
+    - Should be one of ['Y', 'N']
+  loan_amnt:
+    code:
+    - - '.hasMin(''loan_amnt'', lambda x: x >= 0)'
+      - Valid
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - Should be non-negative
+    - Should have a minimum value of 0
+  loan_grade:
+    code:
+    - - .isComplete('loan_grade')
+      - Valid
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - Should be complete (no null values)
+    - Should be one of ['A', 'B', 'C', 'D', 'E', 'F', 'G']
+  loan_int_rate:
+    code:
+    - - '.hasMin(''loan_int_rate'', lambda x: x >= 0)'
+      - Valid
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - Should be non-negative
+    - Should have a minimum value of 0
+  loan_percent_income:
+    code:
+    - - '.hasMin(''loan_percent_income'', lambda x: x >= 0)'
+      - Valid
+    - - .isNonNegative('loan_percent_income')
+      - Valid
+    assumptions:
+    - Should be non-negative
+    - Should have a minimum value of 0
+  person_age:
+    code:
+    - - '.hasMin(''person_age'', lambda x: x >= 0)'
+      - Valid
+    - - .isNonNegative('person_age')
+      - Valid
+    assumptions:
+    - Should be non-negative
+    - Should have a minimum value of 0
+  person_emp_length:
+    code:
+    - - '.hasMin(''person_emp_length'', lambda x: x >= 0)'
+      - Valid
+    - - .isNonNegative('person_emp_length')
+      - Valid
+    assumptions:
+    - Should be non-negative
+    - Should have a minimum value of 0
+  person_home_ownership:
+    code:
+    - - .isComplete('person_home_ownership')
+      - Valid
+    - - .isContainedIn('person_home_ownership', ['OTHER', 'OWN', 'MORTGAGE', 'RENT'])
+      - Valid
+    assumptions:
+    - Should be complete (no null values)
+    - Should be one of ['OTHER', 'OWN', 'MORTGAGE', 'RENT']
+  person_income:
+    code:
+    - - '.hasMin(''person_income'', lambda x: x >= 0)'
+      - Valid
+    - - .isNonNegative('person_income')
+      - Valid
+    assumptions:
+    - Should be non-negative
+    - Should have a minimum value of 0

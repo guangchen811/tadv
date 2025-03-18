@@ -1,0 +1,49 @@
+results:
+  cb_person_cred_hist_length:
+    code:
+    - - '.satisfies(''cb_person_cred_hist_length >= 0'', ''cb_person_cred_hist_length
+        should be a numeric column'', lambda x: x == 1.0)'
+      - Passed
+  cb_person_default_on_file:
+    code:
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Passed
+  loan_amnt:
+    code:
+    - - '.satisfies(''loan_amnt >= 0'', ''loan_amnt should be a numeric column'',
+        lambda x: x == 1.0)'
+      - Passed
+  loan_grade:
+    code:
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Passed
+  loan_int_rate:
+    code:
+    - - '.satisfies(''loan_int_rate >= 0'', ''loan_int_rate should be a numeric column'',
+        lambda x: x == 1.0)'
+      - Passed
+  loan_intent:
+    code:
+    - - '.hasPattern(''loan_intent'', ''EDUCATION|MEDICAL|VENTURE|PERSONAL|HOMEIMPROVEMENT|DEBTCONSOLIDATION'',
+        lambda x: x == 1.0)'
+      - Passed
+  loan_percent_income:
+    code:
+    - - '.satisfies(''loan_percent_income >= 0'', ''loan_percent_income should be
+        a numeric column'', lambda x: x == 1.0)'
+      - Passed
+  loan_status:
+    code:
+    - - '.satisfies(''loan_status >= 0'', ''loan_status should be a numeric column'',
+        lambda x: x == 1.0)'
+      - Passed
+  person_age:
+    code:
+    - - '.satisfies(''person_age >= 0'', ''person_age should be a numeric column'',
+        lambda x: x == 1.0)'
+      - Passed
+  person_emp_length:
+    code:
+    - - '.satisfies(''person_emp_length >= 0'', ''person_emp_length should be a numeric
+        column'', lambda x: x == 1.0)'
+      - Passed

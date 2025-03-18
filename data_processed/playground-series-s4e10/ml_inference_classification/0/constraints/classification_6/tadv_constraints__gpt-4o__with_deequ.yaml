@@ -1,0 +1,79 @@
+constraints:
+  cb_person_default_on_file:
+    code:
+    - - .isComplete('cb_person_default_on_file')
+      - Valid
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    assumptions:
+    - cb_person_default_on_file should be complete (no missing values).
+    - cb_person_default_on_file should be either 'Y' or 'N'.
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - id should be complete (no missing values).
+    - id should be unique.
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - loan_amnt should be complete (no missing values).
+    - loan_amnt should be non-negative.
+  loan_grade:
+    code:
+    - - .isComplete('loan_grade')
+      - Valid
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - loan_grade should be complete (no missing values).
+    - 'loan_grade should be one of the known grades: [''A'', ''B'', ''C'', ''D'',
+      ''E'', ''F'', ''G''].'
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - loan_int_rate should be complete (no missing values).
+    - loan_int_rate should be non-negative.
+  person_age:
+    code:
+    - - .isComplete('person_age')
+      - Valid
+    - - .isNonNegative('person_age')
+      - Valid
+    assumptions:
+    - person_age should be complete (no missing values).
+    - person_age should be non-negative.
+  person_home_ownership:
+    code:
+    - - .isComplete('person_home_ownership')
+      - Valid
+    - - .isContainedIn('person_home_ownership', ['RENT', 'MORTGAGE', 'OWN', 'OTHER'])
+      - Valid
+    assumptions:
+    - person_home_ownership should be complete (no missing values).
+    - 'person_home_ownership should be one of the known categories: [''RENT'', ''MORTGAGE'',
+      ''OWN'', ''OTHER''].'
+  person_income:
+    code:
+    - - .isComplete('person_income')
+      - Valid
+    - - .isNonNegative('person_income')
+      - Valid
+    - - .satisfies('person_income != 0', 'person_income should not be zero')
+      - Valid
+    assumptions:
+    - person_income should be complete (no missing values).
+    - person_income should be non-negative.
+    - person_income should not be zero to avoid division by zero when calculating
+      loan_to_income_ratio.

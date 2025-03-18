@@ -1,0 +1,43 @@
+constraints:
+  cb_person_cred_hist_length:
+    code:
+    - - .isNonNegative('cb_person_cred_hist_length')
+      - Valid
+    assumptions:
+    - should contain non-negative values
+  cb_person_default_on_file:
+    code:
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    assumptions:
+    - should only contain the values 'Y' or 'N'
+  id:
+    code:
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - should be unique or at least distinct within each dataset
+  loan_amnt:
+    code:
+    - - .isPositive('loan_amnt')
+      - Valid
+    assumptions:
+    - should contain positive values
+  loan_grade:
+    code:
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - should only contain predefined categories (A, B, C, D, E, F, G)
+  loan_int_rate:
+    code:
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - should be a non-negative numeric value
+  person_home_ownership:
+    code:
+    - - .isContainedIn('person_home_ownership', ['RENT', 'MORTGAGE', 'OWN', 'OTHER'])
+      - Valid
+    assumptions:
+    - should only contain predefined categories (RENT, MORTGAGE, OWN, OTHER)

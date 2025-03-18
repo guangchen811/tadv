@@ -1,0 +1,29 @@
+constraints:
+  Age:
+    code:
+    - - '.hasMin(''Age'', lambda x: isinstance(x, (int, float)))'
+      - Valid
+    - - '.hasMin(''Age'', lambda x: x > 0)'
+      - Valid
+    - - .isComplete('Age')
+      - Valid
+    assumptions:
+    - Age should be a numeric value since it is used in numerical computations.
+    - Age should be greater than 0 since division by zero is replaced with NaN.
+  Billing Amount:
+    code:
+    - - '.hasMin(''Billing Amount'', lambda x: isinstance(x, (int, float)))'
+      - Valid
+    - - .isComplete('Billing Amount')
+      - Valid
+    assumptions:
+    - Billing Amount should be a numeric value since it is used in numerical calculations
+      and model training.
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - id should be unique across the dataset to ensure proper identification of records.

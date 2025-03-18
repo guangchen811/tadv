@@ -1,0 +1,59 @@
+constraints:
+  Billing Amount:
+    code:
+    - - .isComplete('billing_amount')
+      - Invalid
+    - - .isNonNegative('billing_amount')
+      - Invalid
+    assumptions:
+    - Billing Amount should be complete, as it is used for regression prediction.
+    - Billing Amount should be numeric and non-negative, as it represents a monetary
+      value.
+  Date of Admission:
+    code:
+    - - .isComplete('admission_dt')
+      - Invalid
+    - - .satisfies('admission_dt IS NOT NULL', 'Valid date format for admission_dt')
+      - Invalid
+    assumptions:
+    - Date of Admission should be complete, as it is used to calculate length_of_stay.
+    - Date of Admission should be a valid date format to ensure accurate calculations.
+  Discharge Date:
+    code:
+    - - .isComplete('discharge_dt')
+      - Invalid
+    - - .satisfies('discharge_dt IS NOT NULL', 'Valid date format for discharge_dt')
+      - Invalid
+    assumptions:
+    - Discharge Date should be complete, as it is used to calculate length_of_stay.
+    - Discharge Date should be a valid date format to ensure accurate calculations.
+  Doctor:
+    code:
+    - - .isComplete('Doctor')
+      - Valid
+    assumptions:
+    - Doctor should be complete if present, as it might be used for further analysis.
+  Name:
+    code:
+    - - .isComplete('Name')
+      - Valid
+    assumptions:
+    - Name should be complete if present, as it might be used for further analysis.
+  Test Results:
+    code:
+    - - .isComplete('Test Results')
+      - Valid
+    - - .isContainedIn('Test Results', ['Abnormal', 'Normal', 'Inconclusive'])
+      - Valid
+    assumptions:
+    - Test Results should be complete if present, as it is considered for processing.
+    - 'Test Results should only contain values: Abnormal, Normal, Inconclusive.'
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - id should be complete, as it is used for identifying test samples.
+    - id should be unique to ensure each sample is distinct.

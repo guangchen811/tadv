@@ -1,0 +1,87 @@
+constraints:
+  cb_person_cred_hist_length:
+    code:
+    - - .isNonNegative('cb_person_cred_hist_length')
+      - Valid
+    assumptions:
+    - The 'cb_person_cred_hist_length' column should be greater than or equal to 0,
+      as credit history length cannot be negative.
+  cb_person_default_on_file:
+    code:
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    assumptions:
+    - 'The ''cb_person_default_on_file'' column should contain only the values: ''Y'',
+      ''N'', indicating whether there is a default on file.'
+  id:
+    code:
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The 'id' column should contain unique values for each entry to ensure proper
+      identification of records.
+  loan_amnt:
+    code:
+    - - .isPositive('loan_amnt')
+      - Valid
+    assumptions:
+    - The 'loan_amnt' column should be greater than 0, as loan amount should be a
+      positive value.
+  loan_grade:
+    code:
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - 'The ''loan_grade'' column should contain only the values: ''A'', ''B'', ''C'',
+      ''D'', ''E'', ''F'', ''G'', as these are the known grade categories.'
+  loan_int_rate:
+    code:
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - The 'loan_int_rate' column should be greater than or equal to 0, as interest
+      rate cannot be negative.
+  loan_percent_income:
+    code:
+    - - .isGreaterThanOrEqualTo('loan_percent_income', 0)
+      - Invalid
+    - - .isLessThanOrEqualTo('loan_percent_income', 1)
+      - Invalid
+    assumptions:
+    - The 'loan_percent_income' column should be between 0 and 1, representing a percentage
+      of income.
+  loan_status:
+    code:
+    - - .isContainedIn('loan_status', [0, 1])
+      - Invalid
+    assumptions:
+    - 'The ''loan_status'' column should contain only the values: 0, 1, indicating
+      binary classification.'
+  person_age:
+    code:
+    - - .isNonNegative('person_age')
+      - Valid
+    assumptions:
+    - The 'person_age' column should be greater than or equal to 0, as age cannot
+      be negative.
+  person_emp_length:
+    code:
+    - - .isNonNegative('person_emp_length')
+      - Valid
+    assumptions:
+    - The 'person_emp_length' column should be greater than or equal to 0, as employment
+      length cannot be negative.
+  person_home_ownership:
+    code:
+    - - .isContainedIn('person_home_ownership', ['OTHER', 'OWN', 'MORTGAGE', 'RENT'])
+      - Valid
+    assumptions:
+    - 'The ''person_home_ownership'' column should contain only the values: ''OTHER'',
+      ''OWN'', ''MORTGAGE'', ''RENT'', as these are the known categories.'
+  person_income:
+    code:
+    - - .isNonNegative('person_income')
+      - Valid
+    assumptions:
+    - The 'person_income' column should be greater than or equal to 0, as income cannot
+      be negative.

@@ -1,0 +1,8 @@
+Billing Amount
+Age
+id
+Name
+Test Results
+Doctor
+Discharge Date
+Date of Admission

@@ -1,0 +1,72 @@
+constraints:
+  cb_person_default_on_file:
+    code:
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    assumptions:
+    - Values should be one of ['Y', 'N'] as they are used for OneHotEncoding.
+  id:
+    code:
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - Assumed to be unique for each row since it is used as an identifier.
+  loan_amnt:
+    code:
+    - - .isPositive('loan_amnt')
+      - Valid
+    assumptions:
+    - Assumed to be a positive integer as it represents loan amount.
+  loan_grade:
+    code:
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - Values should be one of ['A', 'B', 'C', 'D', 'E', 'F', 'G'] as they are used
+      for OneHotEncoding.
+  loan_int_rate:
+    code:
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - Assumed to be a non-negative fractional number as it represents interest rate.
+  loan_intent:
+    code:
+    - - .isContainedIn('loan_intent', ['EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL',
+        'DEBTCONSOLIDATION', 'MEDICAL', 'VENTURE'])
+      - Valid
+    assumptions:
+    - Values should be one of ['EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL', 'DEBTCONSOLIDATION',
+      'MEDICAL', 'VENTURE'] as they are used for OneHotEncoding.
+  loan_percent_income:
+    code:
+    - - .isNonNegative('loan_percent_income')
+      - Valid
+    assumptions:
+    - Assumed to be a non-negative fractional number as it represents loan percent
+      of income.
+  person_age:
+    code:
+    - - .isNonNegative('person_age')
+      - Valid
+    assumptions:
+    - Assumed to be a non-negative integer as it represents age.
+  person_emp_length:
+    code:
+    - - .isNonNegative('person_emp_length')
+      - Valid
+    assumptions:
+    - Assumed to be non-negative as it represents employment length.
+  person_home_ownership:
+    code:
+    - - .isContainedIn('person_home_ownership', ['OTHER', 'OWN', 'MORTGAGE', 'RENT'])
+      - Valid
+    assumptions:
+    - Values should be one of ['OTHER', 'OWN', 'MORTGAGE', 'RENT'] as they are used
+      for OneHotEncoding.
+  person_income:
+    code:
+    - - .isNonNegative('person_income')
+      - Valid
+    assumptions:
+    - Assumed to be a non-negative integer as it represents income.

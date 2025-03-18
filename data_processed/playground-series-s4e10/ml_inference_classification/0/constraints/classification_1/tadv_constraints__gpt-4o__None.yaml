@@ -1,0 +1,79 @@
+constraints:
+  cb_person_cred_hist_length:
+    code:
+    - - .isNonNegative('cb_person_cred_hist_length')
+      - Valid
+    assumptions:
+    - Values should be greater than or equal to 0
+  cb_person_default_on_file:
+    code:
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    assumptions:
+    - Values should be one of ['Y', 'N']
+  id:
+    code:
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - Values should be unique
+  loan_amnt:
+    code:
+    - - .isPositive('loan_amnt')
+      - Valid
+    assumptions:
+    - Values should be greater than 0
+  loan_grade:
+    code:
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - Values should be one of ['A', 'B', 'C', 'D', 'E', 'F', 'G']
+  loan_int_rate:
+    code:
+    - - .isGreaterThanOrEqualTo('loan_int_rate', '0')
+      - Invalid
+    - - .isLessThanOrEqualTo('loan_int_rate', '100')
+      - Invalid
+    assumptions:
+    - Values should be between 0 and 100
+  loan_intent:
+    code:
+    - - .isContainedIn('loan_intent', ['EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL',
+        'DEBTCONSOLIDATION', 'MEDICAL', 'VENTURE'])
+      - Valid
+    assumptions:
+    - Values should be one of ['EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL', 'DEBTCONSOLIDATION',
+      'MEDICAL', 'VENTURE']
+  loan_percent_income:
+    code:
+    - - .isGreaterThanOrEqualTo('loan_percent_income', '0')
+      - Invalid
+    - - .isLessThanOrEqualTo('loan_percent_income', '100')
+      - Invalid
+    assumptions:
+    - Values should be between 0 and 100
+  person_age:
+    code:
+    - - .isPositive('person_age')
+      - Valid
+    assumptions:
+    - Values should be greater than 0
+  person_emp_length:
+    code:
+    - - .isNonNegative('person_emp_length')
+      - Valid
+    assumptions:
+    - Values should be greater than or equal to 0
+  person_home_ownership:
+    code:
+    - - .isContainedIn('person_home_ownership', ['OWN', 'MORTGAGE', 'RENT', 'OTHER'])
+      - Valid
+    assumptions:
+    - Values should be one of ['OWN', 'MORTGAGE', 'RENT', 'OTHER']
+  person_income:
+    code:
+    - - .isNonNegative('person_income')
+      - Valid
+    assumptions:
+    - Values should be greater than or equal to 0
