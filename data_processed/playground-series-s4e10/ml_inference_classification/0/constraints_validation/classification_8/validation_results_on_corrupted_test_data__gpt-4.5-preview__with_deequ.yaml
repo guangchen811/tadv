@@ -1,0 +1,59 @@
+results:
+  cb_person_cred_hist_length:
+    code:
+    - - .isComplete('cb_person_cred_hist_length')
+      - Passed
+    - - .isNonNegative('cb_person_cred_hist_length')
+      - Passed
+    - - .satisfies('cb_person_cred_hist_length % 1 = 0', 'integer_check_cb_person_cred_hist_length')
+      - Passed
+  cb_person_default_on_file:
+    code:
+    - - .isComplete('cb_person_default_on_file')
+      - Passed
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Passed
+  id:
+    code:
+    - - .isComplete('id')
+      - Passed
+    - - .isNonNegative('id')
+      - Passed
+    - - .isUnique('id')
+      - Passed
+    - - .satisfies('id % 1 = 0', 'integer_check_id')
+      - Passed
+  loan_amnt:
+    code:
+    - - '.hasMax(''loan_amnt'', lambda x: x > 30000)'
+      - Passed
+    - - '.hasMin(''loan_amnt'', lambda x: x <= 5000)'
+      - Passed
+    - - .isComplete('loan_amnt')
+      - Passed
+    - - .isNonNegative('loan_amnt')
+      - Passed
+  loan_grade:
+    code:
+    - - .isComplete('loan_grade')
+      - Failed
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Passed
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Passed
+    - - .isNonNegative('loan_int_rate')
+      - Passed
+  loan_percent_income:
+    code:
+    - - .isComplete('loan_percent_income')
+      - Passed
+    - - .isNonNegative('loan_percent_income')
+      - Passed
+  person_home_ownership:
+    code:
+    - - .isComplete('person_home_ownership')
+      - Passed
+    - - .isContainedIn('person_home_ownership', ['RENT', 'MORTGAGE', 'OWN', 'OTHER'])
+      - Passed

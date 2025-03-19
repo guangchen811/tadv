@@ -28,13 +28,6 @@ constraints:
     - - .isNonNegative("Age")
       - Valid
     assumptions: []
-  Billing Amount:
-    code:
-    - - .isComplete("Billing Amount")
-      - Valid
-    - - .isUnique("Billing Amount")
-      - Invalid
-    assumptions: []
   Blood Type:
     code:
     - - .isComplete("Blood Type")

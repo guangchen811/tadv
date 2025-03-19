@@ -111,10 +111,3 @@ constraints:
         >= 0.94, "It should be above 0.94!")'
       - Valid
     assumptions: []
-  person_income:
-    code:
-    - - .isComplete("person_income")
-      - Valid
-    - - .isNonNegative("person_income")
-      - Valid
-    assumptions: []

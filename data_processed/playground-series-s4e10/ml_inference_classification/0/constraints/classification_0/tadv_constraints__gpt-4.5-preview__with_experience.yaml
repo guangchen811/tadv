@@ -1,0 +1,53 @@
+constraints:
+  cb_person_default_on_file:
+    code:
+    - - .isComplete('cb_person_default_on_file')
+      - Valid
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    assumptions:
+    - Values should belong to categories ['Y', 'N'].
+    - Column should not contain NULL values.
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - Values should be unique.
+    - Column should not contain NULL values.
+  loan_amnt:
+    code:
+    - - '.hasMax(''loan_amnt'', lambda x: x < 50000)'
+      - Valid
+    - - '.hasMin(''loan_amnt'', lambda x: x > 100)'
+      - Valid
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    - - .isPositive('loan_amnt')
+      - Valid
+    assumptions:
+    - Values must be non-negative.
+    - Values should be greater than zero to avoid issues with log transformation.
+    - Values should be within a reasonable range based on historical loan amounts.
+  loan_grade:
+    code:
+    - - .isComplete('loan_grade')
+      - Valid
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - Values should belong to the categories ['A', 'B', 'C', 'D', 'E', 'F', 'G'].
+    - Column should not contain NULL values.
+  loan_int_rate:
+    code:
+    - - '.hasMax(''loan_int_rate'', lambda x: x <= 50.0)'
+      - Valid
+    - - '.hasMin(''loan_int_rate'', lambda x: x >= 0.0)'
+      - Valid
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - Values must be non-negative.
+    - Interest rate values should be realistically bounded (e.g., between 0% and 50%).

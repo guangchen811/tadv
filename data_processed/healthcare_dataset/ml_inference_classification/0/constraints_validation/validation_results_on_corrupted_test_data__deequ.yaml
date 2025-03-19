@@ -87,12 +87,6 @@ results:
     code:
     - - .isComplete("Room Number")
       - Passed
-  Test Results:
-    code:
-    - - .isComplete("Test Results")
-      - Failed
-    - - .isContainedIn("Test Results", ["Abnormal", "Normal", "Inconclusive"])
-      - Failed
   id:
     code:
     - - .isComplete("id")

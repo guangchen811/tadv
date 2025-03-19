@@ -60,14 +60,6 @@ results:
       - Passed
     - - .isNonNegative("loan_percent_income")
       - Passed
-  loan_status:
-    code:
-    - - .isComplete("loan_status")
-      - Failed
-    - - .isContainedIn("loan_status", ["0", "1"])
-      - Failed
-    - - .isNonNegative("loan_status")
-      - Failed
   person_age:
     code:
     - - .isComplete("person_age")

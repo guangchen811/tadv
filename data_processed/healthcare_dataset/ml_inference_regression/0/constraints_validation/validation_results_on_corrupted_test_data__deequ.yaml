@@ -26,10 +26,6 @@ results:
       - Failed
     - - .isNonNegative("Age")
       - Passed
-  Billing Amount:
-    code:
-    - - .isComplete("Billing Amount")
-      - Failed
   Blood Type:
     code:
     - - .isComplete("Blood Type")

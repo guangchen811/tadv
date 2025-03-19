@@ -24,6 +24,14 @@ def run_deequ_dv(dataset_name, downstream_task, processed_data_label):
             processed_data_label=processed_data_label,
             dq_manager=dq_manager
         )
+        if downstream_task == "ml_inference_classification":
+            # drop the target column for classification task
+            target_column_name = "Test Results" if dataset_name == "healthcare_dataset" else "loan_status"
+            spark_train_df = spark_train_df.drop(target_column_name)
+        elif downstream_task == "ml_inference_regression":
+            # drop the target column for regression task
+            target_column_name = "Billing Amount" if dataset_name == "healthcare_dataset" else "person_income"
+            spark_train_df = spark_train_df.drop(target_column_name)
     elif downstream_task in ["sql_query", "webpage_generation"]:
         spark_train_df, spark_train, _, _ = load_previous_and_new_spark_data(
             dataset_name=dataset_name,

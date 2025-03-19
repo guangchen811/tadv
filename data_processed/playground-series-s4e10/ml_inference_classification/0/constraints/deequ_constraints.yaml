@@ -68,15 +68,6 @@ constraints:
     - - .isNonNegative("loan_percent_income")
       - Valid
     assumptions: []
-  loan_status:
-    code:
-    - - .isComplete("loan_status")
-      - Valid
-    - - .isContainedIn("loan_status", ["0", "1"])
-      - Valid
-    - - .isNonNegative("loan_status")
-      - Valid
-    assumptions: []
   person_age:
     code:
     - - .isComplete("person_age")

@@ -36,11 +36,15 @@ def results_calculation(dataset_name, downstream_task, processed_data_label):
     if not constraints_validation_dir.exists():
         raise FileNotFoundError(f"Constraints validation directory not found: {constraints_validation_dir}")
     deequ_result = {}
+    deequ_with_column_skipped_result = {}
     for script_constraints_dir in sorted(constraints_validation_dir.iterdir()):
         if script_constraints_dir.is_file():
+            # deeque constraints
             new_data_name, _ = script_constraints_dir.stem.split("__")
             constraints_file = constraints_validation_dir / f"{script_constraints_dir.name}"
             deequ_result[new_data_name] = ValidationResults.from_yaml(constraints_file).check_result()
+            deequ_with_column_skipped_result[new_data_name] = ValidationResults.from_yaml(
+                constraints_file).check_result(column_skipped=['person_age'])
     for script_constraints_dir in sorted(constraints_validation_dir.iterdir()):
         if script_constraints_dir.is_dir():
             for constraints_file_name in sorted(script_constraints_dir.iterdir()):
@@ -52,8 +56,12 @@ def results_calculation(dataset_name, downstream_task, processed_data_label):
                     f"{new_data_name}__{method_used}__{strategy_used}"] = ValidationResults.from_yaml(
                     constraints_file).check_result()
             for new_data_name in deequ_result.keys():
-                constraints_validation_dict[script_constraints_dir.name][f"{new_data_name}__deequ__None"] = deequ_result[
-                    new_data_name]
+                constraints_validation_dict[script_constraints_dir.name][f"{new_data_name}__deequ__None"] = \
+                    deequ_result[
+                        new_data_name]
+                constraints_validation_dict[script_constraints_dir.name][f"{new_data_name}__deequ__column_skipped"] = \
+                    deequ_with_column_skipped_result[
+                        new_data_name]
 
     constraints_result_data = []
     for script, results in constraints_validation_dict.items():
@@ -63,6 +71,8 @@ def results_calculation(dataset_name, downstream_task, processed_data_label):
                                             "Failed Constraints": result[1], "Strategy": strategy_used,
                                             "New Data Type": new_data_name})
     constraints_result_df = pd.DataFrame(constraints_result_data)
+    if constraints_result_df.empty:
+        raise FileNotFoundError(f"No constraints validation results found in {constraints_validation_dir}")
 
     # Pivot the table to merge clean and corrupted rows into a single row
     constraints_result_df['New Data Type'] = constraints_result_df['New Data Type'].apply(
@@ -76,8 +86,6 @@ def results_calculation(dataset_name, downstream_task, processed_data_label):
     constraints_result_df_pivot.reset_index(inplace=True)
 
     joined_df = pd.merge(output_result_df, constraints_result_df_pivot, how="outer", on="Script")
-    for i in range(joined_df.shape[0]):
-        print(joined_df.iloc[i])
     result_table_path = get_current_folder().parent / "result_tables/"
     result_table_path.mkdir(parents=True, exist_ok=True)
     joined_df.to_csv(result_table_path / f"{dataset_name}__{downstream_task}__{processed_data_label}.csv")
@@ -118,3 +126,4 @@ if __name__ == "__main__":
             except FileNotFoundError as e:
                 print(f"Skipping {dataset_name}__{downstream_task} due to error: {e}")
                 continue
+            print(f"Results calculated for {dataset_name}__{downstream_task}")

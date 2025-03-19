@@ -99,9 +99,3 @@ results:
     - - '.isContainedIn("person_home_ownership", ["RENT", "MORTGAGE"], lambda x: x
         >= 0.94, "It should be above 0.94!")'
       - Passed
-  person_income:
-    code:
-    - - .isComplete("person_income")
-      - Failed
-    - - .isNonNegative("person_income")
-      - Failed

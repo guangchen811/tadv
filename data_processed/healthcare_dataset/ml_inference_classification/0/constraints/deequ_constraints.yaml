@@ -105,13 +105,6 @@ constraints:
     - - .isNonNegative("Room Number")
       - Invalid
     assumptions: []
-  Test Results:
-    code:
-    - - .isComplete("Test Results")
-      - Valid
-    - - .isContainedIn("Test Results", ["Abnormal", "Normal", "Inconclusive"])
-      - Valid
-    assumptions: []
   id:
     code:
     - - .isComplete("id")
