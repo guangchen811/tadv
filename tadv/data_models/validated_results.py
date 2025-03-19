@@ -69,11 +69,15 @@ class ValidationResults:
             )
         return results
 
-    def check_result(self) -> tuple[int, int]:
+    def check_result(self, column_skipped=None) -> tuple[int, int]:
         num_passed = 0
         num_failed = 0
 
-        for column_result in self.results.values():
+        column_skipped = [] if column_skipped is None else column_skipped
+        
+        for column_name, column_result in self.results.items():
+            if column_name in column_skipped:
+                continue
             for entry in column_result.code:
                 if entry.status == "Passed":
                     num_passed += 1
