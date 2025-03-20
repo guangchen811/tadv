@@ -2,3 +2,7 @@ loan_grade
 loan_int_rate
 loan_status
 person_emp_length
+loan_grade
+loan_int_rate
+loan_status
+person_emp_length

@@ -4,3 +4,9 @@ Billing Amount
 Blood Type
 Gender
 Medication
+Admission Type
+Age
+Billing Amount
+Blood Type
+Gender
+Medication

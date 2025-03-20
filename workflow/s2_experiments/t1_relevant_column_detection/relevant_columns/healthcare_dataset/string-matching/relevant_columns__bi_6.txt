@@ -2,3 +2,31 @@ Blood Type
 Medical Condition
 Blood Type
 Medical Condition
+Admission Type
+Age
+Billing Amount
+Blood Type
+Date of Admission
+Doctor
+Hospital
+id
+Insurance Provider
+Medical Condition
+Medication
+Name
+Room Number
+Test Results
+Admission Type
+Age
+Billing Amount
+Blood Type
+Date of Admission
+Doctor
+Hospital
+id
+Insurance Provider
+Medical Condition
+Medication
+Name
+Room Number
+Test Results

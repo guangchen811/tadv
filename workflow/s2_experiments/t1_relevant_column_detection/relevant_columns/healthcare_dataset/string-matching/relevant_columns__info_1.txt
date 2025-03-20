@@ -10,3 +10,15 @@ Discharge Date
 Hospital
 id
 Name
+Age
+Date of Admission
+Discharge Date
+Hospital
+id
+Name
+Age
+Date of Admission
+Discharge Date
+Hospital
+id
+Name

@@ -1,2 +1,4 @@
 Admission Type
 Hospital
+Admission Type
+Hospital

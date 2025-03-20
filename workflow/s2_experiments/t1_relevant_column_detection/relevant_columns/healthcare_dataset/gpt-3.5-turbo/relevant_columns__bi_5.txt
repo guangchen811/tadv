@@ -1,2 +1,4 @@
 Billing Amount
 Doctor
+Billing Amount
+Doctor

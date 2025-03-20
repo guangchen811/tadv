@@ -1,3 +1,7 @@
 loan_amnt
 loan_int_rate
 person_income
+loan_amnt
+loan_int_rate
+new_data
+person_income

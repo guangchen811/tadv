@@ -16,3 +16,23 @@ id
 Insurance Provider
 Medical Condition
 Room Number
+Age
+Billing Amount
+Date of Admission
+Discharge Date
+Doctor
+Hospital
+id
+Insurance Provider
+Medical Condition
+Room Number
+Age
+Billing Amount
+Date of Admission
+Discharge Date
+Doctor
+Hospital
+id
+Insurance Provider
+Medical Condition
+Room Number

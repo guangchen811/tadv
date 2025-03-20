@@ -2,3 +2,21 @@ Date of Admission
 id
 Date of Admission
 id
+Admission Type
+Billing Amount
+Date of Admission
+Doctor
+Hospital
+id
+Insurance Provider
+Medical Condition
+Room Number
+Admission Type
+Billing Amount
+Date of Admission
+Doctor
+Hospital
+id
+Insurance Provider
+Medical Condition
+Room Number

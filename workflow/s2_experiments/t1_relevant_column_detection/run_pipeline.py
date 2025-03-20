@@ -85,11 +85,11 @@ def run_langchain_cadv_on_all_models(dataset_name, model_names, processed_data_l
 
 if __name__ == "__main__":
     dataset_name_options = ["playground-series-s4e10", "healthcare_dataset"]
-    # model_names = ["string-matching", "gpt-3.5-turbo", "gpt-4o", "gpt-4.5-preview"]
-    model_names = ["string-matching"]
+    model_names = ["string-matching", "gpt-3.5-turbo", "gpt-4o", "gpt-4.5-preview"]
+    # model_names = ["string-matching"]
     processed_data_label = '0'
-    dataset_name = dataset_name_options[0]
 
-    all_results = run_langchain_cadv_on_all_models(dataset_name=dataset_name,
-                                                   model_names=model_names,
-                                                   processed_data_label=processed_data_label)
+    for dataset_name in dataset_name_options:
+        all_results = run_langchain_cadv_on_all_models(dataset_name=dataset_name,
+                                                       model_names=model_names,
+                                                       processed_data_label=processed_data_label)

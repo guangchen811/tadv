@@ -4,3 +4,9 @@ loan_intent
 loan_percent_income
 loan_status
 person_income
+loan_amnt
+loan_grade
+loan_intent
+loan_percent_income
+loan_status
+person_income

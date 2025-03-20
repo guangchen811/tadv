@@ -1,3 +1,6 @@
 id
 loan_amnt
 person_income
+id
+loan_amnt
+person_income

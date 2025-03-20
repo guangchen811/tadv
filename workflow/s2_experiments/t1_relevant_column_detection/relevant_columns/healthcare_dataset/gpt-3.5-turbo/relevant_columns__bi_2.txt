@@ -1,3 +1,7 @@
 Billing Amount
 Insurance Provider
 Medical Condition
+Billing Amount
+Insurance Provider
+Medical Condition
+Name

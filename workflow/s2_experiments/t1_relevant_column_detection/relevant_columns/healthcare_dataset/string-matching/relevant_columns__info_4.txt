@@ -8,3 +8,15 @@ Blood Type
 Gender
 id
 Medication
+Age
+Billing Amount
+Blood Type
+Gender
+id
+Medication
+Age
+Billing Amount
+Blood Type
+Gender
+id
+Medication

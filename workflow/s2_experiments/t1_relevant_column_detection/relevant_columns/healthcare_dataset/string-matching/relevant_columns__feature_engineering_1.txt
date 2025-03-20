@@ -2,3 +2,29 @@ id
 Medication
 id
 Medication
+Admission Type
+Age
+Billing Amount
+Date of Admission
+Discharge Date
+Doctor
+Hospital
+id
+Insurance Provider
+Medical Condition
+Medication
+Room Number
+Test Results
+Admission Type
+Age
+Billing Amount
+Date of Admission
+Discharge Date
+Doctor
+Hospital
+id
+Insurance Provider
+Medical Condition
+Medication
+Room Number
+Test Results

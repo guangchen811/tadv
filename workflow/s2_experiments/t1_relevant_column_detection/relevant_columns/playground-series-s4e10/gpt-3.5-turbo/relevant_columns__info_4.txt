@@ -1,3 +1,6 @@
 loan_amnt
 loan_status
 person_income
+loan_amnt
+loan_status
+person_income

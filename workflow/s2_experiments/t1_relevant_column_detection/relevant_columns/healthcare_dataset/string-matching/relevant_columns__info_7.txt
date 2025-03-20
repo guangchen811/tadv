@@ -8,3 +8,17 @@ Discharge Date
 Doctor
 id
 Medical Condition
+Age
+Date of Admission
+Discharge Date
+Doctor
+Hospital
+id
+Medical Condition
+Age
+Date of Admission
+Discharge Date
+Doctor
+Hospital
+id
+Medical Condition

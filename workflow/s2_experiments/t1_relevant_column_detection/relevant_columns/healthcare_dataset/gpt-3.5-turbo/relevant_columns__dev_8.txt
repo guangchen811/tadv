@@ -2,3 +2,5 @@ Age
 id
 Medical Condition
 Name
+Age
+Medical Condition

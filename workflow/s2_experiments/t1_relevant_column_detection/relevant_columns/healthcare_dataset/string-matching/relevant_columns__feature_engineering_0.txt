@@ -4,3 +4,17 @@ id
 Date of Admission
 Discharge Date
 id
+Age
+Date of Admission
+Discharge Date
+Hospital
+id
+Medical Condition
+Medication
+Age
+Date of Admission
+Discharge Date
+Hospital
+id
+Medical Condition
+Medication

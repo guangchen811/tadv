@@ -8,3 +8,13 @@ Hospital
 id
 Medical Condition
 Medication
+Age
+Hospital
+id
+Medical Condition
+Medication
+Age
+Hospital
+id
+Medical Condition
+Medication

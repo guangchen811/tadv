@@ -1,2 +1,7 @@
 id
 Test Results
+Blood Type
+Doctor
+Gender
+id
+Test Results

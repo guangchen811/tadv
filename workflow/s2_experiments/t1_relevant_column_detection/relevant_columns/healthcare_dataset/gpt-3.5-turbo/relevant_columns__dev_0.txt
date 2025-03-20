@@ -2,3 +2,7 @@ Admission Type
 Age
 Billing Amount
 Medical Condition
+Admission Type
+Age
+Billing Amount
+Medical Condition

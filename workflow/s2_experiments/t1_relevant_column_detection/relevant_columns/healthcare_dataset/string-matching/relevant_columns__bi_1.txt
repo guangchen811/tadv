@@ -18,3 +18,25 @@ Medical Condition
 Medication
 Name
 Test Results
+Admission Type
+Age
+Billing Amount
+Blood Type
+Gender
+id
+Insurance Provider
+Medical Condition
+Medication
+Name
+Test Results
+Admission Type
+Age
+Billing Amount
+Blood Type
+Gender
+id
+Insurance Provider
+Medical Condition
+Medication
+Name
+Test Results

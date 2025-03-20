@@ -6,3 +6,17 @@ Admission Type
 Age
 Billing Amount
 Medical Condition
+Admission Type
+Age
+Billing Amount
+Gender
+id
+Medical Condition
+Room Number
+Admission Type
+Age
+Billing Amount
+Gender
+id
+Medical Condition
+Room Number

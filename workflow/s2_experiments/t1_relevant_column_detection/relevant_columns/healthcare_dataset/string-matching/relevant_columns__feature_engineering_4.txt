@@ -6,3 +6,25 @@ Billing Amount
 Gender
 id
 Medical Condition
+Admission Type
+Age
+Billing Amount
+Doctor
+Gender
+Hospital
+id
+Insurance Provider
+Medical Condition
+Room Number
+Test Results
+Admission Type
+Age
+Billing Amount
+Doctor
+Gender
+Hospital
+id
+Insurance Provider
+Medical Condition
+Room Number
+Test Results

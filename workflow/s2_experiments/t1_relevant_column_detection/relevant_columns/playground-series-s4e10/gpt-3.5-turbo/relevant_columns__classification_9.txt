@@ -2,3 +2,7 @@ cb_person_default_on_file
 loan_amnt
 loan_grade
 loan_int_rate
+cb_person_default_on_file
+loan_amnt
+loan_grade
+loan_int_rate

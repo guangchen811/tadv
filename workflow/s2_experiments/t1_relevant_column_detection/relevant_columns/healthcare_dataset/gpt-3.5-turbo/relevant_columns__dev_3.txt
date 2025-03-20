@@ -1,3 +1,13 @@
 Billing Amount
 Doctor
 Hospital
+Admission Type
+Billing Amount
+Date of Admission
+Discharge Date
+Doctor
+Hospital
+Insurance Provider
+Medication
+Room Number
+Test Results

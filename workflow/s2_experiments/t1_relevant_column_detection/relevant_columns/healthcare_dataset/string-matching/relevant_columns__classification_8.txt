@@ -18,3 +18,23 @@ Insurance Provider
 Name
 Room Number
 Test Results
+Blood Type
+Date of Admission
+Discharge Date
+Doctor
+Gender
+id
+Insurance Provider
+Name
+Room Number
+Test Results
+Blood Type
+Date of Admission
+Discharge Date
+Doctor
+Gender
+id
+Insurance Provider
+Name
+Room Number
+Test Results

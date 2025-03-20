@@ -10,3 +10,15 @@ Gender
 id
 Medical Condition
 Test Results
+Age
+Billing Amount
+Gender
+id
+Medical Condition
+Test Results
+Age
+Billing Amount
+Gender
+id
+Medical Condition
+Test Results

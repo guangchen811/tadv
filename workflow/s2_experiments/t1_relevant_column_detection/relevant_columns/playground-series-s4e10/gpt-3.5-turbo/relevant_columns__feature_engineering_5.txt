@@ -1,2 +1,4 @@
 cb_person_cred_hist_length
 id
+cb_person_cred_hist_length
+id

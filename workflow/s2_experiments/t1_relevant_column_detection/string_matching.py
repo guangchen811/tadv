@@ -4,9 +4,17 @@ from tadv.llm.langchain.downstream_task_prompt import SQL_QUERY_TASK_DESCRIPTION
 
 
 def run_string_matching_for_rcd(column_list, script_context):
+    script_context = script_context.lower()
     relevant_columns_list = []
     for column in column_list:
-        if column in script_context:
+        column_variations = [column,
+                             column.replace("_", " "),
+                             column.replace("_", ""),
+                             column.replace(" ", "_"),
+                             column.replace(" ", "")
+                             ]
+        column_variations_lower = [variation.lower() for variation in column_variations]
+        if any([variation in script_context for variation in column_variations_lower]):
             relevant_columns_list.append(column)
     return relevant_columns_list
 

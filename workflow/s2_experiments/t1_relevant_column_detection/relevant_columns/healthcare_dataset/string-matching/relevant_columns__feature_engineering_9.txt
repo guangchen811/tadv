@@ -10,3 +10,17 @@ Date of Admission
 Discharge Date
 id
 Medical Condition
+Admission Type
+Billing Amount
+Date of Admission
+Discharge Date
+id
+Medical Condition
+Room Number
+Admission Type
+Billing Amount
+Date of Admission
+Discharge Date
+id
+Medical Condition
+Room Number

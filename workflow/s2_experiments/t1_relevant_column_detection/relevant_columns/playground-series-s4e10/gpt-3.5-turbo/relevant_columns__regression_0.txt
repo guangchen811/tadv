@@ -4,3 +4,11 @@ loan_amnt_int_rate
 loan_grade
 log_loan_amnt
 person_home_ownership
+cb_person_cred_hist_length
+cb_person_default_on_file
+loan_amnt
+loan_grade
+loan_int_rate
+person_emp_length
+person_home_ownership
+person_income

@@ -8,3 +8,15 @@ Hospital
 id
 Insurance Provider
 Medical Condition
+Age
+Billing Amount
+Hospital
+id
+Insurance Provider
+Medical Condition
+Age
+Billing Amount
+Hospital
+id
+Insurance Provider
+Medical Condition

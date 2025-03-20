@@ -8,3 +8,13 @@ Age
 Billing Amount
 Hospital
 id
+Admission Type
+Age
+Billing Amount
+Hospital
+id
+Admission Type
+Age
+Billing Amount
+Hospital
+id

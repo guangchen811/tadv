@@ -28,3 +28,33 @@ Medical Condition
 Name
 Room Number
 Test Results
+Admission Type
+Age
+Billing Amount
+Blood Type
+Date of Admission
+Discharge Date
+Doctor
+Gender
+Hospital
+id
+Insurance Provider
+Medical Condition
+Name
+Room Number
+Test Results
+Admission Type
+Age
+Billing Amount
+Blood Type
+Date of Admission
+Discharge Date
+Doctor
+Gender
+Hospital
+id
+Insurance Provider
+Medical Condition
+Name
+Room Number
+Test Results

@@ -12,3 +12,19 @@ Doctor
 id
 Medical Condition
 Name
+Age
+Date of Admission
+Discharge Date
+Doctor
+Hospital
+id
+Medical Condition
+Name
+Age
+Date of Admission
+Discharge Date
+Doctor
+Hospital
+id
+Medical Condition
+Name

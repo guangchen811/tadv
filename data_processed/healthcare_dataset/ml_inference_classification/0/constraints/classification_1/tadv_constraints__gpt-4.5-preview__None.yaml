@@ -1,0 +1,72 @@
+constraints:
+  Admission Type:
+    code:
+    - - .isComplete('Admission Type')
+      - Valid
+    - - .isContainedIn('Admission Type', ['Emergency', 'Urgent', 'Elective'])
+      - Valid
+    assumptions:
+    - Values must belong to ['Emergency', 'Urgent', 'Elective'].
+    - Values must not be null.
+  Age:
+    code:
+    - - '.hasMax(''Age'', lambda x: x <= 100)'
+      - Valid
+    - - '.hasMin(''Age'', lambda x: x > 0)'
+      - Valid
+    - - .isComplete('Age')
+      - Valid
+    assumptions:
+    - Values must be greater than 0.
+    - Values must be less than or equal to 100.
+    - Values must not be null.
+  Billing Amount:
+    code:
+    - - '.hasMax(''Billing Amount'', lambda x: x < 50000)'
+      - Invalid
+    - - .isComplete('Billing Amount')
+      - Valid
+    - - .isNonNegative('Billing Amount')
+      - Invalid
+    assumptions:
+    - Values must be numerical and less than 50000.
+    - Values must not be null.
+  Blood Type:
+    code:
+    - - .isComplete('Blood Type')
+      - Valid
+    - - .isContainedIn('Blood Type', ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+',
+        'O-', 'Rare'])
+      - Valid
+    assumptions:
+    - Values must either belong to known blood types ['A+', 'A-', 'B+', 'B-', 'AB+',
+      'AB-', 'O+', 'O-'] or be categorized explicitly as 'Rare'.
+    - Values must not be null.
+  Gender:
+    code:
+    - - .isComplete('Gender')
+      - Valid
+    - - .isContainedIn('Gender', ['Male', 'Female'])
+      - Valid
+    assumptions:
+    - Values must be either 'Male' or 'Female'.
+    - Values must not be null.
+  Medication:
+    code:
+    - - .isComplete('Medication')
+      - Valid
+    - - .isContainedIn('Medication', ['Aspirin', 'Paracetamol', 'Ibuprofen', 'Penicillin',
+        'Lipitor'])
+      - Valid
+    assumptions:
+    - Values must belong to ['Aspirin', 'Paracetamol', 'Ibuprofen', 'Penicillin',
+      'Lipitor'].
+    - Values must not be null.
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - Values must be unique and not null.

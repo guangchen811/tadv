@@ -6,3 +6,13 @@ Billing Amount
 Gender
 id
 Medical Condition
+Age
+Billing Amount
+Gender
+id
+Medical Condition
+Age
+Billing Amount
+Gender
+id
+Medical Condition

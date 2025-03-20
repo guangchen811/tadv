@@ -1,2 +1,4 @@
 loan_intent
 person_income
+loan_intent
+person_income

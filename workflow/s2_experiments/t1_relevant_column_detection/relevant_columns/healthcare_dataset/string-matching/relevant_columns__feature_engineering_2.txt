@@ -2,3 +2,9 @@ Age
 id
 Age
 id
+Age
+Doctor
+id
+Age
+Doctor
+id
