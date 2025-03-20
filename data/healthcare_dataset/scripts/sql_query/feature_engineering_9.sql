@@ -25,3 +25,7 @@ SELECT "id",
            END AS cost_per_day
 FROM new_data
 ORDER BY "id";
+
+-- columns we want to keep in the final dataset
+-- id, Medical Condition, Admission Type, Billing Amount, length_of_stay, cost_per_day
+-- Room number is not included in the final dataset because it is sensitive information.

@@ -1,7 +1,8 @@
 from tadv.utils import load_dotenv, get_current_folder
 
 load_dotenv()
-from workflow.s2_experiments.t1_relevant_column_detection.string_matching import run_string_matching_for_rcd, run_llm_for_rcd
+from workflow.s2_experiments.t1_relevant_column_detection.string_matching import run_string_matching_for_rcd, \
+    run_llm_for_rcd
 from workflow.s2_experiments.t1_relevant_column_detection.metrics import RelevantColumnDetectionMetric
 from workflow.s2_experiments.utils import load_previous_and_new_spark_data
 
@@ -27,7 +28,7 @@ def run_langchain_cadv_on_single_model(dataset_name, model_name, processed_data_
 
     spark_previous_data, spark_previous, _, _ = load_previous_and_new_spark_data(
         dataset_name=dataset_name,
-        downstream_task="sql_query", # it doesn't matter what this is set to as long as it's a valid task
+        downstream_task="sql_query",  # it doesn't matter what this is set to as long as it's a valid task
         processed_data_label=processed_data_label,
         dq_manager=dq_manager
     )
@@ -84,8 +85,8 @@ def run_langchain_cadv_on_all_models(dataset_name, model_names, processed_data_l
 
 if __name__ == "__main__":
     dataset_name_options = ["playground-series-s4e10", "healthcare_dataset"]
-    # model_names = ["string-matching", "llama3.2:1b", "llama3.2", "gpt-4o-mini", "gpt-4o"]
-    model_names = ["string-matching", "gpt-3.5-turbo", "gpt-4o", "gpt-4.5-preview"]
+    # model_names = ["string-matching", "gpt-3.5-turbo", "gpt-4o", "gpt-4.5-preview"]
+    model_names = ["string-matching"]
     processed_data_label = '0'
     dataset_name = dataset_name_options[0]
 

@@ -13,3 +13,4 @@ WHERE (
               OR "Medical Condition" IN ('Cancer', 'Diabetes')
           )
 ORDER BY "Age" DESC, "Medical Condition";
+-- TODO: ask for clarification on the definition of "High" risk patients from the doctor

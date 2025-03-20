@@ -10,4 +10,4 @@ SELECT CASE
        ROUND(SUM(loan_amnt) * 1.0 / SUM(person_income), 2) AS avg_loan_to_income_ratio
 FROM new_data
 GROUP BY income_band
-ORDER BY total_loans DESC;
+ORDER BY total_loans DESC LIMIT 10;

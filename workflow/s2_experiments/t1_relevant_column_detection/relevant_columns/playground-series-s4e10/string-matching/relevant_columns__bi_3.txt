@@ -3,3 +3,13 @@ id
 loan_grade
 loan_int_rate
 person_home_ownership
+cb_person_default_on_file
+id
+loan_grade
+loan_int_rate
+person_home_ownership
+cb_person_default_on_file
+id
+loan_grade
+loan_int_rate
+person_home_ownership

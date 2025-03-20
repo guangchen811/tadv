@@ -1,3 +1,4 @@
+-- This query is used to identify high-risk patients based on their billing amount and insurance provider.
 WITH risk_factors AS (SELECT "id",
                              "Name",
                              "Age",
@@ -10,7 +11,7 @@ WITH risk_factors AS (SELECT "id",
                              "Test Results",
                              CUME_DIST() OVER (PARTITION BY "Medical Condition" ORDER BY "Billing Amount" DESC) AS condition_billing_cume_dist, AVG("Billing Amount") OVER (PARTITION BY "Medical Condition") AS avg_billing_per_condition, PERCENT_RANK() OVER (PARTITION BY "Insurance Provider" ORDER BY "Billing Amount" DESC) AS insurance_billing_rank, ROW_NUMBER() OVER (PARTITION BY "Medical Condition", "Insurance Provider" ORDER BY "Billing Amount" DESC) AS row_num
                       FROM new_data),
-
+-- Blood Type is not considered here
      high_risk_patients AS (SELECT "id",
                                    "Name",
                                    "Age",

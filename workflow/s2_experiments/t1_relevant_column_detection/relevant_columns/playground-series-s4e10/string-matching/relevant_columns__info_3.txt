@@ -4,3 +4,15 @@ loan_intent
 loan_status
 person_emp_length
 person_home_ownership
+id
+loan_grade
+loan_intent
+loan_status
+person_emp_length
+person_home_ownership
+id
+loan_grade
+loan_intent
+loan_status
+person_emp_length
+person_home_ownership

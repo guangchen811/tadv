@@ -17,3 +17,4 @@ FROM new_data AS t
                    ON t."Gender" = b."Gender"
                        AND t."Medical Condition" = b."Medical Condition"
 ORDER BY t."id";
+

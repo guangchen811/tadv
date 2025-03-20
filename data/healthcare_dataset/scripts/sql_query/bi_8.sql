@@ -1,3 +1,6 @@
+-- Age is personal information that can be used to identify individuals.
+-- We should not include it in the final report and could not use it together with other columns like, Name, Room Number, etc.
+
 SELECT "Medical Condition",
        COUNT(*) AS condition_count
 FROM (SELECT *

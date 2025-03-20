@@ -2,3 +2,12 @@ loan_amnt
 loan_int_rate
 loan_status
 person_home_ownership
+loan_amnt
+loan_int_rate
+loan_status
+person_home_ownership
+loan_amnt
+loan_int_rate
+loan_percent_income
+loan_status
+person_home_ownership

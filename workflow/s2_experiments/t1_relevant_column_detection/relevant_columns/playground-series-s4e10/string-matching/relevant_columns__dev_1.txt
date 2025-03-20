@@ -1,1 +1,9 @@
 loan_grade
+loan_grade
+cb_person_default_on_file
+id
+loan_grade
+loan_int_rate
+loan_intent
+loan_status
+person_income

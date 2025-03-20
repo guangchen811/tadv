@@ -1,3 +1,9 @@
 id
 loan_grade
 loan_status
+id
+loan_grade
+loan_status
+id
+loan_grade
+loan_status

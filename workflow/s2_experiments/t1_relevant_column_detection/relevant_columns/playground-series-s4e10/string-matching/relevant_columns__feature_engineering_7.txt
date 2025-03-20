@@ -1,1 +1,12 @@
 loan_int_rate
+loan_int_rate
+cb_person_default_on_file
+loan_amnt
+loan_grade
+loan_int_rate
+loan_intent
+loan_percent_income
+loan_status
+person_emp_length
+person_home_ownership
+person_income

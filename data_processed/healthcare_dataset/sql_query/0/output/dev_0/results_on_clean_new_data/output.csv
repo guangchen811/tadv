@@ -1,6 +1,6 @@
-id,Name,Age,Gender,Blood Type,Medical Condition,Date of Admission,Doctor,Hospital,Insurance Provider,Billing Amount,Room Number,Admission Type,Discharge Date,Medication,Test Results
-51165,raCHeL SIMmons,60,Female,AB-,Asthma,2022-04-26,Luis Gomez,Stephens Ltd,UnitedHealthcare,51714.30087099009,124,Urgent,2022-05-23,Ibuprofen,Inconclusive
-45553,ashLEy vasQUEZ,30,Female,O+,Asthma,2021-11-24,David Gonzalez,"Baker, Weber Patton and",Medicare,51587.93681650202,236,Emergency,2021-12-07,Ibuprofen,Abnormal
-34877,TIfFaNy BoWman,69,Male,AB+,Arthritis,2020-12-03,Adam Sanders,Bowman-Jimenez,Aetna,51567.27767127847,188,Emergency,2020-12-29,Aspirin,Normal
-36718,MrS. LISA monToYa,50,Female,B-,Arthritis,2019-11-20,Raymond Grant,Inc Hernandez,Aetna,51452.80479226108,218,Emergency,2019-11-29,Aspirin,Normal
-46232,jAMEs lam,58,Male,AB-,Asthma,2023-12-26,John Harrell,Mejia-Hayes,Aetna,51314.46557448548,363,Elective,2024-01-07,Penicillin,Normal
+id,Name,Age,Blood Type,Medical Condition,Date of Admission,Doctor,Hospital,Insurance Provider,Billing Amount,Room Number,Admission Type,Discharge Date,Medication,Test Results,Room Number_1
+51165,raCHeL SIMmons,60,AB-,Asthma,2022-04-26,Luis Gomez,Stephens Ltd,UnitedHealthcare,51714.30087099009,124,Urgent,2022-05-23,Ibuprofen,Inconclusive,124
+45553,ashLEy vasQUEZ,30,O+,Asthma,2021-11-24,David Gonzalez,"Baker, Weber Patton and",Medicare,51587.93681650202,236,Emergency,2021-12-07,Ibuprofen,Abnormal,236
+34877,TIfFaNy BoWman,69,AB+,Arthritis,2020-12-03,Adam Sanders,Bowman-Jimenez,Aetna,51567.27767127847,188,Emergency,2020-12-29,Aspirin,Normal,188
+36718,MrS. LISA monToYa,50,B-,Arthritis,2019-11-20,Raymond Grant,Inc Hernandez,Aetna,51452.80479226108,218,Emergency,2019-11-29,Aspirin,Normal,218
+46232,jAMEs lam,58,AB-,Asthma,2023-12-26,John Harrell,Mejia-Hayes,Aetna,51314.46557448548,363,Elective,2024-01-07,Penicillin,Normal,363

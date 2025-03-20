@@ -4,3 +4,15 @@ loan_amnt
 loan_grade
 loan_int_rate
 loan_status
+cb_person_default_on_file
+id
+loan_amnt
+loan_grade
+loan_int_rate
+loan_status
+cb_person_default_on_file
+id
+loan_amnt
+loan_grade
+loan_int_rate
+loan_status

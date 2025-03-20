@@ -1,0 +1,3 @@
+Binder Error: Table "mc1" does not have a column named "Patient_ID"
+
+Candidate bindings: : "id"

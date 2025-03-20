@@ -18,10 +18,10 @@ if __name__ == "__main__":
         return [options_list[i] for i in indices]
 
 
-    parser = argparse.ArgumentParser(description='Run ML Inference')
+    parser = argparse.ArgumentParser(description='Run scripts for downstream tasks')
     parser.add_argument('--dataset-option', type=str, default="all",
                         help='Comma-separated dataset options or "all". Options: 0: playground-series-s4e10, 1: healthcare_dataset')
-    parser.add_argument('--downstream-task-option', type=str, default="all",
+    parser.add_argument('--downstream-task-option', type=str, default="2",
                         help='Comma-separated downstream task options or "all". Options: 0: ml_inference_classification, 1: ml_inference_regression, 2: sql_query, 3: webpage_generation')
     parser.add_argument('--processed-data-label', type=str, default="0",
                         help='Version Label of the processed data')

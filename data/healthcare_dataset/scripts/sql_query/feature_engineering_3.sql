@@ -6,3 +6,9 @@ SELECT t."id",
 FROM new_data AS t
 GROUP BY t."id"
 ORDER BY t."id";
+-- The current score calculation is based on the following logic:
+-- - Cancer: 3 points
+-- - Diabetes: 2 points
+-- - Hypertension: 1 point
+-- The total risk score is the sum of the points for each condition.
+-- Maybe we should ask the doctor from relevant hospitals to provide a more accurate risk score calculation.

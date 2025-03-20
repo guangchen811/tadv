@@ -1,14 +1,16 @@
-WITH stays AS (SELECT "id",
+-- Compute the length of stay for each patient visit
+WITH stays AS (SELECT "id",               -- Patient ID
                       DATEDIFF(
                               'day',
-                              CAST("Date of Admission" AS DATE),
-                              CAST("Discharge Date" AS DATE)
-                      ) AS length_of_stay
+                              CAST("Date of Admission" AS DATE), -- Convert admission date to DATE type
+                              CAST("Discharge Date" AS DATE) -- Convert discharge date to DATE type
+                      ) AS length_of_stay -- Calculate the duration of stay in days
                FROM new_data)
-SELECT "id",
-       COUNT(*)                      AS total_visits,
-       SUM(length_of_stay)           AS sum_length_of_stay,
-       ROUND(AVG(length_of_stay), 2) AS avg_length_of_stay
+
+-- Aggregate patient visit data
+SELECT "id",                                                -- Patient ID
+       COUNT(*)                      AS total_visits,       -- Total number of visits per patient
+       SUM(length_of_stay)           AS sum_length_of_stay, -- Total number of days spent in hospital across visits
+       ROUND(AVG(length_of_stay), 2) AS avg_length_of_stay  -- Average length of stay per patient, rounded to 2 decimal places
 FROM stays
-GROUP BY "id"
-ORDER BY "id";
+GROUP BY "id" -- Group by patient ID to calculate stats for each individual

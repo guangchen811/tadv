@@ -1,3 +1,4 @@
 annotations:
   required_columns:
     - loan_int_rate
+    - person_age

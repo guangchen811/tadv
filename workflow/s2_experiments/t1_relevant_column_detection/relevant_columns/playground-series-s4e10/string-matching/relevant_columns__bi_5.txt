@@ -1,3 +1,15 @@
 loan_amnt
 loan_grade
 person_income
+loan_amnt
+loan_grade
+person_income
+id
+loan_amnt
+loan_grade
+loan_int_rate
+loan_status
+person_age
+person_emp_length
+person_home_ownership
+person_income

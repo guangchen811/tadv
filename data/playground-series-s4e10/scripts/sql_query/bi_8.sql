@@ -1,3 +1,4 @@
+-- This query calculates the default rate for each loan purpose and home ownership status.
 WITH derived_table AS (SELECT p.person_home_ownership AS home_status,
                               p.loan_intent           AS purpose,
                               p.loan_status           AS repayment_status
