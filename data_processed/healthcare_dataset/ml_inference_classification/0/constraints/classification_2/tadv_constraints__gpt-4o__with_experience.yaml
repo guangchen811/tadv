@@ -1,0 +1,46 @@
+constraints:
+  Age:
+    code:
+    - - '.hasMax(''Age'', lambda x: x <= 120)'
+      - Valid
+    - - '.hasMin(''Age'', lambda x: x >= 0)'
+      - Valid
+    - - .isComplete('Age')
+      - Valid
+    - - .isNonNegative('Age')
+      - Valid
+    assumptions:
+    - The column should not contain null values (completeness constraint).
+    - The column should be numeric (type constraint).
+    - The column should have non-negative values (non-negative constraint).
+    - The column should have a reasonable range of values, typically between 0 and
+      120 (min and max constraint).
+  Billing Amount:
+    code:
+    - - .isComplete('Billing Amount')
+      - Valid
+    - - .isNonNegative('Billing Amount')
+      - Invalid
+    assumptions:
+    - The column should not contain null values (completeness constraint).
+    - The column should be numeric (type constraint).
+    - The column should have non-negative values (non-negative constraint).
+  Test Results:
+    code:
+    - - .isComplete('Test Results')
+      - Valid
+    - - .isContainedIn('Test Results', ['Abnormal', 'Normal', 'Inconclusive'])
+      - Valid
+    assumptions:
+    - The column should not contain null values (completeness constraint).
+    - 'The column should have values within the categorical range: ''Abnormal'', ''Normal'',
+      ''Inconclusive''.'
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The column should not contain null values (completeness constraint).
+    - The column should have unique values (unique constraint).

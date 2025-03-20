@@ -1,0 +1,39 @@
+constraints:
+  Admission Type:
+    code:
+    - - '.hasPattern(''Admission Type'', ''Emergency'', lambda x: x > 0)'
+      - Valid
+    - - .isComplete('Admission Type')
+      - Valid
+    assumptions:
+    - The 'Admission Type' column should contain the value 'Emergency' for rows to
+      be included in the query result.
+  Age:
+    code:
+    - - .isComplete('Age')
+      - Valid
+    - - .isGreaterThanOrEqualTo('Age', 30)
+      - Invalid
+    - - .isLessThanOrEqualTo('Age', 70)
+      - Invalid
+    assumptions:
+    - The 'Age' column should have values between 30 and 70 (inclusive) for rows to
+      be included in the query result.
+  Billing Amount:
+    code:
+    - - .isComplete('Billing Amount')
+      - Valid
+    - - .isGreaterThan('Billing Amount', 5000)
+      - Invalid
+    assumptions:
+    - The 'Billing Amount' column should have values greater than 5000 for rows to
+      be included in the query result.
+  Medical Condition:
+    code:
+    - - '.hasPattern(''Medical Condition'', ''Asthma'', lambda x: x > 0)'
+      - Valid
+    - - .isComplete('Medical Condition')
+      - Valid
+    assumptions:
+    - The 'Medical Condition' column should contain the value 'Asthma' for rows to
+      be included in the query result.

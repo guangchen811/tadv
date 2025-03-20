@@ -1,0 +1,36 @@
+constraints:
+  Age:
+    code:
+    - - '.hasMax(''Age'', lambda x: x < 150)'
+      - Valid
+    - - .isComplete('Age')
+      - Valid
+    - - .isNonNegative('Age')
+      - Valid
+    assumptions:
+    - The 'Age' column should be convertible to a numeric type without causing errors.
+    - The 'Age' column is used in a condition that checks if Age is less than 30,
+      implying Age values should be numerical and reasonable (e.g., non-negative).
+  Billing Amount:
+    code:
+    - - '.hasMax(''Billing Amount'', lambda x: x < 1000)'
+      - Invalid
+    - - .isComplete('Billing Amount')
+      - Valid
+    - - .isNonNegative('Billing Amount')
+      - Invalid
+    assumptions:
+    - The 'Billing Amount' column should be convertible to a numeric type without
+      causing errors.
+    - The 'Billing Amount' column is used in a condition that checks if Billing Amount
+      is less than 1000, implying Billing Amount values should be numerical and reasonably
+      positive.
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The 'id' column should exist in both train and test datasets.
+    - The 'id' column should not contain any missing values.

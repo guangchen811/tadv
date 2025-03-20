@@ -1,0 +1,43 @@
+constraints:
+  Age:
+    code:
+    - - .isComplete('Age')
+      - Valid
+    - - .isNonNegative('Age')
+      - Valid
+    - - .satisfies('Age >= 0', 'Age should be non-negative')
+      - Valid
+    assumptions:
+    - The 'Age' column should be complete.
+    - The 'Age' column should only contain non-negative values.
+    - The 'Age' column should be a numeric data type, coercing if necessary.
+  Age_Billing_Interaction:
+    code:
+    - - .satisfies('Age < 30 AND `Billing Amount` < 1000', 'Age_Billing_Interaction
+        should reflect interaction')
+      - Invalid
+    assumptions:
+    - The 'Age_Billing_Interaction' column is derived from 'Age' and 'Billing Amount'
+      and should reflect the interaction where 'Age' is less than 30 and 'Billing
+      Amount' is less than 1000.
+  Billing Amount:
+    code:
+    - - .isComplete('Billing Amount')
+      - Valid
+    - - .satisfies('`Billing Amount` >= 0', 'Billing Amount should be non-negative')
+      - Invalid
+    assumptions:
+    - The 'Billing Amount' column should be complete.
+    - The 'Billing Amount' column should be a numeric data type, coercing if necessary.
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isNonNegative('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The 'id' column should be complete.
+    - The 'id' column should contain unique values.
+    - The 'id' column should only contain non-negative values.

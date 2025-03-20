@@ -1,35 +1,73 @@
 constraints:
-  Billing Amount:
+  Admission Type:
     code:
-    - - .isComplete('billing_amount')
-      - Invalid
-    - - .isNonNegative('billing_amount')
-      - Invalid
-    assumptions:
-    - Billing Amount must be a numeric column.
-  Date of Admission:
-    code:
-    - - .isComplete('admission_dt')
-      - Invalid
-    - - .satisfies('admission_dt IS NOT NULL', 'admission_dt should be a valid datetime
-        format')
-      - Invalid
-    assumptions:
-    - Date of Admission should be convertible to a valid datetime format.
-  Discharge Date:
-    code:
-    - - .isComplete('discharge_dt')
-      - Invalid
-    - - .satisfies('discharge_dt IS NOT NULL', 'discharge_dt should be a valid datetime
-        format')
-      - Invalid
-    assumptions:
-    - Discharge Date should be convertible to a valid datetime format.
-  id:
-    code:
-    - - .isComplete('id')
+    - - '.hasPattern(''Admission Type'', ''.*'', lambda x: x == 1.0)'
       - Valid
-    - - .isUnique('id')
+    - - .isComplete('Admission Type')
       - Valid
     assumptions:
-    - id should be a unique identifier with no duplicates.
+    - Admission Type should be a string and converted to numeric codes.
+  Age:
+    code:
+    - - '.hasMin(''Age'', lambda x: x >= 0)'
+      - Valid
+    - - .isComplete('Age')
+      - Valid
+    assumptions:
+    - Age should be a numeric value.
+  Blood Type:
+    code:
+    - - '.hasPattern(''Blood Type'', ''.*'', lambda x: x == 1.0)'
+      - Valid
+    - - .isComplete('Blood Type')
+      - Valid
+    assumptions:
+    - Blood Type should be a string and converted to numeric codes.
+  Gender:
+    code:
+    - - '.hasPattern(''Gender'', ''.*'', lambda x: x == 1.0)'
+      - Valid
+    - - .isComplete('Gender')
+      - Valid
+    assumptions:
+    - Gender should be a string and converted to numeric codes.
+  Hospital:
+    code:
+    - - '.hasPattern(''Hospital'', ''.*'', lambda x: x == 1.0)'
+      - Valid
+    - - .isComplete('Hospital')
+      - Valid
+    assumptions:
+    - Hospital should be a string and converted to numeric codes.
+  Insurance Provider:
+    code:
+    - - '.hasPattern(''Insurance Provider'', ''.*'', lambda x: x == 1.0)'
+      - Valid
+    - - .isComplete('Insurance Provider')
+      - Valid
+    assumptions:
+    - Insurance Provider should be a string and converted to numeric codes.
+  Medical Condition:
+    code:
+    - - '.hasPattern(''Medical Condition'', ''.*'', lambda x: x == 1.0)'
+      - Valid
+    - - .isComplete('Medical Condition')
+      - Valid
+    assumptions:
+    - Medical Condition should be a string and converted to numeric codes.
+  Medication:
+    code:
+    - - '.hasPattern(''Medication'', ''.*'', lambda x: x == 1.0)'
+      - Valid
+    - - .isComplete('Medication')
+      - Valid
+    assumptions:
+    - Medication should be a string and converted to numeric codes.
+  Room Number:
+    code:
+    - - '.hasMin(''Room Number'', lambda x: x >= 0)'
+      - Valid
+    - - .isComplete('Room Number')
+      - Valid
+    assumptions:
+    - Room Number should be a numeric value.

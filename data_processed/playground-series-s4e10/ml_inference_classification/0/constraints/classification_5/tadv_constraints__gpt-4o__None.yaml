@@ -1,93 +1,98 @@
 constraints:
   cb_person_cred_hist_length:
     code:
-    - - '.hasMax(''cb_person_cred_hist_length'', lambda x: x <= 50)'
+    - - .isComplete('cb_person_cred_hist_length')
       - Valid
     - - .isNonNegative('cb_person_cred_hist_length')
       - Valid
     assumptions:
-    - cb_person_cred_hist_length should be a non-negative integer
-    - cb_person_cred_hist_length typically ranges from 0 to 50 years
+    - Assumed to be a non-negative integer representing the number of years of credit
+      history.
   cb_person_default_on_file:
     code:
+    - - .isComplete('cb_person_default_on_file')
+      - Valid
     - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
       - Valid
     assumptions:
-    - cb_person_default_on_file should be either 'Y' or 'N'
+    - 'Assumed to be one of the categories: [''Y'', ''N''], as seen in the dataset
+      statistics and used for categorical transformation.'
   id:
     code:
+    - - .isComplete('id')
+      - Valid
     - - .isUnique('id')
       - Valid
     assumptions:
-    - id should be a unique integer for each record
+    - Assumed to be unique for each record as it is used as an identifier.
   loan_amnt:
     code:
-    - - '.hasMax(''loan_amnt'', lambda x: x <= 100000)'
+    - - .isComplete('loan_amnt')
       - Valid
     - - .isPositive('loan_amnt')
       - Valid
     assumptions:
-    - loan_amnt should be a positive integer
-    - loan_amnt should not exceed reasonable loan limits, typically up to 100000
+    - Assumed to be a positive integer, as loans are typically positive amounts.
   loan_int_rate:
     code:
-    - - '.hasMax(''loan_int_rate'', lambda x: x <= 100)'
+    - - .isComplete('loan_int_rate')
       - Valid
-    - - '.hasMin(''loan_int_rate'', lambda x: x >= 0)'
-      - Valid
-    - - .isPositive('loan_int_rate')
+    - - .isNonNegative('loan_int_rate')
       - Valid
     assumptions:
-    - loan_int_rate should be a positive number
-    - loan_int_rate should be between 0 and 100
+    - Assumed to be a non-negative value, as interest rates cannot be negative.
   loan_intent:
     code:
+    - - .isComplete('loan_intent')
+      - Valid
     - - .isContainedIn('loan_intent', ['EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL',
         'DEBTCONSOLIDATION', 'MEDICAL', 'VENTURE'])
       - Valid
     assumptions:
-    - loan_intent should be one of 'EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL', 'DEBTCONSOLIDATION',
-      'MEDICAL', 'VENTURE'
+    - 'Assumed to be one of the categories: [''EDUCATION'', ''HOMEIMPROVEMENT'', ''PERSONAL'',
+      ''DEBTCONSOLIDATION'', ''MEDICAL'', ''VENTURE''], as seen in the dataset statistics
+      and used for categorical transformation.'
   loan_percent_income:
     code:
-    - - '.hasMax(''loan_percent_income'', lambda x: x <= 100)'
+    - - .isComplete('loan_percent_income')
       - Valid
-    - - '.hasMin(''loan_percent_income'', lambda x: x >= 0)'
-      - Valid
-    - - .isPositive('loan_percent_income')
+    - - .isContainedIn('loan_percent_income', list(range(0, 101)))
       - Invalid
+    - - .isNonNegative('loan_percent_income')
+      - Valid
     assumptions:
-    - loan_percent_income should be a positive number
-    - loan_percent_income should be between 0 and 100
+    - Assumed to be a non-negative value representing a percentage, thus should be
+      between 0 and 100.
   person_age:
     code:
-    - - '.hasMax(''person_age'', lambda x: x <= 100)'
-      - Valid
-    - - '.hasMin(''person_age'', lambda x: x >= 18)'
+    - - .isComplete('person_age')
       - Valid
     - - .isNonNegative('person_age')
       - Valid
     assumptions:
-    - person_age should be a non-negative integer
-    - person_age should be a reasonable human age, typically between 18 and 100
+    - Assumed to be a non-negative integer, as it's used in numerical computations.
   person_emp_length:
     code:
-    - - '.hasMax(''person_emp_length'', lambda x: x <= 40)'
-      - Invalid
+    - - .isComplete('person_emp_length')
+      - Valid
     - - .isNonNegative('person_emp_length')
       - Valid
     assumptions:
-    - person_emp_length should be a non-negative number
-    - person_emp_length typically ranges from 0 to 40 years
+    - Assumed to be a non-negative value since it's used in numerical computations.
   person_home_ownership:
     code:
+    - - .isComplete('person_home_ownership')
+      - Valid
     - - .isContainedIn('person_home_ownership', ['OTHER', 'OWN', 'MORTGAGE', 'RENT'])
       - Valid
     assumptions:
-    - person_home_ownership should be one of 'OTHER', 'OWN', 'MORTGAGE', 'RENT'
+    - 'Assumed to be one of the categories: [''OTHER'', ''OWN'', ''MORTGAGE'', ''RENT''],
+      as seen in the dataset statistics and used for categorical transformation.'
   person_income:
     code:
+    - - .isComplete('person_income')
+      - Valid
     - - .isNonNegative('person_income')
       - Valid
     assumptions:
-    - person_income should be a non-negative integer
+    - Assumed to be a non-negative integer, as it's used in numerical computations.

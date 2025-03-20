@@ -133,7 +133,7 @@ if __name__ == "__main__":
                         help='Dataset name. Options: 0: playground-series-s4e10, 1: healthcare_dataset')
     parser.add_argument('--downstream-task-option', type=str, default="all",
                         help='Downstream task. Options: 0: ml_inference_classification, 1: ml_inference_regression, 2: sql_query, 3: webpage_generation')
-    parser.add_argument('--model-name-option', type=str, default="2",
+    parser.add_argument('--model-name-option', type=str, default="1",
                         help='Model name. Options: 0: gpt-3.5-turbo, 1: gpt-4o, 2: gpt-4.5-preview')
     parser.add_argument('--processed-data-label', type=str, default="0",
                         help='Version Label of the processed data')
