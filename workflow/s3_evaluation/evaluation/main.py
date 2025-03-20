@@ -44,7 +44,7 @@ def results_calculation(dataset_name, downstream_task, processed_data_label):
             constraints_file = constraints_validation_dir / f"{script_constraints_dir.name}"
             deequ_result[new_data_name] = ValidationResults.from_yaml(constraints_file).check_result()
             deequ_with_column_skipped_result[new_data_name] = ValidationResults.from_yaml(
-                constraints_file).check_result(column_skipped=['person_age'])
+                constraints_file).check_result(column_skipped=['person_age', 'Age'])
     for script_constraints_dir in sorted(constraints_validation_dir.iterdir()):
         if script_constraints_dir.is_dir():
             for constraints_file_name in sorted(script_constraints_dir.iterdir()):
@@ -112,7 +112,7 @@ if __name__ == "__main__":
                         help='Dataset name. Options: 0: playground-series-s4e10, 1: healthcare_dataset')
     parser.add_argument('--downstream-task-option', type=str, default="all",
                         help='Downstream task. Options: 0: ml_inference_classification, 1: ml_inference_regression, 2: sql_query, 3: webpage_generation')
-    parser.add_argument('--processed-data-label', type=str, default="3",
+    parser.add_argument('--processed-data-label', type=str, default="0",
                         help='Version Label of the processed data')
     args = parser.parse_args()
 
