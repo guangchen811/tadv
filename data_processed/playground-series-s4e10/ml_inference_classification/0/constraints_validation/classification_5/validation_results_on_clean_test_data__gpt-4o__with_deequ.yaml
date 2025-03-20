@@ -15,8 +15,6 @@ results:
     code:
     - - .isComplete('id')
       - Passed
-    - - .isNonNegative('id')
-      - Passed
     - - .isUnique('id')
       - Passed
   loan_amnt:
@@ -40,18 +38,14 @@ results:
       - Passed
   loan_percent_income:
     code:
-    - - '.hasMax(''loan_percent_income'', lambda x: x <= 1.0)'
-      - Passed
     - - .isComplete('loan_percent_income')
       - Passed
     - - .isNonNegative('loan_percent_income')
       - Passed
   person_age:
     code:
-    - - '.hasMax(''person_age'', lambda x: x <= 100)'
+    - - '.hasMax(''person_age'', lambda x: x < 120)'
       - Failed
-    - - '.hasMin(''person_age'', lambda x: x >= 18)'
-      - Passed
     - - .isComplete('person_age')
       - Passed
     - - .isNonNegative('person_age')

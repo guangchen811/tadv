@@ -1,0 +1,35 @@
+constraints:
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isPositive('loan_amnt')
+      - Valid
+    assumptions:
+    - The column loan_amnt should have a positive integral value.
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - .isPositive('loan_int_rate')
+      - Valid
+    assumptions:
+    - The column loan_int_rate should have a positive fractional value.
+  loan_intent:
+    code:
+    - - .isComplete('loan_intent')
+      - Valid
+    - - .isContainedIn('loan_intent', ['EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL',
+        'DEBTCONSOLIDATION', 'MEDICAL', 'VENTURE'])
+      - Valid
+    assumptions:
+    - 'The column loan_intent should have one of the following values: [''EDUCATION'',
+      ''HOMEIMPROVEMENT'', ''PERSONAL'', ''DEBTCONSOLIDATION'', ''MEDICAL'', ''VENTURE''].'
+  person_income:
+    code:
+    - - .isComplete('person_income')
+      - Valid
+    - - .isPositive('person_income')
+      - Valid
+    assumptions:
+    - The column person_income should have a positive integral value.

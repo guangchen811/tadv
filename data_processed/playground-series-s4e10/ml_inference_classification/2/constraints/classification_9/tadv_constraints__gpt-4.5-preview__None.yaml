@@ -1,0 +1,48 @@
+constraints:
+  cb_person_default_on_file:
+    code:
+    - - .isComplete('cb_person_default_on_file')
+      - Valid
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    assumptions:
+    - 'cb_person_default_on_file should contain only the following values: [''Y'',
+      ''N'']'
+    - cb_person_default_on_file should not contain null values
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - id column should not contain null values
+    - id should be unique
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - loan_amnt should be greater than or equal to 0
+    - loan_amnt should not contain null values
+  loan_grade:
+    code:
+    - - .isComplete('loan_grade')
+      - Valid
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - 'loan_grade should contain only the following values: [''A'', ''B'', ''C'',
+      ''D'', ''E'', ''F'', ''G'']'
+    - loan_grade should not contain null values
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - loan_int_rate should be greater than or equal to 0
+    - loan_int_rate should not contain null values

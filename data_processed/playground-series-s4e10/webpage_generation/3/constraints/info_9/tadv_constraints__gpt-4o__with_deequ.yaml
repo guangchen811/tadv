@@ -1,0 +1,67 @@
+constraints:
+  cb_person_cred_hist_length:
+    code:
+    - - .isComplete('cb_person_cred_hist_length')
+      - Valid
+    - - .isNonNegative('cb_person_cred_hist_length')
+      - Valid
+    assumptions:
+    - The 'cb_person_cred_hist_length' column should be complete (no missing values).
+    - The 'cb_person_cred_hist_length' column should contain non-negative values.
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - The 'loan_amnt' column should be complete (no missing values).
+    - The 'loan_amnt' column should contain non-negative values.
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - The 'loan_int_rate' column should be complete (no missing values).
+    - The 'loan_int_rate' column should contain non-negative values.
+  loan_percent_income:
+    code:
+    - - .isComplete('loan_percent_income')
+      - Valid
+    - - .isNonNegative('loan_percent_income')
+      - Valid
+    assumptions:
+    - The 'loan_percent_income' column should be complete (no missing values).
+    - The 'loan_percent_income' column should contain non-negative values.
+  loan_status:
+    code:
+    - - .isComplete('loan_status')
+      - Valid
+    - - .isContainedIn('loan_status', [0, 1])
+      - Invalid
+    - - .isNonNegative('loan_status')
+      - Valid
+    assumptions:
+    - The 'loan_status' column should be complete (no missing values).
+    - The 'loan_status' column should only contain the values 0 or 1.
+    - The 'loan_status' column should contain non-negative values.
+  person_emp_length:
+    code:
+    - - .isComplete('person_emp_length')
+      - Valid
+    - - .isNonNegative('person_emp_length')
+      - Valid
+    assumptions:
+    - The 'person_emp_length' column should be complete (no missing values).
+    - The 'person_emp_length' column should contain non-negative values.
+  person_income:
+    code:
+    - - .isComplete('person_income')
+      - Valid
+    - - .isNonNegative('person_income')
+      - Valid
+    assumptions:
+    - The 'person_income' column should be complete (no missing values).
+    - The 'person_income' column should contain non-negative values.

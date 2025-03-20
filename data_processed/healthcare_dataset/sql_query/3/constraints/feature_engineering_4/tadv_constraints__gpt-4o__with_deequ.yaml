@@ -1,0 +1,44 @@
+constraints:
+  Billing Amount:
+    code:
+    - - .isComplete('Billing Amount')
+      - Valid
+    - - .isNonNegative('Billing Amount')
+      - Invalid
+    assumptions:
+    - The column 'Billing Amount' should be complete (no missing values).
+    - The column 'Billing Amount' should be a fractional number.
+    - The column 'Billing Amount' should have reasonable values, i.e., not negative
+      and within expected billing ranges.
+  Gender:
+    code:
+    - - .isComplete('Gender')
+      - Valid
+    - - .isContainedIn('Gender', ['Male', 'Female'])
+      - Valid
+    assumptions:
+    - The column 'Gender' should be complete (no missing values).
+    - 'The column ''Gender'' should only contain values: [''Male'', ''Female''].'
+  Medical Condition:
+    code:
+    - - .isComplete('Medical Condition')
+      - Valid
+    - - .isContainedIn('Medical Condition', ['Diabetes', 'Asthma', 'Obesity', 'Hypertension',
+        'Arthritis', 'Cancer'])
+      - Valid
+    assumptions:
+    - The column 'Medical Condition' should be complete (no missing values).
+    - 'The column ''Medical Condition'' should only contain values: [''Diabetes'',
+      ''Asthma'', ''Obesity'', ''Hypertension'', ''Arthritis'', ''Cancer''].'
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isNonNegative('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The column 'id' should be complete (no missing values).
+    - The column 'id' should be unique to correctly identify entries.
+    - The column 'id' should be a non-negative integer.

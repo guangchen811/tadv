@@ -1,0 +1,40 @@
+constraints:
+  Admission Type:
+    code:
+    - - .isComplete('Admission Type')
+      - Valid
+    - - .isContainedIn('Admission Type', ['Emergency', 'Urgent', 'Elective'])
+      - Valid
+    assumptions:
+    - The column should be treated as a string.
+    - The column is complete, suggesting a NOT NULL constraint.
+    - 'The column should have values within the known range: [''Emergency'', ''Urgent'',
+      ''Elective''].'
+  Age:
+    code:
+    - - .isComplete('Age')
+      - Valid
+    - - .isGreaterThanOrEqualTo('Age', 0)
+      - Invalid
+    assumptions:
+    - The column should be treated as a numeric type.
+    - The column is complete, suggesting a NOT NULL constraint.
+    - The column should have a minimum value constraint, e.g., age should be >= 0.
+  Billing Amount:
+    code:
+    - - .isComplete('Billing Amount')
+      - Valid
+    - - .isNonNegative('Billing Amount')
+      - Invalid
+    assumptions:
+    - The column should be treated as a numeric type.
+    - The column is complete, suggesting a NOT NULL constraint.
+    - The column may have a minimum value constraint based on context (e.g., no negative
+      billing amounts).
+  Hospital:
+    code:
+    - - .isComplete('Hospital')
+      - Valid
+    assumptions:
+    - The column should be treated as a string.
+    - The column is complete, suggesting a NOT NULL constraint.

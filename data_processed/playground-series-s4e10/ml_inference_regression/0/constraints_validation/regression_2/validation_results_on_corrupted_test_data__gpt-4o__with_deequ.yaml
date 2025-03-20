@@ -7,7 +7,9 @@ results:
       - Passed
   cb_person_default_on_file:
     code:
-    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+    - - .isComplete('cb_person_default_on_file')
+      - Passed
+    - - .isContainedIn('cb_person_default_on_file', ['N', 'Y'])
       - Passed
   loan_amnt:
     code:
@@ -17,6 +19,8 @@ results:
       - Passed
   loan_grade:
     code:
+    - - .isComplete('loan_grade')
+      - Passed
     - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
       - Failed
   loan_int_rate:
@@ -27,6 +31,8 @@ results:
       - Passed
   loan_intent:
     code:
+    - - .isComplete('loan_intent')
+      - Passed
     - - .isContainedIn('loan_intent', ['EDUCATION', 'MEDICAL', 'PERSONAL', 'VENTURE',
         'DEBTCONSOLIDATION', 'HOMEIMPROVEMENT'])
       - Passed
@@ -38,13 +44,15 @@ results:
       - Passed
   loan_status:
     code:
+    - - .isComplete('loan_status')
+      - Passed
     - - .isContainedIn('loan_status', ['0', '1'])
       - Passed
   person_age:
     code:
     - - .isComplete('person_age')
       - Passed
-    - - .isNonNegative('person_age')
+    - - .isPositive('person_age')
       - Passed
   person_emp_length:
     code:
@@ -54,5 +62,13 @@ results:
       - Failed
   person_home_ownership:
     code:
+    - - .isComplete('person_home_ownership')
+      - Passed
     - - .isContainedIn('person_home_ownership', ['RENT', 'MORTGAGE', 'OWN', 'OTHER'])
       - Passed
+  person_income:
+    code:
+    - - .isComplete('person_income')
+      - Failed
+    - - .isNonNegative('person_income')
+      - Failed

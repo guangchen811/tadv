@@ -196,7 +196,7 @@ poetry run python ./workflow/s3_evaluation/evaluation/calculate_code_performance
 The evaluation results will be saved in the `data_processed/<dataset>/<downstream-task>/<processed-data-label>/output_validation/` folder.
 
 ```shell
-poetry run python ./workflow/s3_evaluation/evaluation/calculate_code_performance.py --dataset-option "all" --downstream-task-option "all" --processed-data-label "0"
+poetry run python ./workflow/s3_evaluation/evaluation/validate_constraints.py --dataset-option "all" --downstream-task-option "all" --processed-data-label "0"
 ```
 
 The evaluation results will be saved in the `data_processed/<dataset>/<downstream-task>/<processed-data-label>/constraints_validation/` folder.

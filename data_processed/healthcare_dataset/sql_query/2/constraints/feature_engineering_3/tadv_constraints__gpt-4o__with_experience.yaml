@@ -1,0 +1,22 @@
+constraints:
+  Medical Condition:
+    code:
+    - - .isComplete('Medical Condition')
+      - Valid
+    - - .isContainedIn('Medical Condition', ['Hypertension', 'Cancer', 'Obesity',
+        'Arthritis', 'Diabetes', 'Asthma'])
+      - Valid
+    assumptions:
+    - The column 'Medical Condition' should be complete (NOT NULL).
+    - 'The column ''Medical Condition'' should have values within the defined categorical
+      range: ''Hypertension'', ''Cancer'', ''Obesity'', ''Arthritis'', ''Diabetes'',
+      ''Asthma''.'
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The column 'id' should be complete (NOT NULL).
+    - The column 'id' should have unique values (UNIQUE constraint).

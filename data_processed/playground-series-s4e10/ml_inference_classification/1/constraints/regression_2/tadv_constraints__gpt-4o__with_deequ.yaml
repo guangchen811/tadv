@@ -1,0 +1,119 @@
+constraints:
+  cb_person_cred_hist_length:
+    code:
+    - - .isComplete('cb_person_cred_hist_length')
+      - Valid
+    - - .isNonNegative('cb_person_cred_hist_length')
+      - Valid
+    assumptions:
+    - The 'cb_person_cred_hist_length' column should be complete.
+    - The 'cb_person_cred_hist_length' column should contain non-negative values.
+    - The 'cb_person_cred_hist_length' column should contain values within a reasonable
+      range for credit history length.
+  cb_person_default_on_file:
+    code:
+    - - .isComplete('cb_person_default_on_file')
+      - Valid
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    assumptions:
+    - The 'cb_person_default_on_file' column should be complete.
+    - 'The ''cb_person_default_on_file'' column should only contain the values: ''Y''
+      or ''N''.'
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - The 'loan_amnt' column should be complete.
+    - The 'loan_amnt' column should contain non-negative values.
+  loan_grade:
+    code:
+    - - .isComplete('loan_grade')
+      - Valid
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - The 'loan_grade' column should be complete.
+    - The 'loan_grade' column should contain grades from 'A' to 'G'.
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - The 'loan_int_rate' column should be complete.
+    - The 'loan_int_rate' column should contain non-negative values.
+  loan_intent:
+    code:
+    - - .isComplete('loan_intent')
+      - Valid
+    - - .isContainedIn('loan_intent', ['EDUCATION', 'MEDICAL', 'PERSONAL', 'VENTURE',
+        'DEBTCONSOLIDATION', 'HOMEIMPROVEMENT'])
+      - Valid
+    assumptions:
+    - The 'loan_intent' column should be complete.
+    - 'The ''loan_intent'' column should only contain the values: ''EDUCATION'', ''MEDICAL'',
+      ''PERSONAL'', ''VENTURE'', ''DEBTCONSOLIDATION'', ''HOMEIMPROVEMENT''.'
+  loan_percent_income:
+    code:
+    - - .isComplete('loan_percent_income')
+      - Valid
+    - - .isNonNegative('loan_percent_income')
+      - Valid
+    assumptions:
+    - The 'loan_percent_income' column should be complete.
+    - The 'loan_percent_income' column should contain non-negative values.
+  loan_status:
+    code:
+    - - .isComplete('loan_status')
+      - Valid
+    - - .isContainedIn('loan_status', [0, 1])
+      - Invalid
+    - - .isNonNegative('loan_status')
+      - Valid
+    assumptions:
+    - The 'loan_status' column should be complete.
+    - 'The ''loan_status'' column should only contain binary values: ''0'' or ''1''.'
+    - The 'loan_status' column should contain non-negative values.
+  person_age:
+    code:
+    - - '.hasMax(''person_age'', lambda x: x <= 84)'
+      - Valid
+    - - '.hasMin(''person_age'', lambda x: x >= 20)'
+      - Valid
+    - - .isComplete('person_age')
+      - Valid
+    - - .isNonNegative('person_age')
+      - Valid
+    assumptions:
+    - The 'person_age' column should be complete.
+    - The 'person_age' column should contain values that are non-negative.
+    - The 'person_age' column should primarily contain realistic adult ages typically
+      between 20 and 84.
+  person_emp_length:
+    code:
+    - - .isComplete('person_emp_length')
+      - Valid
+    - - .isNonNegative('person_emp_length')
+      - Valid
+    assumptions:
+    - The 'person_emp_length' column should be complete.
+    - The 'person_emp_length' column should contain non-negative values.
+  person_home_ownership:
+    code:
+    - - '.hasPattern(''person_home_ownership'', ''RENT|MORTGAGE'', lambda x: x > 0.5)'
+      - Valid
+    - - .isComplete('person_home_ownership')
+      - Valid
+    - - .isContainedIn('person_home_ownership', ['RENT', 'MORTGAGE', 'OWN', 'OTHER'])
+      - Valid
+    assumptions:
+    - The 'person_home_ownership' column should be complete.
+    - 'The ''person_home_ownership'' column should only contain the values: ''RENT'',
+      ''MORTGAGE'', ''OWN'', ''OTHER''.'
+    - The 'person_home_ownership' column should predominantly contain 'RENT' or 'MORTGAGE'
+      as values.

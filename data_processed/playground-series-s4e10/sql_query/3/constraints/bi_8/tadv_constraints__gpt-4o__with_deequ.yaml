@@ -1,0 +1,34 @@
+constraints:
+  loan_intent:
+    code:
+    - - .isComplete('loan_intent')
+      - Valid
+    - - .isContainedIn('loan_intent', ['EDUCATION', 'MEDICAL', 'PERSONAL', 'VENTURE',
+        'DEBTCONSOLIDATION', 'HOMEIMPROVEMENT'])
+      - Valid
+    assumptions:
+    - The column should be complete and contain no missing values.
+    - Values should be one of ['EDUCATION', 'MEDICAL', 'PERSONAL', 'VENTURE', 'DEBTCONSOLIDATION',
+      'HOMEIMPROVEMENT'] as the code groups by these categories.
+  loan_status:
+    code:
+    - - .isComplete('loan_status')
+      - Valid
+    - - .isContainedIn('loan_status', ['0', '1'])
+      - Valid
+    assumptions:
+    - The column should be complete and contain no missing values.
+    - Values should be binary, either '0' or '1', representing non-default and default
+      statuses respectively.
+    - The default status is indicated by '1', which is used in calculating default
+      rates.
+  person_home_ownership:
+    code:
+    - - .isComplete('person_home_ownership')
+      - Valid
+    - - .isContainedIn('person_home_ownership', ['RENT', 'MORTGAGE', 'OWN', 'OTHER'])
+      - Valid
+    assumptions:
+    - The column should be complete and contain no missing values.
+    - Values should be one of ['RENT', 'MORTGAGE', 'OWN', 'OTHER'] as the code groups
+      by these categories.

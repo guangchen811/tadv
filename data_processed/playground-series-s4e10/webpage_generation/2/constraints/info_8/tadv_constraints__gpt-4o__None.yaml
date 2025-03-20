@@ -1,0 +1,42 @@
+constraints:
+  cb_person_cred_hist_length:
+    code:
+    - - .isNonNegative('cb_person_cred_hist_length')
+      - Valid
+    assumptions:
+    - cb_person_cred_hist_length should be a non-negative integer.
+  loan_amnt:
+    code:
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - loan_amnt should be a non-negative integer.
+  loan_int_rate:
+    code:
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - loan_int_rate should be a non-negative value.
+    - loan_int_rate should be a fractional number, as it is standardized before PCA.
+  loan_percent_income:
+    code:
+    - - .isNonNegative('loan_percent_income')
+      - Valid
+    assumptions:
+    - loan_percent_income should be a non-negative value.
+    - loan_percent_income should be a fractional number, as it is standardized before
+      PCA.
+  person_emp_length:
+    code:
+    - - .isNonNegative('person_emp_length')
+      - Valid
+    assumptions:
+    - person_emp_length should be a non-negative value.
+    - person_emp_length should be a fractional number, as it is standardized before
+      PCA.
+  person_income:
+    code:
+    - - .isNonNegative('person_income')
+      - Valid
+    assumptions:
+    - person_income should be a non-negative integer.

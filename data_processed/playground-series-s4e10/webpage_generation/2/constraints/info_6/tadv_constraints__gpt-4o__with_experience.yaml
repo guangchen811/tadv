@@ -1,0 +1,84 @@
+constraints:
+  loan_amnt:
+    code:
+    - - '.hasMean(''loan_amnt'', lambda x: True)'
+      - Valid
+    - - '.hasStandardDeviation(''loan_amnt'', lambda x: True)'
+      - Valid
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - The column 'loan_amnt' is complete, suggesting a NOT NULL constraint.
+    - All values in 'loan_amnt' should be non-negative, suggesting an IS NON NEGATIVE
+      constraint.
+    - The column 'loan_amnt' is numeric, suggesting constraints for mean and standard
+      deviation.
+  loan_grade:
+    code:
+    - - .isComplete('loan_grade')
+      - Valid
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - The column 'loan_grade' is complete, suggesting a NOT NULL constraint.
+    - 'The column ''loan_grade'' should have values within the range observed: ''A'',
+      ''B'', ''C'', ''D'', ''E'', ''F'', ''G''.'
+    - For most values, 'loan_grade' should be within the observed range, suggesting
+      an IS IN constraint for most of the values.
+  loan_intent:
+    code:
+    - - .isComplete('loan_intent')
+      - Valid
+    - - .isContainedIn('loan_intent', ['EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL',
+        'DEBTCONSOLIDATION', 'MEDICAL', 'VENTURE'])
+      - Valid
+    assumptions:
+    - The column 'loan_intent' is complete, suggesting a NOT NULL constraint.
+    - 'The column ''loan_intent'' should have values within the range observed: ''EDUCATION'',
+      ''HOMEIMPROVEMENT'', ''PERSONAL'', ''DEBTCONSOLIDATION'', ''MEDICAL'', ''VENTURE''.'
+    - For most values, 'loan_intent' should be within the observed range, suggesting
+      an IS IN constraint for most of the values.
+  loan_status:
+    code:
+    - - .isComplete('loan_status')
+      - Valid
+    - - .isContainedIn('loan_status', [0, 1])
+      - Invalid
+    assumptions:
+    - The column 'loan_status' is complete, suggesting a NOT NULL constraint.
+    - The column 'loan_status' should have values '0' or '1', based on the binary
+      nature of the data.
+  person_emp_length:
+    code:
+    - - '.hasMean(''person_emp_length'', lambda x: True)'
+      - Valid
+    - - '.hasStandardDeviation(''person_emp_length'', lambda x: True)'
+      - Valid
+    - - .isComplete('person_emp_length')
+      - Valid
+    - - .isNonNegative('person_emp_length')
+      - Valid
+    assumptions:
+    - The column 'person_emp_length' is complete, suggesting a NOT NULL constraint.
+    - All values in 'person_emp_length' should be non-negative, suggesting an IS NON
+      NEGATIVE constraint.
+    - The column 'person_emp_length' is numeric, suggesting constraints for mean and
+      standard deviation.
+  person_income:
+    code:
+    - - '.hasMean(''person_income'', lambda x: True)'
+      - Valid
+    - - '.hasStandardDeviation(''person_income'', lambda x: True)'
+      - Valid
+    - - .isComplete('person_income')
+      - Valid
+    - - .isNonNegative('person_income')
+      - Valid
+    assumptions:
+    - The column 'person_income' is complete, suggesting a NOT NULL constraint.
+    - All values in 'person_income' should be non-negative, suggesting an IS NON NEGATIVE
+      constraint.
+    - The column 'person_income' is numeric, suggesting constraints for mean and standard
+      deviation.

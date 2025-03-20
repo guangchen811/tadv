@@ -1,0 +1,63 @@
+constraints:
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .satisfies('CAST(loan_amnt AS INT) = loan_amnt', 'loan_amnt is Integral')
+      - Valid
+    assumptions:
+    - The column should be complete (NOT NULL).
+    - The column should be an Integral type.
+  loan_grade:
+    code:
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - The column should have values in the set {'A', 'B', 'C', 'D', 'E', 'F', 'G'}.
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - .satisfies('CAST(loan_int_rate AS FLOAT) = loan_int_rate', 'loan_int_rate
+        is Fractional')
+      - Invalid
+    assumptions:
+    - The column should be complete (NOT NULL).
+    - The column should be a Fractional type.
+  loan_intent:
+    code:
+    - - .isContainedIn('loan_intent', ['EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL',
+        'DEBTCONSOLIDATION', 'MEDICAL', 'VENTURE'])
+      - Valid
+    assumptions:
+    - The column should have values in the set {'EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL',
+      'DEBTCONSOLIDATION', 'MEDICAL', 'VENTURE'}.
+  loan_percent_income:
+    code:
+    - - .isComplete('loan_percent_income')
+      - Valid
+    - - .satisfies('CAST(loan_percent_income AS FLOAT) = loan_percent_income', 'loan_percent_income
+        is Fractional')
+      - Invalid
+    assumptions:
+    - The column should be complete (NOT NULL).
+    - The column should be a Fractional type.
+  loan_status:
+    code:
+    - - .isComplete('loan_status')
+      - Valid
+    - - .isContainedIn('loan_status', [0, 1])
+      - Invalid
+    assumptions:
+    - The column should have values in the set {0, 1}.
+    - The column should be complete (NOT NULL).
+  person_income:
+    code:
+    - - .isComplete('person_income')
+      - Valid
+    - - .satisfies('CAST(person_income AS INT) = person_income', 'person_income is
+        Integral')
+      - Valid
+    assumptions:
+    - The column should be complete (NOT NULL).
+    - The column should be an Integral type.

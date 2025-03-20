@@ -1,0 +1,97 @@
+constraints:
+  cb_person_cred_hist_length:
+    code:
+    - - .isComplete('cb_person_cred_hist_length')
+      - Valid
+    - - .satisfies('pd.api.types.is_numeric_dtype(cb_person_cred_hist_length)', 'cb_person_cred_hist_length
+        is numeric')
+      - Invalid
+    assumptions:
+    - Must be a numeric type as it is processed as a numeric feature.
+  cb_person_default_on_file:
+    code:
+    - - .isComplete('cb_person_default_on_file')
+      - Valid
+    - - .satisfies('pd.api.types.is_categorical_dtype(cb_person_default_on_file)',
+        'cb_person_default_on_file is categorical')
+      - Invalid
+    assumptions:
+    - Must be a categorical type as it is processed as a categorical feature.
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .satisfies('pd.api.types.is_numeric_dtype(loan_amnt)', 'loan_amnt is numeric')
+      - Invalid
+    assumptions:
+    - Must be a numeric type as it is processed as a numeric feature.
+  loan_grade:
+    code:
+    - - .isComplete('loan_grade')
+      - Valid
+    - - .satisfies('pd.api.types.is_categorical_dtype(loan_grade)', 'loan_grade is
+        categorical')
+      - Invalid
+    assumptions:
+    - Must be a categorical type as it is processed as a categorical feature.
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - .satisfies('pd.api.types.is_numeric_dtype(loan_int_rate)', 'loan_int_rate
+        is numeric')
+      - Invalid
+    assumptions:
+    - Must be a numeric type as it is processed as a numeric feature.
+  loan_intent:
+    code:
+    - - .isComplete('loan_intent')
+      - Valid
+    - - .satisfies('pd.api.types.is_categorical_dtype(loan_intent)', 'loan_intent
+        is categorical')
+      - Invalid
+    assumptions:
+    - Must be a categorical type as it is processed as a categorical feature.
+  loan_percent_income:
+    code:
+    - - .isComplete('loan_percent_income')
+      - Valid
+    - - .satisfies('pd.api.types.is_numeric_dtype(loan_percent_income)', 'loan_percent_income
+        is numeric')
+      - Invalid
+    assumptions:
+    - Must be a numeric type as it is processed as a numeric feature.
+  loan_status:
+    code:
+    - - .isComplete('loan_status')
+      - Valid
+    - - .satisfies('pd.api.types.is_numeric_dtype(loan_status)', 'loan_status is numeric')
+      - Invalid
+    assumptions:
+    - Must be a numeric type as it is processed as a numeric feature.
+  person_age:
+    code:
+    - - .isComplete('person_age')
+      - Valid
+    - - .satisfies('pd.api.types.is_numeric_dtype(person_age)', 'person_age is numeric')
+      - Invalid
+    assumptions:
+    - Must be a numeric type as it is processed as a numeric feature.
+  person_emp_length:
+    code:
+    - - .isComplete('person_emp_length')
+      - Valid
+    - - .satisfies('pd.api.types.is_numeric_dtype(person_emp_length)', 'person_emp_length
+        is numeric')
+      - Invalid
+    assumptions:
+    - Must be a numeric type as it is processed as a numeric feature.
+  person_home_ownership:
+    code:
+    - - .isComplete('person_home_ownership')
+      - Valid
+    - - .satisfies('pd.api.types.is_categorical_dtype(person_home_ownership)', 'person_home_ownership
+        is categorical')
+      - Invalid
+    assumptions:
+    - Must be a categorical type as it is processed as a categorical feature.

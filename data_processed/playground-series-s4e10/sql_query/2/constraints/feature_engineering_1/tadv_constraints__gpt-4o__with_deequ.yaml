@@ -1,0 +1,27 @@
+constraints:
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isGreaterThan('loan_amnt', '0')
+      - Invalid
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - The column 'loan_amnt' should be complete, with no missing values.
+    - The column 'loan_amnt' should have non-negative values.
+    - The column 'loan_amnt' should have values greater than zero to avoid division
+      by zero when calculating the ratio.
+  person_income:
+    code:
+    - - .isComplete('person_income')
+      - Valid
+    - - .isGreaterThan('person_income', '0')
+      - Invalid
+    - - .isNonNegative('person_income')
+      - Valid
+    assumptions:
+    - The column 'person_income' should be complete, with no missing values.
+    - The column 'person_income' should have non-negative values.
+    - The column 'person_income' should have values greater than zero to avoid division
+      by zero when calculating the ratio.

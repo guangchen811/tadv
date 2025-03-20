@@ -1,16 +1,12 @@
 results:
   Age:
     code:
-    - - '.hasMin(''Age'', lambda x: isinstance(x, (int, float)))'
-      - Passed
-    - - '.hasMin(''Age'', lambda x: x > 0)'
-      - Passed
     - - .isComplete('Age')
+      - Passed
+    - - .satisfies('Age != 0', 'Age should not be zero')
       - Passed
   Billing Amount:
     code:
-    - - '.hasMin(''Billing Amount'', lambda x: isinstance(x, (int, float)))'
-      - Failed
     - - .isComplete('Billing Amount')
       - Failed
   id:

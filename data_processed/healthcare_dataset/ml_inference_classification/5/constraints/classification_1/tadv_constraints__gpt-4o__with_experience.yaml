@@ -1,0 +1,83 @@
+constraints:
+  Admission Type:
+    code:
+    - - .isComplete('Admission Type')
+      - Valid
+    - - .isContainedIn('Admission Type', ['Emergency', 'Urgent', 'Elective'])
+      - Valid
+    assumptions:
+    - Values should be within the set {'Emergency', 'Urgent', 'Elective'}
+    - Column is expected to be complete (NOT NULL)
+  Age:
+    code:
+    - - .isComplete('Age')
+      - Valid
+    - - .isLessThanOrEqualTo('Age', 100)
+      - Invalid
+    - - .isPositive('Age')
+      - Valid
+    assumptions:
+    - All values should be greater than 0 and less than or equal to 100
+    - Values are expected to be non-negative
+    - Column is expected to be complete (NOT NULL)
+  Billing Amount:
+    code:
+    - - .isComplete('Billing Amount')
+      - Valid
+    - - .isLessThan('Billing Amount', 50000)
+      - Invalid
+    - - .isPositive('Billing Amount')
+      - Invalid
+    assumptions:
+    - All values should be less than 50000
+    - Values are expected to be non-negative
+    - Column is expected to be complete (NOT NULL)
+  Blood Type:
+    code:
+    - - .isComplete('Blood Type')
+      - Valid
+    - - .isContainedIn('Blood Type', ['A+', 'O+', 'B+', 'AB+', 'A-', 'O-', 'B-', 'AB-',
+        'A', 'B', 'C', 'D', 'Rh-null', 'Rare'])
+      - Valid
+    assumptions:
+    - Values should be within the set {'A+', 'O+', 'B+', 'AB+', 'A-', 'O-', 'B-',
+      'AB-', 'A', 'B', 'C', 'D', 'Rh-null', 'Rare'}
+    - Column is expected to be complete (NOT NULL)
+  Gender:
+    code:
+    - - .isComplete('Gender')
+      - Valid
+    - - .isContainedIn('Gender', ['Male', 'Female'])
+      - Valid
+    assumptions:
+    - Values should be within the set {'Male', 'Female'}
+    - Column is expected to be complete (NOT NULL)
+  Medication:
+    code:
+    - - .isComplete('Medication')
+      - Valid
+    - - .isContainedIn('Medication', ['Aspirin', 'Paracetamol', 'Ibuprofen', 'Penicillin',
+        'Lipitor'])
+      - Valid
+    assumptions:
+    - Values should be within the set {'Aspirin', 'Paracetamol', 'Ibuprofen', 'Penicillin',
+      'Lipitor'}
+    - Column is expected to be complete (NOT NULL)
+  Test Results:
+    code:
+    - - .isComplete('Test Results')
+      - Valid
+    - - .isContainedIn('Test Results', ['Abnormal', 'Normal', 'Inconclusive'])
+      - Valid
+    assumptions:
+    - Values should be within the set {'Abnormal', 'Normal', 'Inconclusive'}
+    - Column is expected to be complete (NOT NULL)
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - Values are expected to be unique
+    - Column is expected to be complete (NOT NULL)

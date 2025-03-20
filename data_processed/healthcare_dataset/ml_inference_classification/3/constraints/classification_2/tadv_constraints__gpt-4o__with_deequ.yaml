@@ -1,0 +1,54 @@
+constraints:
+  Age:
+    code:
+    - - .isComplete('Age')
+      - Valid
+    - - .isNonNegative('Age')
+      - Valid
+    - - '.satisfies(''Age < 30 AND `Billing Amount` < 1000'', ''Age_Billing_Interaction
+        condition'', lambda x: x > 0.0)'
+      - Valid
+    - - .satisfies('Age >= 0', 'Age should be numeric and non-negative')
+      - Valid
+    assumptions:
+    - The 'Age' column should be complete, with no missing values.
+    - The 'Age' column should contain only non-negative values.
+    - The 'Age' column should be numeric and should be convertible to a numerical
+      format.
+    - The 'Age' column, when combined with 'Billing Amount', assumes that 'Age < 30'
+      and 'Billing Amount < 1000' can be used to create a new feature 'Age_Billing_Interaction'.
+  Billing Amount:
+    code:
+    - - .isComplete('Billing Amount')
+      - Valid
+    - - .satisfies('`Billing Amount` >= 0', 'Billing Amount should be numeric and
+        non-negative')
+      - Invalid
+    assumptions:
+    - The 'Billing Amount' column should be complete, with no missing values.
+    - The 'Billing Amount' column should be numeric and should be convertible to a
+      numerical format.
+    - The 'Billing Amount' column is not used directly in the final feature set but
+      is used to create the 'Age_Billing_Interaction' feature.
+  Test Results:
+    code:
+    - - .isComplete('Test Results')
+      - Valid
+    - - .isContainedIn('Test Results', ['Abnormal', 'Normal', 'Inconclusive'])
+      - Valid
+    assumptions:
+    - The 'Test Results' column should be complete, with no missing values.
+    - 'The ''Test Results'' column should contain only the predefined values: ''Abnormal'',
+      ''Normal'', and ''Inconclusive''.'
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isNonNegative('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The 'id' column should be complete, with no missing values.
+    - The 'id' column should be unique across all records.
+    - The 'id' column should contain only non-negative values.

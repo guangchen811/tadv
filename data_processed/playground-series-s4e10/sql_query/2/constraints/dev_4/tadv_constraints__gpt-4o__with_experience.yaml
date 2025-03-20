@@ -1,0 +1,21 @@
+constraints:
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - The column 'loan_amnt' should be complete, suggesting a NOT NULL constraint.
+    - The column 'loan_amnt' should contain non-negative values, suggesting an IS
+      NON NEGATIVE constraint.
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - The column 'loan_int_rate' should be complete, suggesting a NOT NULL constraint.
+    - The column 'loan_int_rate' should contain non-negative values, suggesting an
+      IS NON NEGATIVE constraint.

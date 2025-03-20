@@ -1,0 +1,51 @@
+constraints:
+  Age:
+    code:
+    - - '.hasMax(''Age'', lambda x: x <= 120)'
+      - Valid
+    - - '.hasMin(''Age'', lambda x: x >= 0)'
+      - Valid
+    - - .isComplete('Age')
+      - Valid
+    - - .isNonNegative('Age')
+      - Valid
+    assumptions:
+    - The 'Age' column should be complete, meaning no missing values.
+    - The 'Age' column should be non-negative, as age cannot be negative.
+    - The 'Age' column should contain values that are within a practical human age
+      range, typically 0 to 120.
+    - 'The ''Age'' column should contain values in appropriate ranges to determine
+      risk levels: High risk if Age >= 65, Medium risk if Age is between 40 and 64,
+      and Low risk if Age is below 40.'
+  Medical Condition:
+    code:
+    - - .isComplete('Medical Condition')
+      - Valid
+    - - .isContainedIn('Medical Condition', ['Diabetes', 'Asthma', 'Obesity', 'Hypertension',
+        'Arthritis', 'Cancer'])
+      - Valid
+    assumptions:
+    - The 'Medical Condition' column should be complete, meaning no missing values.
+    - 'The ''Medical Condition'' column should only contain values from the specified
+      set: [''Diabetes'', ''Asthma'', ''Obesity'', ''Hypertension'', ''Arthritis'',
+      ''Cancer''].'
+    - When 'Medical Condition' contains 'Cancer' or 'Diabetes', it should contribute
+      to a 'High' risk level.
+  Name:
+    code:
+    - - .isComplete('Name')
+      - Valid
+    assumptions:
+    - The 'Name' column should be complete, meaning no missing values.
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isNonNegative('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The 'id' column should be complete, meaning no missing values.
+    - The 'id' column should have unique values to ensure proper identification.
+    - The 'id' column should be non-negative, as IDs are usually positive integers.

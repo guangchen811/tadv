@@ -1,0 +1,39 @@
+constraints:
+  Age:
+    code:
+    - - .isComplete('Age')
+      - Valid
+    assumptions:
+    - Age column should be filled with its mean if any missing values are present.
+  Billing Amount:
+    code:
+    - - .isPositive('Billing Amount')
+      - Invalid
+    assumptions:
+    - Billing Amount should be positive as it is used in a logarithmic transformation.
+  Gender:
+    code:
+    - - .isContainedIn('Gender', ['Male', 'Female'])
+      - Valid
+    assumptions:
+    - Gender column should be one of the predefined categories (likely Male or Female
+      from the histogram).
+  Medical Condition:
+    code:
+    - - .isContainedIn('Medical Condition', ['Hypertension', 'Cancer'])
+      - Invalid
+    assumptions:
+    - Medical Condition column should be one of the predefined categories (e.g., Hypertension,
+      Cancer, etc. from the histogram).
+  Test Results:
+    code:
+    - - .isComplete('Test Results')
+      - Valid
+    assumptions:
+    - Test Results column should exist in the train dataset.
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    assumptions:
+    - ID column should exist in both train and test datasets.

@@ -1,21 +1,13 @@
 results:
   Age:
     code:
-    - - .isComplete('Age')
-      - Passed
     - - .isNonNegative('Age')
       - Passed
-    - - .satisfies('Age <= 120', 'Age should be a reasonable positive integer')
-      - Failed
-  Room Number:
-    code:
-    - - .isComplete('Room Number')
+    - - .satisfies('Age == floor(Age)', 'Age should be integral')
       - Passed
   id:
     code:
     - - .isComplete('id')
-      - Passed
-    - - .isNonNegative('id')
       - Passed
     - - .isUnique('id')
       - Passed

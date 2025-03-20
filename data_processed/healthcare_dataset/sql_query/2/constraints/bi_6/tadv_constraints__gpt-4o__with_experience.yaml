@@ -1,0 +1,26 @@
+constraints:
+  Blood Type:
+    code:
+    - - .isComplete('Blood Type')
+      - Valid
+    - - .isContainedIn('Blood Type', ['A+', 'O+', 'B+', 'AB+', 'A-', 'O-', 'B-', 'AB-'])
+      - Valid
+    assumptions:
+    - 'The column ''Blood Type'' should have values within the observed range: [''A+'',
+      ''O+'', ''B+'', ''AB+'', ''A-'', ''O-'', ''B-'', ''AB-''].'
+    - The column 'Blood Type' is complete, suggesting a NOT NULL constraint.
+    - The column 'Blood Type' should suggest an IS IN constraint for most values as
+      they fall within the observed categories.
+  Medical Condition:
+    code:
+    - - .isComplete('Medical Condition')
+      - Valid
+    - - .isContainedIn('Medical Condition', ['Hypertension', 'Cancer', 'Obesity',
+        'Arthritis', 'Diabetes', 'Asthma'])
+      - Valid
+    assumptions:
+    - 'The column ''Medical Condition'' should have values within the observed range:
+      [''Hypertension'', ''Cancer'', ''Obesity'', ''Arthritis'', ''Diabetes'', ''Asthma''].'
+    - The column 'Medical Condition' is complete, suggesting a NOT NULL constraint.
+    - The column 'Medical Condition' should suggest an IS IN constraint for most values
+      as they fall within the observed categories.

@@ -1,0 +1,38 @@
+constraints:
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - loan_amnt should be complete, meaning no missing values are allowed.
+    - loan_amnt should be non-negative.
+    - loan_amnt is used to calculate the average loan amount in each income band.
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - loan_int_rate should be complete, meaning no missing values are allowed.
+    - loan_int_rate should be non-negative.
+    - loan_int_rate is used to calculate the average interest rate in each income
+      band.
+  person_income:
+    code:
+    - - .isComplete('person_income')
+      - Valid
+    - - .isNonNegative('person_income')
+      - Valid
+    - - '.satisfies(''person_income < 50000 OR (person_income >= 50000 AND person_income
+        <= 100000) OR person_income > 100000'', ''Valid income bands'', lambda x:
+        x == 1.0)'
+      - Valid
+    assumptions:
+    - person_income should be complete, meaning no missing values are allowed.
+    - person_income should be non-negative.
+    - 'person_income is used to segment into income bands: ''Low Income'' if less
+      than 50000, ''Medium Income'' if between 50000 and 100000, otherwise ''High
+      Income''.'

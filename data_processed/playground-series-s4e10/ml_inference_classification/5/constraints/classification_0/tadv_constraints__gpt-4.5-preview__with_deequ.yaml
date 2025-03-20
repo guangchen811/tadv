@@ -1,0 +1,54 @@
+constraints:
+  cb_person_default_on_file:
+    code:
+    - - .isComplete('cb_person_default_on_file')
+      - Valid
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    assumptions:
+    - cb_person_default_on_file should always be present.
+    - cb_person_default_on_file should only contain values 'Y' or 'N'.
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isNonNegative('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - id should always be present, unique, and non-negative.
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isPositive('loan_amnt')
+      - Valid
+    assumptions:
+    - loan_amnt should always be present and non-negative.
+    - loan_amnt should be strictly positive (greater than zero), as log transformation
+      is applied.
+  loan_grade:
+    code:
+    - - .isComplete('loan_grade')
+      - Valid
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - loan_grade should always be present.
+    - 'loan_grade should belong to one of the categories: [''A'', ''B'', ''C'', ''D'',
+      ''E'', ''F'', ''G''].'
+  loan_int_rate:
+    code:
+    - - '.hasMax(''loan_int_rate'', lambda x: x <= 100)'
+      - Valid
+    - - '.hasMin(''loan_int_rate'', lambda x: x >= 0)'
+      - Valid
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - loan_int_rate should always be present and non-negative.
+    - loan_int_rate should be within a reasonable percentage range (e.g., between
+      0% and 100%).

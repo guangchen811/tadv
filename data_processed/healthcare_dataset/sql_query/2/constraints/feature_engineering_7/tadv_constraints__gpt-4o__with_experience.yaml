@@ -1,0 +1,20 @@
+constraints:
+  Date of Admission:
+    code:
+    - - .isComplete('Date of Admission')
+      - Valid
+    - - .satisfies('CAST(Date of Admission AS DATE) IS NOT NULL', 'Valid Date Format')
+      - Invalid
+    assumptions:
+    - The column 'Date of Admission' should be complete, as it is used to calculate
+      the admission_date and determine the 30-day rolling window.
+    - The column 'Date of Admission' should be convertible to a valid date format,
+      as the code casts it to DATE for calculations.
+  id:
+    code:
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The column 'id' should have unique values, as the approximate number of distinct
+      values is close to the total number of records and it is used to identify individual
+      records.

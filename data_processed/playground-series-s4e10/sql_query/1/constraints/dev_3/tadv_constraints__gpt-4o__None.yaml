@@ -1,0 +1,24 @@
+constraints:
+  loan_amnt:
+    code:
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - loan_amnt should be a non-negative integer
+  loan_int_rate:
+    code:
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - loan_int_rate should be a non-negative fractional number
+  person_income:
+    code:
+    - - .isNonNegative('person_income')
+      - Valid
+    - - .satisfies('person_income < 50000 OR (person_income >= 50000 AND person_income
+        <= 100000) OR person_income > 100000', 'Income Band Condition')
+      - Valid
+    assumptions:
+    - person_income should be a non-negative integer
+    - person_income should be less than 50000, between 50000 and 100000, or greater
+      than 100000

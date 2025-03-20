@@ -1,0 +1,72 @@
+constraints:
+  Age:
+    code:
+    - - '.hasMax(''Age'', lambda x: x < 120)'
+      - Valid
+    - - .isComplete('Age')
+      - Valid
+    - - .isNonNegative('Age')
+      - Valid
+    assumptions:
+    - The 'Age' column should not have null values.
+    - The 'Age' column should contain non-negative numbers.
+    - The 'Age' column should have a maximum value constraint based on the observed
+      data.
+  Billing Amount:
+    code:
+    - - .isComplete('Billing Amount')
+      - Valid
+    - - .isNonNegative('Billing Amount')
+      - Invalid
+    assumptions:
+    - The 'Billing Amount' column should not have null values.
+    - The 'Billing Amount' column should contain non-negative numbers.
+  Blood Type:
+    code:
+    - - .isComplete('Blood Type')
+      - Valid
+    - - .isContainedIn('Blood Type', ['A+', 'O+', 'B+', 'AB+', 'A-', 'O-', 'B-', 'AB-'])
+      - Valid
+    assumptions:
+    - The 'Blood Type' column should not have null values.
+    - The 'Blood Type' column should have values within the set {'A+', 'O+', 'B+',
+      'AB+', 'A-', 'O-', 'B-', 'AB-'}.
+  Date of Admission:
+    code:
+    - - .isComplete('Date of Admission')
+      - Valid
+    - - .satisfies('Date of Admission IS NOT NULL', 'Date of Admission convertible
+        to datetime')
+      - Invalid
+    assumptions:
+    - The 'Date of Admission' column should not have null values.
+    - The 'Date of Admission' column should be convertible to a datetime format.
+  Discharge Date:
+    code:
+    - - .isComplete('Discharge Date')
+      - Valid
+    - - .satisfies('Discharge Date IS NOT NULL', 'Discharge Date convertible to datetime')
+      - Invalid
+    assumptions:
+    - The 'Discharge Date' column should not have null values.
+    - The 'Discharge Date' column should be convertible to a datetime format.
+  Medical Condition:
+    code:
+    - - .isComplete('Medical Condition')
+      - Valid
+    - - .isContainedIn('Medical Condition', ['Hypertension', 'Cancer', 'Obesity',
+        'Arthritis', 'Diabetes', 'Asthma'])
+      - Valid
+    assumptions:
+    - The 'Medical Condition' column should not have null values.
+    - The 'Medical Condition' column should have values within the set {'Hypertension',
+      'Cancer', 'Obesity', 'Arthritis', 'Diabetes', 'Asthma'}.
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The 'id' column should not have null values.
+    - The 'id' column should have unique values.

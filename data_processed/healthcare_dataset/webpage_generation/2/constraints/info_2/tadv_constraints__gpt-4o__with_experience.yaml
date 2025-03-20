@@ -1,0 +1,12 @@
+constraints:
+  Name:
+    code:
+    - - .isComplete('Name')
+      - Valid
+    - - .satisfies('Name == Name.astype(str)', 'Name should be string')
+      - Invalid
+    assumptions:
+    - The column 'Name' should not have any null values since it is used to drop rows
+      with missing values.
+    - The column 'Name' should be treated as a string type as it is explicitly converted
+      to a string in the code.

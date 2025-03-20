@@ -1,0 +1,31 @@
+constraints:
+  Date of Admission:
+    code:
+    - - .isComplete('Date of Admission')
+      - Valid
+    - - .satisfies('CAST(`Date of Admission` AS DATE) IS NOT NULL', 'parsable_as_date')
+      - Valid
+    assumptions:
+    - The column should be complete (no missing values).
+    - The values should be parsable as dates.
+  Discharge Date:
+    code:
+    - - .isComplete('Discharge Date')
+      - Valid
+    - - .isGreaterThanOrEqualTo('Discharge Date', 'Date of Admission')
+      - Invalid
+    - - .satisfies('CAST(`Discharge Date` AS DATE) IS NOT NULL', 'parsable_as_date')
+      - Valid
+    assumptions:
+    - The column should be complete (no missing values).
+    - The values should be parsable as dates.
+    - Discharge Date should not be earlier than Date of Admission.
+  Test Results:
+    code:
+    - - .isComplete('Test Results')
+      - Valid
+    - - .isContainedIn('Test Results', ['Abnormal', 'Normal', 'Inconclusive'])
+      - Valid
+    assumptions:
+    - The column should be complete (no missing values).
+    - The values should be contained within the set ['Abnormal', 'Normal', 'Inconclusive'].

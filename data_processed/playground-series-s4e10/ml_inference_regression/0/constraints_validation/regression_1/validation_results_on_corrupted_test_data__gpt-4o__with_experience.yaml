@@ -3,7 +3,7 @@ results:
     code:
     - - .isComplete('cb_person_cred_hist_length')
       - Passed
-    - - .satisfies('cb_person_cred_hist_length >= 0', 'cb_person_cred_hist_length_non_negative')
+    - - .isNonNegative('cb_person_cred_hist_length')
       - Passed
   id:
     code:
@@ -13,6 +13,8 @@ results:
       - Passed
   loan_amnt:
     code:
+    - - '.hasMin(''loan_amnt'', lambda x: x >= 0)'
+      - Passed
     - - .isComplete('loan_amnt')
       - Passed
     - - .isNonNegative('loan_amnt')
@@ -50,9 +52,11 @@ results:
       - Passed
   person_age:
     code:
+    - - '.hasMin(''person_age'', lambda x: x >= 0)'
+      - Passed
     - - .isComplete('person_age')
       - Passed
-    - - .satisfies('person_age > 0', 'person_age_positive')
+    - - .isNonNegative('person_age')
       - Passed
   person_emp_length:
     code:
@@ -64,5 +68,5 @@ results:
     code:
     - - .isComplete('person_home_ownership')
       - Passed
-    - - .isContainedIn('person_home_ownership', ['OWN', 'MORTGAGE', 'RENT', 'OTHER'])
+    - - .isContainedIn('person_home_ownership', ['OTHER', 'OWN', 'MORTGAGE', 'RENT'])
       - Passed

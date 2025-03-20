@@ -1,0 +1,21 @@
+constraints:
+  loan_intent:
+    code:
+    - - .isComplete('loan_intent')
+      - Valid
+    - - .isContainedIn('loan_intent', ['EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL',
+        'DEBTCONSOLIDATION', 'MEDICAL', 'VENTURE'])
+      - Valid
+    assumptions:
+    - Should have values within ['EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL', 'DEBTCONSOLIDATION',
+      'MEDICAL', 'VENTURE']
+    - Should be NOT NULL
+  person_income:
+    code:
+    - - .isComplete('person_income')
+      - Valid
+    - - .isNonNegative('person_income')
+      - Valid
+    assumptions:
+    - Should be NOT NULL
+    - Should be non-negative

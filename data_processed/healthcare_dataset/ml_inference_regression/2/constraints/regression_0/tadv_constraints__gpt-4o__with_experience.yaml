@@ -1,0 +1,47 @@
+constraints:
+  Age:
+    code:
+    - - .isComplete('Age')
+      - Valid
+    - - .isNonNegative('Age')
+      - Valid
+    - - '.satisfies(''Age == floor(Age)'', ''Age should be integral'', lambda x: x
+        == 1.0)'
+      - Valid
+    assumptions:
+    - The column 'Age' should be complete (NOT NULL) as it is used in the model.
+    - The column 'Age' should contain only integral values as it is of Integral type.
+    - The column 'Age' should be non-negative since age cannot be negative.
+  Room Number:
+    code:
+    - - .isNonNegative('Room Number')
+      - Invalid
+    - - '.satisfies(''Room Number == floor(Room Number)'', ''Room Number should be
+        integral'', lambda x: x == 1.0)'
+      - Invalid
+    assumptions:
+    - The column 'Room Number' should contain only integral (numeric) values as the
+      code treats it as numeric.
+    - The column 'Room Number' should be non-negative since room numbers are typically
+      non-negative integers.
+  billing_amount:
+    code:
+    - - .isComplete('billing_amount')
+      - Invalid
+    - - '.satisfies(''billing_amount >= 0'', ''billing_amount should contain numeric
+        values'', lambda x: x >= 0)'
+      - Invalid
+    assumptions:
+    - The column 'billing_amount' should be complete (NOT NULL) as it is used for
+      the target variable.
+    - The column 'billing_amount' should contain only numeric values since it is renamed
+      from 'Billing Amount', which is of Fractional type.
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The column 'id' should be unique as it is used to identify rows.
+    - The column 'id' should be complete (NOT NULL) as it is used to identify rows.

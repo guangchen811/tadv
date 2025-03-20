@@ -1,0 +1,12 @@
+constraints:
+  Date of Admission:
+    code:
+    - - .hasPattern('Date of Admission', '\\d{4}-\\d{2}-\\d{2}')
+      - Valid
+    - - .isComplete('Date of Admission')
+      - Valid
+    assumptions:
+    - The column should contain valid date strings that can be cast to a DATE type.
+    - The column should not have missing or null values.
+    - The date strings should be consistently formatted to ensure correct chronological
+      ordering.

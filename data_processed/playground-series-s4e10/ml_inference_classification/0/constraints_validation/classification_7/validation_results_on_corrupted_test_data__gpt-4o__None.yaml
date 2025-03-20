@@ -1,34 +1,33 @@
 results:
   cb_person_default_on_file:
     code:
-    - - '.hasCompleteness(''cb_person_default_on_file'', lambda x: x == 1.0)'
+    - - .isComplete('cb_person_default_on_file')
       - Passed
     - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
       - Passed
   id:
     code:
-    - - '.hasCompleteness(''id'', lambda x: x == 1.0)'
+    - - .isComplete('id')
       - Passed
     - - .isUnique('id')
       - Passed
-    - - .satisfies('id == id', 'id should contain integral values')
-      - Passed
   loan_amnt:
     code:
-    - - '.hasCompleteness(''loan_amnt'', lambda x: x == 1.0)'
+    - - .isComplete('loan_amnt')
       - Passed
-    - - .satisfies('loan_amnt == loan_amnt', 'loan_amnt should contain integral values')
+    - - .isNonNegative('loan_amnt')
+      - Passed
+    - - .satisfies('loan_amnt >= 0', 'NonNegativeInteger')
       - Passed
   loan_grade:
     code:
-    - - '.hasCompleteness(''loan_grade'', lambda x: x == 1.0)'
+    - - .isComplete('loan_grade')
       - Failed
     - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
       - Passed
   loan_int_rate:
     code:
-    - - '.hasCompleteness(''loan_int_rate'', lambda x: x == 1.0)'
+    - - .isComplete('loan_int_rate')
       - Passed
-    - - .satisfies('loan_int_rate == loan_int_rate', 'loan_int_rate should contain
-        fractional values')
+    - - .satisfies('loan_int_rate >= 0', 'ValidFractionalNumber')
       - Passed

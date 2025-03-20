@@ -13,20 +13,28 @@ results:
       - Passed
   loan_amnt:
     code:
-    - - .isPositive('loan_amnt')
+    - - .isNonNegative('loan_amnt')
       - Passed
   loan_grade:
     code:
     - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Passed
+  loan_int_rate:
+    code:
+    - - .isNonNegative('loan_int_rate')
       - Passed
   loan_intent:
     code:
     - - .isContainedIn('loan_intent', ['EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL',
         'DEBTCONSOLIDATION', 'MEDICAL', 'VENTURE'])
       - Passed
+  loan_percent_income:
+    code:
+    - - .isNonNegative('loan_percent_income')
+      - Passed
   person_age:
     code:
-    - - .isPositive('person_age')
+    - - .isNonNegative('person_age')
       - Passed
   person_emp_length:
     code:
@@ -34,7 +42,7 @@ results:
       - Failed
   person_home_ownership:
     code:
-    - - .isContainedIn('person_home_ownership', ['OWN', 'MORTGAGE', 'RENT', 'OTHER'])
+    - - .isContainedIn('person_home_ownership', ['OTHER', 'OWN', 'MORTGAGE', 'RENT'])
       - Passed
   person_income:
     code:

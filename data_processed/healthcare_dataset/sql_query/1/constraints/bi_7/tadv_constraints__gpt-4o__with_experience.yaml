@@ -1,0 +1,23 @@
+constraints:
+  Admission Type:
+    code:
+    - - .isComplete('Admission Type')
+      - Valid
+    - - .isContainedIn('Admission Type', ['Emergency', 'Urgent', 'Elective'])
+      - Valid
+    assumptions:
+    - The column 'Admission Type' should not have NULL values as its completeness
+      is 1.0.
+    - The column 'Admission Type' should contain values within ['Emergency', 'Urgent',
+      'Elective'] as these are the known categories.
+    - The column 'Admission Type' should contain string values.
+  Hospital:
+    code:
+    - - '.hasApproxCountDistinct(''Hospital'', lambda x: x == 26773)'
+      - Valid
+    - - .isComplete('Hospital')
+      - Valid
+    assumptions:
+    - The column 'Hospital' should not have NULL values as its completeness is 1.0.
+    - The column 'Hospital' should contain string values.
+    - The column 'Hospital' should have a categorical range with 26773 distinct values.

@@ -1,0 +1,23 @@
+constraints:
+  Date of Admission:
+    code:
+    - - .hasPattern('Date of Admission', '^[0-9]{4}-[0-9]{2}-[0-9]{2}$')
+      - Valid
+    - - .isComplete('Date of Admission')
+      - Valid
+    - - .satisfies('admission_date >= previous_admission_date OR previous_admission_date
+        IS NULL', 'Dates in Date of Admission should be ordered chronologically')
+      - Invalid
+    assumptions:
+    - The 'Date of Admission' column should be convertible to a valid date format.
+    - Dates in the 'Date of Admission' column should be ordered chronologically for
+      each 'id'.
+  id:
+    code:
+    - - .isUnique('id')
+      - Valid
+    - - .satisfies('id >= 0', 'Id should be a non-negative integer')
+      - Valid
+    assumptions:
+    - The 'id' column should be unique for each patient.
+    - The 'id' column should be an integer value.

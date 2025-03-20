@@ -1,0 +1,10 @@
+constraints:
+  Name:
+    code:
+    - - .isComplete('Name')
+      - Valid
+    - - .satisfies('Name NOT LIKE ""', 'Name should contain only string values')
+      - Valid
+    assumptions:
+    - The 'Name' column must be complete (no missing values).
+    - The 'Name' column should contain only string values.

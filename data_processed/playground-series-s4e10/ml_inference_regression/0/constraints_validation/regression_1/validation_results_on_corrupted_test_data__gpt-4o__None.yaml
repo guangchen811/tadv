@@ -3,13 +3,6 @@ results:
     code:
     - - .isNonNegative('cb_person_cred_hist_length')
       - Passed
-    - - .satisfies('cb_person_cred_hist_length == round(cb_person_cred_hist_length)',
-        'cb_person_cred_hist_length should be an integer')
-      - Passed
-  cb_person_default_on_file:
-    code:
-    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
-      - Passed
   id:
     code:
     - - .isUnique('id')
@@ -18,30 +11,14 @@ results:
     code:
     - - .isPositive('loan_amnt')
       - Passed
-    - - .satisfies('loan_amnt == round(loan_amnt)', 'loan_amnt should be an integer')
-      - Passed
   loan_grade:
     code:
     - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
       - Failed
-  loan_int_rate:
-    code:
-    - - .isNonNegative('loan_int_rate')
-      - Passed
   loan_intent:
     code:
     - - .isContainedIn('loan_intent', ['EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL',
         'DEBTCONSOLIDATION', 'MEDICAL', 'VENTURE'])
-      - Passed
-  loan_percent_income:
-    code:
-    - - .isNonNegative('loan_percent_income')
-      - Passed
-  person_age:
-    code:
-    - - .isNonNegative('person_age')
-      - Passed
-    - - .satisfies('person_age == round(person_age)', 'person_age should be an integer')
       - Passed
   person_emp_length:
     code:

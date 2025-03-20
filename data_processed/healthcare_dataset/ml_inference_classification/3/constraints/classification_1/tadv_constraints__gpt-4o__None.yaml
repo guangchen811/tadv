@@ -1,0 +1,46 @@
+constraints:
+  Admission Type:
+    code: []
+    assumptions: []
+  Age:
+    code:
+    - - .isGreaterThan('Age', 0)
+      - Invalid
+    - - .isLessThanOrEqualTo('Age', 100)
+      - Invalid
+    assumptions:
+    - All values should be greater than 0.
+    - All values should be less than or equal to 100.
+  Billing Amount:
+    code:
+    - - '.hasApproxQuantile(''Billing Amount'', 0.95, lambda x: x < 50000)'
+      - Valid
+    assumptions:
+    - At least 95% of the values should be less than 50000.
+  Blood Type:
+    code:
+    - - .isContainedIn('Blood Type', ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+',
+        'O-', 'A', 'B', 'C', 'D', 'Rh-null', 'Rare'])
+      - Valid
+    assumptions:
+    - Values should be one of ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-', 'A',
+      'B', 'C', 'D', 'Rh-null', 'Rare']. Values not in this list should be labeled
+      as 'Rare'.
+  Gender:
+    code: []
+    assumptions: []
+  Medication:
+    code: []
+    assumptions: []
+  Test Results:
+    code:
+    - - .satisfies('Test Results IN expected_classes', 'Expected Classes Check')
+      - Invalid
+    assumptions:
+    - Predictions should match the expected classes from the model classifier.
+  id:
+    code:
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - Values should have a unique constraint to ensure no duplicates.

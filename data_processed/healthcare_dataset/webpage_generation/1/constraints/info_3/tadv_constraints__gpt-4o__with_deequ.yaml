@@ -1,0 +1,55 @@
+constraints:
+  Age:
+    code:
+    - - .isComplete('Age')
+      - Valid
+    - - .isNonNegative('Age')
+      - Valid
+    assumptions:
+    - Age should be a non-negative integer.
+    - Age should be complete for calculating the average age.
+  Date of Admission:
+    code:
+    - - .isComplete('Date of Admission')
+      - Valid
+    - - .satisfies('Date of Admission is not null', 'Valid Date of Admission')
+      - Invalid
+    assumptions:
+    - Date of Admission should be parseable into a valid date format.
+    - Date of Admission should be complete.
+  Discharge Date:
+    code:
+    - - .isComplete('Discharge Date')
+      - Valid
+    - - .isGreaterThan('Discharge Date', 'Date of Admission')
+      - Invalid
+    - - .satisfies('Discharge Date is not null', 'Valid Discharge Date')
+      - Invalid
+    assumptions:
+    - Discharge Date should be parseable into a valid date format.
+    - Discharge Date should be complete.
+    - Discharge Date should be after the Date of Admission.
+  Doctor:
+    code:
+    - - .isComplete('Doctor')
+      - Valid
+    assumptions:
+    - Doctor should be treated as a string.
+    - Doctor information should be complete for calculating the most frequent doctor.
+  Medical Condition:
+    code:
+    - - .isComplete('Medical Condition')
+      - Valid
+    - - .isContainedIn('Medical Condition', ['Diabetes', 'Asthma', 'Obesity', 'Hypertension',
+        'Arthritis', 'Cancer'])
+      - Valid
+    assumptions:
+    - Medical Condition should be treated as a string.
+    - 'Medical Condition should contain only the expected categories: Diabetes, Asthma,
+      Obesity, Hypertension, Arthritis, Cancer.'
+  Name:
+    code:
+    - - .isComplete('Name')
+      - Valid
+    assumptions:
+    - Name should be treated as a string.

@@ -1,0 +1,40 @@
+constraints:
+  cb_person_cred_hist_length:
+    code:
+    - - .satisfies('cb_person_cred_hist_length != 0 WHERE loan_amnt == 0', 'Non-zero
+        credit history when loan amount is zero')
+      - Invalid
+    assumptions:
+    - cb_person_cred_hist_length should not be zero when loan_amnt is zero to avoid
+      division by zero
+  cb_person_default_on_file:
+    code:
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    assumptions:
+    - cb_person_default_on_file should only contain values 'Y' or 'N'
+  loan_amnt:
+    code:
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - loan_amnt should be non-negative
+  loan_grade:
+    code:
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - loan_grade should only contain values from {A, B, C, D, E, F, G}
+  loan_int_rate:
+    code:
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - loan_int_rate should be a non-negative numeric value
+  person_home_ownership:
+    code:
+    - - .isContainedIn('person_home_ownership', ['OWN', 'MORTGAGE', 'RENT', 'OTHER'])
+      - Valid
+    assumptions:
+    - person_home_ownership should only contain values from {OWN, MORTGAGE, RENT,
+      OTHER}

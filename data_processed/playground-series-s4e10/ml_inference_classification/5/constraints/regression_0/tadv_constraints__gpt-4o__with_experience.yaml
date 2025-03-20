@@ -1,0 +1,64 @@
+constraints:
+  cb_person_cred_hist_length:
+    code:
+    - - .isComplete('cb_person_cred_hist_length')
+      - Valid
+    - - .isNonNegative('cb_person_cred_hist_length')
+      - Valid
+    assumptions:
+    - The column 'cb_person_cred_hist_length' should be complete, suggesting a NOT
+      NULL constraint.
+    - The column 'cb_person_cred_hist_length' contains only non-negative numbers,
+      suggesting an IS NON NEGATIVE constraint.
+  cb_person_default_on_file:
+    code:
+    - - .isComplete('cb_person_default_on_file')
+      - Valid
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    assumptions:
+    - The column 'cb_person_default_on_file' should be complete, suggesting a NOT
+      NULL constraint.
+    - The column 'cb_person_default_on_file' should have values within ['Y', 'N']
+      as observed in the histogram, suggesting an IS IN constraint.
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - The column 'loan_amnt' should be complete, suggesting a NOT NULL constraint.
+    - The column 'loan_amnt' contains only non-negative numbers, suggesting an IS
+      NON NEGATIVE constraint.
+  loan_grade:
+    code:
+    - - .isComplete('loan_grade')
+      - Valid
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - The column 'loan_grade' should be complete, suggesting a NOT NULL constraint.
+    - The column 'loan_grade' should have values within ['A', 'B', 'C', 'D', 'E',
+      'F', 'G'] as observed in the histogram, suggesting an IS IN constraint.
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - The column 'loan_int_rate' should be complete, suggesting a NOT NULL constraint.
+    - The column 'loan_int_rate' contains only non-negative numbers, suggesting an
+      IS NON NEGATIVE constraint.
+  person_home_ownership:
+    code:
+    - - .isComplete('person_home_ownership')
+      - Valid
+    - - .isContainedIn('person_home_ownership', ['OWN', 'MORTGAGE', 'RENT', 'OTHER'])
+      - Valid
+    assumptions:
+    - The column 'person_home_ownership' should be complete, suggesting a NOT NULL
+      constraint.
+    - The column 'person_home_ownership' should have values within ['OWN', 'MORTGAGE',
+      'RENT', 'OTHER'] as observed in the histogram, suggesting an IS IN constraint.

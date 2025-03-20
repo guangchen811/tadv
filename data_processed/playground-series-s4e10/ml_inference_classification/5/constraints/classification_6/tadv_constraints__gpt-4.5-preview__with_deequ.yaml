@@ -1,0 +1,79 @@
+constraints:
+  cb_person_default_on_file:
+    code:
+    - - .isComplete('cb_person_default_on_file')
+      - Valid
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    assumptions:
+    - Credit bureau default status should be complete (no missing values).
+    - Credit bureau default status should be either 'Y' or 'N'.
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isNonNegative('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - ID should be complete (no missing values).
+    - ID should be a unique identifier.
+    - ID should be a non-negative integer.
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isPositive('loan_amnt')
+      - Valid
+    assumptions:
+    - Loan amount should be complete (no missing values).
+    - Loan amount should be a positive numeric value greater than zero.
+  loan_grade:
+    code:
+    - - .isComplete('loan_grade')
+      - Valid
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - Loan grade should be complete (no missing values).
+    - Loan grade should be one of ['A', 'B', 'C', 'D', 'E', 'F', 'G'].
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - Loan interest rate should be complete (no missing values).
+    - Loan interest rate should be a non-negative numeric value.
+  person_age:
+    code:
+    - - '.hasMin(''person_age'', lambda x: x >= 18)'
+      - Valid
+    - - .isComplete('person_age')
+      - Valid
+    - - .isNonNegative('person_age')
+      - Valid
+    assumptions:
+    - Person age should be complete (no missing values).
+    - Person age should be a non-negative integer.
+    - Person age should be at least 18 years old.
+  person_home_ownership:
+    code:
+    - - .isComplete('person_home_ownership')
+      - Valid
+    - - .isContainedIn('person_home_ownership', ['RENT', 'MORTGAGE', 'OWN', 'OTHER'])
+      - Valid
+    assumptions:
+    - Person home ownership should be complete (no missing values).
+    - Person home ownership should be one of ['RENT', 'MORTGAGE', 'OWN', 'OTHER'].
+  person_income:
+    code:
+    - - .isComplete('person_income')
+      - Valid
+    - - .isPositive('person_income')
+      - Valid
+    assumptions:
+    - Person income should be complete (no missing values).
+    - Person income should be a positive numeric value greater than zero.

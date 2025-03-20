@@ -3,7 +3,7 @@ results:
     code:
     - - .isComplete('Age')
       - Passed
-    - - .satisfies('Age >= 0', 'Age should be numeric and non-negative')
+    - - .satisfies('Age >= 0', 'Age should be non-negative')
       - Passed
   Room Number:
     code:
@@ -14,4 +14,6 @@ results:
     - - .isComplete('id')
       - Passed
     - - .isUnique('id')
+      - Passed
+    - - .satisfies('id >= 0', 'ID should be non-negative')
       - Passed

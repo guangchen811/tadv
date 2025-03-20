@@ -1,0 +1,16 @@
+constraints:
+  person_emp_length:
+    code:
+    - - .isComplete('person_emp_length')
+      - Valid
+    - - .isNonNegative('person_emp_length')
+      - Valid
+    - - .satisfies('person_emp_length < 2 OR (person_emp_length >= 2 AND person_emp_length
+        <= 5) OR person_emp_length > 5', 'Valid employment length categories')
+      - Valid
+    assumptions:
+    - The column person_emp_length should be complete, i.e., no missing values.
+    - The column person_emp_length should be non-negative, as negative employment
+      length doesn't make logical sense.
+    - The column person_emp_length should be either less than 2, between 2 and 5,
+      or greater than 5, as these are the categories defined in the downstream task.

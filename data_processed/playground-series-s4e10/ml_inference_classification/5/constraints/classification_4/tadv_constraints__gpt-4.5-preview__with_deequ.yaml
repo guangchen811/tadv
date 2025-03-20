@@ -1,0 +1,131 @@
+constraints:
+  cb_person_default_on_file:
+    code:
+    - - .isComplete('cb_person_default_on_file')
+      - Valid
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    assumptions:
+    - cb_person_default_on_file must be complete without missing values
+    - cb_person_default_on_file should only contain the values 'Y' or 'N'
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isNonNegative('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - id must be complete without missing values
+    - id must be non-negative
+    - id must be unique
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isPositive('loan_amnt')
+      - Valid
+    assumptions:
+    - loan_amnt must be complete without missing values
+    - loan_amnt must be non-negative
+    - loan_amnt should be greater than zero
+  loan_grade:
+    code:
+    - - .isComplete('loan_grade')
+      - Valid
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - loan_grade must be complete without missing values
+    - loan_grade should only contain the values 'A', 'B', 'C', 'D', 'E', 'F', or 'G'
+  loan_int_rate:
+    code:
+    - - '.hasMax(''loan_int_rate'', lambda x: x <= 100)'
+      - Valid
+    - - '.hasMin(''loan_int_rate'', lambda x: x >= 0)'
+      - Valid
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - loan_int_rate must be complete without missing values
+    - loan_int_rate must be non-negative
+    - loan_int_rate should be within a realistic interest rate range (e.g., between
+      0% and 100%)
+  loan_intent:
+    code:
+    - - .isComplete('loan_intent')
+      - Valid
+    - - .isContainedIn('loan_intent', ['EDUCATION', 'MEDICAL', 'PERSONAL', 'VENTURE',
+        'DEBTCONSOLIDATION', 'HOMEIMPROVEMENT'])
+      - Valid
+    assumptions:
+    - loan_intent must be complete without missing values
+    - loan_intent should only contain the values 'EDUCATION', 'MEDICAL', 'PERSONAL',
+      'VENTURE', 'DEBTCONSOLIDATION', or 'HOMEIMPROVEMENT'
+  loan_percent_income:
+    code:
+    - - '.hasMax(''loan_percent_income'', lambda x: x <= 1)'
+      - Valid
+    - - '.hasMin(''loan_percent_income'', lambda x: x >= 0)'
+      - Valid
+    - - .isComplete('loan_percent_income')
+      - Valid
+    - - .isNonNegative('loan_percent_income')
+      - Valid
+    assumptions:
+    - loan_percent_income must be complete without missing values
+    - loan_percent_income must be non-negative
+    - loan_percent_income should be between 0 and 1 (0% to 100%)
+  person_age:
+    code:
+    - - '.hasMax(''person_age'', lambda x: x <= 100)'
+      - Valid
+    - - '.hasMin(''person_age'', lambda x: x >= 18)'
+      - Valid
+    - - .isComplete('person_age')
+      - Valid
+    - - .isNonNegative('person_age')
+      - Valid
+    assumptions:
+    - person_age must be complete without missing values
+    - person_age must be non-negative
+    - person_age should be within a reasonable human adult age range, e.g., between
+      18 and 100
+  person_emp_length:
+    code:
+    - - '.hasMax(''person_emp_length'', lambda x: x <= 50)'
+      - Invalid
+    - - '.hasMin(''person_emp_length'', lambda x: x >= 0)'
+      - Valid
+    - - .isComplete('person_emp_length')
+      - Valid
+    - - .isNonNegative('person_emp_length')
+      - Valid
+    assumptions:
+    - person_emp_length must be complete without missing values
+    - person_emp_length must be non-negative
+    - person_emp_length should be within a realistic employment duration, e.g., between
+      0 and 50 years
+  person_home_ownership:
+    code:
+    - - .isComplete('person_home_ownership')
+      - Valid
+    - - .isContainedIn('person_home_ownership', ['RENT', 'MORTGAGE', 'OWN', 'OTHER'])
+      - Valid
+    assumptions:
+    - person_home_ownership must be complete without missing values
+    - person_home_ownership should only contain the values 'RENT', 'MORTGAGE', 'OWN',
+      or 'OTHER'
+  person_income:
+    code:
+    - - .isComplete('person_income')
+      - Valid
+    - - .isPositive('person_income')
+      - Valid
+    assumptions:
+    - person_income must be complete without missing values
+    - person_income must be non-negative
+    - person_income should be greater than zero to avoid division issues during preprocessing

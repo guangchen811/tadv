@@ -1,0 +1,37 @@
+constraints:
+  cb_person_cred_hist_length:
+    code:
+    - - .isNonNegative('cb_person_cred_hist_length')
+      - Valid
+    assumptions:
+    - cb_person_cred_hist_length should be non-negative
+  cb_person_default_on_file:
+    code:
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    assumptions:
+    - cb_person_default_on_file should be one of 'Y', 'N'
+  loan_amnt:
+    code:
+    - - .isGreaterThan('loan_amnt', 0)
+      - Invalid
+    assumptions:
+    - loan_amnt should be greater than 0
+  loan_grade:
+    code:
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - loan_grade should be one of 'A', 'B', 'C', 'D', 'E', 'F', 'G'
+  loan_int_rate:
+    code:
+    - - .isGreaterThanOrEqualTo('loan_int_rate', 0)
+      - Invalid
+    assumptions:
+    - loan_int_rate should be greater than or equal to 0
+  person_home_ownership:
+    code:
+    - - .isContainedIn('person_home_ownership', ['OWN', 'MORTGAGE', 'RENT', 'OTHER'])
+      - Valid
+    assumptions:
+    - person_home_ownership should be one of 'OWN', 'MORTGAGE', 'RENT', 'OTHER'

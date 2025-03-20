@@ -1,0 +1,19 @@
+constraints:
+  Billing Amount:
+    code:
+    - - .isComplete('Billing Amount')
+      - Valid
+    - - .isNonNegative('Billing Amount')
+      - Invalid
+    assumptions:
+    - Entries should be non-negative.
+    - Column should not contain null values.
+  Doctor:
+    code:
+    - - .isComplete('Doctor')
+      - Valid
+    - - .isUnique('Doctor')
+      - Invalid
+    assumptions:
+    - Entries should be valid identifiers for doctors.
+    - Column should not contain null or invalid entries.

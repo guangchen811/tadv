@@ -1,0 +1,14 @@
+constraints:
+  cb_person_default_on_file:
+    code:
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    assumptions:
+    - The column should only contain the values 'Y' or 'N'.
+    - The value should be 'N' for the record to be considered in the analysis.
+  loan_intent:
+    code:
+    - - .isComplete('loan_intent')
+      - Valid
+    assumptions:
+    - The column should have no null values.

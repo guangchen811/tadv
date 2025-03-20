@@ -1,6 +1,8 @@
 results:
   cb_person_cred_hist_length:
     code:
+    - - '.hasMin(''cb_person_cred_hist_length'', lambda x: x >= 0)'
+      - Passed
     - - .isComplete('cb_person_cred_hist_length')
       - Passed
     - - .isNonNegative('cb_person_cred_hist_length')
@@ -19,6 +21,8 @@ results:
       - Passed
   loan_amnt:
     code:
+    - - '.hasMin(''loan_amnt'', lambda x: x >= 0)'
+      - Passed
     - - .isComplete('loan_amnt')
       - Passed
     - - .isNonNegative('loan_amnt')
@@ -31,6 +35,8 @@ results:
       - Passed
   loan_int_rate:
     code:
+    - - '.hasMin(''loan_int_rate'', lambda x: x >= 0)'
+      - Passed
     - - .isComplete('loan_int_rate')
       - Passed
     - - .isNonNegative('loan_int_rate')
@@ -44,18 +50,24 @@ results:
       - Passed
   loan_percent_income:
     code:
+    - - '.hasMin(''loan_percent_income'', lambda x: x >= 0)'
+      - Passed
     - - .isComplete('loan_percent_income')
       - Passed
     - - .isNonNegative('loan_percent_income')
       - Passed
   person_age:
     code:
+    - - '.hasMin(''person_age'', lambda x: x >= 0)'
+      - Passed
     - - .isComplete('person_age')
       - Passed
     - - .isNonNegative('person_age')
       - Passed
   person_emp_length:
     code:
+    - - '.hasMin(''person_emp_length'', lambda x: x >= 0)'
+      - Passed
     - - .isComplete('person_emp_length')
       - Passed
     - - .isNonNegative('person_emp_length')
@@ -68,6 +80,8 @@ results:
       - Passed
   person_income:
     code:
+    - - '.hasMin(''person_income'', lambda x: x >= 0)'
+      - Passed
     - - .isComplete('person_income')
       - Passed
     - - .isNonNegative('person_income')

@@ -29,10 +29,6 @@ results:
       - Passed
     - - .isNonNegative('loan_int_rate')
       - Passed
-  loan_status:
-    code:
-    - - .isComplete('loan_status')
-      - Failed
   person_age:
     code:
     - - .isComplete('person_age')

@@ -1,0 +1,30 @@
+constraints:
+  cb_person_default_on_file:
+    code:
+    - - .isComplete('cb_person_default_on_file')
+      - Valid
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    assumptions:
+    - Values should be one of ['Y', 'N']
+    - Column should be complete with no missing values
+  loan_grade:
+    code:
+    - - .isComplete('loan_grade')
+      - Valid
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - Values should be one of ['A', 'B', 'C', 'D', 'E', 'F', 'G']
+    - Column should be complete with no missing values
+  loan_intent:
+    code:
+    - - .isComplete('loan_intent')
+      - Valid
+    - - .isContainedIn('loan_intent', ['EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL',
+        'DEBTCONSOLIDATION', 'MEDICAL', 'VENTURE'])
+      - Valid
+    assumptions:
+    - Values should be one of ['EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL', 'DEBTCONSOLIDATION',
+      'MEDICAL', 'VENTURE']
+    - Column should be complete with no missing values

@@ -1,0 +1,43 @@
+constraints:
+  cb_person_cred_hist_length:
+    code:
+    - - .isNonNegative('cb_person_cred_hist_length')
+      - Valid
+    assumptions:
+    - cb_person_cred_hist_length should be non-negative as it is used in a division
+      operation.
+  cb_person_default_on_file:
+    code:
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    assumptions:
+    - cb_person_default_on_file should contain values 'Y' or 'N' as it's used in one-hot
+      encoding.
+  loan_amnt:
+    code:
+    - - .isPositive('loan_amnt')
+      - Valid
+    assumptions:
+    - loan_amnt should be greater than 0 since it's used in calculations such as logarithm
+      and division.
+  loan_grade:
+    code:
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - loan_grade should contain values from the set ['A', 'B', 'C', 'D', 'E', 'F',
+      'G'] as it is checked for membership in ['A', 'B'].
+  loan_int_rate:
+    code:
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - loan_int_rate should be non-negative because it's used in a multiplication with
+      loan_amnt.
+  person_home_ownership:
+    code:
+    - - .isContainedIn('person_home_ownership', ['OWN', 'RENT', 'MORTGAGE', 'OTHER'])
+      - Valid
+    assumptions:
+    - person_home_ownership should contain values from the set ['OWN', 'RENT', 'MORTGAGE',
+      'OTHER'] because it is checked for equality with 'OWN'.

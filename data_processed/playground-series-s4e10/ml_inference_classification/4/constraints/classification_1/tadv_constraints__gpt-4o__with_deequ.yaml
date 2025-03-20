@@ -1,0 +1,122 @@
+constraints:
+  cb_person_cred_hist_length:
+    code:
+    - - .isComplete('cb_person_cred_hist_length')
+      - Valid
+    - - .isNonNegative('cb_person_cred_hist_length')
+      - Valid
+    assumptions:
+    - The column should be complete, with no missing values.
+    - Values in the column should be non-negative integers, representing the length
+      of credit history in years.
+  cb_person_default_on_file:
+    code:
+    - - .isComplete('cb_person_default_on_file')
+      - Valid
+    - - .isContainedIn('cb_person_default_on_file', ['N', 'Y'])
+      - Valid
+    assumptions:
+    - The column should be complete, with no missing values.
+    - Values in the column should be one of ['N', 'Y'].
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The column should be complete, with no missing values.
+    - Values in the column should be unique integers, representing unique identifiers.
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - The column should be complete, with no missing values.
+    - Values in the column should be non-negative integers.
+  loan_grade:
+    code:
+    - - .isComplete('loan_grade')
+      - Valid
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - The column should be complete, with no missing values.
+    - Values in the column should be one of ['A', 'B', 'C', 'D', 'E', 'F', 'G'].
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - The column should be complete, with no missing values.
+    - Values in the column should be non-negative numbers, representing interest rates.
+  loan_intent:
+    code:
+    - - .isComplete('loan_intent')
+      - Valid
+    - - .isContainedIn('loan_intent', ['EDUCATION', 'MEDICAL', 'PERSONAL', 'VENTURE',
+        'DEBTCONSOLIDATION', 'HOMEIMPROVEMENT'])
+      - Valid
+    assumptions:
+    - The column should be complete, with no missing values.
+    - Values in the column should be one of ['EDUCATION', 'MEDICAL', 'PERSONAL', 'VENTURE',
+      'DEBTCONSOLIDATION', 'HOMEIMPROVEMENT'].
+  loan_percent_income:
+    code:
+    - - .isComplete('loan_percent_income')
+      - Valid
+    - - .isNonNegative('loan_percent_income')
+      - Valid
+    assumptions:
+    - The column should be complete, with no missing values.
+    - Values in the column should be non-negative numbers, representing the percentage
+      of income.
+  person_age:
+    code:
+    - - '.hasMax(''person_age'', lambda x: x <= 100)'
+      - Valid
+    - - '.hasMin(''person_age'', lambda x: x >= 18)'
+      - Valid
+    - - .isComplete('person_age')
+      - Valid
+    - - .isNonNegative('person_age')
+      - Valid
+    assumptions:
+    - The column should be complete, with no missing values.
+    - Values in the column should be non-negative integers.
+    - Values should typically be within a reasonable range for adult ages (e.g., 18
+      to 100).
+  person_emp_length:
+    code:
+    - - .isComplete('person_emp_length')
+      - Valid
+    - - .isNonNegative('person_emp_length')
+      - Valid
+    assumptions:
+    - The column should be complete, with no missing values.
+    - Values in the column should be non-negative numbers, representing years of employment.
+  person_home_ownership:
+    code:
+    - - .isComplete('person_home_ownership')
+      - Valid
+    - - .isContainedIn('person_home_ownership', ['RENT', 'MORTGAGE', 'OWN', 'OTHER'])
+      - Valid
+    assumptions:
+    - The column should be complete, with no missing values.
+    - Values in the column should be one of ['RENT', 'MORTGAGE', 'OWN', 'OTHER'].
+  person_income:
+    code:
+    - - '.hasMin(''person_income'', lambda x: x > 0)'
+      - Valid
+    - - .isComplete('person_income')
+      - Valid
+    - - .isNonNegative('person_income')
+      - Valid
+    assumptions:
+    - The column should be complete, with no missing values.
+    - Values in the column should be non-negative integers.
+    - Income values should be reasonable, typically above zero.

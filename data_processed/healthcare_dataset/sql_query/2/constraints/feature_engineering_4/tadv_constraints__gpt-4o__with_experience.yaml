@@ -1,0 +1,45 @@
+constraints:
+  Billing Amount:
+    code:
+    - - '.hasMean(''Billing Amount'', lambda x: x > 0)'
+      - Valid
+    - - '.hasStandardDeviation(''Billing Amount'', lambda x: x > 0)'
+      - Valid
+    - - .isComplete('Billing Amount')
+      - Valid
+    - - .isNonNegative('Billing Amount')
+      - Invalid
+    assumptions:
+    - The column should have a minimum value of 0, as billing amounts cannot be negative.
+    - The column should not be NULL.
+    - The column should suggest a mean and standard deviation constraint to ensure
+      data consistency.
+  Gender:
+    code:
+    - - .isComplete('Gender')
+      - Valid
+    - - .isContainedIn('Gender', ['Male', 'Female'])
+      - Valid
+    assumptions:
+    - 'The column should have values within the set: [''Male'', ''Female''].'
+    - The column should not be NULL.
+  Medical Condition:
+    code:
+    - - .isComplete('Medical Condition')
+      - Valid
+    - - .isContainedIn('Medical Condition', ['Hypertension', 'Cancer', 'Obesity',
+        'Arthritis', 'Diabetes', 'Asthma'])
+      - Valid
+    assumptions:
+    - 'The column should have values within the set: [''Hypertension'', ''Cancer'',
+      ''Obesity'', ''Arthritis'', ''Diabetes'', ''Asthma''].'
+    - The column should not be NULL.
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The column should be unique, as it is used to identify each record.
+    - The column should not be NULL.

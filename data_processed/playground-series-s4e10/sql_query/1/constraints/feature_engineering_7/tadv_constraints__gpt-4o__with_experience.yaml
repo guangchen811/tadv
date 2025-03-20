@@ -1,0 +1,16 @@
+constraints:
+  loan_int_rate:
+    code:
+    - - '.hasMax(''loan_int_rate'', lambda x: x <= 30)'
+      - Valid
+    - - '.hasMin(''loan_int_rate'', lambda x: x >= 0)'
+      - Valid
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - The column should not contain null values.
+    - The column values should be non-negative.
+    - The column values are expected to be within a reasonable range of 0 to 30.
+    - The column values should be of Fractional numeric type.

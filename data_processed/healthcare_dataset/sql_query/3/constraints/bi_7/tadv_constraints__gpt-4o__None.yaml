@@ -1,0 +1,16 @@
+constraints:
+  Admission Type:
+    code:
+    - - .isComplete('Admission Type')
+      - Valid
+    - - .isContainedIn('Admission Type', ['Emergency', 'Urgent', 'Elective'])
+      - Valid
+    assumptions:
+    - Entries should be non-null to ensure proper grouping.
+    - Entries should be one of ['Emergency', 'Urgent', 'Elective'].
+  Hospital:
+    code:
+    - - .isComplete('Hospital')
+      - Valid
+    assumptions:
+    - Entries should be non-null to ensure proper grouping.

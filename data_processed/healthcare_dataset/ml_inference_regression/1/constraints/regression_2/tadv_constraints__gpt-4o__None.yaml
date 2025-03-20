@@ -1,0 +1,48 @@
+constraints:
+  Billing Amount:
+    code:
+    - - '.hasPattern(''Billing Amount'', ''^[0-9]+(\.[0-9]+)?$'', lambda x: x == 1.0)'
+      - Invalid
+    - - .isComplete('Billing Amount')
+      - Valid
+    assumptions:
+    - The 'Billing Amount' column should contain numeric values.
+    - The 'Billing Amount' column should not contain missing values.
+  Date of Admission:
+    code:
+    - - '.hasPattern(''Date of Admission'', ''^\d{4}-\d{2}-\d{2}$'', lambda x: x ==
+        1.0)'
+      - Valid
+    - - .isComplete('Date of Admission')
+      - Valid
+    assumptions:
+    - The 'Date of Admission' column should be convertible to datetime format.
+    - The 'Date of Admission' column should not contain missing values.
+  Discharge Date:
+    code:
+    - - '.hasPattern(''Discharge Date'', ''^\d{4}-\d{2}-\d{2}$'', lambda x: x == 1.0)'
+      - Valid
+    - - .isComplete('Discharge Date')
+      - Valid
+    assumptions:
+    - The 'Discharge Date' column should be convertible to datetime format.
+    - The 'Discharge Date' column should not contain missing values.
+  Doctor:
+    code: []
+    assumptions:
+    - The 'Doctor' column is dropped and should not affect the task.
+  Name:
+    code: []
+    assumptions:
+    - The 'Name' column is dropped and should not affect the task.
+  Test Results:
+    code: []
+    assumptions:
+    - The 'Test Results' column is dropped and should not affect the task.
+  id:
+    code:
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The 'id' column should have unique values.
+    - The 'id' column should be present in both train and test datasets.

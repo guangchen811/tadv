@@ -3,11 +3,13 @@ results:
     code:
     - - .isComplete('cb_person_default_on_file')
       - Passed
-    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+    - - .isContainedIn('cb_person_default_on_file', ['N', 'Y'])
       - Passed
   id:
     code:
     - - .isComplete('id')
+      - Passed
+    - - .isNonNegative('id')
       - Passed
     - - .isUnique('id')
       - Passed
@@ -29,6 +31,12 @@ results:
       - Passed
     - - .isNonNegative('loan_int_rate')
       - Passed
+  loan_status:
+    code:
+    - - .isComplete('loan_status')
+      - Failed
+    - - .isNonNegative('loan_status')
+      - Failed
   person_age:
     code:
     - - .isComplete('person_age')
@@ -47,5 +55,5 @@ results:
       - Passed
     - - .isNonNegative('person_income')
       - Passed
-    - - .satisfies('person_income != 0', 'person_income should not be zero')
+    - - .satisfies('person_income != 0', 'Non-zero person_income')
       - Passed

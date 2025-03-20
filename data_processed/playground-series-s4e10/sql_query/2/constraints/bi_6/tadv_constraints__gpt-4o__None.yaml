@@ -1,0 +1,57 @@
+constraints:
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - Values should be non-negative as loan amounts cannot be negative.
+  loan_grade:
+    code:
+    - - .isComplete('loan_grade')
+      - Valid
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - Values should be from the set {'A', 'B', 'C', 'D', 'E', 'F', 'G'} to ensure
+      valid credit grades.
+  loan_intent:
+    code:
+    - - .isComplete('loan_intent')
+      - Valid
+    - - .isContainedIn('loan_intent', ['EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL',
+        'DEBTCONSOLIDATION', 'MEDICAL', 'VENTURE'])
+      - Valid
+    assumptions:
+    - Values should be from the set {'EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL', 'DEBTCONSOLIDATION',
+      'MEDICAL', 'VENTURE'} to ensure valid loan intents.
+  loan_percent_income:
+    code:
+    - - .isComplete('loan_percent_income')
+      - Valid
+    - - .isLessThanOrEqualTo('loan_percent_income', 100)
+      - Invalid
+    - - .isNonNegative('loan_percent_income')
+      - Valid
+    assumptions:
+    - Values should be non-negative as the loan percentage of income cannot be negative.
+    - Values should not exceed 100 as the loan percentage of income cannot logically
+      exceed 100%.
+  loan_status:
+    code:
+    - - .isComplete('loan_status')
+      - Valid
+    - - .isContainedIn('loan_status', [0, 1])
+      - Invalid
+    assumptions:
+    - Values should be either 0 or 1 to represent the loan status as non-default or
+      default.
+  person_income:
+    code:
+    - - .isComplete('person_income')
+      - Valid
+    - - .isNonNegative('person_income')
+      - Valid
+    assumptions:
+    - Values should be non-negative as income cannot be negative.

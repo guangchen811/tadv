@@ -1,0 +1,36 @@
+constraints:
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isPositive('loan_amnt')
+      - Valid
+    assumptions:
+    - loan_amnt should be a positive integer as it represents the amount of loan issued.
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - loan_int_rate should be a non-negative fractional number as it represents the
+      interest rate for the loan.
+  loan_status:
+    code:
+    - - .isComplete('loan_status')
+      - Valid
+    - - .isContainedIn('loan_status', [0, 1])
+      - Invalid
+    assumptions:
+    - loan_status should only contain the values 0 and 1, where 1 indicates a defaulted
+      loan and 0 otherwise.
+  person_home_ownership:
+    code:
+    - - .isComplete('person_home_ownership')
+      - Valid
+    - - .isContainedIn('person_home_ownership', ['RENT', 'OWN', 'MORTGAGE', 'OTHER'])
+      - Valid
+    assumptions:
+    - Values should be one of {'RENT', 'OWN', 'MORTGAGE', 'OTHER'} as these are the
+      expected categories for home ownership.

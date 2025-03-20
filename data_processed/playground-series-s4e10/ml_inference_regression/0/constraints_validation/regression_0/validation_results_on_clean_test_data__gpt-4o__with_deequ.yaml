@@ -15,6 +15,8 @@ results:
     code:
     - - .isComplete('id')
       - Passed
+    - - .isNonNegative('id')
+      - Passed
     - - .isUnique('id')
       - Passed
   loan_amnt:

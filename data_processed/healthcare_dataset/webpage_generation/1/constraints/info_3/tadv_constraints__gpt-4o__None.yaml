@@ -1,0 +1,50 @@
+constraints:
+  Age:
+    code:
+    - - .isComplete('Age')
+      - Valid
+    - - .satisfies('Age >= 0', 'Age is non-negative')
+      - Valid
+    assumptions:
+    - should be a numeric value
+    - should not have null or empty values
+  Date of Admission:
+    code:
+    - - .isComplete('Date of Admission')
+      - Valid
+    - - .satisfies('Date of Admission IS NOT NULL', 'Date of Admission is not null')
+      - Invalid
+    assumptions:
+    - should be convertible to datetime format without issues
+    - should not have null or empty values
+  Discharge Date:
+    code:
+    - - .isComplete('Discharge Date')
+      - Valid
+    - - .isGreaterThanOrEqualTo('Discharge Date', 'Date of Admission')
+      - Invalid
+    - - .satisfies('Discharge Date IS NOT NULL', 'Discharge Date is not null')
+      - Invalid
+    assumptions:
+    - should be convertible to datetime format without issues
+    - should not have null or empty values
+    - should be greater than or equal to Date of Admission
+  Doctor:
+    code:
+    - - .isComplete('Doctor')
+      - Valid
+    assumptions:
+    - should be convertible to string without issues
+  Medical Condition:
+    code:
+    - - .isComplete('Medical Condition')
+      - Valid
+    assumptions:
+    - should be convertible to string without issues
+    - should not have null or empty values
+  Name:
+    code:
+    - - .isComplete('Name')
+      - Valid
+    assumptions:
+    - should be convertible to string without issues

@@ -1,0 +1,57 @@
+constraints:
+  cb_person_default_on_file:
+    code:
+    - - .isComplete('cb_person_default_on_file')
+      - Valid
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    assumptions:
+    - cb_person_default_on_file should be a String type.
+    - cb_person_default_on_file should have values within the set {'Y', 'N'} (IS IN
+      constraint).
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - id should be an Integral type.
+    - id should have unique values (UNIQUE constraint).
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - loan_amnt should be an Integral type.
+    - loan_amnt should have a value greater than or equal to 0 (IS NON NEGATIVE).
+  loan_grade:
+    code:
+    - - .isComplete('loan_grade')
+      - Valid
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - loan_grade should be a String type.
+    - loan_grade should have values within the set {'A', 'B', 'C', 'D', 'E', 'F',
+      'G'} (IS IN constraint).
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - loan_int_rate should be a Fractional type.
+    - loan_int_rate should have a value greater than or equal to 0 (IS NON NEGATIVE).
+  loan_status:
+    code:
+    - - .isComplete('loan_status')
+      - Valid
+    - - .isContainedIn('loan_status', [0, 1])
+      - Invalid
+    assumptions:
+    - loan_status should be an Integral type.
+    - loan_status should have values within the set {0, 1} (IS IN constraint).

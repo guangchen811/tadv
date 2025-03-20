@@ -1,0 +1,51 @@
+constraints:
+  cb_person_cred_hist_length:
+    code:
+    - - .isNonNegative('cb_person_cred_hist_length')
+      - Valid
+    assumptions:
+    - cb_person_cred_hist_length should be a non-negative integer
+  cb_person_default_on_file:
+    code:
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    assumptions:
+    - cb_person_default_on_file should be either 'Y' or 'N'
+  id:
+    code:
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - id should be a unique integer for each record
+  loan_amnt:
+    code:
+    - - .isGreaterThanOrEqualTo('loan_amnt', 0)
+      - Invalid
+    - - .isPositive('loan_amnt')
+      - Valid
+    assumptions:
+    - loan_amnt should be a positive integer
+    - loan_amnt should be greater than or equal to 0 for log transformation
+  loan_grade:
+    code:
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - 'loan_grade should be one of the predefined categories: [''A'', ''B'', ''C'',
+      ''D'', ''E'', ''F'', ''G'']'
+  loan_int_rate:
+    code:
+    - - .isGreaterThan('loan_int_rate', 0)
+      - Invalid
+    - - .isPositive('loan_int_rate')
+      - Valid
+    assumptions:
+    - loan_int_rate should be a positive fraction
+    - loan_int_rate should be greater than 0
+  person_home_ownership:
+    code:
+    - - .isContainedIn('person_home_ownership', ['RENT', 'MORTGAGE', 'OWN', 'OTHER'])
+      - Valid
+    assumptions:
+    - 'person_home_ownership should be one of the predefined categories: [''RENT'',
+      ''MORTGAGE'', ''OWN'', ''OTHER'']'

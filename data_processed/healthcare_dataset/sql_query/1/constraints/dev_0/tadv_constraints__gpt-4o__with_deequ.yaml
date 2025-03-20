@@ -1,0 +1,54 @@
+constraints:
+  Admission Type:
+    code:
+    - - .hasPattern('Admission Type', '.*Emergency.*')
+      - Invalid
+    - - .isComplete('Admission Type')
+      - Valid
+    - - .isContainedIn('Admission Type', ['Urgent', 'Elective', 'Emergency'])
+      - Valid
+    assumptions:
+    - The column 'Admission Type' should be complete, meaning no null values are allowed.
+    - 'The values in the column ''Admission Type'' should be one of the following:
+      [''Urgent'', ''Elective'', ''Emergency''].'
+    - The column 'Admission Type' should contain the value 'Emergency' for filtering
+      purposes in the query.
+  Age:
+    code:
+    - - .isComplete('Age')
+      - Valid
+    - - .isNonNegative('Age')
+      - Valid
+    - - .satisfies('Age >= 30 AND Age <= 70', 'Age range check')
+      - Invalid
+    assumptions:
+    - The column 'Age' should be complete, meaning no null values are allowed.
+    - The values in the column 'Age' should be between 30 and 70, inclusive, for filtering
+      purposes in the query.
+    - The column 'Age' should only include non-negative values.
+  Billing Amount:
+    code:
+    - - .isComplete('Billing Amount')
+      - Valid
+    - - .satisfies('Billing Amount > 5000', 'Billing Amount minimum check')
+      - Invalid
+    assumptions:
+    - The column 'Billing Amount' should be complete, meaning no null values are allowed.
+    - The values in the column 'Billing Amount' should be greater than 5000 for filtering
+      purposes in the query.
+  Medical Condition:
+    code:
+    - - .hasPattern('Medical Condition', '.*Asthma.*')
+      - Invalid
+    - - .isComplete('Medical Condition')
+      - Valid
+    - - .isContainedIn('Medical Condition', ['Diabetes', 'Asthma', 'Obesity', 'Hypertension',
+        'Arthritis', 'Cancer'])
+      - Valid
+    assumptions:
+    - The column 'Medical Condition' should be complete, meaning no null values are
+      allowed.
+    - 'The values in the column ''Medical Condition'' should be one of the following:
+      [''Diabetes'', ''Asthma'', ''Obesity'', ''Hypertension'', ''Arthritis'', ''Cancer''].'
+    - The column 'Medical Condition' should contain the value 'Asthma' for filtering
+      purposes in the query.

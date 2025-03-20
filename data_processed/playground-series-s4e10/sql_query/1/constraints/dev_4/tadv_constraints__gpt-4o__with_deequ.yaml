@@ -1,0 +1,31 @@
+constraints:
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    - - .satisfies('loan_amnt % 1 == 0', 'loan_amnt_is_integral')
+      - Valid
+    assumptions:
+    - The 'loan_amnt' column should be complete, meaning there should be no missing
+      values.
+    - The 'loan_amnt' column should contain only non-negative values, as negative
+      loan amounts do not make sense in the context of a loan.
+    - The 'loan_amnt' should be a valid integral value, as it represents a monetary
+      amount and should not have fractional values.
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    - - .satisfies('loan_int_rate >= 0', 'loan_int_rate_is_fractional')
+      - Valid
+    assumptions:
+    - The 'loan_int_rate' column should be complete, meaning there should be no missing
+      values.
+    - The 'loan_int_rate' column should contain only non-negative values, as negative
+      interest rates are not realistic in this context.
+    - The 'loan_int_rate' should be a valid fractional value, as interest rates can
+      have decimal points.

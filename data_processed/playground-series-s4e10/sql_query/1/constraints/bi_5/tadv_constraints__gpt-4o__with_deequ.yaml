@@ -1,0 +1,37 @@
+constraints:
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - The loan_amnt column should be complete, meaning no missing values are allowed.
+    - The loan_amnt column should be non-negative, as loan amounts cannot be negative.
+    - The average loan amount calculation assumes that all loan_amnt values contribute
+      correctly to the average computation.
+  loan_grade:
+    code:
+    - - .isComplete('loan_grade')
+      - Valid
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - The loan_grade column should be complete, meaning no missing values are allowed.
+    - The loan_grade column should only contain values from the set {'A', 'B', 'C',
+      'D', 'E', 'F', 'G'}.
+    - The loan_grade categorization assumes that the loan_grade values reflect borrower
+      risk accurately.
+  person_income:
+    code:
+    - - .isComplete('person_income')
+      - Valid
+    - - .isNonNegative('person_income')
+      - Valid
+    - - .satisfies('person_income >= 0', 'Valid Income')
+      - Valid
+    assumptions:
+    - The person_income column should be complete, meaning no missing values are allowed.
+    - The person_income column should be non-negative, as income cannot be negative.
+    - Income segmentation assumes that person_income values are valid and can be categorized
+      into 'Low Income', 'Medium Income', and 'High Income'.

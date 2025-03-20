@@ -1,0 +1,55 @@
+constraints:
+  cb_person_default_on_file:
+    code:
+    - - .isComplete('cb_person_default_on_file')
+      - Valid
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    assumptions:
+    - Values should be either 'Y' or 'N'.
+    - Values should not contain nulls.
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    - - .satisfies('id RLIKE "^[0-9]+$"', 'id_numeric_check')
+      - Valid
+    assumptions:
+    - Values should be unique.
+    - Values should not contain nulls.
+    - Values should be numeric.
+  loan_amnt:
+    code:
+    - - '.hasHistogramValues(''loan_amnt'', lambda bins: all(value > 0 for value in
+        bins.values()), lambda x: ''Low'' if x <= 5000 else (''Med'' if x <= 15000
+        else (''High'' if x <= 30000 else ''VHigh'')), maxBins=4)'
+      - Invalid
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - Values should be numeric and non-negative.
+    - Values should not contain nulls.
+    - 'Values should have at least some occurrences within each defined bin range:
+      (0, 5000], (5000, 15000], (15000, 30000], and above 30000.'
+  loan_grade:
+    code:
+    - - .isComplete('loan_grade')
+      - Valid
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - Values should be one of ['A', 'B', 'C', 'D', 'E', 'F', 'G'].
+    - Values should not contain nulls.
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - Values should be numeric and non-negative.
+    - Values should not contain nulls.

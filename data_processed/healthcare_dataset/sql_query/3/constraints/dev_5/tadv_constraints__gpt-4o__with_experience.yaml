@@ -1,0 +1,46 @@
+constraints:
+  Billing Amount:
+    code:
+    - - '.hasMean(''Billing Amount'', lambda x: x > 0)'
+      - Valid
+    - - '.hasStandardDeviation(''Billing Amount'', lambda x: x >= 0)'
+      - Valid
+    - - .isComplete('Billing Amount')
+      - Valid
+    - - .isNonNegative('Billing Amount')
+      - Invalid
+    assumptions:
+    - Assume 'Billing Amount' should be complete (NOT NULL) because completeness is
+      1.0.
+    - Assume 'Billing Amount' is non-negative, as billing amounts typically are.
+    - Assume 'Billing Amount' could have a mean and standard deviation constraint
+      for typical billing scenarios.
+  Medical Condition:
+    code:
+    - - .isComplete('Medical Condition')
+      - Valid
+    - - .isContainedIn('Medical Condition', ['Hypertension', 'Cancer', 'Obesity',
+        'Arthritis', 'Diabetes', 'Asthma'])
+      - Valid
+    assumptions:
+    - Assume 'Medical Condition' should be complete (NOT NULL) because completeness
+      is 1.0.
+    - Assume 'Medical Condition' has a specific set of values (Hypertension, Cancer,
+      Obesity, Arthritis, Diabetes, Asthma).
+  Name:
+    code:
+    - - '.hasMaxLength(''Name'', lambda x: x < 100)'
+      - Valid
+    - - .isComplete('Name')
+      - Valid
+    assumptions:
+    - Assume 'Name' should be complete (NOT NULL) because completeness is 1.0.
+    - Assume 'Name' is a string column, consider a MAX LENGTH constraint for typical
+      name lengths.
+  id:
+    code:
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - Assume 'id' is a unique identifier, implying a UNIQUE constraint due to 33472
+      distinct values out of 33300 records.

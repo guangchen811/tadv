@@ -1,0 +1,101 @@
+constraints:
+  cb_person_default_on_file:
+    code:
+    - - .isComplete('cb_person_default_on_file')
+      - Valid
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    assumptions:
+    - Default on file should be either 'Y' or 'N'
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - ID values should be unique
+    - ID should not contain nulls
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isPositive('loan_amnt')
+      - Valid
+    assumptions:
+    - Loan amount should be greater than 0
+  loan_grade:
+    code:
+    - - .isComplete('loan_grade')
+      - Valid
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - Loan grade should be one of ['A', 'B', 'C', 'D', 'E', 'F', 'G']
+  loan_int_rate:
+    code:
+    - - '.hasMax(''loan_int_rate'', lambda x: x <= 100)'
+      - Valid
+    - - '.hasMin(''loan_int_rate'', lambda x: x > 0)'
+      - Valid
+    - - .isComplete('loan_int_rate')
+      - Valid
+    assumptions:
+    - Loan interest rate should be greater than 0
+    - Loan interest rate should be less than or equal to 100
+  loan_intent:
+    code:
+    - - .isComplete('loan_intent')
+      - Valid
+    - - .isContainedIn('loan_intent', ['EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL',
+        'DEBTCONSOLIDATION', 'MEDICAL', 'VENTURE'])
+      - Valid
+    assumptions:
+    - Loan intent should be one of ['EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL', 'DEBTCONSOLIDATION',
+      'MEDICAL', 'VENTURE']
+  loan_percent_income:
+    code:
+    - - '.hasMax(''loan_percent_income'', lambda x: x <= 100)'
+      - Valid
+    - - '.hasMin(''loan_percent_income'', lambda x: x > 0)'
+      - Invalid
+    - - .isComplete('loan_percent_income')
+      - Valid
+    assumptions:
+    - Loan percent income should be greater than 0
+    - Loan percent income should be less than or equal to 100
+  person_age:
+    code:
+    - - '.hasMax(''person_age'', lambda x: x <= 100)'
+      - Valid
+    - - '.hasMin(''person_age'', lambda x: x > 18)'
+      - Valid
+    - - .isComplete('person_age')
+      - Valid
+    assumptions:
+    - Age should be greater than 18
+    - Age should be less than or equal to 100
+  person_emp_length:
+    code:
+    - - .isComplete('person_emp_length')
+      - Valid
+    - - .isNonNegative('person_emp_length')
+      - Valid
+    assumptions:
+    - Employment length should be greater than or equal to 0
+  person_home_ownership:
+    code:
+    - - .isComplete('person_home_ownership')
+      - Valid
+    - - .isContainedIn('person_home_ownership', ['OTHER', 'OWN', 'MORTGAGE', 'RENT'])
+      - Valid
+    assumptions:
+    - Home ownership should be one of ['OTHER', 'OWN', 'MORTGAGE', 'RENT']
+  person_income:
+    code:
+    - - .isComplete('person_income')
+      - Valid
+    - - .isPositive('person_income')
+      - Valid
+    assumptions:
+    - Income should be greater than 0

@@ -31,3 +31,9 @@ results:
       - Passed
     - - .isNonNegative('loan_int_rate')
       - Passed
+  loan_status:
+    code:
+    - - .isComplete('loan_status')
+      - Failed
+    - - .isNonNegative('loan_status')
+      - Failed

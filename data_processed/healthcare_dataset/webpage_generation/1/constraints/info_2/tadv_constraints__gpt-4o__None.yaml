@@ -1,0 +1,7 @@
+constraints:
+  Name:
+    code:
+    - - .isComplete('Name')
+      - Valid
+    assumptions:
+    - The 'Name' column should not contain missing values.

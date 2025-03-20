@@ -1,0 +1,73 @@
+constraints:
+  cb_person_default_on_file:
+    code:
+    - - .isComplete('cb_person_default_on_file')
+      - Valid
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    assumptions:
+    - NOT NULL
+    - IS IN ['Y', 'N']
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - NOT NULL
+    - UNIQUE
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - NOT NULL
+    - IS NON NEGATIVE
+  loan_grade:
+    code:
+    - - .isComplete('loan_grade')
+      - Valid
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - NOT NULL
+    - IS IN ['A', 'B', 'C', 'D', 'E', 'F', 'G']
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - NOT NULL
+    - IS NON NEGATIVE
+  person_age:
+    code:
+    - - .isComplete('person_age')
+      - Valid
+    - - .isNonNegative('person_age')
+      - Valid
+    assumptions:
+    - NOT NULL
+    - IS NON NEGATIVE
+  person_home_ownership:
+    code:
+    - - .isComplete('person_home_ownership')
+      - Valid
+    - - .isContainedIn('person_home_ownership', ['RENT', 'MORTGAGE', 'OWN', 'OTHER'])
+      - Valid
+    assumptions:
+    - NOT NULL
+    - IS IN ['RENT', 'MORTGAGE', 'OWN', 'OTHER']
+  person_income:
+    code:
+    - - .isComplete('person_income')
+      - Valid
+    - - .isNonNegative('person_income')
+      - Valid
+    assumptions:
+    - NOT NULL
+    - IS NON NEGATIVE

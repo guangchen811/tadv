@@ -1,0 +1,46 @@
+constraints:
+  Date of Admission:
+    code: []
+    assumptions:
+    - The column 'Date of Admission' is not used after loading the data and is dropped
+      from both train and test datasets.
+  Discharge Date:
+    code: []
+    assumptions:
+    - The column 'Discharge Date' is not used after loading the data and is dropped
+      from both train and test datasets.
+  Doctor:
+    code: []
+    assumptions:
+    - The column 'Doctor' is not used after loading the data and is dropped from both
+      train and test datasets.
+  Name:
+    code: []
+    assumptions:
+    - The column 'Name' is not used after loading the data and is dropped from both
+      train and test datasets.
+  Test Results:
+    code: []
+    assumptions:
+    - The column 'Test Results' is not used after loading the data and is dropped
+      from both train and test datasets.
+  billing_amount:
+    code:
+    - - '.hasMin(''billing_amount'', lambda x: isinstance(x, (int, float)))'
+      - Invalid
+    - - .isComplete('billing_amount')
+      - Invalid
+    assumptions:
+    - The column 'billing_amount' should not contain missing values as missing values
+      are filled with 0.
+    - The column 'billing_amount' should contain numeric values as it is used in numeric
+      computations and scaling.
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The column 'id' should not contain missing values as it is used to extract 'test_ids'.
+    - The column 'id' should contain unique values as it represents unique identifiers.

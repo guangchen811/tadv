@@ -11,6 +11,12 @@ results:
       - Passed
     - - .isUnique('id')
       - Passed
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Passed
+    - - .isNonNegative('loan_amnt')
+      - Passed
   loan_grade:
     code:
     - - .isComplete('loan_grade')
@@ -23,3 +29,7 @@ results:
       - Passed
     - - .isNonNegative('loan_int_rate')
       - Passed
+  loan_status:
+    code:
+    - - .isComplete('loan_status')
+      - Failed

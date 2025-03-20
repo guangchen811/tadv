@@ -1,0 +1,26 @@
+constraints:
+  Medication:
+    code:
+    - - .isComplete('Medication')
+      - Valid
+    - - .isContainedIn('Medication', ['Aspirin', 'Paracetamol', 'Ibuprofen', 'Penicillin',
+        'Lipitor'])
+      - Valid
+    assumptions:
+    - The 'Medication' column should be complete, meaning no missing values.
+    - The 'Medication' column should only contain the values ['Aspirin', 'Paracetamol',
+      'Ibuprofen', 'Penicillin', 'Lipitor'], as these are the medications being tracked
+      by the code.
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isNonNegative('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The 'id' column should be complete, meaning no missing values.
+    - The 'id' column should contain only non-negative values.
+    - The 'id' column should be unique, ensuring each patient is identified with a
+      unique identifier.

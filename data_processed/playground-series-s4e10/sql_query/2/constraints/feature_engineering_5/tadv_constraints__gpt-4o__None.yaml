@@ -1,0 +1,23 @@
+constraints:
+  cb_person_cred_hist_length:
+    code:
+    - - .isComplete('cb_person_cred_hist_length')
+      - Valid
+    - - .isNonNegative('cb_person_cred_hist_length')
+      - Valid
+    assumptions:
+    - cb_person_cred_hist_length should be of data type Integral, as it is used in
+      arithmetic operations.
+    - cb_person_cred_hist_length should be complete, meaning it should not have any
+      missing values, as it is used to calculate credit_hist_change.
+  id:
+    code:
+    - - .isNonNegative('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - id should be unique or at least ordered correctly to ensure the LAG function
+      works as expected.
+    - id should be of data type Integral, as it is used for ordering in the window
+      function.

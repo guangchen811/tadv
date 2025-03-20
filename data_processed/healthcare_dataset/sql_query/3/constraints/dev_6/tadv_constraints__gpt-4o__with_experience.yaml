@@ -1,0 +1,57 @@
+constraints:
+  Admission Type:
+    code:
+    - - .isComplete('Admission Type')
+      - Valid
+    - - .isContainedIn('Admission Type', ['Emergency', 'Urgent', 'Elective'])
+      - Valid
+    assumptions:
+    - The column 'Admission Type' should not contain NULL values.
+    - The column 'Admission Type' should have values within the set {'Emergency',
+      'Urgent', 'Elective'}.
+  Gender:
+    code:
+    - - .isComplete('Gender')
+      - Valid
+    - - .isContainedIn('Gender', ['Male', 'Female'])
+      - Valid
+    assumptions:
+    - The column 'Gender' should not contain NULL values.
+    - The column 'Gender' should have values within the set {'Male', 'Female'}.
+  Insurance Provider:
+    code:
+    - - .isComplete('Insurance Provider')
+      - Valid
+    - - .isContainedIn('Insurance Provider', ['Aetna', 'Blue Cross', 'UnitedHealthcare',
+        'Cigna', 'Medicare'])
+      - Valid
+    assumptions:
+    - The column 'Insurance Provider' should not contain NULL values.
+    - The column 'Insurance Provider' should have values within the set {'Aetna',
+      'Blue Cross', 'UnitedHealthcare', 'Cigna', 'Medicare'}.
+  Medical Condition:
+    code:
+    - - .isComplete('Medical Condition')
+      - Valid
+    - - .isContainedIn('Medical Condition', ['Hypertension', 'Cancer', 'Obesity',
+        'Arthritis', 'Diabetes', 'Asthma'])
+      - Valid
+    assumptions:
+    - The column 'Medical Condition' should not contain NULL values.
+    - The column 'Medical Condition' should have values within the set {'Hypertension',
+      'Cancer', 'Obesity', 'Arthritis', 'Diabetes', 'Asthma'}.
+  Name:
+    code:
+    - - .isComplete('Name')
+      - Valid
+    assumptions:
+    - The column 'Name' should not contain NULL values.
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The column 'id' should have unique values.
+    - The column 'id' should not contain NULL values.

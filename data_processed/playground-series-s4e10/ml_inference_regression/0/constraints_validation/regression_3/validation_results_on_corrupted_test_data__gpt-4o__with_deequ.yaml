@@ -5,21 +5,17 @@ results:
       - Passed
     - - .isNonNegative('cb_person_cred_hist_length')
       - Passed
-    - - .isPositive('cb_person_cred_hist_length')
-      - Passed
   cb_person_default_on_file:
     code:
     - - .isComplete('cb_person_default_on_file')
       - Passed
-    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+    - - .isContainedIn('cb_person_default_on_file', ['N', 'Y'])
       - Passed
   loan_amnt:
     code:
     - - .isComplete('loan_amnt')
       - Passed
     - - .isNonNegative('loan_amnt')
-      - Passed
-    - - .isPositive('loan_amnt')
       - Passed
   loan_grade:
     code:

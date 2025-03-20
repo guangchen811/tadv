@@ -1,0 +1,71 @@
+constraints:
+  Billing Amount:
+    code:
+    - - .isComplete("Billing Amount")
+      - Valid
+    - - .isNonNegative("Billing Amount")
+      - Invalid
+    assumptions:
+    - 'Assumption: The column ''Billing Amount'' should be complete and contain only
+      non-negative values.'
+    - 'Assumption: The column ''Billing Amount'' should support ordering operations
+      as it is used for ranking and distribution calculations.'
+  Date of Admission:
+    code:
+    - - .isComplete("Date of Admission")
+      - Valid
+    assumptions:
+    - 'Assumption: The column ''Date of Admission'' should be complete as it may be
+      relevant for time-based analyses despite not being directly used in the current
+      code.'
+  Discharge Date:
+    code:
+    - - .isComplete("Discharge Date")
+      - Valid
+    assumptions:
+    - 'Assumption: The column ''Discharge Date'' should be complete, similar to ''Date
+      of Admission'', and may be relevant for potential time-based operations.'
+  Doctor:
+    code:
+    - - .isComplete("Doctor")
+      - Valid
+    assumptions:
+    - 'Assumption: The column ''Doctor'' should be complete as it is part of the dataset
+      but not directly used in computations.'
+  Hospital:
+    code:
+    - - .isComplete("Hospital")
+      - Valid
+    assumptions:
+    - 'Assumption: The column ''Hospital'' should be complete and contain meaningful
+      string values, even though it is excluded in the final selection.'
+  Insurance Provider:
+    code:
+    - - .isComplete("Insurance Provider")
+      - Valid
+    - - .isContainedIn("Insurance Provider", ["Cigna", "Medicare", "UnitedHealthcare",
+        "Blue Cross", "Aetna"])
+      - Valid
+    assumptions:
+    - 'Assumption: The column ''Insurance Provider'' should have values contained
+      in the set: ''Cigna'', ''Medicare'', ''UnitedHealthcare'', ''Blue Cross'', ''Aetna''.'
+    - 'Assumption: The column ''Insurance Provider'' should be complete as it is used
+      for grouping operations and comparisons.'
+  Medical Condition:
+    code:
+    - - .isContainedIn("Medical Condition", ["Diabetes", "Asthma", "Obesity", "Hypertension",
+        "Arthritis", "Cancer"])
+      - Valid
+    assumptions:
+    - 'Assumption: The column ''Medical Condition'' should have distinct values that
+      match the expected categories: ''Diabetes'', ''Asthma'', ''Obesity'', ''Hypertension'',
+      ''Arthritis'', ''Cancer''.'
+  Room Number:
+    code:
+    - - .isComplete("Room Number")
+      - Valid
+    - - .satisfies("Room Number >= 0", "Room Number should be non-negative")
+      - Invalid
+    assumptions:
+    - 'Assumption: The column ''Room Number'' should be complete and contain only
+      non-negative integers.'

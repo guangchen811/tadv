@@ -3,7 +3,7 @@ results:
     code:
     - - .isComplete('cb_person_default_on_file')
       - Passed
-    - - .isContainedIn('cb_person_default_on_file', ['N', 'Y'])
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
       - Passed
   id:
     code:
@@ -21,6 +21,8 @@ results:
       - Passed
   loan_grade:
     code:
+    - - '.hasPattern(''loan_grade'', ''A|B|C|D'', lambda x: x >= 0.6)'
+      - Passed
     - - .isComplete('loan_grade')
       - Passed
     - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])

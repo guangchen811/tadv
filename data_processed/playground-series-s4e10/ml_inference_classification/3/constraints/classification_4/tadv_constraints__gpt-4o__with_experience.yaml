@@ -1,0 +1,105 @@
+constraints:
+  cb_person_default_on_file:
+    code:
+    - - .isComplete('cb_person_default_on_file')
+      - Valid
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    assumptions:
+    - The column should have values within ['Y', 'N'] as seen in the histogram.
+    - The column should maintain its completeness as it is fully complete in the sample.
+  id:
+    code:
+    - - '.hasUniqueValueRatio([''id''], lambda x: x == 1.0)'
+      - Valid
+    - - .isComplete('id')
+      - Valid
+    assumptions:
+    - The column should maintain its completeness as it is fully complete in the sample.
+    - The column should have unique values as the ratio of distinct values is close
+      to the number of records.
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - The column should maintain its completeness as it is fully complete in the sample.
+    - The values should be non-negative as it represents loan amount.
+  loan_grade:
+    code:
+    - - .isComplete('loan_grade')
+      - Valid
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - The column should have values within ['A', 'B', 'C', 'D', 'E', 'F', 'G'] as
+      seen in the histogram.
+    - The column should maintain its completeness as it is fully complete in the sample.
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - The column should maintain its completeness as it is fully complete in the sample.
+    - The values should be non-negative as it represents interest rate.
+  loan_intent:
+    code:
+    - - .isComplete('loan_intent')
+      - Valid
+    - - .isContainedIn('loan_intent', ['EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL',
+        'DEBTCONSOLIDATION', 'MEDICAL', 'VENTURE'])
+      - Valid
+    assumptions:
+    - The column should have values within ['EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL',
+      'DEBTCONSOLIDATION', 'MEDICAL', 'VENTURE'] as seen in the histogram.
+    - The column should maintain its completeness as it is fully complete in the sample.
+  loan_percent_income:
+    code:
+    - - .isComplete('loan_percent_income')
+      - Valid
+    - - .isNonNegative('loan_percent_income')
+      - Valid
+    assumptions:
+    - The column should maintain its completeness as it is fully complete in the sample.
+    - The values should be non-negative as it represents a percentage of income.
+  person_age:
+    code:
+    - - .isComplete('person_age')
+      - Valid
+    - - .isNonNegative('person_age')
+      - Valid
+    assumptions:
+    - The column should maintain its completeness as it is fully complete in the sample.
+    - The values should be non-negative as it represents age.
+  person_emp_length:
+    code:
+    - - .isComplete('person_emp_length')
+      - Valid
+    - - .isNonNegative('person_emp_length')
+      - Valid
+    assumptions:
+    - The column should maintain its completeness as it is fully complete in the sample.
+    - The values should be non-negative as it represents employment length.
+  person_home_ownership:
+    code:
+    - - .isComplete('person_home_ownership')
+      - Valid
+    - - .isContainedIn('person_home_ownership', ['OTHER', 'OWN', 'MORTGAGE', 'RENT'])
+      - Valid
+    assumptions:
+    - The column should have values within ['OTHER', 'OWN', 'MORTGAGE', 'RENT'] as
+      seen in the histogram.
+    - The column should maintain its completeness as it is fully complete in the sample.
+  person_income:
+    code:
+    - - .isComplete('person_income')
+      - Valid
+    - - .isNonNegative('person_income')
+      - Valid
+    assumptions:
+    - The column should maintain its completeness as it is fully complete in the sample.
+    - The values should be non-negative as it represents income.

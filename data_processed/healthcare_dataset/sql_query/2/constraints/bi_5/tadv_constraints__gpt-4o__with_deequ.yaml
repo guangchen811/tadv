@@ -1,0 +1,19 @@
+constraints:
+  Billing Amount:
+    code:
+    - - .isComplete('Billing Amount')
+      - Valid
+    - - .isNonNegative('Billing Amount')
+      - Invalid
+    assumptions:
+    - The 'Billing Amount' column must be complete.
+    - The 'Billing Amount' should be non-negative.
+  Doctor:
+    code:
+    - - '.hasCompleteness(''Doctor'', lambda x: x > 0.0)'
+      - Valid
+    - - .isComplete('Doctor')
+      - Valid
+    assumptions:
+    - The 'Doctor' column must be complete.
+    - Each doctor should have at least one patient entry.

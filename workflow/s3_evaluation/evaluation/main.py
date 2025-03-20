@@ -112,7 +112,7 @@ if __name__ == "__main__":
                         help='Dataset name. Options: 0: playground-series-s4e10, 1: healthcare_dataset')
     parser.add_argument('--downstream-task-option', type=str, default="all",
                         help='Downstream task. Options: 0: ml_inference_classification, 1: ml_inference_regression, 2: sql_query, 3: webpage_generation')
-    parser.add_argument('--processed-data-label', type=str, default="0",
+    parser.add_argument('--processed-data-label', type=str, default="3",
                         help='Version Label of the processed data')
     args = parser.parse_args()
 

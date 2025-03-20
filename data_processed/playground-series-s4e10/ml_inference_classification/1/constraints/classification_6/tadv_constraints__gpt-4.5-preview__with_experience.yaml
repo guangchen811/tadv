@@ -1,0 +1,85 @@
+constraints:
+  cb_person_default_on_file:
+    code:
+    - - .isComplete('cb_person_default_on_file')
+      - Valid
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    assumptions:
+    - Values should be either 'Y' or 'N'.
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - Values should be unique.
+    - Values should be non-null.
+  loan_amnt:
+    code:
+    - - '.hasMax(''loan_amnt'', lambda x: x <= 100000)'
+      - Valid
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isPositive('loan_amnt')
+      - Valid
+    assumptions:
+    - Values should be greater than 0.
+    - Loan amount should not exceed a reasonable upper limit, for example 100000.
+  loan_grade:
+    code:
+    - - .isComplete('loan_grade')
+      - Valid
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - Values should be one of ['A', 'B', 'C', 'D', 'E', 'F', 'G'].
+  loan_int_rate:
+    code:
+    - - '.hasMax(''loan_int_rate'', lambda x: x <= 35.0)'
+      - Valid
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - Values should be non-negative.
+    - Interest rate should be within a reasonable range, typically between 0% and
+      35%.
+  person_age:
+    code:
+    - - '.hasMax(''person_age'', lambda x: x <= 100)'
+      - Valid
+    - - '.hasMin(''person_age'', lambda x: x >= 18)'
+      - Valid
+    - - .isComplete('person_age')
+      - Valid
+    - - .isNonNegative('person_age')
+      - Valid
+    assumptions:
+    - Values should be non-negative.
+    - Values should be within a reasonable human age range, typically between 18 and
+      100.
+  person_home_ownership:
+    code:
+    - - .isComplete('person_home_ownership')
+      - Valid
+    - - .isContainedIn('person_home_ownership', ['OWN', 'MORTGAGE', 'RENT', 'OTHER'])
+      - Valid
+    assumptions:
+    - Values should be one of ['OWN', 'MORTGAGE', 'RENT', 'OTHER'].
+  person_income:
+    code:
+    - - '.hasMax(''person_income'', lambda x: x <= 500000)'
+      - Invalid
+    - - '.hasMin(''person_income'', lambda x: x >= 5000)'
+      - Invalid
+    - - .isComplete('person_income')
+      - Valid
+    - - .isPositive('person_income')
+      - Valid
+    assumptions:
+    - Values should be greater than 0.
+    - Values should be within a reasonable income range, for instance between 5000
+      and 500000.

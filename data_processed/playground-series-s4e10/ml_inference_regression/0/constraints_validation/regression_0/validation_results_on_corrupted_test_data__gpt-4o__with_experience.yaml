@@ -39,5 +39,5 @@ results:
     code:
     - - .isComplete('person_home_ownership')
       - Passed
-    - - .isContainedIn('person_home_ownership', ['OWN', 'MORTGAGE', 'RENT', 'OTHER'])
+    - - .isContainedIn('person_home_ownership', ['RENT', 'MORTGAGE', 'OWN', 'OTHER'])
       - Passed

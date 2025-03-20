@@ -1,0 +1,61 @@
+constraints:
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - Column 'loan_amnt' should be complete (NOT NULL).
+    - Column 'loan_amnt' should have a minimum value constraint, but specific value
+      is not provided.
+    - Column 'loan_amnt' should have a maximum value constraint, but specific value
+      is not provided.
+    - Column 'loan_amnt' should have a mean and standard deviation constraint, but
+      specific values are not provided.
+    - Column 'loan_amnt' consists of non-negative numbers, suggesting an IS NON NEGATIVE
+      constraint.
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - Column 'loan_int_rate' should be complete (NOT NULL).
+    - Column 'loan_int_rate' should have a minimum value constraint, but specific
+      value is not provided.
+    - Column 'loan_int_rate' should have a maximum value constraint, but specific
+      value is not provided.
+    - Column 'loan_int_rate' should have a mean and standard deviation constraint,
+      but specific values are not provided.
+    - Column 'loan_int_rate' consists of non-negative numbers, suggesting an IS NON
+      NEGATIVE constraint.
+  loan_status:
+    code:
+    - - .isComplete('loan_status')
+      - Valid
+    - - .isContainedIn('loan_status', [0, 1])
+      - Invalid
+    assumptions:
+    - Column 'loan_status' should be complete (NOT NULL).
+    - Column 'loan_status' should be an integral type constraint as it is used in
+      numerical calculations.
+    - Column 'loan_status' should consist of values within {0, 1}, suggesting an IS
+      IN constraint.
+  person_emp_length:
+    code:
+    - - .isComplete('person_emp_length')
+      - Valid
+    - - .isNonNegative('person_emp_length')
+      - Valid
+    assumptions:
+    - Column 'person_emp_length' should be complete (NOT NULL).
+    - Column 'person_emp_length' should have a minimum value constraint, but specific
+      value is not provided.
+    - Column 'person_emp_length' should have a maximum value constraint, but specific
+      value is not provided.
+    - Column 'person_emp_length' should have a mean and standard deviation constraint,
+      but specific values are not provided.
+    - Column 'person_emp_length' consists of non-negative numbers, suggesting an IS
+      NON NEGATIVE constraint.

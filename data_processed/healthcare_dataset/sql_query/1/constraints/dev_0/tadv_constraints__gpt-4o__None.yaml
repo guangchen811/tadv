@@ -1,0 +1,27 @@
+constraints:
+  Admission Type:
+    code:
+    - - .isContainedIn('Admission Type', ['Emergency'])
+      - Invalid
+    assumptions:
+    - The column 'Admission Type' should include the value 'Emergency'.
+  Age:
+    code:
+    - - .isGreaterThanOrEqualTo('Age', 30)
+      - Invalid
+    - - .isLessThanOrEqualTo('Age', 70)
+      - Invalid
+    assumptions:
+    - Values in the column 'Age' should be between 30 and 70, inclusive.
+  Billing Amount:
+    code:
+    - - .isGreaterThan('Billing Amount', 5000)
+      - Invalid
+    assumptions:
+    - Values in the column 'Billing Amount' should be greater than 5000.
+  Medical Condition:
+    code:
+    - - .isContainedIn('Medical Condition', ['Asthma'])
+      - Invalid
+    assumptions:
+    - The column 'Medical Condition' should include the value 'Asthma'.

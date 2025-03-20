@@ -1,0 +1,27 @@
+constraints:
+  Age:
+    code:
+    - - .isComplete('Age')
+      - Valid
+    - - .satisfies('Age != 0', 'Age should not be zero')
+      - Valid
+    assumptions:
+    - The values should be numeric.
+    - The values should not be zero.
+  Billing Amount:
+    code:
+    - - .isComplete('Billing Amount')
+      - Valid
+    - - .isNonNegative('Billing Amount')
+      - Invalid
+    assumptions:
+    - The values should be numeric.
+    - The values should be non-negative.
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The values should be unique for each entry.

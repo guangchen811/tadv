@@ -35,8 +35,8 @@ results:
     code:
     - - .isComplete('Insurance Provider')
       - Passed
-    - - .isContainedIn('Insurance Provider', ['Aetna', 'Blue Cross', 'UnitedHealthcare',
-        'Cigna', 'Medicare'])
+    - - .isContainedIn('Insurance Provider', ['Cigna', 'Medicare', 'UnitedHealthcare',
+        'Blue Cross', 'Aetna'])
       - Passed
   Medical Condition:
     code:
@@ -55,4 +55,12 @@ results:
   Room Number:
     code:
     - - .isComplete('Room Number')
+      - Passed
+  id:
+    code:
+    - - .isComplete('id')
+      - Passed
+    - - .isNonNegative('id')
+      - Passed
+    - - .isUnique('id')
       - Passed

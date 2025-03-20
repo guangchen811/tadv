@@ -1,0 +1,36 @@
+constraints:
+  loan_amnt:
+    code:
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - 'Assumption 1: loan_amnt should be a non-negative integer, as it represents
+      the amount of the loan issued.'
+  loan_grade:
+    code:
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - 'Assumption 1: loan_grade should be one of the predefined categories [''A'',
+      ''B'', ''C'', ''D'', ''E'', ''F'', ''G''], as it represents the credit grade
+      of the loan.'
+  person_income:
+    code:
+    - - .isNonNegative('person_income')
+      - Valid
+    - - .satisfies('person_income < 50000', 'Low Income Segment')
+      - Invalid
+    - - .satisfies('person_income > 100000', 'High Income Segment')
+      - Invalid
+    - - .satisfies('person_income >= 50000 AND person_income <= 100000', 'Medium Income
+        Segment')
+      - Invalid
+    assumptions:
+    - 'Assumption 1: person_income should be a non-negative integer, as it represents
+      an individual''s income level.'
+    - 'Assumption 2: person_income should be less than 50000 for the ''Low Income''
+      segment.'
+    - 'Assumption 3: person_income should be between 50000 and 100000 for the ''Medium
+      Income'' segment.'
+    - 'Assumption 4: person_income should be greater than 100000 for the ''High Income''
+      segment.'

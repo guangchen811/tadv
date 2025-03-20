@@ -1,0 +1,54 @@
+constraints:
+  cb_person_default_on_file:
+    code:
+    - - .isComplete('cb_person_default_on_file')
+      - Valid
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    assumptions:
+    - The 'cb_person_default_on_file' column should be complete with no missing values.
+    - The 'cb_person_default_on_file' column should only contain 'Y' or 'N'.
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isNonNegative('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The 'id' column should be complete with no missing values.
+    - The 'id' column should contain unique values.
+    - The 'id' column should contain non-negative values.
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - The 'loan_amnt' column should be complete with no missing values.
+    - The 'loan_amnt' column should contain non-negative values.
+  loan_grade:
+    code:
+    - - '.hasPattern(''loan_grade'', ''A|B|C|D'', lambda x: x >= 0.6)'
+      - Valid
+    - - .isComplete('loan_grade')
+      - Valid
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - The 'loan_grade' column should be complete with no missing values.
+    - 'The ''loan_grade'' column should be one of the following values: [''A'', ''B'',
+      ''C'', ''D'', ''E'', ''F'', ''G''].'
+    - The 'loan_grade' column should predominantly contain values 'A', 'B', 'C', or
+      'D'.
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - The 'loan_int_rate' column should be complete with no missing values.
+    - The 'loan_int_rate' column should contain non-negative values.

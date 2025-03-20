@@ -1,0 +1,43 @@
+constraints:
+  Date of Admission:
+    code:
+    - - .isComplete('Date of Admission')
+      - Valid
+    - - '.satisfies(''Date of Admission IS NOT NULL AND Date of Admission != '''''',
+        ''Date of Admission should be convertible to datetime'', lambda x: x > 0.99)'
+      - Invalid
+    assumptions:
+    - The 'Date of Admission' column should be convertible to datetime format.
+    - The 'Date of Admission' column should not contain any missing values.
+  Discharge Date:
+    code:
+    - - .isComplete('Discharge Date')
+      - Valid
+    - - .isGreaterThan('Discharge Date', 'Date of Admission')
+      - Invalid
+    - - '.satisfies(''Discharge Date IS NOT NULL AND Discharge Date != '''''', ''Discharge
+        Date should be convertible to datetime'', lambda x: x > 0.99)'
+      - Invalid
+    assumptions:
+    - The 'Discharge Date' column should be convertible to datetime format.
+    - The 'Discharge Date' column should not contain any missing values.
+    - The 'Discharge Date' should be after the 'Date of Admission'.
+  Test Results:
+    code:
+    - - .isComplete('Test Results')
+      - Valid
+    - - .isContainedIn('Test Results', ['Abnormal', 'Normal', 'Inconclusive'])
+      - Valid
+    assumptions:
+    - The 'Test Results' column should not contain any missing values.
+    - 'The ''Test Results'' column should only contain values: ''Abnormal'', ''Normal'',
+      or ''Inconclusive''.'
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The 'id' column should have unique values across all rows.
+    - The 'id' column should not contain any missing values.

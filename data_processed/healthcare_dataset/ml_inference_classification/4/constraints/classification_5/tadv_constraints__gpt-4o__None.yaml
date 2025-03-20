@@ -1,0 +1,67 @@
+constraints:
+  Age:
+    code:
+    - - .isComplete('Age')
+      - Valid
+    - - .isNonNegative('Age')
+      - Valid
+    assumptions:
+    - The 'Age' should be numerical, missing values filled with 0 before scaling.
+  Billing Amount:
+    code:
+    - - .isComplete('Billing Amount')
+      - Valid
+    - - .isNonNegative('Billing Amount')
+      - Invalid
+    assumptions:
+    - The 'Billing Amount' should be numerical, missing values filled with 0 before
+      scaling.
+  Blood Type:
+    code:
+    - - .isComplete('Blood Type')
+      - Valid
+    - - .isContainedIn('Blood Type', ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+',
+        'O-'])
+      - Valid
+    assumptions:
+    - The 'Blood Type' column should contain known categories for one-hot encoding.
+  Date of Admission:
+    code:
+    - - .isComplete('Date of Admission')
+      - Valid
+    - - .satisfies('Date of Admission IS NOT NULL', 'Date of Admission is convertible
+        to datetime')
+      - Invalid
+    assumptions:
+    - The 'Date of Admission' column should be convertible to a datetime format.
+  Discharge Date:
+    code:
+    - - .isComplete('Discharge Date')
+      - Valid
+    - - .satisfies('Discharge Date IS NOT NULL', 'Discharge Date is convertible to
+        datetime')
+      - Invalid
+    assumptions:
+    - The 'Discharge Date' column should be convertible to a datetime format.
+  Medical Condition:
+    code:
+    - - .isComplete('Medical Condition')
+      - Valid
+    - - .satisfies('Medical Condition IS NOT NULL', 'Medical Condition has known categories')
+      - Invalid
+    assumptions:
+    - The 'Medical Condition' column should contain known categories for one-hot encoding.
+  Test Results:
+    code:
+    - - .isComplete('Test Results')
+      - Valid
+    assumptions:
+    - The 'Test Results' column must exist in the training dataset.
+    - The 'Test Results' column must have consistent and valid labels for encoding
+      and decoding.
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    assumptions:
+    - The 'id' column must exist in both the training and test datasets.

@@ -23,9 +23,13 @@ results:
     code:
     - - .isNonNegative('loan_int_rate')
       - Passed
+  loan_percent_income:
+    code:
+    - - .isNonNegative('loan_percent_income')
+      - Passed
   person_age:
     code:
-    - - .isNonNegative('person_age')
+    - - .isPositive('person_age')
       - Passed
   person_emp_length:
     code:
@@ -37,5 +41,5 @@ results:
       - Passed
   person_income:
     code:
-    - - .isNonNegative('person_income')
+    - - .isPositive('person_income')
       - Passed

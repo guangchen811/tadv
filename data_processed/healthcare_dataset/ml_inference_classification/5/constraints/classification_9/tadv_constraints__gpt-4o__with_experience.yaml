@@ -1,0 +1,63 @@
+constraints:
+  admission_type:
+    code:
+    - - .isContainedIn('admission_type', ['Emergency', 'Urgent', 'Elective'])
+      - Invalid
+    assumptions:
+    - admission_type should be one of ['Emergency', 'Urgent', 'Elective']
+  age:
+    code:
+    - - '.hasMin(''age'', lambda x: x >= 0)'
+      - Valid
+    - - .isPositive('age')
+      - Valid
+    assumptions:
+    - age should be greater than 0 to avoid division by zero in cost_age_ratio calculation
+    - age should have a MIN value of 0
+  billing_amount:
+    code:
+    - - '.hasMin(''billing_amount'', lambda x: x >= 0)'
+      - Invalid
+    - - .isNonNegative('billing_amount')
+      - Invalid
+    assumptions:
+    - billing_amount should be a non-negative number
+    - billing_amount should have a MIN value of 0
+  blood_type:
+    code:
+    - - .isContainedIn('blood_type', ['A+', 'O+', 'B+', 'AB+', 'A-', 'O-', 'B-', 'AB-'])
+      - Invalid
+    assumptions:
+    - blood_type should be one of ['A+', 'O+', 'B+', 'AB+', 'A-', 'O-', 'B-', 'AB-']
+  gender:
+    code:
+    - - .isContainedIn('gender', ['Male', 'Female'])
+      - Valid
+    assumptions:
+    - gender should be one of ['Male', 'Female']
+  hospital:
+    code:
+    - - .isComplete('hospital')
+      - Valid
+    assumptions:
+    - hospital should be a non-null value since it's used in categorical encoding
+  id:
+    code:
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - id should be unique as it likely serves as an identifier
+  medical_condition:
+    code:
+    - - .isContainedIn('medical_condition', ['Hypertension', 'Cancer', 'Obesity',
+        'Arthritis', 'Diabetes', 'Asthma'])
+      - Invalid
+    assumptions:
+    - medical_condition should be one of ['Hypertension', 'Cancer', 'Obesity', 'Arthritis',
+      'Diabetes', 'Asthma']
+  test_results:
+    code:
+    - - .isContainedIn('test_results', ['Abnormal', 'Normal', 'Inconclusive'])
+      - Invalid
+    assumptions:
+    - test_results should be one of ['Abnormal', 'Normal', 'Inconclusive']

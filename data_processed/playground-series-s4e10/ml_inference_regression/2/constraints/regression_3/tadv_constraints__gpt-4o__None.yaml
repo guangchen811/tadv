@@ -1,0 +1,47 @@
+constraints:
+  cb_person_cred_hist_length:
+    code:
+    - - .isNonNegative('cb_person_cred_hist_length')
+      - Valid
+    assumptions:
+    - The column 'cb_person_cred_hist_length' should contain non-negative values,
+      as it is used in the 'cred_hist_ratio'.
+  cb_person_default_on_file:
+    code:
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    assumptions:
+    - The column 'cb_person_default_on_file' should only contain the values {'Y',
+      'N'}, as it is used for one-hot encoding.
+  loan_amnt:
+    code:
+    - - .isGreaterThan('loan_amnt', 'zero')
+      - Invalid
+    - - .isPositive('loan_amnt')
+      - Valid
+    assumptions:
+    - The column 'loan_amnt' should contain positive values greater than zero, as
+      it is used in a logarithmic transformation.
+    - The column 'loan_amnt' should not contain zero or negative values, to prevent
+      division by zero in 'cred_hist_ratio'.
+  loan_grade:
+    code:
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - The column 'loan_grade' should only contain the values {'A', 'B', 'C', 'D',
+      'E', 'F', 'G'}, as it is used for one-hot encoding.
+  loan_int_rate:
+    code:
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - The column 'loan_int_rate' should contain non-negative values, as it is used
+      in numeric transformations.
+  person_home_ownership:
+    code:
+    - - .isContainedIn('person_home_ownership', ['OWN', 'MORTGAGE', 'RENT', 'OTHER'])
+      - Valid
+    assumptions:
+    - The column 'person_home_ownership' should only contain the values {'OWN', 'MORTGAGE',
+      'RENT', 'OTHER'}, as it is used for one-hot encoding.

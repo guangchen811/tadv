@@ -1,0 +1,26 @@
+constraints:
+  person_age:
+    code:
+    - - .isComplete('person_age')
+      - Valid
+    - - .isNonNegative('person_age')
+      - Valid
+    assumptions:
+    - person_age is not directly used in the employment length categorization, but
+      its completeness is important for any future analysis.
+    - person_age should be greater than or equal to 0, as negative ages are not logical.
+  person_emp_length:
+    code:
+    - - .isComplete('person_emp_length')
+      - Valid
+    - - .isNonNegative('person_emp_length')
+      - Valid
+    - - .isPositive('person_emp_length')
+      - Invalid
+    assumptions:
+    - person_emp_length should be greater than or equal to 0, as negative employment
+      lengths are not logical.
+    - person_emp_length should be a positive fractional number, reflecting years of
+      experience.
+    - person_emp_length should not be NULL, as the code handles potential NULL or
+      missing values by categorizing them as 'Unknown'.

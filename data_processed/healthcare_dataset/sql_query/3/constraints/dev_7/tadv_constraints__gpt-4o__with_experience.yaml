@@ -1,0 +1,13 @@
+constraints:
+  Date of Admission:
+    code:
+    - - .isComplete('Date of Admission')
+      - Valid
+    - - .satisfies('CAST(Date of Admission AS DATE) IS NOT NULL', 'Date of Admission
+        is convertible to DATE')
+      - Invalid
+    assumptions:
+    - Assumption that the 'Date of Admission' column should not contain null values
+      (NOT NULL constraint).
+    - Assumption that the 'Date of Admission' column should be convertible to a DATE
+      type.

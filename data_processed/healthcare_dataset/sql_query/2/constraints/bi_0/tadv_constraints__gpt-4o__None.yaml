@@ -1,0 +1,29 @@
+constraints:
+  Billing Amount:
+    code:
+    - - .isComplete("Billing Amount")
+      - Valid
+    - - .isPositive("Billing Amount")
+      - Invalid
+    assumptions:
+    - Should not have missing values.
+    - Should contain valid numerical (fractional) values.
+    - Values should be positive.
+  Insurance Provider:
+    code:
+    - - '.hasApproxCountDistinct("Insurance Provider", lambda x: x > 0.8)'
+      - Valid
+    - - .isComplete("Insurance Provider")
+      - Valid
+    assumptions:
+    - Should not have missing values.
+    - Should have distinct values for partitioning and grouping.
+  Medical Condition:
+    code:
+    - - '.hasApproxCountDistinct("Medical Condition", lambda x: x > 0.8)'
+      - Valid
+    - - .isComplete("Medical Condition")
+      - Valid
+    assumptions:
+    - Should not have missing values.
+    - Should have distinct values for partitioning.

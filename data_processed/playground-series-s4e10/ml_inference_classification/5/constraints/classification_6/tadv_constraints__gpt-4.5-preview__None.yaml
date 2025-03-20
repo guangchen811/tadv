@@ -1,0 +1,85 @@
+constraints:
+  cb_person_default_on_file:
+    code:
+    - - .isComplete('cb_person_default_on_file')
+      - Valid
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    assumptions:
+    - Value should only contain 'Y' or 'N' to represent whether the person has a credit
+      bureau default.
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - ID should be a unique identifier with no duplicates or missing values.
+  loan_amnt:
+    code:
+    - - '.hasApproxQuantile(''loan_amnt'', 0.99, lambda x: x < 1e6)'
+      - Valid
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isPositive('loan_amnt')
+      - Valid
+    assumptions:
+    - Loan amount should be greater than zero.
+    - Loan amount should not exceed a reasonable upper bound based on historical data
+      to avoid unrealistic loan requests.
+  loan_grade:
+    code:
+    - - .isComplete('loan_grade')
+      - Valid
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - 'Loan grade should only contain the known categories: [''A'', ''B'', ''C'',
+      ''D'', ''E'', ''F'', ''G''].'
+  loan_int_rate:
+    code:
+    - - '.hasMax(''loan_int_rate'', lambda x: x < 100)'
+      - Valid
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - .isPositive('loan_int_rate')
+      - Valid
+    assumptions:
+    - Loan interest rate should be greater than zero.
+    - Loan interest rate should not exceed a logical upper bound (e.g., less than
+      100%) to avoid unrealistic values.
+  person_age:
+    code:
+    - - '.hasMax(''person_age'', lambda x: x <= 100)'
+      - Valid
+    - - '.hasMin(''person_age'', lambda x: x >= 18)'
+      - Valid
+    - - .isComplete('person_age')
+      - Valid
+    assumptions:
+    - Age should be greater than or equal to 18 to represent valid adult loan applicants.
+    - Age should be within a reasonable range (e.g., 18 to 100 years) to avoid unrealistic
+      values.
+  person_home_ownership:
+    code:
+    - - .isComplete('person_home_ownership')
+      - Valid
+    - - .isContainedIn('person_home_ownership', ['RENT', 'OWN', 'MORTGAGE', 'OTHER'])
+      - Valid
+    assumptions:
+    - 'Home ownership should only contain known categories: [''RENT'', ''OWN'', ''MORTGAGE'',
+      ''OTHER''].'
+  person_income:
+    code:
+    - - '.hasApproxQuantile(''person_income'', 0.99, lambda x: x < 1e6)'
+      - Invalid
+    - - .isComplete('person_income')
+      - Valid
+    - - .isPositive('person_income')
+      - Valid
+    assumptions:
+    - Income should be greater than zero, as dividing by zero or negative values in
+      loan-to-income calculation would cause errors.
+    - Income values should be within a realistic range to avoid extreme or unrealistic
+      outliers.

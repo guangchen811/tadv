@@ -1,0 +1,21 @@
+constraints:
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - The column should have no missing values.
+    - The data type should be integral.
+    - All values should be non-negative.
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - The column should have no missing values.
+    - The data type should be fractional.
+    - All values should be non-negative.

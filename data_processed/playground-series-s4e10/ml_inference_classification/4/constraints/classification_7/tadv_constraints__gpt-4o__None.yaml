@@ -1,0 +1,51 @@
+constraints:
+  cb_person_default_on_file:
+    code:
+    - - .isComplete('cb_person_default_on_file')
+      - Valid
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    assumptions:
+    - cb_person_default_on_file should be either 'Y' or 'N' for OrdinalEncoder.
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - id should be unique for each record in the test dataset to ensure correct mapping
+      in the submission file.
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    - - .satisfies('(loan_amnt >= 0) & (loan_amnt < 5000) OR (loan_amnt >= 5000) &
+        (loan_amnt < 15000) OR (loan_amnt >= 15000) & (loan_amnt < 30000) OR (loan_amnt
+        >= 30000)', 'LoanAmountCategorization')
+      - Invalid
+    - - .satisfies('loan_amnt >= 0', 'NonNegativeInteger')
+      - Valid
+    assumptions:
+    - loan_amnt should be a non-negative integer as it is used to create loan_amnt_cat
+      categories.
+    - 'loan_amnt should fall within the specified bins: [0, 5000, 15000, 30000, inf]
+      for categorization.'
+  loan_grade:
+    code:
+    - - .isComplete('loan_grade')
+      - Valid
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - loan_grade should be one of the known categories (A, B, C, D, E, F, G) for OrdinalEncoder.
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - .satisfies('loan_int_rate >= 0', 'ValidFractionalNumber')
+      - Valid
+    assumptions:
+    - loan_int_rate should be a valid fractional number for StandardScaler.

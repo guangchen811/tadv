@@ -1,0 +1,75 @@
+constraints:
+  Admission Type:
+    code:
+    - - .isComplete('Admission Type')
+      - Valid
+    assumptions:
+    - The 'Admission Type' column is used as a feature and should not contain missing
+      values after imputation.
+  Age:
+    code:
+    - - .isComplete('Age')
+      - Valid
+    - - .satisfies('Age == Age', 'Age should be numeric without coercion')
+      - Valid
+    assumptions:
+    - The 'Age' column should contain numeric values.
+    - The 'Age' column should be able to convert to numeric without coercion errors.
+  Billing Amount:
+    code:
+    - - .isComplete('Billing Amount')
+      - Valid
+    - - .satisfies('`Billing Amount` == `Billing Amount`', 'Billing Amount should
+        be numeric without coercion')
+      - Valid
+    assumptions:
+    - The 'Billing Amount' column should contain numeric values.
+    - The 'Billing Amount' column should be able to convert to numeric without coercion
+      errors.
+  Blood Type:
+    code:
+    - - .isComplete('Blood Type')
+      - Valid
+    assumptions:
+    - The 'Blood Type' column is used as a feature and should not contain missing
+      values after imputation.
+  Gender:
+    code:
+    - - .isComplete('Gender')
+      - Valid
+    assumptions:
+    - The 'Gender' column is used as a feature and should not contain missing values
+      after imputation.
+  Insurance Provider:
+    code:
+    - - .isComplete('Insurance Provider')
+      - Valid
+    assumptions:
+    - The 'Insurance Provider' column is used as a feature and should not contain
+      missing values after imputation.
+  Medical Condition:
+    code:
+    - - .isComplete('Medical Condition')
+      - Valid
+    assumptions:
+    - The 'Medical Condition' column is used as a feature and should not contain missing
+      values after imputation.
+  Medication:
+    code:
+    - - .isComplete('Medication')
+      - Valid
+    assumptions:
+    - The 'Medication' column is used as a feature and should not contain missing
+      values after imputation.
+  Test Results:
+    code: []
+    assumptions:
+    - The 'Test Results' column is the target variable and should exist in the train
+      dataset.
+    - The 'Test Results' column should not contain missing values in the train dataset.
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    assumptions:
+    - The 'id' column must exist in both train and test datasets.

@@ -1,0 +1,24 @@
+constraints:
+  Billing Amount:
+    code:
+    - - .hasPattern('Billing Amount', '\d+\.\d{1,2}')
+      - Invalid
+    - - .isNonNegative('Billing Amount')
+      - Invalid
+    assumptions:
+    - Column 'Billing Amount' should be a fractional type.
+    - Column 'Billing Amount' should be non-negative.
+  Hospital:
+    code:
+    - - .isContainedIn('Hospital', observed_hospital_values)
+      - Invalid
+    assumptions:
+    - Column 'Hospital' should have values within the observed categorical range.
+  Medical Condition:
+    code:
+    - - .isContainedIn('Medical Condition', ['Hypertension', 'Cancer', 'Obesity',
+        'Arthritis', 'Diabetes', 'Asthma'])
+      - Valid
+    assumptions:
+    - 'Column ''Medical Condition'' should have values within the observed categorical
+      range: Hypertension, Cancer, Obesity, Arthritis, Diabetes, Asthma.'

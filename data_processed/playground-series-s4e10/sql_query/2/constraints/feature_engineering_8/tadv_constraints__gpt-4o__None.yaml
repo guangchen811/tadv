@@ -1,0 +1,12 @@
+constraints:
+  person_emp_length:
+    code:
+    - - '.hasMax(''person_emp_length'', lambda x: x > 0)'
+      - Valid
+    - - .isNonNegative('person_emp_length')
+      - Valid
+    assumptions:
+    - The column 'person_emp_length' should have a maximum value greater than 0 to
+      avoid division by zero when normalizing.
+    - The values in 'person_emp_length' should be non-negative as employment length
+      cannot be negative.

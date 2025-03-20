@@ -1,0 +1,116 @@
+constraints:
+  Admission Type:
+    code:
+    - - .isComplete("Admission Type")
+      - Valid
+    - - .isContainedIn("Admission Type", ["Urgent", "Elective", "Emergency"])
+      - Valid
+    assumptions: []
+  Age:
+    code:
+    - - .isComplete("Age")
+      - Valid
+    - - .isContainedIn("Age", ["38", "56", "25", "58", "34", "80", "57", "66", "63",
+        "50", "37", "46", "49", "54", "22", "70", "43", "65", "42", "76", "26", "24",
+        "64", "60", "21", "52", "41", "36", "79", "35", "19", "62", "29", "55", "48",
+        "44", "77", "69", "53", "83", "71", "73", "33", "84", "18", "32", "59", "75",
+        "31", "67", "45", "30", "47", "23", "81", "51", "40", "27", "68", "74", "82",
+        "72", "61", "78", "20", "85", "39", "28", "86", "17", "87", "88", "16", "15",
+        "13", "14", "89"])
+      - Valid
+    - - '.isContainedIn("Age", ["38", "56", "25", "58", "34", "80", "57", "66", "63",
+        "50", "37", "46", "49", "54", "22", "70", "43", "65", "42", "76", "26", "24",
+        "64", "60", "21", "52", "41", "36", "79", "35", "19", "62", "29", "55", "48",
+        "44", "77", "69", "53", "83", "71", "73", "33", "84", "18", "32", "59", "75",
+        "31", "67", "45", "30", "47", "23", "81", "51", "40", "27", "68", "74", "82"],
+        lambda x: x >= 0.89, "It should be above 0.89!")'
+      - Valid
+    - - .isNonNegative("Age")
+      - Valid
+    assumptions: []
+  Blood Type:
+    code:
+    - - .isComplete("Blood Type")
+      - Valid
+    - - .isContainedIn("Blood Type", ["A-", "B-", "B+", "AB-", "A+", "O+", "O-", "AB+"])
+      - Valid
+    assumptions: []
+  Date of Admission:
+    code:
+    - - .isComplete("Date of Admission")
+      - Valid
+    assumptions: []
+  Discharge Date:
+    code:
+    - - .isComplete("Discharge Date")
+      - Valid
+    assumptions: []
+  Doctor:
+    code:
+    - - .isComplete("Doctor")
+      - Valid
+    assumptions: []
+  Gender:
+    code:
+    - - .isComplete("Gender")
+      - Valid
+    - - .isContainedIn("Gender", ["Male", "Female"])
+      - Valid
+    assumptions: []
+  Hospital:
+    code:
+    - - .isComplete("Hospital")
+      - Valid
+    assumptions: []
+  Insurance Provider:
+    code:
+    - - .isComplete("Insurance Provider")
+      - Valid
+    - - .isContainedIn("Insurance Provider", ["Cigna", "Medicare", "UnitedHealthcare",
+        "Blue Cross", "Aetna"])
+      - Valid
+    assumptions: []
+  Medical Condition:
+    code:
+    - - .isComplete("Medical Condition")
+      - Valid
+    - - .isContainedIn("Medical Condition", ["Diabetes", "Asthma", "Obesity", "Hypertension",
+        "Arthritis", "Cancer"])
+      - Valid
+    assumptions: []
+  Medication:
+    code:
+    - - .isComplete("Medication")
+      - Valid
+    - - .isContainedIn("Medication", ["Aspirin", "Ibuprofen", "Lipitor", "Paracetamol",
+        "Penicillin"])
+      - Valid
+    assumptions: []
+  Name:
+    code:
+    - - .isComplete("Name")
+      - Valid
+    assumptions: []
+  Room Number:
+    code:
+    - - .isComplete("Room Number")
+      - Valid
+    - - .isNonNegative("Room Number")
+      - Invalid
+    assumptions: []
+  Test Results:
+    code:
+    - - .isComplete("Test Results")
+      - Valid
+    - - .isContainedIn("Test Results", ["Abnormal", "Normal", "Inconclusive"])
+      - Valid
+    assumptions: []
+  id:
+    code:
+    - - .isComplete("id")
+      - Valid
+    - - .isNonNegative("id")
+      - Valid
+    - - .isUnique("id")
+      - Valid
+    assumptions: []

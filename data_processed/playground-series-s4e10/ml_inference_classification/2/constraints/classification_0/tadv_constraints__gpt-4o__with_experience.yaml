@@ -1,0 +1,53 @@
+constraints:
+  cb_person_default_on_file:
+    code:
+    - - .isComplete('cb_person_default_on_file')
+      - Valid
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    assumptions:
+    - cb_person_default_on_file is complete (not null)
+    - cb_person_default_on_file should be one of ['Y', 'N']
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - id is complete (not null)
+    - id should be unique
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - loan_amnt should be non-negative
+    - loan_amnt is complete (not null)
+  loan_grade:
+    code:
+    - - .isComplete('loan_grade')
+      - Valid
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - loan_grade is complete (not null)
+    - loan_grade should be one of ['A', 'B', 'C', 'D', 'E', 'F', 'G']
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - loan_int_rate is complete (not null)
+    - loan_int_rate should be non-negative
+  log_loan_amnt:
+    code:
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - Derived from 'loan_amnt' using log transformation, so 'loan_amnt' should be
+      non-negative

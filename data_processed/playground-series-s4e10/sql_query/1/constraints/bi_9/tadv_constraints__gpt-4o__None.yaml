@@ -1,0 +1,38 @@
+constraints:
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - The column 'loan_amnt' should contain non-negative integer values since it represents
+      loan amounts.
+  loan_grade:
+    code:
+    - - .isComplete('loan_grade')
+      - Valid
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - 'The column ''loan_grade'' should only contain the values: ''A'', ''B'', ''C'',
+      ''D'', ''E'', ''F'', ''G''.'
+  loan_intent:
+    code:
+    - - .isComplete('loan_intent')
+      - Valid
+    - - .isContainedIn('loan_intent', ['EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL',
+        'DEBTCONSOLIDATION', 'MEDICAL', 'VENTURE'])
+      - Valid
+    assumptions:
+    - 'The column ''loan_intent'' should only contain the values: ''EDUCATION'', ''HOMEIMPROVEMENT'',
+      ''PERSONAL'', ''DEBTCONSOLIDATION'', ''MEDICAL'', ''VENTURE''.'
+  person_income:
+    code:
+    - - .isComplete('person_income')
+      - Valid
+    - - .isNonNegative('person_income')
+      - Valid
+    assumptions:
+    - The column 'person_income' should contain non-negative integer values since
+      it represents income levels.

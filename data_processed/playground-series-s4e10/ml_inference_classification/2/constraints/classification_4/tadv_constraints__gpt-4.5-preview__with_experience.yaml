@@ -1,0 +1,113 @@
+constraints:
+  cb_person_default_on_file:
+    code:
+    - - .isComplete('cb_person_default_on_file')
+      - Valid
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    assumptions:
+    - Default on file indicator should be either 'Y' or 'N'.
+    - Default on file indicator should not be null.
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - ID should be unique.
+    - ID should not be null.
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - Loan amount should be non-negative.
+    - Loan amount should not be null.
+  loan_grade:
+    code:
+    - - .isComplete('loan_grade')
+      - Valid
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - Loan grade should be one of ['A', 'B', 'C', 'D', 'E', 'F', 'G'].
+    - Loan grade should not be null.
+  loan_int_rate:
+    code:
+    - - '.hasMax(''loan_int_rate'', lambda x: x <= 1.0)'
+      - Invalid
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - Loan interest rate should be non-negative and typically less than or equal to
+      1 (100%).
+    - Loan interest rate should not be null.
+  loan_intent:
+    code:
+    - - .isComplete('loan_intent')
+      - Valid
+    - - .isContainedIn('loan_intent', ['EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL',
+        'DEBTCONSOLIDATION', 'MEDICAL', 'VENTURE'])
+      - Valid
+    assumptions:
+    - Loan intent should be one of ['EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL', 'DEBTCONSOLIDATION',
+      'MEDICAL', 'VENTURE'].
+    - Loan intent should not be null.
+  loan_percent_income:
+    code:
+    - - '.hasMax(''loan_percent_income'', lambda x: x <= 1.0)'
+      - Valid
+    - - .isComplete('loan_percent_income')
+      - Valid
+    - - .isNonNegative('loan_percent_income')
+      - Valid
+    assumptions:
+    - Loan percent of income should be non-negative and typically less than or equal
+      to 1 (100%).
+    - Loan percent income should not be null.
+  person_age:
+    code:
+    - - '.hasMax(''person_age'', lambda x: x < 100)'
+      - Valid
+    - - '.hasMin(''person_age'', lambda x: x >= 18)'
+      - Valid
+    - - .isComplete('person_age')
+      - Valid
+    assumptions:
+    - Age should be greater than or equal to 18 and realistically less than 100.
+    - Person age should not be null.
+  person_emp_length:
+    code:
+    - - .isComplete('person_emp_length')
+      - Valid
+    - - .isNonNegative('person_emp_length')
+      - Valid
+    - - .satisfies('person_emp_length <= person_age', 'emp_length_leq_age')
+      - Invalid
+    assumptions:
+    - Employment length should be non-negative and realistically less than or equal
+      to person's age.
+    - Person employment length should not be null.
+  person_home_ownership:
+    code:
+    - - .isComplete('person_home_ownership')
+      - Valid
+    - - .isContainedIn('person_home_ownership', ['OWN', 'MORTGAGE', 'RENT', 'OTHER'])
+      - Valid
+    assumptions:
+    - Home ownership should be one of ['OWN', 'MORTGAGE', 'RENT', 'OTHER'].
+    - Person home ownership should not be null.
+  person_income:
+    code:
+    - - .isComplete('person_income')
+      - Valid
+    - - .isNonNegative('person_income')
+      - Valid
+    assumptions:
+    - Income should be non-negative.
+    - Person income should not be null.

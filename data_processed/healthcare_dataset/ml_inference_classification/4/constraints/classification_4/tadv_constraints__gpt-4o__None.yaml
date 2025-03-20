@@ -1,0 +1,48 @@
+constraints:
+  Age:
+    code:
+    - - .isComplete('Age')
+      - Valid
+    - - .isPositive('Age')
+      - Valid
+    assumptions:
+    - Values in the 'Age' column must be positive since they are used as a divisor
+      in ratio calculations.
+  Billing Amount:
+    code:
+    - - .isComplete('Billing Amount')
+      - Valid
+    - - .isNonNegative('Billing Amount')
+      - Invalid
+    assumptions:
+    - Values in the 'Billing Amount' column must be non-negative.
+  Gender:
+    code:
+    - - .isComplete('Gender')
+      - Valid
+    - - .isContainedIn('Gender', ['Male', 'Female'])
+      - Valid
+    assumptions:
+    - Values in the 'Gender' column should be either 'Male' or 'Female'.
+  Medical Condition:
+    code:
+    - - .isComplete('Medical Condition')
+      - Valid
+    - - .isContainedIn('Medical Condition', ['Hypertension', 'Cancer', 'Obesity',
+        'Arthritis', 'Diabetes', 'Asthma'])
+      - Valid
+    assumptions:
+    - Values in the 'Medical Condition' column should be one of 'Hypertension', 'Cancer',
+      'Obesity', 'Arthritis', 'Diabetes', or 'Asthma'.
+  Test Results:
+    code:
+    - - .isComplete('Test Results')
+      - Valid
+    assumptions:
+    - The 'Test Results' column must be present in the train dataset.
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    assumptions:
+    - The 'id' column must be present in both train and test datasets.

@@ -1,0 +1,38 @@
+constraints:
+  Age:
+    code:
+    - - .isComplete('Age')
+      - Valid
+    - - .isNonNegative('Age')
+      - Valid
+    assumptions:
+    - The 'Age' column is assumed to be complete, meaning no missing values should
+      be present.
+    - The 'Age' column should contain non-negative integer values.
+  Date of Admission:
+    code:
+    - - .isComplete('Date of Admission')
+      - Valid
+    - - .satisfies('Date of Admission IS NOT NULL AND Date of Admission != ""', 'valid_date_of_admission')
+      - Invalid
+    assumptions:
+    - The 'Date of Admission' column is assumed to be complete, meaning no missing
+      values should be present.
+    - The 'Date of Admission' column should be convertible to a valid datetime format.
+  Discharge Date:
+    code:
+    - - .isComplete('Discharge Date')
+      - Valid
+    - - .satisfies('Discharge Date IS NOT NULL AND Discharge Date != ""', 'valid_discharge_date')
+      - Invalid
+    assumptions:
+    - The 'Discharge Date' column is assumed to be complete, meaning no missing values
+      should be present.
+    - The 'Discharge Date' column should be convertible to a valid datetime format.
+  Name:
+    code:
+    - - .isComplete('Name')
+      - Valid
+    assumptions:
+    - The 'Name' column is assumed to be complete, meaning no missing values should
+      be present.

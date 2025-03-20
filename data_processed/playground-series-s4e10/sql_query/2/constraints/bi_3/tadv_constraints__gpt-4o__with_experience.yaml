@@ -1,0 +1,30 @@
+constraints:
+  cb_person_default_on_file:
+    code:
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    assumptions:
+    - The column 'cb_person_default_on_file' should have values within ['Y', 'N'].
+  loan_grade:
+    code:
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - The column 'loan_grade' should have values within ['A', 'B', 'C', 'D', 'E',
+      'F', 'G'].
+  loan_int_rate:
+    code:
+    - - '.hasMin(''loan_int_rate'', lambda x: x > 15.0)'
+      - Invalid
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - The column 'loan_int_rate' should have a minimum value greater than 15.0.
+    - The column 'loan_int_rate' should be non-negative.
+  person_home_ownership:
+    code:
+    - - .isContainedIn('person_home_ownership', ['OTHER', 'OWN', 'MORTGAGE', 'RENT'])
+      - Valid
+    assumptions:
+    - The column 'person_home_ownership' should have values within ['OTHER', 'OWN',
+      'MORTGAGE', 'RENT'].

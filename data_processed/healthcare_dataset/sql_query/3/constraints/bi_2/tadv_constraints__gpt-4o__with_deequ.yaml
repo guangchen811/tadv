@@ -1,0 +1,30 @@
+constraints:
+  Billing Amount:
+    code:
+    - - .isComplete("Billing Amount")
+      - Valid
+    - - .satisfies('CAST("Billing Amount" AS DOUBLE) IS NOT NULL', 'Billing Amount
+        should be a Fractional data type')
+      - Invalid
+    assumptions:
+    - The 'Billing Amount' column must be complete, i.e., no missing values.
+    - The 'Billing Amount' should be a Fractional data type as expected by the code
+      for ordering purposes.
+  Medical Condition:
+    code:
+    - - .isComplete("Medical Condition")
+      - Valid
+    - - .isContainedIn("Medical Condition", ['Diabetes', 'Asthma', 'Obesity', 'Hypertension',
+        'Arthritis', 'Cancer'])
+      - Valid
+    assumptions:
+    - The 'Medical Condition' column must be complete, i.e., no missing values.
+    - The 'Medical Condition' values should be contained within the known categories
+      ['Diabetes', 'Asthma', 'Obesity', 'Hypertension', 'Arthritis', 'Cancer']. This
+      ensures all medical conditions are recognized.
+  Name:
+    code:
+    - - .isComplete("Name")
+      - Valid
+    assumptions:
+    - The 'Name' column must be complete, i.e., no missing values.

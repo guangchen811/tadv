@@ -1,0 +1,73 @@
+constraints:
+  cb_person_cred_hist_length:
+    code:
+    - - .isNonNegative('cb_person_cred_hist_length')
+      - Valid
+    assumptions:
+    - cb_person_cred_hist_length should be a non-negative integer.
+  cb_person_default_on_file:
+    code:
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    assumptions:
+    - cb_person_default_on_file should be one of ['Y', 'N'].
+  id:
+    code:
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - id should be unique for each record.
+  loan_amnt:
+    code:
+    - - .isPositive('loan_amnt')
+      - Valid
+    assumptions:
+    - loan_amnt should be a positive integer.
+  loan_grade:
+    code:
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - loan_grade should be one of ['A', 'B', 'C', 'D', 'E', 'F', 'G'].
+  loan_int_rate:
+    code:
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - loan_int_rate should be a non-negative value.
+  loan_percent_income:
+    code:
+    - - .isNonNegative('loan_percent_income')
+      - Valid
+    assumptions:
+    - loan_percent_income should be a non-negative value.
+  loan_status:
+    code:
+    - - .isContainedIn('loan_status', [0, 1])
+      - Invalid
+    assumptions:
+    - loan_status should be either 0 or 1.
+  person_age:
+    code:
+    - - .isPositive('person_age')
+      - Valid
+    assumptions:
+    - person_age should be a positive integer.
+  person_emp_length:
+    code:
+    - - .isNonNegative('person_emp_length')
+      - Valid
+    assumptions:
+    - person_emp_length should be a non-negative value.
+  person_home_ownership:
+    code:
+    - - .isContainedIn('person_home_ownership', ['OTHER', 'OWN', 'MORTGAGE', 'RENT'])
+      - Valid
+    assumptions:
+    - person_home_ownership should be one of ['OTHER', 'OWN', 'MORTGAGE', 'RENT'].
+  person_income:
+    code:
+    - - .isPositive('person_income')
+      - Valid
+    assumptions:
+    - person_income should be a positive integer.

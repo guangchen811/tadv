@@ -1,0 +1,24 @@
+constraints:
+  cb_person_default_on_file:
+    code:
+    - - .isComplete('cb_person_default_on_file')
+      - Valid
+    - - .isContainedIn('cb_person_default_on_file', ['N', 'Y'])
+      - Valid
+    assumptions:
+    - The column 'cb_person_default_on_file' should be complete with no missing values.
+    - The column 'cb_person_default_on_file' should contain only the values 'N' and
+      'Y'.
+    - The query assumes that filtering is performed on 'cb_person_default_on_file'
+      to include only non-default borrowers ('N').
+  loan_intent:
+    code:
+    - - .isComplete('loan_intent')
+      - Valid
+    - - .isContainedIn('loan_intent', ['EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL',
+        'DEBTCONSOLIDATION', 'MEDICAL', 'VENTURE'])
+      - Valid
+    assumptions:
+    - The column 'loan_intent' should be complete with no missing values.
+    - 'The column ''loan_intent'' should contain only the following values: [''EDUCATION'',
+      ''HOMEIMPROVEMENT'', ''PERSONAL'', ''DEBTCONSOLIDATION'', ''MEDICAL'', ''VENTURE''].'

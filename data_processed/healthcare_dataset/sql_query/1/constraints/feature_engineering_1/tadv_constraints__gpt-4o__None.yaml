@@ -1,0 +1,17 @@
+constraints:
+  Medication:
+    code:
+    - - .isContainedIn('Medication', ['Aspirin', 'Paracetamol', 'Ibuprofen', 'Pnicillin',
+        'Lipitor'])
+      - Invalid
+    assumptions:
+    - 'The ''Medication'' column should only contain the following values: ''Aspirin'',
+      ''Paracetamol'', ''Ibuprofen'', ''Pnicillin'', ''Lipitor''. These values are
+      specifically checked in the code snippet.'
+  id:
+    code:
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The 'id' column should be unique for each patient, as it is used as a unique
+      patient identifier.

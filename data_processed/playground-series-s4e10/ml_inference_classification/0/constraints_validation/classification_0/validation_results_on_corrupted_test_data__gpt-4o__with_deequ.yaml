@@ -3,12 +3,10 @@ results:
     code:
     - - .isComplete('cb_person_default_on_file')
       - Passed
-    - - .isContainedIn('cb_person_default_on_file', ['N', 'Y'])
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
       - Passed
   id:
     code:
-    - - .isComplete('id')
-      - Passed
     - - .isNonNegative('id')
       - Passed
     - - .isUnique('id')
@@ -18,8 +16,6 @@ results:
     - - .isComplete('loan_amnt')
       - Passed
     - - .isNonNegative('loan_amnt')
-      - Passed
-    - - .isPositive('loan_amnt')
       - Passed
   loan_grade:
     code:

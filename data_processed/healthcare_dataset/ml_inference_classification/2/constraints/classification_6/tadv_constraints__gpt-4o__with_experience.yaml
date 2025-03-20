@@ -1,0 +1,78 @@
+constraints:
+  Age:
+    code:
+    - - '.hasMean(''Age'', lambda x: x is not None)'
+      - Valid
+    - - '.hasStandardDeviation(''Age'', lambda x: x is not None)'
+      - Valid
+    - - .isComplete('Age')
+      - Valid
+    - - .isNonNegative('Age')
+      - Valid
+    assumptions:
+    - The column 'Age' should have a completeness of 1.0, suggesting a NOT NULL constraint.
+    - The column 'Age' is a numeric column, suggesting a mean and standard deviation
+      constraint.
+    - The column 'Age' appears to be non-negative, suggesting an IS NON NEGATIVE constraint.
+  Gender:
+    code:
+    - - .isComplete('Gender')
+      - Valid
+    - - .isContainedIn('Gender', ['Male', 'Female'])
+      - Valid
+    assumptions:
+    - The column 'Gender' should have a completeness of 1.0, suggesting a NOT NULL
+      constraint.
+    - 'The column ''Gender'' has a categorical range of values: [''Male'', ''Female''],
+      suggesting an IS IN constraint for these values.'
+  admission_date:
+    code:
+    - - .isComplete('admission_date')
+      - Invalid
+    - - .isNonNegative('admission_date')
+      - Invalid
+    assumptions:
+    - The column 'admission_date' should have a completeness of 1.0, suggesting a
+      NOT NULL constraint.
+    - The column 'admission_date' should be convertible to a numeric timestamp, suggesting
+      a TYPE constraint.
+  billing_amount:
+    code:
+    - - '.hasMean(''billing_amount'', lambda x: x is not None)'
+      - Invalid
+    - - '.hasStandardDeviation(''billing_amount'', lambda x: x is not None)'
+      - Invalid
+    - - .isComplete('billing_amount')
+      - Invalid
+    - - .isNonNegative('billing_amount')
+      - Invalid
+    assumptions:
+    - The column 'billing_amount' should have a completeness of 1.0, suggesting a
+      NOT NULL constraint.
+    - The column 'billing_amount' is a numeric column, suggesting a mean and standard
+      deviation constraint.
+    - The column 'billing_amount' appears to be non-negative, suggesting an IS NON
+      NEGATIVE constraint.
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The column 'id' should have a completeness of 1.0, suggesting a NOT NULL constraint.
+    - The column 'id' has a ratio of approximate num distinct values close to the
+      number of records, suggesting a UNIQUE constraint.
+  medical_condition:
+    code:
+    - - .isComplete('medical_condition')
+      - Invalid
+    - - .isContainedIn('medical_condition', ['Hypertension', 'Cancer', 'Obesity',
+        'Arthritis', 'Diabetes', 'Asthma'])
+      - Invalid
+    assumptions:
+    - The column 'medical_condition' should have a completeness of 1.0, suggesting
+      a NOT NULL constraint.
+    - 'The column ''medical_condition'' has a categorical range of values: [''Hypertension'',
+      ''Cancer'', ''Obesity'', ''Arthritis'', ''Diabetes'', ''Asthma''], suggesting
+      an IS IN constraint for these values and potentially other reasonable values.'

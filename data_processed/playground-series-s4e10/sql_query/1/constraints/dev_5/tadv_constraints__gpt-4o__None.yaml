@@ -1,0 +1,26 @@
+constraints:
+  id:
+    code:
+    - - .isUnique('id')
+      - Valid
+    - - '.satisfies(''id = 43152'', ''ID must be 43152'', lambda x: x > 0.0)'
+      - Invalid
+    assumptions:
+    - The column 'id' should contain unique values, as it is used to identify individual
+      records.
+    - There should be at least one record with the 'id' value 43152, as the WHERE
+      clause filters data using this specific id.
+  loan_amnt:
+    code:
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - The column 'loan_amnt' should have non-negative values, as loan amounts cannot
+      be negative.
+  person_income:
+    code:
+    - - .isNonNegative('person_income')
+      - Valid
+    assumptions:
+    - The column 'person_income' should have non-negative values, as income cannot
+      be negative.

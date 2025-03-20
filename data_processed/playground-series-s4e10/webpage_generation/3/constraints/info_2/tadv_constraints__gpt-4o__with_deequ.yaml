@@ -1,0 +1,23 @@
+constraints:
+  loan_grade:
+    code:
+    - - .isComplete('loan_grade')
+      - Valid
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - The column 'loan_grade' should be complete (no missing values).
+    - The column 'loan_grade' should contain only the values ['A', 'B', 'C', 'D',
+      'E', 'F', 'G'].
+  loan_status:
+    code:
+    - - .isComplete('loan_status')
+      - Valid
+    - - .isContainedIn('loan_status', ['0', '1'])
+      - Valid
+    - - .satisfies('loan_status IN (0, 1)', 'loan_status should be numeric')
+      - Valid
+    assumptions:
+    - The column 'loan_status' should be complete (no missing values).
+    - The column 'loan_status' should contain only the values ['0', '1'].
+    - The column 'loan_status' should contain numeric values for mathematical operations.

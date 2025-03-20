@@ -1,0 +1,39 @@
+constraints:
+  Age:
+    code:
+    - - .isComplete('Age')
+      - Valid
+    - - .satisfies('Age.cast(IntegerType) == Age', 'Age should be integral')
+      - Invalid
+    assumptions:
+    - Age column should be complete (no missing values).
+    - Age column should be of type integral.
+  Date of Admission:
+    code:
+    - - .isComplete('Date of Admission')
+      - Valid
+    - - .satisfies('to_date(Date of Admission, "yyyy-MM-dd") == Date of Admission',
+        'Date of Admission should be convertible to datetime')
+      - Invalid
+    assumptions:
+    - Date of Admission column should be complete (no missing values).
+    - Date of Admission should be convertible to datetime format.
+  Discharge Date:
+    code:
+    - - .isComplete('Discharge Date')
+      - Valid
+    - - .satisfies('to_date(Discharge Date, "yyyy-MM-dd") == Discharge Date', 'Discharge
+        Date should be convertible to datetime')
+      - Invalid
+    assumptions:
+    - Discharge Date column should be complete (no missing values).
+    - Discharge Date should be convertible to datetime format.
+  Name:
+    code:
+    - - .isComplete('Name')
+      - Valid
+    - - .satisfies('Name.cast(StringType) == Name', 'Name should be string')
+      - Invalid
+    assumptions:
+    - Name column should be complete (no missing values).
+    - Name column should be of type string.

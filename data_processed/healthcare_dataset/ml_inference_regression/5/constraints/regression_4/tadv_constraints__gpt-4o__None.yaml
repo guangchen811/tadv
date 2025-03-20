@@ -1,0 +1,20 @@
+constraints:
+  billing_amount:
+    code:
+    - - .isComplete('billing_amount')
+      - Invalid
+    - - '.satisfies(''billing_amount >= 0'', ''billing_amount_non_negative'', lambda
+        x: x == 1.0)'
+      - Invalid
+    assumptions:
+    - Should be numeric.
+    - Should not contain missing values.
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - Should be unique.
+    - Should not contain missing values.

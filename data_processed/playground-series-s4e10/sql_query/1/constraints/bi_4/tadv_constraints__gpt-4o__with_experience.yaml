@@ -1,0 +1,23 @@
+constraints:
+  cb_person_default_on_file:
+    code:
+    - - .isComplete('cb_person_default_on_file')
+      - Valid
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    assumptions:
+    - The column 'cb_person_default_on_file' should not have NULL values.
+    - The column 'cb_person_default_on_file' should predominantly contain the values
+      'Y' and 'N'.
+  loan_intent:
+    code:
+    - - .isComplete('loan_intent')
+      - Valid
+    - - .isContainedIn('loan_intent', ['EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL',
+        'DEBTCONSOLIDATION', 'MEDICAL', 'VENTURE'])
+      - Valid
+    assumptions:
+    - The column 'loan_intent' should not have NULL values.
+    - 'The column ''loan_intent'' should predominantly contain values within the set:
+      [''EDUCATION'', ''HOMEIMPROVEMENT'', ''PERSONAL'', ''DEBTCONSOLIDATION'', ''MEDICAL'',
+      ''VENTURE''].'

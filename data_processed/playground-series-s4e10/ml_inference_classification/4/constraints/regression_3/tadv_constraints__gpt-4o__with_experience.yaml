@@ -1,0 +1,56 @@
+constraints:
+  cb_person_cred_hist_length:
+    code:
+    - - .isComplete('cb_person_cred_hist_length')
+      - Valid
+    - - .isGreaterThanOrEqualTo('cb_person_cred_hist_length', 0)
+      - Invalid
+    assumptions:
+    - Assume cb_person_cred_hist_length is complete (NOT NULL).
+    - Assume cb_person_cred_hist_length should be greater than or equal to 0.
+  cb_person_default_on_file:
+    code:
+    - - .isComplete('cb_person_default_on_file')
+      - Valid
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    assumptions:
+    - Assume cb_person_default_on_file is complete (NOT NULL).
+    - Assume cb_person_default_on_file should be one of ['Y', 'N'].
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isPositive('loan_amnt')
+      - Valid
+    assumptions:
+    - Assume loan_amnt should be greater than 0 for log transformation to be valid.
+    - Assume loan_amnt is complete (NOT NULL).
+  loan_grade:
+    code:
+    - - .isComplete('loan_grade')
+      - Valid
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - Assume loan_grade is complete (NOT NULL).
+    - Assume loan_grade should be one of ['A', 'B', 'C', 'D', 'E', 'F', 'G'] as per
+      the observed categories.
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - .isGreaterThanOrEqualTo('loan_int_rate', 0)
+      - Invalid
+    assumptions:
+    - Assume loan_int_rate is complete (NOT NULL).
+    - Assume loan_int_rate should be greater than or equal to 0.
+  person_home_ownership:
+    code:
+    - - .isComplete('person_home_ownership')
+      - Valid
+    - - .isContainedIn('person_home_ownership', ['OWN', 'MORTGAGE', 'RENT', 'OTHER'])
+      - Valid
+    assumptions:
+    - Assume person_home_ownership is complete (NOT NULL).
+    - Assume person_home_ownership should be one of ['OWN', 'MORTGAGE', 'RENT', 'OTHER'].

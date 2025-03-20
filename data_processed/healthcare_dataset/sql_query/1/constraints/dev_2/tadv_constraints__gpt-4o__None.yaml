@@ -1,0 +1,44 @@
+constraints:
+  Billing Amount:
+    code:
+    - - .isNonNegative('Billing Amount')
+      - Invalid
+    assumptions:
+    - The 'Billing Amount' column should be a non-negative fractional number.
+  Date of Admission:
+    code:
+    - - .isComplete('Date of Admission')
+      - Valid
+    - - .satisfies('CAST(`Date of Admission` AS DATE) BETWEEN CAST('2020-01-01' AS
+        DATE) AND CAST('2022-12-31' AS DATE)', 'Date of Admission Range Check')
+      - Invalid
+    assumptions:
+    - The 'Date of Admission' column should be a non-empty string that can be cast
+      to a valid date.
+    - The 'Date of Admission' values should be between '2020-01-01' and '2022-12-31'.
+  Medical Condition:
+    code:
+    - - .isComplete('Medical Condition')
+      - Valid
+    assumptions:
+    - The 'Medical Condition' column should be a non-empty string.
+  Name:
+    code:
+    - - .isComplete('Name')
+      - Valid
+    assumptions:
+    - The 'Name' column should be a non-empty string.
+  Test Results:
+    code:
+    - - .isComplete('Test Results')
+      - Valid
+    - - .isContainedIn('Test Results', ['Abnormal'])
+      - Invalid
+    assumptions:
+    - The 'Test Results' column should contain the value 'Abnormal'.
+  id:
+    code:
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The 'id' column should contain unique values.

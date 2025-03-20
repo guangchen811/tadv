@@ -1,0 +1,33 @@
+constraints:
+  loan_intent:
+    code:
+    - - .isComplete('loan_intent')
+      - Valid
+    - - .isContainedIn('loan_intent', ['EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL',
+        'DEBTCONSOLIDATION', 'MEDICAL', 'VENTURE', 'AUTO', 'RECREATION'])
+      - Valid
+    assumptions:
+    - The column should not be null.
+    - 'The column should have values within the range: ''EDUCATION'', ''HOMEIMPROVEMENT'',
+      ''PERSONAL'', ''DEBTCONSOLIDATION'', ''MEDICAL'', ''VENTURE'', and other reasonable
+      values like ''AUTO'', ''RECREATION''.'
+  loan_status:
+    code:
+    - - .isComplete('loan_status')
+      - Valid
+    - - .isContainedIn('loan_status', ['0', '1'])
+      - Valid
+    assumptions:
+    - The column should not be null.
+    - 'The column should have values within the range: ''0'', ''1''.'
+  person_home_ownership:
+    code:
+    - - .isComplete('person_home_ownership')
+      - Valid
+    - - .isContainedIn('person_home_ownership', ['OTHER', 'OWN', 'MORTGAGE', 'RENT',
+        'LEASE', 'FREEHOLD'])
+      - Valid
+    assumptions:
+    - The column should not be null.
+    - 'The column should have values within the range: ''OTHER'', ''OWN'', ''MORTGAGE'',
+      ''RENT'', and other reasonable values like ''LEASE'', ''FREEHOLD''.'

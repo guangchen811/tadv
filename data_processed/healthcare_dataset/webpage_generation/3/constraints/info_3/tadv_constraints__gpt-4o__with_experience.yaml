@@ -1,0 +1,49 @@
+constraints:
+  Age:
+    code:
+    - - .isComplete('Age')
+      - Valid
+    - - .isNonNegative('Age')
+      - Valid
+    assumptions:
+    - The column should contain non-negative numbers
+    - The column should be complete (NOT NULL)
+  Date of Admission:
+    code:
+    - - .isComplete('Date of Admission')
+      - Valid
+    assumptions:
+    - The column should be convertible to a datetime format
+    - The column should be complete (NOT NULL)
+  Discharge Date:
+    code:
+    - - .isComplete('Discharge Date')
+      - Valid
+    assumptions:
+    - The column should be convertible to a datetime format
+    - The column should be complete (NOT NULL)
+  Doctor:
+    code:
+    - - .isComplete('Doctor')
+      - Valid
+    assumptions:
+    - The column should be treated as a string
+    - The column should be complete (NOT NULL)
+  Medical Condition:
+    code:
+    - - .isComplete('Medical Condition')
+      - Valid
+    - - .isContainedIn('Medical Condition', ['Hypertension', 'Cancer', 'Obesity',
+        'Arthritis', 'Diabetes', 'Asthma'])
+      - Valid
+    assumptions:
+    - 'The column should have a value within the observed categorical range: [''Hypertension'',
+      ''Cancer'', ''Obesity'', ''Arthritis'', ''Diabetes'', ''Asthma'']'
+    - The column should be complete (NOT NULL)
+  Name:
+    code:
+    - - .isComplete('Name')
+      - Valid
+    assumptions:
+    - The column should be treated as a string
+    - The column should be complete (NOT NULL)

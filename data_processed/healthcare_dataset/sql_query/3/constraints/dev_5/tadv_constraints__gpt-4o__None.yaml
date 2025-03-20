@@ -1,0 +1,30 @@
+constraints:
+  Billing Amount:
+    code:
+    - - .isComplete('Billing Amount')
+      - Valid
+    - - .isPositive('Billing Amount')
+      - Invalid
+    assumptions:
+    - '"Billing Amount" should be a positive number.'
+    - '"Billing Amount" should be complete, meaning no missing values.'
+  Medical Condition:
+    code:
+    - - .isContainedIn('Medical Condition', ['Hypertension', 'Cancer', 'Obesity',
+        'Arthritis', 'Diabetes', 'Asthma'])
+      - Valid
+    assumptions:
+    - '"Medical Condition" should be one of the following: [''Hypertension'', ''Cancer'',
+      ''Obesity'', ''Arthritis'', ''Diabetes'', ''Asthma''].'
+  Name:
+    code:
+    - - .isComplete('Name')
+      - Valid
+    assumptions:
+    - '"Name" should be complete, meaning no missing values.'
+  id:
+    code:
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - '"id" should be unique for each record.'

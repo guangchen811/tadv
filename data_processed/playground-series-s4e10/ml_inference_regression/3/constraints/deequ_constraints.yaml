@@ -1,0 +1,113 @@
+constraints:
+  cb_person_cred_hist_length:
+    code:
+    - - .isComplete("cb_person_cred_hist_length")
+      - Valid
+    - - .isContainedIn("cb_person_cred_hist_length", ["2", "3", "4", "9", "8", "7",
+        "10", "5", "6", "14", "12", "13", "11", "16", "15", "17", "20", "19", "27",
+        "24", "28", "21", "22", "25", "26", "23", "30", "29", "18"])
+      - Valid
+    - - '.isContainedIn("cb_person_cred_hist_length", ["2", "3", "4", "9", "8", "7",
+        "10", "5", "6", "14"], lambda x: x >= 0.9, "It should be above 0.9!")'
+      - Valid
+    - - .isNonNegative("cb_person_cred_hist_length")
+      - Valid
+    assumptions: []
+  cb_person_default_on_file:
+    code:
+    - - .isComplete("cb_person_default_on_file")
+      - Valid
+    - - .isContainedIn("cb_person_default_on_file", ["N", "Y"])
+      - Valid
+    assumptions: []
+  id:
+    code:
+    - - .isComplete("id")
+      - Valid
+    - - .isNonNegative("id")
+      - Valid
+    - - .isUnique("id")
+      - Valid
+    assumptions: []
+  loan_amnt:
+    code:
+    - - .isComplete("loan_amnt")
+      - Valid
+    - - .isNonNegative("loan_amnt")
+      - Valid
+    assumptions: []
+  loan_grade:
+    code:
+    - - .isComplete("loan_grade")
+      - Valid
+    - - .isContainedIn("loan_grade", ["A", "B", "C", "D", "E", "F", "G"])
+      - Valid
+    - - '.isContainedIn("loan_grade", ["A", "B", "C", "D"], lambda x: x >= 0.97, "It
+        should be above 0.97!")'
+      - Valid
+    assumptions: []
+  loan_int_rate:
+    code:
+    - - .isComplete("loan_int_rate")
+      - Valid
+    - - .isNonNegative("loan_int_rate")
+      - Valid
+    assumptions: []
+  loan_intent:
+    code:
+    - - .isComplete("loan_intent")
+      - Valid
+    - - .isContainedIn("loan_intent", ["EDUCATION", "MEDICAL", "PERSONAL", "VENTURE",
+        "DEBTCONSOLIDATION", "HOMEIMPROVEMENT"])
+      - Valid
+    assumptions: []
+  loan_percent_income:
+    code:
+    - - .isComplete("loan_percent_income")
+      - Valid
+    - - .isNonNegative("loan_percent_income")
+      - Valid
+    assumptions: []
+  loan_status:
+    code:
+    - - .isComplete("loan_status")
+      - Valid
+    - - .isContainedIn("loan_status", ["0", "1"])
+      - Valid
+    - - .isNonNegative("loan_status")
+      - Valid
+    assumptions: []
+  person_age:
+    code:
+    - - .isComplete("person_age")
+      - Valid
+    - - .isContainedIn("person_age", ["23", "22", "24", "25", "27", "26", "28", "29",
+        "30", "31", "21", "32", "33", "36", "34", "37", "35", "38", "39", "40", "41",
+        "43", "42", "44", "46", "45", "47", "48", "50", "51", "53", "49", "54", "52",
+        "58", "55", "56", "60", "57", "65", "66", "20", "64", "61", "70", "69", "59",
+        "62", "80", "73", "84"])
+      - Valid
+    - - '.isContainedIn("person_age", ["23", "22", "24", "25", "27", "26", "28", "29",
+        "30", "31", "21", "32", "33", "36", "34", "37"], lambda x: x >= 0.91, "It
+        should be above 0.91!")'
+      - Valid
+    - - .isNonNegative("person_age")
+      - Valid
+    assumptions: []
+  person_emp_length:
+    code:
+    - - .isComplete("person_emp_length")
+      - Valid
+    - - .isNonNegative("person_emp_length")
+      - Valid
+    assumptions: []
+  person_home_ownership:
+    code:
+    - - .isComplete("person_home_ownership")
+      - Valid
+    - - .isContainedIn("person_home_ownership", ["RENT", "MORTGAGE", "OWN", "OTHER"])
+      - Valid
+    - - '.isContainedIn("person_home_ownership", ["RENT", "MORTGAGE"], lambda x: x
+        >= 0.94, "It should be above 0.94!")'
+      - Valid
+    assumptions: []

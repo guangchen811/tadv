@@ -1,0 +1,22 @@
+constraints:
+  Blood Type:
+    code:
+    - - .isComplete('Blood Type')
+      - Valid
+    - - .isContainedIn('Blood Type', ['A+', 'O+', 'B+', 'AB+', 'A-', 'O-', 'B-', 'AB-'])
+      - Valid
+    assumptions:
+    - 'All values must be one of the known blood types: [''A+'', ''O+'', ''B+'', ''AB+'',
+      ''A-'', ''O-'', ''B-'', ''AB-'']'
+    - Column should be complete with no missing values
+  Medical Condition:
+    code:
+    - - .isComplete('Medical Condition')
+      - Valid
+    - - .isContainedIn('Medical Condition', ['Hypertension', 'Cancer', 'Obesity',
+        'Arthritis', 'Diabetes', 'Asthma'])
+      - Valid
+    assumptions:
+    - 'All values must be one of the known medical conditions: [''Hypertension'',
+      ''Cancer'', ''Obesity'', ''Arthritis'', ''Diabetes'', ''Asthma'']'
+    - Column should be complete with no missing values

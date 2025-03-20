@@ -1,0 +1,51 @@
+constraints:
+  Date of Admission:
+    code:
+    - - .isComplete('Date of Admission')
+      - Valid
+    - - .satisfies('Date of Admission IS NOT NULL AND LENGTH(Date of Admission) >
+        0', 'Date of Admission valid format')
+      - Invalid
+    assumptions:
+    - The 'Date of Admission' column should be complete (no missing values).
+    - The 'Date of Admission' column should have values convertible to dates (valid
+      date format).
+  Discharge Date:
+    code:
+    - - .isComplete('Discharge Date')
+      - Valid
+    - - .isGreaterThanOrEqualTo('Discharge Date', 'Date of Admission')
+      - Invalid
+    - - .satisfies('Discharge Date IS NOT NULL AND LENGTH(Discharge Date) > 0', 'Discharge
+        Date valid format')
+      - Invalid
+    assumptions:
+    - The 'Discharge Date' column should be complete (no missing values).
+    - The 'Discharge Date' column should have values convertible to dates (valid date
+      format).
+    - The 'Discharge Date' should be greater than or equal to the 'Date of Admission'.
+  Doctor:
+    code:
+    - - .isComplete('Doctor')
+      - Valid
+    - - .isComplete('Doctor')
+      - Valid
+    assumptions:
+    - The 'Doctor' column should be complete (no missing values).
+    - The 'Doctor' column should have values treated as strings without leading or
+      trailing spaces.
+  Medical Condition:
+    code:
+    - - .isComplete('Medical Condition')
+      - Valid
+    - - .isComplete('Medical Condition')
+      - Valid
+    - - .isContainedIn('Medical Condition', ['Diabetes', 'Asthma', 'Obesity', 'Hypertension',
+        'Arthritis', 'Cancer'])
+      - Valid
+    assumptions:
+    - The 'Medical Condition' column should be complete (no missing values).
+    - The 'Medical Condition' column should have values treated as strings without
+      leading or trailing spaces.
+    - The 'Medical Condition' should be one of ['Diabetes', 'Asthma', 'Obesity', 'Hypertension',
+      'Arthritis', 'Cancer'].

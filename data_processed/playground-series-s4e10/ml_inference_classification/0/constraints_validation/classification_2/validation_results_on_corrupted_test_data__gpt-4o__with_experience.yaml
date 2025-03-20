@@ -50,8 +50,6 @@ results:
       - Passed
   person_age:
     code:
-    - - '.hasMin(''person_age'', lambda x: x >= 18)'
-      - Passed
     - - .isComplete('person_age')
       - Passed
     - - .isNonNegative('person_age')

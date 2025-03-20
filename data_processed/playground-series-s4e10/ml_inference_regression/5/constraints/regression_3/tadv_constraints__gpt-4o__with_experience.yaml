@@ -1,0 +1,53 @@
+constraints:
+  cb_person_cred_hist_length:
+    code:
+    - - .isNonNegative('cb_person_cred_hist_length')
+      - Valid
+    assumptions:
+    - The column should have non-negative values as it is used in a division operation.
+  cb_person_default_on_file:
+    code:
+    - - .isComplete('cb_person_default_on_file')
+      - Valid
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    assumptions:
+    - The column values should be within ['Y', 'N'] based on the histogram.
+    - The column should not have null values since it is used in one-hot encoding.
+  loan_amnt:
+    code:
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    - - .satisfies('loan_amnt > 0', 'Non-zero loan amount')
+      - Valid
+    assumptions:
+    - The column should have non-negative values since a log transformation is applied.
+    - The column should not contain zero values because log transformation cannot
+      handle zero.
+  loan_grade:
+    code:
+    - - .isComplete('loan_grade')
+      - Valid
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - The column values should be within ['A', 'B', 'C', 'D', 'E', 'F', 'G'] based
+      on the histogram.
+    - The column should not have null values since it is used in one-hot encoding.
+  loan_int_rate:
+    code:
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - The column should have non-negative values as a standard deviation and mean
+      operation might be applied.
+  person_home_ownership:
+    code:
+    - - .isComplete('person_home_ownership')
+      - Valid
+    - - .isContainedIn('person_home_ownership', ['OWN', 'MORTGAGE', 'RENT', 'OTHER'])
+      - Valid
+    assumptions:
+    - The column values should be within ['OWN', 'MORTGAGE', 'RENT', 'OTHER'] based
+      on the histogram.
+    - The column should not have null values since it is used in one-hot encoding.

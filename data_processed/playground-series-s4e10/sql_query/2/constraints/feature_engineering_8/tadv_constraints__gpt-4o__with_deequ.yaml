@@ -1,0 +1,17 @@
+constraints:
+  person_emp_length:
+    code:
+    - - '.hasMax(''person_emp_length'', lambda x: x < 50)'
+      - Invalid
+    - - .isComplete('person_emp_length')
+      - Valid
+    - - .isContainedIn('emp_length_category', ['Junior', 'Mid-level', 'Senior', 'Unknown'])
+      - Invalid
+    - - .isNonNegative('person_emp_length')
+      - Valid
+    assumptions:
+    - The column should be complete (no missing values).
+    - The column should contain non-negative values.
+    - Values should be categorized as 'Junior' for less than 2, 'Mid-level' for between
+      2 and 5, and 'Senior' for greater than 5.
+    - There should be a logical maximum value that the column can take.

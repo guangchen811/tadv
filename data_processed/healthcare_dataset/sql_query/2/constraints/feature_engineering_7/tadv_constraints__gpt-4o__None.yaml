@@ -1,0 +1,23 @@
+constraints:
+  Date of Admission:
+    code:
+    - - .isComplete('Date of Admission')
+      - Valid
+    - - .satisfies('CAST(Date of Admission AS DATE) IS NOT NULL', 'Date of Admission
+        valid date format')
+      - Invalid
+    assumptions:
+    - The 'Date of Admission' column should be complete, meaning no missing values
+      are allowed.
+    - The 'Date of Admission' column should be in a valid date format that can be
+      cast to a DATE type for time-based calculations.
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The 'id' column should be complete, meaning no missing values are allowed.
+    - The 'id' column should have unique values, as it is used to partition data and
+      identify individual records.

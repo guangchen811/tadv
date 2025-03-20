@@ -1,0 +1,53 @@
+constraints:
+  Age:
+    code:
+    - - .isComplete('Age')
+      - Valid
+    - - .isNonNegative('Age')
+      - Valid
+    assumptions:
+    - Age should be complete (NOT NULL).
+    - Age should be a numeric (Integral) type.
+    - Age should be non-negative.
+    - Age should have a reasonable mean and standard deviation.
+  Billing Amount:
+    code:
+    - - .isComplete('Billing Amount')
+      - Valid
+    - - .isNonNegative('Billing Amount')
+      - Invalid
+    assumptions:
+    - Billing Amount should be complete (NOT NULL).
+    - Billing Amount should be a numeric (Fractional) type.
+    - Billing Amount should be non-negative.
+    - Billing Amount should have a reasonable mean and standard deviation.
+  Gender:
+    code:
+    - - .isComplete('Gender')
+      - Valid
+    - - .isContainedIn('Gender', ['Male', 'Female'])
+      - Valid
+    assumptions:
+    - Gender should be complete (NOT NULL).
+    - Gender should have values from the set {'Male', 'Female'}.
+  Medical Condition:
+    code:
+    - - .isComplete('Medical Condition')
+      - Valid
+    - - .isContainedIn('Medical Condition', ['Hypertension', 'Cancer', 'Obesity',
+        'Arthritis', 'Diabetes', 'Asthma'])
+      - Valid
+    assumptions:
+    - Medical Condition should be complete (NOT NULL).
+    - Medical Condition should have values from the set {'Hypertension', 'Cancer',
+      'Obesity', 'Arthritis', 'Diabetes', 'Asthma'}.
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - ID column should exist in both train and test datasets.
+    - ID column should be complete (NOT NULL).
+    - ID column should have unique values.

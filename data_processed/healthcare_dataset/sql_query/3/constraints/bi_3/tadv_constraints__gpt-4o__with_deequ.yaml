@@ -1,0 +1,22 @@
+constraints:
+  Admission Type:
+    code:
+    - - .isComplete('Admission Type')
+      - Valid
+    - - .isContainedIn('Admission Type', ['Urgent', 'Elective', 'Emergency'])
+      - Valid
+    assumptions:
+    - The 'Admission Type' column should be complete, meaning no null values are allowed.
+    - 'The ''Admission Type'' column should only contain the values: ''Urgent'', ''Elective'',
+      or ''Emergency''.'
+  Medication:
+    code:
+    - - .isComplete('Medication')
+      - Valid
+    - - .isContainedIn('Medication', ['Aspirin', 'Ibuprofen', 'Lipitor', 'Paracetamol',
+        'Penicillin'])
+      - Valid
+    assumptions:
+    - The 'Medication' column should be complete, meaning no null values are allowed.
+    - 'The ''Medication'' column should only contain the values: ''Aspirin'', ''Ibuprofen'',
+      ''Lipitor'', ''Paracetamol'', or ''Penicillin''.'

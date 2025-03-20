@@ -1,0 +1,74 @@
+constraints:
+  Admission Type:
+    code:
+    - - .isComplete('Admission Type')
+      - Valid
+    - - .isContainedIn('Admission Type', ['Emergency', 'Urgent', 'Elective'])
+      - Valid
+    assumptions:
+    - The column 'Admission Type' should have values in ['Emergency', 'Urgent', 'Elective'].
+    - The column 'Admission Type' should not have null values.
+  Billing Amount:
+    code:
+    - - .isComplete('Billing Amount')
+      - Valid
+    - - .isNonNegative('Billing Amount')
+      - Invalid
+    assumptions:
+    - The column 'Billing Amount' should contain non-negative values.
+    - The column 'Billing Amount' should not have null values.
+  Date of Admission:
+    code:
+    - - .isComplete('Date of Admission')
+      - Valid
+    - - .satisfies('Date of Admission IS NOT NULL', 'Date of Admission non-null')
+      - Invalid
+    assumptions:
+    - The column 'Date of Admission' should be convertible to a datetime format.
+    - The column 'Date of Admission' should not have null values.
+  Discharge Date:
+    code:
+    - - .isComplete('Discharge Date')
+      - Valid
+    - - .satisfies('Discharge Date IS NOT NULL', 'Discharge Date non-null')
+      - Invalid
+    assumptions:
+    - The column 'Discharge Date' should be convertible to a datetime format.
+    - The column 'Discharge Date' should not have null values.
+  Medical Condition:
+    code:
+    - - .isComplete('Medical Condition')
+      - Valid
+    - - .isContainedIn('Medical Condition', ['Hypertension', 'Cancer', 'Obesity',
+        'Arthritis', 'Diabetes', 'Asthma'])
+      - Valid
+    assumptions:
+    - The column 'Medical Condition' should have values in ['Hypertension', 'Cancer',
+      'Obesity', 'Arthritis', 'Diabetes', 'Asthma'].
+    - The column 'Medical Condition' should not have null values.
+  Medication:
+    code:
+    - - .isComplete('Medication')
+      - Valid
+    - - .isContainedIn('Medication', ['Aspirin', 'Paracetamol', 'Ibuprofen', 'Penicillin',
+        'Lipitor'])
+      - Valid
+    assumptions:
+    - The column 'Medication' should have values in ['Aspirin', 'Paracetamol', 'Ibuprofen',
+      'Penicillin', 'Lipitor'].
+    - The column 'Medication' should not have null values.
+  Test Results:
+    code:
+    - - .isComplete('Test Results')
+      - Valid
+    - - .isContainedIn('Test Results', ['Abnormal', 'Normal', 'Inconclusive'])
+      - Valid
+    assumptions:
+    - The column 'Test Results' should have values in ['Abnormal', 'Normal', 'Inconclusive'].
+    - The column 'Test Results' should not have null values.
+  id:
+    code:
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The column 'id' should have unique values.

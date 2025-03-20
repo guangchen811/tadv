@@ -1,0 +1,65 @@
+constraints:
+  cb_person_cred_hist_length:
+    code:
+    - - .isComplete('cb_person_cred_hist_length')
+      - Valid
+    - - .isNonNegative('cb_person_cred_hist_length')
+      - Valid
+    assumptions:
+    - NOT NULL constraint since completeness is 1.0
+    - IS NON NEGATIVE since dataType is Integral
+  cb_person_default_on_file:
+    code:
+    - - .isComplete('cb_person_default_on_file')
+      - Valid
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    assumptions:
+    - NOT NULL constraint since completeness is 1.0
+    - IS IN constraint with most values being ['Y', 'N']
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - NOT NULL constraint since completeness is 1.0
+    - UNIQUE constraint due to high approximateNumDistinctValues relative to record
+      count
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - NOT NULL constraint since completeness is 1.0
+    - IS NON NEGATIVE since dataType is Integral
+  loan_grade:
+    code:
+    - - .isComplete('loan_grade')
+      - Valid
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - NOT NULL constraint since completeness is 1.0
+    - IS IN constraint with most values being ['A', 'B', 'C', 'D', 'E', 'F', 'G']
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - NOT NULL constraint since completeness is 1.0
+    - IS NON NEGATIVE since dataType is Fractional
+  person_home_ownership:
+    code:
+    - - .isComplete('person_home_ownership')
+      - Valid
+    - - .isContainedIn('person_home_ownership', ['RENT', 'MORTGAGE', 'OWN', 'OTHER'])
+      - Valid
+    assumptions:
+    - NOT NULL constraint since completeness is 1.0
+    - IS IN constraint with most values being ['RENT', 'MORTGAGE', 'OWN', 'OTHER']

@@ -5,20 +5,6 @@ results:
       - Passed
     - - .isNonNegative('cb_person_cred_hist_length')
       - Passed
-  cb_person_default_on_file:
-    code:
-    - - .isComplete('cb_person_default_on_file')
-      - Passed
-    - - .isContainedIn('cb_person_default_on_file', ['N', 'Y'])
-      - Passed
-  id:
-    code:
-    - - .isComplete('id')
-      - Passed
-    - - .isNonNegative('id')
-      - Passed
-    - - .isUnique('id')
-      - Passed
   loan_amnt:
     code:
     - - .isComplete('loan_amnt')
@@ -33,8 +19,6 @@ results:
       - Failed
   loan_int_rate:
     code:
-    - - '.hasMax(''loan_int_rate'', lambda x: x < 100)'
-      - Passed
     - - .isComplete('loan_int_rate')
       - Passed
     - - .isNonNegative('loan_int_rate')
@@ -48,8 +32,6 @@ results:
       - Passed
   loan_percent_income:
     code:
-    - - '.hasMax(''loan_percent_income'', lambda x: x <= 1)'
-      - Passed
     - - .isComplete('loan_percent_income')
       - Passed
     - - .isNonNegative('loan_percent_income')
@@ -58,14 +40,8 @@ results:
     code:
     - - .isComplete('loan_status')
       - Passed
-    - - .isContainedIn('loan_status', ['0', '1'])
-      - Passed
   person_age:
     code:
-    - - '.hasMax(''person_age'', lambda x: x <= 100)'
-      - Failed
-    - - '.hasMin(''person_age'', lambda x: x >= 18)'
-      - Passed
     - - .isComplete('person_age')
       - Passed
     - - .isNonNegative('person_age')

@@ -1,0 +1,19 @@
+constraints:
+  loan_amnt:
+    code:
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    - - .satisfies('loan_amnt != 0', 'Non-zero loan amount')
+      - Valid
+    assumptions:
+    - IS NON NEGATIVE
+    - NO ZERO VALUES
+  person_income:
+    code:
+    - - .isNonNegative('person_income')
+      - Valid
+    - - .satisfies('person_income != 0', 'Non-zero person income')
+      - Valid
+    assumptions:
+    - IS NON NEGATIVE
+    - NO ZERO VALUES

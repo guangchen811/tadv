@@ -1,0 +1,34 @@
+constraints:
+  Billing Amount:
+    code:
+    - - .isComplete('Billing Amount')
+      - Valid
+    - - .isNonNegative('Billing Amount')
+      - Invalid
+    assumptions:
+    - 'Assumption: The ''Billing Amount'' column should be complete, meaning every
+      record should have a non-null value.'
+    - 'Assumption: The ''Billing Amount'' column should contain only valid fractional
+      values as it is used to compute averages.'
+    - 'Assumption: The ''Billing Amount'' should be non-negative, as negative billing
+      amounts are not meaningful in this financial context.'
+  Doctor:
+    code:
+    - - .isComplete('Doctor')
+      - Valid
+    assumptions:
+    - 'Assumption: The ''Doctor'' column should be complete, meaning every record
+      should have a non-null value.'
+    - 'Assumption: The ''Doctor'' column should not contain any unexpected data types
+      given its string data type classification.'
+  Hospital:
+    code:
+    - - .isComplete('Hospital')
+      - Valid
+    - - .isContainedIn('Hospital', ['Powell-Wheeler'])
+      - Invalid
+    assumptions:
+    - 'Assumption: The ''Hospital'' column should be complete, meaning every record
+      should have a non-null value.'
+    - 'Assumption: The ''Hospital'' column should contain the value ''Powell-Wheeler'',
+      as per the filtering condition in the query.'

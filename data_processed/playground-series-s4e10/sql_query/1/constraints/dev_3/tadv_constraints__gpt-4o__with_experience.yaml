@@ -1,0 +1,31 @@
+constraints:
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - NOT NULL
+    - IS NON NEGATIVE
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - NOT NULL
+    - IS NON NEGATIVE
+  person_income:
+    code:
+    - - '.hasMin(''person_income'', lambda x: x >= 0)'
+      - Valid
+    - - .isComplete('person_income')
+      - Valid
+    - - .isNonNegative('person_income')
+      - Valid
+    assumptions:
+    - NOT NULL
+    - IS NON NEGATIVE
+    - 'MIN constraint: person_income >= 0'

@@ -1,0 +1,73 @@
+constraints:
+  cb_person_cred_hist_length:
+    code:
+    - - .isNonNegative('cb_person_cred_hist_length')
+      - Valid
+    assumptions:
+    - Values should be non-negative integers.
+  id:
+    code:
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - Values should be unique identifiers.
+  loan_amnt:
+    code:
+    - - .isPositive('loan_amnt')
+      - Valid
+    assumptions:
+    - Values should be positive integers.
+  loan_grade:
+    code:
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - Values should be one of 'A', 'B', 'C', 'D', 'E', 'F', or 'G'.
+  loan_int_rate:
+    code:
+    - - .isGreaterThanOrEqualTo('loan_int_rate', 0)
+      - Invalid
+    - - .isLessThanOrEqualTo('loan_int_rate', 100)
+      - Invalid
+    assumptions:
+    - Values should be between 0 and 100.
+  loan_intent:
+    code:
+    - - .isContainedIn('loan_intent', ['EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL',
+        'DEBTCONSOLIDATION', 'MEDICAL', 'VENTURE'])
+      - Valid
+    assumptions:
+    - Values should be one of 'EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL', 'DEBTCONSOLIDATION',
+      'MEDICAL', or 'VENTURE'.
+  loan_percent_income:
+    code:
+    - - .isGreaterThanOrEqualTo('loan_percent_income', 0)
+      - Invalid
+    - - .isLessThanOrEqualTo('loan_percent_income', 1)
+      - Invalid
+    assumptions:
+    - Values should be between 0 and 1.
+  loan_status:
+    code:
+    - - .isContainedIn('loan_status', [0, 1])
+      - Invalid
+    assumptions:
+    - Values should be either 0 or 1.
+  person_age:
+    code:
+    - - .isGreaterThanOrEqualTo('person_age', 18)
+      - Invalid
+    assumptions:
+    - Values should be greater than or equal to 18.
+  person_emp_length:
+    code:
+    - - .isNonNegative('person_emp_length')
+      - Valid
+    assumptions:
+    - Values should be non-negative numbers.
+  person_home_ownership:
+    code:
+    - - .isContainedIn('person_home_ownership', ['OWN', 'MORTGAGE', 'RENT', 'OTHER'])
+      - Valid
+    assumptions:
+    - Values should be one of 'OWN', 'MORTGAGE', 'RENT', or 'OTHER'.

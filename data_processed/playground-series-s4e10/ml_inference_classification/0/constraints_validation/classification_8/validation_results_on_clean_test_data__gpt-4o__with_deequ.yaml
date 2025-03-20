@@ -9,7 +9,7 @@ results:
     code:
     - - .isComplete('cb_person_default_on_file')
       - Passed
-    - - .isContainedIn('cb_person_default_on_file', ['N', 'Y'])
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
       - Passed
   id:
     code:
@@ -24,6 +24,10 @@ results:
     - - .isComplete('loan_amnt')
       - Passed
     - - .isNonNegative('loan_amnt')
+      - Passed
+    - - .satisfies('loan_amnt >= 0 AND loan_amnt <= 5000 OR loan_amnt > 5000 AND loan_amnt
+        <= 15000 OR loan_amnt > 15000 AND loan_amnt <= 30000 OR loan_amnt > 30000',
+        'loan_amnt range')
       - Passed
   loan_grade:
     code:

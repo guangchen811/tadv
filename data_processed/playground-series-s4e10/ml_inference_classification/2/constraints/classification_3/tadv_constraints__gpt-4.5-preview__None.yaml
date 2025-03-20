@@ -1,0 +1,122 @@
+constraints:
+  cb_person_cred_hist_length:
+    code:
+    - - '.hasVariance(''cb_person_cred_hist_length'', lambda x: x > 1e-4)'
+      - Invalid
+    - - .isComplete('cb_person_cred_hist_length')
+      - Valid
+    - - .isNonNegative('cb_person_cred_hist_length')
+      - Valid
+    assumptions:
+    - Credit history length should be non-negative integers.
+    - Variance should not be extremely low (greater than 1e-4) to avoid dropping due
+      to low predictive power.
+  cb_person_default_on_file:
+    code:
+    - - .isComplete('cb_person_default_on_file')
+      - Valid
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    assumptions:
+    - Values should be either 'Y' or 'N' only, indicating whether a default is on
+      file or not.
+  loan_amnt:
+    code:
+    - - '.hasVariance(''loan_amnt'', lambda x: x > 1e-4)'
+      - Invalid
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isPositive('loan_amnt')
+      - Valid
+    assumptions:
+    - Loan amount values should be positive numbers greater than zero, as zero loan
+      amount would result in division by zero in derived feature calculation.
+    - Variance should not be extremely low (greater than 1e-4) to avoid dropping due
+      to low predictive power.
+  loan_grade:
+    code:
+    - - .isComplete('loan_grade')
+      - Valid
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - 'Values should belong to the set of known grades: [''A'', ''B'', ''C'', ''D'',
+      ''E'', ''F'', ''G''].'
+  loan_int_rate:
+    code:
+    - - '.hasMax(''loan_int_rate'', lambda x: x <= 1.0)'
+      - Invalid
+    - - '.hasVariance(''loan_int_rate'', lambda x: x > 1e-4)'
+      - Invalid
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - Interest rate values should be non-negative and typically less than 1 (assuming
+      interest rates are represented as fractions, e.g., 0.05 for 5%).
+    - Variance should not be extremely low (greater than 1e-4) to avoid dropping due
+      to low predictive power.
+  loan_percent_income:
+    code:
+    - - '.hasMax(''loan_percent_income'', lambda x: x <= 1.0)'
+      - Valid
+    - - '.hasVariance(''loan_percent_income'', lambda x: x > 1e-4)'
+      - Invalid
+    - - .isComplete('loan_percent_income')
+      - Valid
+    - - .isGreaterThan('loan_percent_income', 0)
+      - Invalid
+    assumptions:
+    - Loan percent income should be positive numbers greater than zero and realistically
+      less than or equal to 1 (100%), as excessively high values may indicate data
+      entry errors or unrealistic loan conditions.
+    - Variance should not be extremely low (greater than 1e-4) to avoid dropping due
+      to low predictive power.
+  person_age:
+    code:
+    - - '.hasVariance(''person_age'', lambda x: x > 1e-4)'
+      - Invalid
+    - - .isComplete('person_age')
+      - Valid
+    - - .isGreaterThan('person_age', 18)
+      - Invalid
+    assumptions:
+    - Values should be positive integers greater than 18, as negative or extremely
+      low ages are unrealistic and potentially harmful.
+    - Variance should not be extremely low (greater than 1e-4) to avoid dropping due
+      to low predictive power.
+  person_emp_length:
+    code:
+    - - '.hasVariance(''person_emp_length'', lambda x: x > 1e-4)'
+      - Invalid
+    - - .isComplete('person_emp_length')
+      - Valid
+    - - .isNonNegative('person_emp_length')
+      - Valid
+    assumptions:
+    - Employment length values should be non-negative.
+    - Variance should not be extremely low (greater than 1e-4) to avoid dropping due
+      to low predictive power.
+  person_home_ownership:
+    code:
+    - - .isComplete('person_home_ownership')
+      - Valid
+    - - .isContainedIn('person_home_ownership', ['OWN', 'MORTGAGE', 'RENT', 'OTHER'])
+      - Valid
+    assumptions:
+    - 'Values should belong to the set of known categories: [''OWN'', ''MORTGAGE'',
+      ''RENT'', ''OTHER''].'
+  person_income:
+    code:
+    - - '.hasVariance(''person_income'', lambda x: x > 1e-4)'
+      - Invalid
+    - - .isComplete('person_income')
+      - Valid
+    - - .isPositive('person_income')
+      - Valid
+    assumptions:
+    - Income values should be positive numbers greater than zero, as zero or negative
+      income is unrealistic and will cause division errors during income_to_loan calculation.
+    - Variance should not be extremely low (greater than 1e-4) to avoid dropping due
+      to low predictive power.

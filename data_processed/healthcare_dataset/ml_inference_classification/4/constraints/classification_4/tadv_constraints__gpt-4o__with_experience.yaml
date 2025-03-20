@@ -1,0 +1,60 @@
+constraints:
+  Age:
+    code:
+    - - '.hasMin(''Age'', lambda x: x >= 0)'
+      - Valid
+    - - .isComplete('Age')
+      - Valid
+    - - .isNonNegative('Age')
+      - Valid
+    assumptions:
+    - The 'Age' column should be complete (NOT NULL constraint).
+    - The 'Age' column should contain non-negative values (IS NON NEGATIVE constraint).
+    - The 'Age' column should have a minimum value (consider a reasonable lower bound
+      like MIN 0).
+  Billing Amount:
+    code:
+    - - .isComplete('Billing Amount')
+      - Valid
+    - - .isNonNegative('Billing Amount')
+      - Invalid
+    assumptions:
+    - The 'Billing Amount' column should be complete (NOT NULL constraint).
+    - The 'Billing Amount' column should contain non-negative values (IS NON NEGATIVE
+      constraint).
+  Gender:
+    code:
+    - - .isComplete('Gender')
+      - Valid
+    - - .isContainedIn('Gender', ['Male', 'Female'])
+      - Valid
+    assumptions:
+    - The 'Gender' column should be complete (NOT NULL constraint).
+    - 'The ''Gender'' column should have values within a reasonable set: [''Male'',
+      ''Female''].'
+  Medical Condition:
+    code:
+    - - '.hasPattern(''Medical Condition'', ''Hypertension|Cancer|Obesity|Arthritis|Diabetes|Asthma'',
+        lambda x: x > 0.8)'
+      - Valid
+    - - .isComplete('Medical Condition')
+      - Valid
+    - - .isContainedIn('Medical Condition', ['Hypertension', 'Cancer', 'Obesity',
+        'Arthritis', 'Diabetes', 'Asthma'])
+      - Valid
+    assumptions:
+    - The 'Medical Condition' column should be complete (NOT NULL constraint).
+    - 'The ''Medical Condition'' column should have values within a reasonable set:
+      [''Hypertension'', ''Cancer'', ''Obesity'', ''Arthritis'', ''Diabetes'', ''Asthma''].'
+    - 'Most values in ''Medical Condition'' should belong to the set: [''Hypertension'',
+      ''Cancer'', ''Obesity'', ''Arthritis'', ''Diabetes'', ''Asthma''] (IS IN constraint
+      for most values).'
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The 'id' column should be complete (NOT NULL constraint).
+    - The 'id' column should be unique across the dataset.

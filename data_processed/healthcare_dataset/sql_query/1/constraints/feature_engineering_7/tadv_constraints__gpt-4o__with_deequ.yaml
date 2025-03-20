@@ -1,0 +1,25 @@
+constraints:
+  Date of Admission:
+    code:
+    - - .hasPattern('Date of Admission', '\\d{4}-\\d{2}-\\d{2}')
+      - Valid
+    - - .isComplete('Date of Admission')
+      - Valid
+    assumptions:
+    - The 'Date of Admission' column should be complete, meaning no missing values
+      are allowed.
+    - The 'Date of Admission' column should be in a valid date format to ensure proper
+      date calculations can be performed.
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isNonNegative('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The 'id' column should be complete, meaning no missing values are allowed.
+    - The 'id' column should be unique to ensure each patient is identified distinctly.
+    - The 'id' column should be non-negative, as negative identifiers are not meaningful
+      in this context.

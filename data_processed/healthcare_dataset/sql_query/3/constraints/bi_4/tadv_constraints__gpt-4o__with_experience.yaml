@@ -1,0 +1,38 @@
+constraints:
+  Billing Amount:
+    code:
+    - - '.hasMean(''Billing Amount'', lambda x: historical_mean_assert(x))'
+      - Invalid
+    - - '.hasStandardDeviation(''Billing Amount'', lambda x: historical_std_assert(x))'
+      - Invalid
+    - - .isComplete('Billing Amount')
+      - Valid
+    - - .isNonNegative('Billing Amount')
+      - Invalid
+    assumptions:
+    - The column should not contain null values.
+    - The values should be non-negative.
+    - The column is numeric and should have a mean and standard deviation that aligns
+      with the historical data distribution.
+  Insurance Provider:
+    code:
+    - - .isComplete('Insurance Provider')
+      - Valid
+    - - .isContainedIn('Insurance Provider', ['Aetna', 'Blue Cross', 'UnitedHealthcare',
+        'Cigna', 'Medicare'])
+      - Valid
+    assumptions:
+    - 'The values should be within the known categories: Aetna, Blue Cross, UnitedHealthcare,
+      Cigna, Medicare.'
+    - The column should not contain null values.
+  Medical Condition:
+    code:
+    - - .isComplete('Medical Condition')
+      - Valid
+    - - .isContainedIn('Medical Condition', ['Hypertension', 'Cancer', 'Obesity',
+        'Arthritis', 'Diabetes', 'Asthma'])
+      - Valid
+    assumptions:
+    - 'The values should be within the known categories: Hypertension, Cancer, Obesity,
+      Arthritis, Diabetes, Asthma.'
+    - The column should not contain null values.

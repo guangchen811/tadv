@@ -1,0 +1,15 @@
+constraints:
+  person_home_ownership:
+    code:
+    - - '.hasPattern(''person_home_ownership'', ''OTHER|OWN|MORTGAGE|RENT'', lambda
+        x: x > 0.8)'
+      - Valid
+    - - .isComplete('person_home_ownership')
+      - Valid
+    - - .isContainedIn('person_home_ownership', ['OTHER', 'OWN', 'MORTGAGE', 'RENT'])
+      - Valid
+    assumptions:
+    - The column should have values within the set {'OTHER', 'OWN', 'MORTGAGE', 'RENT'}
+    - The column should not contain NULL values
+    - Most values in the column should be within the set {'OTHER', 'OWN', 'MORTGAGE',
+      'RENT'}

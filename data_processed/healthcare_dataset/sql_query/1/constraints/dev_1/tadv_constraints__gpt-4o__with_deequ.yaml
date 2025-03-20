@@ -1,0 +1,23 @@
+constraints:
+  Date of Admission:
+    code:
+    - - .isComplete('Date of Admission')
+      - Valid
+    - - .satisfies('CAST(Date of Admission AS DATE) IS NOT NULL', 'Date of Admission
+        format check')
+      - Invalid
+    - - .satisfies('Date of Admission <= CURRENT_DATE AND Date of Admission >= CURRENT_DATE
+        - INTERVAL 10 YEAR', 'Date of Admission reasonable range')
+      - Invalid
+    - - '.satisfies(''Date of Admission > LAG(Date of Admission, 1) OVER (ORDER BY
+        Date of Admission)'', ''Date of Admission chronological order'', lambda x:
+        x > 0.9)'
+      - Invalid
+    assumptions:
+    - The 'Date of Admission' column should be complete (no missing values).
+    - The 'Date of Admission' values should be in a format that can be converted to
+      DATE type.
+    - The 'Date of Admission' values should be in chronological order to ensure meaningful
+      rolling average calculations.
+    - The 'Date of Admission' should fall within a reasonable date range, not in the
+      future or too far in the past.

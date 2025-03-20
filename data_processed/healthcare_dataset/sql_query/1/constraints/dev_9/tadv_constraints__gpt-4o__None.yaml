@@ -1,0 +1,33 @@
+constraints:
+  Age:
+    code:
+    - - .isComplete('Age')
+      - Valid
+    - - .isNonNegative('Age')
+      - Valid
+    assumptions:
+    - The 'Age' column should be an integer value.
+    - The 'Age' column should have values greater than or equal to 0.
+  Medical Condition:
+    code:
+    - - .isComplete('Medical Condition')
+      - Valid
+    - - .isContainedIn('Medical Condition', ['Cancer', 'Diabetes', 'Hypertension',
+        'Obesity', 'Arthritis', 'Asthma'])
+      - Valid
+    assumptions:
+    - The 'Medical Condition' column should be non-null for all entries.
+    - The 'Medical Condition' column should only contain values from the list ['Cancer',
+      'Diabetes', 'Hypertension', 'Obesity', 'Arthritis', 'Asthma'].
+  Name:
+    code:
+    - - .isComplete('Name')
+      - Valid
+    assumptions:
+    - The 'Name' column should be non-null for all entries.
+  id:
+    code:
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The 'id' column should contain unique values.

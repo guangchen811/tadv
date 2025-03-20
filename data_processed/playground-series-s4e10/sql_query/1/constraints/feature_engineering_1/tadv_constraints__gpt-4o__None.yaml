@@ -1,0 +1,13 @@
+constraints:
+  loan_amnt:
+    code:
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - The loan_amnt column should not contain negative values.
+  person_income:
+    code:
+    - - .isPositive('person_income')
+      - Valid
+    assumptions:
+    - The person_income column should not contain zero or negative values.

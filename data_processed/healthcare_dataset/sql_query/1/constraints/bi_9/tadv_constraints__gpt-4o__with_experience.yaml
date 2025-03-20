@@ -1,0 +1,30 @@
+constraints:
+  Date of Admission:
+    code:
+    - - .isComplete('Date of Admission')
+      - Valid
+    - - .satisfies('CAST(`Date of Admission` AS DATE) IS NOT NULL', 'Date of Admission
+        Convertible to DATE')
+      - Valid
+    assumptions:
+    - Should be convertible to DATE type
+    - Should have NOT NULL constraint
+  Discharge Date:
+    code:
+    - - .isComplete('Discharge Date')
+      - Valid
+    - - .satisfies('CAST(`Discharge Date` AS DATE) IS NOT NULL', 'Discharge Date Convertible
+        to DATE')
+      - Valid
+    assumptions:
+    - Should be convertible to DATE type
+    - Should have NOT NULL constraint
+  Test Results:
+    code:
+    - - .isComplete('Test Results')
+      - Valid
+    - - .isContainedIn('Test Results', ['Abnormal', 'Normal', 'Inconclusive'])
+      - Valid
+    assumptions:
+    - Should have values in ['Abnormal', 'Normal', 'Inconclusive']
+    - Should have NOT NULL constraint

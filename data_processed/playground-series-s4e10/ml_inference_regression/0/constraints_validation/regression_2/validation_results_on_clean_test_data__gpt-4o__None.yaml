@@ -1,49 +1,66 @@
 results:
   cb_person_cred_hist_length:
     code:
-    - - '.satisfies(''cb_person_cred_hist_length >= 0'', ''cb_person_cred_hist_length
-        should be a numeric column'', lambda x: x == 1.0)'
+    - - .isComplete('cb_person_cred_hist_length')
+      - Passed
+    - - .isNonNegative('cb_person_cred_hist_length')
       - Passed
   cb_person_default_on_file:
     code:
+    - - .isComplete('cb_person_default_on_file')
+      - Passed
     - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
       - Passed
   loan_amnt:
     code:
-    - - '.satisfies(''loan_amnt >= 0'', ''loan_amnt should be a numeric column'',
-        lambda x: x == 1.0)'
+    - - .isComplete('loan_amnt')
+      - Passed
+    - - .isPositive('loan_amnt')
       - Passed
   loan_grade:
     code:
+    - - .isComplete('loan_grade')
+      - Passed
     - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
       - Passed
   loan_int_rate:
     code:
-    - - '.satisfies(''loan_int_rate >= 0'', ''loan_int_rate should be a numeric column'',
-        lambda x: x == 1.0)'
+    - - .isComplete('loan_int_rate')
+      - Passed
+    - - .isNonNegative('loan_int_rate')
       - Passed
   loan_intent:
     code:
-    - - '.hasPattern(''loan_intent'', ''EDUCATION|MEDICAL|VENTURE|PERSONAL|HOMEIMPROVEMENT|DEBTCONSOLIDATION'',
-        lambda x: x == 1.0)'
+    - - .isComplete('loan_intent')
+      - Passed
+    - - .isContainedIn('loan_intent', ['EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL',
+        'DEBTCONSOLIDATION', 'MEDICAL', 'VENTURE'])
       - Passed
   loan_percent_income:
     code:
-    - - '.satisfies(''loan_percent_income >= 0'', ''loan_percent_income should be
-        a numeric column'', lambda x: x == 1.0)'
+    - - .isComplete('loan_percent_income')
+      - Passed
+    - - .isNonNegative('loan_percent_income')
       - Passed
   loan_status:
     code:
-    - - '.satisfies(''loan_status >= 0'', ''loan_status should be a numeric column'',
-        lambda x: x == 1.0)'
+    - - .isComplete('loan_status')
       - Passed
   person_age:
     code:
-    - - '.satisfies(''person_age >= 0'', ''person_age should be a numeric column'',
-        lambda x: x == 1.0)'
+    - - .isComplete('person_age')
+      - Passed
+    - - .isNonNegative('person_age')
       - Passed
   person_emp_length:
     code:
-    - - '.satisfies(''person_emp_length >= 0'', ''person_emp_length should be a numeric
-        column'', lambda x: x == 1.0)'
+    - - .isComplete('person_emp_length')
+      - Passed
+    - - .isNonNegative('person_emp_length')
+      - Passed
+  person_home_ownership:
+    code:
+    - - .isComplete('person_home_ownership')
+      - Passed
+    - - .isContainedIn('person_home_ownership', ['OTHER', 'OWN', 'MORTGAGE', 'RENT'])
       - Passed

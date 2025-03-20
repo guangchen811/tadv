@@ -1,0 +1,48 @@
+constraints:
+  Billing Amount:
+    code:
+    - - .isNonNegative('billing_amount')
+      - Invalid
+    assumptions:
+    - Should be a numeric data type.
+    - Should be non-negative.
+  Date of Admission:
+    code:
+    - - .isComplete('admission_dt')
+      - Invalid
+    assumptions:
+    - Should be a valid date format.
+    - Should be complete (NOT NULL).
+  Discharge Date:
+    code:
+    - - .isComplete('discharge_dt')
+      - Invalid
+    - - .isGreaterThanOrEqualTo('discharge_dt', 'admission_dt')
+      - Invalid
+    assumptions:
+    - Should be a valid date format.
+    - Should be complete (NOT NULL).
+    - Should be greater than or equal to Date of Admission.
+  Doctor:
+    code: []
+    assumptions:
+    - Should be a string data type.
+    - Could have any string value due to high cardinality.
+  Name:
+    code: []
+    assumptions:
+    - Should be a string data type.
+    - Could have any string value due to high cardinality.
+  Test Results:
+    code:
+    - - .isContainedIn('Test Results', ['Abnormal', 'Normal', 'Inconclusive'])
+      - Valid
+    assumptions:
+    - 'Should be within the known categories: ''Abnormal'', ''Normal'', ''Inconclusive''.'
+  id:
+    code:
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - Should be a numeric data type.
+    - Should be unique.

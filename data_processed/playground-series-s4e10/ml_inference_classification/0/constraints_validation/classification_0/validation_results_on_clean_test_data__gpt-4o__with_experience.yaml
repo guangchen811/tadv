@@ -1,8 +1,6 @@
 results:
   cb_person_default_on_file:
     code:
-    - - '.hasDistinctness([''cb_person_default_on_file''], lambda x: x < 1.0)'
-      - Passed
     - - .isComplete('cb_person_default_on_file')
       - Passed
     - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
@@ -15,16 +13,14 @@ results:
       - Passed
   loan_amnt:
     code:
-    - - '.hasMax(''loan_amnt'', lambda x: x <= 50000)'
-      - Passed
     - - .isComplete('loan_amnt')
       - Passed
+  log_loan_amnt:
+    code:
     - - .isNonNegative('loan_amnt')
       - Passed
   loan_grade:
     code:
-    - - '.hasDistinctness([''loan_grade''], lambda x: x < 1.0)'
-      - Passed
     - - .isComplete('loan_grade')
       - Passed
     - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])

@@ -7,17 +7,9 @@ results:
     code:
     - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
       - Passed
-  loan_amnt:
-    code:
-    - - .isNonNegative('loan_amnt')
-      - Passed
   loan_grade:
     code:
     - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
-      - Passed
-  loan_int_rate:
-    code:
-    - - .isNonNegative('loan_int_rate')
       - Passed
   person_home_ownership:
     code:

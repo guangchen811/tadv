@@ -1,0 +1,21 @@
+constraints:
+  Admission Type:
+    code:
+    - - .isComplete('Admission Type')
+      - Valid
+    - - .isContainedIn('Admission Type', ['Emergency', 'Urgent', 'Elective'])
+      - Valid
+    assumptions:
+    - The 'Admission Type' column should be complete with no missing values.
+    - The 'Admission Type' should only contain the values 'Emergency', 'Urgent', or
+      'Elective'.
+  Hospital:
+    code:
+    - - '.hasPattern(''Hospital'', ''.*'', lambda x: x == 1.0)'
+      - Valid
+    - - .isComplete('Hospital')
+      - Valid
+    assumptions:
+    - The 'Hospital' column should be complete with no missing values.
+    - Each 'Hospital' entry should correspond to a valid hospital name present in
+      the dataset.

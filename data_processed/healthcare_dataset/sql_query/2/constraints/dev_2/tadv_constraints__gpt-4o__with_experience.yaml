@@ -1,0 +1,61 @@
+constraints:
+  Billing Amount:
+    code:
+    - - .isComplete('Billing Amount')
+      - Valid
+    - - .isNonNegative('Billing Amount')
+      - Invalid
+    assumptions:
+    - The column 'Billing Amount' should be complete (NOT NULL).
+    - The column 'Billing Amount' should be non-negative.
+  Date of Admission:
+    code:
+    - - .isComplete('Date of Admission')
+      - Valid
+    - - .satisfies('Date of Admission >= 2020-01-01 AND Date of Admission <= 2022-12-31',
+        'date_range_check')
+      - Invalid
+    - - .satisfies('TRY_CAST(Date of Admission AS DATE) IS NOT NULL', 'valid_date_check')
+      - Invalid
+    assumptions:
+    - The column 'Date of Admission' should be complete (NOT NULL).
+    - The column 'Date of Admission' should be a valid date.
+    - The column 'Date of Admission' should be between '2020-01-01' and '2022-12-31'.
+  Medical Condition:
+    code:
+    - - .isComplete('Medical Condition')
+      - Valid
+    - - .isContainedIn('Medical Condition', ['Hypertension', 'Cancer', 'Obesity',
+        'Arthritis', 'Diabetes', 'Asthma'])
+      - Valid
+    assumptions:
+    - The column 'Medical Condition' should be complete (NOT NULL).
+    - The column 'Medical Condition' should have values within ['Hypertension', 'Cancer',
+      'Obesity', 'Arthritis', 'Diabetes', 'Asthma'].
+  Name:
+    code:
+    - - .isComplete('Name')
+      - Valid
+    assumptions:
+    - The column 'Name' should be complete (NOT NULL).
+  Test Results:
+    code:
+    - - .isComplete('Test Results')
+      - Valid
+    - - .isContainedIn('Test Results', ['Abnormal', 'Normal', 'Inconclusive'])
+      - Valid
+    - - .satisfies('Test Results == Abnormal', 'task_specific_value_check')
+      - Invalid
+    assumptions:
+    - The column 'Test Results' should be complete (NOT NULL).
+    - The column 'Test Results' should have values within ['Abnormal', 'Normal', 'Inconclusive'].
+    - The column 'Test Results' should have 'Abnormal' for the downstream task.
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The column 'id' should be complete (NOT NULL).
+    - The column 'id' should have unique values.

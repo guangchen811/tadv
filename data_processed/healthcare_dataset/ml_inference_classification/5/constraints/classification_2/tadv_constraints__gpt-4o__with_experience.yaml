@@ -1,0 +1,93 @@
+constraints:
+  Age:
+    code:
+    - - '.hasMean(''Age'', lambda x: 0 <= x <= 100)'
+      - Valid
+    - - '.hasStandardDeviation(''Age'', lambda x: x > 0)'
+      - Valid
+    - - .isComplete('Age')
+      - Valid
+    - - .satisfies('Age >= 0', 'Age should be non-negative')
+      - Valid
+    assumptions:
+    - The 'Age' column should be complete (NOT NULL).
+    - The 'Age' column should be converted to numeric and should not contain non-numeric
+      values.
+    - The 'Age' column should be non-negative.
+    - The 'Age' column should have a mean and standard deviation within a reasonable
+      range.
+  Billing Amount:
+    code:
+    - - '.hasMean(''Billing Amount'', lambda x: x >= 0)'
+      - Valid
+    - - '.hasStandardDeviation(''Billing Amount'', lambda x: x > 0)'
+      - Valid
+    - - .isComplete('Billing Amount')
+      - Valid
+    - - .satisfies('`Billing Amount` >= 0', 'Billing Amount should be non-negative')
+      - Invalid
+    assumptions:
+    - The 'Billing Amount' column should be complete (NOT NULL).
+    - The 'Billing Amount' column should be converted to numeric and should not contain
+      non-numeric values.
+    - The 'Billing Amount' column should be non-negative.
+    - The 'Billing Amount' column should have a mean and standard deviation within
+      a reasonable range.
+  Date of Admission:
+    code:
+    - - .isComplete('Date of Admission')
+      - Valid
+    assumptions:
+    - The 'Date of Admission' column should be complete (NOT NULL).
+  Discharge Date:
+    code:
+    - - .isComplete('Discharge Date')
+      - Valid
+    assumptions:
+    - The 'Discharge Date' column should be complete (NOT NULL).
+  Doctor:
+    code:
+    - - .isComplete('Doctor')
+      - Valid
+    assumptions:
+    - The 'Doctor' column should be complete (NOT NULL).
+  Hospital:
+    code:
+    - - .isComplete('Hospital')
+      - Valid
+    assumptions:
+    - The 'Hospital' column should be complete (NOT NULL).
+  Name:
+    code:
+    - - .isComplete('Name')
+      - Valid
+    assumptions:
+    - The 'Name' column should be complete (NOT NULL).
+  Room Number:
+    code:
+    - - .isComplete('Room Number')
+      - Valid
+    - - .satisfies('`Room Number` >= 0', 'Room Number should be non-negative')
+      - Valid
+    assumptions:
+    - The 'Room Number' column should be complete (NOT NULL).
+    - The 'Room Number' column should be non-negative.
+  Test Results:
+    code:
+    - - .isComplete('Test Results')
+      - Valid
+    - - .isContainedIn('Test Results', ['Abnormal', 'Normal', 'Inconclusive'])
+      - Valid
+    assumptions:
+    - The 'Test Results' column should be complete (NOT NULL).
+    - 'The ''Test Results'' column should contain values within the set: [''Abnormal'',
+      ''Normal'', ''Inconclusive''].'
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The 'id' column should be complete (NOT NULL).
+    - The 'id' column should have unique values.

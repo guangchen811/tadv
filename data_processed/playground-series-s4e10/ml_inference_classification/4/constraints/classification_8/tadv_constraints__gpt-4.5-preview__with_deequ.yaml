@@ -1,0 +1,89 @@
+constraints:
+  cb_person_cred_hist_length:
+    code:
+    - - .isComplete('cb_person_cred_hist_length')
+      - Valid
+    - - .isNonNegative('cb_person_cred_hist_length')
+      - Valid
+    - - .satisfies('cb_person_cred_hist_length % 1 = 0', 'integer_check_cb_person_cred_hist_length')
+      - Valid
+    assumptions:
+    - The column 'cb_person_cred_hist_length' must not contain missing values.
+    - The values in 'cb_person_cred_hist_length' must be integers and non-negative.
+  cb_person_default_on_file:
+    code:
+    - - .isComplete('cb_person_default_on_file')
+      - Valid
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    assumptions:
+    - The column 'cb_person_default_on_file' must not contain missing values.
+    - The values in 'cb_person_default_on_file' must only be one of ['Y', 'N'].
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isNonNegative('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    - - .satisfies('id % 1 = 0', 'integer_check_id')
+      - Valid
+    assumptions:
+    - The column 'id' must not contain missing values.
+    - The values in 'id' must be unique.
+    - The values in 'id' must be non-negative integers.
+  loan_amnt:
+    code:
+    - - '.hasMax(''loan_amnt'', lambda x: x > 30000)'
+      - Valid
+    - - '.hasMin(''loan_amnt'', lambda x: x <= 5000)'
+      - Valid
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - The column 'loan_amnt' must not contain missing values.
+    - The values in 'loan_amnt' must be non-negative.
+    - 'The values in ''loan_amnt'' must include values covering all categories: ''Low''
+      (0-5000), ''Medium'' (5001-15000), ''High'' (15001-30000), and ''Very High''
+      (above 30000).'
+  loan_grade:
+    code:
+    - - .isComplete('loan_grade')
+      - Valid
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - The column 'loan_grade' must not contain missing values.
+    - The values in 'loan_grade' must only be one of ['A', 'B', 'C', 'D', 'E', 'F',
+      'G'].
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - The column 'loan_int_rate' must not contain missing values.
+    - The values in 'loan_int_rate' must be non-negative.
+  loan_percent_income:
+    code:
+    - - .isComplete('loan_percent_income')
+      - Valid
+    - - .isNonNegative('loan_percent_income')
+      - Valid
+    assumptions:
+    - The column 'loan_percent_income' must not contain missing values.
+    - The values in 'loan_percent_income' must be non-negative.
+  person_home_ownership:
+    code:
+    - - .isComplete('person_home_ownership')
+      - Valid
+    - - .isContainedIn('person_home_ownership', ['RENT', 'MORTGAGE', 'OWN', 'OTHER'])
+      - Valid
+    assumptions:
+    - The column 'person_home_ownership' must not contain missing values.
+    - The values in 'person_home_ownership' must only be one of ['RENT', 'MORTGAGE',
+      'OWN', 'OTHER'].

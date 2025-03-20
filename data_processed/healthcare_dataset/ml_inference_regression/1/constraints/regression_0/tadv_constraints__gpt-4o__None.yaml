@@ -1,0 +1,39 @@
+constraints:
+  Age:
+    code:
+    - - .isComplete('Age')
+      - Valid
+    - - .satisfies('Age >= 0', 'Age should be non-negative')
+      - Valid
+    assumptions:
+    - Must be a numeric value as it is converted to numeric using pd.to_numeric.
+    - Missing values are filled with 0.
+  Room Number:
+    code:
+    - - .isComplete('Room Number')
+      - Valid
+    - - .satisfies('Room Number >= 0', 'Room Number should be non-negative')
+      - Invalid
+    assumptions:
+    - Must be a numeric value as it is converted to numeric using pd.to_numeric.
+    - Missing values are filled with 0.
+  billing_amount:
+    code:
+    - - .isComplete('billing_amount')
+      - Invalid
+    - - .satisfies('billing_amount >= 0', 'Billing Amount should be non-negative')
+      - Invalid
+    assumptions:
+    - Must be a numeric value since it is the target for regression.
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    - - .satisfies('id >= 0', 'ID should be non-negative')
+      - Valid
+    assumptions:
+    - Must be a unique identifier since it is used to match test predictions with
+      test data.
+    - Must be integral as it is treated as an ID column.

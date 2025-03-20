@@ -1,0 +1,15 @@
+constraints:
+  person_emp_length:
+    code:
+    - - .isComplete('person_emp_length')
+      - Valid
+    - - .isNonNegative('person_emp_length')
+      - Valid
+    assumptions:
+    - The column person_emp_length should be complete and have a NOT NULL constraint,
+      as it is complete in the sample.
+    - 'The column person_emp_length should have a value within the ranges: ''< 2'',
+      ''2 to 5'', ''> 5'', or ''Unknown''. This implies handling potential NULL or
+      missing values by categorizing them as ''Unknown''.'
+    - The column person_emp_length should have non-negative values as the employment
+      length cannot be negative in a practical scenario.

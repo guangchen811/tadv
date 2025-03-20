@@ -1,0 +1,65 @@
+constraints:
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isPositive('loan_amnt')
+      - Valid
+    assumptions:
+    - loan_amnt should be a positive integer value representing the amount issued
+      for the loan.
+  loan_grade:
+    code:
+    - - .isComplete('loan_grade')
+      - Valid
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - loan_grade should have a limited set of distinct values reflecting different
+      credit risk levels.
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - .isPositive('loan_int_rate')
+      - Valid
+    assumptions:
+    - loan_int_rate should be a positive fractional value representing the interest
+      rate applied to the loan.
+  loan_intent:
+    code:
+    - - .isComplete('loan_intent')
+      - Valid
+    - - .isContainedIn('loan_intent', ['education', 'medical', 'personal', 'home improvement',
+        'other'])
+      - Invalid
+    assumptions:
+    - loan_intent should have a limited set of distinct values reflecting different
+      purposes for the loan.
+  loan_percent_income:
+    code:
+    - - .isComplete('loan_percent_income')
+      - Valid
+    - - .isPositive('loan_percent_income')
+      - Invalid
+    assumptions:
+    - loan_percent_income should be a positive fractional value representing the loan
+      amount as a percentage of the borrower's income.
+  loan_status:
+    code:
+    - - .isComplete('loan_status')
+      - Valid
+    - - .isContainedIn('loan_status', [0, 1])
+      - Invalid
+    assumptions:
+    - loan_status is expected to be binary, indicating whether a loan is defaulted
+      (1) or not (0).
+  person_income:
+    code:
+    - - .isComplete('person_income')
+      - Valid
+    - - .isPositive('person_income')
+      - Valid
+    assumptions:
+    - person_income should be a positive integer value representing the borrower's
+      income.

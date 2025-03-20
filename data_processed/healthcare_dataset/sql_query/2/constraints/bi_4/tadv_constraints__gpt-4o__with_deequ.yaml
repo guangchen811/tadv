@@ -1,0 +1,32 @@
+constraints:
+  Billing Amount:
+    code:
+    - - .isComplete('Billing Amount')
+      - Valid
+    - - .isPositive('Billing Amount')
+      - Invalid
+    assumptions:
+    - Billing Amount should be complete.
+    - Billing Amount should be a positive number.
+  Insurance Provider:
+    code:
+    - - .isComplete('Insurance Provider')
+      - Valid
+    - - .isContainedIn('Insurance Provider', ['Cigna', 'Medicare', 'UnitedHealthcare',
+        'Blue Cross', 'Aetna'])
+      - Valid
+    assumptions:
+    - Insurance Provider should be complete.
+    - 'Insurance Provider should be one of the predefined values: Cigna, Medicare,
+      UnitedHealthcare, Blue Cross, Aetna.'
+  Medical Condition:
+    code:
+    - - .isComplete('Medical Condition')
+      - Valid
+    - - .isContainedIn('Medical Condition', ['Diabetes', 'Asthma', 'Obesity', 'Hypertension',
+        'Arthritis', 'Cancer'])
+      - Valid
+    assumptions:
+    - Medical Condition should be complete.
+    - 'Medical Condition should be one of the predefined values: Diabetes, Asthma,
+      Obesity, Hypertension, Arthritis, Cancer.'

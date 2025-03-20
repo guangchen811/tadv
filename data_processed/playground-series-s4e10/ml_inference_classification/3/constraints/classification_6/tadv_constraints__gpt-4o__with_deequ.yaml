@@ -1,0 +1,103 @@
+constraints:
+  cb_person_default_on_file:
+    code:
+    - - .isComplete('cb_person_default_on_file')
+      - Valid
+    - - .isContainedIn('cb_person_default_on_file', ['N', 'Y'])
+      - Valid
+    assumptions:
+    - The column 'cb_person_default_on_file' should be complete (no missing values).
+    - The column 'cb_person_default_on_file' should be one of ['N', 'Y'].
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isNonNegative('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The column 'id' should be complete (no missing values).
+    - The column 'id' should be unique.
+    - The column 'id' should contain non-negative values.
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - The column 'loan_amnt' should be complete (no missing values).
+    - The column 'loan_amnt' should contain non-negative values.
+  loan_grade:
+    code:
+    - - .isComplete('loan_grade')
+      - Valid
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - The column 'loan_grade' should be complete (no missing values).
+    - The column 'loan_grade' should be one of ['A', 'B', 'C', 'D', 'E', 'F', 'G'].
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - The column 'loan_int_rate' should be complete (no missing values).
+    - The column 'loan_int_rate' should contain non-negative values.
+  loan_status:
+    code:
+    - - .isComplete('loan_status')
+      - Valid
+    - - .isContainedIn('loan_status', [0, 1])
+      - Invalid
+    - - .isNonNegative('loan_status')
+      - Valid
+    assumptions:
+    - The column 'loan_status' should be complete (no missing values).
+    - The column 'loan_status' should be one of [0, 1].
+    - The column 'loan_status' should contain non-negative values.
+  loan_to_income_ratio:
+    code:
+    - - .isComplete('loan_to_income_ratio')
+      - Invalid
+    - - .isNonNegative('loan_to_income_ratio')
+      - Invalid
+    assumptions:
+    - The column 'loan_to_income_ratio' is derived from 'loan_amnt' / 'person_income'
+      and should be complete (no missing values).
+    - The column 'loan_to_income_ratio' should be a non-negative value.
+  person_age:
+    code:
+    - - .isComplete('person_age')
+      - Valid
+    - - .isNonNegative('person_age')
+      - Valid
+    assumptions:
+    - The column 'person_age' should be complete (no missing values).
+    - The column 'person_age' should contain non-negative values.
+  person_home_ownership:
+    code:
+    - - .isComplete('person_home_ownership')
+      - Valid
+    - - .isContainedIn('person_home_ownership', ['RENT', 'MORTGAGE', 'OWN', 'OTHER'])
+      - Valid
+    assumptions:
+    - The column 'person_home_ownership' should be complete (no missing values).
+    - The column 'person_home_ownership' should be one of ['RENT', 'MORTGAGE', 'OWN',
+      'OTHER'].
+  person_income:
+    code:
+    - - .isComplete('person_income')
+      - Valid
+    - - .isNonNegative('person_income')
+      - Valid
+    - - .satisfies('person_income != 0', 'Non-zero person_income')
+      - Valid
+    assumptions:
+    - The column 'person_income' should be complete (no missing values).
+    - The column 'person_income' should contain non-negative values.
+    - The column 'person_income' should not be zero to avoid division by zero in loan_to_income_ratio
+      calculation.

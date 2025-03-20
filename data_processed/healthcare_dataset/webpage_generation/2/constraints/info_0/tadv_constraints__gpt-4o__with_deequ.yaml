@@ -1,0 +1,41 @@
+constraints:
+  Age:
+    code:
+    - - '.hasMax(''Age'', lambda x: x <= 120)'
+      - Valid
+    - - .isComplete('Age')
+      - Valid
+    - - .isNonNegative('Age')
+      - Valid
+    assumptions:
+    - The column 'Age' should be complete (no missing values).
+    - The column 'Age' should be numeric and non-negative.
+    - The column 'Age' should be within a reasonable range [0, 120].
+  Hospital:
+    code:
+    - - .isComplete('Hospital')
+      - Valid
+    assumptions:
+    - The column 'Hospital' should be complete (no missing values).
+  Medical Condition:
+    code:
+    - - .isComplete('Medical Condition')
+      - Valid
+    - - .isContainedIn('Medical Condition', ['Diabetes', 'Asthma', 'Obesity', 'Hypertension',
+        'Arthritis', 'Cancer'])
+      - Valid
+    assumptions:
+    - The column 'Medical Condition' should be complete (no missing values).
+    - 'The column ''Medical Condition'' should contain values: [''Diabetes'', ''Asthma'',
+      ''Obesity'', ''Hypertension'', ''Arthritis'', ''Cancer''].'
+  Medication:
+    code:
+    - - .isComplete('Medication')
+      - Valid
+    - - .isContainedIn('Medication', ['Aspirin', 'Ibuprofen', 'Lipitor', 'Paracetamol',
+        'Penicillin'])
+      - Valid
+    assumptions:
+    - The column 'Medication' should be complete (no missing values).
+    - 'The column ''Medication'' should contain values: [''Aspirin'', ''Ibuprofen'',
+      ''Lipitor'', ''Paracetamol'', ''Penicillin''].'

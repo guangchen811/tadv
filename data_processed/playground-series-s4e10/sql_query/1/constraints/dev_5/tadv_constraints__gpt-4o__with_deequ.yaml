@@ -1,0 +1,25 @@
+constraints:
+  id:
+    code:
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - Each id should be unique to identify individual records.
+  loan_amnt:
+    code:
+    - - '.hasSum(''loan_amnt'', lambda x: x >= 0)'
+      - Valid
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - loan_amnt should be non-negative.
+    - The sum of loan_amnt should be computed accurately for each id.
+  person_income:
+    code:
+    - - '.isGreaterThan(''person_income'', ''current_loans'', lambda x: x > 2)'
+      - Invalid
+    - - .isNonNegative('person_income')
+      - Valid
+    assumptions:
+    - person_income should be non-negative.
+    - person_income should be greater than twice the sum of loan_amnt for eligibility.

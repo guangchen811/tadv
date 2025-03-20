@@ -1,0 +1,39 @@
+constraints:
+  loan_amnt:
+    code:
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - loan_amnt should be a non-negative integer
+  loan_grade:
+    code:
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - loan_grade should be one of ['A', 'B', 'C', 'D', 'E', 'F', 'G']
+  loan_intent:
+    code:
+    - - .isContainedIn('loan_intent', ['EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL',
+        'DEBTCONSOLIDATION', 'MEDICAL', 'VENTURE'])
+      - Valid
+    assumptions:
+    - loan_intent should be one of ['EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL', 'DEBTCONSOLIDATION',
+      'MEDICAL', 'VENTURE']
+  loan_status:
+    code:
+    - - .isContainedIn('loan_status', [0, 1])
+      - Invalid
+    assumptions:
+    - loan_status should be either 0 or 1
+  person_emp_length:
+    code:
+    - - .isNonNegative('person_emp_length')
+      - Valid
+    assumptions:
+    - person_emp_length should be a non-negative number
+  person_income:
+    code:
+    - - .isNonNegative('person_income')
+      - Valid
+    assumptions:
+    - person_income should be a non-negative integer

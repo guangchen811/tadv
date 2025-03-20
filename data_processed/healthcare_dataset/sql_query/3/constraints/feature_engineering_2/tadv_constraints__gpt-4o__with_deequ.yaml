@@ -1,0 +1,37 @@
+constraints:
+  Age:
+    code:
+    - - '.hasMax(''Age'', lambda x: x <= 120)'
+      - Valid
+    - - '.hasMin(''Age'', lambda x: x >= 0)'
+      - Valid
+    - - .isComplete('Age')
+      - Valid
+    - - .isNonNegative('Age')
+      - Valid
+    - - .satisfies('Age < 18 OR (Age BETWEEN 18 AND 30) OR (Age BETWEEN 31 AND 50)
+        OR (Age BETWEEN 51 AND 64) OR Age >= 65', 'Age categorization logic')
+      - Valid
+    - - .satisfies('Age = CAST(Age AS INTEGER)', 'Age should be integer')
+      - Valid
+    assumptions:
+    - The 'Age' column should be complete (no missing values).
+    - The 'Age' column should be non-negative.
+    - The 'Age' column should allow integer values.
+    - The 'Age' column should be within a reasonable range, considering the age categorization
+      logic (e.g., 0 to 120).
+    - 'The ''Age'' column should support the categorization logic: <18 as ''child'',
+      18-30 as ''young_adult'', 31-50 as ''adult'', 51-64 as ''mid_senior'', and 65+
+      as ''senior''.'
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isNonNegative('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The 'id' column should be complete (no missing values).
+    - The 'id' column should contain unique values for each patient.
+    - The 'id' column should be non-negative.

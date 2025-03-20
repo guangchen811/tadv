@@ -1,0 +1,13 @@
+constraints:
+  person_emp_length:
+    code:
+    - - '.hasMin(''person_emp_length'', lambda x: x >= 0)'
+      - Valid
+    - - .isComplete('person_emp_length')
+      - Valid
+    - - .isContainedIn('emp_length_category', ['Junior', 'Mid-level', 'Senior', 'Unknown'])
+      - Invalid
+    assumptions:
+    - should be NOT NULL
+    - should have a minimum value of 0
+    - 'should fit into categories: ''Junior'', ''Mid-level'', ''Senior'', ''Unknown'''

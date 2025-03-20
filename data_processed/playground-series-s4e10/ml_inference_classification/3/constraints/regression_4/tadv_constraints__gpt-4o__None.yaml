@@ -1,0 +1,43 @@
+constraints:
+  cb_person_cred_hist_length:
+    code:
+    - - .isNonNegative('cb_person_cred_hist_length')
+      - Valid
+    assumptions:
+    - cb_person_cred_hist_length should be non-negative because it is used in a division
+      operation
+  cb_person_default_on_file:
+    code:
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    assumptions:
+    - cb_person_default_on_file should only contain values 'Y' or 'N' as it is used
+      in a categorical transformation
+  loan_amnt:
+    code:
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - loan_amnt should be non-negative because it is used in np.log1p which requires
+      non-negative values
+    - loan_amnt should be non-negative because it is used in a division operation
+  loan_grade:
+    code:
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - loan_grade should only contain values from ['A', 'B', 'C', 'D', 'E', 'F', 'G']
+      because it is checked for membership in ['A', 'B']
+  loan_int_rate:
+    code:
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - loan_int_rate should be non-negative because it multiplies with loan_amnt
+  person_home_ownership:
+    code:
+    - - .isContainedIn('person_home_ownership', ['OWN', 'MORTGAGE', 'RENT', 'OTHER'])
+      - Valid
+    assumptions:
+    - person_home_ownership should only contain values from ['OWN', 'MORTGAGE', 'RENT',
+      'OTHER'] because it is checked for equality with 'OWN'

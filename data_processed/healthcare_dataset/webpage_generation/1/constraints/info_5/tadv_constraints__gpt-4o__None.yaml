@@ -1,0 +1,43 @@
+constraints:
+  Billing Amount:
+    code:
+    - - .isComplete('Billing Amount')
+      - Valid
+    - - '.satisfies(''isinstance(Billing Amount, (int, float, np.float64, np.int64))'',
+        ''Billing Amount numeric type'', lambda x: x == 1.0)'
+      - Invalid
+    assumptions:
+    - Values should be convertible to numeric types
+  Blood Type:
+    code:
+    - - '.hasPattern(''Blood Type'', ''O\+|O\-|A\+|A\-|B\+|B\-|AB\+|AB\-'', lambda
+        x: x == 1.0)'
+      - Valid
+    - - .isComplete('Blood Type')
+      - Valid
+    - - '.satisfies(''Blood Type == Blood Type.str.strip().str.upper()'', ''Blood
+        Type formatting'', lambda x: x == 1.0)'
+      - Invalid
+    assumptions:
+    - 'Values should be standardized to one of the following: O+, O-, A+, A-, B+,
+      B-, AB+, AB-'
+    - Values should be treated as strings and formatted in uppercase without leading
+      or trailing spaces
+  Gender:
+    code:
+    - - .isComplete('Gender')
+      - Valid
+    - - '.satisfies(''Gender == Gender.str.strip()'', ''Gender formatting'', lambda
+        x: x == 1.0)'
+      - Invalid
+    assumptions:
+    - Values should be treated as strings without leading or trailing spaces
+  Medication:
+    code:
+    - - .isComplete('Medication')
+      - Valid
+    - - '.satisfies(''Medication == Medication.str.strip()'', ''Medication formatting'',
+        lambda x: x == 1.0)'
+      - Invalid
+    assumptions:
+    - Values should be treated as strings without leading or trailing spaces

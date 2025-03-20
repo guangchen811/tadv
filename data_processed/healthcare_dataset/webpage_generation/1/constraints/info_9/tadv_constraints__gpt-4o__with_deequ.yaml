@@ -1,0 +1,19 @@
+constraints:
+  Admission Type:
+    code:
+    - - .isComplete('Admission Type')
+      - Valid
+    - - .isContainedIn('Admission Type', ['Urgent', 'Elective', 'Emergency'])
+      - Valid
+    assumptions:
+    - The column should be complete with non-missing values.
+    - The column values should be either 'Urgent', 'Elective', or 'Emergency'.
+  Date of Admission:
+    code:
+    - - .hasPattern('Date of Admission', '\d{4}-\d{2}-\d{2}')
+      - Valid
+    - - .isComplete('Date of Admission')
+      - Valid
+    assumptions:
+    - The column should be complete with non-missing values.
+    - The column values should be parsable into valid date formats.

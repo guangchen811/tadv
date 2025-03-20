@@ -1,0 +1,36 @@
+constraints:
+  Billing Amount:
+    code:
+    - - .isComplete('Billing Amount')
+      - Valid
+    - - .satisfies('CAST(`Billing Amount` AS DOUBLE) IS NOT NULL', 'Billing Amount
+        should be numeric')
+      - Valid
+    assumptions:
+    - The column 'Billing Amount' should be complete, meaning no missing values are
+      allowed.
+    - The column 'Billing Amount' should contain numeric (fractional) values only.
+  Date of Admission:
+    code:
+    - - .isComplete('Date of Admission')
+      - Valid
+    - - .satisfies('CAST(`Date of Admission` AS DATE) IS NOT NULL', 'Date of Admission
+        should be convertible to DATE')
+      - Valid
+    assumptions:
+    - The column 'Date of Admission' should be complete, meaning no missing values
+      are allowed.
+    - The column 'Date of Admission' should be convertible to DATE format without
+      errors.
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isNonNegative('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The column 'id' should be complete, meaning no missing values are allowed.
+    - The column 'id' should only contain non-negative values.
+    - The column 'id' should be unique, ensuring that each entry is distinct.

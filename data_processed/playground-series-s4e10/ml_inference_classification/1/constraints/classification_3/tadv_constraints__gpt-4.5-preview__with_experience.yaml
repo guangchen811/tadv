@@ -1,0 +1,135 @@
+constraints:
+  cb_person_cred_hist_length:
+    code:
+    - - '.hasMax(''cb_person_cred_hist_length'', lambda x: x <= 50)'
+      - Valid
+    - - .isComplete('cb_person_cred_hist_length')
+      - Valid
+    - - .isNonNegative('cb_person_cred_hist_length')
+      - Valid
+    assumptions:
+    - Value must be non-negative as credit history length cannot be negative.
+    - Value should be within a reasonable range (e.g., less than or equal to 50 years).
+    - Column should not contain null values.
+  cb_person_default_on_file:
+    code:
+    - - .isComplete('cb_person_default_on_file')
+      - Valid
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    assumptions:
+    - Value should be either 'Y' (Yes) or 'N' (No).
+    - Column should not contain null values.
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - Value should be unique across all records, serving as an identifier.
+    - Column should not contain null values.
+  loan_amnt:
+    code:
+    - - '.hasMax(''loan_amnt'', lambda x: x <= 100000)'
+      - Valid
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isPositive('loan_amnt')
+      - Valid
+    assumptions:
+    - Value must be greater than zero, as loan amount must be positive.
+    - Column should have a reasonable upper bound based on typical loan amounts in
+      the dataset (for example, less than or equal to 100,000).
+    - Column should not contain null values.
+  loan_grade:
+    code:
+    - - .isComplete('loan_grade')
+      - Valid
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - 'Value should be one of the known categories: [''A'', ''B'', ''C'', ''D'', ''E'',
+      ''F'', ''G''].'
+    - Column should not contain null values.
+  loan_int_rate:
+    code:
+    - - '.hasMax(''loan_int_rate'', lambda x: x <= 1.0)'
+      - Invalid
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - Value must be non-negative and typically less than or equal to 1.0 (100%), as
+      it represents a loan interest rate.
+    - Column should not contain null values.
+  loan_percent_income:
+    code:
+    - - '.hasMax(''loan_percent_income'', lambda x: x <= 1.0)'
+      - Valid
+    - - .isComplete('loan_percent_income')
+      - Valid
+    - - .isPositive('loan_percent_income')
+      - Invalid
+    assumptions:
+    - Value must be positive and should typically be below or equal to 1.0 (100%),
+      as it represents the proportion of income.
+    - Column should not contain null values.
+  loan_status:
+    code:
+    - - .isComplete('loan_status')
+      - Valid
+    - - .isContainedIn('loan_status', [0, 1])
+      - Invalid
+    assumptions:
+    - Value should be binary, containing only 0 or 1.
+    - Column should not contain null values.
+  person_age:
+    code:
+    - - '.hasMax(''person_age'', lambda x: x <= 100)'
+      - Valid
+    - - '.hasMin(''person_age'', lambda x: x >= 18)'
+      - Valid
+    - - .isComplete('person_age')
+      - Valid
+    assumptions:
+    - Value must be greater than or equal to 18, as it represents a person's age involved
+      in loan applications.
+    - Value should be within a reasonable human age range, typically between 18 and
+      100 years old.
+    - Column should not contain null values.
+  person_emp_length:
+    code:
+    - - '.hasMax(''person_emp_length'', lambda x: x <= 50)'
+      - Invalid
+    - - .isComplete('person_emp_length')
+      - Valid
+    - - .isNonNegative('person_emp_length')
+      - Valid
+    assumptions:
+    - Value must be non-negative as employment length cannot be negative.
+    - Column should have reasonable upper bound, typically less than or equal to 50
+      years.
+    - Column should not contain null values.
+  person_home_ownership:
+    code:
+    - - .isComplete('person_home_ownership')
+      - Valid
+    - - .isContainedIn('person_home_ownership', ['OWN', 'MORTGAGE', 'RENT', 'OTHER'])
+      - Valid
+    assumptions:
+    - 'Value should be one of the known categories: [''OWN'', ''MORTGAGE'', ''RENT'',
+      ''OTHER''].'
+    - Column should not contain null values.
+  person_income:
+    code:
+    - - .isComplete('person_income')
+      - Valid
+    - - .isPositive('person_income')
+      - Valid
+    assumptions:
+    - Value must be non-negative since income cannot be negative.
+    - Value should be greater than zero, as zero income might not be realistic for
+      loan applications.
+    - Column should not contain null values.

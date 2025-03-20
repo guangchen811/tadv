@@ -1,0 +1,44 @@
+constraints:
+  Age:
+    code:
+    - - .isComplete('Age')
+      - Valid
+    - - .isNonNegative('Age')
+      - Valid
+    assumptions:
+    - The column 'Age' should have a NOT NULL constraint as its completeness is 1.0.
+    - The column 'Age' should have a data type of Integral.
+    - The column 'Age' should only contain non-negative values, as age cannot be negative.
+  Date of Admission:
+    code:
+    - - .isComplete('Date of Admission')
+      - Valid
+    - - '.satisfies(''Date of Admission IS NOT NULL AND TO_DATE(Date of Admission,
+        "yyyy-MM-dd") IS NOT NULL'', ''Date of Admission convertible to datetime'',
+        lambda x: x == 1.0)'
+      - Invalid
+    assumptions:
+    - The column 'Date of Admission' should have a NOT NULL constraint as its completeness
+      is 1.0.
+    - The column 'Date of Admission' should be convertible to datetime format.
+  Discharge Date:
+    code:
+    - - .isComplete('Discharge Date')
+      - Valid
+    - - '.satisfies(''Discharge Date IS NOT NULL AND TO_DATE(Discharge Date, "yyyy-MM-dd")
+        IS NOT NULL'', ''Discharge Date convertible to datetime'', lambda x: x ==
+        1.0)'
+      - Invalid
+    assumptions:
+    - The column 'Discharge Date' should have a NOT NULL constraint as its completeness
+      is 1.0.
+    - The column 'Discharge Date' should be convertible to datetime format.
+  Name:
+    code:
+    - - .isComplete('Full Name')
+      - Invalid
+    - - .isComplete('Name')
+      - Valid
+    assumptions:
+    - The column 'Name' should have a NOT NULL constraint as its completeness is 1.0.
+    - The column 'Name' should be treated as a string and converted to 'Full Name'.

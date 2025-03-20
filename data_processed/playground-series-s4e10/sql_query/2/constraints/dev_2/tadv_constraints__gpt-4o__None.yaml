@@ -1,0 +1,32 @@
+constraints:
+  loan_amnt:
+    code:
+    - - '.hasMean(''loan_amnt'', lambda x: x >= 0)'
+      - Valid
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - The column should contain non-negative values, as it represents loan amounts.
+    - The column should have valid numerical entries to compute the average.
+  loan_int_rate:
+    code:
+    - - '.hasMean(''loan_int_rate'', lambda x: x >= 0)'
+      - Valid
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - The column should contain non-negative values, as it represents interest rates.
+    - The column should have valid numerical entries to compute the average.
+  loan_intent:
+    code:
+    - - .hasPattern('loan_intent', 'CONSISTENT_PATTERN_FOR_CATEGORY')
+      - Invalid
+    - - .isComplete('loan_intent')
+      - Valid
+    assumptions:
+    - The column should have consistent and valid categories for grouping, as it is
+      used in a GROUP BY operation.

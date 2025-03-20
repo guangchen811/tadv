@@ -1,0 +1,27 @@
+constraints:
+  Date of Admission:
+    code:
+    - - .isComplete('Date of Admission')
+      - Valid
+    - - .satisfies('Date of Admission IS NULL OR Date of Admission >= LAG(Date of
+        Admission) OVER (PARTITION BY id ORDER BY Date of Admission)', 'Chronological
+        Order Check')
+      - Invalid
+    - - .satisfies('TRY_CAST(Date of Admission AS DATE) IS NOT NULL', 'Valid Date
+        Check')
+      - Invalid
+    assumptions:
+    - The 'Date of Admission' column should be complete (no missing values).
+    - The 'Date of Admission' column should contain valid date values.
+    - The 'Date of Admission' values should be chronologically ordered for each 'id'
+      to ensure correct calculation of days since the last admission.
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The 'id' column should be complete (no missing values).
+    - The 'id' column should contain unique values to ensure accurate partitioning
+      by patient.

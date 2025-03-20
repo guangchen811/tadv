@@ -1,0 +1,22 @@
+constraints:
+  loan_grade:
+    code:
+    - - .isComplete('loan_grade')
+      - Valid
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - Values should be one of ['A', 'B', 'C', 'D', 'E', 'F', 'G']
+    - Column should not contain NULL values
+  loan_status:
+    code:
+    - - .isComplete('loan_status')
+      - Valid
+    - - .isContainedIn('loan_status', [0, 1])
+      - Invalid
+    - - .isNonNegative('loan_status')
+      - Valid
+    assumptions:
+    - Values should be one of [0, 1]
+    - Column should not contain NULL values
+    - Values should be non-negative

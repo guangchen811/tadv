@@ -1,0 +1,71 @@
+constraints:
+  Admission Type:
+    code:
+    - - .isContainedIn('admission_type', ['Emergency', 'Urgent', 'Elective'])
+      - Invalid
+    assumptions:
+    - Admission Type should be one of ['Emergency', 'Urgent', 'Elective'].
+  Age:
+    code:
+    - - .isPositive('age')
+      - Valid
+    assumptions:
+    - Age should be greater than 0.
+  Billing Amount:
+    code:
+    - - .isNonNegative('billing_amount')
+      - Invalid
+    assumptions:
+    - Billing Amount should be non-negative.
+  Blood Type:
+    code:
+    - - .isContainedIn('blood_type', ['A+', 'O+', 'B+', 'AB+', 'A-', 'O-', 'B-', 'AB-'])
+      - Invalid
+    assumptions:
+    - Blood Type should be one of ['A+', 'O+', 'B+', 'AB+', 'A-', 'O-', 'B-', 'AB-'].
+  Date of Admission:
+    code:
+    - - .isComplete('admission_dt')
+      - Invalid
+    - - .satisfies('admission_dt >= to_date("1970-01-01")', 'Valid admission date')
+      - Invalid
+    assumptions:
+    - Date of Admission should be a valid date.
+  Discharge Date:
+    code:
+    - - .isComplete('discharge_dt')
+      - Invalid
+    - - .satisfies('discharge_dt >= admission_dt', 'Discharge date not earlier than
+        admission date')
+      - Invalid
+    assumptions:
+    - Discharge Date should be a valid date.
+    - Discharge Date should not be earlier than Date of Admission.
+  Gender:
+    code:
+    - - .isContainedIn('gender', ['Male', 'Female'])
+      - Valid
+    assumptions:
+    - Gender should be one of ['Male', 'Female'].
+  Hospital:
+    code: []
+    assumptions: []
+  Medical Condition:
+    code:
+    - - .isContainedIn('medical_condition', ['Hypertension', 'Cancer', 'Obesity',
+        'Arthritis', 'Diabetes', 'Asthma'])
+      - Invalid
+    assumptions:
+    - Medical Condition should be one of ['Hypertension', 'Cancer', 'Obesity', 'Arthritis',
+      'Diabetes', 'Asthma'].
+  Test Results:
+    code:
+    - - .isContainedIn('test_results', ['Abnormal', 'Normal', 'Inconclusive'])
+      - Invalid
+    assumptions:
+    - Test Results should be one of ['Abnormal', 'Normal', 'Inconclusive'].
+  id:
+    code:
+    - - .isUnique('id')
+      - Valid
+    assumptions: []

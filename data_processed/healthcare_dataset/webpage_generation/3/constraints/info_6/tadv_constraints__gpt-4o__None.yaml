@@ -1,0 +1,35 @@
+constraints:
+  Admission Type:
+    code:
+    - - .isComplete('Admission Type')
+      - Valid
+    assumptions:
+    - The 'Admission Type' column should contain string values.
+    - The 'Admission Type' column should not be empty to calculate the most common
+      admission type.
+  Age:
+    code:
+    - - .isComplete('Age')
+      - Valid
+    - - .satisfies('Age >= 0', 'Non-negative Age')
+      - Valid
+    assumptions:
+    - The 'Age' column should contain numeric values.
+    - The 'Age' column should not have non-numeric or missing values to calculate
+      the average age.
+  Billing Amount:
+    code:
+    - - .isComplete('Billing Amount')
+      - Valid
+    - - .satisfies('Billing Amount >= 0', 'Non-negative Billing Amount')
+      - Invalid
+    assumptions:
+    - The 'Billing Amount' column should contain numeric values.
+    - The 'Billing Amount' column should not have non-numeric or missing values to
+      calculate the average billing amount.
+  Hospital:
+    code:
+    - - .isComplete('Hospital')
+      - Valid
+    assumptions:
+    - The 'Hospital' column should contain string values.

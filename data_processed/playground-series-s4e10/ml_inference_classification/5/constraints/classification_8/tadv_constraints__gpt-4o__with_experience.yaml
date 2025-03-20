@@ -1,0 +1,78 @@
+constraints:
+  cb_person_cred_hist_length:
+    code:
+    - - '.hasMean(''cb_person_cred_hist_length'', lambda x: x is not None)'
+      - Valid
+    - - '.hasStandardDeviation(''cb_person_cred_hist_length'', lambda x: x is not
+        None)'
+      - Valid
+    - - .isNonNegative('cb_person_cred_hist_length')
+      - Valid
+    assumptions:
+    - cb_person_cred_hist_length should be a non-negative integer
+    - cb_person_cred_hist_length should have a mean and standard deviation constraint
+  cb_person_default_on_file:
+    code:
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    assumptions:
+    - cb_person_default_on_file should be one of 'Y', 'N'
+  id:
+    code:
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - id should be unique
+  loan_amnt:
+    code:
+    - - '.hasHistogramValues(''loan_amnt'', lambda h: h[''Low''] + h[''Medium''] +
+        h[''High''] + h[''Very High''] == 1.0, binningUdf=lambda x: ''Low'' if x <=
+        5000 else ''Medium'' if x <= 15000 else ''High'' if x <= 30000 else ''Very
+        High'', maxBins=4)'
+      - Invalid
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - loan_amnt should be a non-negative integer
+    - loan_amnt values should be categorized into 'Low', 'Medium', 'High', 'Very High'
+      based on its value
+  loan_amnt_category:
+    code:
+    - - .isContainedIn('loan_amnt_category', ['Low', 'Medium', 'High', 'Very High'])
+      - Invalid
+    assumptions:
+    - loan_amnt_category should be one of 'Low', 'Medium', 'High', 'Very High'
+  loan_grade:
+    code:
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - loan_grade should be one of 'A', 'B', 'C', 'D', 'E', 'F', 'G'
+  loan_int_rate:
+    code:
+    - - '.hasMean(''loan_int_rate'', lambda x: x is not None)'
+      - Valid
+    - - '.hasStandardDeviation(''loan_int_rate'', lambda x: x is not None)'
+      - Valid
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - loan_int_rate should be a non-negative fraction
+    - loan_int_rate should have a mean and standard deviation constraint
+  loan_percent_income:
+    code:
+    - - '.hasMean(''loan_percent_income'', lambda x: x is not None)'
+      - Valid
+    - - '.hasStandardDeviation(''loan_percent_income'', lambda x: x is not None)'
+      - Valid
+    - - .isNonNegative('loan_percent_income')
+      - Valid
+    assumptions:
+    - loan_percent_income should be a non-negative fraction
+    - loan_percent_income should have a mean and standard deviation constraint
+  person_home_ownership:
+    code:
+    - - .isContainedIn('person_home_ownership', ['RENT', 'MORTGAGE', 'OWN', 'OTHER'])
+      - Valid
+    assumptions:
+    - person_home_ownership should be one of 'RENT', 'MORTGAGE', 'OWN', 'OTHER'

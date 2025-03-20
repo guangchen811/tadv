@@ -1,0 +1,60 @@
+constraints:
+  cb_person_default_on_file:
+    code:
+    - - .isComplete('cb_person_default_on_file')
+      - Valid
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    assumptions:
+    - cb_person_default_on_file should be NOT NULL
+    - cb_person_default_on_file should have values in ['Y', 'N']
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - id should be NOT NULL
+    - id should be unique
+  loan_amnt:
+    code:
+    - - '.hasMax(''loan_amnt'', lambda x: x <= 50000)'
+      - Valid
+    - - '.hasMin(''loan_amnt'', lambda x: x > 0)'
+      - Valid
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isPositive('loan_amnt')
+      - Valid
+    assumptions:
+    - loan_amnt should be NOT NULL
+    - loan_amnt should be non-negative
+    - loan_amnt should be greater than 0
+    - loan_amnt should typically be within the range [0, 50000] based on the binning
+      logic
+  loan_grade:
+    code:
+    - - .isComplete('loan_grade')
+      - Valid
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - loan_grade should be NOT NULL
+    - loan_grade should be one of the known values ['A', 'B', 'C', 'D', 'E', 'F',
+      'G']
+  loan_int_rate:
+    code:
+    - - '.hasMax(''loan_int_rate'', lambda x: x <= 30)'
+      - Valid
+    - - '.hasMin(''loan_int_rate'', lambda x: x >= 0)'
+      - Valid
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - loan_int_rate should be NOT NULL
+    - loan_int_rate should be non-negative
+    - loan_int_rate should typically be within a reasonable interest rate range (e.g.,
+      0% to 30%)

@@ -1,0 +1,14 @@
+constraints:
+  Medical Condition:
+    code:
+    - - .isContainedIn('Medical Condition', ['Cancer', 'Diabetes', 'Hypertension'])
+      - Invalid
+    assumptions:
+    - 'The ''Medical Condition'' should only contain the values: ''Cancer'', ''Diabetes'',
+      ''Hypertension'', or other values that do not affect the risk score calculation.'
+  id:
+    code:
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - Each 'id' should be unique, as it is used to group data.

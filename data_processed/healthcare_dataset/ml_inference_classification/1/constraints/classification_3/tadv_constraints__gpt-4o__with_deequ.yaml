@@ -1,0 +1,61 @@
+constraints:
+  Age:
+    code:
+    - - .isComplete('Age')
+      - Valid
+    - - .isNonNegative('Age')
+      - Valid
+    assumptions:
+    - Age column must be complete, but missing values can be filled with the column
+      mean.
+    - Age values should be non-negative.
+  Billing Amount:
+    code:
+    - - .isComplete('Billing Amount')
+      - Valid
+    - - .isNonNegative('Billing Amount')
+      - Invalid
+    assumptions:
+    - Billing Amount column must be complete and should not have missing values.
+    - Billing Amount values should be non-negative.
+  Gender:
+    code:
+    - - .isComplete('Gender')
+      - Valid
+    - - .isContainedIn('Gender', ['Male', 'Female'])
+      - Valid
+    assumptions:
+    - Gender column must be complete and should not have missing values.
+    - 'Gender should only contain values: ''Male'', ''Female''.'
+  Medical Condition:
+    code:
+    - - .isComplete('Medical Condition')
+      - Valid
+    - - .isContainedIn('Medical Condition', ['Diabetes', 'Asthma', 'Obesity', 'Hypertension',
+        'Arthritis', 'Cancer'])
+      - Valid
+    assumptions:
+    - Medical Condition column must be complete and should not have missing values.
+    - 'Medical Condition should only contain values: ''Diabetes'', ''Asthma'', ''Obesity'',
+      ''Hypertension'', ''Arthritis'', ''Cancer''.'
+  Test Results:
+    code:
+    - - .isComplete('Test Results')
+      - Valid
+    - - .isContainedIn('Test Results', ['Abnormal', 'Normal', 'Inconclusive'])
+      - Valid
+    assumptions:
+    - Test Results column should be complete and should not have missing values.
+    - 'Test Results should only contain values: ''Abnormal'', ''Normal'', ''Inconclusive''.'
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isNonNegative('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - ID column must be complete and should not have missing values.
+    - ID column should be unique across the dataset.
+    - ID values should be non-negative.

@@ -1,0 +1,108 @@
+constraints:
+  Admission Type:
+    code:
+    - - .isComplete('Admission Type')
+      - Valid
+    - - .isContainedIn('Admission Type', ['Emergency', 'Urgent', 'Elective'])
+      - Valid
+    assumptions:
+    - Assume 'Admission Type' should have values within ['Emergency', 'Urgent', 'Elective']
+      or other reasonable values.
+    - Assume 'Admission Type' has a completeness of 1.0, it should have a NOT NULL
+      constraint.
+  Age:
+    code:
+    - - .isComplete('Age')
+      - Valid
+    - - .isNonNegative('Age')
+      - Valid
+    assumptions:
+    - Assume 'Age' is a numeric column, it should be non-negative.
+    - Assume 'Age' has a completeness of 1.0, it should have a NOT NULL constraint.
+  Billing Amount:
+    code:
+    - - .isComplete('billing_amount')
+      - Invalid
+    - - .isNonNegative('billing_amount')
+      - Invalid
+    assumptions:
+    - Assume 'Billing Amount' is a numeric column, it should be non-negative.
+    - Assume 'Billing Amount' has a completeness of 1.0, it should have a NOT NULL
+      constraint.
+  Blood Type:
+    code:
+    - - .isComplete('Blood Type')
+      - Valid
+    - - .isContainedIn('Blood Type', ['A+', 'O+', 'B+', 'AB+', 'A-', 'O-', 'B-', 'AB-'])
+      - Valid
+    assumptions:
+    - Assume 'Blood Type' should have values within ['A+', 'O+', 'B+', 'AB+', 'A-',
+      'O-', 'B-', 'AB-'] or other reasonable values.
+    - Assume 'Blood Type' has a completeness of 1.0, it should have a NOT NULL constraint.
+  Gender:
+    code:
+    - - .isComplete('Gender')
+      - Valid
+    - - .isContainedIn('Gender', ['Male', 'Female'])
+      - Valid
+    assumptions:
+    - Assume 'Gender' should have values within ['Male', 'Female'] or other reasonable
+      values.
+    - Assume 'Gender' has a completeness of 1.0, it should have a NOT NULL constraint.
+  Hospital:
+    code:
+    - - .isComplete('Hospital')
+      - Valid
+    assumptions:
+    - Assume 'Hospital' has a completeness of 1.0, it should have a NOT NULL constraint.
+  Id:
+    code:
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - Assume 'Id' column has unique values due to the high number of distinct values
+      close to the number of records.
+  Insurance Provider:
+    code:
+    - - .isComplete('Insurance Provider')
+      - Valid
+    - - .isContainedIn('Insurance Provider', ['Aetna', 'Blue Cross', 'UnitedHealthcare',
+        'Cigna', 'Medicare'])
+      - Valid
+    assumptions:
+    - Assume 'Insurance Provider' should have values within ['Aetna', 'Blue Cross',
+      'UnitedHealthcare', 'Cigna', 'Medicare'] or other reasonable values.
+    - Assume 'Insurance Provider' has a completeness of 1.0, it should have a NOT
+      NULL constraint.
+  Medical Condition:
+    code:
+    - - .isComplete('Medical Condition')
+      - Valid
+    - - .isContainedIn('Medical Condition', ['Hypertension', 'Cancer', 'Obesity',
+        'Arthritis', 'Diabetes', 'Asthma'])
+      - Valid
+    assumptions:
+    - Assume 'Medical Condition' should have values within ['Hypertension', 'Cancer',
+      'Obesity', 'Arthritis', 'Diabetes', 'Asthma'] or other reasonable values.
+    - Assume 'Medical Condition' has a completeness of 1.0, it should have a NOT NULL
+      constraint.
+  Medication:
+    code:
+    - - .isComplete('Medication')
+      - Valid
+    - - .isContainedIn('Medication', ['Aspirin', 'Paracetamol', 'Ibuprofen', 'Penicillin',
+        'Lipitor'])
+      - Valid
+    assumptions:
+    - Assume 'Medication' should have values within ['Aspirin', 'Paracetamol', 'Ibuprofen',
+      'Penicillin', 'Lipitor'] or other reasonable values.
+    - Assume 'Medication' has a completeness of 1.0, it should have a NOT NULL constraint.
+  Room Number:
+    code:
+    - - .isComplete('Room Number')
+      - Valid
+    - - .isNonNegative('Room Number')
+      - Invalid
+    assumptions:
+    - Assume 'Room Number' is a numeric column, it should be non-negative.
+    - Assume 'Room Number' has a completeness of 1.0, it should have a NOT NULL constraint.

@@ -1,0 +1,42 @@
+constraints:
+  Billing Amount:
+    code:
+    - - .isComplete('Billing Amount')
+      - Valid
+    - - .satisfies('Billing Amount >= 0', 'Non-negative Billing Amount')
+      - Invalid
+    assumptions:
+    - Billing Amount values should be non-null and convertible to numeric
+    - Billing Amount should be treated as a numeric (fractional) type
+  Hospital:
+    code:
+    - - .isComplete('Hospital')
+      - Valid
+    assumptions:
+    - Hospital values should be non-null
+    - Hospital should be treated as a string and stripped of leading and trailing
+      spaces
+  Insurance Provider:
+    code:
+    - - .isComplete('Insurance Provider')
+      - Valid
+    - - .isContainedIn('Insurance Provider', ['Aetna', 'Blue Cross', 'UnitedHealthcare',
+        'Cigna', 'Medicare'])
+      - Valid
+    assumptions:
+    - 'Insurance Provider values should be non-null and one of the expected categories:
+      [''Aetna'', ''Blue Cross'', ''UnitedHealthcare'', ''Cigna'', ''Medicare'']'
+    - Insurance Provider should be treated as a string and stripped of leading and
+      trailing spaces
+  Medical Condition:
+    code:
+    - - .isComplete('Medical Condition')
+      - Valid
+    - - .isContainedIn('Medical Condition', ['Hypertension', 'Cancer', 'Obesity',
+        'Arthritis', 'Diabetes', 'Asthma'])
+      - Valid
+    assumptions:
+    - 'Medical Condition values should be non-null and one of the expected categories:
+      [''Hypertension'', ''Cancer'', ''Obesity'', ''Arthritis'', ''Diabetes'', ''Asthma'']'
+    - Medical Condition should be treated as a string and stripped of leading and
+      trailing spaces
