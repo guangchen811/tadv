@@ -1,0 +1,12 @@
+- MaskValues:
+    Columns:
+    - Insurance Provider
+    Params:
+      severity: 0.1
+      sampling: CAR
+- MaskValues:
+    Columns:
+    - Billing Amount
+    Params:
+      severity: 0.05
+      sampling: CAR

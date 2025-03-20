@@ -1,0 +1,14 @@
+- MissingCategoricalValueCorruption:
+    Columns:
+    - Medical Condition
+    Params:
+      severity: 0.1
+      sampling: CAR
+      max_unique_num: 30
+      corrupt_strategy: to_majority
+- MaskValues:
+    Columns:
+    - Hospital
+    Params:
+      severity: 0.3
+      sampling: CAR

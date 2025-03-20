@@ -1,0 +1,19 @@
+- MaskValues:
+    Columns:
+      - Doctor
+    Params:
+      severity: 0.3
+- MissingCategoricalValueCorruption:
+    Columns:
+      - Admission Type
+    Params:
+      severity: 0.1
+      sampling: CAR
+      max_unique_num: 30
+      corrupt_strategy: to_majority
+- ColumnInserting:
+    Columns:
+      - Hospital
+    Params:
+      sampling: CAR
+      corrupt_strategy: sanitize_to_identifier

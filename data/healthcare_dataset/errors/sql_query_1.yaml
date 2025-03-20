@@ -1,0 +1,12 @@
+- GaussianNoise:
+    Columns:
+      - Age
+    Params:
+      severity: 0.3
+      sampling: CAR
+- ColumnInserting:
+    Columns:
+      - Name
+    Params:
+      sampling: CAR
+      corrupt_strategy: add_prefix

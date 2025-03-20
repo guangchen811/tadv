@@ -1,0 +1,10 @@
+- MaskValues:
+    Columns:
+      - Gender
+    Params:
+      severity: 0.1
+- GaussianNoise:
+    Columns:
+      - Age
+    Params:
+      severity: 0.1

@@ -1,0 +1,12 @@
+- MaskValues:
+    Columns:
+    - Gender
+    Params:
+      severity: 0.1
+      sampling: CAR
+- GaussianNoise:
+    Columns:
+    - Age
+    Params:
+      severity: 0.1
+      sampling: CAR

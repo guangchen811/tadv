@@ -1,0 +1,6 @@
+- Scaling:
+    Columns:
+    - Age
+    Params:
+      severity: 0.3
+      sampling: CAR

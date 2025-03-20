@@ -4,3 +4,32 @@
     Params:
       severity: 0.3
       sampling: CAR
+- MissingCategoricalValueCorruption:
+    Columns:
+      - Medical Condition
+    Params:
+      severity: 0.1
+      sampling: CAR
+      max_unique_num: 30
+      corrupt_strategy: to_majority
+- MissingCategoricalValueCorruption:
+    Columns:
+      - Admission Type
+    Params:
+      severity: 0.1
+      sampling: CAR
+      max_unique_num: 30
+      corrupt_strategy: to_majority
+- MissingCategoricalValueCorruption:
+    Columns:
+      - Blood Type
+    Params:
+      severity: 0.5
+      sampling: CAR
+      max_unique_num: 30
+      corrupt_strategy: to_random
+- ColumnDropping:
+    Columns:
+      - Date of Admission
+    Params:
+      severity: 1

@@ -1,0 +1,11 @@
+- ColumnInserting:
+    Columns:
+      - Hospital
+    Params:
+      sampling: CAR
+      corrupt_strategy: sanitize_to_identifier
+- ColumnDropping:
+    Columns:
+      - Date of Admission
+    Params:
+      severity: 1
