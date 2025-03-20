@@ -1,0 +1,23 @@
+results:
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Passed
+    - - .isNonNegative('loan_amnt')
+      - Passed
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Passed
+    - - .isNonNegative('loan_int_rate')
+      - Passed
+  person_income:
+    code:
+    - - .isComplete('person_income')
+      - Passed
+    - - .isNonNegative('person_income')
+      - Passed
+    - - '.satisfies(''person_income < 50000 OR (person_income >= 50000 AND person_income
+        <= 100000) OR person_income > 100000'', ''Valid income bands'', lambda x:
+        x == 1.0)'
+      - Passed

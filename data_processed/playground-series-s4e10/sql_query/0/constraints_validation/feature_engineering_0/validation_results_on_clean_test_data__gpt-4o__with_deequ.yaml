@@ -1,0 +1,17 @@
+results:
+  loan_intent:
+    code:
+    - - .isComplete('loan_intent')
+      - Passed
+    - - .isContainedIn('loan_intent', ['DEBTCONSOLIDATION', 'EDUCATION', 'VENTURE',
+        'MEDICAL', 'PERSONAL', 'HOMEIMPROVEMENT'])
+      - Passed
+  person_income:
+    code:
+    - - .isComplete('person_income')
+      - Passed
+    - - .isNonNegative('person_income')
+      - Passed
+    - - .satisfies('person_income < 50000 OR (person_income >= 50000 AND person_income
+        <= 100000) OR person_income > 100000', 'valid_income_range')
+      - Passed

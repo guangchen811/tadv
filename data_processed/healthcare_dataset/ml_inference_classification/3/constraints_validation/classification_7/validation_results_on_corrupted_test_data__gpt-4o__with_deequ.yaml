@@ -1,0 +1,21 @@
+results:
+  Age:
+    code:
+    - - .isComplete('age')
+      - Passed
+    - - .isNonNegative('age')
+      - Failed
+    - - .satisfies('age > 0', 'Age should be greater than 0 where calculating cost_per_year_of_age')
+      - Failed
+  Gender:
+    code:
+    - - .isComplete('gender')
+      - Passed
+    - - .isContainedIn('gender', ['Male', 'Female'])
+      - Failed
+  id:
+    code:
+    - - .isNonNegative('id')
+      - Passed
+    - - .isUnique('id')
+      - Passed

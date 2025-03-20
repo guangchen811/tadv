@@ -1,0 +1,25 @@
+results:
+  cb_person_default_on_file:
+    code:
+    - - .isComplete('cb_person_default_on_file')
+      - Passed
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Passed
+  loan_grade:
+    code:
+    - - .isComplete('loan_grade')
+      - Passed
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Passed
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Passed
+    - - .isNonNegative('loan_int_rate')
+      - Passed
+  person_home_ownership:
+    code:
+    - - .isComplete('person_home_ownership')
+      - Passed
+    - - .isContainedIn('person_home_ownership', ['RENT', 'OWN', 'MORTGAGE', 'OTHER'])
+      - Passed

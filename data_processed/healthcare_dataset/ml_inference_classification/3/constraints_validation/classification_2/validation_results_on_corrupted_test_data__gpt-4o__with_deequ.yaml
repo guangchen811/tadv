@@ -1,0 +1,30 @@
+results:
+  Age:
+    code:
+    - - .isComplete('Age')
+      - Passed
+    - - .isNonNegative('Age')
+      - Failed
+    - - '.satisfies(''Age < 30 AND `Billing Amount` < 1000'', ''Age_Billing_Interaction
+        condition'', lambda x: x > 0.0)'
+      - Passed
+    - - .satisfies('Age >= 0', 'Age should be numeric and non-negative')
+      - Failed
+  Billing Amount:
+    code:
+    - - .isComplete('Billing Amount')
+      - Passed
+  Test Results:
+    code:
+    - - .isComplete('Test Results')
+      - Failed
+    - - .isContainedIn('Test Results', ['Abnormal', 'Normal', 'Inconclusive'])
+      - Failed
+  id:
+    code:
+    - - .isComplete('id')
+      - Passed
+    - - .isNonNegative('id')
+      - Passed
+    - - .isUnique('id')
+      - Passed

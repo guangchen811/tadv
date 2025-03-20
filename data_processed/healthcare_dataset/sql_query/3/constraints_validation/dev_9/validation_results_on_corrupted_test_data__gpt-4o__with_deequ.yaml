@@ -1,0 +1,30 @@
+results:
+  Age:
+    code:
+    - - '.hasMax(''Age'', lambda x: x <= 120)'
+      - Failed
+    - - '.hasMin(''Age'', lambda x: x >= 0)'
+      - Passed
+    - - .isComplete('Age')
+      - Passed
+    - - .isNonNegative('Age')
+      - Passed
+  Medical Condition:
+    code:
+    - - .isComplete('Medical Condition')
+      - Passed
+    - - .isContainedIn('Medical Condition', ['Diabetes', 'Asthma', 'Obesity', 'Hypertension',
+        'Arthritis', 'Cancer'])
+      - Passed
+  Name:
+    code:
+    - - .isComplete('Name')
+      - Passed
+  id:
+    code:
+    - - .isComplete('id')
+      - Passed
+    - - .isNonNegative('id')
+      - Passed
+    - - .isUnique('id')
+      - Passed

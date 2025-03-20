@@ -1,0 +1,19 @@
+results:
+  Age:
+    code:
+    - - .isComplete('age')
+      - Passed
+    - - .isPositive('age')
+      - Passed
+  Gender:
+    code:
+    - - .isComplete('gender')
+      - Passed
+    - - .isContainedIn('gender', ['Male', 'Female'])
+      - Passed
+  id:
+    code:
+    - - .isComplete('id')
+      - Passed
+    - - .isUnique('id')
+      - Passed

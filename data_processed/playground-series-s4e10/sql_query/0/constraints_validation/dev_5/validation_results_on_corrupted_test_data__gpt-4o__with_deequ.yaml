@@ -1,0 +1,15 @@
+results:
+  id:
+    code:
+    - - .isUnique('id')
+      - Passed
+  loan_amnt:
+    code:
+    - - '.hasSum(''loan_amnt'', lambda x: x >= 0)'
+      - Passed
+    - - .isNonNegative('loan_amnt')
+      - Passed
+  person_income:
+    code:
+    - - .isNonNegative('person_income')
+      - Passed

@@ -1,0 +1,11 @@
+results:
+  loan_amnt:
+    code:
+    - - .isNonNegative('loan_amnt')
+      - Passed
+    - - .isPositive('loan_amnt')
+      - Passed
+  person_income:
+    code:
+    - - .isPositive('person_income')
+      - Passed

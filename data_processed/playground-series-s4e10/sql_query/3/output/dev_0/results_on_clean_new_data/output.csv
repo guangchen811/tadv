@@ -1,0 +1,4 @@
+income_band,total_loans,avg_loan_amount,avg_interest_rate,avg_loan_to_income_ratio
+Medium Income,12686,9899.45,10.49,0.14
+Low Income,8483,6982.11,11.02,0.19
+High Income,2289,13127.99,10.45,0.1

@@ -1,0 +1,15 @@
+results:
+  loan_grade:
+    code:
+    - - .isComplete('loan_grade')
+      - Passed
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Failed
+  loan_status:
+    code:
+    - - .isComplete('loan_status')
+      - Passed
+    - - .isContainedIn('loan_status', ['0', '1'])
+      - Passed
+    - - .satisfies('loan_status IN (0, 1)', 'loan_status should be numeric')
+      - Passed

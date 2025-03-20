@@ -1,0 +1,37 @@
+results:
+  Admission Type:
+    code:
+    - - .isContainedIn('Admission Type', ['Emergency', 'Urgent', 'Elective'])
+      - Passed
+  Age:
+    code:
+    - - '.hasMax(''Age'', lambda x: x <= 100)'
+      - Failed
+    - - '.hasMin(''Age'', lambda x: x > 0)'
+      - Passed
+    - - .satisfies('Age % 1 = 0', 'Age_is_integer')
+      - Passed
+  Blood Type:
+    code:
+    - - .isComplete('Blood Type')
+      - Passed
+    - - .isContainedIn('Blood Type', ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+',
+        'O-', 'A', 'B', 'C', 'D', 'Rh-null', 'Rare'])
+      - Passed
+  Gender:
+    code:
+    - - .isContainedIn('Gender', ['Male', 'Female'])
+      - Passed
+  Medication:
+    code:
+    - - .isComplete('Medication')
+      - Passed
+    - - .isContainedIn('Medication', ['Aspirin', 'Paracetamol', 'Ibuprofen', 'Penicillin',
+        'Lipitor'])
+      - Passed
+  id:
+    code:
+    - - .isComplete('id')
+      - Passed
+    - - .isUnique('id')
+      - Passed

@@ -1,0 +1,38 @@
+results:
+  Age:
+    code:
+    - - .isComplete('Age')
+      - Passed
+    - - .isNonNegative('Age')
+      - Passed
+  Billing Amount:
+    code:
+    - - .isComplete('Billing Amount')
+      - Passed
+  Blood Type:
+    code:
+    - - .isComplete('Blood Type')
+      - Passed
+    - - .isContainedIn('Blood Type', ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+',
+        'O-'])
+      - Passed
+  Date of Admission:
+    code:
+    - - .isComplete('Date of Admission')
+      - Passed
+  Discharge Date:
+    code:
+    - - .isComplete('Discharge Date')
+      - Passed
+  Medical Condition:
+    code:
+    - - .isComplete('Medical Condition')
+      - Passed
+  Test Results:
+    code:
+    - - .isComplete('Test Results')
+      - Failed
+  id:
+    code:
+    - - .isComplete('id')
+      - Passed

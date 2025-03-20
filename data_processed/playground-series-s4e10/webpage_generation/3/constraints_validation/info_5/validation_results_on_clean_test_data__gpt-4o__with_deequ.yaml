@@ -1,0 +1,17 @@
+results:
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Passed
+    - - .isNonNegative('loan_amnt')
+      - Passed
+  loan_status:
+    code:
+    - - .isComplete('loan_status')
+      - Passed
+  person_income:
+    code:
+    - - .isNonNegative('person_income')
+      - Passed
+    - - .satisfies('person_income >= 0', 'Non-negative income')
+      - Passed

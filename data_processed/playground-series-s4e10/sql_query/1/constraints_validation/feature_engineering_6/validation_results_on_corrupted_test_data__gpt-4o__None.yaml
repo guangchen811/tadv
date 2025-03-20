@@ -1,0 +1,9 @@
+results:
+  loan_amnt:
+    code:
+    - - isPositive('loan_amnt')
+      - Passed
+  person_income:
+    code:
+    - - isPositive('person_income')
+      - Passed

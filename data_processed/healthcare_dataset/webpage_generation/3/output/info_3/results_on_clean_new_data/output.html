@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Medical Condition Statistics</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+    <script>
+        let data = {};
+
+        function loadData() {
+            fetch('data.json')
+                .then(response => response.json())
+                .then(jsonData => {
+                    data = jsonData;
+                    console.log("Data loaded successfully.");
+                    populateDropdown();
+                })
+                .catch(error => console.error("Error loading data:", error));
+        }
+
+        function populateDropdown() {
+            let dropdown = document.getElementById("conditionSelect");
+            dropdown.innerHTML = "";
+            Object.keys(data).forEach(condition => {
+                let option = document.createElement("option");
+                option.value = condition;
+                option.textContent = condition;
+                dropdown.appendChild(option);
+            });
+        }
+
+        function queryInfo() {
+            let condition = document.getElementById("conditionSelect").value;
+            let resultDiv = document.getElementById("result");
+            resultDiv.innerHTML = "";
+
+            if (data[condition]) {
+                let info = data[condition];
+                resultDiv.innerHTML = `
+                    <p>Average Age: ${info["Average Age"]}</p>
+                    <p>Average Stay Days: ${info["Average Stay Days"]}</p>
+                    <p>Most Frequent Doctor: ${info["Most Frequent Doctor"]}</p>
+                `;
+            } else {
+                resultDiv.innerHTML = "No records found.";
+            }
+        }
+
+        window.onload = loadData;
+    </script>
+</head>
+<body>
+    <h1>Medical Condition Statistics</h1>
+
+    <label for="conditionSelect">Select a Medical Condition:</label>
+    <select id="conditionSelect" onchange="queryInfo()">
+        <option value="" disabled selected>Choose a condition</option>
+    </select>
+
+    <div id="result" class="result"></div>
+</body>
+</html>

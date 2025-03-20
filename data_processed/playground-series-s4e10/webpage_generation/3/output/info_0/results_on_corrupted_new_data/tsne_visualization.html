@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>t-SNE Loan Visualization</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+        .chart-container {
+            width: 80%;
+            max-width: 700px;
+            margin: auto;
+        }
+    </style>
+    <script>
+        let tsneData = [];
+
+        function loadData() {
+            fetch('tsne_data.json')
+                .then(response => response.json())
+                .then(jsonData => {
+                    tsneData = jsonData;
+                    renderChart();
+                })
+                .catch(error => console.error("Error loading data:", error));
+        }
+
+        function renderChart() {
+            let ctx = document.getElementById("tsneChart").getContext('2d');
+
+            if (window.myChart) {
+                window.myChart.destroy();
+            }
+
+            let approved = tsneData.filter(d => d.loan_status === 1);
+            let rejected = tsneData.filter(d => d.loan_status === 0);
+
+            window.myChart = new Chart(ctx, {
+                type: 'scatter',
+                data: {
+                    datasets: [
+                        {
+                            label: 'Approved Loans',
+                            data: approved.map(d => {
+                                return {x: d.TSNE1, y: d.TSNE2};
+                            }),
+                            backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'Rejected Loans',
+                            data: rejected.map(d => {
+                                return {x: d.TSNE1, y: d.TSNE2};
+                            }),
+                            backgroundColor: 'rgba(255, 99, 132, 0.6)',
+                            borderColor: 'rgba(255, 99, 132, 1)',
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        x: {
+                            title: { display: true, text: 'TSNE1' }
+                        },
+                        y: {
+                            title: { display: true, text: 'TSNE2' }
+                        }
+                    }
+                }
+            });
+        }
+
+        window.onload = loadData;
+    </script>
+</head>
+<body>
+    <h1>t-SNE Loan Data Visualization</h1>
+    <p>
+       A simple 2D t-SNE scatter plot. 
+       Blue = Approved Loans, 
+       Red = Rejected Loans.
+    </p>
+    <div class="chart-container">
+        <canvas id="tsneChart"></canvas>
+    </div>
+</body>
+</html>

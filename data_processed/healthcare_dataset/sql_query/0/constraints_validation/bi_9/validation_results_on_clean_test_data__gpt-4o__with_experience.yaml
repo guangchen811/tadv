@@ -1,0 +1,21 @@
+results:
+  Date of Admission:
+    code:
+    - - .isComplete('Date of Admission')
+      - Passed
+    - - .satisfies('CAST(`Date of Admission` AS DATE) IS NOT NULL', 'Date of Admission
+        Convertible to DATE')
+      - Passed
+  Discharge Date:
+    code:
+    - - .isComplete('Discharge Date')
+      - Passed
+    - - .satisfies('CAST(`Discharge Date` AS DATE) IS NOT NULL', 'Discharge Date Convertible
+        to DATE')
+      - Passed
+  Test Results:
+    code:
+    - - .isComplete('Test Results')
+      - Passed
+    - - .isContainedIn('Test Results', ['Abnormal', 'Normal', 'Inconclusive'])
+      - Passed

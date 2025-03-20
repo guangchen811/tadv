@@ -1,0 +1,16 @@
+results:
+  loan_amnt:
+    code:
+    - - .isNonNegative('loan_amnt')
+      - Passed
+  loan_int_rate:
+    code:
+    - - .isNonNegative('loan_int_rate')
+      - Passed
+  person_income:
+    code:
+    - - .isNonNegative('person_income')
+      - Passed
+    - - .satisfies('person_income < 50000 OR (person_income >= 50000 AND person_income
+        <= 100000) OR person_income > 100000', 'Income Band Condition')
+      - Passed

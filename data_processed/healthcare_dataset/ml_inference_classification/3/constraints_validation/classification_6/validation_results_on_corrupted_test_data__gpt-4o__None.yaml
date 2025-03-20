@@ -1,0 +1,13 @@
+results:
+  Age:
+    code:
+    - - .isNonNegative('Age')
+      - Failed
+  Gender:
+    code:
+    - - .isContainedIn('Gender', ['Male', 'Female'])
+      - Failed
+  id:
+    code:
+    - - .isUnique('id')
+      - Passed

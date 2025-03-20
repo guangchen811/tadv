@@ -1,0 +1,34 @@
+results:
+  loan_amnt:
+    code:
+    - - '.hasMean(''loan_amnt'', lambda x: x > 0)'
+      - Passed
+    - - '.hasStandardDeviation(''loan_amnt'', lambda x: x > 0)'
+      - Passed
+    - - .isComplete('loan_amnt')
+      - Passed
+    - - .isNonNegative('loan_amnt')
+      - Passed
+  loan_grade:
+    code:
+    - - .isComplete('loan_grade')
+      - Passed
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Failed
+  loan_intent:
+    code:
+    - - .isComplete('loan_intent')
+      - Passed
+    - - .isContainedIn('loan_intent', ['EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL',
+        'DEBTCONSOLIDATION', 'MEDICAL', 'VENTURE'])
+      - Passed
+  person_income:
+    code:
+    - - '.hasMean(''person_income'', lambda x: x > 0)'
+      - Passed
+    - - '.hasStandardDeviation(''person_income'', lambda x: x > 0)'
+      - Passed
+    - - .isComplete('person_income')
+      - Passed
+    - - .isNonNegative('person_income')
+      - Passed

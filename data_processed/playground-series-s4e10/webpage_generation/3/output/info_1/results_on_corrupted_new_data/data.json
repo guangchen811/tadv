@@ -1,0 +1,22 @@
+{
+    "loan_grade": {
+        "A": 7547,
+        "B": 7297,
+        "C": 3994,
+        "D": 1838,
+        "E": 381,
+        "F": 44,
+        "G": 12
+    },
+    "loan_intent": {
+        "EDUCATION": 4904,
+        "MEDICAL": 4451,
+        "VENTURE": 4059,
+        "PERSONAL": 4010,
+        "DEBTCONSOLIDATION": 3603,
+        "HOMEIMPROVEMENT": 2431
+    },
+    "cb_person_default_on_file": {
+        "N": 23458
+    }
+}

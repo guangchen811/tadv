@@ -1,0 +1,17 @@
+results:
+  Age:
+    code:
+    - - .isComplete('Age')
+      - Passed
+    - - .satisfies('Age != 0', 'Age should not be zero')
+      - Passed
+  Billing Amount:
+    code:
+    - - .isComplete('Billing Amount')
+      - Failed
+  id:
+    code:
+    - - .isComplete('id')
+      - Passed
+    - - .isUnique('id')
+      - Passed

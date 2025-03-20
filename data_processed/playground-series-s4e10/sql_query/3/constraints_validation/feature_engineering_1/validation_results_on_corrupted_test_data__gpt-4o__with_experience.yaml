@@ -1,0 +1,14 @@
+results:
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Passed
+    - - .satisfies('loan_amnt >= 0', 'loan_amnt should be non-negative')
+      - Passed
+  person_income:
+    code:
+    - - .isComplete('person_income')
+      - Passed
+    - - .satisfies('person_income > 0', 'person_income should be positive to avoid
+        division by zero')
+      - Passed

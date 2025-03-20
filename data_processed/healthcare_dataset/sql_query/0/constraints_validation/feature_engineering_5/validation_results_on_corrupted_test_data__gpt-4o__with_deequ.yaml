@@ -1,0 +1,26 @@
+results:
+  Billing Amount:
+    code:
+    - - .isComplete('Billing Amount')
+      - Passed
+  Gender:
+    code:
+    - - .isComplete('Gender')
+      - Passed
+    - - .isContainedIn('Gender', ['Male', 'Female'])
+      - Passed
+  Medical Condition:
+    code:
+    - - .isComplete('Medical Condition')
+      - Passed
+    - - .isContainedIn('Medical Condition', ['Diabetes', 'Asthma', 'Obesity', 'Hypertension',
+        'Arthritis', 'Cancer'])
+      - Passed
+  id:
+    code:
+    - - .isComplete('id')
+      - Passed
+    - - .isNonNegative('id')
+      - Passed
+    - - .isUnique('id')
+      - Passed

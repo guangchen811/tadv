@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>PCA Loan Data Visualization</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+        }
+        .chart-container {
+            width: 100%;
+            max-width: 600px;
+            margin: auto;
+        }
+    </style>
+    <script>
+        let pcaData = [];
+
+        function loadData() {
+            fetch('pca_all_data.json')
+                .then(response => response.json())
+                .then(jsonData => {
+                    pcaData = jsonData;
+                    renderChart();
+                })
+                .catch(error => console.error("Error loading data:", error));
+        }
+
+        function renderChart() {
+            let ctx = document.getElementById("pcaChart").getContext('2d');
+            if (window.myChart) {
+                window.myChart.destroy();
+            }
+
+            let approvedData = pcaData.filter(record => record.loan_status === 1);
+            let rejectedData = pcaData.filter(record => record.loan_status === 0);
+
+            window.myChart = new Chart(ctx, {
+                type: 'scatter',
+                data: {
+                    datasets: [{
+                        label: 'Approved Loans',
+                        data: approvedData.map(record => ({ x: record.PC1, y: record.PC2 })),
+                        backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }, {
+                        label: 'Rejected Loans',
+                        data: rejectedData.map(record => ({ x: record.PC1, y: record.PC2 })),
+                        backgroundColor: 'rgba(255, 99, 132, 0.6)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        x: { title: { display: true, text: 'PC1' } },
+                        y: { title: { display: true, text: 'PC2' } }
+                    }
+                }
+            });
+        }
+
+        window.onload = loadData;
+    </script>
+</head>
+<body>
+    <h1>PCA Loan Data Visualization</h1>
+    <p>This chart visualizes loan applicants' financial data using PCA. The blue points represent approved loans, while the red points indicate rejected loans.</p>
+    <div class="chart-container">
+        <canvas id="pcaChart"></canvas>
+    </div>
+</body>
+</html>

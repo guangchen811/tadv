@@ -1,0 +1,23 @@
+results:
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Passed
+    - - .isPositive('loan_amnt')
+      - Passed
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Passed
+    - - .isNonNegative('loan_int_rate')
+      - Passed
+  loan_status:
+    code:
+    - - .isComplete('loan_status')
+      - Passed
+  person_home_ownership:
+    code:
+    - - .isComplete('person_home_ownership')
+      - Passed
+    - - .isContainedIn('person_home_ownership', ['RENT', 'OWN', 'MORTGAGE', 'OTHER'])
+      - Passed

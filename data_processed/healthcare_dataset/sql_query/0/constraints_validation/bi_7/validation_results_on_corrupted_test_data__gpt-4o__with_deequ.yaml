@@ -1,0 +1,13 @@
+results:
+  Admission Type:
+    code:
+    - - .isComplete('Admission Type')
+      - Passed
+    - - .isContainedIn('Admission Type', ['Emergency', 'Urgent', 'Elective'])
+      - Passed
+  Hospital:
+    code:
+    - - '.hasPattern(''Hospital'', ''.*'', lambda x: x == 1.0)'
+      - Passed
+    - - .isComplete('Hospital')
+      - Passed

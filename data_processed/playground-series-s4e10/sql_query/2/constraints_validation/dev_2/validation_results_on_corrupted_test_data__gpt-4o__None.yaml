@@ -1,0 +1,21 @@
+results:
+  loan_amnt:
+    code:
+    - - '.hasMean(''loan_amnt'', lambda x: x >= 0)'
+      - Passed
+    - - .isComplete('loan_amnt')
+      - Passed
+    - - .isNonNegative('loan_amnt')
+      - Passed
+  loan_int_rate:
+    code:
+    - - '.hasMean(''loan_int_rate'', lambda x: x >= 0)'
+      - Passed
+    - - .isComplete('loan_int_rate')
+      - Passed
+    - - .isNonNegative('loan_int_rate')
+      - Passed
+  loan_intent:
+    code:
+    - - .isComplete('loan_intent')
+      - Passed

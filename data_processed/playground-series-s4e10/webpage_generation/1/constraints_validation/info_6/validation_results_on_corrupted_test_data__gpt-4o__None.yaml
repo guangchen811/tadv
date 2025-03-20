@@ -1,0 +1,22 @@
+results:
+  loan_amnt:
+    code:
+    - - .isNonNegative('loan_amnt')
+      - Passed
+  loan_grade:
+    code:
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Failed
+  loan_intent:
+    code:
+    - - .isContainedIn('loan_intent', ['EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL',
+        'DEBTCONSOLIDATION', 'MEDICAL', 'VENTURE'])
+      - Passed
+  person_emp_length:
+    code:
+    - - .isNonNegative('person_emp_length')
+      - Passed
+  person_income:
+    code:
+    - - .isNonNegative('person_income')
+      - Passed

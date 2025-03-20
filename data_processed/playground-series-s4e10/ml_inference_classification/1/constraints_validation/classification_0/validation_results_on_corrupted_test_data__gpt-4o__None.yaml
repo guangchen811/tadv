@@ -1,0 +1,24 @@
+results:
+  cb_person_default_on_file:
+    code:
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Passed
+  id:
+    code:
+    - - .isUnique('id')
+      - Passed
+  loan_grade:
+    code:
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Failed
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Passed
+    - - '.satisfies(''loan_int_rate >= 0'', ''Valid interest rates'', lambda x: x
+        == 1.0)'
+      - Passed
+  log_loan_amnt:
+    code:
+    - - .isNonNegative('loan_amnt')
+      - Passed

@@ -1,0 +1,7 @@
+results:
+  person_emp_length:
+    code:
+    - - '.hasMax(''person_emp_length'', lambda x: x > 0)'
+      - Passed
+    - - .isNonNegative('person_emp_length')
+      - Passed

@@ -1,0 +1,17 @@
+results:
+  Age:
+    code:
+    - - .isComplete('Age')
+      - Passed
+  Gender:
+    code:
+    - - .isContainedIn('Gender', ['Male', 'Female'])
+      - Passed
+  Test Results:
+    code:
+    - - .isComplete('Test Results')
+      - Failed
+  id:
+    code:
+    - - .isComplete('id')
+      - Passed

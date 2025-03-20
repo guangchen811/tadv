@@ -1,0 +1,10 @@
+results:
+  person_home_ownership:
+    code:
+    - - '.hasPattern(''person_home_ownership'', ''OTHER|OWN|MORTGAGE|RENT'', lambda
+        x: x > 0.8)'
+      - Passed
+    - - .isComplete('person_home_ownership')
+      - Passed
+    - - .isContainedIn('person_home_ownership', ['OTHER', 'OWN', 'MORTGAGE', 'RENT'])
+      - Passed

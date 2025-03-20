@@ -1,0 +1,19 @@
+results:
+  Date of Admission:
+    code:
+    - - .hasPattern('Date of Admission', '\\d{4}-\\d{2}-\\d{2}')
+      - Passed
+    - - .isComplete('Date of Admission')
+      - Passed
+  Discharge Date:
+    code:
+    - - .hasPattern('Discharge Date', '\\d{4}-\\d{2}-\\d{2}')
+      - Passed
+    - - .isComplete('Discharge Date')
+      - Passed
+  Test Results:
+    code:
+    - - .isComplete('Test Results')
+      - Passed
+    - - .isContainedIn('Test Results', ['Abnormal', 'Normal', 'Inconclusive'])
+      - Passed

@@ -1,0 +1,19 @@
+results:
+  id:
+    code:
+    - - .isComplete('id')
+      - Passed
+    - - .isUnique('id')
+      - Passed
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Passed
+    - - .isNonNegative('loan_amnt')
+      - Passed
+  person_income:
+    code:
+    - - .isComplete('person_income')
+      - Passed
+    - - .isNonNegative('person_income')
+      - Passed

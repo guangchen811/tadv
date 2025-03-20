@@ -1,0 +1,57 @@
+results:
+  cb_person_cred_hist_length:
+    code:
+    - - .isComplete('cb_person_cred_hist_length')
+      - Passed
+  cb_person_default_on_file:
+    code:
+    - - .isComplete('cb_person_default_on_file')
+      - Passed
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Passed
+  id:
+    code:
+    - - .isComplete('id')
+      - Passed
+    - - .isUnique('id')
+      - Passed
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Passed
+  loan_grade:
+    code:
+    - - .isComplete('loan_grade')
+      - Passed
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Failed
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Passed
+  loan_percent_income:
+    code:
+    - - .isComplete('loan_percent_income')
+      - Passed
+  loan_status:
+    code:
+    - - .isComplete('loan_status')
+      - Failed
+  person_age:
+    code:
+    - - .isComplete('person_age')
+      - Passed
+  person_emp_length:
+    code:
+    - - .isComplete('person_emp_length')
+      - Passed
+  person_home_ownership:
+    code:
+    - - .isComplete('person_home_ownership')
+      - Passed
+    - - .isContainedIn('person_home_ownership', ['OTHER', 'OWN', 'MORTGAGE', 'RENT'])
+      - Passed
+  person_income:
+    code:
+    - - .isComplete('person_income')
+      - Passed

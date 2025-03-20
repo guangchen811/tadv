@@ -1,0 +1,60 @@
+results:
+  Admission Type:
+    code:
+    - - .isComplete('Admission Type')
+      - Passed
+    - - .isContainedIn('Admission Type', ['Urgent', 'Elective', 'Emergency'])
+      - Passed
+  Age:
+    code:
+    - - .isComplete('Age')
+      - Passed
+    - - .isNonNegative('Age')
+      - Passed
+  Billing Amount:
+    code:
+    - - .isComplete('Billing Amount')
+      - Passed
+  Gender:
+    code:
+    - - .isComplete('Gender')
+      - Passed
+    - - .isContainedIn('Gender', ['Male', 'Female'])
+      - Passed
+  Insurance Provider:
+    code:
+    - - .isComplete('Insurance Provider')
+      - Passed
+    - - .isContainedIn('Insurance Provider', ['Cigna', 'Medicare', 'UnitedHealthcare',
+        'Blue Cross', 'Aetna'])
+      - Passed
+  Medical Condition:
+    code:
+    - - .isComplete('Medical Condition')
+      - Passed
+    - - .isContainedIn('Medical Condition', ['Diabetes', 'Asthma', 'Obesity', 'Hypertension',
+        'Arthritis', 'Cancer'])
+      - Passed
+  Medication:
+    code:
+    - - .isComplete('Medication')
+      - Passed
+    - - .isContainedIn('Medication', ['Aspirin', 'Ibuprofen', 'Lipitor', 'Paracetamol',
+        'Penicillin'])
+      - Passed
+  Name:
+    code:
+    - - .isComplete('Name')
+      - Passed
+  Test Results:
+    code:
+    - - .isComplete('Test Results')
+      - Passed
+    - - .isContainedIn('Test Results', ['Abnormal', 'Normal', 'Inconclusive'])
+      - Passed
+  id:
+    code:
+    - - .isComplete('id')
+      - Passed
+    - - .isUnique('id')
+      - Passed

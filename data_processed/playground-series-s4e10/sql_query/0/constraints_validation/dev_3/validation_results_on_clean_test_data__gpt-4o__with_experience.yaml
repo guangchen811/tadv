@@ -1,0 +1,21 @@
+results:
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Passed
+    - - .isNonNegative('loan_amnt')
+      - Passed
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Passed
+    - - .isNonNegative('loan_int_rate')
+      - Passed
+  person_income:
+    code:
+    - - '.hasMin(''person_income'', lambda x: x >= 0)'
+      - Passed
+    - - .isComplete('person_income')
+      - Passed
+    - - .isNonNegative('person_income')
+      - Passed

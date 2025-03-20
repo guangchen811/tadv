@@ -1,0 +1,42 @@
+results:
+  Admission Type:
+    code:
+    - - .isComplete('Admission Type')
+      - Passed
+  Age:
+    code:
+    - - .isComplete('Age')
+      - Passed
+    - - .satisfies('Age == Age', 'Age should be numeric without coercion')
+      - Passed
+  Billing Amount:
+    code:
+    - - .isComplete('Billing Amount')
+      - Passed
+    - - .satisfies('`Billing Amount` == `Billing Amount`', 'Billing Amount should
+        be numeric without coercion')
+      - Passed
+  Blood Type:
+    code:
+    - - .isComplete('Blood Type')
+      - Passed
+  Gender:
+    code:
+    - - .isComplete('Gender')
+      - Passed
+  Insurance Provider:
+    code:
+    - - .isComplete('Insurance Provider')
+      - Passed
+  Medical Condition:
+    code:
+    - - .isComplete('Medical Condition')
+      - Passed
+  Medication:
+    code:
+    - - .isComplete('Medication')
+      - Passed
+  id:
+    code:
+    - - .isComplete('id')
+      - Passed

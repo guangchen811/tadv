@@ -1,0 +1,19 @@
+results:
+  loan_amnt:
+    code:
+    - - '.hasApproxQuantile("loan_amnt", 0.5, lambda x: x > 0)'
+      - Passed
+    - - .isNonNegative("loan_amnt")
+      - Passed
+  loan_int_rate:
+    code:
+    - - '.hasStandardDeviation("loan_int_rate", lambda x: x > 0)'
+      - Passed
+    - - .isNonNegative("loan_int_rate")
+      - Passed
+  person_income:
+    code:
+    - - '.hasApproxQuantile("person_income", 0.5, lambda x: x > 0)'
+      - Passed
+    - - .isNonNegative("person_income")
+      - Passed

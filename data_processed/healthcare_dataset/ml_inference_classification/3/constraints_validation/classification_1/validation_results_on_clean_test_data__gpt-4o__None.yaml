@@ -1,0 +1,14 @@
+results:
+  Billing Amount:
+    code:
+    - - '.hasApproxQuantile(''Billing Amount'', 0.95, lambda x: x < 50000)'
+      - Passed
+  Blood Type:
+    code:
+    - - .isContainedIn('Blood Type', ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+',
+        'O-', 'A', 'B', 'C', 'D', 'Rh-null', 'Rare'])
+      - Passed
+  id:
+    code:
+    - - .isUnique('id')
+      - Passed

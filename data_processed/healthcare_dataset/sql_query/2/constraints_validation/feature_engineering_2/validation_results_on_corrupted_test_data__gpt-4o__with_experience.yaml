@@ -1,0 +1,11 @@
+results:
+  Age:
+    code:
+    - - .isComplete('Age')
+      - Passed
+    - - .isNonNegative('Age')
+      - Failed
+  id:
+    code:
+    - - .isUnique('id')
+      - Passed

@@ -1,0 +1,27 @@
+results:
+  Age:
+    code:
+    - - '.hasMax(''Age'', lambda x: x <= 120)'
+      - Failed
+    - - '.hasMin(''Age'', lambda x: x >= 0)'
+      - Passed
+    - - .isComplete('Age')
+      - Passed
+    - - .isNonNegative('Age')
+      - Passed
+    - - '.satisfies(''Age < 18'', ''child'', lambda x: x >= 0)'
+      - Passed
+    - - '.satisfies(''Age >= 18 AND Age <= 30'', ''young_adult'', lambda x: x >= 0)'
+      - Passed
+    - - '.satisfies(''Age >= 31 AND Age <= 50'', ''adult'', lambda x: x >= 0)'
+      - Passed
+    - - '.satisfies(''Age >= 51 AND Age <= 64'', ''mid_senior'', lambda x: x >= 0)'
+      - Passed
+    - - '.satisfies(''Age >= 65'', ''senior'', lambda x: x >= 0)'
+      - Passed
+  id:
+    code:
+    - - .isComplete('id')
+      - Passed
+    - - .isUnique('id')
+      - Passed

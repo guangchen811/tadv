@@ -1,0 +1,38 @@
+results:
+  Age:
+    code:
+    - - .isComplete('Age')
+      - Passed
+    - - .isNonNegative('Age')
+      - Failed
+  Billing Amount:
+    code:
+    - - .isComplete('Billing Amount')
+      - Passed
+  Gender:
+    code:
+    - - .isComplete('Gender')
+      - Passed
+    - - .isContainedIn('Gender', ['Male', 'Female'])
+      - Failed
+  Medical Condition:
+    code:
+    - - .isComplete('Medical Condition')
+      - Passed
+    - - .isContainedIn('Medical Condition', ['Diabetes', 'Asthma', 'Obesity', 'Hypertension',
+        'Arthritis', 'Cancer'])
+      - Passed
+  Test Results:
+    code:
+    - - .isComplete('Test Results')
+      - Failed
+    - - .isContainedIn('Test Results', ['Abnormal', 'Normal', 'Inconclusive'])
+      - Failed
+  id:
+    code:
+    - - .isComplete('id')
+      - Passed
+    - - .isNonNegative('id')
+      - Passed
+    - - .isUnique('id')
+      - Passed

@@ -1,0 +1,37 @@
+results:
+  Admission Type:
+    code:
+    - - .isComplete('Admission Type')
+      - Passed
+    - - .isContainedIn('Admission Type', ['Urgent', 'Elective', 'Emergency'])
+      - Passed
+  Gender:
+    code:
+    - - .isComplete('Gender')
+      - Passed
+    - - .isContainedIn('Gender', ['Male', 'Female'])
+      - Passed
+  Insurance Provider:
+    code:
+    - - .isComplete('Insurance Provider')
+      - Passed
+    - - .isContainedIn('Insurance Provider', ['Cigna', 'Medicare', 'UnitedHealthcare',
+        'Blue Cross', 'Aetna'])
+      - Passed
+  Medical Condition:
+    code:
+    - - .isComplete('Medical Condition')
+      - Passed
+    - - .isContainedIn('Medical Condition', ['Diabetes', 'Asthma', 'Obesity', 'Hypertension',
+        'Arthritis', 'Cancer'])
+      - Passed
+  Name:
+    code:
+    - - .isComplete('Name')
+      - Passed
+  id:
+    code:
+    - - .isComplete('id')
+      - Passed
+    - - .isUnique('id')
+      - Passed

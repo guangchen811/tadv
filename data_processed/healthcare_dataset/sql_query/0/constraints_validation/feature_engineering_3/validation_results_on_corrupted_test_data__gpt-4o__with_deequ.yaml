@@ -1,0 +1,13 @@
+results:
+  Medical Condition:
+    code:
+    - - .isComplete('Medical Condition')
+      - Passed
+  id:
+    code:
+    - - .isComplete('id')
+      - Passed
+    - - .isNonNegative('id')
+      - Passed
+    - - .isUnique('id')
+      - Passed

@@ -1,0 +1,13 @@
+results:
+  person_age:
+    code:
+    - - .isComplete('person_age')
+      - Passed
+    - - .isNonNegative('person_age')
+      - Passed
+  person_emp_length:
+    code:
+    - - .isComplete('person_emp_length')
+      - Passed
+    - - .isNonNegative('person_emp_length')
+      - Passed

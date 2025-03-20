@@ -1,0 +1,9 @@
+results:
+  loan_grade:
+    code:
+    - - '.hasNumberOfDistinctValues(''loan_grade'', lambda x: x == 7, None, None)'
+      - Failed
+    - - .isComplete('loan_grade')
+      - Passed
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Failed

@@ -1,0 +1,13 @@
+results:
+  loan_amnt:
+    code:
+    - - .isNonNegative('loan_amnt')
+      - Passed
+  loan_grade:
+    code:
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Passed
+  person_income:
+    code:
+    - - .isNonNegative('person_income')
+      - Passed

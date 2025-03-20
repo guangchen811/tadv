@@ -1,0 +1,11 @@
+results:
+  loan_intent:
+    code:
+    - - .isComplete('loan_intent')
+      - Passed
+  person_income:
+    code:
+    - - .isComplete('person_income')
+      - Passed
+    - - .isNonNegative('person_income')
+      - Passed

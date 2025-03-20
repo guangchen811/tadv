@@ -1,0 +1,11 @@
+results:
+  loan_amnt:
+    code:
+    - - '.hasMax(''loan_amnt'', lambda x: x < 1000000)'
+      - Failed
+    - - .isNonNegative('loan_amnt')
+      - Passed
+  person_income:
+    code:
+    - - .isNonNegative('person_income')
+      - Passed

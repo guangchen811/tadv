@@ -1,0 +1,25 @@
+Blood Type,Medical Condition,condition_total
+A+,Arthritis,884
+A+,Diabetes,495
+A+,Obesity,480
+A-,Arthritis,883
+A-,Hypertension,484
+A-,Cancer,461
+AB+,Arthritis,986
+AB+,Hypertension,516
+AB+,Obesity,485
+AB-,Arthritis,922
+AB-,Cancer,484
+AB-,Hypertension,465
+B+,Arthritis,934
+B+,Diabetes,485
+B+,Cancer,462
+B-,Arthritis,921
+B-,Hypertension,477
+B-,Cancer,468
+O+,Arthritis,957
+O+,Cancer,468
+O+,Hypertension,466
+O-,Arthritis,941
+O-,Obesity,486
+O-,Cancer,454

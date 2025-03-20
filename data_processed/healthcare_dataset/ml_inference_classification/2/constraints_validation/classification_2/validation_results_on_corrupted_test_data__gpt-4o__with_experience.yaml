@@ -1,0 +1,57 @@
+results:
+  Age:
+    code:
+    - - '.hasMean(''Age'', lambda x: 0 <= x <= 100)'
+      - Passed
+    - - '.hasStandardDeviation(''Age'', lambda x: x > 0)'
+      - Passed
+    - - .isComplete('Age')
+      - Passed
+    - - .satisfies('Age >= 0', 'Age should be non-negative')
+      - Passed
+  Billing Amount:
+    code:
+    - - '.hasMean(''Billing Amount'', lambda x: x >= 0)'
+      - Passed
+    - - '.hasStandardDeviation(''Billing Amount'', lambda x: x > 0)'
+      - Passed
+    - - .isComplete('Billing Amount')
+      - Passed
+  Date of Admission:
+    code:
+    - - .isComplete('Date of Admission')
+      - Failed
+  Discharge Date:
+    code:
+    - - .isComplete('Discharge Date')
+      - Passed
+  Doctor:
+    code:
+    - - .isComplete('Doctor')
+      - Passed
+  Hospital:
+    code:
+    - - .isComplete('Hospital')
+      - Passed
+  Name:
+    code:
+    - - .isComplete('Name')
+      - Passed
+  Room Number:
+    code:
+    - - .isComplete('Room Number')
+      - Passed
+    - - .satisfies('`Room Number` >= 0', 'Room Number should be non-negative')
+      - Passed
+  Test Results:
+    code:
+    - - .isComplete('Test Results')
+      - Failed
+    - - .isContainedIn('Test Results', ['Abnormal', 'Normal', 'Inconclusive'])
+      - Failed
+  id:
+    code:
+    - - .isComplete('id')
+      - Passed
+    - - .isUnique('id')
+      - Passed

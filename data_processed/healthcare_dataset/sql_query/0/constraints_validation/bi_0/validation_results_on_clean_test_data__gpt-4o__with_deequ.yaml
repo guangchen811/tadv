@@ -1,0 +1,37 @@
+results:
+  Billing Amount:
+    code:
+    - - .isComplete("Billing Amount")
+      - Passed
+  Date of Admission:
+    code:
+    - - .isComplete("Date of Admission")
+      - Passed
+  Discharge Date:
+    code:
+    - - .isComplete("Discharge Date")
+      - Passed
+  Doctor:
+    code:
+    - - .isComplete("Doctor")
+      - Passed
+  Hospital:
+    code:
+    - - .isComplete("Hospital")
+      - Passed
+  Insurance Provider:
+    code:
+    - - .isComplete("Insurance Provider")
+      - Passed
+    - - .isContainedIn("Insurance Provider", ["Cigna", "Medicare", "UnitedHealthcare",
+        "Blue Cross", "Aetna"])
+      - Passed
+  Medical Condition:
+    code:
+    - - .isContainedIn("Medical Condition", ["Diabetes", "Asthma", "Obesity", "Hypertension",
+        "Arthritis", "Cancer"])
+      - Passed
+  Room Number:
+    code:
+    - - .isComplete("Room Number")
+      - Passed

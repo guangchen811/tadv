@@ -1,0 +1,33 @@
+results:
+  Billing Amount:
+    code:
+    - - '.hasMean(''Billing Amount'', lambda x: x is not None)'
+      - Passed
+    - - '.hasStandardDeviation(''Billing Amount'', lambda x: x is not None)'
+      - Passed
+  Date of Admission:
+    code:
+    - - .isComplete('Date of Admission')
+      - Passed
+  Discharge Date:
+    code:
+    - - .isComplete('Discharge Date')
+      - Passed
+  Doctor:
+    code:
+    - - .isComplete('Doctor')
+      - Passed
+  Hospital:
+    code:
+    - - .isComplete('Hospital')
+      - Passed
+  Insurance Provider:
+    code:
+    - - .isContainedIn('Insurance Provider', ['Aetna', 'Blue Cross', 'UnitedHealthcare',
+        'Cigna', 'Medicare'])
+      - Passed
+  Medical Condition:
+    code:
+    - - .isContainedIn('Medical Condition', ['Hypertension', 'Cancer', 'Obesity',
+        'Arthritis', 'Diabetes', 'Asthma'])
+      - Passed

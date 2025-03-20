@@ -1,0 +1,27 @@
+{
+    "Arthritis": {
+        "Average Age": 51.89,
+        "Average Stay Days": 15.58,
+        "Most Frequent Doctor": "Michael Smith"
+    },
+    "Cancer": {
+        "Average Age": 51.7,
+        "Average Stay Days": 15.65,
+        "Most Frequent Doctor": "Anna Brown"
+    },
+    "Diabetes": {
+        "Average Age": 51.36,
+        "Average Stay Days": 15.42,
+        "Most Frequent Doctor": "David Johnson"
+    },
+    "Hypertension": {
+        "Average Age": 51.98,
+        "Average Stay Days": 15.52,
+        "Most Frequent Doctor": "Michael Smith"
+    },
+    "Obesity": {
+        "Average Age": 51.41,
+        "Average Stay Days": 15.49,
+        "Most Frequent Doctor": "David Davis"
+    }
+}

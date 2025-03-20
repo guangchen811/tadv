@@ -1,0 +1,16 @@
+results:
+  Age:
+    code:
+    - - .isComplete('Age')
+      - Passed
+    - - .isNonNegative('Age')
+      - Passed
+    - - '.satisfies(''Age == floor(Age)'', ''Age should be integral'', lambda x: x
+        == 1.0)'
+      - Passed
+  id:
+    code:
+    - - .isComplete('id')
+      - Passed
+    - - .isUnique('id')
+      - Passed

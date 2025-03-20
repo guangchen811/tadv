@@ -1,0 +1,35 @@
+results:
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Passed
+    - - .satisfies('CAST(loan_amnt AS INT) = loan_amnt', 'loan_amnt is Integral')
+      - Passed
+  loan_grade:
+    code:
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Passed
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Passed
+  loan_intent:
+    code:
+    - - .isContainedIn('loan_intent', ['EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL',
+        'DEBTCONSOLIDATION', 'MEDICAL', 'VENTURE'])
+      - Passed
+  loan_percent_income:
+    code:
+    - - .isComplete('loan_percent_income')
+      - Passed
+  loan_status:
+    code:
+    - - .isComplete('loan_status')
+      - Passed
+  person_income:
+    code:
+    - - .isComplete('person_income')
+      - Passed
+    - - .satisfies('CAST(person_income AS INT) = person_income', 'person_income is
+        Integral')
+      - Passed

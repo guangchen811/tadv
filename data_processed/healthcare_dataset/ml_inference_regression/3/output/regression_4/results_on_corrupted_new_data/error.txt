@@ -1,0 +1,18 @@
+Traceback (most recent call last):
+  File "/Users/haochen/Codebase/tadv/data/healthcare_dataset/scripts/ml_inference/regression_4.py", line 50, in <module>
+    testX_scaled = scaler.transform(testX)
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/haochen/Codebase/tadv/tadv/runtime_environments/python/env/lib/python3.12/site-packages/sklearn/utils/_set_output.py", line 319, in wrapped
+    data_to_wrap = f(self, X, *args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/haochen/Codebase/tadv/tadv/runtime_environments/python/env/lib/python3.12/site-packages/sklearn/preprocessing/_data.py", line 1062, in transform
+    X = validate_data(
+        ^^^^^^^^^^^^^^
+  File "/Users/haochen/Codebase/tadv/tadv/runtime_environments/python/env/lib/python3.12/site-packages/sklearn/utils/validation.py", line 2919, in validate_data
+    _check_feature_names(_estimator, X, reset=reset)
+  File "/Users/haochen/Codebase/tadv/tadv/runtime_environments/python/env/lib/python3.12/site-packages/sklearn/utils/validation.py", line 2777, in _check_feature_names
+    raise ValueError(message)
+ValueError: The feature names should match those that were passed during fit.
+Feature names unseen at fit time:
+- Hospital_sanitized
+

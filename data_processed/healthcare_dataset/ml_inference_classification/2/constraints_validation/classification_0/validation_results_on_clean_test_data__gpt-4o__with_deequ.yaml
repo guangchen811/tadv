@@ -1,0 +1,84 @@
+results:
+  Admission Type:
+    code:
+    - - .isComplete('Admission Type')
+      - Passed
+    - - .isContainedIn('Admission Type', ['Urgent', 'Elective', 'Emergency'])
+      - Passed
+  Age:
+    code:
+    - - .isComplete('Age')
+      - Passed
+    - - .isNonNegative('Age')
+      - Passed
+  Billing Amount:
+    code:
+    - - .isComplete('Billing Amount')
+      - Passed
+  Blood Type:
+    code:
+    - - .isComplete('Blood Type')
+      - Passed
+    - - .isContainedIn('Blood Type', ['A-', 'B-', 'B+', 'AB-', 'A+', 'O+', 'O-', 'AB+'])
+      - Passed
+  Date of Admission:
+    code:
+    - - .isComplete('Date of Admission')
+      - Passed
+  Discharge Date:
+    code:
+    - - .isComplete('Discharge Date')
+      - Passed
+  Doctor:
+    code:
+    - - .isComplete('Doctor')
+      - Passed
+  Gender:
+    code:
+    - - .isComplete('Gender')
+      - Passed
+    - - .isContainedIn('Gender', ['Male', 'Female'])
+      - Passed
+  Hospital:
+    code:
+    - - .isComplete('Hospital')
+      - Passed
+  Insurance Provider:
+    code:
+    - - .isComplete('Insurance Provider')
+      - Passed
+    - - .isContainedIn('Insurance Provider', ['Cigna', 'Medicare', 'UnitedHealthcare',
+        'Blue Cross', 'Aetna'])
+      - Passed
+  Medical Condition:
+    code:
+    - - .isComplete('Medical Condition')
+      - Passed
+    - - .isContainedIn('Medical Condition', ['Diabetes', 'Asthma', 'Obesity', 'Hypertension',
+        'Arthritis', 'Cancer'])
+      - Passed
+  Medication:
+    code:
+    - - .isComplete('Medication')
+      - Passed
+    - - .isContainedIn('Medication', ['Aspirin', 'Ibuprofen', 'Lipitor', 'Paracetamol',
+        'Penicillin'])
+      - Passed
+  Room Number:
+    code:
+    - - .isComplete('Room Number')
+      - Passed
+  Test Results:
+    code:
+    - - .isComplete('Test Results')
+      - Failed
+    - - .isContainedIn('Test Results', ['Abnormal', 'Normal', 'Inconclusive'])
+      - Failed
+  id:
+    code:
+    - - .isComplete('id')
+      - Passed
+    - - .isNonNegative('id')
+      - Passed
+    - - .isUnique('id')
+      - Passed

@@ -1,0 +1,21 @@
+results:
+  loan_intent:
+    code:
+    - - .isComplete('loan_intent')
+      - Passed
+    - - .isContainedIn('loan_intent', ['EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL',
+        'DEBTCONSOLIDATION', 'MEDICAL', 'VENTURE', 'AUTO', 'RECREATION'])
+      - Passed
+  loan_status:
+    code:
+    - - .isComplete('loan_status')
+      - Passed
+    - - .isContainedIn('loan_status', ['0', '1'])
+      - Passed
+  person_home_ownership:
+    code:
+    - - .isComplete('person_home_ownership')
+      - Passed
+    - - .isContainedIn('person_home_ownership', ['OTHER', 'OWN', 'MORTGAGE', 'RENT',
+        'LEASE', 'FREEHOLD'])
+      - Passed

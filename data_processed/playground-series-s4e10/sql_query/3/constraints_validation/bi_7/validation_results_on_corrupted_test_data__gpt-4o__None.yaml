@@ -1,0 +1,37 @@
+results:
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Passed
+    - - .isPositive('loan_amnt')
+      - Passed
+  loan_grade:
+    code:
+    - - .isComplete('loan_grade')
+      - Failed
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Passed
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Passed
+    - - .isPositive('loan_int_rate')
+      - Passed
+  loan_intent:
+    code:
+    - - .isComplete('loan_intent')
+      - Passed
+  loan_percent_income:
+    code:
+    - - .isComplete('loan_percent_income')
+      - Passed
+  loan_status:
+    code:
+    - - .isComplete('loan_status')
+      - Passed
+  person_income:
+    code:
+    - - .isComplete('person_income')
+      - Passed
+    - - .isPositive('person_income')
+      - Passed

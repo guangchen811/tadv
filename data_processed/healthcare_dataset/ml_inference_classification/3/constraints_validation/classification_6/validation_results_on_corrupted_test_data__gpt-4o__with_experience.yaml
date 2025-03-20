@@ -1,0 +1,23 @@
+results:
+  Age:
+    code:
+    - - '.hasMean(''Age'', lambda x: x is not None)'
+      - Passed
+    - - '.hasStandardDeviation(''Age'', lambda x: x is not None)'
+      - Passed
+    - - .isComplete('Age')
+      - Passed
+    - - .isNonNegative('Age')
+      - Failed
+  Gender:
+    code:
+    - - .isComplete('Gender')
+      - Passed
+    - - .isContainedIn('Gender', ['Male', 'Female'])
+      - Failed
+  id:
+    code:
+    - - .isComplete('id')
+      - Passed
+    - - .isUnique('id')
+      - Passed

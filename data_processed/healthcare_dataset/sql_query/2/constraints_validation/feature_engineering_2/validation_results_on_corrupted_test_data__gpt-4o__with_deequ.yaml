@@ -1,0 +1,24 @@
+results:
+  Age:
+    code:
+    - - '.hasMax(''Age'', lambda x: x <= 120)'
+      - Failed
+    - - '.hasMin(''Age'', lambda x: x >= 0)'
+      - Failed
+    - - .isComplete('Age')
+      - Passed
+    - - .isNonNegative('Age')
+      - Failed
+    - - .satisfies('Age < 18 OR (Age BETWEEN 18 AND 30) OR (Age BETWEEN 31 AND 50)
+        OR (Age BETWEEN 51 AND 64) OR Age >= 65', 'Age categorization logic')
+      - Passed
+    - - .satisfies('Age = CAST(Age AS INTEGER)', 'Age should be integer')
+      - Passed
+  id:
+    code:
+    - - .isComplete('id')
+      - Passed
+    - - .isNonNegative('id')
+      - Passed
+    - - .isUnique('id')
+      - Passed

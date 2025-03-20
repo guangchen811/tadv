@@ -1,0 +1,20 @@
+results:
+  loan_intent:
+    code:
+    - - .isComplete('loan_intent')
+      - Passed
+    - - .isContainedIn('loan_intent', ['EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL',
+        'DEBTCONSOLIDATION', 'MEDICAL', 'VENTURE'])
+      - Passed
+  loan_status:
+    code:
+    - - '.hasNumberOfDistinctValues(''loan_status'', lambda x: x == 2, None, None)'
+      - Passed
+    - - .isComplete('loan_status')
+      - Passed
+  person_home_ownership:
+    code:
+    - - .isComplete('person_home_ownership')
+      - Passed
+    - - .isContainedIn('person_home_ownership', ['OTHER', 'OWN', 'MORTGAGE', 'RENT'])
+      - Passed

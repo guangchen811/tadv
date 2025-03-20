@@ -1,0 +1,97 @@
+results:
+  Admission Type:
+    code:
+    - - .isComplete("Admission Type")
+      - Passed
+    - - .isContainedIn("Admission Type", ["Urgent", "Elective", "Emergency"])
+      - Passed
+  Age:
+    code:
+    - - .isComplete("Age")
+      - Passed
+    - - .isContainedIn("Age", ["38", "56", "25", "58", "34", "80", "57", "66", "63",
+        "50", "37", "46", "49", "54", "22", "70", "43", "65", "42", "76", "26", "24",
+        "64", "60", "21", "52", "41", "36", "79", "35", "19", "62", "29", "55", "48",
+        "44", "77", "69", "53", "83", "71", "73", "33", "84", "18", "32", "59", "75",
+        "31", "67", "45", "30", "47", "23", "81", "51", "40", "27", "68", "74", "82",
+        "72", "61", "78", "20", "85", "39", "28", "86", "17", "87", "88", "16", "15",
+        "13", "14", "89"])
+      - Passed
+    - - '.isContainedIn("Age", ["38", "56", "25", "58", "34", "80", "57", "66", "63",
+        "50", "37", "46", "49", "54", "22", "70", "43", "65", "42", "76", "26", "24",
+        "64", "60", "21", "52", "41", "36", "79", "35", "19", "62", "29", "55", "48",
+        "44", "77", "69", "53", "83", "71", "73", "33", "84", "18", "32", "59", "75",
+        "31", "67", "45", "30", "47", "23", "81", "51", "40", "27", "68", "74", "82"],
+        lambda x: x >= 0.89, "It should be above 0.89!")'
+      - Passed
+    - - .isNonNegative("Age")
+      - Passed
+  Billing Amount:
+    code:
+    - - .isComplete("Billing Amount")
+      - Passed
+  Blood Type:
+    code:
+    - - .isComplete("Blood Type")
+      - Passed
+    - - .isContainedIn("Blood Type", ["A-", "B-", "B+", "AB-", "A+", "O+", "O-", "AB+"])
+      - Passed
+  Date of Admission:
+    code:
+    - - .isComplete("Date of Admission")
+      - Failed
+  Discharge Date:
+    code:
+    - - .isComplete("Discharge Date")
+      - Passed
+  Doctor:
+    code:
+    - - .isComplete("Doctor")
+      - Passed
+  Gender:
+    code:
+    - - .isComplete("Gender")
+      - Passed
+    - - .isContainedIn("Gender", ["Male", "Female"])
+      - Passed
+  Hospital:
+    code:
+    - - .isComplete("Hospital")
+      - Passed
+  Insurance Provider:
+    code:
+    - - .isComplete("Insurance Provider")
+      - Passed
+    - - .isContainedIn("Insurance Provider", ["Cigna", "Medicare", "UnitedHealthcare",
+        "Blue Cross", "Aetna"])
+      - Passed
+  Medical Condition:
+    code:
+    - - .isComplete("Medical Condition")
+      - Passed
+    - - .isContainedIn("Medical Condition", ["Diabetes", "Asthma", "Obesity", "Hypertension",
+        "Arthritis", "Cancer"])
+      - Passed
+  Medication:
+    code:
+    - - .isComplete("Medication")
+      - Passed
+    - - .isContainedIn("Medication", ["Aspirin", "Ibuprofen", "Lipitor", "Paracetamol",
+        "Penicillin"])
+      - Passed
+  Name:
+    code:
+    - - .isComplete("Name")
+      - Passed
+  Room Number:
+    code:
+    - - .isComplete("Room Number")
+      - Passed
+  id:
+    code:
+    - - .isComplete("id")
+      - Passed
+    - - .isNonNegative("id")
+      - Passed
+    - - .isUnique("id")
+      - Passed

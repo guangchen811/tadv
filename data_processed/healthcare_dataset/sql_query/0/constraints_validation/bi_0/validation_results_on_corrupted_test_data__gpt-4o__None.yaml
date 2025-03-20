@@ -1,0 +1,17 @@
+results:
+  Billing Amount:
+    code:
+    - - .isComplete("Billing Amount")
+      - Passed
+  Insurance Provider:
+    code:
+    - - '.hasApproxCountDistinct("Insurance Provider", lambda x: x > 0.8)'
+      - Passed
+    - - .isComplete("Insurance Provider")
+      - Passed
+  Medical Condition:
+    code:
+    - - '.hasApproxCountDistinct("Medical Condition", lambda x: x > 0.8)'
+      - Passed
+    - - .isComplete("Medical Condition")
+      - Passed

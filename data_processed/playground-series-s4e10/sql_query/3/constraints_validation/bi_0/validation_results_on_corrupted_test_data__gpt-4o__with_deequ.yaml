@@ -1,0 +1,23 @@
+results:
+  loan_grade:
+    code:
+    - - .isComplete('loan_grade')
+      - Failed
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Passed
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Passed
+    - - .isNonNegative('loan_int_rate')
+      - Passed
+  loan_status:
+    code:
+    - - .isComplete('loan_status')
+      - Passed
+  person_emp_length:
+    code:
+    - - .isComplete('person_emp_length')
+      - Passed
+    - - .isNonNegative('person_emp_length')
+      - Passed

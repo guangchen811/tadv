@@ -1,0 +1,27 @@
+results:
+  age:
+    code:
+    - - .isComplete('age')
+      - Passed
+    - - .isNonNegative('age')
+      - Failed
+    - - .isPositive('age')
+      - Failed
+  gender:
+    code:
+    - - .isComplete('gender')
+      - Passed
+    - - .isContainedIn('gender', ['Male', 'Female'])
+      - Failed
+  hospital:
+    code:
+    - - .isComplete('hospital')
+      - Passed
+  id:
+    code:
+    - - .isComplete('id')
+      - Passed
+    - - .isNonNegative('id')
+      - Passed
+    - - .isUnique('id')
+      - Passed

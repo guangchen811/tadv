@@ -1,0 +1,22 @@
+results:
+  Billing Amount:
+    code:
+    - - .isComplete('Billing Amount')
+      - Failed
+  Date of Admission:
+    code:
+    - - '.hasPattern(''Date of Admission'', ''^\d{4}-\d{2}-\d{2}$'', lambda x: x ==
+        1.0)'
+      - Passed
+    - - .isComplete('Date of Admission')
+      - Passed
+  Discharge Date:
+    code:
+    - - '.hasPattern(''Discharge Date'', ''^\d{4}-\d{2}-\d{2}$'', lambda x: x == 1.0)'
+      - Passed
+    - - .isComplete('Discharge Date')
+      - Passed
+  id:
+    code:
+    - - .isUnique('id')
+      - Passed

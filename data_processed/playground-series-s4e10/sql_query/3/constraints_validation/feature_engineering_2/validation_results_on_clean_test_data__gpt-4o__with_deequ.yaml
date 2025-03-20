@@ -1,0 +1,10 @@
+results:
+  person_emp_length:
+    code:
+    - - .isComplete('person_emp_length')
+      - Passed
+    - - .isNonNegative('person_emp_length')
+      - Passed
+    - - .satisfies('person_emp_length < 2 OR (person_emp_length >= 2 AND person_emp_length
+        <= 5) OR person_emp_length > 5', 'Valid employment length categories')
+      - Passed

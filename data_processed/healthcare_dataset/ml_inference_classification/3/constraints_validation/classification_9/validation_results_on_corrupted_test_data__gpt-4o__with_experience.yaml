@@ -1,0 +1,19 @@
+results:
+  age:
+    code:
+    - - '.hasMin(''age'', lambda x: x >= 0)'
+      - Failed
+    - - .isPositive('age')
+      - Failed
+  gender:
+    code:
+    - - .isContainedIn('gender', ['Male', 'Female'])
+      - Failed
+  hospital:
+    code:
+    - - .isComplete('hospital')
+      - Passed
+  id:
+    code:
+    - - .isUnique('id')
+      - Passed

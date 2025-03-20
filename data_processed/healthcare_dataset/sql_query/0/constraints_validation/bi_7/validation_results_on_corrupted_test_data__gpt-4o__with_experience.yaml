@@ -1,0 +1,13 @@
+results:
+  Admission Type:
+    code:
+    - - .isComplete('Admission Type')
+      - Passed
+    - - .isContainedIn('Admission Type', ['Emergency', 'Urgent', 'Elective'])
+      - Passed
+  Hospital:
+    code:
+    - - '.hasApproxCountDistinct(''Hospital'', lambda x: x == 26773)'
+      - Failed
+    - - .isComplete('Hospital')
+      - Passed

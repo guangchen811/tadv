@@ -1,0 +1,8 @@
+results:
+  Date of Admission:
+    code:
+    - - '.hasPattern(''Date of Admission'', ''\\d{4}-\\d{2}-\\d{2}'', lambda x: x
+        > 0.9)'
+      - Passed
+    - - .isComplete('Date of Admission')
+      - Passed

@@ -1,0 +1,9 @@
+results:
+  loan_grade:
+    code:
+    - - '.hasPattern(''loan_grade'', ''A|B|C|D|E|F|G'', lambda x: x > 0.8)'
+      - Passed
+    - - .isComplete('loan_grade')
+      - Passed
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Passed

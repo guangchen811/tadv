@@ -1,0 +1,5 @@
+results:
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Passed

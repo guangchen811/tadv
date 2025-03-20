@@ -1,0 +1,5 @@
+results:
+  id:
+    code:
+    - - .isUnique('id')
+      - Passed

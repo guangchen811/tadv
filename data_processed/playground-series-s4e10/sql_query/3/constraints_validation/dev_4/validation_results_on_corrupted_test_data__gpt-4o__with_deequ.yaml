@@ -1,0 +1,17 @@
+results:
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Passed
+    - - .isNonNegative('loan_amnt')
+      - Passed
+    - - .satisfies('loan_amnt % 1 == 0', 'loan_amnt_is_integral')
+      - Passed
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Passed
+    - - .isNonNegative('loan_int_rate')
+      - Passed
+    - - .satisfies('loan_int_rate >= 0', 'loan_int_rate_is_fractional')
+      - Passed

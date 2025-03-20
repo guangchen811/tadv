@@ -1,0 +1,74 @@
+results:
+  cb_person_cred_hist_length:
+    code:
+    - - .isComplete('cb_person_cred_hist_length')
+      - Passed
+    - - .isNonNegative('cb_person_cred_hist_length')
+      - Passed
+  cb_person_default_on_file:
+    code:
+    - - .isComplete('cb_person_default_on_file')
+      - Passed
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Passed
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Passed
+    - - .isNonNegative('loan_amnt')
+      - Passed
+  loan_grade:
+    code:
+    - - .isComplete('loan_grade')
+      - Passed
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Failed
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Passed
+    - - .isNonNegative('loan_int_rate')
+      - Passed
+  loan_intent:
+    code:
+    - - .isComplete('loan_intent')
+      - Passed
+    - - .isContainedIn('loan_intent', ['EDUCATION', 'MEDICAL', 'PERSONAL', 'VENTURE',
+        'DEBTCONSOLIDATION', 'HOMEIMPROVEMENT'])
+      - Passed
+  loan_percent_income:
+    code:
+    - - .isComplete('loan_percent_income')
+      - Passed
+    - - .isNonNegative('loan_percent_income')
+      - Passed
+  loan_status:
+    code:
+    - - .isComplete('loan_status')
+      - Failed
+    - - .isNonNegative('loan_status')
+      - Failed
+  person_age:
+    code:
+    - - '.hasMax(''person_age'', lambda x: x <= 84)'
+      - Failed
+    - - '.hasMin(''person_age'', lambda x: x >= 20)'
+      - Passed
+    - - .isComplete('person_age')
+      - Passed
+    - - .isNonNegative('person_age')
+      - Passed
+  person_emp_length:
+    code:
+    - - .isComplete('person_emp_length')
+      - Passed
+    - - .isNonNegative('person_emp_length')
+      - Passed
+  person_home_ownership:
+    code:
+    - - '.hasPattern(''person_home_ownership'', ''RENT|MORTGAGE'', lambda x: x > 0.5)'
+      - Passed
+    - - .isComplete('person_home_ownership')
+      - Passed
+    - - .isContainedIn('person_home_ownership', ['RENT', 'MORTGAGE', 'OWN', 'OTHER'])
+      - Passed

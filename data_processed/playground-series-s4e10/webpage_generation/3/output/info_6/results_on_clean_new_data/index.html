@@ -1,0 +1,87 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Loan Search</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        .container { width: 80%; margin: auto; }
+        input, select { padding: 10px; margin: 10px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 12px; border: 1px solid #ddd; text-align: center; }
+        th { background-color: #f4f4f4; }
+    </style>
+    <script>
+        let data = [];
+
+        function loadData() {
+            fetch('search_data.json')
+                .then(response => response.json())
+                .then(jsonData => { data = jsonData; })
+                .catch(error => console.error("Error loading data:", error));
+        }
+
+        function searchLoans() {
+            let intent = document.getElementById("loan_intent").value.toLowerCase();
+            let grade = document.getElementById("loan_grade").value.toUpperCase();
+            let minAmount = document.getElementById("min_amount").value || 0;
+            let maxAmount = document.getElementById("max_amount").value || Number.MAX_VALUE;
+
+            let results = data.filter(row =>
+                (intent === "" || row.loan_intent.toLowerCase().includes(intent)) &&
+                (grade === "" || row.loan_grade === grade) &&
+                row.loan_amnt >= minAmount && row.loan_amnt <= maxAmount
+            );
+
+            displayResults(results);
+        }
+
+        function displayResults(results) {
+            let tableBody = document.getElementById("tableBody");
+            tableBody.innerHTML = "";
+
+            results.forEach(row => {
+                let tr = document.createElement("tr");
+                tr.innerHTML = `
+                    <td>${row.loan_intent}</td>
+                    <td>${row.loan_grade}</td>
+                    <td>${row.loan_amnt}</td>
+                    <td>${row.person_income}</td>
+                    <td>${row.person_emp_length}</td>
+                    <td>${row.Approved}</td>
+                    <td>${row.Default}</td>
+                `;
+                tableBody.appendChild(tr);
+            });
+        }
+
+        window.onload = loadData;
+    </script>
+</head>
+<body>
+    <h1>Loan Search</h1>
+    <div class="container">
+        <input type="text" id="loan_intent" placeholder="Loan Intent (e.g., Education)"/>
+        <input type="text" id="loan_grade" placeholder="Loan Grade (A, B, C, etc.)"/>
+        <input type="number" id="min_amount" placeholder="Min Loan Amount"/>
+        <input type="number" id="max_amount" placeholder="Max Loan Amount"/>
+        <button onclick="searchLoans()">Search</button>
+        <table>
+            <thead>
+                <tr>
+                    <th>Loan Intent</th>
+                    <th>Loan Grade</th>
+                    <th>Loan Amount</th>
+                    <th>Income</th>
+                    <th>Employment Length</th>
+                    <th>Approved</th>
+                    <th>Default</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+        </table>
+    </div>
+</body>
+</html>

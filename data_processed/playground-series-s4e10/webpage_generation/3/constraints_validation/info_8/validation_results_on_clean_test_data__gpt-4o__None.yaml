@@ -1,0 +1,25 @@
+results:
+  cb_person_cred_hist_length:
+    code:
+    - - .isNonNegative('cb_person_cred_hist_length')
+      - Passed
+  loan_amnt:
+    code:
+    - - .isNonNegative('loan_amnt')
+      - Passed
+  loan_int_rate:
+    code:
+    - - .isNonNegative('loan_int_rate')
+      - Passed
+  loan_percent_income:
+    code:
+    - - .isNonNegative('loan_percent_income')
+      - Passed
+  person_emp_length:
+    code:
+    - - .isNonNegative('person_emp_length')
+      - Passed
+  person_income:
+    code:
+    - - .isNonNegative('person_income')
+      - Passed

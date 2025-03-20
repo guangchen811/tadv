@@ -1,0 +1,7 @@
+results:
+  Date of Admission:
+    code:
+    - - .isComplete('Date of Admission')
+      - Passed
+    - - .satisfies('CAST(`Date of Admission` AS DATE) IS NOT NULL', 'valid_date_check')
+      - Passed

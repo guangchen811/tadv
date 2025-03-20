@@ -1,0 +1,30 @@
+results:
+  cb_person_cred_hist_length:
+    code:
+    - - .isComplete('cb_person_cred_hist_length')
+      - Passed
+    - - .isNonNegative('cb_person_cred_hist_length')
+      - Passed
+  loan_grade:
+    code:
+    - - '.hasPattern(''loan_grade'', ''A|B|C|D|E|F|G'', lambda x: x > 0.9)'
+      - Passed
+    - - .isComplete('loan_grade')
+      - Passed
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Passed
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Passed
+    - - .isNonNegative('loan_int_rate')
+      - Passed
+  person_home_ownership:
+    code:
+    - - '.hasPattern(''person_home_ownership'', ''OWN|MORTGAGE|RENT|OTHER'', lambda
+        x: x > 0.9)'
+      - Passed
+    - - .isComplete('person_home_ownership')
+      - Passed
+    - - .isContainedIn('person_home_ownership', ['OWN', 'MORTGAGE', 'RENT', 'OTHER'])
+      - Passed
