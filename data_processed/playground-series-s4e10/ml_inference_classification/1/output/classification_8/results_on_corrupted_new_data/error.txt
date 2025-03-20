@@ -1,0 +1,37 @@
+Traceback (most recent call last):
+  File "/Users/haochen/Codebase/tadv/data/playground-series-s4e10/scripts/ml_inference/classification_8.py", line 64, in <module>
+    X_test = preprocessor.transform(X_test)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/haochen/Codebase/tadv/tadv/runtime_environments/python/env/lib/python3.12/site-packages/sklearn/utils/_set_output.py", line 319, in wrapped
+    data_to_wrap = f(self, X, *args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/haochen/Codebase/tadv/tadv/runtime_environments/python/env/lib/python3.12/site-packages/sklearn/compose/_column_transformer.py", line 1101, in transform
+    Xs = self._call_func_on_transformers(
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/haochen/Codebase/tadv/tadv/runtime_environments/python/env/lib/python3.12/site-packages/sklearn/compose/_column_transformer.py", line 910, in _call_func_on_transformers
+    return Parallel(n_jobs=self.n_jobs)(jobs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/haochen/Codebase/tadv/tadv/runtime_environments/python/env/lib/python3.12/site-packages/sklearn/utils/parallel.py", line 77, in __call__
+    return super().__call__(iterable_with_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/haochen/Codebase/tadv/tadv/runtime_environments/python/env/lib/python3.12/site-packages/joblib/parallel.py", line 1918, in __call__
+    return output if self.return_generator else list(output)
+                                                ^^^^^^^^^^^^
+  File "/Users/haochen/Codebase/tadv/tadv/runtime_environments/python/env/lib/python3.12/site-packages/joblib/parallel.py", line 1847, in _get_sequential_output
+    res = func(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/haochen/Codebase/tadv/tadv/runtime_environments/python/env/lib/python3.12/site-packages/sklearn/utils/parallel.py", line 139, in __call__
+    return self.function(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/haochen/Codebase/tadv/tadv/runtime_environments/python/env/lib/python3.12/site-packages/sklearn/pipeline.py", line 1531, in _transform_one
+    res = transformer.transform(X, **params.transform)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/haochen/Codebase/tadv/tadv/runtime_environments/python/env/lib/python3.12/site-packages/sklearn/utils/_set_output.py", line 319, in wrapped
+    data_to_wrap = f(self, X, *args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/haochen/Codebase/tadv/tadv/runtime_environments/python/env/lib/python3.12/site-packages/sklearn/preprocessing/_encoders.py", line 1043, in transform
+    X_int, X_mask = self._transform(
+                    ^^^^^^^^^^^^^^^^
+  File "/Users/haochen/Codebase/tadv/tadv/runtime_environments/python/env/lib/python3.12/site-packages/sklearn/preprocessing/_encoders.py", line 218, in _transform
+    raise ValueError(msg)
+ValueError: Found unknown categories ['missing'] in column 0 during transform

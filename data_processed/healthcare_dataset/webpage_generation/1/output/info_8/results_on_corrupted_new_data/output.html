@@ -1,0 +1,99 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Insurance Coverage Insights</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .table-container {
+            margin-top: 20px;
+            display: none;
+        }
+        .table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 10px;
+        }
+        .table th, .table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        .table th {
+            background-color: #f2f2f2;
+        }
+    </style>
+    <script>
+        let data = {};
+
+        function loadData() {
+            fetch('data.json')
+                .then(response => response.json())
+                .then(jsonData => {
+                    data = jsonData;
+                    console.log("Data loaded successfully.");
+                    populateDropdown();
+                })
+                .catch(error => console.error("Error loading data:", error));
+        }
+
+        function populateDropdown() {
+            let dropdown = document.getElementById("insuranceSelect");
+            dropdown.innerHTML = "";
+            Object.keys(data).forEach(provider => {
+                let option = document.createElement("option");
+                option.value = provider;
+                option.textContent = provider;
+                dropdown.appendChild(option);
+            });
+        }
+
+        function queryInfo() {
+            let provider = document.getElementById("insuranceSelect").value;
+            let tableContainer = document.getElementById("tableContainer");
+            let tableBody = document.getElementById("tableBody");
+            tableBody.innerHTML = "";
+
+            if (data[provider]) {
+                let info = data[provider];
+                let rowHTML = `<tr>
+                    <td>${info["Average Billing Amount"]}</td>
+                    <td>${info["Most Common Treatment"]}</td>
+                    <td>${info["Most Frequent Hospital"]}</td>
+                </tr>`;
+                tableBody.innerHTML = rowHTML;
+                tableContainer.style.display = "block";
+            } else {
+                tableContainer.style.display = "none";
+            }
+        }
+
+        window.onload = loadData;
+    </script>
+</head>
+<body>
+    <h1>Insurance Coverage Insights</h1>
+
+    <label for="insuranceSelect">Select an Insurance Provider:</label>
+    <select id="insuranceSelect" onchange="queryInfo()">
+        <option value="" disabled selected>Choose a provider</option>
+    </select>
+
+    <div id="tableContainer" class="table-container">
+        <h2>Insurance Statistics</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Average Billing Amount</th>
+                    <th>Most Common Treatment</th>
+                    <th>Most Frequent Hospital</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+        </table>
+    </div>
+</body>
+</html>

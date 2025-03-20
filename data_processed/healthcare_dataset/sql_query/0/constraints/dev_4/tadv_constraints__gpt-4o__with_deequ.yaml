@@ -1,0 +1,34 @@
+constraints:
+  Billing Amount:
+    code:
+    - - .isComplete('Billing Amount')
+      - Valid
+    - - .isNonNegative('Billing Amount')
+      - Invalid
+    assumptions:
+    - The 'Billing Amount' column should be complete, with no missing values.
+    - The 'Billing Amount' column should contain non-negative values, as negative
+      billing amounts are not valid.
+    - The 'Billing Amount' column values should be rounded to two decimal places when
+      computing averages.
+  Hospital:
+    code:
+    - - .isComplete('Hospital')
+      - Valid
+    assumptions:
+    - The 'Hospital' column should be complete, with no missing values.
+    - The 'Hospital' column contains specific hospital names and should not be NULL
+      unless aggregating by medical condition.
+  Medical Condition:
+    code:
+    - - .isComplete('Medical Condition')
+      - Valid
+    - - .isContainedIn('Medical Condition', ['Diabetes', 'Asthma', 'Obesity', 'Hypertension',
+        'Arthritis', 'Cancer'])
+      - Valid
+    assumptions:
+    - The 'Medical Condition' column should be complete, with no missing values.
+    - The 'Medical Condition' column contains specific medical conditions and should
+      not be NULL unless aggregating by hospital.
+    - 'The ''Medical Condition'' column should only contain values from the set: [''Diabetes'',
+      ''Asthma'', ''Obesity'', ''Hypertension'', ''Arthritis'', ''Cancer''].'

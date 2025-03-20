@@ -1,0 +1,13 @@
+constraints:
+  loan_amnt:
+    code:
+    - - isPositive('loan_amnt')
+      - Valid
+    assumptions:
+    - loan_amnt should be greater than 0
+  person_income:
+    code:
+    - - isPositive('person_income')
+      - Valid
+    assumptions:
+    - person_income should be greater than 0

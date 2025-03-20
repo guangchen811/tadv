@@ -1,0 +1,48 @@
+constraints:
+  Admission Type:
+    code:
+    - - .isContainedIn('Admission Type', ['Emergency', 'Urgent', 'Elective'])
+      - Valid
+    assumptions:
+    - The column 'Admission Type' should have values within ['Emergency', 'Urgent',
+      'Elective'].
+  Billing Amount:
+    code:
+    - - .isNonNegative('Billing Amount')
+      - Invalid
+    assumptions:
+    - The column 'Billing Amount' should contain non-negative values.
+  Date of Admission:
+    code:
+    - - .isComplete('Date of Admission')
+      - Valid
+    - - .satisfies('CAST(Date of Admission AS DATE) IS NOT NULL', 'Date of Admission
+        castable to date')
+      - Invalid
+    assumptions:
+    - The column 'Date of Admission' should be castable to a valid date format.
+    - The column 'Date of Admission' should be complete (NOT NULL).
+  Discharge Date:
+    code:
+    - - .isComplete('Discharge Date')
+      - Valid
+    - - .satisfies('CAST(Discharge Date AS DATE) IS NOT NULL', 'Discharge Date castable
+        to date')
+      - Invalid
+    assumptions:
+    - The column 'Discharge Date' should be castable to a valid date format.
+    - The column 'Discharge Date' should be complete (NOT NULL).
+  Medical Condition:
+    code:
+    - - .isContainedIn('Medical Condition', ['Hypertension', 'Cancer', 'Obesity',
+        'Arthritis', 'Diabetes', 'Asthma'])
+      - Valid
+    assumptions:
+    - The column 'Medical Condition' should have values within ['Hypertension', 'Cancer',
+      'Obesity', 'Arthritis', 'Diabetes', 'Asthma'].
+  id:
+    code:
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The column 'id' should have unique values.

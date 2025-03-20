@@ -1,0 +1,98 @@
+constraints:
+  Admission Type:
+    code:
+    - - .isComplete('Admission Type')
+      - Valid
+    - - .isContainedIn('Admission Type', ['Emergency', 'Urgent', 'Elective'])
+      - Valid
+    assumptions:
+    - The column 'Admission Type' should not be null.
+    - 'The column ''Admission Type'' should have values within the categorical range:
+      ''Emergency'', ''Urgent'', ''Elective''.'
+  Age:
+    code:
+    - - '.hasMin(''Age'', lambda x: x >= 0)'
+      - Valid
+    - - .isComplete('Age')
+      - Valid
+    - - .isNonNegative('Age')
+      - Valid
+    assumptions:
+    - The column 'Age' should not be null.
+    - The column 'Age' should have a reasonable minimum value, such as 0.
+    - The column 'Age' should be a non-negative integer.
+  Billing Amount:
+    code:
+    - - .isComplete('Billing Amount')
+      - Valid
+    - - .isNonNegative('Billing Amount')
+      - Invalid
+    assumptions:
+    - The column 'Billing Amount' should not be null.
+    - The column 'Billing Amount' should be a non-negative number.
+  Gender:
+    code:
+    - - .isComplete('Gender')
+      - Valid
+    - - .isContainedIn('Gender', ['Male', 'Female'])
+      - Valid
+    assumptions:
+    - The column 'Gender' should not be null.
+    - 'The column ''Gender'' should have values within the categorical range: ''Male'',
+      ''Female''.'
+  Insurance Provider:
+    code:
+    - - .isComplete('Insurance Provider')
+      - Valid
+    - - .isContainedIn('Insurance Provider', ['Aetna', 'Blue Cross', 'UnitedHealthcare',
+        'Cigna', 'Medicare'])
+      - Valid
+    assumptions:
+    - The column 'Insurance Provider' should not be null.
+    - 'The column ''Insurance Provider'' should have values within the categorical
+      range: ''Aetna'', ''Blue Cross'', ''UnitedHealthcare'', ''Cigna'', ''Medicare''.'
+  Medical Condition:
+    code:
+    - - .isComplete('Medical Condition')
+      - Valid
+    - - .isContainedIn('Medical Condition', ['Hypertension', 'Cancer', 'Obesity',
+        'Arthritis', 'Diabetes', 'Asthma'])
+      - Valid
+    assumptions:
+    - The column 'Medical Condition' should not be null.
+    - 'The column ''Medical Condition'' should have values within the categorical
+      range: ''Hypertension'', ''Cancer'', ''Obesity'', ''Arthritis'', ''Diabetes'',
+      ''Asthma''.'
+  Medication:
+    code:
+    - - .isComplete('Medication')
+      - Valid
+    - - .isContainedIn('Medication', ['Aspirin', 'Paracetamol', 'Ibuprofen', 'Penicillin',
+        'Lipitor'])
+      - Valid
+    assumptions:
+    - The column 'Medication' should not be null.
+    - 'The column ''Medication'' should have values within the categorical range:
+      ''Aspirin'', ''Paracetamol'', ''Ibuprofen'', ''Penicillin'', ''Lipitor''.'
+  Name:
+    code:
+    - - .isComplete('Name')
+      - Valid
+    assumptions:
+    - The column 'Name' should not be null.
+  Test Results:
+    code:
+    - - .isComplete('Test Results')
+      - Valid
+    - - .isContainedIn('Test Results', ['Abnormal', 'Normal', 'Inconclusive'])
+      - Valid
+    assumptions:
+    - The column 'Test Results' should not be null.
+    - 'The column ''Test Results'' should have values within the categorical range:
+      ''Abnormal'', ''Normal'', ''Inconclusive''.'
+  id:
+    code:
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The column 'id' should be unique.

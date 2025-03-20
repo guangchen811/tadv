@@ -1,0 +1,50 @@
+constraints:
+  Age:
+    code:
+    - - .isComplete('age')
+      - Valid
+    - - .isPositive('age')
+      - Valid
+    assumptions:
+    - Age column should be greater than 0 to avoid division by zero in cost_per_year_of_age
+      calculation
+    - Age column should not have missing values
+  Billing Amount:
+    code:
+    - - .isComplete('billing_amount')
+      - Invalid
+    - - .isNonNegative('billing_amount')
+      - Invalid
+    assumptions:
+    - Billing Amount column should be greater than or equal to 0 as billing amounts
+      typically cannot be negative
+    - Billing Amount column should not have missing values
+  Gender:
+    code:
+    - - .isComplete('gender')
+      - Valid
+    - - .isContainedIn('gender', ['Male', 'Female'])
+      - Valid
+    assumptions:
+    - 'Gender column should only contain values: ''Male'' or ''Female'' based on the
+      given dataset statistics'
+    - Gender column should not have missing values
+  Test Results:
+    code:
+    - - .isComplete('test_results')
+      - Invalid
+    - - .isContainedIn('test_results', ['Abnormal', 'Normal', 'Inconclusive'])
+      - Invalid
+    assumptions:
+    - 'Test Results column should only contain values: ''Abnormal'', ''Normal'', or
+      ''Inconclusive'' based on the given dataset statistics'
+    - Test Results column should not have missing values
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - id column should have unique values
+    - id column should not have missing values

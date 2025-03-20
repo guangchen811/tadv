@@ -1,0 +1,24 @@
+constraints:
+  loan_amnt:
+    code:
+    - - .isPositive('loan_amnt')
+      - Valid
+    - - .satisfies('loan_amnt == int(loan_amnt)', 'loan_amnt is integer')
+      - Valid
+    assumptions:
+    - Values should be positive integers
+  loan_status:
+    code:
+    - - .isContainedIn('loan_status', [0, 1])
+      - Invalid
+    assumptions:
+    - 'Values should be binary: 0 or 1'
+  person_income:
+    code:
+    - - .isContainedIn('person_income', [0, 20000, 50000, 100000, 200000, float('inf')])
+      - Invalid
+    - - .isNonNegative('person_income')
+      - Valid
+    assumptions:
+    - Values should be non-negative and ideally fit into income bins [0, 20000, 50000,
+      100000, 200000, inf]

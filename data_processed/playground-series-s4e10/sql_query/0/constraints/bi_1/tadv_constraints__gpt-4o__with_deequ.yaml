@@ -1,0 +1,21 @@
+constraints:
+  cb_person_default_on_file:
+    code:
+    - - .isComplete('cb_person_default_on_file')
+      - Valid
+    - - .isContainedIn('cb_person_default_on_file', ['N', 'Y'])
+      - Valid
+    assumptions:
+    - Column should be complete with no missing values.
+    - Values should be either 'N' or 'Y'.
+    - A 'N' value indicates a non-default status, which is used to calculate the approval
+      rate.
+  person_home_ownership:
+    code:
+    - - .isComplete('person_home_ownership')
+      - Valid
+    - - .isContainedIn('person_home_ownership', ['RENT', 'MORTGAGE', 'OWN', 'OTHER'])
+      - Valid
+    assumptions:
+    - Column should be complete with no missing values.
+    - 'Values should be one of the following: RENT, MORTGAGE, OWN, OTHER.'

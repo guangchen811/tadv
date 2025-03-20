@@ -1,0 +1,35 @@
+constraints:
+  age:
+    code:
+    - - .isNonNegative('age')
+      - Valid
+    - - .isPositive('age')
+      - Valid
+    assumptions:
+    - Age should be greater than 0 to avoid division by zero in cost_per_year_of_age
+      calculation.
+    - Age should be non-negative as it represents a person's age.
+  billing_amount:
+    code:
+    - - .isNonNegative('billing_amount')
+      - Invalid
+    assumptions:
+    - Billing amount should be non-negative since it represents a monetary value.
+  gender:
+    code:
+    - - .isContainedIn('gender', ['Male', 'Female'])
+      - Valid
+    assumptions:
+    - Gender should be either 'Male' or 'Female'.
+  id:
+    code:
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - ID should be unique for each record.
+  test_results:
+    code:
+    - - .isContainedIn('test_results', ['Abnormal', 'Normal', 'Inconclusive'])
+      - Invalid
+    assumptions:
+    - Test results should be one of 'Abnormal', 'Normal', or 'Inconclusive'.

@@ -1,0 +1,7 @@
+- ColumnInserting:
+    Columns:
+    - loan_intent
+    Params:
+      severity: 0.1
+      sampling: CAR
+      corrupt_strategy: add_prefix

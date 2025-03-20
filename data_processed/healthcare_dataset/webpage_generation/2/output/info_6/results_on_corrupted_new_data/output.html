@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Hospital Department Statistics</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+    <script>
+        let data = {};
+
+        function loadData() {
+            fetch('data.json')
+                .then(response => response.json())
+                .then(jsonData => {
+                    data = jsonData;
+                    console.log("Data loaded successfully.");
+                    populateDropdown();
+                })
+                .catch(error => console.error("Error loading data:", error));
+        }
+
+        function populateDropdown() {
+            let dropdown = document.getElementById("departmentSelect");
+            dropdown.innerHTML = "";
+            Object.keys(data).forEach(department => {
+                let option = document.createElement("option");
+                option.value = department;
+                option.textContent = department;
+                dropdown.appendChild(option);
+            });
+        }
+
+        function queryInfo() {
+            let department = document.getElementById("departmentSelect").value;
+            let resultDiv = document.getElementById("result");
+            resultDiv.innerHTML = "";
+
+            if (data[department]) {
+                let info = data[department];
+                resultDiv.innerHTML = `
+                    <p>Average Age: ${info["Average Age"]}</p>
+                    <p>Most Common Admission Type: ${info["Most Common Admission Type"]}</p>
+                    <p>Average Billing Amount: $${info["Average Billing Amount"]}</p>
+                `;
+            } else {
+                resultDiv.innerHTML = "No records found.";
+            }
+        }
+
+        window.onload = loadData;
+    </script>
+</head>
+<body>
+    <h1>Hospital Department Statistics</h1>
+
+    <label for="departmentSelect">Select a Department:</label>
+    <select id="departmentSelect" onchange="queryInfo()">
+        <option value="" disabled selected>Choose a department</option>
+    </select>
+
+    <div id="result" class="result"></div>
+</body>
+</html>

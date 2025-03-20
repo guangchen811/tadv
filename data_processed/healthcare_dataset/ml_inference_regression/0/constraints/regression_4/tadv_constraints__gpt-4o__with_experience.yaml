@@ -1,0 +1,33 @@
+constraints:
+  billing_amount:
+    code:
+    - - '.hasMin(''billing_amount'', lambda x: x >= 0)'
+      - Invalid
+    - - .isComplete('billing_amount')
+      - Invalid
+    - - .isNonNegative('billing_amount')
+      - Invalid
+    - - .satisfies('billing_amount >= 0', 'billing_amount_non_negative')
+      - Invalid
+    assumptions:
+    - Column 'billing_amount' should be non-negative as it represents an amount.
+    - Column 'billing_amount' is expected to be complete (NOT NULL) since it's used
+      as a target variable.
+    - Column 'billing_amount' should have a minimum value constraint, possibly greater
+      than or equal to 0, considering it represents an amount.
+    - Column 'billing_amount' is expected to be numeric, so a type constraint should
+      be in place to ensure it's a Fractional type.
+  id:
+    code:
+    - - '.hasMin(''id'', lambda x: x > 0)'
+      - Invalid
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - Column 'id' should have a UNIQUE constraint since it serves as an identifier.
+    - Column 'id' is expected to be complete (NOT NULL) as it is used for referencing
+      specific rows.
+    - Column 'id' should have a minimum value constraint to ensure it is a positive
+      integer.

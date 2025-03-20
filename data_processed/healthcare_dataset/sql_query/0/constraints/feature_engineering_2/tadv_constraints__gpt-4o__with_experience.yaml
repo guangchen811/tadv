@@ -1,0 +1,17 @@
+constraints:
+  Age:
+    code:
+    - - .isComplete('Age')
+      - Valid
+    - - .isNonNegative('Age')
+      - Valid
+    assumptions:
+    - The 'Age' column should have values that are non-negative.
+    - The 'Age' column should not have null values.
+  id:
+    code:
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The 'id' column should be unique as it serves as a unique identifier for each
+      patient.

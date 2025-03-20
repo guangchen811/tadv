@@ -1,0 +1,15 @@
+constraints:
+  Age:
+    code:
+    - - '.hasMin(''Age'', lambda x: x >= 65)'
+      - Invalid
+    assumptions:
+    - Age should be 65 or older
+  Medical Condition:
+    code:
+    - - .isContainedIn('Medical Condition', ['Hypertension', 'Cancer', 'Obesity',
+        'Arthritis', 'Diabetes', 'Asthma'])
+      - Valid
+    assumptions:
+    - Medical Condition values should be one of {Hypertension, Cancer, Obesity, Arthritis,
+      Diabetes, Asthma}

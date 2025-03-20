@@ -1,0 +1,23 @@
+constraints:
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .satisfies('loan_amnt >= 0', 'loan_amnt should be non-negative')
+      - Valid
+    assumptions:
+    - The column should be NOT NULL.
+    - The column should be a valid integer.
+    - The column should be non-negative.
+  person_income:
+    code:
+    - - .isComplete('person_income')
+      - Valid
+    - - .satisfies('person_income > 0', 'person_income should be positive to avoid
+        division by zero')
+      - Valid
+    assumptions:
+    - The column should be NOT NULL.
+    - The column should be a valid integer.
+    - The column should be non-negative.
+    - The column should not contain zero to avoid division by zero.

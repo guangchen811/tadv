@@ -1,0 +1,43 @@
+constraints:
+  Admission Type:
+    code:
+    - - .isComplete('Admission Type')
+      - Valid
+    - - .isComplete('Admission Type')
+      - Valid
+    - - .isContainedIn('Admission Type', ['Urgent', 'Elective', 'Emergency'])
+      - Valid
+    assumptions:
+    - Admission Type column should be complete (no missing values).
+    - 'Admission Type column should only contain values: ''Urgent'', ''Elective'',
+      or ''Emergency''.'
+    - Admission Type should be treated as strings consistently.
+  Age:
+    code:
+    - - .isComplete('Age')
+      - Valid
+    - - .satisfies('Age >= 0', 'Age should be non-negative')
+      - Valid
+    assumptions:
+    - Age column should be complete (no missing values).
+    - Age should be convertible to numeric values without errors.
+    - Age should be non-negative.
+  Billing Amount:
+    code:
+    - - .isComplete('Billing Amount')
+      - Valid
+    - - .satisfies('Billing Amount >= 0', 'Billing Amount should be non-negative')
+      - Invalid
+    assumptions:
+    - Billing Amount column should be complete (no missing values).
+    - Billing Amount should be convertible to numeric values without errors.
+    - Billing Amount should be non-negative.
+  Hospital:
+    code:
+    - - .isComplete('Department')
+      - Invalid
+    - - .isComplete('Hospital')
+      - Valid
+    assumptions:
+    - Hospital column should be complete (no missing values).
+    - Hospital column should be treated as strings consistently.

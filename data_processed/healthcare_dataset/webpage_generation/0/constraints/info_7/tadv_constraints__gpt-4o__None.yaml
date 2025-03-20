@@ -1,0 +1,42 @@
+constraints:
+  Date of Admission:
+    code:
+    - - .isComplete('Date of Admission')
+      - Valid
+    - - .satisfies('Date of Admission IS NOT NULL', 'Date of Admission non-null check')
+      - Invalid
+    assumptions:
+    - The 'Date of Admission' column should be convertible to a datetime format.
+    - The 'Date of Admission' column should not contain any null values after conversion.
+  Discharge Date:
+    code:
+    - - .isComplete('Discharge Date')
+      - Valid
+    - - .isGreaterThanOrEqualTo('Discharge Date', 'Date of Admission')
+      - Invalid
+    - - .satisfies('Discharge Date IS NOT NULL', 'Discharge Date non-null check')
+      - Invalid
+    assumptions:
+    - The 'Discharge Date' column should be convertible to a datetime format.
+    - The 'Discharge Date' column should not contain any null values after conversion.
+    - The 'Discharge Date' should be greater than or equal to 'Date of Admission'.
+  Doctor:
+    code:
+    - - '.hasPattern(''Doctor'', ''^\s*\S+(\s+\S+)*\s*$'', lambda x: x == 1.0)'
+      - Valid
+    - - .isComplete('Doctor')
+      - Valid
+    assumptions:
+    - The 'Doctor' column should be a non-null string.
+    - The 'Doctor' column values should be stripped of leading and trailing spaces.
+  Medical Condition:
+    code:
+    - - '.hasPattern(''Medical Condition'', ''^\s*\S+(\s+\S+)*\s*$'', lambda x: x
+        == 1.0)'
+      - Valid
+    - - .isComplete('Medical Condition')
+      - Valid
+    assumptions:
+    - The 'Medical Condition' column should be a non-null string.
+    - The 'Medical Condition' column values should be stripped of leading and trailing
+      spaces.

@@ -1,0 +1,16 @@
+constraints:
+  Date of Admission:
+    code:
+    - - .isComplete('Date of Admission')
+      - Valid
+    - - .satisfies('CAST(`Date of Admission` AS DATE) IS NOT NULL', 'valid_date_check')
+      - Valid
+    - - .satisfies('`Date of Admission` = MIN(`Date of Admission`) OVER (ORDER BY
+        `Date of Admission`)', 'chronological_order_check')
+      - Invalid
+    assumptions:
+    - The 'Date of Admission' column should be complete with no missing values.
+    - The 'Date of Admission' column should contain valid date strings that can be
+      successfully cast to DATE format.
+    - The 'Date of Admission' column should be ordered chronologically to ensure correct
+      calculation of rolling averages.

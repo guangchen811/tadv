@@ -1,0 +1,42 @@
+Insurance Provider,Medical Condition,avg_billing
+Aetna,Arthritis,25963.68
+Aetna,Asthma,26546.07
+Aetna,Cancer,24589.53
+Aetna,Diabetes,25309.5
+Aetna,Hypertension,25917.74
+Aetna,Obesity,25439.75
+Aetna,,25621.64
+Blue Cross,Arthritis,25533.86
+Blue Cross,Asthma,25497.78
+Blue Cross,Cancer,25071.83
+Blue Cross,Diabetes,25900.33
+Blue Cross,Hypertension,25351.86
+Blue Cross,Obesity,25870.45
+Blue Cross,,25545.03
+Cigna,Arthritis,25593.93
+Cigna,Asthma,25620.35
+Cigna,Cancer,26401.41
+Cigna,Diabetes,26538.33
+Cigna,Hypertension,25213.56
+Cigna,Obesity,26103.86
+Cigna,,25908.24
+Medicare,Arthritis,25088.12
+Medicare,Asthma,25502.49
+Medicare,Cancer,25022.37
+Medicare,Diabetes,25723.49
+Medicare,Hypertension,25409.28
+Medicare,Obesity,26457.89
+Medicare,,25524.56
+UnitedHealthcare,Arthritis,25863.1
+UnitedHealthcare,Asthma,25483.8
+UnitedHealthcare,Cancer,24266.8
+UnitedHealthcare,Diabetes,24935.87
+UnitedHealthcare,Hypertension,25596.48
+UnitedHealthcare,Obesity,25640.13
+UnitedHealthcare,,25300.12
+,Arthritis,25607.01
+,Asthma,25718.51
+,Cancer,25078.66
+,Diabetes,25679.51
+,Hypertension,25498.92
+,Obesity,25899.85

@@ -1,0 +1,23 @@
+constraints:
+  cb_person_default_on_file:
+    code:
+    - - .isComplete('cb_person_default_on_file')
+      - Valid
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    assumptions:
+    - The column should have values 'Y', 'N', as these are the observed values.
+    - The column should have a NOT NULL constraint, as it is complete in the dataset.
+    - Most values in the column should be 'Y' or 'N', suggesting an IS IN constraint
+      for these values.
+  loan_intent:
+    code:
+    - - .isComplete('loan_intent')
+      - Valid
+    - - .isContainedIn('loan_intent', ['EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL',
+        'DEBTCONSOLIDATION', 'MEDICAL', 'VENTURE'])
+      - Valid
+    assumptions:
+    - 'The column should have values within the observed range: ''EDUCATION'', ''HOMEIMPROVEMENT'',
+      ''PERSONAL'', ''DEBTCONSOLIDATION'', ''MEDICAL'', ''VENTURE''.'
+    - The column should have a NOT NULL constraint, as it is complete in the dataset.

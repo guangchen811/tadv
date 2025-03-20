@@ -1,0 +1,13 @@
+constraints:
+  loan_grade:
+    code:
+    - - '.hasPattern(''loan_grade'', ''A|B|C|D|E|F|G'', lambda x: x > 0.8)'
+      - Valid
+    - - .isComplete('loan_grade')
+      - Valid
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - should be one of ['A', 'B', 'C', 'D', 'E', 'F', 'G']
+    - should not be NULL
+    - should have values in ['A', 'B', 'C', 'D', 'E', 'F', 'G'] for most entries

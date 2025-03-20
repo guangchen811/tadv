@@ -1,0 +1,51 @@
+constraints:
+  cb_person_default_on_file:
+    code:
+    - - .isComplete('cb_person_default_on_file')
+      - Valid
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    - - '.satisfies(''cb_person_default_on_file IN (''Y'', ''N'')'', ''Most cb_person_default_on_file
+        values are valid'', lambda x: x > 0.8)'
+      - Invalid
+    assumptions:
+    - The column 'cb_person_default_on_file' should have values within ['Y', 'N']
+      based on the observed categorical range.
+    - The column 'cb_person_default_on_file' should be NOT NULL since its completeness
+      is 1.0.
+    - Most values in 'cb_person_default_on_file' should be within ['Y', 'N']. An IS
+      IN constraint should hold for most of the values.
+  loan_grade:
+    code:
+    - - .isComplete('loan_grade')
+      - Valid
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    - - '.satisfies(''loan_grade IN (''A'', ''B'', ''C'', ''D'', ''E'', ''F'', ''G'')'',
+        ''Most loan_grade values are valid'', lambda x: x > 0.8)'
+      - Invalid
+    assumptions:
+    - The column 'loan_grade' should have values within ['A', 'B', 'C', 'D', 'E',
+      'F', 'G'] based on the observed categorical range.
+    - The column 'loan_grade' should be NOT NULL since its completeness is 1.0.
+    - Most values in 'loan_grade' should be within ['A', 'B', 'C', 'D', 'E', 'F',
+      'G']. An IS IN constraint should hold for most of the values.
+  loan_intent:
+    code:
+    - - .isComplete('loan_intent')
+      - Valid
+    - - .isContainedIn('loan_intent', ['EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL',
+        'DEBTCONSOLIDATION', 'MEDICAL', 'VENTURE'])
+      - Valid
+    - - '.satisfies(''loan_intent IN (''EDUCATION'', ''HOMEIMPROVEMENT'', ''PERSONAL'',
+        ''DEBTCONSOLIDATION'', ''MEDICAL'', ''VENTURE'')'', ''Most loan_intent values
+        are valid'', lambda x: x > 0.8)'
+      - Invalid
+    assumptions:
+    - The column 'loan_intent' should have values within ['EDUCATION', 'HOMEIMPROVEMENT',
+      'PERSONAL', 'DEBTCONSOLIDATION', 'MEDICAL', 'VENTURE'] based on the observed
+      categorical range.
+    - The column 'loan_intent' should be NOT NULL since its completeness is 1.0.
+    - Most values in 'loan_intent' should be within ['EDUCATION', 'HOMEIMPROVEMENT',
+      'PERSONAL', 'DEBTCONSOLIDATION', 'MEDICAL', 'VENTURE']. An IS IN constraint
+      should hold for most of the values.

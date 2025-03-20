@@ -1,0 +1,40 @@
+constraints:
+  cb_person_default_on_file:
+    code:
+    - - .isComplete('cb_person_default_on_file')
+      - Valid
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
+      - Valid
+    assumptions:
+    - Values should be one of ['Y', 'N'] as these indicate whether the person has
+      defaulted before.
+  loan_grade:
+    code:
+    - - .isComplete('loan_grade')
+      - Valid
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - Values should be one of ['A', 'B', 'C', 'D', 'E', 'F', 'G'] as these are the
+      loan grades considered in the analysis.
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - '.isGreaterThan(''loan_int_rate'', 15.0, lambda x: x > 0.8)'
+      - Invalid
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - Values should be greater than 15.0 as the analysis filters for loans with high
+      interest rates.
+    - Values should be non-negative as interest rates cannot be negative.
+  person_home_ownership:
+    code:
+    - - .isComplete('person_home_ownership')
+      - Valid
+    - - .isContainedIn('person_home_ownership', ['RENT', 'OWN', 'MORTGAGE', 'OTHER'])
+      - Valid
+    assumptions:
+    - Values should be one of ['RENT', 'OWN', 'MORTGAGE', 'OTHER'] as these are the
+      home ownership types considered in the analysis.

@@ -1,0 +1,86 @@
+constraints:
+  admission_type:
+    code:
+    - - .isComplete('admission_type')
+      - Invalid
+    - - .isContainedIn('admission_type', ['Urgent', 'Elective', 'Emergency'])
+      - Invalid
+    assumptions:
+    - Admission Type should be complete.
+    - Admission Type should be one of ['Urgent', 'Elective', 'Emergency'].
+  age:
+    code:
+    - - .isComplete('age')
+      - Valid
+    - - .isNonNegative('age')
+      - Valid
+    - - .isPositive('age')
+      - Valid
+    assumptions:
+    - Age should be complete and non-negative.
+    - Age should be greater than 0 to avoid division by zero in cost_age_ratio.
+  billing_amount:
+    code:
+    - - .isComplete('billing_amount')
+      - Invalid
+    - - .isNonNegative('billing_amount')
+      - Invalid
+    assumptions:
+    - Billing Amount should be complete.
+    - Billing Amount should be non-negative.
+  blood_type:
+    code:
+    - - .isComplete('blood_type')
+      - Invalid
+    - - .isContainedIn('blood_type', ['A-', 'B-', 'B+', 'AB-', 'A+', 'O+', 'O-', 'AB+'])
+      - Invalid
+    assumptions:
+    - Blood Type should be complete.
+    - Blood Type should be one of ['A-', 'B-', 'B+', 'AB-', 'A+', 'O+', 'O-', 'AB+'].
+  gender:
+    code:
+    - - .isComplete('gender')
+      - Valid
+    - - .isContainedIn('gender', ['Male', 'Female'])
+      - Valid
+    assumptions:
+    - Gender should be complete.
+    - Gender should be one of ['Male', 'Female'].
+  hospital:
+    code:
+    - - .isComplete('hospital')
+      - Valid
+    assumptions:
+    - Hospital should be complete.
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isNonNegative('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - ID should be complete.
+    - ID should be non-negative.
+    - ID should be unique.
+  medical_condition:
+    code:
+    - - .isComplete('medical_condition')
+      - Invalid
+    - - .isContainedIn('medical_condition', ['Diabetes', 'Asthma', 'Obesity', 'Hypertension',
+        'Arthritis', 'Cancer'])
+      - Invalid
+    assumptions:
+    - Medical Condition should be complete.
+    - Medical Condition should be one of ['Diabetes', 'Asthma', 'Obesity', 'Hypertension',
+      'Arthritis', 'Cancer'].
+  test_results:
+    code:
+    - - .isComplete('test_results')
+      - Invalid
+    - - .isContainedIn('test_results', ['Abnormal', 'Normal', 'Inconclusive'])
+      - Invalid
+    assumptions:
+    - Test Results should be complete.
+    - Test Results should be one of ['Abnormal', 'Normal', 'Inconclusive'].

@@ -1,0 +1,18 @@
+constraints:
+  Billing Amount:
+    code:
+    - - .isComplete('Billing Amount')
+      - Valid
+    - - .isNonNegative('Billing Amount')
+      - Invalid
+    assumptions:
+    - The column 'Billing Amount' should not contain null values as it is complete
+      in the sample.
+    - The column 'Billing Amount' should only contain non-negative numbers.
+  Doctor:
+    code:
+    - - .isComplete('Doctor')
+      - Valid
+    assumptions:
+    - The column 'Doctor' should not contain null values as it is complete in the
+      sample.

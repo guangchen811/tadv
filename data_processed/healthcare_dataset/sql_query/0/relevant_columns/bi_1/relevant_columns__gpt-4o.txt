@@ -1,0 +1,10 @@
+id
+Name
+Age
+Gender
+Medical Condition
+Insurance Provider
+Billing Amount
+Medication
+Admission Type
+Test Results

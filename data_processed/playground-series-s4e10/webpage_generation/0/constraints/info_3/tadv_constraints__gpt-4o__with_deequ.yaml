@@ -1,0 +1,50 @@
+constraints:
+  loan_grade:
+    code:
+    - - .isComplete('loan_grade')
+      - Valid
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - loan_grade should be complete with no missing values
+    - loan_grade should only contain values from the set ['A', 'B', 'C', 'D', 'E',
+      'F', 'G']
+  loan_intent:
+    code:
+    - - .isComplete('loan_intent')
+      - Valid
+    - - .isContainedIn('loan_intent', ['EDUCATION', 'MEDICAL', 'PERSONAL', 'VENTURE',
+        'DEBTCONSOLIDATION', 'HOMEIMPROVEMENT'])
+      - Valid
+    assumptions:
+    - loan_intent should be complete with no missing values
+    - loan_intent should only contain values from the set ['EDUCATION', 'MEDICAL',
+      'PERSONAL', 'VENTURE', 'DEBTCONSOLIDATION', 'HOMEIMPROVEMENT']
+  loan_status:
+    code:
+    - - .isComplete('loan_status')
+      - Valid
+    - - .isContainedIn('loan_status', ['0', '1'])
+      - Valid
+    assumptions:
+    - loan_status should be complete with no missing values
+    - loan_status should only contain values from the set ['0', '1']
+  person_emp_length:
+    code:
+    - - .isComplete('person_emp_length')
+      - Valid
+    - - .isNonNegative('person_emp_length')
+      - Valid
+    assumptions:
+    - person_emp_length should be complete with no missing values
+    - person_emp_length should be non-negative
+  person_home_ownership:
+    code:
+    - - .isComplete('person_home_ownership')
+      - Valid
+    - - .isContainedIn('person_home_ownership', ['RENT', 'MORTGAGE', 'OWN', 'OTHER'])
+      - Valid
+    assumptions:
+    - person_home_ownership should be complete with no missing values
+    - person_home_ownership should only contain values from the set ['RENT', 'MORTGAGE',
+      'OWN', 'OTHER']

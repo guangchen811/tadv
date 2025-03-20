@@ -1,0 +1,12 @@
+constraints:
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - .isGreaterThanOrEqualTo('loan_int_rate', 0)
+      - Invalid
+    - - .isLessThanOrEqualTo('loan_int_rate', 100)
+      - Invalid
+    assumptions:
+    - Values should be greater than or equal to 0
+    - Values should be less than or equal to 100

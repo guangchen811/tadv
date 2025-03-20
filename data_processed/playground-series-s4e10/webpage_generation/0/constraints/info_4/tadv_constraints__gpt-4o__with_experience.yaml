@@ -1,0 +1,30 @@
+constraints:
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - The column 'loan_amnt' should be complete, suggesting a NOT NULL constraint.
+    - The values in 'loan_amnt' should be non-negative, suggesting an IS NON NEGATIVE
+      constraint.
+  loan_status:
+    code:
+    - - .isComplete('loan_status')
+      - Valid
+    - - .isContainedIn('loan_status', [0, 1])
+      - Invalid
+    assumptions:
+    - The column 'loan_status' should be complete, suggesting a NOT NULL constraint.
+    - The values in 'loan_status' should be either 0 or 1, suggesting an IS IN constraint.
+  person_income:
+    code:
+    - - .isComplete('person_income')
+      - Valid
+    - - .isNonNegative('person_income')
+      - Valid
+    assumptions:
+    - The column 'person_income' should be complete, suggesting a NOT NULL constraint.
+    - The values in 'person_income' should be non-negative, suggesting an IS NON NEGATIVE
+      constraint.

@@ -1,0 +1,32 @@
+{
+    "Arthritis": {
+        "Average Age": 185.96,
+        "Average Stay Days": 15.39,
+        "Most Frequent Doctor": "Steven Thomas"
+    },
+    "Asthma": {
+        "Average Age": 187.11,
+        "Average Stay Days": 15.77,
+        "Most Frequent Doctor": "Anthony Baker"
+    },
+    "Cancer": {
+        "Average Age": 195.19,
+        "Average Stay Days": 15.65,
+        "Most Frequent Doctor": "Anna Brown"
+    },
+    "Diabetes": {
+        "Average Age": 194.67,
+        "Average Stay Days": 15.42,
+        "Most Frequent Doctor": "David Johnson"
+    },
+    "Hypertension": {
+        "Average Age": 193.17,
+        "Average Stay Days": 15.52,
+        "Most Frequent Doctor": "Michael Smith"
+    },
+    "Obesity": {
+        "Average Age": 192.0,
+        "Average Stay Days": 15.49,
+        "Most Frequent Doctor": "David Davis"
+    }
+}

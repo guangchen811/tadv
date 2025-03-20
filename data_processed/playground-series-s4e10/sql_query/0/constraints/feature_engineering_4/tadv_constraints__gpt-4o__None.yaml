@@ -1,0 +1,7 @@
+constraints:
+  person_home_ownership:
+    code:
+    - - .isContainedIn('person_home_ownership', ['RENT', 'MORTGAGE', 'OWN'])
+      - Invalid
+    assumptions:
+    - Value should be one of ['RENT', 'MORTGAGE', 'OWN']

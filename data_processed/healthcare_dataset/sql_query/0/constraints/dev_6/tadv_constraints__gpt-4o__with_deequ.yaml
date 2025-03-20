@@ -1,0 +1,57 @@
+constraints:
+  Admission Type:
+    code:
+    - - .isComplete('Admission Type')
+      - Valid
+    - - .isContainedIn('Admission Type', ['Urgent', 'Elective', 'Emergency'])
+      - Valid
+    assumptions:
+    - The 'Admission Type' column should be complete.
+    - The 'Admission Type' column should contain only the values 'Urgent', 'Elective',
+      'Emergency'.
+  Gender:
+    code:
+    - - .isComplete('Gender')
+      - Valid
+    - - .isContainedIn('Gender', ['Male', 'Female'])
+      - Valid
+    assumptions:
+    - The 'Gender' column should be complete.
+    - The 'Gender' column should contain only the values 'Male' or 'Female'.
+  Insurance Provider:
+    code:
+    - - .isComplete('Insurance Provider')
+      - Valid
+    - - .isContainedIn('Insurance Provider', ['Cigna', 'Medicare', 'UnitedHealthcare',
+        'Blue Cross', 'Aetna'])
+      - Valid
+    assumptions:
+    - The 'Insurance Provider' column should be complete.
+    - The 'Insurance Provider' column should contain only the values 'Cigna', 'Medicare',
+      'UnitedHealthcare', 'Blue Cross', 'Aetna'.
+  Medical Condition:
+    code:
+    - - .isComplete('Medical Condition')
+      - Valid
+    - - .isContainedIn('Medical Condition', ['Diabetes', 'Asthma', 'Obesity', 'Hypertension',
+        'Arthritis', 'Cancer'])
+      - Valid
+    assumptions:
+    - The 'Medical Condition' column should be complete.
+    - The 'Medical Condition' column should contain only the values 'Diabetes', 'Asthma',
+      'Obesity', 'Hypertension', 'Arthritis', 'Cancer'.
+  Name:
+    code:
+    - - .isComplete('Name')
+      - Valid
+    assumptions:
+    - The 'Name' column should be complete.
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The 'id' column should be complete.
+    - The 'id' column should be unique.

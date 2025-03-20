@@ -1,0 +1,38 @@
+constraints:
+  loan_grade:
+    code:
+    - - .isComplete('loan_grade')
+      - Valid
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - Loan grade should be one of the predefined categories ['A', 'B', 'C', 'D', 'E',
+      'F', 'G'].
+    - The loan grade should be complete for all records.
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - The interest rate should be complete for all records.
+    - Interest rate should be non-negative.
+  loan_status:
+    code:
+    - - .isComplete('loan_status')
+      - Valid
+    - - .isContainedIn('loan_status', [0, 1])
+      - Invalid
+    assumptions:
+    - Loan status should be either 0 or 1.
+    - Loan status should be complete for all records.
+  person_emp_length:
+    code:
+    - - .isComplete('person_emp_length')
+      - Valid
+    - - .isNonNegative('person_emp_length')
+      - Valid
+    assumptions:
+    - The employment duration should be complete for all records.
+    - Employment duration should be non-negative.

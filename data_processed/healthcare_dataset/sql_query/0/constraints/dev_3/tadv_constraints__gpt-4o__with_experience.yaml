@@ -1,0 +1,38 @@
+constraints:
+  Billing Amount:
+    code:
+    - - '.hasMean("Billing Amount", lambda x: x > 0)'
+      - Valid
+    - - '.hasStandardDeviation("Billing Amount", lambda x: x >= 0)'
+      - Valid
+    - - .isComplete("Billing Amount")
+      - Valid
+    - - .isNonNegative("Billing Amount")
+      - Invalid
+    assumptions:
+    - The Billing Amount column should be NOT NULL.
+    - The Billing Amount should be a numeric (Fractional) value with constraints on
+      mean and standard deviation.
+    - The Billing Amount should be non-negative.
+  Doctor:
+    code:
+    - - '.hasApproxCountDistinct("Doctor", lambda x: x > 0.5)'
+      - Valid
+    - - '.hasDistinctness(["Doctor"], lambda x: x > 0.5)'
+      - Valid
+    - - .isComplete("Doctor")
+      - Valid
+    assumptions:
+    - The Doctor column should be NOT NULL.
+    - Doctor names are diverse, suggesting a large range of distinct values.
+    - The Doctor column is used for grouping, indicating it may be a category or identifier.
+  Hospital:
+    code:
+    - - .isComplete("Hospital")
+      - Valid
+    - - .isContainedIn("Hospital", ["Powell-Wheeler", "Other Hospital Names"])
+      - Invalid
+    assumptions:
+    - The Hospital column should be NOT NULL.
+    - The Hospital column should contain values like 'Powell-Wheeler' or other reasonable
+      hospital names.

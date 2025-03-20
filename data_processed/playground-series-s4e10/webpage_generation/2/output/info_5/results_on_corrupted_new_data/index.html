@@ -1,0 +1,100 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Loan Risk Analysis</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+        .chart-container {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            background: #fff;
+        }
+    </style>
+    <script>
+        let data = [];
+
+        function loadData() {
+            fetch('data.json')
+                .then(response => response.json())
+                .then(jsonData => {
+                    data = jsonData;
+                    renderChart(jsonData);
+                })
+                .catch(error => console.error("Error loading data:", error));
+        }
+
+        function renderChart(data) {
+            let ctx = document.getElementById("barChart").getContext('2d');
+            let labels = data.map(row => row["Income Bracket"]);
+            let defaultRates = data.map(row => row["Default Rate (%)"]);
+            let totalLoans = data.map(row => row["Total_Loans"]);
+
+            if (window.myChart) {
+                window.myChart.destroy();
+            }
+
+            window.myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Default Rate (%)',
+                        data: defaultRates,
+                        backgroundColor: 'rgba(255, 99, 132, 0.6)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function(tooltipItem) {
+                                    let index = tooltipItem.dataIndex;
+                                    return `Default Rate: ${defaultRates[index].toFixed(2)}% 
+Total Loans: ${totalLoans[index]}`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Default Rate (%)'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Income Bracket'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        window.onload = loadData;
+    </script>
+</head>
+<body>
+    <h1>Loan Risk Analysis: Default Rate by Income Bracket</h1>
+    <div class="chart-container">
+        <canvas id="barChart"></canvas>
+    </div>
+</body>
+</html>

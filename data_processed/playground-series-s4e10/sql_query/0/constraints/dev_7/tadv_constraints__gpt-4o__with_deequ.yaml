@@ -1,0 +1,44 @@
+constraints:
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - The column loan_amnt should be non-negative as loan amounts cannot be negative.
+    - The column loan_amnt should be complete (no missing values) to accurately calculate
+      average loan amounts.
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - The column loan_int_rate should be non-negative since interest rates cannot
+      be negative.
+    - The column loan_int_rate should be complete (no missing values) to accurately
+      calculate average interest rates.
+  loan_status:
+    code:
+    - - .isComplete('loan_status')
+      - Valid
+    - - .isContainedIn('loan_status', ['0', '1'])
+      - Valid
+    assumptions:
+    - The column loan_status should have values only from the set {'0', '1'} where
+      '1' indicates a default.
+    - The column loan_status should be complete (no missing values) so that defaults
+      can be accurately summed.
+  person_home_ownership:
+    code:
+    - - .isComplete('person_home_ownership')
+      - Valid
+    - - .isContainedIn('person_home_ownership', ['RENT', 'MORTGAGE', 'OWN', 'OTHER'])
+      - Valid
+    assumptions:
+    - The column person_home_ownership should have values only from the set {'RENT',
+      'MORTGAGE', 'OWN', 'OTHER'} as it is used to group loan statistics.
+    - The column person_home_ownership should be complete (no missing values) for
+      accurate grouping and analysis.

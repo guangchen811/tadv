@@ -1,0 +1,4 @@
+person_home_ownership
+loan_grade
+loan_int_rate
+cb_person_default_on_file

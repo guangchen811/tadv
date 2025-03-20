@@ -1,0 +1,21 @@
+constraints:
+  Admission Type:
+    code:
+    - - .isComplete('Admission Type')
+      - Valid
+    - - .isContainedIn('Admission Type', ['Emergency', 'Urgent', 'Elective'])
+      - Valid
+    assumptions:
+    - The 'Admission Type' should not contain null values.
+    - 'The ''Admission Type'' should be one of the categories: ''Emergency'', ''Urgent'',
+      ''Elective''.'
+  Date of Admission:
+    code:
+    - - .isComplete('Date of Admission')
+      - Valid
+    - - .satisfies('Date of Admission IS NOT NULL', 'Date of Admission should not
+        contain null values')
+      - Invalid
+    assumptions:
+    - The 'Date of Admission' should be in a valid date format.
+    - The 'Date of Admission' should not contain null values.

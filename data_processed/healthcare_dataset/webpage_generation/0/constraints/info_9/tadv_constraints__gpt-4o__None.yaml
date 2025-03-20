@@ -1,0 +1,19 @@
+constraints:
+  Admission Type:
+    code:
+    - - .isComplete('Admission Type')
+      - Valid
+    - - .satisfies('Admission Type == Admission Type.strip()', 'No leading or trailing
+        spaces')
+      - Invalid
+    assumptions:
+    - Admission Type should not contain leading or trailing spaces and should be a
+      valid string.
+  Date of Admission:
+    code:
+    - - .isComplete('Date of Admission')
+      - Valid
+    - - .satisfies('Date of Admission > 0', 'Valid date check')
+      - Invalid
+    assumptions:
+    - Date of Admission should be convertible to a valid date format.

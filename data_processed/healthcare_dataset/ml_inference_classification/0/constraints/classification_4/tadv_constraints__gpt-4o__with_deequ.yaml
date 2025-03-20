@@ -1,0 +1,64 @@
+constraints:
+  Age:
+    code:
+    - - '.hasMin(''Age'', lambda x: x > 0)'
+      - Valid
+    - - .isComplete('Age')
+      - Valid
+    - - .isNonNegative('Age')
+      - Valid
+    assumptions:
+    - The 'Age' column should be complete (no missing values).
+    - The 'Age' column should contain non-negative values.
+    - The 'Age' column should not contain zero values for valid records.
+  Billing Amount:
+    code:
+    - - .isComplete('Billing Amount')
+      - Valid
+    - - .isNonNegative('Billing Amount')
+      - Invalid
+    assumptions:
+    - The 'Billing Amount' column should be complete (no missing values).
+    - The 'Billing Amount' column should contain non-negative values.
+  Gender:
+    code:
+    - - .isComplete('Gender')
+      - Valid
+    - - .isContainedIn('Gender', ['Male', 'Female'])
+      - Valid
+    assumptions:
+    - The 'Gender' column should be complete (no missing values).
+    - The 'Gender' column should only contain values in ['Male', 'Female'].
+  Medical Condition:
+    code:
+    - - .isComplete('Medical Condition')
+      - Valid
+    - - .isContainedIn('Medical Condition', ['Diabetes', 'Asthma', 'Obesity', 'Hypertension',
+        'Arthritis', 'Cancer'])
+      - Valid
+    assumptions:
+    - The 'Medical Condition' column should be complete (no missing values).
+    - The 'Medical Condition' column should only contain values in ['Diabetes', 'Asthma',
+      'Obesity', 'Hypertension', 'Arthritis', 'Cancer'].
+  Test Results:
+    code:
+    - - .isComplete('Test Results')
+      - Valid
+    - - .isContainedIn('Test Results', ['Abnormal', 'Normal', 'Inconclusive'])
+      - Valid
+    assumptions:
+    - The 'Test Results' column should be complete (no missing values).
+    - The 'Test Results' column should only contain values in ['Abnormal', 'Normal',
+      'Inconclusive'].
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isNonNegative('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The 'id' column should be complete (no missing values).
+    - The 'id' column should have unique values.
+    - The 'id' column should contain non-negative values.

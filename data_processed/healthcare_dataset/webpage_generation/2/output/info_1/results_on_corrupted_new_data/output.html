@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Hospital Stay Query</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+    <script>
+        let data = {};
+
+        function loadData() {
+            fetch('data.json')
+                .then(response => response.json())
+                .then(jsonData => {
+                    data = jsonData;
+                    console.log("Data loaded successfully.");
+                })
+                .catch(error => console.error("Error loading data:", error));
+        }
+
+        function queryInfo() {
+            let input = document.getElementById("nameQuery").value.toLowerCase().trim();
+            let resultDiv = document.getElementById("result");
+            resultDiv.innerHTML = "";
+
+            if (data[input]) {
+                let info = data[input];
+                resultDiv.innerHTML = `Age: ${info["Age"]} <br> Days Stayed: ${info["Days Stayed"]}`;
+            } else {
+                resultDiv.innerHTML = "No records found.";
+            }
+        }
+
+        window.onload = loadData;
+    </script>
+</head>
+<body>
+    <h1>Hospital Stay Query</h1>
+
+    <label for="nameQuery">Enter Full Name:</label>
+    <input type="text" id="nameQuery" onkeyup="queryInfo()" placeholder="Type to search...">
+
+    <div id="result" class="result"></div>
+</body>
+</html>

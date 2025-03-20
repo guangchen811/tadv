@@ -1,0 +1,19 @@
+constraints:
+  cb_person_cred_hist_length:
+    code:
+    - - .isComplete('cb_person_cred_hist_length')
+      - Valid
+    - - .isNonNegative('cb_person_cred_hist_length')
+      - Valid
+    assumptions:
+    - The column 'cb_person_cred_hist_length' should be NOT NULL.
+    - The column 'cb_person_cred_hist_length' should be non-negative.
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The column 'id' should have unique values.
+    - The column 'id' should be NOT NULL.

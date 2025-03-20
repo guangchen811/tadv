@@ -1,0 +1,34 @@
+constraints:
+  Age:
+    code:
+    - - '.hasCompleteness(''Age'', lambda x: x >= 0.8)'
+      - Valid
+    - - .isComplete('Age')
+      - Valid
+    assumptions:
+    - Should be numeric
+    - Null values should be minimal for meaningful distribution
+  Hospital:
+    code:
+    - - .isComplete('Hospital')
+      - Valid
+    assumptions:
+    - Should be of string type
+    - Should not contain null values
+  Medical Condition:
+    code:
+    - - .isComplete('Medical Condition')
+      - Valid
+    - - .isComplete(['Medical Condition', 'Medication', 'Hospital', 'Age'])
+      - Invalid
+    assumptions:
+    - Should be of string type
+    - Should not contain null values
+    - Each entry should have corresponding entries in Medication, Hospital, and Age
+  Medication:
+    code:
+    - - .isComplete('Medication')
+      - Valid
+    assumptions:
+    - Should be of string type
+    - Should not contain null values

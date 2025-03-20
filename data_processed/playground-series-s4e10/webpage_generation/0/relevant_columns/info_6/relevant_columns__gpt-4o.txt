@@ -1,0 +1,6 @@
+person_income
+loan_amnt
+loan_intent
+loan_grade
+person_emp_length
+loan_status

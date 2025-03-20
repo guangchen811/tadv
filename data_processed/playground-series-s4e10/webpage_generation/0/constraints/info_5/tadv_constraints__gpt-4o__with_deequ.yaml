@@ -1,0 +1,28 @@
+constraints:
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - The column 'loan_amnt' should be complete and consist of non-negative values.
+  loan_status:
+    code:
+    - - .isComplete('loan_status')
+      - Valid
+    - - .isContainedIn('loan_status', [0, 1])
+      - Invalid
+    assumptions:
+    - The column 'loan_status' should only contain the values 0 and 1.
+    - The column 'loan_status' should be complete with all entries filled.
+  person_income:
+    code:
+    - - .isNonNegative('person_income')
+      - Valid
+    - - .satisfies('person_income >= 0', 'Non-negative income')
+      - Valid
+    assumptions:
+    - The column 'person_income' should be a non-negative integer.
+    - The column 'person_income' should fall within defined income brackets, ensuring
+      no illogical values.

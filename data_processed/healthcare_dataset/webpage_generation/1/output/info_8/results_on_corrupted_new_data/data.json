@@ -1,0 +1,32 @@
+{
+    "?": {
+        "Average Billing Amount": 25680.3,
+        "Most Common Treatment": "Arthritis",
+        "Most Frequent Hospital": "Campbell PLC"
+    },
+    "Aetna": {
+        "Average Billing Amount": 25680.89,
+        "Most Common Treatment": "Hypertension",
+        "Most Frequent Hospital": "Miller Inc"
+    },
+    "Blue Cross": {
+        "Average Billing Amount": 25450.22,
+        "Most Common Treatment": "Arthritis",
+        "Most Frequent Hospital": "Ltd Smith"
+    },
+    "Cigna": {
+        "Average Billing Amount": 25940.16,
+        "Most Common Treatment": "Hypertension",
+        "Most Frequent Hospital": "Ltd Smith"
+    },
+    "Medicare": {
+        "Average Billing Amount": 25625.3,
+        "Most Common Treatment": "Arthritis",
+        "Most Frequent Hospital": "Group Davis"
+    },
+    "UnitedHealthcare": {
+        "Average Billing Amount": 25155.12,
+        "Most Common Treatment": "Arthritis",
+        "Most Frequent Hospital": "Johnson Inc"
+    }
+}

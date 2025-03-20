@@ -1,0 +1,36 @@
+constraints:
+  Age:
+    code:
+    - - '.hasMax(''Age'', lambda x: x <= 120)'
+      - Valid
+    - - '.hasMin(''Age'', lambda x: x >= 0)'
+      - Valid
+    - - .isComplete('Age')
+      - Valid
+    - - .isNonNegative('Age')
+      - Valid
+    - - '.satisfies(''Age < 18'', ''child'', lambda x: x >= 0)'
+      - Valid
+    - - '.satisfies(''Age >= 18 AND Age <= 30'', ''young_adult'', lambda x: x >= 0)'
+      - Valid
+    - - '.satisfies(''Age >= 31 AND Age <= 50'', ''adult'', lambda x: x >= 0)'
+      - Valid
+    - - '.satisfies(''Age >= 51 AND Age <= 64'', ''mid_senior'', lambda x: x >= 0)'
+      - Valid
+    - - '.satisfies(''Age >= 65'', ''senior'', lambda x: x >= 0)'
+      - Valid
+    assumptions:
+    - Age should be a non-negative integer.
+    - Age values should be within reasonable human age limits, e.g., 0 to 120.
+    - 'Age is used to categorize patients into age buckets: ''child'' for Age < 18,
+      ''young_adult'' for Age between 18 and 30, ''adult'' for Age between 31 and
+      50, ''mid_senior'' for Age between 51 and 64, and ''senior'' for Age 65 and
+      older.'
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - id should be a unique identifier for each patient.

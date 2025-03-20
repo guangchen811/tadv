@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "/Users/haochen/Codebase/tadv/data/healthcare_dataset/scripts/ml_inference/classification_0.py", line 88, in <module>
+    test_preds = model.predict(X_test.drop(columns=[ID_COL]))
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/haochen/Codebase/tadv/tadv/runtime_environments/python/env/lib/python3.12/site-packages/sklearn/pipeline.py", line 787, in predict
+    Xt = transform.transform(Xt)
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/haochen/Codebase/tadv/tadv/runtime_environments/python/env/lib/python3.12/site-packages/sklearn/utils/_set_output.py", line 319, in wrapped
+    data_to_wrap = f(self, X, *args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/haochen/Codebase/tadv/tadv/runtime_environments/python/env/lib/python3.12/site-packages/sklearn/compose/_column_transformer.py", line 1090, in transform
+    raise ValueError(f"columns are missing: {diff}")
+ValueError: columns are missing: {'Date of Admission'}

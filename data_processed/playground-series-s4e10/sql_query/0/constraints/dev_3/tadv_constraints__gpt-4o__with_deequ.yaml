@@ -1,0 +1,29 @@
+constraints:
+  loan_amnt:
+    code:
+    - - '.hasApproxQuantile("loan_amnt", 0.5, lambda x: x > 0)'
+      - Valid
+    - - .isNonNegative("loan_amnt")
+      - Valid
+    assumptions:
+    - loan_amnt should be a non-negative integer.
+    - loan_amnt should reflect typical lending scenarios for analysis.
+  loan_int_rate:
+    code:
+    - - '.hasStandardDeviation("loan_int_rate", lambda x: x > 0)'
+      - Valid
+    - - .isNonNegative("loan_int_rate")
+      - Valid
+    assumptions:
+    - loan_int_rate should be a non-negative value.
+    - loan_int_rate should be a consistent metric across the dataset.
+  person_income:
+    code:
+    - - '.hasApproxQuantile("person_income", 0.5, lambda x: x > 0)'
+      - Valid
+    - - .isNonNegative("person_income")
+      - Valid
+    assumptions:
+    - person_income should be a non-negative integer.
+    - 'person_income should have values allowing categorization into bands: <50000,
+      50000-100000, >100000.'

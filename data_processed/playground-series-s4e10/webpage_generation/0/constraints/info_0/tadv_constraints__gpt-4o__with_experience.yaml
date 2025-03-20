@@ -1,0 +1,115 @@
+constraints:
+  cb_person_cred_hist_length:
+    code:
+    - - '.hasMean(''cb_person_cred_hist_length'', lambda x: x is not None)'
+      - Valid
+    - - '.hasStandardDeviation(''cb_person_cred_hist_length'', lambda x: x is not
+        None)'
+      - Valid
+    - - .isComplete('cb_person_cred_hist_length')
+      - Valid
+    - - .isNonNegative('cb_person_cred_hist_length')
+      - Valid
+    assumptions:
+    - 'NOT NULL: Column cb_person_cred_hist_length should not have null values since
+      it''s complete in the sample.'
+    - 'IS NON NEGATIVE: Column cb_person_cred_hist_length should be non-negative as
+      credit history length cannot be negative.'
+    - 'MEAN AND STD DEV: Consider suggesting mean and standard deviation constraints
+      for column cb_person_cred_hist_length as it''s a numeric column.'
+  loan_amnt:
+    code:
+    - - '.hasMean(''loan_amnt'', lambda x: x is not None)'
+      - Valid
+    - - '.hasStandardDeviation(''loan_amnt'', lambda x: x is not None)'
+      - Valid
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - 'NOT NULL: Column loan_amnt should not have null values since it''s complete
+      in the sample.'
+    - 'IS NON NEGATIVE: Column loan_amnt should be non-negative as it represents a
+      loan amount.'
+    - 'MEAN AND STD DEV: Consider suggesting mean and standard deviation constraints
+      for column loan_amnt as it''s a numeric column.'
+  loan_int_rate:
+    code:
+    - - '.hasMean(''loan_int_rate'', lambda x: x is not None)'
+      - Valid
+    - - '.hasStandardDeviation(''loan_int_rate'', lambda x: x is not None)'
+      - Valid
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - 'NOT NULL: Column loan_int_rate should not have null values since it''s complete
+      in the sample.'
+    - 'IS NON NEGATIVE: Column loan_int_rate should be non-negative as interest rate
+      cannot be negative.'
+    - 'MEAN AND STD DEV: Consider suggesting mean and standard deviation constraints
+      for column loan_int_rate as it''s a numeric column.'
+  loan_percent_income:
+    code:
+    - - '.hasMean(''loan_percent_income'', lambda x: x is not None)'
+      - Valid
+    - - '.hasStandardDeviation(''loan_percent_income'', lambda x: x is not None)'
+      - Valid
+    - - .isComplete('loan_percent_income')
+      - Valid
+    - - .isNonNegative('loan_percent_income')
+      - Valid
+    assumptions:
+    - 'NOT NULL: Column loan_percent_income should not have null values since it''s
+      complete in the sample.'
+    - 'IS NON NEGATIVE: Column loan_percent_income should be non-negative as it represents
+      a percentage.'
+    - 'MEAN AND STD DEV: Consider suggesting mean and standard deviation constraints
+      for column loan_percent_income as it''s a numeric column.'
+  loan_status:
+    code:
+    - - .isComplete('loan_status')
+      - Valid
+    - - .isContainedIn('loan_status', [0, 1])
+      - Invalid
+    assumptions:
+    - 'NOT NULL: Column loan_status should not have null values since it''s complete
+      in the sample.'
+    - 'IS IN: Column loan_status should have values within {0, 1} as per the histogram
+      data.'
+  person_emp_length:
+    code:
+    - - '.hasMean(''person_emp_length'', lambda x: x is not None)'
+      - Valid
+    - - '.hasStandardDeviation(''person_emp_length'', lambda x: x is not None)'
+      - Valid
+    - - .isComplete('person_emp_length')
+      - Valid
+    - - .isNonNegative('person_emp_length')
+      - Valid
+    assumptions:
+    - 'NOT NULL: Column person_emp_length should not have null values since it''s
+      complete in the sample.'
+    - 'IS NON NEGATIVE: Column person_emp_length should be non-negative as employment
+      length cannot be negative.'
+    - 'MEAN AND STD DEV: Consider suggesting mean and standard deviation constraints
+      for column person_emp_length as it''s a numeric column.'
+  person_income:
+    code:
+    - - '.hasMean(''person_income'', lambda x: x is not None)'
+      - Valid
+    - - '.hasStandardDeviation(''person_income'', lambda x: x is not None)'
+      - Valid
+    - - .isComplete('person_income')
+      - Valid
+    - - .isNonNegative('person_income')
+      - Valid
+    assumptions:
+    - 'NOT NULL: Column person_income should not have null values since it''s complete
+      in the sample.'
+    - 'IS NON NEGATIVE: Column person_income should be non-negative as it''s an income
+      field.'
+    - 'MEAN AND STD DEV: Consider suggesting mean and standard deviation constraints
+      for column person_income as it''s a numeric column.'

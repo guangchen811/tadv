@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "/Users/haochen/Codebase/tadv/data/healthcare_dataset/scripts/ml_inference/classification_2.py", line 49, in <module>
+    testX = test_df.drop(columns=[
+            ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/haochen/Codebase/tadv/tadv/runtime_environments/python/env/lib/python3.12/site-packages/pandas/core/frame.py", line 5581, in drop
+    return super().drop(
+           ^^^^^^^^^^^^^
+  File "/Users/haochen/Codebase/tadv/tadv/runtime_environments/python/env/lib/python3.12/site-packages/pandas/core/generic.py", line 4788, in drop
+    obj = obj._drop_axis(labels, axis, level=level, errors=errors)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/haochen/Codebase/tadv/tadv/runtime_environments/python/env/lib/python3.12/site-packages/pandas/core/generic.py", line 4830, in _drop_axis
+    new_axis = axis.drop(labels, errors=errors)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/haochen/Codebase/tadv/tadv/runtime_environments/python/env/lib/python3.12/site-packages/pandas/core/indexes/base.py", line 7070, in drop
+    raise KeyError(f"{labels[mask].tolist()} not found in axis")
+KeyError: "['Date of Admission'] not found in axis"

@@ -1,0 +1,65 @@
+constraints:
+  Billing Amount:
+    code:
+    - - '.hasMean(''Billing Amount'', lambda x: x is not None)'
+      - Valid
+    - - '.hasMin(''Billing Amount'', lambda x: x >= 0)'
+      - Invalid
+    - - '.hasStandardDeviation(''Billing Amount'', lambda x: x is not None)'
+      - Valid
+    - - .isNonNegative('Billing Amount')
+      - Invalid
+    assumptions:
+    - Should be non-negative as it represents monetary values.
+    - Should have a minimum value of 0.
+    - Should have a mean and standard deviation to maintain consistency in billing
+      amounts.
+  Date of Admission:
+    code:
+    - - .isComplete('Date of Admission')
+      - Valid
+    assumptions:
+    - Should be complete with no null values as observed in the data.
+  Discharge Date:
+    code:
+    - - .isComplete('Discharge Date')
+      - Valid
+    assumptions:
+    - Should be complete with no null values as observed in the data.
+  Doctor:
+    code:
+    - - .isComplete('Doctor')
+      - Valid
+    assumptions:
+    - Should be complete with no null values as observed in the data.
+  Hospital:
+    code:
+    - - .isComplete('Hospital')
+      - Valid
+    assumptions:
+    - Should be complete with no null values as observed in the data.
+  Insurance Provider:
+    code:
+    - - .isContainedIn('Insurance Provider', ['Aetna', 'Blue Cross', 'UnitedHealthcare',
+        'Cigna', 'Medicare'])
+      - Valid
+    assumptions:
+    - Should have values in the set {Aetna, Blue Cross, UnitedHealthcare, Cigna, Medicare}
+      as seen in the histogram with 100% presence.
+  Medical Condition:
+    code:
+    - - .isContainedIn('Medical Condition', ['Hypertension', 'Cancer', 'Obesity',
+        'Arthritis', 'Diabetes', 'Asthma'])
+      - Valid
+    assumptions:
+    - Should have values in the set {Hypertension, Cancer, Obesity, Arthritis, Diabetes,
+      Asthma} as seen in the histogram with 100% presence.
+  Room Number:
+    code:
+    - - .isNonNegative('Room Number')
+      - Invalid
+    - - .satisfies('Room Number >= 0', 'Room Number Check')
+      - Invalid
+    assumptions:
+    - Should be integral as it represents a room number.
+    - Should have a non-negative value as room numbers are typically positive.

@@ -1,0 +1,12 @@
+- Scaling:
+    Columns:
+    - loan_amnt
+    Params:
+      severity: 0.1
+      sampling: CAR
+- MaskValues:
+    Columns:
+    - loan_grade
+    Params:
+      severity: 0.1
+      sampling: CAR

@@ -1,0 +1,26 @@
+constraints:
+  Billing Amount:
+    code:
+    - - .isComplete('Billing Amount')
+      - Valid
+    - - .isNonNegative('Billing Amount')
+      - Invalid
+    assumptions:
+    - The 'Billing Amount' column must be complete, as it is used to calculate the
+      average billing per doctor.
+    - The 'Billing Amount' should be non-negative, as billing amounts cannot logically
+      be negative.
+  Doctor:
+    code:
+    - - .isComplete('Doctor')
+      - Valid
+    assumptions:
+    - The 'Doctor' column must be complete, as it is used for grouping and aggregating
+      to determine patient count per doctor.
+  Hospital:
+    code:
+    - - .isComplete('Hospital')
+      - Valid
+    assumptions:
+    - The 'Hospital' column must be complete, as it is used in the WHERE clause to
+      filter data for a specific hospital ('Powell-Wheeler').

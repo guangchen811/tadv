@@ -1,0 +1,29 @@
+constraints:
+  loan_amnt:
+    code:
+    - - .isLessThanOrEqualTo('loan_amnt', 'MAX_ALLOWABLE_LOAN_AMOUNT')
+      - Invalid
+    - - .isPositive('loan_amnt')
+      - Valid
+    assumptions:
+    - loan_amnt should be a positive value
+  loan_int_rate:
+    code:
+    - - .isLessThanOrEqualTo('loan_int_rate', 'MAX_INTEREST_RATE')
+      - Invalid
+    - - .isPositive('loan_int_rate')
+      - Valid
+    assumptions:
+    - loan_int_rate should be a positive value
+  loan_status:
+    code:
+    - - .isContainedIn('loan_status', [0, 1])
+      - Invalid
+    assumptions:
+    - loan_status should be either 0 or 1
+  person_emp_length:
+    code:
+    - - .isNonNegative('person_emp_length')
+      - Valid
+    assumptions:
+    - person_emp_length should be a non-negative value

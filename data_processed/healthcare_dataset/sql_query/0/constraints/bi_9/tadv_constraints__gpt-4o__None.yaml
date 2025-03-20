@@ -1,0 +1,31 @@
+constraints:
+  Date of Admission:
+    code:
+    - - .hasPattern('Date of Admission', '\\d{4}-\\d{2}-\\d{2}')
+      - Valid
+    - - .isComplete('Date of Admission')
+      - Valid
+    assumptions:
+    - Date of Admission must be in a valid date format that can be cast to a DATE
+      type.
+  Discharge Date:
+    code:
+    - - .hasPattern('Discharge Date', '\\d{4}-\\d{2}-\\d{2}')
+      - Valid
+    - - .isComplete('Discharge Date')
+      - Valid
+    - - .isGreaterThanOrEqualTo('Discharge Date', 'Date of Admission')
+      - Invalid
+    assumptions:
+    - Discharge Date must be in a valid date format that can be cast to a DATE type.
+    - Discharge Date must be greater than or equal to Date of Admission to ensure
+      a non-negative length of stay.
+  Test Results:
+    code:
+    - - .isComplete('Test Results')
+      - Valid
+    - - .isContainedIn('Test Results', ['Abnormal', 'Normal', 'Inconclusive'])
+      - Valid
+    assumptions:
+    - 'Test Results should only contain one of the expected categories: ''Abnormal'',
+      ''Normal'', or ''Inconclusive''.'

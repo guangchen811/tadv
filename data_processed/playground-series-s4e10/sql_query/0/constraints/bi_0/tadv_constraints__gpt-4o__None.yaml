@@ -1,0 +1,41 @@
+constraints:
+  loan_grade:
+    code:
+    - - .isComplete('loan_grade')
+      - Valid
+    - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - Data type should be String
+    - Values should be one of ['A', 'B', 'C', 'D', 'E', 'F', 'G']
+    - No missing values allowed
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - Data type should be Fractional
+    - Values should be non-negative
+    - No missing values allowed
+  loan_status:
+    code:
+    - - .isComplete('loan_status')
+      - Valid
+    - - .isContainedIn('loan_status', [0, 1])
+      - Invalid
+    assumptions:
+    - Data type should be Integral
+    - Values should be either 0 or 1
+    - No missing values allowed
+  person_emp_length:
+    code:
+    - - .isComplete('person_emp_length')
+      - Valid
+    - - .isNonNegative('person_emp_length')
+      - Valid
+    assumptions:
+    - Data type should be Fractional
+    - Values should be non-negative
+    - No missing values allowed

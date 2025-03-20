@@ -1,0 +1,8 @@
+Medical Condition
+Billing Amount
+Insurance Provider
+Room Number
+Doctor
+Date of Admission
+Discharge Date
+Hospital

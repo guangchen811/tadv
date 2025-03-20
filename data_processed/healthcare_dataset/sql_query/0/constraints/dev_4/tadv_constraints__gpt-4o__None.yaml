@@ -1,0 +1,23 @@
+constraints:
+  Billing Amount:
+    code:
+    - - .isNonNegative('Billing Amount')
+      - Invalid
+    assumptions:
+    - Billing Amount should be a non-negative fractional value.
+  Hospital:
+    code:
+    - - '.satisfies(''Hospital IS NOT NULL'', ''Hospital should be a non-empty string
+        value.'', lambda x: x > 0.0)'
+      - Valid
+    assumptions:
+    - Hospital should be a non-empty string value.
+    - Hospital can have NULL values when aggregating by Medical Condition.
+  Medical Condition:
+    code:
+    - - '.satisfies(''Medical Condition IS NOT NULL'', ''Medical Condition should
+        be a non-empty string value.'', lambda x: x > 0.0)'
+      - Invalid
+    assumptions:
+    - Medical Condition should be a non-empty string value.
+    - Medical Condition can have NULL values when aggregating by Hospital.

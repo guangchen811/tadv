@@ -1,0 +1,5 @@
+loan_grade
+loan_intent
+loan_status
+person_home_ownership
+person_emp_length

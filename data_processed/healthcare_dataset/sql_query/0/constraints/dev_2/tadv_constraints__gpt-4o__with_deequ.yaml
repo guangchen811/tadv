@@ -1,0 +1,68 @@
+constraints:
+  Billing Amount:
+    code:
+    - - .isComplete('Billing Amount')
+      - Valid
+    - - .isNonNegative('Billing Amount')
+      - Invalid
+    assumptions:
+    - The 'Billing Amount' column should be complete with no missing values.
+    - The 'Billing Amount' should contain non-negative values.
+  Date of Admission:
+    code:
+    - - .isComplete('Date of Admission')
+      - Valid
+    - - .satisfies('CAST(Date of Admission AS DATE) BETWEEN DATE(2020-01-01) AND DATE(2022-12-31)',
+        'Date of Admission within range')
+      - Invalid
+    - - .satisfies('CAST(Date of Admission AS DATE) IS NOT NULL', 'Date of Admission
+        castable to date')
+      - Invalid
+    assumptions:
+    - The 'Date of Admission' column should be complete with no missing values.
+    - The 'Date of Admission' values should be castable to a valid date format.
+    - The 'Date of Admission' should fall between '2020-01-01' and '2022-12-31'.
+  Medical Condition:
+    code:
+    - - .isComplete('Medical Condition')
+      - Valid
+    - - .isContainedIn('Medical Condition', ['Diabetes', 'Asthma', 'Obesity', 'Hypertension',
+        'Arthritis', 'Cancer'])
+      - Valid
+    assumptions:
+    - The 'Medical Condition' column should be complete with no missing values.
+    - 'The ''Medical Condition'' should only contain values: ''Diabetes'', ''Asthma'',
+      ''Obesity'', ''Hypertension'', ''Arthritis'', ''Cancer''.'
+  Name:
+    code:
+    - - .isComplete('Name')
+      - Valid
+    assumptions:
+    - The 'Name' column should be complete with no missing values.
+  Test Results:
+    code:
+    - - .isComplete('Test Results')
+      - Valid
+    - - .isContainedIn('Test Results', ['Abnormal', 'Normal', 'Inconclusive'])
+      - Valid
+    - - '.satisfies(''Test Results = Abnormal'', ''Has at least one Abnormal result'',
+        lambda x: x > 0)'
+      - Invalid
+    assumptions:
+    - The 'Test Results' column should be complete with no missing values.
+    - 'The ''Test Results'' should only contain values: ''Abnormal'', ''Normal'',
+      ''Inconclusive''.'
+    - The 'Test Results' should include at least one 'Abnormal' result as per filtering
+      requirement.
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isNonNegative('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The 'id' column should be complete with no missing values.
+    - The 'id' column should contain unique values to ensure each record is distinct.
+    - The 'id' column should contain non-negative values.

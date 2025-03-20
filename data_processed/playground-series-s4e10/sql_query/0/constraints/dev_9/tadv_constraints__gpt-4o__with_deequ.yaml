@@ -1,0 +1,37 @@
+constraints:
+  loan_amnt:
+    code:
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - The column 'loan_amnt' should be complete (no missing values).
+    - The values in 'loan_amnt' should be non-negative.
+  loan_int_rate:
+    code:
+    - - .isComplete('loan_int_rate')
+      - Valid
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - The column 'loan_int_rate' should be complete (no missing values).
+    - The values in 'loan_int_rate' should be non-negative.
+  loan_status:
+    code:
+    - - .isComplete('loan_status')
+      - Valid
+    - - .isContainedIn('loan_status', [0, 1])
+      - Invalid
+    assumptions:
+    - The column 'loan_status' should be complete (no missing values).
+    - The values in 'loan_status' should be either 0 or 1 to indicate loan status.
+  person_emp_length:
+    code:
+    - - .isComplete('person_emp_length')
+      - Valid
+    - - .isNonNegative('person_emp_length')
+      - Valid
+    assumptions:
+    - The column 'person_emp_length' should be complete (no missing values).
+    - The values in 'person_emp_length' should be non-negative.

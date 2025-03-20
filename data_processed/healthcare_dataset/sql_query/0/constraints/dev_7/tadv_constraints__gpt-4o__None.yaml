@@ -1,0 +1,15 @@
+constraints:
+  Date of Admission:
+    code:
+    - - '.hasPattern(''Date of Admission'', ''\\d{4}-\\d{2}-\\d{2}'', lambda x: x
+        > 0.9)'
+      - Valid
+    - - .isComplete('Date of Admission')
+      - Valid
+    - - .satisfies('CAST(Date of Admission AS DATE) IS NOT NULL', 'Date of Admission
+        should be convertible to DATE')
+      - Invalid
+    assumptions:
+    - The column should be convertible to a DATE type.
+    - The column should have no missing values.
+    - The dates should follow a consistent and recognizable format.

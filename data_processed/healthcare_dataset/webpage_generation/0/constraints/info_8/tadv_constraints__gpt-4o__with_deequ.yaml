@@ -1,0 +1,48 @@
+constraints:
+  Billing Amount:
+    code:
+    - - .isComplete('Billing Amount')
+      - Valid
+    - - .satisfies('Billing Amount IS NOT NULL AND Billing Amount >= 0', 'Billing
+        Amount should be convertible to a numeric type and non-negative')
+      - Invalid
+    assumptions:
+    - Billing Amount should be convertible to a numeric type.
+    - Billing Amount should be complete for all records.
+  Hospital:
+    code:
+    - - '.hasPattern(''Hospital'', ''^[\w\s]+$'', lambda x: x == 1.0)'
+      - Invalid
+    - - .isComplete('Hospital')
+      - Valid
+    assumptions:
+    - Hospital should be treated as a string and should not contain leading or trailing
+      whitespace.
+  Insurance Provider:
+    code:
+    - - '.hasPattern(''Insurance Provider'', ''^[\w\s]+$'', lambda x: x == 1.0)'
+      - Valid
+    - - .isComplete('Insurance Provider')
+      - Valid
+    - - .isContainedIn('Insurance Provider', ['Aetna', 'Blue Cross', 'UnitedHealthcare',
+        'Cigna', 'Medicare'])
+      - Valid
+    assumptions:
+    - Insurance Provider should be treated as a string and should not contain leading
+      or trailing whitespace.
+    - 'Insurance Provider values should be one of the known providers: ''Aetna'',
+      ''Blue Cross'', ''UnitedHealthcare'', ''Cigna'', ''Medicare''.'
+  Medical Condition:
+    code:
+    - - '.hasPattern(''Medical Condition'', ''^[\w\s]+$'', lambda x: x == 1.0)'
+      - Valid
+    - - .isComplete('Medical Condition')
+      - Valid
+    - - .isContainedIn('Medical Condition', ['Diabetes', 'Asthma', 'Obesity', 'Hypertension',
+        'Arthritis', 'Cancer'])
+      - Valid
+    assumptions:
+    - Medical Condition should be treated as a string and should not contain leading
+      or trailing whitespace.
+    - 'Medical Condition values should be one of the known conditions: ''Diabetes'',
+      ''Asthma'', ''Obesity'', ''Hypertension'', ''Arthritis'', ''Cancer''.'

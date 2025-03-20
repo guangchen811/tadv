@@ -1,0 +1,42 @@
+constraints:
+  Date of Admission:
+    code:
+    - - .isComplete('Date of Admission')
+      - Valid
+    - - .satisfies('CAST(`Date of Admission` AS DATE) IS NOT NULL', 'Date of Admission
+        must be convertible to DATE')
+      - Valid
+    assumptions:
+    - The 'Date of Admission' column should be complete, meaning there should be no
+      missing values.
+    - The 'Date of Admission' column values should be convertible to a proper DATE
+      type for accurate calculations.
+  Discharge Date:
+    code:
+    - - .isComplete('Discharge Date')
+      - Valid
+    - - '.isGreaterThanOrEqualTo(''Discharge Date'', ''Date of Admission'', lambda
+        x: x == 1.0)'
+      - Invalid
+    - - .satisfies('CAST(`Discharge Date` AS DATE) IS NOT NULL', 'Discharge Date must
+        be convertible to DATE')
+      - Valid
+    assumptions:
+    - The 'Discharge Date' column should be complete, meaning there should be no missing
+      values.
+    - The 'Discharge Date' column values should be convertible to a proper DATE type
+      for accurate calculations.
+    - The 'Discharge Date' should not be earlier than 'Date of Admission' to ensure
+      logical consistency in the length of stay calculation.
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isNonNegative('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - The 'id' column should be complete, meaning there should be no missing values.
+    - The 'id' column values should be unique to correctly identify each patient.
+    - The 'id' column values should be non-negative as they represent identifiers.

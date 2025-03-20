@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Doctor Performance Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+    <script>
+        let data = {};
+
+        function loadData() {
+            fetch('data.json')
+                .then(response => response.json())
+                .then(jsonData => {
+                    data = jsonData;
+                    console.log("Data loaded successfully.");
+                    populateDropdown();
+                })
+                .catch(error => console.error("Error loading data:", error));
+        }
+
+        function populateDropdown() {
+            let dropdown = document.getElementById("doctorSelect");
+            dropdown.innerHTML = "";
+            Object.keys(data).forEach(doctor => {
+                let option = document.createElement("option");
+                option.value = doctor;
+                option.textContent = doctor;
+                dropdown.appendChild(option);
+            });
+        }
+
+        function queryInfo() {
+            let doctor = document.getElementById("doctorSelect").value;
+            let resultDiv = document.getElementById("result");
+            resultDiv.innerHTML = "";
+
+            if (data[doctor]) {
+                let info = data[doctor];
+                resultDiv.innerHTML = `
+                    <p>Total Patients Treated: ${info["Total Patients Treated"]}</p>
+                    <p>Average Stay Duration: ${info["Average Stay Duration"]} days</p>
+                    <p>Most Common Medical Condition: ${info["Most Common Medical Condition"]}</p>
+                `;
+            } else {
+                resultDiv.innerHTML = "No records found.";
+            }
+        }
+
+        window.onload = loadData;
+    </script>
+</head>
+<body>
+    <h1>Doctor Performance Dashboard</h1>
+
+    <label for="doctorSelect">Select a Doctor:</label>
+    <select id="doctorSelect" onchange="queryInfo()">
+        <option value="" disabled selected>Choose a doctor</option>
+    </select>
+
+    <div id="result" class="result"></div>
+</body>
+</html>

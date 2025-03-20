@@ -1,0 +1,32 @@
+constraints:
+  loan_intent:
+    code:
+    - - .isComplete('loan_intent')
+      - Valid
+    - - .isContainedIn('loan_intent', ['EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL',
+        'DEBTCONSOLIDATION', 'MEDICAL', 'VENTURE'])
+      - Valid
+    assumptions:
+    - 'Column should contain only predefined categories: ''EDUCATION'', ''HOMEIMPROVEMENT'',
+      ''PERSONAL'', ''DEBTCONSOLIDATION'', ''MEDICAL'', ''VENTURE''.'
+    - Column completeness should be 1.0.
+  loan_status:
+    code:
+    - - '.hasNumberOfDistinctValues(''loan_status'', lambda x: x == 2, None, None)'
+      - Valid
+    - - .isComplete('loan_status')
+      - Valid
+    assumptions:
+    - Column should contain only two distinct values representing repayment status,
+      typically '0' and '1'.
+    - Column completeness should be 1.0.
+  person_home_ownership:
+    code:
+    - - .isComplete('person_home_ownership')
+      - Valid
+    - - .isContainedIn('person_home_ownership', ['OTHER', 'OWN', 'MORTGAGE', 'RENT'])
+      - Valid
+    assumptions:
+    - 'Column should contain only predefined categories: ''OTHER'', ''OWN'', ''MORTGAGE'',
+      ''RENT''.'
+    - Column completeness should be 1.0.
