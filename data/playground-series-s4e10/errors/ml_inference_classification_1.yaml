@@ -1,0 +1,27 @@
+- Scaling:
+    Columns:
+      - loan_amnt
+    Params:
+      severity: 0.3
+      sampling: CAR
+- ColumnInserting:
+    Columns:
+      - loan_intent
+    Params:
+      severity: 0.1
+      sampling: CAR
+      corrupt_strategy: add_prefix
+- ColumnInserting:
+    Columns:
+      - person_home_ownership
+      - person_age
+    Params:
+      severity: 0.1
+      sampling: CAR
+      corrupt_strategy: concatenate
+- MaskValues:
+    Columns:
+      - loan_grade
+    Params:
+      severity: 0.1
+      sampling: CAR

@@ -1,0 +1,6 @@
+- MaskValues:
+    Columns:
+      - loan_grade
+    Params:
+      severity: 0.1
+      sampling: CAR

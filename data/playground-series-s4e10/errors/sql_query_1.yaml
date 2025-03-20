@@ -1,0 +1,8 @@
+- ColumnInserting:
+    Columns:
+      - person_home_ownership
+      - person_age
+    Params:
+      severity: 0.1
+      sampling: CAR
+      corrupt_strategy: concatenate
