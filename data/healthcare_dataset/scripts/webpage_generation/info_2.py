@@ -13,6 +13,8 @@ args = parser.parse_args()
 # Read CSV into a DataFrame
 df = pd.read_csv(os.path.join(args.input, "new_data.csv"))
 
+df = df.dropna(subset=["Name"])
+
 # Ensure Full Name is treated as a string
 df["Full Name"] = df["Name"].astype(str)
 

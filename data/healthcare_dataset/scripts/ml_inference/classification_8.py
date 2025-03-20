@@ -34,6 +34,8 @@ drop_cols = ["Name", "Gender", "Doctor", "Room Number", "Insurance Provider"]
 train_df = train_df.drop(columns=drop_cols, errors="ignore")
 test_df = test_df.drop(columns=drop_cols, errors="ignore")
 
+train_df = train_df.dropna()
+
 # Create a length_of_stay feature in days
 train_df["admission_dt"] = pd.to_datetime(train_df["admission_dt"], errors="coerce")
 train_df["discharge_dt"] = pd.to_datetime(train_df["discharge_dt"], errors="coerce")

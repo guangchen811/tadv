@@ -32,6 +32,11 @@ train_ids = train_df[[ID_COL]]
 test_ids = test_df[[ID_COL]]
 
 # 3. Feature Engineering: Creating New Features
+train_df["Age"] = pd.to_numeric(train_df["Age"], errors="coerce")
+test_df["Age"] = pd.to_numeric(test_df["Age"], errors="coerce")
+train_df["Billing Amount"] = pd.to_numeric(train_df["Billing Amount"], errors="coerce")
+test_df["Billing Amount"] = pd.to_numeric(test_df["Billing Amount"], errors="coerce")
+
 train_df["Age_Billing_Interaction"] = train_df["Age"].lt(30) & train_df["Billing Amount"].lt(1000)
 test_df["Age_Billing_Interaction"] = test_df["Age"].lt(30) & test_df["Billing Amount"].lt(1000)
 
