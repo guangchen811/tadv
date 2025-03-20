@@ -4,29 +4,27 @@ constraints:
     assumptions: []
   Age:
     code:
+    - - .isGreaterThan('Age', 0)
+      - Invalid
     - - .isLessThanOrEqualTo('Age', 100)
       - Invalid
-    - - .isPositive('Age')
-      - Valid
     assumptions:
-    - All values should be greater than 0
-    - All values should be less than or equal to 100
+    - Age should be greater than 0
+    - Age should be less than or equal to 100
   Billing Amount:
     code:
-    - - '.hasCompleteness(''Billing Amount'', lambda x: x >= 0.95)'
+    - - '.hasApproxQuantile(''Billing Amount'', 0.95, lambda x: x < 50000)'
       - Valid
-    - - '.hasMax(''Billing Amount'', lambda x: x < 50000)'
-      - Invalid
     assumptions:
-    - At least 95 percent of the values should be less than 50000
+    - At least 95 percent of the Billing Amount should be less than 50000
   Blood Type:
     code:
     - - .isContainedIn('Blood Type', ['A', 'B', 'C', 'D', 'A+', 'A-', 'B+', 'B-',
         'AB+', 'AB-', 'O+', 'O-', 'Rh-null', 'Rare'])
       - Valid
     assumptions:
-    - 'Values should match one of the following categories: A, B, C, D, A+, A-, B+,
-      B-, AB+, AB-, O+, O-, Rh-null, Rare'
+    - Blood Type should be one of ['A', 'B', 'C', 'D', 'A+', 'A-', 'B+', 'B-', 'AB+',
+      'AB-', 'O+', 'O-', 'Rh-null', 'Rare'] or categorized as 'Rare'
   Gender:
     code: []
     assumptions: []
@@ -35,13 +33,11 @@ constraints:
     assumptions: []
   Test Results:
     code:
-    - - .isContainedIn('Test Results', list(expected_classes))
+    - - .isContainedIn('Test Results', expected_classes)
       - Invalid
     assumptions:
-    - Values should match expected classes from the model's classifier
+    - Test Results should only contain values present in the expected classes after
+      model training
   id:
-    code:
-    - - .isUnique('id')
-      - Valid
-    assumptions:
-    - Values should be unique
+    code: []
+    assumptions: []
