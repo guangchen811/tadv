@@ -12,10 +12,10 @@ Acevedo PLC,Elective,1.0
 "Acevedo and Hart, Hernandez",Urgent,1.0
 "Acevedo and Lewis Barker,",Urgent,1.0
 Acevedo-Lawson,Elective,1.0
-Acosta Group,Urgent,0.5
 Acosta Group,Emergency,0.5
-Acosta Inc,Emergency,0.5
+Acosta Group,Urgent,0.5
 Acosta Inc,Elective,0.5
+Acosta Inc,Emergency,0.5
 Acosta Ltd,Elective,1.0
 Acosta PLC,Emergency,1.0
 Acosta Sons and,Urgent,1.0
@@ -28,16 +28,16 @@ Acosta-Robertson,Elective,1.0
 Acosta-Taylor,Urgent,1.0
 Acosta-Thomas,Emergency,1.0
 Adams Group,Elective,0.5
-Adams Group,Urgent,0.25
 Adams Group,Emergency,0.25
+Adams Group,Urgent,0.25
 Adams Inc,Emergency,1.0
 Adams LLC,Emergency,1.0
 "Adams Lawson, and Fleming",Urgent,1.0
 Adams Ltd,Urgent,1.0
 "Adams Macias and Arias,",Emergency,1.0
 "Adams Marshall, Taylor and",Emergency,1.0
-Adams PLC,Urgent,0.5
 Adams PLC,Emergency,0.5
+Adams PLC,Urgent,0.5
 "Adams Patterson, Lawrence and",Emergency,1.0
 Adams Sons and,Elective,1.0
 "Adams Weaver, and Acosta",Elective,1.0
@@ -165,14 +165,14 @@ Ali-Marsh,Emergency,1.0
 "Allen Gonzales and Hill,",Urgent,1.0
 Allen Group,Emergency,0.8
 Allen Group,Urgent,0.2
-Allen Inc,Elective,0.5
 Allen Inc,Urgent,0.5
+Allen Inc,Elective,0.5
 Allen LLC,Urgent,1.0
 Allen Ltd,Emergency,0.667
 Allen Ltd,Urgent,0.333
 Allen PLC,Emergency,0.5
-Allen PLC,Elective,0.25
 Allen PLC,Urgent,0.25
+Allen PLC,Elective,0.25
 "Allen Payne, Hamilton and",Emergency,1.0
 "Allen Pearson and Kaiser,",Elective,1.0
 "Allen Rodriguez, and Stewart",Elective,1.0
@@ -307,8 +307,8 @@ Anderson PLC,Elective,0.5
 "Anderson Rivera, and Thornton",Urgent,1.0
 "Anderson Rodriguez, Taylor and",Emergency,1.0
 "Anderson Scott, Ramos and",Emergency,1.0
-Anderson Sons and,Emergency,0.5
 Anderson Sons and,Urgent,0.5
+Anderson Sons and,Emergency,0.5
 "Anderson Stone Sutton, and",Elective,1.0
 "Anderson Watson Moody, and",Urgent,1.0
 "Anderson and Fernandez Burns,",Elective,1.0
@@ -367,8 +367,8 @@ Anderson-Matthews,Emergency,1.0
 Anderson-Mckee,Urgent,1.0
 Anderson-Mckinney,Urgent,1.0
 Anderson-Miller,Emergency,1.0
-Anderson-Moore,Emergency,0.5
 Anderson-Moore,Elective,0.5
+Anderson-Moore,Emergency,0.5
 Anderson-Morgan,Urgent,1.0
 Anderson-Moses,Elective,1.0
 Anderson-Mueller,Urgent,1.0
@@ -381,8 +381,8 @@ Anderson-Richardson,Elective,1.0
 Anderson-Roberts,Elective,1.0
 Anderson-Sanchez,Urgent,1.0
 Anderson-Silva,Elective,0.333
-Anderson-Silva,Emergency,0.333
 Anderson-Silva,Urgent,0.333
+Anderson-Silva,Emergency,0.333
 Anderson-Smith,Emergency,1.0
 Anderson-Thomas,Urgent,1.0
 Anderson-Thompson,Urgent,1.0
@@ -450,8 +450,8 @@ Arnold Inc,Elective,0.5
 "Arnold, Porter Gordon and",Elective,1.0
 "Arnold, West Juarez and",Urgent,1.0
 Arnold-Baker,Emergency,1.0
-Arnold-Johnson,Urgent,0.5
 Arnold-Johnson,Emergency,0.5
+Arnold-Johnson,Urgent,0.5
 Arnold-Lopez,Elective,1.0
 Arnold-Navarro,Elective,1.0
 Arnold-Nguyen,Urgent,1.0
@@ -575,11 +575,11 @@ Bailey-English,Elective,1.0
 Bailey-Flynn,Urgent,1.0
 Bailey-Hernandez,Emergency,1.0
 Bailey-Leach,Urgent,1.0
-Bailey-Miller,Urgent,0.5
 Bailey-Miller,Emergency,0.5
+Bailey-Miller,Urgent,0.5
 Bailey-Richmond,Elective,1.0
-Bailey-Rivera,Emergency,0.5
 Bailey-Rivera,Elective,0.5
+Bailey-Rivera,Emergency,0.5
 Bailey-Roberts,Urgent,1.0
 Bailey-Sandoval,Emergency,1.0
 Bailey-Smith,Elective,1.0
@@ -595,18 +595,18 @@ Baird-Young,Elective,1.0
 "Baker Conrad and Andrews,",Urgent,1.0
 "Baker Elliott and Miller,",Elective,1.0
 "Baker Gardner Pearson, and",Urgent,1.0
-Baker Group,Urgent,0.5
 Baker Group,Elective,0.5
+Baker Group,Urgent,0.5
 "Baker Hoffman Carpenter, and",Urgent,1.0
 Baker Inc,Urgent,1.0
 Baker LLC,Emergency,0.5
 Baker LLC,Elective,0.5
 "Baker Larson, Berg and",Elective,1.0
 Baker Ltd,Elective,0.333
-Baker Ltd,Urgent,0.333
 Baker Ltd,Emergency,0.333
-Baker PLC,Emergency,0.4
+Baker Ltd,Urgent,0.333
 Baker PLC,Elective,0.4
+Baker PLC,Emergency,0.4
 Baker PLC,Urgent,0.2
 "Baker Tucker Webster, and",Emergency,1.0
 "Baker and Carlson Boyle,",Emergency,1.0
@@ -643,8 +643,8 @@ Baker-Watkins,Elective,1.0
 Baldwin Group,Emergency,1.0
 Baldwin Inc,Elective,1.0
 "Baldwin Kent Archer, and",Elective,1.0
-Baldwin LLC,Urgent,0.5
 Baldwin LLC,Emergency,0.5
+Baldwin LLC,Urgent,0.5
 Baldwin Ltd,Elective,1.0
 Baldwin PLC,Elective,1.0
 "Baldwin Rowe Browning, and",Emergency,1.0
@@ -702,8 +702,8 @@ Barber-Powers,Urgent,1.0
 "Barker Hammond Rogers, and",Emergency,1.0
 Barker Ltd,Urgent,0.5
 Barker Ltd,Elective,0.5
-Barker and Sons,Emergency,0.5
 Barker and Sons,Elective,0.5
+Barker and Sons,Emergency,0.5
 "Barker and Walker, Pena",Urgent,1.0
 "Barker, Nguyen Long and",Emergency,1.0
 "Barker, Sanders Thomas and",Urgent,1.0
@@ -829,9 +829,9 @@ Bass-Black,Emergency,1.0
 Bass-Howe,Emergency,1.0
 "Bates Anderson and Carpenter,",Elective,1.0
 "Bates Barnes Jones, and",Emergency,1.0
-Bates Inc,Elective,0.333
 Bates Inc,Emergency,0.333
 Bates Inc,Urgent,0.333
+Bates Inc,Elective,0.333
 Bates LLC,Emergency,1.0
 Bates Ltd,Elective,1.0
 Bates PLC,Urgent,1.0
@@ -849,8 +849,8 @@ Bauer-King,Emergency,1.0
 Bauer-Logan,Urgent,1.0
 Bauer-Santos,Elective,1.0
 "Bautista Dickerson, Gomez and",Emergency,1.0
-Bautista Sons and,Elective,0.5
 Bautista Sons and,Emergency,0.5
+Bautista Sons and,Elective,0.5
 "Bautista Torres Powell, and",Elective,1.0
 "Bautista and Evans Blevins,",Urgent,1.0
 "Bautista, Hernandez and Smith",Emergency,1.0
@@ -905,8 +905,8 @@ Beck-Romero,Urgent,1.0
 "Becker Cruz, and Alvarez",Emergency,1.0
 Becker Group,Elective,1.0
 Becker Inc,Urgent,1.0
-Becker LLC,Elective,0.5
 Becker LLC,Urgent,0.5
+Becker LLC,Elective,0.5
 Becker Sons and,Emergency,1.0
 "Becker and Hancock Baker,",Urgent,1.0
 "Becker and Martinez Romero,",Emergency,1.0
@@ -987,8 +987,8 @@ Benjamin-Stewart,Urgent,1.0
 Benjamin-Williams,Elective,1.0
 "Bennett Garcia and Young,",Urgent,1.0
 Bennett Group,Elective,1.0
-Bennett Inc,Elective,0.5
 Bennett Inc,Emergency,0.5
+Bennett Inc,Elective,0.5
 Bennett Ltd,Emergency,0.5
 Bennett Ltd,Urgent,0.5
 Bennett PLC,Elective,0.5
@@ -1050,8 +1050,8 @@ Bernard Sons and,Urgent,1.0
 "Bernard and Perez, Miller",Urgent,1.0
 "Bernard, Griffith and Garcia",Emergency,1.0
 Bernard-Flores,Emergency,1.0
-Bernard-Jones,Urgent,0.5
 Bernard-Jones,Emergency,0.5
+Bernard-Jones,Urgent,0.5
 Bernard-Martin,Emergency,1.0
 Bernard-Shelton,Elective,1.0
 Bernard-Sullivan,Emergency,1.0
@@ -1440,8 +1440,8 @@ Brown Ltd,Emergency,0.167
 "Brown Nelson Camacho, and",Urgent,1.0
 "Brown Nixon, and Taylor",Urgent,1.0
 Brown PLC,Elective,0.778
-Brown PLC,Urgent,0.111
 Brown PLC,Emergency,0.111
+Brown PLC,Urgent,0.111
 "Brown Padilla and Simpson,",Elective,1.0
 "Brown Parker Johnson, and",Elective,1.0
 "Brown Russo and Simmons,",Elective,1.0
@@ -1497,8 +1497,8 @@ Brown-Beck,Urgent,1.0
 Brown-Bell,Elective,1.0
 Brown-Blackburn,Emergency,1.0
 Brown-Blair,Emergency,1.0
-Brown-Bradley,Elective,0.5
 Brown-Bradley,Emergency,0.5
+Brown-Bradley,Elective,0.5
 Brown-Brown,Urgent,1.0
 Brown-Caldwell,Elective,1.0
 Brown-Carrillo,Urgent,1.0
@@ -1510,8 +1510,8 @@ Brown-Combs,Elective,1.0
 Brown-Cook,Urgent,1.0
 Brown-Cruz,Elective,0.5
 Brown-Cruz,Urgent,0.5
-Brown-Davis,Elective,0.5
 Brown-Davis,Urgent,0.5
+Brown-Davis,Elective,0.5
 Brown-Day,Emergency,1.0
 Brown-Diaz,Elective,1.0
 Brown-Dillon,Emergency,1.0
@@ -1536,8 +1536,8 @@ Brown-Holmes,Emergency,0.5
 Brown-Hughes,Elective,1.0
 Brown-Jackson,Urgent,0.5
 Brown-Jackson,Elective,0.5
-Brown-Jones,Emergency,0.5
 Brown-Jones,Urgent,0.5
+Brown-Jones,Emergency,0.5
 Brown-Kelley,Elective,1.0
 Brown-Kelly,Emergency,1.0
 Brown-Knapp,Emergency,1.0
@@ -1648,8 +1648,8 @@ Bullock-Pierce,Elective,1.0
 Bullock-Zimmerman,Urgent,1.0
 "Burch Drake, and Hogan",Urgent,1.0
 Burch Group,Emergency,1.0
-Burch PLC,Elective,0.5
 Burch PLC,Urgent,0.5
+Burch PLC,Elective,0.5
 Burch-Bryant,Urgent,1.0
 Burch-Friedman,Elective,1.0
 Burch-Marks,Elective,1.0
@@ -1825,8 +1825,8 @@ Callahan LLC,Emergency,0.5
 Callahan-Ball,Elective,1.0
 Callahan-Jones,Emergency,1.0
 Callahan-Young,Urgent,1.0
-Camacho LLC,Elective,0.5
 Camacho LLC,Urgent,0.5
+Camacho LLC,Elective,0.5
 Camacho Ltd,Emergency,1.0
 Camacho PLC,Urgent,1.0
 "Camacho, Garcia and Bruce",Urgent,1.0
@@ -1842,14 +1842,14 @@ Cameron-Alexander,Emergency,1.0
 Cameron-Le,Emergency,1.0
 Cameron-Sutton,Urgent,1.0
 "Campbell Gray Friedman, and",Emergency,1.0
-Campbell Group,Urgent,0.5
 Campbell Group,Elective,0.5
+Campbell Group,Urgent,0.5
 Campbell Inc,Emergency,1.0
-Campbell LLC,Urgent,0.4
 Campbell LLC,Elective,0.4
+Campbell LLC,Urgent,0.4
 Campbell LLC,Emergency,0.2
-Campbell Ltd,Emergency,0.5
 Campbell Ltd,Elective,0.5
+Campbell Ltd,Emergency,0.5
 "Campbell Nichols, Garcia and",Urgent,1.0
 Campbell PLC,Elective,0.75
 Campbell PLC,Urgent,0.25
@@ -2007,10 +2007,10 @@ Carrillo-Jones,Urgent,1.0
 Carrillo-Price,Emergency,1.0
 Carrillo-Rodriguez,Urgent,1.0
 "Carroll Aguilar, Smith and",Elective,1.0
-Carroll Group,Urgent,0.5
 Carroll Group,Elective,0.5
-Carroll LLC,Urgent,0.5
+Carroll Group,Urgent,0.5
 Carroll LLC,Elective,0.5
+Carroll LLC,Urgent,0.5
 "Carroll and Hall Meyer,",Urgent,1.0
 "Carroll, Robles and Johnston",Emergency,1.0
 "Carroll, and Fields Smith",Elective,1.0
@@ -2029,11 +2029,11 @@ Carroll-Kim,Emergency,1.0
 Carroll-Miller,Elective,1.0
 Carroll-Saunders,Emergency,1.0
 Carroll-Wilson,Urgent,1.0
-Carson Group,Elective,0.5
 Carson Group,Urgent,0.5
+Carson Group,Elective,0.5
 Carson Inc,Emergency,1.0
-Carson LLC,Urgent,0.5
 Carson LLC,Emergency,0.5
+Carson LLC,Urgent,0.5
 Carson PLC,Urgent,1.0
 "Carson and Berry Porter,",Urgent,1.0
 "Carson and Nielsen, Buchanan",Elective,1.0
@@ -2047,8 +2047,8 @@ Carson-Villanueva,Emergency,1.0
 Carter Group,Emergency,0.667
 Carter Group,Urgent,0.333
 Carter Inc,Elective,0.714
-Carter Inc,Urgent,0.143
 Carter Inc,Emergency,0.143
+Carter Inc,Urgent,0.143
 Carter LLC,Elective,1.0
 "Carter Leblanc, Wilkerson and",Urgent,1.0
 Carter Ltd,Elective,1.0
@@ -2439,8 +2439,8 @@ Clements-Grant,Elective,1.0
 Clements-Ortega,Elective,1.0
 Clements-Suarez,Urgent,1.0
 Cline LLC,Emergency,1.0
-Cline Ltd,Urgent,0.5
 Cline Ltd,Elective,0.5
+Cline Ltd,Urgent,0.5
 "Cline and King, Le",Elective,1.0
 Cline-Carpenter,Urgent,1.0
 Cline-Santiago,Emergency,1.0
@@ -2449,8 +2449,8 @@ Cline-Watson,Urgent,1.0
 Cline-Williams,Elective,1.0
 "Cobb Anderson, and Barker",Elective,1.0
 Cobb Group,Emergency,1.0
-Cobb Inc,Urgent,0.5
 Cobb Inc,Elective,0.5
+Cobb Inc,Urgent,0.5
 Cobb Ltd,Elective,0.5
 Cobb Ltd,Urgent,0.5
 Cobb PLC,Elective,1.0
@@ -2493,8 +2493,8 @@ Cohen-Riley,Emergency,1.0
 Cole Group,Urgent,1.0
 Cole Inc,Emergency,1.0
 Cole LLC,Elective,1.0
-Cole Ltd,Elective,0.5
 Cole Ltd,Urgent,0.5
+Cole Ltd,Elective,0.5
 "Cole Morales Garcia, and",Emergency,1.0
 Cole PLC,Urgent,1.0
 "Cole Schmidt, and Gutierrez",Elective,1.0
@@ -2513,8 +2513,8 @@ Cole-Morgan,Urgent,1.0
 Cole-Ortiz,Emergency,1.0
 Cole-Rodriguez,Urgent,1.0
 Coleman Group,Elective,1.0
-Coleman Inc,Urgent,0.5
 Coleman Inc,Emergency,0.5
+Coleman Inc,Urgent,0.5
 "Coleman Johnson, Evans and",Elective,1.0
 Coleman PLC,Elective,1.0
 Coleman Sons and,Urgent,1.0
@@ -2698,8 +2698,8 @@ Cooley-Alvarado,Urgent,1.0
 "Cooper Brown Parks, and",Elective,1.0
 "Cooper Collins, and Hudson",Urgent,1.0
 "Cooper Cunningham, and Warren",Elective,1.0
-Cooper Group,Elective,0.5
 Cooper Group,Emergency,0.5
+Cooper Group,Elective,0.5
 "Cooper Hendricks Walker, and",Elective,1.0
 Cooper Inc,Emergency,0.5
 Cooper Inc,Elective,0.5
@@ -2760,8 +2760,8 @@ Cowan Inc,Urgent,1.0
 "Cox Booth, and Lee",Urgent,1.0
 "Cox Cervantes and Rowe,",Elective,1.0
 "Cox Dodson, Velez and",Elective,1.0
-Cox Group,Emergency,0.333
 Cox Group,Elective,0.333
+Cox Group,Emergency,0.333
 Cox Group,Urgent,0.333
 "Cox Gutierrez, and Hamilton",Elective,1.0
 Cox Inc,Emergency,1.0
@@ -2971,8 +2971,8 @@ Davenport-Simpson,Elective,1.0
 "David Gomez, Mcclain and",Urgent,1.0
 David Inc,Elective,1.0
 David LLC,Elective,1.0
-David Sons and,Elective,0.5
 David Sons and,Urgent,0.5
+David Sons and,Elective,0.5
 "David, Cunningham and Shaffer",Emergency,1.0
 "David, Hess Rivera and",Urgent,1.0
 David-Johnson,Emergency,1.0
@@ -3015,8 +3015,8 @@ Davis Group,Emergency,0.667
 Davis Group,Urgent,0.333
 "Davis Henson, and Mack",Emergency,1.0
 "Davis Hodges Wells, and",Emergency,1.0
-Davis Inc,Emergency,0.444
 Davis Inc,Urgent,0.444
+Davis Inc,Emergency,0.444
 Davis Inc,Elective,0.111
 Davis LLC,Urgent,0.5
 Davis LLC,Elective,0.25
@@ -3048,8 +3048,8 @@ Davis Sons and,Urgent,1.0
 "Davis and Roberts Jensen,",Emergency,1.0
 "Davis and Robinson, Ross",Elective,1.0
 "Davis and Rodriguez Smith,",Emergency,1.0
-Davis and Sons,Urgent,0.5
 Davis and Sons,Elective,0.5
+Davis and Sons,Urgent,0.5
 "Davis and Woodard, Hamilton",Elective,1.0
 "Davis, Barrett and Wells",Emergency,1.0
 "Davis, Burgess Bass and",Elective,1.0
@@ -3195,8 +3195,8 @@ Delgado Group,Emergency,1.0
 Delgado Inc,Elective,0.5
 Delgado Inc,Emergency,0.5
 "Delgado Mitchell Rodriguez, and",Urgent,1.0
-Delgado PLC,Emergency,0.5
 Delgado PLC,Elective,0.5
+Delgado PLC,Emergency,0.5
 "Delgado and Stanton, Young",Elective,1.0
 Delgado-Daniel,Emergency,1.0
 Delgado-Lamb,Urgent,1.0
@@ -3364,8 +3364,8 @@ Dudley-Atkinson,Emergency,1.0
 Dudley-Bartlett,Emergency,1.0
 Dudley-Garcia,Elective,1.0
 Dudley-Mclaughlin,Elective,1.0
-Dudley-Nelson,Emergency,0.5
 Dudley-Nelson,Elective,0.5
+Dudley-Nelson,Emergency,0.5
 Dudley-Silva,Elective,1.0
 Duffy-Boyd,Urgent,1.0
 Duffy-Jackson,Emergency,1.0
@@ -3400,8 +3400,8 @@ Dunlap PLC,Elective,1.0
 Dunlap-Cohen,Emergency,1.0
 "Dunn Brown and Lopez,",Elective,1.0
 Dunn Inc,Elective,1.0
-Dunn PLC,Urgent,0.333
 Dunn PLC,Elective,0.333
+Dunn PLC,Urgent,0.333
 Dunn PLC,Emergency,0.333
 Dunn-Bell,Elective,1.0
 Dunn-Bentley,Urgent,1.0
@@ -3434,8 +3434,8 @@ Durham PLC,Elective,1.0
 "Durham Ray and Reyes,",Emergency,1.0
 "Durham Roberts, and Hanson",Urgent,1.0
 "Durham, Burch and Webb",Urgent,1.0
-Dyer Inc,Elective,0.5
 Dyer Inc,Emergency,0.5
+Dyer Inc,Elective,0.5
 Dyer Ltd,Emergency,1.0
 "Dyer, Morgan and Jackson",Elective,1.0
 "Dyer, Turner Duke and",Urgent,1.0
@@ -3455,8 +3455,8 @@ Edwards Group,Elective,0.667
 Edwards Group,Emergency,0.333
 "Edwards Hendricks, Martin and",Elective,1.0
 "Edwards King Cooper, and",Emergency,1.0
-Edwards Ltd,Emergency,0.5
 Edwards Ltd,Urgent,0.5
+Edwards Ltd,Emergency,0.5
 Edwards PLC,Emergency,1.0
 Edwards Sons and,Urgent,1.0
 "Edwards Ware, and Watson",Urgent,1.0
@@ -3702,8 +3702,8 @@ Ferguson Sons and,Urgent,1.0
 "Ferguson, Perkins and Martinez",Elective,1.0
 Ferguson-Carter,Elective,1.0
 Ferguson-Collins,Elective,1.0
-Ferguson-Johnson,Elective,0.5
 Ferguson-Johnson,Urgent,0.5
+Ferguson-Johnson,Elective,0.5
 Ferguson-Little,Elective,1.0
 Ferguson-Liu,Emergency,1.0
 Ferguson-Molina,Emergency,1.0
@@ -3790,9 +3790,9 @@ Fisher Group,Emergency,1.0
 "Fisher Knight, Walker and",Urgent,1.0
 Fisher LLC,Emergency,1.0
 Fisher Ltd,Urgent,1.0
+Fisher PLC,Elective,0.333
 Fisher PLC,Urgent,0.333
 Fisher PLC,Emergency,0.333
-Fisher PLC,Elective,0.333
 "Fisher Smith and Durham,",Elective,1.0
 "Fisher and Buchanan Garcia,",Urgent,1.0
 "Fisher and Hood, Wade",Emergency,1.0
@@ -3926,8 +3926,8 @@ Foley-Alexander,Emergency,1.0
 Foley-Allen,Elective,1.0
 Foley-Johnson,Elective,1.0
 "Forbes Jackson, Chapman and",Elective,1.0
-Forbes LLC,Urgent,0.5
 Forbes LLC,Elective,0.5
+Forbes LLC,Urgent,0.5
 "Forbes, and Webb Carter",Urgent,1.0
 Forbes-Johns,Elective,1.0
 Forbes-Wallace,Elective,1.0
@@ -3964,8 +3964,8 @@ Foster Group,Urgent,0.5
 "Foster Hood Lucas, and",Urgent,1.0
 Foster Inc,Urgent,0.667
 Foster Inc,Emergency,0.333
-Foster LLC,Elective,0.5
 Foster LLC,Urgent,0.5
+Foster LLC,Elective,0.5
 "Foster Lamb, Graham and",Elective,1.0
 Foster Ltd,Elective,1.0
 Foster PLC,Urgent,1.0
@@ -4014,8 +4014,8 @@ Fox Group,Urgent,1.0
 "Fox Guzman James, and",Emergency,1.0
 Fox Ltd,Urgent,1.0
 "Fox Murray and Johnson,",Elective,1.0
-Fox PLC,Urgent,0.5
 Fox PLC,Emergency,0.5
+Fox PLC,Urgent,0.5
 "Fox Robles Hooper, and",Urgent,1.0
 "Fox and Collins Smith,",Emergency,1.0
 "Fox and Moreno Williams,",Elective,1.0
@@ -4091,8 +4091,8 @@ Frederick Ltd,Urgent,1.0
 "Frederick and Kennedy, Phillips",Elective,1.0
 "Freeman Bennett, Alexander and",Urgent,1.0
 "Freeman Gonzalez Swanson, and",Elective,1.0
-Freeman Group,Elective,0.5
 Freeman Group,Emergency,0.5
+Freeman Group,Elective,0.5
 Freeman Inc,Elective,1.0
 "Freeman Richardson, and Cruz",Elective,1.0
 "Freeman and Brown, Haney",Urgent,1.0
@@ -4130,8 +4130,8 @@ French-Parks,Elective,1.0
 French-Powell,Elective,1.0
 French-Summers,Emergency,1.0
 Frey Inc,Elective,1.0
-Frey LLC,Elective,0.5
 Frey LLC,Emergency,0.5
+Frey LLC,Elective,0.5
 Frey PLC,Elective,1.0
 "Frey and Leon Espinoza,",Urgent,1.0
 Frey-Alvarado,Elective,1.0
@@ -4246,13 +4246,13 @@ Garcia Group,Urgent,0.167
 "Garcia Hansen Rogers, and",Emergency,1.0
 "Garcia Hunt, and Wood",Elective,1.0
 Garcia Inc,Elective,0.5
-Garcia Inc,Urgent,0.25
 Garcia Inc,Emergency,0.25
+Garcia Inc,Urgent,0.25
 "Garcia Johnson and Nelson,",Emergency,1.0
 "Garcia Johnson, and Cordova",Elective,1.0
 Garcia LLC,Elective,0.5
-Garcia LLC,Emergency,0.25
 Garcia LLC,Urgent,0.25
+Garcia LLC,Emergency,0.25
 Garcia Ltd,Elective,0.667
 Garcia Ltd,Emergency,0.333
 "Garcia Martin, Taylor and",Emergency,1.0
@@ -4343,8 +4343,8 @@ Garcia-Parker,Emergency,1.0
 Garcia-Patton,Emergency,1.0
 Garcia-Paul,Elective,1.0
 Garcia-Payne,Urgent,1.0
-Garcia-Ramirez,Elective,0.5
 Garcia-Ramirez,Emergency,0.5
+Garcia-Ramirez,Elective,0.5
 Garcia-Rivera,Urgent,1.0
 Garcia-Rodriguez,Elective,1.0
 Garcia-Sanchez,Elective,1.0
@@ -4394,8 +4394,8 @@ Garrett Group,Urgent,1.0
 Garrett Inc,Elective,1.0
 "Garrett Johnson, and Lee",Emergency,1.0
 Garrett LLC,Urgent,1.0
-Garrett Ltd,Urgent,0.5
 Garrett Ltd,Emergency,0.5
+Garrett Ltd,Urgent,0.5
 "Garrett Martinez, Graham and",Elective,1.0
 Garrett PLC,Elective,1.0
 "Garrett Randall, Brown and",Emergency,1.0
@@ -4455,14 +4455,14 @@ Gates-Green,Urgent,1.0
 Gates-Kramer,Emergency,1.0
 Gay-Jefferson,Elective,1.0
 Gay-Johnson,Elective,1.0
-Gentry and Sons,Elective,0.5
 Gentry and Sons,Emergency,0.5
+Gentry and Sons,Elective,0.5
 Gentry-Dyer,Urgent,1.0
 Gentry-Martin,Urgent,1.0
 Gentry-Walker,Urgent,1.0
 "George Jones, and Walters",Elective,1.0
-George LLC,Urgent,0.5
 George LLC,Elective,0.5
+George LLC,Urgent,0.5
 "George Leach, Macdonald and",Elective,1.0
 George Ltd,Urgent,1.0
 George PLC,Urgent,0.667
@@ -4652,8 +4652,8 @@ Gonzalez Ltd,Elective,0.2
 Gonzalez Ltd,Emergency,0.2
 "Gonzalez Mason Wilson, and",Urgent,1.0
 "Gonzalez Olson Garcia, and",Urgent,1.0
-Gonzalez PLC,Emergency,0.5
 Gonzalez PLC,Urgent,0.5
+Gonzalez PLC,Emergency,0.5
 "Gonzalez Ramirez, Johnson and",Urgent,1.0
 "Gonzalez Roman, Orozco and",Urgent,1.0
 "Gonzalez Ross Gonzalez, and",Urgent,1.0
@@ -4675,8 +4675,8 @@ Gonzalez Sons and,Urgent,0.5
 "Gonzalez, and Hughes Roberts",Emergency,1.0
 Gonzalez-Beasley,Emergency,1.0
 Gonzalez-Bishop,Emergency,1.0
-Gonzalez-Brown,Urgent,0.5
 Gonzalez-Brown,Elective,0.5
+Gonzalez-Brown,Urgent,0.5
 Gonzalez-Burch,Urgent,1.0
 Gonzalez-Carter,Urgent,1.0
 Gonzalez-Chandler,Urgent,1.0
@@ -4731,8 +4731,8 @@ Goodman-Nelson,Emergency,1.0
 "Goodwin Austin, Rocha and",Urgent,1.0
 Goodwin Group,Urgent,0.5
 Goodwin Group,Emergency,0.5
-Goodwin Ltd,Urgent,0.5
 Goodwin Ltd,Emergency,0.5
+Goodwin Ltd,Urgent,0.5
 "Goodwin Santana and Munoz,",Urgent,1.0
 "Goodwin and White, Smith",Urgent,1.0
 "Goodwin, Walker Clark and",Urgent,1.0
@@ -4767,8 +4767,8 @@ Gould-Daniel,Elective,1.0
 Gould-Gibbs,Emergency,1.0
 Gould-Montgomery,Urgent,1.0
 Gould-Pena,Urgent,1.0
-Graham Group,Urgent,0.5
 Graham Group,Emergency,0.5
+Graham Group,Urgent,0.5
 Graham Inc,Emergency,1.0
 "Graham Johnston, Shepherd and",Urgent,1.0
 "Graham Knight, and Griffin",Urgent,1.0
@@ -5015,13 +5015,13 @@ Group Barry,Emergency,1.0
 Group Bates,Urgent,1.0
 Group Beasley,Emergency,1.0
 Group Becker,Emergency,1.0
-Group Bennett,Emergency,0.5
 Group Bennett,Elective,0.5
+Group Bennett,Emergency,0.5
 Group Bentley,Elective,1.0
 Group Berry,Emergency,1.0
 Group Bishop,Urgent,1.0
-Group Black,Emergency,0.5
 Group Black,Elective,0.5
+Group Black,Emergency,0.5
 Group Blake,Emergency,1.0
 Group Blankenship,Elective,1.0
 Group Bolton,Elective,1.0
@@ -5035,8 +5035,8 @@ Group Bryant,Urgent,1.0
 Group Burns,Emergency,1.0
 Group Burton,Emergency,1.0
 Group Bush,Urgent,1.0
-Group Butler,Elective,0.5
 Group Butler,Urgent,0.5
+Group Butler,Elective,0.5
 Group Byrd,Elective,1.0
 Group Camacho,Emergency,1.0
 Group Campbell,Emergency,1.0
@@ -5051,17 +5051,17 @@ Group Chaney,Emergency,1.0
 Group Chapman,Emergency,1.0
 Group Chavez,Emergency,1.0
 Group Christensen,Emergency,1.0
-Group Clark,Emergency,0.5
 Group Clark,Urgent,0.5
+Group Clark,Emergency,0.5
 Group Cline,Urgent,1.0
 Group Cobb,Urgent,1.0
-Group Cole,Elective,0.5
 Group Cole,Urgent,0.5
-Group Coleman,Emergency,0.5
+Group Cole,Elective,0.5
 Group Coleman,Urgent,0.5
+Group Coleman,Emergency,0.5
 Group Conley,Emergency,1.0
-Group Cook,Emergency,0.5
 Group Cook,Elective,0.5
+Group Cook,Emergency,0.5
 Group Cooke,Emergency,1.0
 Group Cooper,Elective,1.0
 Group Cox,Urgent,1.0
@@ -5072,8 +5072,8 @@ Group Daniel,Elective,1.0
 Group Daugherty,Elective,1.0
 Group Davidson,Elective,1.0
 Group Davis,Urgent,0.4
-Group Davis,Emergency,0.3
 Group Davis,Elective,0.3
+Group Davis,Emergency,0.3
 Group Dawson,Elective,1.0
 Group Diaz,Urgent,1.0
 Group Dorsey,Emergency,1.0
@@ -5090,14 +5090,14 @@ Group Evans,Elective,0.5
 Group Evans,Emergency,0.5
 Group Farley,Emergency,1.0
 Group Farmer,Urgent,1.0
-Group Fernandez,Urgent,0.5
 Group Fernandez,Emergency,0.5
+Group Fernandez,Urgent,0.5
 Group Fields,Elective,0.667
 Group Fields,Urgent,0.333
-Group Fisher,Elective,0.5
 Group Fisher,Urgent,0.5
-Group Fleming,Elective,0.5
+Group Fisher,Elective,0.5
 Group Fleming,Emergency,0.5
+Group Fleming,Elective,0.5
 Group Fletcher,Emergency,1.0
 Group Flores,Elective,0.667
 Group Flores,Emergency,0.333
@@ -5121,8 +5121,8 @@ Group Gomez,Elective,0.5
 Group Gomez,Urgent,0.5
 Group Gonzales,Emergency,1.0
 Group Gonzalez,Urgent,0.5
-Group Gonzalez,Elective,0.25
 Group Gonzalez,Emergency,0.25
+Group Gonzalez,Elective,0.25
 Group Gordon,Elective,1.0
 Group Graham,Emergency,1.0
 Group Grant,Urgent,1.0
@@ -5140,8 +5140,8 @@ Group Hamilton,Urgent,0.5
 Group Hamilton,Elective,0.5
 Group Hansen,Urgent,1.0
 Group Hardy,Urgent,1.0
-Group Harper,Urgent,0.5
 Group Harper,Emergency,0.5
+Group Harper,Urgent,0.5
 Group Harrington,Elective,1.0
 Group Harris,Urgent,1.0
 Group Hawkins,Urgent,1.0
@@ -5184,9 +5184,9 @@ Group Jacobs,Emergency,1.0
 Group James,Urgent,0.5
 Group James,Emergency,0.5
 Group Jennings,Elective,1.0
-Group Johnson,Urgent,0.333
 Group Johnson,Elective,0.333
 Group Johnson,Emergency,0.333
+Group Johnson,Urgent,0.333
 Group Jones,Emergency,0.444
 Group Jones,Elective,0.333
 Group Jones,Urgent,0.222
@@ -5277,9 +5277,9 @@ Group Moss,Elective,1.0
 Group Mullins,Emergency,0.5
 Group Mullins,Elective,0.5
 Group Navarro,Elective,1.0
+Group Nelson,Urgent,0.333
 Group Nelson,Emergency,0.333
 Group Nelson,Elective,0.333
-Group Nelson,Urgent,0.333
 Group Nguyen,Emergency,1.0
 Group Nichols,Emergency,1.0
 Group Nicholson,Urgent,1.0
@@ -5287,8 +5287,8 @@ Group Nunez,Emergency,1.0
 Group Obrien,Emergency,1.0
 Group Ochoa,Urgent,1.0
 Group Oliver,Elective,1.0
-Group Oneal,Elective,0.5
 Group Oneal,Emergency,0.5
+Group Oneal,Elective,0.5
 Group Ortega,Elective,1.0
 Group Ortiz,Urgent,1.0
 Group Owens,Elective,0.6
@@ -5305,8 +5305,8 @@ Group Payne,Emergency,1.0
 Group Pena,Urgent,1.0
 Group Perry,Elective,1.0
 Group Peters,Elective,1.0
-Group Peterson,Urgent,0.5
 Group Peterson,Emergency,0.5
+Group Peterson,Urgent,0.5
 Group Phelps,Emergency,1.0
 Group Phillips,Urgent,1.0
 Group Pittman,Emergency,1.0
@@ -5323,19 +5323,19 @@ Group Reed,Emergency,0.667
 Group Reed,Urgent,0.333
 Group Reyes,Elective,1.0
 Group Reynolds,Elective,1.0
-Group Rhodes,Elective,0.5
 Group Rhodes,Urgent,0.5
-Group Richardson,Elective,0.5
+Group Rhodes,Elective,0.5
 Group Richardson,Urgent,0.5
+Group Richardson,Elective,0.5
 Group Riley,Elective,1.0
 Group Robbins,Emergency,1.0
 Group Roberts,Elective,0.667
 Group Roberts,Urgent,0.333
 Group Robinson,Emergency,1.0
 Group Rodgers,Elective,1.0
+Group Rodriguez,Elective,0.333
 Group Rodriguez,Urgent,0.333
 Group Rodriguez,Emergency,0.333
-Group Rodriguez,Elective,0.333
 Group Roman,Urgent,1.0
 Group Rose,Elective,1.0
 Group Ross,Elective,1.0
@@ -5356,23 +5356,23 @@ Group Simpson,Urgent,0.25
 Group Singh,Urgent,1.0
 Group Singleton,Emergency,1.0
 Group Sloan,Emergency,1.0
-Group Smith,Elective,0.4
 Group Smith,Emergency,0.4
+Group Smith,Elective,0.4
 Group Smith,Urgent,0.2
 Group Snyder,Elective,1.0
 Group Stafford,Urgent,1.0
 Group Stanley,Elective,1.0
 Group Stein,Emergency,1.0
 Group Stevenson,Elective,1.0
-Group Stewart,Urgent,0.333
 Group Stewart,Elective,0.333
 Group Stewart,Emergency,0.333
+Group Stewart,Urgent,0.333
 Group Stokes,Urgent,1.0
 Group Strong,Elective,1.0
 Group Stuart,Urgent,1.0
 Group Sullivan,Emergency,0.5
-Group Sullivan,Elective,0.25
 Group Sullivan,Urgent,0.25
+Group Sullivan,Elective,0.25
 Group Swanson,Elective,1.0
 Group Tanner,Urgent,1.0
 Group Taylor,Elective,1.0
@@ -5381,16 +5381,16 @@ Group Thornton,Emergency,1.0
 Group Torres,Urgent,1.0
 Group Turner,Elective,1.0
 Group Underwood,Urgent,1.0
-Group Valdez,Elective,0.333
-Group Valdez,Emergency,0.333
 Group Valdez,Urgent,0.333
+Group Valdez,Emergency,0.333
+Group Valdez,Elective,0.333
 Group Valencia,Urgent,1.0
 Group Valenzuela,Urgent,1.0
 Group Vance,Emergency,1.0
 Group Vang,Emergency,1.0
 Group Vazquez,Elective,1.0
-Group Velasquez,Emergency,0.5
 Group Velasquez,Urgent,0.5
+Group Velasquez,Emergency,0.5
 Group Velazquez,Urgent,1.0
 Group Velez,Elective,1.0
 Group Villa,Elective,1.0
@@ -5454,8 +5454,8 @@ Guerrero-Smith,Elective,1.0
 Guerrero-Sullivan,Urgent,1.0
 "Gutierrez Fuentes Adams, and",Urgent,1.0
 Gutierrez Inc,Elective,0.5
-Gutierrez Inc,Emergency,0.25
 Gutierrez Inc,Urgent,0.25
+Gutierrez Inc,Emergency,0.25
 Gutierrez LLC,Urgent,1.0
 "Gutierrez Obrien and Hill,",Elective,1.0
 Gutierrez PLC,Urgent,0.5
@@ -5479,8 +5479,8 @@ Gutierrez-Rasmussen,Emergency,1.0
 Gutierrez-Reese,Urgent,1.0
 Gutierrez-Solis,Emergency,1.0
 Guzman Ltd,Elective,1.0
-Guzman PLC,Elective,0.5
 Guzman PLC,Emergency,0.5
+Guzman PLC,Elective,0.5
 "Guzman Smith and Price,",Urgent,1.0
 "Guzman and Young Allison,",Emergency,1.0
 "Guzman, Schneider Price and",Elective,1.0
@@ -5526,11 +5526,11 @@ Haley-Mitchell,Emergency,1.0
 "Hall Davis and Adams,",Urgent,1.0
 "Hall Erickson Paul, and",Urgent,1.0
 "Hall Gonzalez and Duarte,",Elective,1.0
-Hall Group,Elective,0.5
 Hall Group,Urgent,0.5
+Hall Group,Elective,0.5
 "Hall Hodge and Reynolds,",Emergency,1.0
-Hall Inc,Elective,0.5
 Hall Inc,Emergency,0.5
+Hall Inc,Elective,0.5
 "Hall Jackson, and Sanchez",Elective,1.0
 "Hall Johnson and Webster,",Urgent,1.0
 Hall LLC,Emergency,0.5
@@ -5544,8 +5544,8 @@ Hall PLC,Emergency,0.333
 Hall PLC,Elective,0.333
 "Hall Reed and Kaiser,",Emergency,1.0
 "Hall Smith Long, and",Elective,1.0
-Hall Sons and,Urgent,0.5
 Hall Sons and,Elective,0.5
+Hall Sons and,Urgent,0.5
 "Hall Wright, Smith and",Elective,1.0
 "Hall and Freeman, Jackson",Elective,1.0
 "Hall and Hebert Castillo,",Emergency,1.0
@@ -5625,8 +5625,8 @@ Hammond-Davis,Emergency,1.0
 Hammond-Ford,Emergency,1.0
 "Hampton Fox and Sanchez,",Elective,1.0
 Hampton Group,Urgent,1.0
-Hampton LLC,Urgent,0.5
 Hampton LLC,Emergency,0.5
+Hampton LLC,Urgent,0.5
 Hampton Ltd,Urgent,1.0
 "Hampton and Bowman, Molina",Urgent,1.0
 "Hampton, Vaughn and Estrada",Urgent,1.0
@@ -5660,8 +5660,8 @@ Hanna-Bond,Urgent,1.0
 Hanna-Braun,Emergency,1.0
 "Hansen Johnson and Avila,",Elective,1.0
 Hansen LLC,Emergency,1.0
-Hansen Ltd,Elective,0.5
 Hansen Ltd,Emergency,0.5
+Hansen Ltd,Elective,0.5
 "Hansen Meyer, and Reed",Emergency,1.0
 Hansen PLC,Urgent,0.5
 Hansen PLC,Elective,0.5
@@ -5676,8 +5676,8 @@ Hansen and Sons,Urgent,1.0
 Hansen-Calhoun,Elective,1.0
 Hansen-Murphy,Emergency,1.0
 Hansen-Ortega,Urgent,1.0
-Hansen-Peterson,Emergency,0.5
 Hansen-Peterson,Elective,0.5
+Hansen-Peterson,Emergency,0.5
 Hansen-Steele,Elective,1.0
 Hansen-Torres,Urgent,1.0
 Hansen-Wright,Urgent,1.0
@@ -5790,8 +5790,8 @@ Harris PLC,Emergency,0.2
 "Harris and Murray, Brown",Urgent,1.0
 "Harris and Owens Long,",Urgent,1.0
 "Harris and Parker, Welch",Emergency,1.0
-Harris and Sons,Emergency,0.5
 Harris and Sons,Elective,0.5
+Harris and Sons,Emergency,0.5
 "Harris, Barber and Brown",Urgent,1.0
 "Harris, Bautista Callahan and",Urgent,1.0
 "Harris, Brown Walker and",Urgent,1.0
@@ -5820,8 +5820,8 @@ Harris-Galvan,Urgent,1.0
 Harris-Hanna,Urgent,1.0
 Harris-Henry,Elective,1.0
 Harris-Hooper,Urgent,1.0
-Harris-Jackson,Elective,0.5
 Harris-Jackson,Emergency,0.5
+Harris-Jackson,Elective,0.5
 Harris-Jenkins,Elective,1.0
 Harris-Lewis,Elective,1.0
 Harris-Melendez,Urgent,1.0
@@ -5867,8 +5867,8 @@ Harrison-Walters,Elective,1.0
 Harrison-Wilson,Urgent,1.0
 "Hart Bell Koch, and",Urgent,1.0
 "Hart Conrad, and Tanner",Emergency,1.0
-Hart Group,Emergency,0.5
 Hart Group,Urgent,0.5
+Hart Group,Emergency,0.5
 "Hart Holt, and Brock",Urgent,1.0
 Hart Inc,Urgent,1.0
 Hart LLC,Elective,1.0
@@ -5945,8 +5945,8 @@ Hayes LLC,Emergency,1.0
 "Hayes Lane Flores, and",Emergency,1.0
 "Hayes Mayer, Barrett and",Emergency,1.0
 "Hayes Owens Jefferson, and",Urgent,1.0
-Hayes PLC,Urgent,0.5
 Hayes PLC,Emergency,0.5
+Hayes PLC,Urgent,0.5
 "Hayes Smith, and Young",Emergency,1.0
 "Hayes and Evans, Maddox",Urgent,1.0
 "Hayes and Hill, Harris",Urgent,1.0
@@ -6016,8 +6016,8 @@ Henderson Sons and,Emergency,1.0
 "Henderson and Ray, Williams",Elective,1.0
 "Henderson and Sanchez, Holland",Emergency,1.0
 "Henderson and Smith Johnson,",Urgent,1.0
-Henderson and Sons,Elective,0.5
 Henderson and Sons,Emergency,0.5
+Henderson and Sons,Elective,0.5
 "Henderson, Lawrence and Gates",Emergency,1.0
 "Henderson, Rich and Moreno",Emergency,1.0
 "Henderson, and Baldwin Nunez",Elective,1.0
@@ -6106,8 +6106,8 @@ Hernandez PLC,Elective,0.25
 "Hernandez Randolph and Blair,",Emergency,1.0
 "Hernandez Richard Simmons, and",Urgent,1.0
 "Hernandez Sanchez, Thomas and",Urgent,1.0
-Hernandez Sons and,Urgent,0.5
 Hernandez Sons and,Elective,0.5
+Hernandez Sons and,Urgent,0.5
 "Hernandez Wong Allen, and",Urgent,1.0
 "Hernandez and Austin Young,",Elective,1.0
 "Hernandez and Erickson May,",Emergency,1.0
@@ -6140,8 +6140,8 @@ Hernandez-Carey,Elective,1.0
 Hernandez-Castro,Urgent,1.0
 Hernandez-Clark,Urgent,1.0
 Hernandez-Cook,Urgent,1.0
-Hernandez-Cunningham,Emergency,0.5
 Hernandez-Cunningham,Elective,0.5
+Hernandez-Cunningham,Emergency,0.5
 Hernandez-Davis,Emergency,1.0
 Hernandez-Dorsey,Urgent,1.0
 Hernandez-Foster,Emergency,1.0
@@ -6170,8 +6170,8 @@ Hernandez-Rhodes,Elective,1.0
 Hernandez-Robertson,Urgent,1.0
 Hernandez-Rubio,Elective,1.0
 Hernandez-Sherman,Urgent,1.0
-Hernandez-Smith,Urgent,0.5
 Hernandez-Smith,Elective,0.5
+Hernandez-Smith,Urgent,0.5
 Hernandez-Todd,Emergency,1.0
 Hernandez-Vaughn,Emergency,1.0
 Hernandez-Villegas,Urgent,1.0
@@ -6253,8 +6253,8 @@ Higgins-Sosa,Urgent,1.0
 "Hill Andrews and Mullins,",Elective,1.0
 "Hill Anthony Smith, and",Urgent,1.0
 Hill Group,Emergency,0.6
-Hill Group,Elective,0.2
 Hill Group,Urgent,0.2
+Hill Group,Elective,0.2
 "Hill Hernandez Scott, and",Urgent,1.0
 Hill Inc,Elective,0.429
 Hill Inc,Emergency,0.429
@@ -6263,8 +6263,8 @@ Hill Inc,Urgent,0.143
 "Hill Johnson, Fuentes and",Emergency,1.0
 Hill LLC,Urgent,1.0
 Hill Ltd,Emergency,1.0
-Hill PLC,Elective,0.333
 Hill PLC,Emergency,0.333
+Hill PLC,Elective,0.333
 Hill PLC,Urgent,0.333
 "Hill Rivera, Wilson and",Emergency,1.0
 Hill Sons and,Urgent,0.5
@@ -6400,8 +6400,8 @@ Holland-Nelson,Emergency,1.0
 Holland-Peters,Urgent,1.0
 Holland-Richardson,Urgent,1.0
 Holland-Stevens,Elective,1.0
-Holloway PLC,Urgent,0.5
 Holloway PLC,Elective,0.5
+Holloway PLC,Urgent,0.5
 "Holloway, Gonzales Wood and",Emergency,1.0
 Holloway-Mcintyre,Elective,1.0
 Holloway-Moore,Urgent,1.0
@@ -6534,8 +6534,8 @@ Howard-Hurley,Elective,1.0
 Howard-Lopez,Elective,1.0
 Howard-Mercado,Elective,1.0
 Howard-Munoz,Emergency,1.0
-Howard-Rodriguez,Emergency,0.5
 Howard-Rodriguez,Elective,0.5
+Howard-Rodriguez,Emergency,0.5
 Howard-Rosales,Elective,1.0
 Howard-Thompson,Elective,1.0
 Howard-Tran,Urgent,1.0
@@ -6646,8 +6646,8 @@ Hull PLC,Urgent,1.0
 Hull-Barnett,Elective,1.0
 Hull-Murphy,Emergency,1.0
 Humphrey LLC,Urgent,1.0
-Humphrey Ltd,Urgent,0.5
 Humphrey Ltd,Elective,0.5
+Humphrey Ltd,Urgent,0.5
 "Humphrey Mckee, Myers and",Urgent,1.0
 "Humphrey Wise, and Bender",Elective,1.0
 Humphrey-Daniels,Urgent,1.0
@@ -6701,8 +6701,8 @@ Hunter-Potts,Urgent,1.0
 Hunter-Russell,Urgent,1.0
 Hunter-Scott,Urgent,1.0
 Hunter-Watkins,Emergency,1.0
-Hurley Inc,Elective,0.5
 Hurley Inc,Emergency,0.5
+Hurley Inc,Elective,0.5
 Hurley Sons and,Elective,1.0
 "Hurley Sullivan, Sutton and",Emergency,1.0
 Hurley-Cooley,Elective,1.0
@@ -6746,8 +6746,8 @@ Inc Alvarado,Urgent,1.0
 Inc Andersen,Urgent,1.0
 Inc Anderson,Emergency,0.6
 Inc Anderson,Elective,0.4
-Inc Andrews,Emergency,0.5
 Inc Andrews,Urgent,0.5
+Inc Andrews,Emergency,0.5
 Inc Arnold,Elective,1.0
 Inc Ayala,Urgent,1.0
 Inc Baker,Emergency,1.0
@@ -6768,8 +6768,8 @@ Inc Benjamin,Emergency,1.0
 Inc Bennett,Urgent,1.0
 Inc Benson,Urgent,1.0
 Inc Bird,Urgent,1.0
-Inc Bishop,Elective,0.5
 Inc Bishop,Emergency,0.5
+Inc Bishop,Elective,0.5
 Inc Black,Emergency,1.0
 Inc Blackwell,Urgent,1.0
 Inc Blair,Emergency,1.0
@@ -6782,15 +6782,15 @@ Inc Boyle,Elective,1.0
 Inc Bradley,Elective,1.0
 Inc Brewer,Elective,1.0
 Inc Brooks,Emergency,1.0
-Inc Brown,Elective,0.364
 Inc Brown,Emergency,0.364
+Inc Brown,Elective,0.364
 Inc Brown,Urgent,0.273
 Inc Bryant,Emergency,0.5
 Inc Bryant,Elective,0.5
 Inc Burnett,Emergency,1.0
 Inc Burns,Emergency,1.0
-Inc Burton,Urgent,0.5
 Inc Burton,Emergency,0.5
+Inc Burton,Urgent,0.5
 Inc Butler,Emergency,0.5
 Inc Butler,Urgent,0.5
 Inc Cabrera,Elective,1.0
@@ -6798,8 +6798,8 @@ Inc Caldwell,Elective,1.0
 Inc Camacho,Emergency,1.0
 Inc Campbell,Elective,1.0
 Inc Cantu,Elective,1.0
-Inc Cardenas,Emergency,0.5
 Inc Cardenas,Urgent,0.5
+Inc Cardenas,Emergency,0.5
 Inc Carey,Urgent,1.0
 Inc Carlson,Emergency,1.0
 Inc Carpenter,Elective,1.0
@@ -6808,8 +6808,8 @@ Inc Carroll,Elective,1.0
 Inc Carson,Urgent,1.0
 Inc Carter,Emergency,1.0
 Inc Case,Emergency,1.0
-Inc Casey,Emergency,0.5
 Inc Casey,Elective,0.5
+Inc Casey,Emergency,0.5
 Inc Castillo,Emergency,1.0
 Inc Castro,Urgent,1.0
 Inc Chambers,Elective,1.0
@@ -6849,8 +6849,8 @@ Inc Dominguez,Elective,1.0
 Inc Douglas,Elective,1.0
 Inc Drake,Emergency,1.0
 Inc Dyer,Emergency,1.0
-Inc Elliott,Urgent,0.5
 Inc Elliott,Elective,0.5
+Inc Elliott,Urgent,0.5
 Inc Ellis,Elective,0.75
 Inc Ellis,Urgent,0.25
 Inc Erickson,Emergency,1.0
@@ -6895,8 +6895,8 @@ Inc Hall,Urgent,1.0
 Inc Hamilton,Urgent,1.0
 Inc Hardy,Urgent,1.0
 Inc Harmon,Urgent,1.0
-Inc Harper,Emergency,0.5
 Inc Harper,Elective,0.5
+Inc Harper,Emergency,0.5
 Inc Harris,Urgent,0.5
 Inc Harris,Emergency,0.5
 Inc Hawkins,Emergency,1.0
@@ -6913,16 +6913,16 @@ Inc Hill,Urgent,0.667
 Inc Hill,Elective,0.333
 Inc Holland,Elective,1.0
 Inc Holmes,Emergency,1.0
-Inc Hopkins,Urgent,0.5
 Inc Hopkins,Emergency,0.5
+Inc Hopkins,Urgent,0.5
 Inc House,Elective,1.0
 Inc Howe,Emergency,1.0
 Inc Hudson,Elective,1.0
 Inc Hughes,Elective,1.0
 Inc Huynh,Elective,1.0
 Inc Ibarra,Emergency,1.0
-Inc Jackson,Emergency,0.4
 Inc Jackson,Urgent,0.4
+Inc Jackson,Emergency,0.4
 Inc Jackson,Elective,0.2
 Inc Jacobs,Elective,1.0
 Inc Jennings,Elective,1.0
@@ -6934,8 +6934,8 @@ Inc Johnston,Elective,1.0
 Inc Jones,Emergency,0.5
 Inc Jones,Elective,0.25
 Inc Jones,Urgent,0.25
-Inc Jordan,Emergency,0.5
 Inc Jordan,Elective,0.5
+Inc Jordan,Emergency,0.5
 Inc Joseph,Emergency,1.0
 Inc Juarez,Urgent,0.667
 Inc Juarez,Emergency,0.333
@@ -6949,8 +6949,8 @@ Inc Lambert,Urgent,1.0
 Inc Landry,Elective,1.0
 Inc Lang,Elective,1.0
 Inc Lara,Urgent,1.0
-Inc Lee,Elective,0.5
 Inc Lee,Emergency,0.5
+Inc Lee,Elective,0.5
 Inc Leon,Elective,1.0
 Inc Leonard,Elective,1.0
 Inc Lester,Emergency,1.0
@@ -6968,8 +6968,8 @@ Inc Lynch,Elective,1.0
 Inc Lyons,Urgent,1.0
 Inc Macias,Elective,1.0
 Inc Mahoney,Elective,1.0
-Inc Marsh,Emergency,0.5
 Inc Marsh,Elective,0.5
+Inc Marsh,Emergency,0.5
 Inc Marshall,Elective,1.0
 Inc Martin,Urgent,0.667
 Inc Martin,Emergency,0.333
@@ -7002,8 +7002,8 @@ Inc Moore,Emergency,0.167
 Inc Mora,Urgent,1.0
 Inc Morales,Emergency,0.8
 Inc Morales,Urgent,0.2
-Inc Morgan,Elective,0.5
 Inc Morgan,Urgent,0.5
+Inc Morgan,Elective,0.5
 Inc Morrow,Urgent,1.0
 Inc Moyer,Emergency,1.0
 Inc Mueller,Urgent,1.0
@@ -7018,8 +7018,8 @@ Inc Nelson,Elective,0.2
 Inc Newman,Emergency,1.0
 Inc Newton,Emergency,0.5
 Inc Newton,Elective,0.5
-Inc Nguyen,Urgent,0.5
 Inc Nguyen,Elective,0.5
+Inc Nguyen,Urgent,0.5
 Inc Nichols,Urgent,1.0
 Inc Norman,Emergency,1.0
 Inc Nunez,Elective,1.0
@@ -7040,17 +7040,17 @@ Inc Patterson,Elective,1.0
 Inc Paul,Elective,1.0
 Inc Pearson,Emergency,1.0
 Inc Perez,Urgent,0.714
-Inc Perez,Elective,0.143
 Inc Perez,Emergency,0.143
+Inc Perez,Elective,0.143
 Inc Perkins,Elective,0.667
 Inc Perkins,Urgent,0.333
-Inc Perry,Emergency,0.5
 Inc Perry,Elective,0.5
+Inc Perry,Emergency,0.5
 Inc Peters,Urgent,1.0
-Inc Peterson,Urgent,0.5
 Inc Peterson,Elective,0.5
-Inc Phillips,Urgent,0.4
+Inc Peterson,Urgent,0.5
 Inc Phillips,Emergency,0.4
+Inc Phillips,Urgent,0.4
 Inc Phillips,Elective,0.2
 Inc Pierce,Emergency,0.5
 Inc Pierce,Urgent,0.5
@@ -7066,8 +7066,8 @@ Inc Ramos,Emergency,1.0
 Inc Ramsey,Elective,1.0
 Inc Rangel,Urgent,0.667
 Inc Rangel,Emergency,0.333
-Inc Ray,Emergency,0.5
 Inc Ray,Urgent,0.5
+Inc Ray,Emergency,0.5
 Inc Reed,Urgent,1.0
 Inc Reid,Emergency,0.5
 Inc Reid,Urgent,0.5
@@ -7079,8 +7079,8 @@ Inc Rivera,Urgent,1.0
 Inc Roberts,Emergency,0.75
 Inc Roberts,Urgent,0.25
 Inc Robinson,Elective,0.5
-Inc Robinson,Emergency,0.25
 Inc Robinson,Urgent,0.25
+Inc Robinson,Emergency,0.25
 Inc Rodriguez,Emergency,0.5
 Inc Rodriguez,Urgent,0.3
 Inc Rodriguez,Elective,0.2
@@ -7089,11 +7089,11 @@ Inc Rogers,Elective,0.333
 Inc Rojas,Emergency,1.0
 Inc Rose,Elective,0.667
 Inc Rose,Emergency,0.333
-Inc Ross,Elective,0.5
 Inc Ross,Emergency,0.5
+Inc Ross,Elective,0.5
 Inc Roy,Elective,1.0
-Inc Ruiz,Urgent,0.5
 Inc Ruiz,Emergency,0.5
+Inc Ruiz,Urgent,0.5
 Inc Russell,Emergency,0.5
 Inc Russell,Urgent,0.5
 Inc Salinas,Elective,1.0
@@ -7103,8 +7103,8 @@ Inc Sanders,Emergency,1.0
 Inc Santana,Elective,1.0
 Inc Saunders,Urgent,1.0
 Inc Schmidt,Elective,1.0
-Inc Scott,Emergency,0.5
 Inc Scott,Urgent,0.5
+Inc Scott,Emergency,0.5
 Inc Serrano,Urgent,1.0
 Inc Shah,Emergency,1.0
 Inc Shannon,Urgent,1.0
@@ -7122,8 +7122,8 @@ Inc Soto,Urgent,1.0
 Inc Steele,Emergency,1.0
 Inc Stein,Elective,1.0
 Inc Stephens,Urgent,1.0
-Inc Stevens,Emergency,0.5
 Inc Stevens,Elective,0.5
+Inc Stevens,Emergency,0.5
 Inc Stewart,Emergency,0.5
 Inc Stewart,Elective,0.5
 Inc Sullivan,Urgent,1.0
@@ -7140,10 +7140,10 @@ Inc Thornton,Elective,1.0
 Inc Todd,Urgent,1.0
 Inc Travis,Emergency,1.0
 Inc Trujillo,Urgent,1.0
-Inc Turner,Urgent,0.5
 Inc Turner,Emergency,0.5
-Inc Tyler,Elective,0.5
+Inc Turner,Urgent,0.5
 Inc Tyler,Emergency,0.5
+Inc Tyler,Elective,0.5
 Inc Underwood,Elective,1.0
 Inc Valdez,Elective,1.0
 Inc Valenzuela,Elective,0.667
@@ -7350,8 +7350,8 @@ Jarvis-Barton,Emergency,1.0
 Jarvis-Thompson,Urgent,1.0
 Jarvis-Wilson,Elective,1.0
 Jefferson LLC,Elective,1.0
-Jefferson Ltd,Elective,0.5
 Jefferson Ltd,Emergency,0.5
+Jefferson Ltd,Elective,0.5
 "Jefferson Morales Gilbert, and",Elective,1.0
 "Jefferson Rice Cobb, and",Emergency,1.0
 "Jefferson Stewart and Watkins,",Urgent,1.0
@@ -7462,9 +7462,9 @@ Johns-Martin,Elective,1.0
 "Johnson Foster, and Lopez",Elective,1.0
 "Johnson Garcia, and Anthony",Elective,1.0
 "Johnson Gonzalez, Hudson and",Urgent,1.0
+Johnson Group,Elective,0.333
 Johnson Group,Emergency,0.333
 Johnson Group,Urgent,0.333
-Johnson Group,Elective,0.333
 "Johnson Hale, and Kim",Elective,1.0
 "Johnson Hernandez and Perry,",Emergency,1.0
 "Johnson Hodges and Mills,",Elective,1.0
@@ -7561,8 +7561,8 @@ Johnson-Calderon,Emergency,1.0
 Johnson-Campbell,Urgent,0.5
 Johnson-Campbell,Emergency,0.5
 Johnson-Carroll,Urgent,1.0
-Johnson-Castaneda,Urgent,0.5
 Johnson-Castaneda,Elective,0.5
+Johnson-Castaneda,Urgent,0.5
 Johnson-Chavez,Urgent,0.5
 Johnson-Chavez,Emergency,0.5
 Johnson-Collins,Urgent,1.0
@@ -7593,8 +7593,8 @@ Johnson-Heath,Emergency,1.0
 Johnson-Hernandez,Elective,1.0
 Johnson-Hines,Urgent,1.0
 Johnson-Holt,Elective,1.0
-Johnson-James,Elective,0.5
 Johnson-James,Urgent,0.5
+Johnson-James,Elective,0.5
 Johnson-Jenkins,Urgent,1.0
 Johnson-Jennings,Emergency,1.0
 Johnson-Lane,Elective,1.0
@@ -7602,8 +7602,8 @@ Johnson-Lawson,Urgent,1.0
 Johnson-Levine,Emergency,1.0
 Johnson-Lewis,Elective,1.0
 Johnson-Little,Elective,1.0
-Johnson-Lopez,Emergency,0.5
 Johnson-Lopez,Urgent,0.5
+Johnson-Lopez,Emergency,0.5
 Johnson-Mathis,Emergency,1.0
 Johnson-Mejia,Elective,1.0
 Johnson-Meyers,Elective,1.0
@@ -7634,8 +7634,8 @@ Johnson-Simmons,Elective,1.0
 Johnson-Simpson,Emergency,0.5
 Johnson-Simpson,Elective,0.5
 Johnson-Smith,Elective,0.333
-Johnson-Smith,Urgent,0.333
 Johnson-Smith,Emergency,0.333
+Johnson-Smith,Urgent,0.333
 Johnson-Snyder,Emergency,1.0
 Johnson-Stewart,Elective,1.0
 Johnson-Stone,Emergency,1.0
@@ -7684,8 +7684,8 @@ Jones Group,Elective,0.429
 Jones Group,Urgent,0.143
 "Jones Hoover and Harris,",Emergency,1.0
 Jones Inc,Emergency,0.6
-Jones Inc,Urgent,0.2
 Jones Inc,Elective,0.2
+Jones Inc,Urgent,0.2
 "Jones Jennings and Christian,",Emergency,1.0
 "Jones Johnson, Mendoza and",Elective,1.0
 Jones LLC,Elective,0.444
@@ -7699,8 +7699,8 @@ Jones Ltd,Urgent,0.364
 Jones Ltd,Elective,0.091
 "Jones Mitchell, and Hernandez",Urgent,1.0
 "Jones Nguyen Gonzalez, and",Emergency,1.0
-Jones PLC,Emergency,0.5
 Jones PLC,Elective,0.5
+Jones PLC,Emergency,0.5
 "Jones Patel, Rose and",Emergency,1.0
 "Jones Peterson, and Bell",Urgent,1.0
 "Jones Reese, and Johnson",Elective,1.0
@@ -7777,15 +7777,15 @@ Jones-Ellis,Emergency,1.0
 Jones-Fitzgerald,Urgent,1.0
 Jones-Fleming,Urgent,1.0
 Jones-Garza,Elective,1.0
-Jones-Graham,Urgent,0.5
 Jones-Graham,Emergency,0.5
+Jones-Graham,Urgent,0.5
 Jones-Gray,Elective,1.0
 Jones-Griffin,Emergency,1.0
 Jones-Harris,Elective,1.0
 Jones-Hendrix,Elective,1.0
 Jones-Henry,Urgent,1.0
-Jones-Hernandez,Emergency,0.5
 Jones-Hernandez,Urgent,0.5
+Jones-Hernandez,Emergency,0.5
 Jones-Hester,Emergency,1.0
 Jones-Hill,Elective,1.0
 Jones-Howard,Emergency,1.0
@@ -7801,8 +7801,8 @@ Jones-Martinez,Elective,1.0
 Jones-Mcdaniel,Urgent,1.0
 Jones-Mendez,Urgent,1.0
 Jones-Miller,Emergency,1.0
-Jones-Molina,Urgent,0.5
 Jones-Molina,Elective,0.5
+Jones-Molina,Urgent,0.5
 Jones-Munoz,Emergency,1.0
 Jones-Nguyen,Emergency,1.0
 Jones-Nicholson,Urgent,1.0
@@ -7811,12 +7811,12 @@ Jones-Perez,Elective,1.0
 Jones-Poole,Emergency,1.0
 Jones-Powell,Elective,1.0
 Jones-Reynolds,Emergency,1.0
-Jones-Rodriguez,Elective,0.5
 Jones-Rodriguez,Emergency,0.5
+Jones-Rodriguez,Elective,0.5
 Jones-Salas,Urgent,1.0
 Jones-Sanchez,Emergency,1.0
-Jones-Smith,Urgent,0.5
 Jones-Smith,Emergency,0.5
+Jones-Smith,Urgent,0.5
 Jones-Taylor,Emergency,1.0
 Jones-Thomas,Elective,1.0
 Jones-Thompson,Elective,1.0
@@ -7834,8 +7834,8 @@ Jones-Young,Emergency,1.0
 "Jordan Clark Leblanc, and",Emergency,1.0
 "Jordan Craig Miller, and",Emergency,1.0
 "Jordan Gilbert, Strickland and",Emergency,1.0
-Jordan Group,Elective,0.5
 Jordan Group,Urgent,0.5
+Jordan Group,Elective,0.5
 Jordan Inc,Urgent,1.0
 "Jordan Smith Whitehead, and",Emergency,1.0
 Jordan Sons and,Elective,1.0
@@ -7903,8 +7903,8 @@ Keith-Hayes,Emergency,1.0
 Keith-Marquez,Emergency,1.0
 Keith-Potter,Urgent,1.0
 Keith-Thornton,Urgent,1.0
-Keller Group,Elective,0.5
 Keller Group,Urgent,0.5
+Keller Group,Elective,0.5
 "Keller Hayes, Cox and",Elective,1.0
 Keller LLC,Urgent,1.0
 Keller Ltd,Urgent,0.5
@@ -7964,8 +7964,8 @@ Kelly-Daniel,Urgent,1.0
 Kelly-Griffith,Elective,1.0
 Kelly-Hammond,Urgent,1.0
 Kelly-Hess,Emergency,1.0
-Kelly-Howard,Urgent,0.5
 Kelly-Howard,Emergency,0.5
+Kelly-Howard,Urgent,0.5
 Kelly-Johnson,Elective,1.0
 Kelly-Jones,Elective,1.0
 Kelly-Mitchell,Elective,1.0
@@ -8042,15 +8042,15 @@ Khan-Snow,Urgent,1.0
 "Kim Coleman and Cohen,",Emergency,1.0
 "Kim Garrett, Lindsey and",Urgent,1.0
 Kim Group,Elective,0.5
-Kim Group,Emergency,0.25
 Kim Group,Urgent,0.25
+Kim Group,Emergency,0.25
 "Kim Hodges, and Curtis",Emergency,1.0
 "Kim Houston, Avila and",Urgent,1.0
 Kim Inc,Urgent,0.5
 Kim Inc,Emergency,0.5
 "Kim Jefferson and Jackson,",Urgent,1.0
-Kim LLC,Emergency,0.5
 Kim LLC,Elective,0.5
+Kim LLC,Emergency,0.5
 "Kim Rosario, and Hammond",Urgent,1.0
 "Kim and Velazquez, Morris",Urgent,1.0
 "Kim and Williams Richards,",Urgent,1.0
@@ -8187,8 +8187,8 @@ Knapp-Gordon,Emergency,1.0
 Knapp-Lindsey,Emergency,1.0
 Knapp-Murphy,Urgent,1.0
 Knight Group,Elective,1.0
-Knight Ltd,Emergency,0.5
 Knight Ltd,Elective,0.5
+Knight Ltd,Emergency,0.5
 "Knight Martinez, Fisher and",Elective,1.0
 "Knight Mayer Wells, and",Emergency,1.0
 "Knight Mcbride, and Palmer",Urgent,1.0
@@ -8242,28 +8242,28 @@ Krueger-Miller,Urgent,1.0
 LLC Acevedo,Elective,1.0
 LLC Adams,Emergency,0.5
 LLC Adams,Urgent,0.5
-LLC Aguilar,Urgent,0.5
 LLC Aguilar,Elective,0.5
+LLC Aguilar,Urgent,0.5
 LLC Alexander,Urgent,1.0
 LLC Allen,Urgent,0.5
 LLC Allen,Emergency,0.5
 LLC Alvarez,Elective,1.0
-LLC Anderson,Emergency,0.4
 LLC Anderson,Elective,0.4
+LLC Anderson,Emergency,0.4
 LLC Anderson,Urgent,0.2
 LLC Andrews,Elective,0.75
 LLC Andrews,Urgent,0.25
 LLC Austin,Elective,0.5
-LLC Austin,Emergency,0.25
 LLC Austin,Urgent,0.25
+LLC Austin,Emergency,0.25
 LLC Ayers,Emergency,1.0
 LLC Bailey,Emergency,1.0
 LLC Baird,Emergency,0.5
 LLC Baird,Elective,0.5
 LLC Baker,Urgent,0.667
 LLC Baker,Emergency,0.333
-LLC Ball,Emergency,0.5
 LLC Ball,Urgent,0.5
+LLC Ball,Emergency,0.5
 LLC Ballard,Emergency,1.0
 LLC Barber,Elective,1.0
 LLC Barrett,Urgent,0.667
@@ -8273,8 +8273,8 @@ LLC Barton,Emergency,0.5
 LLC Barton,Urgent,0.5
 LLC Bates,Urgent,1.0
 LLC Baxter,Emergency,1.0
-LLC Bell,Elective,0.5
 LLC Bell,Urgent,0.5
+LLC Bell,Elective,0.5
 LLC Bennett,Elective,0.667
 LLC Bennett,Emergency,0.333
 LLC Benton,Elective,0.5
@@ -8286,8 +8286,8 @@ LLC Boyd,Urgent,1.0
 LLC Bradley,Elective,1.0
 LLC Brewer,Elective,1.0
 LLC Brown,Urgent,0.6
-LLC Brown,Emergency,0.2
 LLC Brown,Elective,0.2
+LLC Brown,Emergency,0.2
 LLC Buckley,Elective,1.0
 LLC Burgess,Emergency,1.0
 LLC Butler,Emergency,1.0
@@ -8311,13 +8311,13 @@ LLC Chase,Emergency,1.0
 LLC Chavez,Elective,1.0
 LLC Chen,Urgent,1.0
 LLC Cherry,Urgent,1.0
-LLC Christian,Elective,0.5
 LLC Christian,Urgent,0.5
+LLC Christian,Elective,0.5
 LLC Clark,Urgent,0.5
 LLC Clark,Elective,0.5
 LLC Cole,Elective,1.0
-LLC Coleman,Urgent,0.333
 LLC Coleman,Elective,0.333
+LLC Coleman,Urgent,0.333
 LLC Coleman,Emergency,0.333
 LLC Collins,Elective,1.0
 LLC Conner,Elective,1.0
@@ -8334,8 +8334,8 @@ LLC Delgado,Urgent,1.0
 LLC Dickerson,Elective,1.0
 LLC Donovan,Urgent,1.0
 LLC Dorsey,Urgent,1.0
-LLC Douglas,Urgent,0.5
 LLC Douglas,Emergency,0.5
+LLC Douglas,Urgent,0.5
 LLC Downs,Urgent,1.0
 LLC Drake,Emergency,1.0
 LLC Dudley,Urgent,1.0
@@ -8347,22 +8347,22 @@ LLC Elliott,Emergency,0.5
 LLC Ellis,Emergency,1.0
 LLC Erickson,Elective,1.0
 LLC Estrada,Urgent,1.0
-LLC Evans,Elective,0.5
 LLC Evans,Urgent,0.5
+LLC Evans,Elective,0.5
 LLC Fernandez,Urgent,1.0
 LLC Finley,Emergency,1.0
 LLC Fisher,Urgent,1.0
 LLC Fitzgerald,Emergency,0.5
 LLC Fitzgerald,Urgent,0.5
 LLC Fletcher,Emergency,1.0
-LLC Flores,Urgent,0.5
 LLC Flores,Elective,0.5
+LLC Flores,Urgent,0.5
 LLC Flynn,Emergency,1.0
 LLC Foster,Elective,1.0
 LLC Fowler,Urgent,1.0
 LLC Fox,Elective,1.0
-LLC Frank,Emergency,0.5
 LLC Frank,Elective,0.5
+LLC Frank,Emergency,0.5
 LLC Freeman,Elective,0.75
 LLC Freeman,Urgent,0.25
 LLC Garcia,Emergency,0.625
@@ -8376,8 +8376,8 @@ LLC George,Emergency,1.0
 LLC Gibson,Emergency,1.0
 LLC Gill,Elective,1.0
 LLC Gilmore,Emergency,1.0
-LLC Glenn,Emergency,0.5
 LLC Glenn,Urgent,0.5
+LLC Glenn,Emergency,0.5
 LLC Gonzales,Elective,1.0
 LLC Gonzalez,Elective,1.0
 LLC Goodwin,Elective,1.0
@@ -8385,11 +8385,11 @@ LLC Gordon,Elective,1.0
 LLC Grant,Elective,1.0
 LLC Gray,Urgent,1.0
 LLC Green,Urgent,0.6
-LLC Green,Elective,0.2
 LLC Green,Emergency,0.2
+LLC Green,Elective,0.2
 LLC Greene,Urgent,1.0
-LLC Griffin,Urgent,0.5
 LLC Griffin,Emergency,0.5
+LLC Griffin,Urgent,0.5
 LLC Gross,Elective,1.0
 LLC Guzman,Emergency,1.0
 LLC Hahn,Urgent,1.0
@@ -8401,26 +8401,26 @@ LLC Hampton,Emergency,1.0
 LLC Hansen,Emergency,1.0
 LLC Hanson,Emergency,1.0
 LLC Hardin,Urgent,1.0
-LLC Harding,Emergency,0.5
 LLC Harding,Urgent,0.5
-LLC Hardy,Emergency,0.333
+LLC Harding,Emergency,0.5
 LLC Hardy,Elective,0.333
 LLC Hardy,Urgent,0.333
+LLC Hardy,Emergency,0.333
 LLC Harper,Urgent,1.0
 LLC Harrington,Urgent,1.0
-LLC Harris,Emergency,0.4
 LLC Harris,Elective,0.4
+LLC Harris,Emergency,0.4
 LLC Harris,Urgent,0.2
 LLC Harrison,Emergency,1.0
 LLC Harvey,Emergency,1.0
 LLC Hawkins,Emergency,1.0
-LLC Heath,Urgent,0.5
 LLC Heath,Elective,0.5
+LLC Heath,Urgent,0.5
 LLC Hebert,Urgent,1.0
 LLC Henderson,Urgent,1.0
 LLC Henson,Elective,1.0
-LLC Hernandez,Emergency,0.5
 LLC Hernandez,Urgent,0.5
+LLC Hernandez,Emergency,0.5
 LLC Herrera,Emergency,1.0
 LLC Higgins,Urgent,1.0
 LLC Hill,Urgent,0.8
@@ -8432,14 +8432,14 @@ LLC Hodge,Emergency,0.5
 LLC Hodge,Elective,0.5
 LLC Holloway,Emergency,1.0
 LLC Holt,Elective,1.0
-LLC Hooper,Elective,0.5
 LLC Hooper,Emergency,0.5
+LLC Hooper,Elective,0.5
 LLC Hopkins,Urgent,0.5
 LLC Hopkins,Emergency,0.5
 LLC Horn,Urgent,1.0
 LLC Horton,Urgent,1.0
-LLC Howard,Urgent,0.4
 LLC Howard,Emergency,0.4
+LLC Howard,Urgent,0.4
 LLC Howard,Elective,0.2
 LLC Howe,Elective,1.0
 LLC Huff,Elective,1.0
@@ -8447,8 +8447,8 @@ LLC Ingram,Emergency,1.0
 LLC Jackson,Urgent,0.6
 LLC Jackson,Emergency,0.2
 LLC Jackson,Elective,0.2
-LLC Jenkins,Elective,0.5
 LLC Jenkins,Emergency,0.5
+LLC Jenkins,Elective,0.5
 LLC Jimenez,Elective,1.0
 LLC Johnson,Urgent,0.444
 LLC Johnson,Emergency,0.333
@@ -8465,8 +8465,8 @@ LLC Klein,Elective,1.0
 LLC Knight,Elective,1.0
 LLC Knox,Urgent,1.0
 LLC Kramer,Elective,1.0
-LLC Lam,Emergency,0.5
 LLC Lam,Elective,0.5
+LLC Lam,Emergency,0.5
 LLC Lara,Elective,1.0
 LLC Larson,Urgent,1.0
 LLC Lawson,Urgent,1.0
@@ -8474,9 +8474,9 @@ LLC Lee,Emergency,0.75
 LLC Lee,Urgent,0.25
 LLC Leon,Elective,1.0
 LLC Li,Urgent,1.0
-LLC Long,Urgent,0.333
-LLC Long,Emergency,0.333
 LLC Long,Elective,0.333
+LLC Long,Emergency,0.333
+LLC Long,Urgent,0.333
 LLC Lowe,Emergency,1.0
 LLC Lucas,Elective,1.0
 LLC Lynch,Urgent,1.0
@@ -8514,8 +8514,8 @@ LLC Moody,Urgent,1.0
 LLC Moore,Emergency,0.5
 LLC Moore,Elective,0.25
 LLC Moore,Urgent,0.25
-LLC Morales,Elective,0.5
 LLC Morales,Emergency,0.5
+LLC Morales,Elective,0.5
 LLC Moran,Emergency,1.0
 LLC Moreno,Urgent,1.0
 LLC Morgan,Elective,1.0
@@ -8523,11 +8523,11 @@ LLC Morris,Urgent,1.0
 LLC Morrison,Emergency,1.0
 LLC Mullins,Urgent,1.0
 LLC Murphy,Emergency,1.0
-LLC Myers,Urgent,0.5
 LLC Myers,Elective,0.5
+LLC Myers,Urgent,0.5
 LLC Neal,Urgent,1.0
-LLC Nguyen,Urgent,0.5
 LLC Nguyen,Emergency,0.5
+LLC Nguyen,Urgent,0.5
 LLC Nichols,Elective,1.0
 LLC Nicholson,Elective,1.0
 LLC Nunez,Urgent,1.0
@@ -8545,12 +8545,12 @@ LLC Park,Emergency,1.0
 LLC Patrick,Emergency,1.0
 LLC Patterson,Emergency,1.0
 LLC Perez,Urgent,0.6
-LLC Perez,Elective,0.2
 LLC Perez,Emergency,0.2
-LLC Perry,Emergency,0.5
+LLC Perez,Elective,0.2
 LLC Perry,Urgent,0.5
-LLC Peterson,Elective,0.5
+LLC Perry,Emergency,0.5
 LLC Peterson,Urgent,0.5
+LLC Peterson,Elective,0.5
 LLC Potts,Emergency,1.0
 LLC Powell,Elective,1.0
 LLC Price,Urgent,0.5
@@ -8589,13 +8589,13 @@ LLC Ryan,Elective,1.0
 LLC Salas,Emergency,1.0
 LLC Sanchez,Emergency,1.0
 LLC Sandoval,Elective,1.0
-LLC Sanford,Urgent,0.5
 LLC Sanford,Emergency,0.5
+LLC Sanford,Urgent,0.5
 LLC Santiago,Urgent,1.0
 LLC Schaefer,Emergency,1.0
 LLC Schmidt,Elective,1.0
-LLC Scott,Elective,0.333
 LLC Scott,Emergency,0.333
+LLC Scott,Elective,0.333
 LLC Scott,Urgent,0.333
 LLC Serrano,Elective,1.0
 LLC Shaw,Urgent,1.0
@@ -8627,9 +8627,9 @@ LLC Sullivan,Emergency,1.0
 LLC Tate,Urgent,0.5
 LLC Tate,Elective,0.5
 LLC Taylor,Emergency,1.0
-LLC Thomas,Emergency,0.333
-LLC Thomas,Elective,0.333
 LLC Thomas,Urgent,0.333
+LLC Thomas,Elective,0.333
+LLC Thomas,Emergency,0.333
 LLC Thompson,Elective,0.667
 LLC Thompson,Emergency,0.333
 LLC Todd,Elective,1.0
@@ -8668,15 +8668,15 @@ LLC Williams,Emergency,0.2
 LLC Willis,Elective,1.0
 LLC Wilson,Elective,0.75
 LLC Wilson,Emergency,0.25
-LLC Wise,Urgent,0.5
 LLC Wise,Elective,0.5
+LLC Wise,Urgent,0.5
 LLC Wolf,Elective,1.0
 LLC Wong,Elective,1.0
-LLC Wood,Emergency,0.333
-LLC Wood,Elective,0.333
 LLC Wood,Urgent,0.333
-LLC Woods,Emergency,0.5
+LLC Wood,Elective,0.333
+LLC Wood,Emergency,0.333
 LLC Woods,Elective,0.5
+LLC Woods,Emergency,0.5
 LLC Woodward,Urgent,1.0
 LLC Yoder,Elective,1.0
 LLC York,Emergency,1.0
@@ -8729,8 +8729,8 @@ Lane Group,Urgent,0.5
 Lane Inc,Emergency,1.0
 "Lane Kennedy, and Mccoy",Elective,1.0
 "Lane Klein, Garcia and",Emergency,1.0
-Lane LLC,Urgent,0.5
 Lane LLC,Emergency,0.5
+Lane LLC,Urgent,0.5
 Lane Ltd,Emergency,1.0
 "Lane Murray and Young,",Urgent,1.0
 "Lane Riley and Fisher,",Emergency,1.0
@@ -8850,8 +8850,8 @@ Leblanc-Roth,Elective,1.0
 "Lee Cook Barton, and",Elective,1.0
 "Lee Cox Barnes, and",Urgent,1.0
 "Lee Gordon, Allison and",Urgent,1.0
-Lee Group,Emergency,0.4
 Lee Group,Urgent,0.4
+Lee Group,Emergency,0.4
 Lee Group,Elective,0.2
 "Lee Henson and Peters,",Elective,1.0
 Lee Inc,Emergency,0.5
@@ -8863,8 +8863,8 @@ Lee LLC,Emergency,0.167
 Lee Ltd,Urgent,0.667
 Lee Ltd,Emergency,0.333
 Lee PLC,Emergency,0.6
-Lee PLC,Urgent,0.2
 Lee PLC,Elective,0.2
+Lee PLC,Urgent,0.2
 "Lee Palmer and Mccall,",Emergency,1.0
 "Lee Pugh, and Orozco",Urgent,1.0
 "Lee Smith Valencia, and",Urgent,1.0
@@ -8902,8 +8902,8 @@ Lee-Ford,Elective,1.0
 Lee-Gomez,Urgent,1.0
 Lee-Hansen,Emergency,1.0
 Lee-Jensen,Emergency,1.0
-Lee-Johnson,Urgent,0.5
 Lee-Johnson,Elective,0.5
+Lee-Johnson,Urgent,0.5
 Lee-King,Elective,1.0
 Lee-Lee,Emergency,1.0
 Lee-Livingston,Urgent,1.0
@@ -8964,8 +8964,8 @@ Lewis Ltd,Emergency,0.333
 Lewis Ltd,Elective,0.167
 "Lewis Lutz, Cruz and",Urgent,1.0
 "Lewis Nelson, Bailey and",Urgent,1.0
-Lewis PLC,Urgent,0.333
 Lewis PLC,Elective,0.333
+Lewis PLC,Urgent,0.333
 Lewis PLC,Emergency,0.333
 "Lewis Parrish Wolf, and",Emergency,1.0
 "Lewis Ramirez, and Obrien",Urgent,1.0
@@ -9131,15 +9131,15 @@ Lopez Group,Elective,0.143
 Lopez Inc,Urgent,0.667
 Lopez Inc,Elective,0.333
 Lopez LLC,Elective,0.5
-Lopez LLC,Urgent,0.25
 Lopez LLC,Emergency,0.25
+Lopez LLC,Urgent,0.25
 Lopez Ltd,Urgent,1.0
 "Lopez Macdonald Gutierrez, and",Emergency,1.0
 "Lopez Martin and Melendez,",Emergency,1.0
 "Lopez Nolan and Evans,",Elective,1.0
 Lopez PLC,Urgent,0.333
-Lopez PLC,Elective,0.333
 Lopez PLC,Emergency,0.333
+Lopez PLC,Elective,0.333
 "Lopez Parks, and Barrett",Elective,1.0
 "Lopez Porter and Hensley,",Elective,1.0
 "Lopez Randolph, Nash and",Elective,1.0
@@ -9181,8 +9181,8 @@ Lopez-Hurst,Urgent,1.0
 Lopez-Jackson,Emergency,1.0
 Lopez-Jordan,Emergency,1.0
 Lopez-Kelley,Emergency,1.0
-Lopez-Kim,Emergency,0.5
 Lopez-Kim,Urgent,0.5
+Lopez-Kim,Emergency,0.5
 Lopez-Lopez,Elective,1.0
 Lopez-Martinez,Emergency,1.0
 Lopez-Mora,Elective,1.0
@@ -9231,16 +9231,16 @@ Lozano-Horn,Elective,1.0
 Lozano-Lewis,Urgent,1.0
 Lozano-Pearson,Emergency,1.0
 Ltd Adams,Emergency,1.0
-Ltd Aguilar,Elective,0.5
 Ltd Aguilar,Urgent,0.5
-Ltd Alexander,Urgent,0.5
+Ltd Aguilar,Elective,0.5
 Ltd Alexander,Elective,0.5
+Ltd Alexander,Urgent,0.5
 Ltd Allen,Emergency,1.0
 Ltd Alvarado,Urgent,1.0
 Ltd Anderson,Urgent,0.75
 Ltd Anderson,Emergency,0.25
-Ltd Archer,Emergency,0.5
 Ltd Archer,Elective,0.5
+Ltd Archer,Emergency,0.5
 Ltd Arnold,Elective,1.0
 Ltd Atkins,Urgent,1.0
 Ltd Austin,Emergency,0.5
@@ -9282,16 +9282,16 @@ Ltd Butler,Elective,1.0
 Ltd Byrd,Emergency,1.0
 Ltd Caldwell,Urgent,1.0
 Ltd Cameron,Emergency,1.0
-Ltd Campbell,Elective,0.333
-Ltd Campbell,Emergency,0.333
 Ltd Campbell,Urgent,0.333
+Ltd Campbell,Emergency,0.333
+Ltd Campbell,Elective,0.333
 Ltd Campos,Elective,1.0
 Ltd Carroll,Emergency,1.0
-Ltd Carter,Urgent,0.5
 Ltd Carter,Elective,0.5
-Ltd Castillo,Urgent,0.333
+Ltd Carter,Urgent,0.5
 Ltd Castillo,Emergency,0.333
 Ltd Castillo,Elective,0.333
+Ltd Castillo,Urgent,0.333
 Ltd Chambers,Urgent,1.0
 Ltd Chan,Elective,1.0
 Ltd Chavez,Emergency,1.0
@@ -9312,8 +9312,8 @@ Ltd Conway,Emergency,1.0
 Ltd Cook,Urgent,1.0
 Ltd Cooper,Urgent,1.0
 Ltd Cox,Emergency,1.0
-Ltd Crawford,Emergency,0.5
 Ltd Crawford,Urgent,0.5
+Ltd Crawford,Emergency,0.5
 Ltd Cross,Urgent,1.0
 Ltd Cunningham,Urgent,1.0
 Ltd Curry,Urgent,1.0
@@ -9322,15 +9322,15 @@ Ltd Davidson,Elective,1.0
 Ltd Davis,Urgent,0.4
 Ltd Davis,Emergency,0.4
 Ltd Davis,Elective,0.2
-Ltd Delgado,Elective,0.5
 Ltd Delgado,Urgent,0.5
-Ltd Diaz,Emergency,0.333
+Ltd Delgado,Elective,0.5
 Ltd Diaz,Elective,0.333
+Ltd Diaz,Emergency,0.333
 Ltd Diaz,Urgent,0.333
 Ltd Dickerson,Elective,1.0
 Ltd Dillon,Elective,1.0
-Ltd Douglas,Elective,0.5
 Ltd Douglas,Urgent,0.5
+Ltd Douglas,Elective,0.5
 Ltd Duncan,Elective,1.0
 Ltd Eaton,Elective,1.0
 Ltd Edwards,Urgent,1.0
@@ -9338,9 +9338,9 @@ Ltd Escobar,Elective,1.0
 Ltd Esparza,Emergency,1.0
 Ltd Estrada,Urgent,0.667
 Ltd Estrada,Elective,0.333
+Ltd Evans,Urgent,0.333
 Ltd Evans,Emergency,0.333
 Ltd Evans,Elective,0.333
-Ltd Evans,Urgent,0.333
 Ltd Fernandez,Urgent,1.0
 Ltd Fleming,Urgent,1.0
 Ltd Floyd,Urgent,1.0
@@ -9363,10 +9363,10 @@ Ltd Glass,Elective,1.0
 Ltd Golden,Urgent,1.0
 Ltd Gomez,Elective,0.5
 Ltd Gomez,Emergency,0.5
-Ltd Gonzales,Elective,0.5
 Ltd Gonzales,Urgent,0.5
-Ltd Gonzalez,Emergency,0.5
+Ltd Gonzales,Elective,0.5
 Ltd Gonzalez,Urgent,0.5
+Ltd Gonzalez,Emergency,0.5
 Ltd Goodman,Urgent,1.0
 Ltd Gould,Emergency,1.0
 Ltd Graham,Emergency,1.0
@@ -9385,10 +9385,10 @@ Ltd Hansen,Urgent,1.0
 Ltd Harmon,Urgent,1.0
 Ltd Harper,Urgent,1.0
 Ltd Harris,Emergency,0.5
-Ltd Harris,Urgent,0.25
 Ltd Harris,Elective,0.25
-Ltd Harrison,Urgent,0.5
+Ltd Harris,Urgent,0.25
 Ltd Harrison,Elective,0.5
+Ltd Harrison,Urgent,0.5
 Ltd Hatfield,Emergency,1.0
 Ltd Hawkins,Elective,1.0
 Ltd Hayes,Elective,1.0
@@ -9409,8 +9409,8 @@ Ltd Houston,Emergency,1.0
 Ltd Howe,Urgent,1.0
 Ltd Howell,Emergency,1.0
 Ltd Huff,Elective,0.5
-Ltd Huff,Urgent,0.25
 Ltd Huff,Emergency,0.25
+Ltd Huff,Urgent,0.25
 Ltd Hunt,Urgent,0.5
 Ltd Hunt,Elective,0.5
 Ltd Huynh,Elective,1.0
@@ -9422,11 +9422,11 @@ Ltd James,Urgent,0.667
 Ltd James,Elective,0.333
 Ltd Jennings,Emergency,1.0
 Ltd Jensen,Urgent,1.0
-Ltd Jimenez,Elective,0.5
 Ltd Jimenez,Emergency,0.5
+Ltd Jimenez,Elective,0.5
 Ltd Johnson,Emergency,0.5
-Ltd Johnson,Urgent,0.25
 Ltd Johnson,Elective,0.25
+Ltd Johnson,Urgent,0.25
 Ltd Jones,Elective,0.5
 Ltd Jones,Emergency,0.25
 Ltd Jones,Urgent,0.25
@@ -9439,8 +9439,8 @@ Ltd Kelly,Emergency,1.0
 Ltd Kent,Elective,1.0
 Ltd Key,Urgent,1.0
 Ltd King,Urgent,0.667
-Ltd King,Elective,0.167
 Ltd King,Emergency,0.167
+Ltd King,Elective,0.167
 Ltd Kline,Elective,1.0
 Ltd Knight,Elective,1.0
 Ltd Kramer,Elective,1.0
@@ -9453,8 +9453,8 @@ Ltd Lee,Emergency,0.667
 Ltd Lee,Elective,0.333
 Ltd Lester,Urgent,1.0
 Ltd Lewis,Elective,1.0
-Ltd Lin,Urgent,0.5
 Ltd Lin,Elective,0.5
+Ltd Lin,Urgent,0.5
 Ltd Lindsey,Emergency,1.0
 Ltd Liu,Emergency,1.0
 Ltd Lloyd,Elective,1.0
@@ -9473,8 +9473,8 @@ Ltd Marshall,Emergency,1.0
 Ltd Martin,Urgent,0.667
 Ltd Martin,Emergency,0.333
 Ltd Martinez,Urgent,0.5
-Ltd Martinez,Elective,0.25
 Ltd Martinez,Emergency,0.25
+Ltd Martinez,Elective,0.25
 Ltd Mason,Emergency,1.0
 Ltd Massey,Urgent,1.0
 Ltd Mccarty,Elective,1.0
@@ -9496,9 +9496,9 @@ Ltd Miller,Elective,0.5
 Ltd Miller,Urgent,0.25
 Ltd Miller,Emergency,0.25
 Ltd Mills,Elective,1.0
-Ltd Moore,Urgent,0.333
-Ltd Moore,Emergency,0.333
 Ltd Moore,Elective,0.333
+Ltd Moore,Emergency,0.333
+Ltd Moore,Urgent,0.333
 Ltd Morales,Elective,1.0
 Ltd Moreno,Emergency,1.0
 Ltd Morgan,Elective,0.5
@@ -9506,9 +9506,9 @@ Ltd Morgan,Urgent,0.5
 Ltd Moses,Emergency,1.0
 Ltd Moyer,Emergency,1.0
 Ltd Mullen,Elective,1.0
-Ltd Murphy,Urgent,0.333
 Ltd Murphy,Emergency,0.333
 Ltd Murphy,Elective,0.333
+Ltd Murphy,Urgent,0.333
 Ltd Murray,Emergency,1.0
 Ltd Myers,Emergency,0.667
 Ltd Myers,Elective,0.333
@@ -9524,8 +9524,8 @@ Ltd Oliver,Elective,1.0
 Ltd Olson,Urgent,1.0
 Ltd Oneill,Elective,1.0
 Ltd Orr,Elective,1.0
-Ltd Ortiz,Elective,0.5
 Ltd Ortiz,Emergency,0.5
+Ltd Ortiz,Elective,0.5
 Ltd Owens,Emergency,1.0
 Ltd Pace,Emergency,1.0
 Ltd Parker,Emergency,1.0
@@ -9533,8 +9533,8 @@ Ltd Parrish,Emergency,1.0
 Ltd Parsons,Emergency,1.0
 Ltd Patel,Emergency,1.0
 Ltd Patrick,Urgent,1.0
-Ltd Patterson,Elective,0.5
 Ltd Patterson,Emergency,0.5
+Ltd Patterson,Elective,0.5
 Ltd Peck,Emergency,1.0
 Ltd Pena,Emergency,1.0
 Ltd Perez,Emergency,0.5
@@ -9545,8 +9545,8 @@ Ltd Peterson,Urgent,0.5
 Ltd Peterson,Emergency,0.25
 Ltd Peterson,Elective,0.25
 Ltd Phillips,Elective,0.333
-Ltd Phillips,Emergency,0.333
 Ltd Phillips,Urgent,0.333
+Ltd Phillips,Emergency,0.333
 Ltd Pitts,Emergency,1.0
 Ltd Poole,Emergency,1.0
 Ltd Porter,Elective,1.0
@@ -9584,8 +9584,8 @@ Ltd Robertson,Emergency,0.5
 Ltd Robinson,Elective,1.0
 Ltd Rodriguez,Urgent,1.0
 Ltd Rogers,Urgent,1.0
-Ltd Romero,Elective,0.5
 Ltd Romero,Emergency,0.5
+Ltd Romero,Elective,0.5
 Ltd Rosales,Emergency,1.0
 Ltd Rose,Elective,1.0
 Ltd Ross,Elective,1.0
@@ -9638,8 +9638,8 @@ Ltd Thomas,Elective,0.4
 Ltd Thompson,Urgent,0.571
 Ltd Thompson,Elective,0.286
 Ltd Thompson,Emergency,0.143
-Ltd Todd,Urgent,0.5
 Ltd Todd,Emergency,0.5
+Ltd Todd,Urgent,0.5
 Ltd Torres,Elective,1.0
 Ltd Tran,Elective,0.5
 Ltd Tran,Urgent,0.5
@@ -9657,8 +9657,8 @@ Ltd Villanueva,Emergency,1.0
 Ltd Wagner,Urgent,0.5
 Ltd Wagner,Emergency,0.5
 Ltd Walker,Urgent,0.5
-Ltd Walker,Emergency,0.25
 Ltd Walker,Elective,0.25
+Ltd Walker,Emergency,0.25
 Ltd Walton,Elective,1.0
 Ltd Ward,Urgent,1.0
 Ltd Warner,Urgent,1.0
@@ -9684,8 +9684,8 @@ Ltd Williams,Urgent,0.571
 Ltd Williams,Emergency,0.286
 Ltd Williams,Elective,0.143
 Ltd Wilson,Elective,0.5
-Ltd Wilson,Urgent,0.25
 Ltd Wilson,Emergency,0.25
+Ltd Wilson,Urgent,0.25
 Ltd Wise,Emergency,1.0
 Ltd Woodard,Emergency,1.0
 Ltd Woods,Elective,1.0
@@ -9755,8 +9755,8 @@ Lyons Inc,Urgent,1.0
 Lyons LLC,Emergency,1.0
 Lyons Ltd,Elective,1.0
 "Lyons Mendoza, and Garcia",Urgent,1.0
-Lyons Sons and,Urgent,0.5
 Lyons Sons and,Elective,0.5
+Lyons Sons and,Urgent,0.5
 "Lyons Young, Wagner and",Elective,1.0
 "Lyons and Ashley, Berg",Emergency,1.0
 "Lyons and Foster Rodgers,",Emergency,1.0
@@ -9868,9 +9868,9 @@ Marshall Inc,Emergency,1.0
 Marshall LLC,Emergency,1.0
 Marshall Ltd,Elective,1.0
 "Marshall Mills and Combs,",Elective,1.0
+Marshall PLC,Elective,0.333
 Marshall PLC,Urgent,0.333
 Marshall PLC,Emergency,0.333
-Marshall PLC,Elective,0.333
 "Marshall Soto Sanchez, and",Urgent,1.0
 "Marshall and Contreras Garcia,",Elective,1.0
 "Marshall and Middleton Ray,",Emergency,1.0
@@ -9900,8 +9900,8 @@ Martin Inc,Elective,0.125
 "Martin Joseph Snyder, and",Elective,1.0
 "Martin Keith Boyd, and",Urgent,1.0
 Martin LLC,Urgent,0.5
-Martin LLC,Emergency,0.25
 Martin LLC,Elective,0.25
+Martin LLC,Emergency,0.25
 "Martin Martinez, Brown and",Emergency,1.0
 "Martin Mitchell, and Williams",Urgent,1.0
 "Martin Neal Rasmussen, and",Urgent,1.0
@@ -9924,8 +9924,8 @@ Martin PLC,Urgent,0.2
 "Martin and Nguyen Gomez,",Emergency,1.0
 "Martin and Petty, Gibbs",Emergency,1.0
 "Martin and Reed Whitney,",Emergency,1.0
-Martin and Sons,Urgent,0.5
 Martin and Sons,Elective,0.5
+Martin and Sons,Urgent,0.5
 "Martin and Thomas Eaton,",Urgent,1.0
 "Martin, Carter Miller and",Emergency,1.0
 "Martin, Galloway and Wells",Emergency,1.0
@@ -9949,8 +9949,8 @@ Martin-Davis,Emergency,1.0
 Martin-Drake,Emergency,1.0
 Martin-Foster,Elective,1.0
 Martin-Gonzalez,Elective,1.0
-Martin-Green,Emergency,0.5
 Martin-Green,Elective,0.5
+Martin-Green,Emergency,0.5
 Martin-Jones,Urgent,0.5
 Martin-Jones,Emergency,0.5
 Martin-Lowery,Urgent,1.0
@@ -10037,8 +10037,8 @@ Martinez-Ball,Emergency,1.0
 Martinez-Bridges,Elective,1.0
 Martinez-Buck,Urgent,1.0
 Martinez-Cox,Urgent,1.0
-Martinez-Davis,Urgent,0.5
 Martinez-Davis,Emergency,0.5
+Martinez-Davis,Urgent,0.5
 Martinez-Douglas,Emergency,1.0
 Martinez-Duran,Elective,1.0
 Martinez-Edwards,Emergency,1.0
@@ -10069,8 +10069,8 @@ Martinez-Ramirez,Elective,1.0
 Martinez-Richard,Urgent,1.0
 Martinez-Schmidt,Elective,1.0
 Martinez-Solomon,Urgent,1.0
-Martinez-Strickland,Emergency,0.5
 Martinez-Strickland,Urgent,0.5
+Martinez-Strickland,Emergency,0.5
 Martinez-Thomas,Elective,1.0
 Martinez-Tucker,Elective,1.0
 Martinez-Walsh,Urgent,1.0
@@ -10136,8 +10136,8 @@ Mathis-Burton,Elective,1.0
 Mathis-Cruz,Urgent,1.0
 Mathis-Porter,Urgent,1.0
 Mathis-Scott,Emergency,1.0
-Matthews Group,Elective,0.5
 Matthews Group,Emergency,0.5
+Matthews Group,Elective,0.5
 "Matthews Hunt, Kelly and",Urgent,1.0
 Matthews PLC,Elective,1.0
 "Matthews Poole, Herring and",Emergency,1.0
@@ -10396,8 +10396,8 @@ Mcknight PLC,Elective,1.0
 "Mcknight Thompson Baker, and",Emergency,1.0
 Mcknight-Campos,Emergency,1.0
 Mcknight-Jordan,Urgent,1.0
-Mclaughlin Group,Urgent,0.5
 Mclaughlin Group,Elective,0.5
+Mclaughlin Group,Urgent,0.5
 Mclaughlin LLC,Urgent,1.0
 "Mclaughlin and Brown, Haney",Emergency,1.0
 "Mclaughlin, Bernard Pearson and",Elective,1.0
@@ -10448,8 +10448,8 @@ Meadows-Nichols,Urgent,1.0
 Meadows-Zuniga,Elective,1.0
 "Medina Gross Terrell, and",Elective,1.0
 Medina Group,Emergency,1.0
-Medina Inc,Urgent,0.5
 Medina Inc,Elective,0.5
+Medina Inc,Urgent,0.5
 Medina PLC,Elective,0.5
 Medina PLC,Urgent,0.5
 "Medina Perez, Humphrey and",Elective,1.0
@@ -10617,11 +10617,11 @@ Miller Inc,Urgent,0.4
 Miller Inc,Elective,0.333
 Miller Inc,Emergency,0.267
 "Miller Jackson, and Brown",Urgent,1.0
-Miller LLC,Elective,0.5
 Miller LLC,Urgent,0.5
+Miller LLC,Elective,0.5
 Miller Ltd,Urgent,0.455
-Miller Ltd,Elective,0.273
 Miller Ltd,Emergency,0.273
+Miller Ltd,Elective,0.273
 "Miller Massey Lopez, and",Urgent,1.0
 "Miller Montgomery Allen, and",Urgent,1.0
 "Miller Morris, and Zamora",Urgent,1.0
@@ -10704,8 +10704,8 @@ Miller-Golden,Emergency,1.0
 Miller-Green,Emergency,1.0
 Miller-Guzman,Emergency,1.0
 Miller-Harrell,Urgent,1.0
-Miller-Harris,Emergency,0.5
 Miller-Harris,Urgent,0.5
+Miller-Harris,Emergency,0.5
 Miller-Hill,Elective,1.0
 Miller-Howell,Urgent,1.0
 Miller-Jackson,Emergency,1.0
@@ -10751,9 +10751,9 @@ Miller-Rodriguez,Emergency,1.0
 Miller-Ross,Elective,1.0
 Miller-Sanchez,Emergency,1.0
 Miller-Sharp,Urgent,1.0
-Miller-Smith,Elective,0.333
-Miller-Smith,Emergency,0.333
 Miller-Smith,Urgent,0.333
+Miller-Smith,Emergency,0.333
+Miller-Smith,Elective,0.333
 Miller-Stanley,Elective,1.0
 Miller-Thomas,Emergency,1.0
 Miller-Torres,Urgent,1.0
@@ -10764,8 +10764,8 @@ Miller-Williams,Emergency,1.0
 Miller-Yang,Emergency,1.0
 Miller-Young,Urgent,1.0
 Miller-Zhang,Urgent,1.0
-Mills PLC,Emergency,0.5
 Mills PLC,Urgent,0.5
+Mills PLC,Emergency,0.5
 "Mills Sandoval, and Potts",Emergency,1.0
 "Mills Swanson and Nguyen,",Emergency,1.0
 "Mills and Foster, Cline",Urgent,1.0
@@ -10797,8 +10797,8 @@ Miranda-White,Emergency,1.0
 "Mitchell Chapman, Johnson and",Elective,1.0
 "Mitchell Davis and Anderson,",Emergency,1.0
 "Mitchell Gordon, Caldwell and",Elective,1.0
-Mitchell Group,Urgent,0.5
 Mitchell Group,Emergency,0.5
+Mitchell Group,Urgent,0.5
 "Mitchell Hansen, Bray and",Emergency,1.0
 Mitchell Inc,Urgent,0.6
 Mitchell Inc,Emergency,0.2
@@ -10814,8 +10814,8 @@ Mitchell PLC,Emergency,0.75
 Mitchell PLC,Urgent,0.25
 "Mitchell Russo, and Gould",Emergency,1.0
 "Mitchell Sanders, and Beasley",Urgent,1.0
-Mitchell Sons and,Urgent,0.5
 Mitchell Sons and,Elective,0.5
+Mitchell Sons and,Urgent,0.5
 "Mitchell Velasquez Walsh, and",Urgent,1.0
 "Mitchell Watson, and Goodwin",Emergency,1.0
 Mitchell and Sons,Elective,1.0
@@ -10943,8 +10943,8 @@ Moore PLC,Urgent,0.75
 Moore PLC,Emergency,0.25
 "Moore Park and Brown,",Emergency,1.0
 Moore Sons and,Emergency,0.5
-Moore Sons and,Elective,0.25
 Moore Sons and,Urgent,0.25
+Moore Sons and,Elective,0.25
 "Moore Strickland, and Williams",Urgent,1.0
 "Moore Terry Huynh, and",Elective,1.0
 "Moore and Atkins Benson,",Urgent,1.0
@@ -11022,8 +11022,8 @@ Morales Group,Urgent,0.143
 "Morales Hill, Collins and",Emergency,1.0
 Morales LLC,Urgent,1.0
 Morales Ltd,Elective,0.5
-Morales Ltd,Urgent,0.25
 Morales Ltd,Emergency,0.25
+Morales Ltd,Urgent,0.25
 Morales PLC,Elective,1.0
 "Morales Sanders Burke, and",Elective,1.0
 Morales Sons and,Urgent,1.0
@@ -11068,8 +11068,8 @@ Moran-Patton,Emergency,1.0
 Moran-Snow,Emergency,1.0
 Moreno Inc,Urgent,1.0
 "Moreno Jones Little, and",Elective,1.0
-Moreno LLC,Urgent,0.5
 Moreno LLC,Emergency,0.5
+Moreno LLC,Urgent,0.5
 Moreno Ltd,Elective,1.0
 Moreno PLC,Urgent,1.0
 "Moreno, Bentley and Terrell",Emergency,1.0
@@ -11086,8 +11086,8 @@ Morgan Inc,Emergency,0.5
 Morgan LLC,Emergency,1.0
 "Morgan Lowe Carter, and",Elective,1.0
 Morgan Ltd,Elective,0.5
-Morgan Ltd,Urgent,0.25
 Morgan Ltd,Emergency,0.25
+Morgan Ltd,Urgent,0.25
 "Morgan Marquez and Johnson,",Urgent,1.0
 "Morgan Nguyen, and Bean",Elective,1.0
 Morgan PLC,Emergency,1.0
@@ -11203,8 +11203,8 @@ Moses LLC,Elective,1.0
 Moses-Barajas,Emergency,1.0
 Moses-Ellis,Elective,1.0
 Moses-Randall,Urgent,1.0
-Mosley Inc,Urgent,0.5
 Mosley Inc,Elective,0.5
+Mosley Inc,Urgent,0.5
 "Mosley Levine and Thomas,",Emergency,1.0
 Mosley Ltd,Emergency,1.0
 Mosley PLC,Emergency,1.0
@@ -11272,8 +11272,8 @@ Murillo-Warner,Emergency,1.0
 "Murphy Brown, and Hall",Urgent,1.0
 "Murphy Everett and Shea,",Elective,1.0
 Murphy Group,Elective,1.0
-Murphy Inc,Urgent,0.5
 Murphy Inc,Elective,0.5
+Murphy Inc,Urgent,0.5
 "Murphy Jefferson Norris, and",Emergency,1.0
 "Murphy Jimenez, Gonzalez and",Elective,1.0
 Murphy LLC,Emergency,1.0
@@ -11314,8 +11314,8 @@ Murphy-Torres,Urgent,1.0
 Murphy-Vance,Elective,1.0
 "Murray James Maldonado, and",Urgent,1.0
 Murray LLC,Emergency,1.0
-Murray Ltd,Urgent,0.333
 Murray Ltd,Emergency,0.333
+Murray Ltd,Urgent,0.333
 Murray Ltd,Elective,0.333
 Murray PLC,Emergency,1.0
 "Murray, Diaz Jenkins and",Elective,1.0
@@ -11783,8 +11783,8 @@ Owens-Moss,Urgent,1.0
 Owens-Nash,Elective,1.0
 Owens-Wilson,Elective,1.0
 PLC Adams,Elective,0.6
-PLC Adams,Emergency,0.2
 PLC Adams,Urgent,0.2
+PLC Adams,Emergency,0.2
 PLC Aguilar,Emergency,0.667
 PLC Aguilar,Elective,0.333
 PLC Alexander,Urgent,1.0
@@ -11809,8 +11809,8 @@ PLC Bell,Emergency,1.0
 PLC Beltran,Emergency,1.0
 PLC Benjamin,Urgent,1.0
 PLC Berry,Emergency,1.0
-PLC Bishop,Elective,0.5
 PLC Bishop,Emergency,0.5
+PLC Bishop,Elective,0.5
 PLC Black,Elective,1.0
 PLC Blackburn,Elective,1.0
 PLC Blake,Emergency,1.0
@@ -11822,8 +11822,8 @@ PLC Bowen,Elective,1.0
 PLC Briggs,Emergency,1.0
 PLC Brooks,Emergency,1.0
 PLC Brown,Elective,0.5
-PLC Brown,Emergency,0.25
 PLC Brown,Urgent,0.25
+PLC Brown,Emergency,0.25
 PLC Browning,Elective,1.0
 PLC Buck,Elective,1.0
 PLC Burke,Elective,0.5
@@ -11872,8 +11872,8 @@ PLC Dennis,Urgent,1.0
 PLC Diaz,Emergency,1.0
 PLC Dickerson,Urgent,1.0
 PLC Dixon,Emergency,1.0
-PLC Dougherty,Emergency,0.5
 PLC Dougherty,Elective,0.5
+PLC Dougherty,Emergency,0.5
 PLC Doyle,Emergency,1.0
 PLC Drake,Urgent,1.0
 PLC Duncan,Urgent,1.0
@@ -11907,8 +11907,8 @@ PLC Gay,Emergency,1.0
 PLC Gibson,Urgent,1.0
 PLC Gill,Elective,1.0
 PLC Gillespie,Elective,1.0
-PLC Glass,Elective,0.5
 PLC Glass,Emergency,0.5
+PLC Glass,Elective,0.5
 PLC Glover,Elective,1.0
 PLC Gomez,Elective,1.0
 PLC Goodman,Elective,1.0
@@ -11935,9 +11935,9 @@ PLC Harper,Emergency,0.6
 PLC Harper,Urgent,0.4
 PLC Harrell,Urgent,0.5
 PLC Harrell,Elective,0.5
-PLC Harris,Emergency,0.333
 PLC Harris,Urgent,0.333
 PLC Harris,Elective,0.333
+PLC Harris,Emergency,0.333
 PLC Harrison,Urgent,0.5
 PLC Harrison,Emergency,0.25
 PLC Harrison,Elective,0.25
@@ -11964,15 +11964,15 @@ PLC Huang,Emergency,1.0
 PLC Hudson,Urgent,1.0
 PLC Hughes,Emergency,1.0
 PLC Hull,Urgent,1.0
-PLC Hunt,Emergency,0.5
 PLC Hunt,Urgent,0.5
+PLC Hunt,Emergency,0.5
 PLC Hurley,Urgent,1.0
 PLC Jackson,Emergency,0.5
 PLC Jackson,Urgent,0.25
 PLC Jackson,Elective,0.25
 PLC Jacobs,Urgent,1.0
-PLC James,Emergency,0.5
 PLC James,Elective,0.5
+PLC James,Emergency,0.5
 PLC Jenkins,Emergency,1.0
 PLC Jennings,Elective,1.0
 PLC Jimenez,Elective,1.0
@@ -11993,8 +11993,8 @@ PLC Kim,Emergency,1.0
 PLC Klein,Emergency,1.0
 PLC Knight,Emergency,1.0
 PLC Kramer,Urgent,1.0
-PLC Lam,Emergency,0.5
 PLC Lam,Elective,0.5
+PLC Lam,Emergency,0.5
 PLC Landry,Emergency,1.0
 PLC Larsen,Urgent,1.0
 PLC Leach,Emergency,1.0
@@ -12039,8 +12039,8 @@ PLC Meyer,Urgent,0.5
 PLC Meyer,Emergency,0.5
 PLC Miller,Elective,0.8
 PLC Miller,Urgent,0.2
-PLC Mills,Emergency,0.5
 PLC Mills,Urgent,0.5
+PLC Mills,Emergency,0.5
 PLC Mitchell,Emergency,0.5
 PLC Mitchell,Urgent,0.5
 PLC Montgomery,Elective,1.0
@@ -12048,8 +12048,8 @@ PLC Montoya,Elective,1.0
 PLC Moore,Elective,0.8
 PLC Moore,Emergency,0.2
 PLC Morales,Elective,0.6
-PLC Morales,Emergency,0.2
 PLC Morales,Urgent,0.2
+PLC Morales,Emergency,0.2
 PLC Moran,Urgent,1.0
 PLC Morgan,Urgent,0.667
 PLC Morgan,Elective,0.333
@@ -12059,15 +12059,15 @@ PLC Mosley,Emergency,1.0
 PLC Moss,Urgent,1.0
 PLC Mullen,Emergency,1.0
 PLC Murphy,Urgent,1.0
-PLC Murray,Elective,0.5
 PLC Murray,Emergency,0.5
+PLC Murray,Elective,0.5
 PLC Myers,Emergency,1.0
 PLC Nelson,Emergency,0.667
 PLC Nelson,Urgent,0.333
 PLC Newman,Urgent,1.0
 PLC Newton,Urgent,1.0
-PLC Nichols,Urgent,0.5
 PLC Nichols,Emergency,0.5
+PLC Nichols,Urgent,0.5
 PLC Norman,Urgent,1.0
 PLC Norton,Emergency,0.5
 PLC Norton,Urgent,0.5
@@ -12087,15 +12087,15 @@ PLC Parsons,Elective,1.0
 PLC Patterson,Urgent,1.0
 PLC Payne,Urgent,1.0
 PLC Pearson,Elective,1.0
-PLC Perez,Urgent,0.5
 PLC Perez,Emergency,0.5
+PLC Perez,Urgent,0.5
 PLC Perkins,Urgent,1.0
 PLC Perry,Elective,0.5
 PLC Perry,Urgent,0.5
 PLC Peterson,Emergency,0.667
 PLC Peterson,Elective,0.333
-PLC Phillips,Elective,0.333
 PLC Phillips,Urgent,0.333
+PLC Phillips,Elective,0.333
 PLC Phillips,Emergency,0.333
 PLC Pierce,Urgent,1.0
 PLC Pitts,Emergency,1.0
@@ -12158,9 +12158,9 @@ PLC Spears,Elective,1.0
 PLC Stanley,Elective,1.0
 PLC Stein,Elective,1.0
 PLC Stevenson,Elective,1.0
+PLC Stone,Emergency,0.333
 PLC Stone,Urgent,0.333
 PLC Stone,Elective,0.333
-PLC Stone,Emergency,0.333
 PLC Strickland,Emergency,1.0
 PLC Sullivan,Emergency,1.0
 PLC Sutton,Emergency,1.0
@@ -12194,17 +12194,17 @@ PLC Wallace,Emergency,1.0
 PLC Walton,Urgent,1.0
 PLC Wang,Emergency,1.0
 PLC Ward,Emergency,1.0
-PLC Warren,Elective,0.5
 PLC Warren,Emergency,0.5
-PLC Watkins,Emergency,0.5
+PLC Warren,Elective,0.5
 PLC Watkins,Elective,0.5
+PLC Watkins,Emergency,0.5
 PLC Watson,Elective,0.5
 PLC Watson,Urgent,0.5
 PLC Weaver,Elective,1.0
-PLC Webb,Elective,0.5
 PLC Webb,Emergency,0.5
-PLC Wells,Emergency,0.5
+PLC Webb,Elective,0.5
 PLC Wells,Elective,0.5
+PLC Wells,Emergency,0.5
 PLC Werner,Emergency,1.0
 PLC West,Urgent,1.0
 PLC White,Elective,0.667
@@ -12228,8 +12228,8 @@ PLC Wright,Elective,0.4
 PLC Wright,Urgent,0.2
 PLC Yates,Urgent,1.0
 PLC York,Emergency,1.0
-PLC Young,Urgent,0.5
 PLC Young,Emergency,0.5
+PLC Young,Urgent,0.5
 PLC Zamora,Urgent,1.0
 "Pace Clark Chapman, and",Urgent,1.0
 Pace Group,Emergency,1.0
@@ -12247,8 +12247,8 @@ Pacheco-Sanchez,Elective,1.0
 "Padilla Lewis, Anderson and",Elective,1.0
 Padilla PLC,Elective,1.0
 "Padilla Ramirez Adkins, and",Urgent,1.0
-Padilla Sons and,Emergency,0.5
 Padilla Sons and,Urgent,0.5
+Padilla Sons and,Emergency,0.5
 Padilla and Sons,Emergency,1.0
 "Padilla, Grant Sandoval and",Emergency,1.0
 Padilla-Barnes,Elective,1.0
@@ -12276,8 +12276,8 @@ Palmer Group,Elective,1.0
 Palmer Inc,Elective,0.6
 Palmer Inc,Emergency,0.2
 Palmer Inc,Urgent,0.2
-Palmer LLC,Urgent,0.5
 Palmer LLC,Elective,0.5
+Palmer LLC,Urgent,0.5
 Palmer Ltd,Emergency,1.0
 Palmer PLC,Elective,1.0
 "Palmer Singh and Bryant,",Elective,1.0
@@ -12469,8 +12469,8 @@ Paul-Harris,Elective,1.0
 Paul-Jimenez,Emergency,1.0
 Paul-Petty,Elective,1.0
 Paul-Smith,Elective,1.0
-Payne Inc,Elective,0.5
 Payne Inc,Urgent,0.5
+Payne Inc,Elective,0.5
 Payne LLC,Elective,0.5
 Payne LLC,Emergency,0.5
 Payne Sons and,Elective,1.0
@@ -12483,8 +12483,8 @@ Payne-Miller,Emergency,1.0
 "Pearson Cox Larson, and",Urgent,1.0
 Pearson LLC,Elective,1.0
 Pearson PLC,Elective,1.0
-Pearson Sons and,Urgent,0.5
 Pearson Sons and,Elective,0.5
+Pearson Sons and,Urgent,0.5
 "Pearson, Carroll and Lane",Elective,1.0
 Pearson-Adams,Emergency,1.0
 Pearson-Baker,Elective,1.0
@@ -12521,15 +12521,15 @@ Pennington-Murray,Urgent,1.0
 "Perez Dixon, and Moore",Urgent,1.0
 "Perez Fletcher and Lynch,",Emergency,1.0
 Perez Group,Elective,1.0
-Perez Inc,Emergency,0.333
-Perez Inc,Elective,0.333
 Perez Inc,Urgent,0.333
+Perez Inc,Elective,0.333
+Perez Inc,Emergency,0.333
 "Perez Jackson and Walters,",Urgent,1.0
 "Perez Johnson, and Chen",Urgent,1.0
 "Perez Jones and Wood,",Elective,1.0
 "Perez Kirk, and Montgomery",Emergency,1.0
-Perez LLC,Urgent,0.5
 Perez LLC,Elective,0.5
+Perez LLC,Urgent,0.5
 Perez Ltd,Emergency,0.667
 Perez Ltd,Elective,0.333
 Perez PLC,Emergency,1.0
@@ -12667,8 +12667,8 @@ Peterson Group,Emergency,0.5
 Peterson Inc,Elective,0.667
 Peterson Inc,Emergency,0.333
 Peterson LLC,Elective,1.0
-Peterson Ltd,Urgent,0.5
 Peterson Ltd,Emergency,0.5
+Peterson Ltd,Urgent,0.5
 "Peterson Murphy Mcbride, and",Urgent,1.0
 Peterson PLC,Elective,0.5
 Peterson PLC,Urgent,0.5
@@ -12764,8 +12764,8 @@ Phillips-Wu,Emergency,1.0
 Pierce Group,Emergency,1.0
 "Pierce Hamilton and Gregory,",Elective,1.0
 Pierce Inc,Urgent,1.0
-Pierce PLC,Emergency,0.5
 Pierce PLC,Urgent,0.5
+Pierce PLC,Emergency,0.5
 "Pierce and Bailey Jackson,",Elective,1.0
 Pierce-Ellis,Emergency,1.0
 Pierce-Juarez,Elective,1.0
@@ -12872,8 +12872,8 @@ Powell Group,Emergency,1.0
 "Powell Hansen, and Landry",Urgent,1.0
 Powell Inc,Emergency,1.0
 "Powell Johnson, and Simpson",Elective,1.0
-Powell LLC,Urgent,0.5
 Powell LLC,Elective,0.5
+Powell LLC,Urgent,0.5
 Powell PLC,Elective,0.5
 Powell PLC,Emergency,0.5
 "Powell Robinson and Valdez,",Emergency,1.0
@@ -12997,8 +12997,8 @@ Ramirez Group,Emergency,0.286
 Ramirez Inc,Elective,1.0
 Ramirez LLC,Elective,1.0
 "Ramirez Long and Martin,",Emergency,1.0
-Ramirez Ltd,Urgent,0.5
 Ramirez Ltd,Elective,0.5
+Ramirez Ltd,Urgent,0.5
 "Ramirez Oliver, Perez and",Elective,1.0
 Ramirez PLC,Elective,0.75
 Ramirez PLC,Urgent,0.25
@@ -13197,8 +13197,8 @@ Reilly-Taylor,Elective,1.0
 "Reyes Cook, Vaughn and",Elective,1.0
 "Reyes Edwards, Mullen and",Urgent,1.0
 Reyes Group,Elective,1.0
-Reyes PLC,Elective,0.5
 Reyes PLC,Urgent,0.5
+Reyes PLC,Elective,0.5
 "Reyes Page Thompson, and",Urgent,1.0
 "Reyes Rivers and Stevenson,",Elective,1.0
 "Reyes Stokes, and Kennedy",Urgent,1.0
@@ -13219,8 +13219,8 @@ Reyes-Warren,Elective,1.0
 Reynolds Group,Emergency,1.0
 Reynolds Inc,Emergency,1.0
 "Reynolds Jenkins and Taylor,",Urgent,1.0
-Reynolds LLC,Elective,0.5
 Reynolds LLC,Urgent,0.5
+Reynolds LLC,Elective,0.5
 Reynolds Ltd,Urgent,1.0
 Reynolds PLC,Elective,1.0
 "Reynolds and Ewing, Jones",Emergency,1.0
@@ -13360,9 +13360,9 @@ Riggs-Smith,Emergency,1.0
 "Riley Chavez Myers, and",Elective,1.0
 "Riley Erickson and Cunningham,",Emergency,1.0
 "Riley Figueroa and Snyder,",Elective,1.0
+Riley Inc,Urgent,0.333
 Riley Inc,Elective,0.333
 Riley Inc,Emergency,0.333
-Riley Inc,Urgent,0.333
 "Riley Jenkins, and Gonzalez",Elective,1.0
 Riley Ltd,Emergency,1.0
 Riley Sons and,Emergency,1.0
@@ -13487,9 +13487,9 @@ Roberts Group,Urgent,1.0
 "Roberts Hale and Wilson,",Emergency,1.0
 "Roberts Hall, and Williamson",Elective,1.0
 "Roberts Henderson, and Gregory",Emergency,1.0
-Roberts Inc,Emergency,0.333
-Roberts Inc,Elective,0.333
 Roberts Inc,Urgent,0.333
+Roberts Inc,Elective,0.333
+Roberts Inc,Emergency,0.333
 Roberts LLC,Elective,0.333
 Roberts LLC,Urgent,0.333
 Roberts LLC,Emergency,0.333
@@ -13506,8 +13506,8 @@ Roberts Sons and,Elective,1.0
 "Roberts, Savage Lawrence and",Emergency,1.0
 "Roberts, and George Garcia",Urgent,1.0
 Roberts-Crawford,Emergency,1.0
-Roberts-Diaz,Emergency,0.5
 Roberts-Diaz,Elective,0.5
+Roberts-Diaz,Emergency,0.5
 Roberts-Fowler,Emergency,1.0
 Roberts-Garcia,Elective,1.0
 Roberts-Graves,Urgent,1.0
@@ -13558,8 +13558,8 @@ Robertson-Warren,Urgent,1.0
 "Robinson Allen, Leon and",Urgent,1.0
 "Robinson Baker, and Fletcher",Urgent,1.0
 "Robinson Graves and Miller,",Emergency,1.0
-Robinson Group,Elective,0.5
 Robinson Group,Emergency,0.5
+Robinson Group,Elective,0.5
 Robinson Inc,Elective,0.429
 Robinson Inc,Emergency,0.429
 Robinson Inc,Urgent,0.143
@@ -13638,8 +13638,8 @@ Rodgers-Newton,Emergency,1.0
 "Rodriguez Douglas, and Carrillo",Emergency,1.0
 "Rodriguez Fox Hill, and",Urgent,1.0
 "Rodriguez Glover and Brown,",Urgent,1.0
-Rodriguez Group,Urgent,0.4
 Rodriguez Group,Emergency,0.4
+Rodriguez Group,Urgent,0.4
 Rodriguez Group,Elective,0.2
 "Rodriguez Hale and Perez,",Emergency,1.0
 "Rodriguez Hanson and Vazquez,",Emergency,1.0
@@ -13651,8 +13651,8 @@ Rodriguez Inc,Elective,0.429
 "Rodriguez Johnson, and Brown",Urgent,1.0
 Rodriguez LLC,Elective,0.667
 Rodriguez LLC,Emergency,0.333
-Rodriguez Ltd,Emergency,0.4
 Rodriguez Ltd,Urgent,0.4
+Rodriguez Ltd,Emergency,0.4
 Rodriguez Ltd,Elective,0.2
 Rodriguez PLC,Emergency,0.6
 Rodriguez PLC,Elective,0.2
@@ -13725,8 +13725,8 @@ Rodriguez-Mann,Urgent,1.0
 Rodriguez-Martin,Urgent,1.0
 Rodriguez-Mckee,Elective,1.0
 Rodriguez-Melendez,Elective,1.0
-Rodriguez-Miller,Emergency,0.5
 Rodriguez-Miller,Urgent,0.5
+Rodriguez-Miller,Emergency,0.5
 Rodriguez-Morris,Urgent,1.0
 Rodriguez-Navarro,Emergency,1.0
 Rodriguez-Roberts,Elective,1.0
@@ -13861,8 +13861,8 @@ Ross Group,Urgent,0.5
 Ross Group,Elective,0.5
 "Ross Hart, and Mercer",Emergency,1.0
 "Ross Ho, Patterson and",Urgent,1.0
-Ross Inc,Emergency,0.5
 Ross Inc,Urgent,0.5
+Ross Inc,Emergency,0.5
 Ross LLC,Emergency,1.0
 "Ross Lee, Wilson and",Elective,1.0
 "Ross Morgan and Franklin,",Elective,1.0
@@ -14041,8 +14041,8 @@ Sanchez Inc,Emergency,0.857
 Sanchez Inc,Elective,0.143
 Sanchez LLC,Emergency,1.0
 "Sanchez Long, Bradley and",Elective,1.0
-Sanchez Sons and,Elective,0.5
 Sanchez Sons and,Emergency,0.5
+Sanchez Sons and,Elective,0.5
 "Sanchez Soto George, and",Emergency,1.0
 "Sanchez and Benson, Hernandez",Emergency,1.0
 "Sanchez and Ferrell Peterson,",Elective,1.0
@@ -14080,8 +14080,8 @@ Sanchez-Wilson,Urgent,1.0
 Sanchez-Zamora,Emergency,1.0
 Sanders Group,Emergency,0.5
 Sanders Group,Urgent,0.5
-Sanders Inc,Urgent,0.5
 Sanders Inc,Emergency,0.5
+Sanders Inc,Urgent,0.5
 Sanders Ltd,Urgent,1.0
 "Sanders Ortiz Higgins, and",Urgent,1.0
 Sanders PLC,Emergency,1.0
@@ -14196,8 +14196,8 @@ Schmidt-Ford,Elective,1.0
 Schmidt-Hall,Urgent,1.0
 Schmidt-Singh,Elective,1.0
 Schmidt-Smith,Emergency,1.0
-Schmidt-Thomas,Urgent,0.5
 Schmidt-Thomas,Elective,0.5
+Schmidt-Thomas,Urgent,0.5
 Schmidt-Warren,Urgent,1.0
 Schmitt Inc,Elective,1.0
 Schmitt Ltd,Elective,1.0
@@ -14329,8 +14329,8 @@ Serrano Group,Urgent,1.0
 Serrano Inc,Elective,1.0
 Serrano Ltd,Elective,0.75
 Serrano Ltd,Emergency,0.25
-Serrano and Sons,Emergency,0.5
 Serrano and Sons,Elective,0.5
+Serrano and Sons,Emergency,0.5
 "Serrano and Sweeney Anderson,",Emergency,1.0
 Serrano-Dixon,Emergency,1.0
 Serrano-Griffin,Elective,1.0
@@ -14376,18 +14376,18 @@ Sharp-Dominguez,Urgent,1.0
 Sharp-Lee,Emergency,1.0
 "Shaw Delgado and Sanchez,",Emergency,1.0
 Shaw Group,Emergency,0.333
-Shaw Group,Urgent,0.333
 Shaw Group,Elective,0.333
-Shaw Inc,Emergency,0.5
+Shaw Group,Urgent,0.333
 Shaw Inc,Urgent,0.5
+Shaw Inc,Emergency,0.5
 Shaw LLC,Urgent,0.667
 Shaw LLC,Emergency,0.333
 "Shaw Moreno Jenkins, and",Urgent,1.0
 Shaw PLC,Urgent,0.667
 Shaw PLC,Emergency,0.333
 "Shaw Solomon and Duncan,",Emergency,1.0
-Shaw Sons and,Elective,0.5
 Shaw Sons and,Emergency,0.5
+Shaw Sons and,Elective,0.5
 "Shaw Tapia and Barnes,",Elective,1.0
 "Shaw Taylor, and Khan",Emergency,1.0
 "Shaw Ware, Reynolds and",Elective,1.0
@@ -14522,9 +14522,9 @@ Simon-Johns,Elective,1.0
 Simon-Khan,Emergency,1.0
 "Simpson Espinoza, and Thompson",Urgent,1.0
 "Simpson Frank, Ortiz and",Emergency,1.0
-Simpson Inc,Elective,0.333
 Simpson Inc,Emergency,0.333
 Simpson Inc,Urgent,0.333
+Simpson Inc,Elective,0.333
 Simpson Ltd,Urgent,1.0
 Simpson PLC,Elective,1.0
 "Simpson Pratt, Johnson and",Elective,1.0
@@ -14543,8 +14543,8 @@ Simpson-Schneider,Elective,1.0
 Simpson-Stein,Urgent,1.0
 Simpson-Travis,Urgent,1.0
 Simpson-Ward,Emergency,1.0
-Sims Group,Urgent,0.5
 Sims Group,Emergency,0.5
+Sims Group,Urgent,0.5
 "Sims Hester and Jordan,",Elective,1.0
 Sims LLC,Urgent,1.0
 Sims Ltd,Emergency,1.0
@@ -14774,8 +14774,8 @@ Smith-Black,Emergency,1.0
 Smith-Bowers,Elective,1.0
 Smith-Bradshaw,Urgent,1.0
 Smith-Brooks,Urgent,1.0
-Smith-Brown,Emergency,0.5
 Smith-Brown,Elective,0.5
+Smith-Brown,Emergency,0.5
 Smith-Bruce,Urgent,1.0
 Smith-Buchanan,Elective,1.0
 Smith-Byrd,Elective,0.5
@@ -14857,13 +14857,13 @@ Smith-Ramsey,Elective,1.0
 Smith-Reed,Urgent,0.5
 Smith-Reed,Emergency,0.5
 Smith-Reyes,Emergency,1.0
-Smith-Richardson,Elective,0.5
 Smith-Richardson,Emergency,0.5
+Smith-Richardson,Elective,0.5
 Smith-Riddle,Urgent,1.0
 Smith-Rivera,Elective,1.0
 Smith-Robinson,Elective,1.0
-Smith-Rodriguez,Elective,0.333
 Smith-Rodriguez,Urgent,0.333
+Smith-Rodriguez,Elective,0.333
 Smith-Rodriguez,Emergency,0.333
 Smith-Rogers,Urgent,1.0
 Smith-Romero,Urgent,1.0
@@ -14872,8 +14872,8 @@ Smith-Roy,Emergency,1.0
 Smith-Saunders,Emergency,1.0
 Smith-Schroeder,Elective,1.0
 Smith-Shaw,Elective,1.0
-Smith-Smith,Elective,0.5
 Smith-Smith,Emergency,0.5
+Smith-Smith,Elective,0.5
 Smith-Spears,Emergency,1.0
 Smith-Stafford,Elective,1.0
 Smith-Stephens,Urgent,1.0
@@ -14906,11 +14906,11 @@ Snow-Stanley,Urgent,1.0
 Snow-Turner,Emergency,1.0
 "Snyder Brown, Hess and",Urgent,1.0
 Snyder Inc,Elective,1.0
-Snyder LLC,Emergency,0.5
 Snyder LLC,Urgent,0.5
+Snyder LLC,Emergency,0.5
 Snyder Ltd,Emergency,1.0
-Snyder PLC,Emergency,0.5
 Snyder PLC,Urgent,0.5
+Snyder PLC,Emergency,0.5
 "Snyder Wilson, and Spencer",Elective,1.0
 "Snyder and Evans, Meyer",Emergency,1.0
 "Snyder and Long, Wells",Urgent,1.0
@@ -14955,9 +14955,9 @@ Sons Bennett and,Emergency,1.0
 Sons Berry and,Emergency,1.0
 Sons Blair and,Urgent,1.0
 Sons Brooks and,Urgent,1.0
-Sons Brown and,Elective,0.333
-Sons Brown and,Urgent,0.333
 Sons Brown and,Emergency,0.333
+Sons Brown and,Urgent,0.333
+Sons Brown and,Elective,0.333
 Sons Burke and,Urgent,1.0
 Sons Butler and,Urgent,1.0
 Sons Cabrera and,Urgent,1.0
@@ -15031,8 +15031,8 @@ Sons Little and,Elective,1.0
 Sons Lowe and,Urgent,1.0
 Sons Lucero and,Elective,1.0
 Sons Martin and,Elective,0.5
-Sons Martin and,Emergency,0.25
 Sons Martin and,Urgent,0.25
+Sons Martin and,Emergency,0.25
 Sons Mason and,Elective,1.0
 Sons Mayo and,Elective,1.0
 Sons Mcclure and,Urgent,1.0
@@ -15074,12 +15074,12 @@ Sons Ramsey and,Urgent,0.333
 Sons Reyes and,Urgent,1.0
 Sons Reynolds and,Urgent,1.0
 Sons Richards and,Emergency,1.0
-Sons Robinson and,Elective,0.5
 Sons Robinson and,Urgent,0.5
+Sons Robinson and,Elective,0.5
 Sons Robles and,Urgent,1.0
 Sons Ryan and,Elective,1.0
-Sons Sanchez and,Elective,0.5
 Sons Sanchez and,Emergency,0.5
+Sons Sanchez and,Elective,0.5
 Sons Santana and,Urgent,1.0
 Sons Santiago and,Elective,1.0
 Sons Schwartz and,Emergency,1.0
@@ -15088,13 +15088,13 @@ Sons Shaffer and,Urgent,1.0
 Sons Shelton and,Elective,1.0
 Sons Sims and,Urgent,1.0
 Sons Sloan and,Emergency,1.0
-Sons Smith and,Emergency,0.5
 Sons Smith and,Elective,0.5
+Sons Smith and,Emergency,0.5
 Sons Stephens and,Emergency,0.5
 Sons Stephens and,Urgent,0.5
 Sons Stone and,Emergency,1.0
-Sons Taylor and,Emergency,0.5
 Sons Taylor and,Urgent,0.5
+Sons Taylor and,Emergency,0.5
 Sons Thomas and,Elective,1.0
 Sons Valdez and,Emergency,1.0
 Sons Wallace and,Urgent,1.0
@@ -15137,8 +15137,8 @@ Sons and Carrillo,Urgent,1.0
 Sons and Carter,Emergency,1.0
 Sons and Casey,Urgent,1.0
 Sons and Castro,Emergency,1.0
-Sons and Chapman,Emergency,0.5
 Sons and Chapman,Urgent,0.5
+Sons and Chapman,Emergency,0.5
 Sons and Choi,Urgent,1.0
 Sons and Christian,Elective,1.0
 Sons and Clark,Elective,1.0
@@ -15174,13 +15174,13 @@ Sons and Goodwin,Elective,1.0
 Sons and Green,Emergency,1.0
 Sons and Guerrero,Elective,1.0
 Sons and Hall,Urgent,1.0
-Sons and Hamilton,Emergency,0.5
 Sons and Hamilton,Elective,0.5
+Sons and Hamilton,Emergency,0.5
 Sons and Harris,Emergency,1.0
 Sons and Hart,Elective,1.0
 Sons and Heath,Emergency,1.0
-Sons and Hernandez,Elective,0.5
 Sons and Hernandez,Emergency,0.5
+Sons and Hernandez,Elective,0.5
 Sons and Hicks,Elective,1.0
 Sons and Holmes,Elective,1.0
 Sons and Horton,Urgent,1.0
@@ -15193,8 +15193,8 @@ Sons and Johnston,Emergency,1.0
 Sons and Jones,Elective,0.5
 Sons and Jones,Emergency,0.25
 Sons and Jones,Urgent,0.25
-Sons and Keller,Urgent,0.5
 Sons and Keller,Emergency,0.5
+Sons and Keller,Urgent,0.5
 Sons and Kelly,Emergency,1.0
 Sons and Kennedy,Elective,1.0
 Sons and King,Urgent,1.0
@@ -15223,8 +15223,8 @@ Sons and Morales,Urgent,1.0
 Sons and Morton,Emergency,1.0
 Sons and Murphy,Elective,1.0
 Sons and Myers,Elective,1.0
-Sons and Nelson,Urgent,0.5
 Sons and Nelson,Emergency,0.5
+Sons and Nelson,Urgent,0.5
 Sons and Newton,Urgent,1.0
 Sons and Odonnell,Elective,1.0
 Sons and Oliver,Emergency,1.0
@@ -15234,8 +15234,8 @@ Sons and Padilla,Emergency,1.0
 Sons and Palmer,Urgent,1.0
 Sons and Patton,Elective,1.0
 Sons and Peterson,Elective,1.0
-Sons and Phillips,Urgent,0.5
 Sons and Phillips,Emergency,0.5
+Sons and Phillips,Urgent,0.5
 Sons and Porter,Elective,1.0
 Sons and Potter,Emergency,1.0
 Sons and Price,Urgent,1.0
@@ -15483,8 +15483,8 @@ Stewart Group,Elective,1.0
 "Stewart Guzman Moore, and",Emergency,1.0
 Stewart Inc,Elective,1.0
 "Stewart Kelly, Hart and",Elective,1.0
-Stewart LLC,Emergency,0.5
 Stewart LLC,Elective,0.5
+Stewart LLC,Emergency,0.5
 Stewart Ltd,Elective,1.0
 Stewart PLC,Urgent,1.0
 "Stewart Simpson, Wolfe and",Emergency,1.0
@@ -15646,8 +15646,8 @@ Sweeney-Rojas,Elective,1.0
 Tanner Group,Elective,1.0
 "Tanner Smith Miller, and",Urgent,1.0
 "Tanner and Wilson Espinoza,",Emergency,1.0
-Tanner-Cox,Urgent,0.5
 Tanner-Cox,Emergency,0.5
+Tanner-Cox,Urgent,0.5
 Tapia Inc,Urgent,1.0
 Tate Group,Urgent,1.0
 "Tate Morales Navarro, and",Urgent,1.0
@@ -15667,20 +15667,20 @@ Tate-Thompson,Elective,1.0
 "Taylor Dougherty Terry, and",Urgent,1.0
 "Taylor Frye Curtis, and",Elective,1.0
 "Taylor Graham Riley, and",Urgent,1.0
-Taylor Group,Elective,0.333
 Taylor Group,Emergency,0.333
+Taylor Group,Elective,0.333
 Taylor Group,Urgent,0.333
 Taylor Inc,Elective,0.5
 Taylor Inc,Emergency,0.5
 "Taylor Keith and Wood,",Emergency,1.0
-Taylor LLC,Elective,0.5
 Taylor LLC,Urgent,0.5
+Taylor LLC,Elective,0.5
 Taylor Ltd,Elective,0.5
 Taylor Ltd,Emergency,0.5
 "Taylor Mcgee Taylor, and",Elective,1.0
 "Taylor Mcintosh and Ross,",Emergency,1.0
-Taylor PLC,Elective,0.333
 Taylor PLC,Urgent,0.333
+Taylor PLC,Elective,0.333
 Taylor PLC,Emergency,0.333
 "Taylor Patel Mendoza, and",Elective,1.0
 "Taylor Sanchez, and Lopez",Elective,1.0
@@ -15777,8 +15777,8 @@ Terry-Nguyen,Emergency,1.0
 "Thomas Booker, and Thomas",Emergency,1.0
 "Thomas Dawson, and Adams",Elective,1.0
 "Thomas Ferguson Juarez, and",Urgent,1.0
-Thomas Group,Emergency,0.5
 Thomas Group,Urgent,0.5
+Thomas Group,Emergency,0.5
 "Thomas Hanson, and Edwards",Emergency,1.0
 "Thomas Harvey and Brown,",Urgent,1.0
 Thomas Inc,Elective,1.0
@@ -15798,8 +15798,8 @@ Thomas Sons and,Elective,0.5
 "Thomas and Braun Gordon,",Emergency,1.0
 "Thomas and Evans Gordon,",Elective,1.0
 "Thomas and Murphy Preston,",Emergency,1.0
-Thomas and Sons,Urgent,0.5
 Thomas and Sons,Elective,0.5
+Thomas and Sons,Urgent,0.5
 "Thomas and Thomas, Mcmahon",Emergency,1.0
 "Thomas, Bauer and Moore",Emergency,1.0
 "Thomas, Clark and Keith",Elective,1.0
@@ -15863,18 +15863,18 @@ Thompson Group,Emergency,0.2
 Thompson Inc,Urgent,0.5
 Thompson Inc,Emergency,0.5
 Thompson LLC,Elective,0.5
-Thompson LLC,Urgent,0.25
 Thompson LLC,Emergency,0.25
+Thompson LLC,Urgent,0.25
 "Thompson Lopez Jenkins, and",Emergency,1.0
-Thompson Ltd,Urgent,0.4
 Thompson Ltd,Emergency,0.4
+Thompson Ltd,Urgent,0.4
 Thompson Ltd,Elective,0.2
 Thompson PLC,Elective,0.75
 Thompson PLC,Urgent,0.25
 "Thompson Patrick and Smith,",Elective,1.0
 "Thompson Ritter Austin, and",Emergency,1.0
-Thompson Sons and,Elective,0.5
 Thompson Sons and,Urgent,0.5
+Thompson Sons and,Elective,0.5
 "Thompson Summers Glenn, and",Urgent,1.0
 "Thompson Thompson Lindsey, and",Elective,1.0
 "Thompson Wiggins and Frazier,",Urgent,1.0
@@ -16024,8 +16024,8 @@ Townsend-Simmons,Elective,1.0
 "Tran Brown, and Smith",Elective,1.0
 "Tran Hall and Burch,",Urgent,1.0
 Tran Inc,Urgent,1.0
-Tran LLC,Elective,0.5
 Tran LLC,Urgent,0.5
+Tran LLC,Elective,0.5
 Tran Ltd,Elective,1.0
 "Tran Serrano Fleming, and",Urgent,1.0
 "Tran Tate Thompson, and",Emergency,1.0
@@ -16099,8 +16099,8 @@ Tucker-Wright,Urgent,1.0
 "Turner Duran Montgomery, and",Elective,1.0
 Turner Group,Elective,0.75
 Turner Group,Urgent,0.25
-Turner Inc,Elective,0.5
 Turner Inc,Emergency,0.5
+Turner Inc,Elective,0.5
 "Turner Mathews, and Smith",Urgent,1.0
 Turner PLC,Urgent,0.5
 Turner PLC,Elective,0.5
@@ -16386,8 +16386,8 @@ Walker Inc,Elective,0.5
 Walker Inc,Emergency,0.25
 Walker Inc,Urgent,0.25
 Walker LLC,Elective,1.0
-Walker Ltd,Emergency,0.5
 Walker Ltd,Elective,0.5
+Walker Ltd,Emergency,0.5
 "Walker Moore and Rodriguez,",Urgent,1.0
 Walker PLC,Emergency,0.5
 Walker PLC,Elective,0.5
@@ -16430,8 +16430,8 @@ Walker-Jones,Urgent,1.0
 Walker-Liu,Elective,1.0
 Walker-Lozano,Urgent,1.0
 Walker-Martin,Elective,1.0
-Walker-Mason,Elective,0.5
 Walker-Mason,Urgent,0.5
+Walker-Mason,Elective,0.5
 Walker-Maxwell,Emergency,1.0
 Walker-Mitchell,Urgent,1.0
 Walker-Morgan,Emergency,1.0
@@ -16555,13 +16555,13 @@ Wang-Ward,Emergency,1.0
 "Ward Diaz, and Donaldson",Urgent,1.0
 "Ward Flores, and Dixon",Emergency,1.0
 Ward Group,Urgent,1.0
-Ward Inc,Emergency,0.5
 Ward Inc,Urgent,0.5
+Ward Inc,Emergency,0.5
 "Ward Jenkins, and Monroe",Elective,1.0
 "Ward Jones and Leblanc,",Elective,1.0
 Ward Ltd,Urgent,1.0
-Ward PLC,Emergency,0.4
 Ward PLC,Elective,0.4
+Ward PLC,Emergency,0.4
 Ward PLC,Urgent,0.2
 "Ward West and Cruz,",Elective,1.0
 "Ward and Casey, Fuller",Emergency,1.0
@@ -16671,8 +16671,8 @@ Watkins-Strong,Urgent,1.0
 "Watson Baker and Bailey,",Elective,1.0
 "Watson Burgess Williams, and",Emergency,1.0
 "Watson Clark Pace, and",Urgent,1.0
-Watson Group,Elective,0.5
 Watson Group,Urgent,0.5
+Watson Group,Elective,0.5
 Watson Inc,Urgent,0.5
 Watson Inc,Elective,0.5
 Watson LLC,Emergency,1.0
@@ -16901,14 +16901,14 @@ Whitaker-Wright,Urgent,1.0
 "White Fuentes Williams, and",Urgent,1.0
 "White Gonzalez, Bryant and",Urgent,1.0
 White Group,Elective,0.6
-White Group,Urgent,0.2
 White Group,Emergency,0.2
+White Group,Urgent,0.2
 "White Hill and Nash,",Elective,1.0
 White Inc,Urgent,0.6
 White Inc,Emergency,0.4
 "White Joyce Owens, and",Elective,1.0
-White Ltd,Elective,0.5
 White Ltd,Urgent,0.5
+White Ltd,Elective,0.5
 "White Marquez and Mason,",Elective,1.0
 "White Mccullough and Clark,",Emergency,1.0
 "White Mitchell and Hurst,",Urgent,1.0
@@ -16928,8 +16928,8 @@ White PLC,Urgent,1.0
 "White and Aguirre Nguyen,",Urgent,1.0
 "White and Foley, Bryant",Emergency,1.0
 "White and Nelson Green,",Elective,1.0
-White and Sons,Urgent,0.4
 White and Sons,Elective,0.4
+White and Sons,Urgent,0.4
 White and Sons,Emergency,0.2
 "White and Wallace, Anderson",Emergency,1.0
 "White, Alvarez and Fischer",Urgent,1.0
@@ -17004,8 +17004,8 @@ Whitney PLC,Emergency,1.0
 Whitney-Davenport,Elective,1.0
 Whitney-Duarte,Emergency,1.0
 "Wiggins Garcia, Wheeler and",Urgent,1.0
-Wiggins Inc,Urgent,0.5
 Wiggins Inc,Emergency,0.5
+Wiggins Inc,Urgent,0.5
 "Wiggins Vasquez and Edwards,",Elective,1.0
 Wiggins-Anderson,Emergency,1.0
 Wiggins-Archer,Urgent,1.0
@@ -17031,9 +17031,9 @@ Wilkerson LLC,Urgent,1.0
 Wilkerson-Cooper,Elective,1.0
 Wilkerson-Hernandez,Urgent,1.0
 Wilkerson-Hughes,Emergency,1.0
+Wilkins LLC,Elective,0.333
 Wilkins LLC,Urgent,0.333
 Wilkins LLC,Emergency,0.333
-Wilkins LLC,Elective,0.333
 "Wilkins Morgan, Scott and",Elective,1.0
 Wilkins PLC,Urgent,1.0
 "Wilkins, Wade Morse and",Urgent,1.0
@@ -17059,8 +17059,8 @@ Williams Group,Emergency,0.143
 "Williams Howell, and Coleman",Urgent,1.0
 "Williams Hunt, Carey and",Emergency,1.0
 Williams Inc,Urgent,0.5
-Williams Inc,Emergency,0.25
 Williams Inc,Elective,0.25
+Williams Inc,Emergency,0.25
 "Williams Jimenez, and Reynolds",Emergency,1.0
 "Williams Juarez and Bryant,",Urgent,1.0
 "Williams Kelly Mcbride, and",Urgent,1.0
@@ -17089,9 +17089,9 @@ Williams PLC,Emergency,0.273
 "Williams Smith Perez, and",Emergency,1.0
 "Williams Smith, Henderson and",Urgent,1.0
 "Williams Smith, and Mccoy",Urgent,1.0
-Williams Sons and,Emergency,0.333
-Williams Sons and,Urgent,0.333
 Williams Sons and,Elective,0.333
+Williams Sons and,Urgent,0.333
+Williams Sons and,Emergency,0.333
 "Williams Soto Velazquez, and",Urgent,1.0
 "Williams Stephens, Trujillo and",Urgent,1.0
 "Williams Stephenson Curtis, and",Emergency,1.0
@@ -17145,8 +17145,8 @@ Williams-Burton,Urgent,1.0
 Williams-Cabrera,Emergency,1.0
 Williams-Caldwell,Urgent,1.0
 Williams-Campbell,Elective,1.0
-Williams-Carlson,Elective,0.5
 Williams-Carlson,Urgent,0.5
+Williams-Carlson,Elective,0.5
 Williams-Carrillo,Urgent,1.0
 Williams-Chung,Urgent,1.0
 Williams-Clements,Urgent,1.0
@@ -17215,14 +17215,14 @@ Williams-Neal,Urgent,1.0
 Williams-Nichols,Elective,1.0
 Williams-Perez,Emergency,1.0
 Williams-Peterson,Elective,0.333
-Williams-Peterson,Urgent,0.333
 Williams-Peterson,Emergency,0.333
+Williams-Peterson,Urgent,0.333
 Williams-Phillips,Elective,1.0
 Williams-Potter,Elective,1.0
 Williams-Price,Emergency,1.0
 Williams-Riley,Urgent,1.0
-Williams-Robinson,Urgent,0.5
 Williams-Robinson,Elective,0.5
+Williams-Robinson,Urgent,0.5
 Williams-Rodriguez,Urgent,0.5
 Williams-Rodriguez,Elective,0.5
 Williams-Russell,Urgent,1.0
@@ -17259,8 +17259,8 @@ Williamson-Kelley,Elective,1.0
 Williamson-Martin,Urgent,1.0
 Willis LLC,Emergency,1.0
 "Willis Li Hill, and",Urgent,1.0
-Willis Ltd,Urgent,0.5
 Willis Ltd,Emergency,0.5
+Willis Ltd,Urgent,0.5
 Willis PLC,Urgent,1.0
 "Willis Stewart, and Warner",Emergency,1.0
 "Willis Thomas, and Ramos",Emergency,1.0
@@ -17274,8 +17274,8 @@ Willis-Freeman,Emergency,1.0
 Willis-Hudson,Elective,1.0
 Willis-Martinez,Urgent,1.0
 Willis-Mcgee,Emergency,1.0
-Willis-Moore,Emergency,0.5
 Willis-Moore,Urgent,0.5
+Willis-Moore,Emergency,0.5
 Willis-Morrison,Elective,1.0
 Willis-Todd,Elective,1.0
 Willis-Walker,Urgent,1.0
@@ -17283,26 +17283,26 @@ Willis-Williams,Urgent,1.0
 "Wilson Archer, and Jones",Elective,1.0
 "Wilson Bradford Smith, and",Elective,1.0
 "Wilson Cardenas and Reynolds,",Elective,1.0
-Wilson Group,Elective,0.333
 Wilson Group,Urgent,0.333
+Wilson Group,Elective,0.333
 Wilson Group,Emergency,0.333
 Wilson Inc,Emergency,0.667
 Wilson Inc,Elective,0.333
 "Wilson Jones, Lewis and",Emergency,1.0
-Wilson LLC,Elective,0.429
 Wilson LLC,Urgent,0.429
+Wilson LLC,Elective,0.429
 Wilson LLC,Emergency,0.143
 Wilson Ltd,Emergency,0.6
-Wilson Ltd,Elective,0.2
 Wilson Ltd,Urgent,0.2
+Wilson Ltd,Elective,0.2
 "Wilson Mitchell Rodriguez, and",Urgent,1.0
 Wilson PLC,Emergency,0.571
 Wilson PLC,Urgent,0.286
 Wilson PLC,Elective,0.143
 "Wilson Randall Cunningham, and",Elective,1.0
 "Wilson Smith, and Cooley",Elective,1.0
-Wilson Sons and,Emergency,0.5
 Wilson Sons and,Elective,0.5
+Wilson Sons and,Emergency,0.5
 "Wilson Thornton, Olson and",Elective,1.0
 "Wilson Vincent Carney, and",Urgent,1.0
 "Wilson Young, Ballard and",Elective,1.0
@@ -17340,8 +17340,8 @@ Wilson-Fletcher,Urgent,1.0
 Wilson-Foley,Emergency,1.0
 Wilson-Ford,Elective,1.0
 Wilson-Francis,Elective,1.0
-Wilson-Gomez,Emergency,0.5
 Wilson-Gomez,Urgent,0.5
+Wilson-Gomez,Emergency,0.5
 Wilson-Gonzalez,Elective,1.0
 Wilson-Griffin,Elective,1.0
 Wilson-Guzman,Urgent,1.0
@@ -17375,8 +17375,8 @@ Wilson-Torres,Elective,1.0
 Wilson-Walker,Elective,1.0
 Wilson-Ward,Elective,1.0
 Wilson-Watts,Emergency,1.0
-Wilson-White,Urgent,0.5
 Wilson-White,Elective,0.5
+Wilson-White,Urgent,0.5
 Wilson-Wilson,Elective,1.0
 Wilson-Yang,Elective,1.0
 Wilson-Young,Emergency,1.0
@@ -17409,8 +17409,8 @@ Wolf-Benson,Urgent,1.0
 Wolf-Hernandez,Emergency,1.0
 Wolf-Hurst,Urgent,1.0
 Wolf-Romero,Elective,1.0
-Wolfe Inc,Urgent,0.5
 Wolfe Inc,Elective,0.5
+Wolfe Inc,Urgent,0.5
 "Wolfe Johnson, and Alvarez",Elective,1.0
 "Wolfe, Becker and Jones",Elective,1.0
 Wolfe-Fritz,Urgent,1.0
@@ -17436,8 +17436,8 @@ Wong-York,Elective,1.0
 "Wood Burton Lawson, and",Emergency,1.0
 "Wood Carr Adams, and",Urgent,1.0
 "Wood Gomez and Davidson,",Elective,1.0
-Wood Group,Emergency,0.5
 Wood Group,Elective,0.5
+Wood Group,Emergency,0.5
 "Wood Harris, and Wagner",Emergency,1.0
 "Wood Holder, Robbins and",Elective,1.0
 Wood Inc,Emergency,1.0
@@ -17516,15 +17516,15 @@ Wright Inc,Emergency,0.25
 "Wright Kennedy and Fry,",Urgent,1.0
 Wright LLC,Elective,0.6
 Wright LLC,Emergency,0.4
-Wright Ltd,Elective,0.5
 Wright Ltd,Urgent,0.5
+Wright Ltd,Elective,0.5
 "Wright Miller, Sanchez and",Urgent,1.0
 "Wright Morris, and Graves",Elective,1.0
 Wright PLC,Emergency,0.667
 Wright PLC,Elective,0.333
 "Wright Patterson and Brown,",Urgent,1.0
-Wright Sons and,Urgent,0.5
 Wright Sons and,Elective,0.5
+Wright Sons and,Urgent,0.5
 "Wright Vazquez, and Pitts",Urgent,1.0
 "Wright Weber, Harrison and",Urgent,1.0
 "Wright Welch Brooks, and",Elective,1.0
@@ -17616,10 +17616,10 @@ York PLC,Urgent,1.0
 Young Group,Elective,1.0
 Young Inc,Elective,1.0
 "Young Kim Patel, and",Emergency,1.0
-Young LLC,Emergency,0.5
 Young LLC,Urgent,0.5
-Young Ltd,Emergency,0.5
+Young LLC,Emergency,0.5
 Young Ltd,Urgent,0.5
+Young Ltd,Emergency,0.5
 "Young Luna and Cochran,",Elective,1.0
 "Young Martin, Taylor and",Urgent,1.0
 "Young Meyer Griffith, and",Urgent,1.0
@@ -17663,10 +17663,10 @@ Young-Thomas,Urgent,1.0
 Young-Thornton,Elective,1.0
 Young-Villegas,Emergency,1.0
 Young-Webb,Emergency,1.0
-Young-White,Urgent,0.5
 Young-White,Elective,0.5
-Young-Williams,Elective,0.5
+Young-White,Urgent,0.5
 Young-Williams,Urgent,0.5
+Young-Williams,Elective,0.5
 Young-Wilson,Elective,1.0
 Young-Yates,Urgent,1.0
 Yu Inc,Urgent,1.0
@@ -17714,8 +17714,8 @@ Zuniga-White,Urgent,1.0
 "and Adams, Harris Kennedy",Emergency,1.0
 "and Adams, Smith Gonzalez",Urgent,1.0
 "and Adkins Woods, Lowery",Emergency,1.0
-and Aguilar Sons,Emergency,0.5
 and Aguilar Sons,Urgent,0.5
+and Aguilar Sons,Emergency,0.5
 and Aguirre Sons,Emergency,1.0
 "and Alexander Crawford Graham,",Emergency,1.0
 "and Ali Snyder Hughes,",Urgent,1.0
@@ -17739,8 +17739,8 @@ and Alvarez Sons,Emergency,1.0
 "and Andersen, Molina Garcia",Elective,1.0
 "and Anderson Gentry, Esparza",Urgent,1.0
 "and Anderson Kennedy, Owens",Emergency,1.0
-and Anderson Sons,Emergency,0.5
 and Anderson Sons,Urgent,0.5
+and Anderson Sons,Emergency,0.5
 "and Anderson, Berry Franklin",Urgent,1.0
 "and Anderson, Richards Benson",Emergency,1.0
 "and Anderson, Scott Nelson",Elective,1.0
@@ -17986,8 +17986,8 @@ and Chavez Sons,Elective,1.0
 "and Chavez, Strickland Martin",Elective,1.0
 "and Chen Garrett, Hodges",Urgent,1.0
 "and Chen Martinez Williams,",Elective,1.0
-and Chen Sons,Urgent,0.5
 and Chen Sons,Elective,0.5
+and Chen Sons,Urgent,0.5
 "and Cherry Matthews Garcia,",Elective,1.0
 "and Christensen Clark Johnson,",Emergency,1.0
 "and Christian Adkins, Wall",Urgent,1.0
@@ -18049,8 +18049,8 @@ and Craig Sons,Urgent,1.0
 "and Craig, Jones Gomez",Urgent,1.0
 and Crane Sons,Elective,1.0
 "and Crawford Garcia, Acevedo",Elective,1.0
-and Crawford Sons,Urgent,0.5
 and Crawford Sons,Elective,0.5
+and Crawford Sons,Urgent,0.5
 "and Crawford, Davis Riggs",Urgent,1.0
 "and Cross Abbott Dixon,",Elective,1.0
 "and Cross Roberts Clay,",Emergency,1.0
@@ -18165,8 +18165,8 @@ and Elliott Sons,Urgent,1.0
 "and Evans Harris Schultz,",Elective,1.0
 "and Evans Myers Miller,",Emergency,1.0
 "and Evans Ryan Hull,",Urgent,1.0
-and Evans Sons,Emergency,0.5
 and Evans Sons,Elective,0.5
+and Evans Sons,Emergency,0.5
 "and Evans, Carlson Armstrong",Elective,1.0
 "and Evans, Davis Rogers",Emergency,1.0
 "and Evans, Mccann Thomas",Elective,1.0
@@ -18603,8 +18603,8 @@ and Joyce Sons,Urgent,1.0
 "and Kane Moody, Velasquez",Elective,1.0
 "and Kaufman Christian Harris,",Emergency,1.0
 and Keith Sons,Urgent,1.0
-and Keller Sons,Urgent,0.5
 and Keller Sons,Emergency,0.5
+and Keller Sons,Urgent,0.5
 "and Kelley Durham, Stevens",Urgent,1.0
 "and Kelly Jackson, Thomas",Urgent,1.0
 "and Kelly Johnson Nielsen,",Elective,1.0
@@ -18885,8 +18885,8 @@ and Molina Sons,Urgent,1.0
 "and Moore Hunt Mccullough,",Urgent,1.0
 "and Moore Hunter, Jenkins",Elective,1.0
 "and Moore Martinez Owens,",Emergency,1.0
-and Moore Sons,Urgent,0.5
 and Moore Sons,Emergency,0.5
+and Moore Sons,Urgent,0.5
 "and Moore Wiggins, Rubio",Elective,1.0
 "and Moore, Cunningham Clayton",Urgent,1.0
 "and Moore, Davis Olson",Elective,1.0
@@ -19351,8 +19351,8 @@ and Small Sons,Urgent,1.0
 "and Smith Reed, Garcia",Urgent,1.0
 "and Smith Riddle, Reynolds",Elective,1.0
 "and Smith Simmons, Wise",Urgent,1.0
-and Smith Sons,Emergency,0.333
 and Smith Sons,Elective,0.333
+and Smith Sons,Emergency,0.333
 and Smith Sons,Urgent,0.333
 "and Smith Sosa, Miller",Elective,1.0
 "and Smith Thomas, Lee",Urgent,1.0
@@ -19428,8 +19428,8 @@ and Sons Eaton,Emergency,1.0
 and Sons Erickson,Emergency,1.0
 and Sons Evans,Urgent,1.0
 and Sons Everett,Urgent,1.0
-and Sons Fisher,Elective,0.5
 and Sons Fisher,Urgent,0.5
+and Sons Fisher,Elective,0.5
 and Sons Franklin,Emergency,1.0
 and Sons Galloway,Emergency,1.0
 and Sons Garcia,Emergency,1.0
@@ -19454,8 +19454,8 @@ and Sons Hubbard,Elective,1.0
 and Sons Hudson,Elective,1.0
 and Sons Jackson,Elective,1.0
 and Sons Jensen,Emergency,1.0
-and Sons Johnson,Elective,0.5
 and Sons Johnson,Urgent,0.5
+and Sons Johnson,Elective,0.5
 and Sons Jones,Urgent,0.667
 and Sons Jones,Elective,0.333
 and Sons Keith,Urgent,1.0
@@ -19467,8 +19467,8 @@ and Sons Lee,Emergency,1.0
 and Sons Li,Elective,1.0
 and Sons Lloyd,Emergency,1.0
 and Sons Long,Urgent,0.6
-and Sons Long,Emergency,0.2
 and Sons Long,Elective,0.2
+and Sons Long,Emergency,0.2
 and Sons Luna,Elective,1.0
 and Sons Marshall,Emergency,1.0
 and Sons Martinez,Emergency,1.0
@@ -19487,11 +19487,11 @@ and Sons Morgan,Urgent,1.0
 and Sons Morris,Emergency,1.0
 and Sons Munoz,Urgent,1.0
 and Sons Murphy,Emergency,1.0
-and Sons Nelson,Elective,0.5
 and Sons Nelson,Urgent,0.5
+and Sons Nelson,Elective,0.5
 and Sons Nguyen,Emergency,1.0
-and Sons Parker,Emergency,0.5
 and Sons Parker,Urgent,0.5
+and Sons Parker,Emergency,0.5
 and Sons Patel,Urgent,1.0
 and Sons Patton,Urgent,1.0
 and Sons Payne,Urgent,1.0
@@ -19506,8 +19506,8 @@ and Sons Rios,Urgent,1.0
 and Sons Rivas,Urgent,1.0
 and Sons Robbins,Elective,1.0
 and Sons Robinson,Elective,1.0
-and Sons Rodriguez,Urgent,0.5
 and Sons Rodriguez,Elective,0.5
+and Sons Rodriguez,Urgent,0.5
 and Sons Rogers,Emergency,0.667
 and Sons Rogers,Urgent,0.333
 and Sons Sanchez,Emergency,0.667
@@ -19534,8 +19534,8 @@ and Sons Thomas,Emergency,1.0
 and Sons Thompson,Urgent,0.667
 and Sons Thompson,Emergency,0.333
 and Sons Torres,Urgent,0.5
-and Sons Torres,Elective,0.25
 and Sons Torres,Emergency,0.25
+and Sons Torres,Elective,0.25
 and Sons Trujillo,Urgent,1.0
 and Sons Tucker,Emergency,1.0
 and Sons Valentine,Emergency,1.0
@@ -19635,8 +19635,8 @@ and Taylor Sons,Urgent,1.0
 "and Thomas Lopez Lamb,",Urgent,1.0
 "and Thomas Palmer Cooke,",Emergency,1.0
 "and Thomas Sawyer, Watkins",Elective,1.0
-and Thomas Sons,Emergency,0.5
 and Thomas Sons,Elective,0.5
+and Thomas Sons,Emergency,0.5
 "and Thomas Williams Harris,",Elective,1.0
 "and Thomas, Chapman Martinez",Urgent,1.0
 "and Thomas, Smith Bailey",Urgent,1.0

@@ -1,73 +1,48 @@
 constraints:
-  Admission Type:
+  Billing Amount:
     code:
-    - - '.hasPattern(''Admission Type'', ''.*'', lambda x: x == 1.0)'
-      - Valid
-    - - .isComplete('Admission Type')
+    - - '.hasPattern(''Billing Amount'', ''^[0-9]+(\.[0-9]+)?$'', lambda x: x == 1.0)'
+      - Invalid
+    - - .isComplete('Billing Amount')
       - Valid
     assumptions:
-    - Admission Type should be a string and converted to numeric codes.
-  Age:
+    - The 'Billing Amount' column should contain numeric values.
+    - The 'Billing Amount' column should not contain missing values.
+  Date of Admission:
     code:
-    - - '.hasMin(''Age'', lambda x: x >= 0)'
+    - - '.hasPattern(''Date of Admission'', ''^\d{4}-\d{2}-\d{2}$'', lambda x: x ==
+        1.0)'
       - Valid
-    - - .isComplete('Age')
+    - - .isComplete('Date of Admission')
       - Valid
     assumptions:
-    - Age should be a numeric value.
-  Blood Type:
+    - The 'Date of Admission' column should be convertible to datetime format.
+    - The 'Date of Admission' column should not contain missing values.
+  Discharge Date:
     code:
-    - - '.hasPattern(''Blood Type'', ''.*'', lambda x: x == 1.0)'
+    - - '.hasPattern(''Discharge Date'', ''^\d{4}-\d{2}-\d{2}$'', lambda x: x == 1.0)'
       - Valid
-    - - .isComplete('Blood Type')
+    - - .isComplete('Discharge Date')
       - Valid
     assumptions:
-    - Blood Type should be a string and converted to numeric codes.
-  Gender:
+    - The 'Discharge Date' column should be convertible to datetime format.
+    - The 'Discharge Date' column should not contain missing values.
+  Doctor:
+    code: []
+    assumptions:
+    - The 'Doctor' column is dropped and should not affect the task.
+  Name:
+    code: []
+    assumptions:
+    - The 'Name' column is dropped and should not affect the task.
+  Test Results:
+    code: []
+    assumptions:
+    - The 'Test Results' column is dropped and should not affect the task.
+  id:
     code:
-    - - '.hasPattern(''Gender'', ''.*'', lambda x: x == 1.0)'
-      - Valid
-    - - .isComplete('Gender')
+    - - .isUnique('id')
       - Valid
     assumptions:
-    - Gender should be a string and converted to numeric codes.
-  Hospital:
-    code:
-    - - '.hasPattern(''Hospital'', ''.*'', lambda x: x == 1.0)'
-      - Valid
-    - - .isComplete('Hospital')
-      - Valid
-    assumptions:
-    - Hospital should be a string and converted to numeric codes.
-  Insurance Provider:
-    code:
-    - - '.hasPattern(''Insurance Provider'', ''.*'', lambda x: x == 1.0)'
-      - Valid
-    - - .isComplete('Insurance Provider')
-      - Valid
-    assumptions:
-    - Insurance Provider should be a string and converted to numeric codes.
-  Medical Condition:
-    code:
-    - - '.hasPattern(''Medical Condition'', ''.*'', lambda x: x == 1.0)'
-      - Valid
-    - - .isComplete('Medical Condition')
-      - Valid
-    assumptions:
-    - Medical Condition should be a string and converted to numeric codes.
-  Medication:
-    code:
-    - - '.hasPattern(''Medication'', ''.*'', lambda x: x == 1.0)'
-      - Valid
-    - - .isComplete('Medication')
-      - Valid
-    assumptions:
-    - Medication should be a string and converted to numeric codes.
-  Room Number:
-    code:
-    - - '.hasMin(''Room Number'', lambda x: x >= 0)'
-      - Valid
-    - - .isComplete('Room Number')
-      - Valid
-    assumptions:
-    - Room Number should be a numeric value.
+    - The 'id' column should have unique values.
+    - The 'id' column should be present in both train and test datasets.

@@ -6,9 +6,9 @@ constraints:
     - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
       - Valid
     assumptions:
-    - The column 'cb_person_default_on_file' should be complete (NOT NULL).
-    - The column 'cb_person_default_on_file' should have values within ['Y', 'N']
-      (IS IN).
+    - cb_person_default_on_file should be a String type.
+    - cb_person_default_on_file should have values within the set {'Y', 'N'} (IS IN
+      constraint).
   id:
     code:
     - - .isComplete('id')
@@ -16,18 +16,17 @@ constraints:
     - - .isUnique('id')
       - Valid
     assumptions:
-    - The column 'id' should be complete (NOT NULL).
-    - The column 'id' should have unique values (UNIQUE).
-  loan_amnt_cat:
+    - id should be an Integral type.
+    - id should have unique values (UNIQUE constraint).
+  loan_amnt:
     code:
-    - - .isComplete('loan_amnt_cat')
-      - Invalid
-    - - .isContainedIn('loan_amnt_cat', ['Low', 'Med', 'High', 'VHigh'])
-      - Invalid
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isNonNegative('loan_amnt')
+      - Valid
     assumptions:
-    - The column 'loan_amnt_cat' should be complete (NOT NULL).
-    - The column 'loan_amnt_cat' should have values within ['Low', 'Med', 'High',
-      'VHigh'] (IS IN).
+    - loan_amnt should be an Integral type.
+    - loan_amnt should have a value greater than or equal to 0 (IS NON NEGATIVE).
   loan_grade:
     code:
     - - .isComplete('loan_grade')
@@ -35,9 +34,9 @@ constraints:
     - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
       - Valid
     assumptions:
-    - The column 'loan_grade' should be complete (NOT NULL).
-    - The column 'loan_grade' should have values within ['A', 'B', 'C', 'D', 'E',
-      'F', 'G'] (IS IN).
+    - loan_grade should be a String type.
+    - loan_grade should have values within the set {'A', 'B', 'C', 'D', 'E', 'F',
+      'G'} (IS IN constraint).
   loan_int_rate:
     code:
     - - .isComplete('loan_int_rate')
@@ -45,5 +44,14 @@ constraints:
     - - .isNonNegative('loan_int_rate')
       - Valid
     assumptions:
-    - The column 'loan_int_rate' should be complete (NOT NULL).
-    - The column 'loan_int_rate' should have non-negative values (IS NON NEGATIVE).
+    - loan_int_rate should be a Fractional type.
+    - loan_int_rate should have a value greater than or equal to 0 (IS NON NEGATIVE).
+  loan_status:
+    code:
+    - - .isComplete('loan_status')
+      - Valid
+    - - .isContainedIn('loan_status', [0, 1])
+      - Invalid
+    assumptions:
+    - loan_status should be an Integral type.
+    - loan_status should have values within the set {0, 1} (IS IN constraint).

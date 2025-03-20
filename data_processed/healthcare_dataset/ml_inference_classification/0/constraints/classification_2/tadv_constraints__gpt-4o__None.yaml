@@ -1,36 +1,75 @@
 constraints:
+  Admission Type:
+    code:
+    - - .isComplete('Admission Type')
+      - Valid
+    assumptions:
+    - The 'Admission Type' column is used as a feature and should not contain missing
+      values after imputation.
   Age:
     code:
-    - - '.hasMax(''Age'', lambda x: x < 150)'
-      - Valid
     - - .isComplete('Age')
       - Valid
-    - - .isNonNegative('Age')
+    - - .satisfies('Age == Age', 'Age should be numeric without coercion')
       - Valid
     assumptions:
-    - The 'Age' column should be convertible to a numeric type without causing errors.
-    - The 'Age' column is used in a condition that checks if Age is less than 30,
-      implying Age values should be numerical and reasonable (e.g., non-negative).
+    - The 'Age' column should contain numeric values.
+    - The 'Age' column should be able to convert to numeric without coercion errors.
   Billing Amount:
     code:
-    - - '.hasMax(''Billing Amount'', lambda x: x < 1000)'
-      - Invalid
     - - .isComplete('Billing Amount')
       - Valid
-    - - .isNonNegative('Billing Amount')
-      - Invalid
+    - - .satisfies('`Billing Amount` == `Billing Amount`', 'Billing Amount should
+        be numeric without coercion')
+      - Valid
     assumptions:
-    - The 'Billing Amount' column should be convertible to a numeric type without
-      causing errors.
-    - The 'Billing Amount' column is used in a condition that checks if Billing Amount
-      is less than 1000, implying Billing Amount values should be numerical and reasonably
-      positive.
+    - The 'Billing Amount' column should contain numeric values.
+    - The 'Billing Amount' column should be able to convert to numeric without coercion
+      errors.
+  Blood Type:
+    code:
+    - - .isComplete('Blood Type')
+      - Valid
+    assumptions:
+    - The 'Blood Type' column is used as a feature and should not contain missing
+      values after imputation.
+  Gender:
+    code:
+    - - .isComplete('Gender')
+      - Valid
+    assumptions:
+    - The 'Gender' column is used as a feature and should not contain missing values
+      after imputation.
+  Insurance Provider:
+    code:
+    - - .isComplete('Insurance Provider')
+      - Valid
+    assumptions:
+    - The 'Insurance Provider' column is used as a feature and should not contain
+      missing values after imputation.
+  Medical Condition:
+    code:
+    - - .isComplete('Medical Condition')
+      - Valid
+    assumptions:
+    - The 'Medical Condition' column is used as a feature and should not contain missing
+      values after imputation.
+  Medication:
+    code:
+    - - .isComplete('Medication')
+      - Valid
+    assumptions:
+    - The 'Medication' column is used as a feature and should not contain missing
+      values after imputation.
+  Test Results:
+    code: []
+    assumptions:
+    - The 'Test Results' column is the target variable and should exist in the train
+      dataset.
+    - The 'Test Results' column should not contain missing values in the train dataset.
   id:
     code:
     - - .isComplete('id')
       - Valid
-    - - .isUnique('id')
-      - Valid
     assumptions:
-    - The 'id' column should exist in both train and test datasets.
-    - The 'id' column should not contain any missing values.
+    - The 'id' column must exist in both train and test datasets.

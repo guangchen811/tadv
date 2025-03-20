@@ -1,56 +1,51 @@
 constraints:
   cb_person_default_on_file:
     code:
-    - - '.hasCompleteness(''cb_person_default_on_file'', lambda x: x == 1.0)'
+    - - .isComplete('cb_person_default_on_file')
       - Valid
     - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
       - Valid
     assumptions:
-    - The 'cb_person_default_on_file' column should contain only the values ['Y',
-      'N'].
-    - The 'cb_person_default_on_file' column should have a completeness of 1.0 (no
-      missing values).
+    - cb_person_default_on_file should be either 'Y' or 'N' for OrdinalEncoder.
   id:
     code:
-    - - '.hasCompleteness(''id'', lambda x: x == 1.0)'
+    - - .isComplete('id')
       - Valid
     - - .isUnique('id')
       - Valid
-    - - .satisfies('id == id', 'id should contain integral values')
-      - Valid
     assumptions:
-    - The 'id' column should contain unique integral values.
-    - The 'id' column should have a completeness of 1.0 (no missing values).
+    - id should be unique for each record in the test dataset to ensure correct mapping
+      in the submission file.
   loan_amnt:
     code:
-    - - '.hasCompleteness(''loan_amnt'', lambda x: x == 1.0)'
+    - - .isComplete('loan_amnt')
       - Valid
-    - - .isGreaterThan('loan_amnt', 0)
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    - - .satisfies('(loan_amnt >= 0) & (loan_amnt < 5000) OR (loan_amnt >= 5000) &
+        (loan_amnt < 15000) OR (loan_amnt >= 15000) & (loan_amnt < 30000) OR (loan_amnt
+        >= 30000)', 'LoanAmountCategorization')
       - Invalid
-    - - .satisfies('loan_amnt == loan_amnt', 'loan_amnt should contain integral values')
+    - - .satisfies('loan_amnt >= 0', 'NonNegativeInteger')
       - Valid
     assumptions:
-    - The 'loan_amnt' column should contain integral values.
-    - The 'loan_amnt' column should be greater than 0, as bins are defined starting
-      from 0.
-    - The 'loan_amnt' column should have a completeness of 1.0 (no missing values).
+    - loan_amnt should be a non-negative integer as it is used to create loan_amnt_cat
+      categories.
+    - 'loan_amnt should fall within the specified bins: [0, 5000, 15000, 30000, inf]
+      for categorization.'
   loan_grade:
     code:
-    - - '.hasCompleteness(''loan_grade'', lambda x: x == 1.0)'
+    - - .isComplete('loan_grade')
       - Valid
     - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
       - Valid
     assumptions:
-    - The 'loan_grade' column should contain only the values ['A', 'B', 'C', 'D',
-      'E', 'F', 'G'].
-    - The 'loan_grade' column should have a completeness of 1.0 (no missing values).
+    - loan_grade should be one of the known categories (A, B, C, D, E, F, G) for OrdinalEncoder.
   loan_int_rate:
     code:
-    - - '.hasCompleteness(''loan_int_rate'', lambda x: x == 1.0)'
+    - - .isComplete('loan_int_rate')
       - Valid
-    - - .satisfies('loan_int_rate == loan_int_rate', 'loan_int_rate should contain
-        fractional values')
+    - - .satisfies('loan_int_rate >= 0', 'ValidFractionalNumber')
       - Valid
     assumptions:
-    - The 'loan_int_rate' column should contain fractional values.
-    - The 'loan_int_rate' column should have a completeness of 1.0 (no missing values).
+    - loan_int_rate should be a valid fractional number for StandardScaler.

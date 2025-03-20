@@ -3,12 +3,17 @@ constraints:
     code:
     - - .isComplete('cb_person_cred_hist_length')
       - Valid
+    - - .isContainedIn('cb_person_cred_hist_length', [/* predefined set of valid credit
+        history lengths */])
+      - Invalid
     - - .isNonNegative('cb_person_cred_hist_length')
       - Valid
     assumptions:
-    - cb_person_cred_hist_length should be complete, as it is used in a division operation.
-    - cb_person_cred_hist_length should be non-negative, as it is used in a division
-      operation.
+    - The column 'cb_person_cred_hist_length' should be complete, with no missing
+      values.
+    - The values in 'cb_person_cred_hist_length' should be non-negative.
+    - The values in 'cb_person_cred_hist_length' should be contained within a predefined
+      set of valid credit history lengths.
   cb_person_default_on_file:
     code:
     - - .isComplete('cb_person_default_on_file')
@@ -16,18 +21,20 @@ constraints:
     - - .isContainedIn('cb_person_default_on_file', ['N', 'Y'])
       - Valid
     assumptions:
-    - cb_person_default_on_file should be complete, as it is used in categorical transformations.
-    - cb_person_default_on_file should be one of ['N', 'Y'], as these are the expected
-      categories.
+    - The column 'cb_person_default_on_file' should be complete, with no missing values.
+    - The values in 'cb_person_default_on_file' should be either 'N' or 'Y'.
   id:
     code:
     - - .isComplete('id')
       - Valid
+    - - .isNonNegative('id')
+      - Valid
     - - .isUnique('id')
       - Valid
     assumptions:
-    - id should be complete, as it is used to save the submission results.
-    - id should be unique, as it represents distinct entries.
+    - The column 'id' should be complete, with no missing values.
+    - The values in 'id' should be unique.
+    - The values in 'id' should be non-negative.
   loan_amnt:
     code:
     - - .isComplete('loan_amnt')
@@ -35,9 +42,8 @@ constraints:
     - - .isNonNegative('loan_amnt')
       - Valid
     assumptions:
-    - loan_amnt should be complete, as it is used in feature engineering.
-    - loan_amnt should be non-negative, as it is used in calculations involving logarithm
-      and multiplication.
+    - The column 'loan_amnt' should be complete, with no missing values.
+    - The values in 'loan_amnt' should be non-negative.
   loan_grade:
     code:
     - - .isComplete('loan_grade')
@@ -45,9 +51,8 @@ constraints:
     - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
       - Valid
     assumptions:
-    - loan_grade should be complete, as it is used in categorical transformations.
-    - loan_grade should be one of ['A', 'B', 'C', 'D', 'E', 'F', 'G'], as these are
-      the expected categories.
+    - The column 'loan_grade' should be complete, with no missing values.
+    - The values in 'loan_grade' should be one of ['A', 'B', 'C', 'D', 'E', 'F', 'G'].
   loan_int_rate:
     code:
     - - .isComplete('loan_int_rate')
@@ -55,8 +60,8 @@ constraints:
     - - .isNonNegative('loan_int_rate')
       - Valid
     assumptions:
-    - loan_int_rate should be complete, as it is used in feature engineering.
-    - loan_int_rate should be non-negative, as it is used in multiplication with loan_amnt.
+    - The column 'loan_int_rate' should be complete, with no missing values.
+    - The values in 'loan_int_rate' should be non-negative.
   person_home_ownership:
     code:
     - - .isComplete('person_home_ownership')
@@ -64,6 +69,6 @@ constraints:
     - - .isContainedIn('person_home_ownership', ['RENT', 'MORTGAGE', 'OWN', 'OTHER'])
       - Valid
     assumptions:
-    - person_home_ownership should be complete, as it is used in categorical transformations.
-    - person_home_ownership should be one of ['RENT', 'MORTGAGE', 'OWN', 'OTHER'],
-      as these are the expected categories.
+    - The column 'person_home_ownership' should be complete, with no missing values.
+    - The values in 'person_home_ownership' should be one of ['RENT', 'MORTGAGE',
+      'OWN', 'OTHER'].

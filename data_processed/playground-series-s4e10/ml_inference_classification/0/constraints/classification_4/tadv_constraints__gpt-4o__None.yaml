@@ -1,72 +1,91 @@
 constraints:
   cb_person_default_on_file:
     code:
+    - - .isComplete('cb_person_default_on_file')
+      - Valid
     - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
       - Valid
     assumptions:
-    - Values should be one of ['Y', 'N'] as they are used for OneHotEncoding.
+    - 'Must be one of the categories: Y, N'
   id:
     code:
+    - - .isComplete('id')
+      - Valid
     - - .isUnique('id')
       - Valid
     assumptions:
-    - Assumed to be unique for each row since it is used as an identifier.
+    - Should be a unique identifier
   loan_amnt:
     code:
-    - - .isPositive('loan_amnt')
+    - - .isComplete('loan_amnt')
+      - Valid
+    - - .isNonNegative('loan_amnt')
       - Valid
     assumptions:
-    - Assumed to be a positive integer as it represents loan amount.
+    - Should be a non-negative integer
   loan_grade:
     code:
+    - - .isComplete('loan_grade')
+      - Valid
     - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
       - Valid
     assumptions:
-    - Values should be one of ['A', 'B', 'C', 'D', 'E', 'F', 'G'] as they are used
-      for OneHotEncoding.
+    - 'Must be one of the categories: A, B, C, D, E, F, G'
   loan_int_rate:
     code:
+    - - .isComplete('loan_int_rate')
+      - Valid
     - - .isNonNegative('loan_int_rate')
       - Valid
     assumptions:
-    - Assumed to be a non-negative fractional number as it represents interest rate.
+    - Should be a non-negative number
   loan_intent:
     code:
+    - - .isComplete('loan_intent')
+      - Valid
     - - .isContainedIn('loan_intent', ['EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL',
         'DEBTCONSOLIDATION', 'MEDICAL', 'VENTURE'])
       - Valid
     assumptions:
-    - Values should be one of ['EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL', 'DEBTCONSOLIDATION',
-      'MEDICAL', 'VENTURE'] as they are used for OneHotEncoding.
+    - 'Must be one of the categories: EDUCATION, HOMEIMPROVEMENT, PERSONAL, DEBTCONSOLIDATION,
+      MEDICAL, VENTURE'
   loan_percent_income:
     code:
+    - - .isComplete('loan_percent_income')
+      - Valid
     - - .isNonNegative('loan_percent_income')
       - Valid
     assumptions:
-    - Assumed to be a non-negative fractional number as it represents loan percent
-      of income.
+    - Should be a non-negative number
   person_age:
     code:
+    - - .isComplete('person_age')
+      - Valid
     - - .isNonNegative('person_age')
       - Valid
     assumptions:
-    - Assumed to be a non-negative integer as it represents age.
+    - Should be a non-negative integer
   person_emp_length:
     code:
+    - - .isComplete('person_emp_length')
+      - Valid
     - - .isNonNegative('person_emp_length')
       - Valid
     assumptions:
-    - Assumed to be non-negative as it represents employment length.
+    - Should be a non-negative number
   person_home_ownership:
     code:
+    - - .isComplete('person_home_ownership')
+      - Valid
     - - .isContainedIn('person_home_ownership', ['OTHER', 'OWN', 'MORTGAGE', 'RENT'])
       - Valid
     assumptions:
-    - Values should be one of ['OTHER', 'OWN', 'MORTGAGE', 'RENT'] as they are used
-      for OneHotEncoding.
+    - 'Must be one of the categories: OTHER, OWN, MORTGAGE, RENT'
   person_income:
     code:
+    - - .isComplete('person_income')
+      - Valid
     - - .isNonNegative('person_income')
       - Valid
     assumptions:
-    - Assumed to be a non-negative integer as it represents income.
+    - Should be a non-negative integer

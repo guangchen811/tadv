@@ -1,5 +1,6 @@
 loan_int_rate
 loan_grade
 cb_person_default_on_file
-loan_amnt_cat
+loan_amnt
 id
+loan_status

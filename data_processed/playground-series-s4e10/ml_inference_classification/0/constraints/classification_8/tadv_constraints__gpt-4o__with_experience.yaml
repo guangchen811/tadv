@@ -1,105 +1,78 @@
 constraints:
   cb_person_cred_hist_length:
     code:
-    - - '.hasMean(''cb_person_cred_hist_length'', lambda x: x > 0)'
+    - - '.hasMean(''cb_person_cred_hist_length'', lambda x: x is not None)'
       - Valid
-    - - '.hasStandardDeviation(''cb_person_cred_hist_length'', lambda x: x > 0)'
-      - Valid
-    - - .isComplete('cb_person_cred_hist_length')
+    - - '.hasStandardDeviation(''cb_person_cred_hist_length'', lambda x: x is not
+        None)'
       - Valid
     - - .isNonNegative('cb_person_cred_hist_length')
       - Valid
-    - - .satisfies('cb_person_cred_hist_length == cb_person_cred_hist_length', 'Numeric
-        Check')
-      - Valid
     assumptions:
-    - The column should be complete (NOT NULL).
-    - The column should have a numeric value.
-    - The column should have a mean and standard deviation constraint.
-    - The column should be non-negative.
+    - cb_person_cred_hist_length should be a non-negative integer
+    - cb_person_cred_hist_length should have a mean and standard deviation constraint
   cb_person_default_on_file:
     code:
-    - - .isComplete('cb_person_default_on_file')
-      - Valid
     - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
       - Valid
     assumptions:
-    - 'The column should have values within the range: [''Y'', ''N''].'
-    - The column should be complete (NOT NULL).
+    - cb_person_default_on_file should be one of 'Y', 'N'
   id:
     code:
-    - - .isComplete('id')
-      - Valid
     - - .isUnique('id')
       - Valid
     assumptions:
-    - The column should be unique.
-    - The column should be complete (NOT NULL).
+    - id should be unique
   loan_amnt:
     code:
-    - - .isComplete('loan_amnt')
-      - Valid
-    - - .satisfies('loan_amnt >= 0 AND loan_amnt < 5000 OR loan_amnt >= 5000 AND loan_amnt
-        < 15000 OR loan_amnt >= 15000 AND loan_amnt < 30000 OR loan_amnt >= 30000',
-        'loan_amnt_category_consistency')
+    - - '.hasHistogramValues(''loan_amnt'', lambda h: h[''Low''] + h[''Medium''] +
+        h[''High''] + h[''Very High''] == 1.0, binningUdf=lambda x: ''Low'' if x <=
+        5000 else ''Medium'' if x <= 15000 else ''High'' if x <= 30000 else ''Very
+        High'', maxBins=4)'
+      - Invalid
+    - - .isNonNegative('loan_amnt')
       - Valid
     assumptions:
-    - 'The column should have values within the bins: [0, 5000, 15000, 30000, inf]
-      for loan_amnt_category.'
-    - The column should be complete (NOT NULL).
+    - loan_amnt should be a non-negative integer
+    - loan_amnt values should be categorized into 'Low', 'Medium', 'High', 'Very High'
+      based on its value
   loan_amnt_category:
     code:
     - - .isContainedIn('loan_amnt_category', ['Low', 'Medium', 'High', 'Very High'])
       - Invalid
     assumptions:
-    - 'The column should have values within the range: [''Low'', ''Medium'', ''High'',
-      ''Very High''].'
-    - The column is derived from 'loan_amnt' and should be consistent with its binning.
+    - loan_amnt_category should be one of 'Low', 'Medium', 'High', 'Very High'
   loan_grade:
     code:
-    - - .isComplete('loan_grade')
-      - Valid
     - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
       - Valid
     assumptions:
-    - 'The column should have values within the range: [''A'', ''B'', ''C'', ''D'',
-      ''E'', ''F'', ''G''].'
-    - The column should be complete (NOT NULL).
+    - loan_grade should be one of 'A', 'B', 'C', 'D', 'E', 'F', 'G'
   loan_int_rate:
     code:
-    - - '.hasMean(''loan_int_rate'', lambda x: x > 0)'
+    - - '.hasMean(''loan_int_rate'', lambda x: x is not None)'
       - Valid
-    - - '.hasStandardDeviation(''loan_int_rate'', lambda x: x > 0)'
+    - - '.hasStandardDeviation(''loan_int_rate'', lambda x: x is not None)'
       - Valid
-    - - .isComplete('loan_int_rate')
-      - Valid
-    - - .satisfies('loan_int_rate == loan_int_rate', 'Numeric Check')
+    - - .isNonNegative('loan_int_rate')
       - Valid
     assumptions:
-    - The column should be complete (NOT NULL).
-    - The column should have a numeric value.
-    - The column should have a mean and standard deviation constraint.
+    - loan_int_rate should be a non-negative fraction
+    - loan_int_rate should have a mean and standard deviation constraint
   loan_percent_income:
     code:
-    - - '.hasMean(''loan_percent_income'', lambda x: x > 0)'
+    - - '.hasMean(''loan_percent_income'', lambda x: x is not None)'
       - Valid
-    - - '.hasStandardDeviation(''loan_percent_income'', lambda x: x > 0)'
+    - - '.hasStandardDeviation(''loan_percent_income'', lambda x: x is not None)'
       - Valid
-    - - .isComplete('loan_percent_income')
-      - Valid
-    - - .satisfies('loan_percent_income == loan_percent_income', 'Numeric Check')
+    - - .isNonNegative('loan_percent_income')
       - Valid
     assumptions:
-    - The column should be complete (NOT NULL).
-    - The column should have a numeric value.
-    - The column should have a mean and standard deviation constraint.
+    - loan_percent_income should be a non-negative fraction
+    - loan_percent_income should have a mean and standard deviation constraint
   person_home_ownership:
     code:
-    - - .isComplete('person_home_ownership')
-      - Valid
-    - - .isContainedIn('person_home_ownership', ['OTHER', 'OWN', 'MORTGAGE', 'RENT'])
+    - - .isContainedIn('person_home_ownership', ['RENT', 'MORTGAGE', 'OWN', 'OTHER'])
       - Valid
     assumptions:
-    - 'The column should have values within the range: [''OTHER'', ''OWN'', ''MORTGAGE'',
-      ''RENT''].'
-    - The column should be complete (NOT NULL).
+    - person_home_ownership should be one of 'RENT', 'MORTGAGE', 'OWN', 'OTHER'

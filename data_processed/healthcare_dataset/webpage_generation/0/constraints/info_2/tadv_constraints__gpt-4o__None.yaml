@@ -4,4 +4,4 @@ constraints:
     - - .isComplete('Name')
       - Valid
     assumptions:
-    - The 'Name' column must not contain any missing values.
+    - The 'Name' column should not contain missing values.

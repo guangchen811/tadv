@@ -6,9 +6,20 @@ constraints:
     - - .isContainedIn('cb_person_default_on_file', ['N', 'Y'])
       - Valid
     assumptions:
-    - The 'cb_person_default_on_file' column should be complete with no missing values.
-    - 'The ''cb_person_default_on_file'' column should contain only the values: N,
-      Y.'
+    - cb_person_default_on_file should be complete.
+    - cb_person_default_on_file should be one of ['N', 'Y'].
+  id:
+    code:
+    - - .isComplete('id')
+      - Valid
+    - - .isNonNegative('id')
+      - Valid
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - id should be complete.
+    - id should be unique.
+    - id should be non-negative.
   loan_amnt:
     code:
     - - .isComplete('loan_amnt')
@@ -16,8 +27,8 @@ constraints:
     - - .isNonNegative('loan_amnt')
       - Valid
     assumptions:
-    - The 'loan_amnt' column should be complete with no missing values.
-    - The 'loan_amnt' column should be non-negative.
+    - loan_amnt should be complete.
+    - loan_amnt should be non-negative.
   loan_grade:
     code:
     - - .isComplete('loan_grade')
@@ -25,9 +36,8 @@ constraints:
     - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
       - Valid
     assumptions:
-    - The 'loan_grade' column should be complete with no missing values.
-    - 'The ''loan_grade'' column should contain only the values: A, B, C, D, E, F,
-      G.'
+    - loan_grade should be complete.
+    - loan_grade should be one of ['A', 'B', 'C', 'D', 'E', 'F', 'G'].
   loan_int_rate:
     code:
     - - .isComplete('loan_int_rate')
@@ -35,8 +45,8 @@ constraints:
     - - .isNonNegative('loan_int_rate')
       - Valid
     assumptions:
-    - The 'loan_int_rate' column should be complete with no missing values.
-    - The 'loan_int_rate' column should be non-negative.
+    - loan_int_rate should be complete.
+    - loan_int_rate should be non-negative.
   loan_intent:
     code:
     - - .isComplete('loan_intent')
@@ -45,27 +55,33 @@ constraints:
         'DEBTCONSOLIDATION', 'HOMEIMPROVEMENT'])
       - Valid
     assumptions:
-    - The 'loan_intent' column should be complete with no missing values.
-    - 'The ''loan_intent'' column should contain only the values: EDUCATION, MEDICAL,
-      PERSONAL, VENTURE, DEBTCONSOLIDATION, HOMEIMPROVEMENT.'
+    - loan_intent should be complete.
+    - loan_intent should be one of ['EDUCATION', 'MEDICAL', 'PERSONAL', 'VENTURE',
+      'DEBTCONSOLIDATION', 'HOMEIMPROVEMENT'].
   loan_percent_income:
     code:
+    - - '.hasMax(''loan_percent_income'', lambda x: x <= 100)'
+      - Valid
     - - .isComplete('loan_percent_income')
       - Valid
     - - .isNonNegative('loan_percent_income')
       - Valid
     assumptions:
-    - The 'loan_percent_income' column should be complete with no missing values.
-    - The 'loan_percent_income' column should be non-negative.
+    - loan_percent_income should be complete.
+    - loan_percent_income should be non-negative.
+    - loan_percent_income should be a realistic percentage (e.g., <= 100).
   person_age:
     code:
+    - - '.hasMin(''person_age'', lambda x: x >= 18)'
+      - Valid
     - - .isComplete('person_age')
       - Valid
     - - .isNonNegative('person_age')
       - Valid
     assumptions:
-    - The 'person_age' column should be complete with no missing values.
-    - The 'person_age' column should be non-negative.
+    - person_age should be complete.
+    - person_age should be non-negative.
+    - person_age should contain realistic adult ages (e.g., >= 18).
   person_emp_length:
     code:
     - - .isComplete('person_emp_length')
@@ -73,8 +89,8 @@ constraints:
     - - .isNonNegative('person_emp_length')
       - Valid
     assumptions:
-    - The 'person_emp_length' column should be complete with no missing values.
-    - The 'person_emp_length' column should be non-negative.
+    - person_emp_length should be complete.
+    - person_emp_length should be non-negative.
   person_home_ownership:
     code:
     - - .isComplete('person_home_ownership')
@@ -82,9 +98,8 @@ constraints:
     - - .isContainedIn('person_home_ownership', ['RENT', 'MORTGAGE', 'OWN', 'OTHER'])
       - Valid
     assumptions:
-    - The 'person_home_ownership' column should be complete with no missing values.
-    - 'The ''person_home_ownership'' column should contain only the values: RENT,
-      MORTGAGE, OWN, OTHER.'
+    - person_home_ownership should be complete.
+    - person_home_ownership should be one of ['RENT', 'MORTGAGE', 'OWN', 'OTHER'].
   person_income:
     code:
     - - .isComplete('person_income')
@@ -92,5 +107,5 @@ constraints:
     - - .isNonNegative('person_income')
       - Valid
     assumptions:
-    - The 'person_income' column should be complete with no missing values.
-    - The 'person_income' column should be non-negative.
+    - person_income should be complete.
+    - person_income should be non-negative.

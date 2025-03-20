@@ -1,3 +1,4 @@
+log_loan_amnt
 loan_amnt
 loan_int_rate
 loan_grade

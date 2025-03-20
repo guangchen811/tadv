@@ -1,14 +1,15 @@
 constraints:
   cb_person_cred_hist_length:
     code:
-    - - .isComplete('cb_person_cred_hist_length')
+    - - '.hasMin(''cb_person_cred_hist_length'', lambda x: x >= 0)'
       - Valid
     - - .isNonNegative('cb_person_cred_hist_length')
       - Valid
     assumptions:
-    - cb_person_cred_hist_length should be an Integral type.
-    - cb_person_cred_hist_length should be complete (NOT NULL).
-    - cb_person_cred_hist_length should be non-negative.
+    - cb_person_cred_hist_length should be a non-negative integer
+    - cb_person_cred_hist_length should have a minimum value constraint based on reasonable
+      credit history length assumptions (e.g., minimum credit history length is 0
+      years)
   cb_person_default_on_file:
     code:
     - - .isComplete('cb_person_default_on_file')
@@ -16,19 +17,18 @@ constraints:
     - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
       - Valid
     assumptions:
-    - cb_person_default_on_file should have values within ['Y', 'N'].
-    - cb_person_default_on_file should be a String type.
-    - cb_person_default_on_file should be complete (NOT NULL).
+    - cb_person_default_on_file should have values within {'Y', 'N'}
+    - cb_person_default_on_file should be non-null
   loan_amnt:
     code:
-    - - .isComplete('loan_amnt')
+    - - '.hasMin(''loan_amnt'', lambda x: x > 0)'
       - Valid
     - - .isNonNegative('loan_amnt')
       - Valid
     assumptions:
-    - loan_amnt should be an Integral type.
-    - loan_amnt should be complete (NOT NULL).
-    - loan_amnt should be non-negative.
+    - loan_amnt should be a non-negative integer
+    - loan_amnt should have a minimum value constraint based on reasonable loan amount
+      assumptions (e.g., minimum loan amount is greater than 0)
   loan_grade:
     code:
     - - .isComplete('loan_grade')
@@ -36,19 +36,18 @@ constraints:
     - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
       - Valid
     assumptions:
-    - loan_grade should have values within ['A', 'B', 'C', 'D', 'E', 'F', 'G'].
-    - loan_grade should be a String type.
-    - loan_grade should be complete (NOT NULL).
+    - loan_grade should have values within {'A', 'B', 'C', 'D', 'E', 'F', 'G'}
+    - loan_grade should be non-null
   loan_int_rate:
     code:
-    - - .isComplete('loan_int_rate')
+    - - '.hasMin(''loan_int_rate'', lambda x: x > 0)'
       - Valid
     - - .isNonNegative('loan_int_rate')
       - Valid
     assumptions:
-    - loan_int_rate should be a Fractional type.
-    - loan_int_rate should be complete (NOT NULL).
-    - loan_int_rate should be non-negative.
+    - loan_int_rate should be a non-negative number
+    - loan_int_rate should have a minimum value constraint based on reasonable interest
+      rate assumptions (e.g., minimum interest rate is greater than 0)
   loan_intent:
     code:
     - - .isComplete('loan_intent')
@@ -57,40 +56,48 @@ constraints:
         'DEBTCONSOLIDATION', 'MEDICAL', 'VENTURE'])
       - Valid
     assumptions:
-    - loan_intent should have values within ['EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL',
-      'DEBTCONSOLIDATION', 'MEDICAL', 'VENTURE'].
-    - loan_intent should be a String type.
-    - loan_intent should be complete (NOT NULL).
+    - loan_intent should have values within {'EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL',
+      'DEBTCONSOLIDATION', 'MEDICAL', 'VENTURE'}
+    - loan_intent should be non-null
   loan_percent_income:
     code:
-    - - .isComplete('loan_percent_income')
-      - Valid
+    - - '.hasMin(''loan_percent_income'', lambda x: x > 0)'
+      - Invalid
     - - .isNonNegative('loan_percent_income')
       - Valid
     assumptions:
-    - loan_percent_income should be a Fractional type.
-    - loan_percent_income should be complete (NOT NULL).
-    - loan_percent_income should be non-negative.
+    - loan_percent_income should be a non-negative number
+    - loan_percent_income should have a minimum value constraint based on reasonable
+      percent income assumptions (e.g., minimum percent income is greater than 0)
+  loan_status:
+    code:
+    - - .isComplete('loan_status')
+      - Valid
+    - - .isContainedIn('loan_status', [0, 1])
+      - Invalid
+    assumptions:
+    - loan_status should have values within {0, 1}
+    - loan_status should be non-null
   person_age:
     code:
-    - - .isComplete('person_age')
+    - - '.hasMin(''person_age'', lambda x: x >= 0)'
       - Valid
     - - .isNonNegative('person_age')
       - Valid
     assumptions:
-    - person_age should be an Integral type.
-    - person_age should be complete (NOT NULL).
-    - person_age should be non-negative.
+    - person_age should be a non-negative integer
+    - person_age should have a minimum value constraint based on reasonable age assumptions
+      (e.g., minimum age is 0)
   person_emp_length:
     code:
-    - - .isComplete('person_emp_length')
+    - - '.hasMin(''person_emp_length'', lambda x: x >= 0)'
       - Valid
     - - .isNonNegative('person_emp_length')
       - Valid
     assumptions:
-    - person_emp_length should be a Fractional type.
-    - person_emp_length should be complete (NOT NULL).
-    - person_emp_length should be non-negative.
+    - person_emp_length should be a non-negative number
+    - person_emp_length should have a minimum value constraint based on reasonable
+      employment length assumptions (e.g., minimum employment length is 0 years)
   person_home_ownership:
     code:
     - - .isComplete('person_home_ownership')
@@ -98,7 +105,6 @@ constraints:
     - - .isContainedIn('person_home_ownership', ['OTHER', 'OWN', 'MORTGAGE', 'RENT'])
       - Valid
     assumptions:
-    - person_home_ownership should have values within ['OTHER', 'OWN', 'MORTGAGE',
-      'RENT'].
-    - person_home_ownership should be a String type.
-    - person_home_ownership should be complete (NOT NULL).
+    - person_home_ownership should have values within {'OTHER', 'OWN', 'MORTGAGE',
+      'RENT'}
+    - person_home_ownership should be non-null

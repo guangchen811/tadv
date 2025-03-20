@@ -6,19 +6,19 @@ constraints:
     - - .isNonNegative('cb_person_cred_hist_length')
       - Valid
     assumptions:
-    - CB person credit history length should be complete.
-    - CB person credit history length should be non-negative.
-    - CB person credit history length should be within the valid range of credit history
-      lengths.
+    - The 'cb_person_cred_hist_length' column should be complete.
+    - The 'cb_person_cred_hist_length' values should be non-negative.
+    - The 'cb_person_cred_hist_length' should have a specific set of allowed values,
+      ensuring data consistency.
   cb_person_default_on_file:
     code:
     - - .isComplete('cb_person_default_on_file')
       - Valid
-    - - .isContainedIn('cb_person_default_on_file', ['N', 'Y'])
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
       - Valid
     assumptions:
-    - CB person default on file should be complete.
-    - CB person default on file should be one of ['N', 'Y'].
+    - The 'cb_person_default_on_file' column should be complete.
+    - The 'cb_person_default_on_file' values should be either 'Y' or 'N'.
   id:
     code:
     - - .isComplete('id')
@@ -28,21 +28,41 @@ constraints:
     - - .isUnique('id')
       - Valid
     assumptions:
-    - ID should be complete.
-    - ID should be non-negative.
-    - ID should be unique.
+    - The 'id' column should be complete.
+    - The 'id' values should be unique.
+    - The 'id' values should be non-negative.
   loan_amnt:
     code:
-    - - .hasPattern('loan_amnt_category', 'Low|Medium|High|Very High')
-      - Invalid
     - - .isComplete('loan_amnt')
       - Valid
     - - .isNonNegative('loan_amnt')
       - Valid
+    - - .satisfies('loan_amnt >= 0 AND loan_amnt <= 5000 OR loan_amnt > 5000 AND loan_amnt
+        <= 15000 OR loan_amnt > 15000 AND loan_amnt <= 30000 OR loan_amnt > 30000',
+        'loan_amnt range')
+      - Valid
     assumptions:
-    - Loan amount should be complete.
-    - Loan amount should be non-negative.
-    - Loan amount should be categorized into 'Low', 'Medium', 'High', or 'Very High'.
+    - The 'loan_amnt' column should be complete.
+    - The 'loan_amnt' values should be non-negative.
+    - 'The ''loan_amnt'' values should fall within specific ranges: 0-5000, 5000-15000,
+      15000-30000, and above 30000 for categorization.'
+  loan_amnt_category:
+    code:
+    - - .satisfies('loan_amnt_category == "High" WHERE loan_amnt > 15000 AND loan_amnt
+        <= 30000', 'loan_amnt_category High')
+      - Invalid
+    - - .satisfies('loan_amnt_category == "Low" WHERE loan_amnt >= 0 AND loan_amnt
+        <= 5000', 'loan_amnt_category Low')
+      - Invalid
+    - - .satisfies('loan_amnt_category == "Medium" WHERE loan_amnt > 5000 AND loan_amnt
+        <= 15000', 'loan_amnt_category Medium')
+      - Invalid
+    - - .satisfies('loan_amnt_category == "Very High" WHERE loan_amnt > 30000', 'loan_amnt_category
+        Very High')
+      - Invalid
+    assumptions:
+    - The 'loan_amnt_category' is derived from 'loan_amnt', ensuring categorization
+      aligns with loan amount ranges.
   loan_grade:
     code:
     - - .isComplete('loan_grade')
@@ -50,8 +70,9 @@ constraints:
     - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
       - Valid
     assumptions:
-    - Loan grade should be complete.
-    - Loan grade should be one of ['A', 'B', 'C', 'D', 'E', 'F', 'G'].
+    - The 'loan_grade' column should be complete.
+    - 'The ''loan_grade'' values should be one of the following: A, B, C, D, E, F,
+      G.'
   loan_int_rate:
     code:
     - - .isComplete('loan_int_rate')
@@ -59,8 +80,8 @@ constraints:
     - - .isNonNegative('loan_int_rate')
       - Valid
     assumptions:
-    - Loan interest rate should be complete.
-    - Loan interest rate should be non-negative.
+    - The 'loan_int_rate' column should be complete.
+    - The 'loan_int_rate' values should be non-negative.
   loan_percent_income:
     code:
     - - .isComplete('loan_percent_income')
@@ -68,8 +89,8 @@ constraints:
     - - .isNonNegative('loan_percent_income')
       - Valid
     assumptions:
-    - Loan percent of income should be complete.
-    - Loan percent of income should be non-negative.
+    - The 'loan_percent_income' column should be complete.
+    - The 'loan_percent_income' values should be non-negative.
   person_home_ownership:
     code:
     - - .isComplete('person_home_ownership')
@@ -77,5 +98,6 @@ constraints:
     - - .isContainedIn('person_home_ownership', ['RENT', 'MORTGAGE', 'OWN', 'OTHER'])
       - Valid
     assumptions:
-    - Person home ownership status should be complete.
-    - Person home ownership status should be one of ['RENT', 'MORTGAGE', 'OWN', 'OTHER'].
+    - The 'person_home_ownership' column should be complete.
+    - 'The ''person_home_ownership'' values should be one of the following: RENT,
+      MORTGAGE, OWN, OTHER.'

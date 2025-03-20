@@ -1,59 +1,45 @@
 constraints:
-  Billing Amount:
-    code:
-    - - .isComplete('billing_amount')
-      - Invalid
-    - - .isNonNegative('billing_amount')
-      - Invalid
-    assumptions:
-    - Billing Amount should be complete, as it is used for regression prediction.
-    - Billing Amount should be numeric and non-negative, as it represents a monetary
-      value.
-  Date of Admission:
+  admission_dt:
     code:
     - - .isComplete('admission_dt')
       - Invalid
-    - - .satisfies('admission_dt IS NOT NULL', 'Valid date format for admission_dt')
+    - - '.satisfies(''admission_dt IS NOT NULL'', ''admission_dt_validity'', lambda
+        x: x == 1.0)'
       - Invalid
     assumptions:
-    - Date of Admission should be complete, as it is used to calculate length_of_stay.
-    - Date of Admission should be a valid date format to ensure accurate calculations.
-  Discharge Date:
+    - The column 'admission_dt' should be correctly parsed as datetime objects, meaning
+      all values should be valid dates.
+    - The column 'admission_dt' should be complete, meaning there should be no missing
+      values.
+  billing_amount:
+    code:
+    - - .isComplete('billing_amount')
+      - Invalid
+    assumptions:
+    - The column 'billing_amount' should be complete, meaning there should be no missing
+      values.
+  discharge_dt:
     code:
     - - .isComplete('discharge_dt')
       - Invalid
-    - - .satisfies('discharge_dt IS NOT NULL', 'Valid date format for discharge_dt')
+    - - '.satisfies(''discharge_dt IS NOT NULL'', ''discharge_dt_validity'', lambda
+        x: x == 1.0)'
       - Invalid
     assumptions:
-    - Discharge Date should be complete, as it is used to calculate length_of_stay.
-    - Discharge Date should be a valid date format to ensure accurate calculations.
-  Doctor:
-    code:
-    - - .isComplete('Doctor')
-      - Valid
-    assumptions:
-    - Doctor should be complete if present, as it might be used for further analysis.
-  Name:
-    code:
-    - - .isComplete('Name')
-      - Valid
-    assumptions:
-    - Name should be complete if present, as it might be used for further analysis.
-  Test Results:
-    code:
-    - - .isComplete('Test Results')
-      - Valid
-    - - .isContainedIn('Test Results', ['Abnormal', 'Normal', 'Inconclusive'])
-      - Valid
-    assumptions:
-    - Test Results should be complete if present, as it is considered for processing.
-    - 'Test Results should only contain values: Abnormal, Normal, Inconclusive.'
+    - The column 'discharge_dt' should be correctly parsed as datetime objects, meaning
+      all values should be valid dates.
+    - The column 'discharge_dt' should be complete, meaning there should be no missing
+      values.
   id:
     code:
     - - .isComplete('id')
       - Valid
+    - - .isNonNegative('id')
+      - Valid
     - - .isUnique('id')
       - Valid
     assumptions:
-    - id should be complete, as it is used for identifying test samples.
-    - id should be unique to ensure each sample is distinct.
+    - The column 'id' should be complete, meaning there should be no missing values.
+    - The column 'id' should contain unique values to serve as a proper identifier
+      for each record.
+    - The column 'id' should contain non-negative integer values.

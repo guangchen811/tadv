@@ -4,29 +4,33 @@ constraints:
     - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
       - Valid
     assumptions:
-    - Should contain only 'Y' or 'N'
+    - cb_person_default_on_file should be one of the distinct values ['Y', 'N'] as
+      it is one-hot encoded for categorical processing.
   id:
     code:
     - - .isUnique('id')
       - Valid
     assumptions:
-    - Should contain unique values
+    - id should be a unique integer value for each row to correctly map predictions
+      with the test data in the submission file.
   loan_amnt:
     code:
     - - .isNonNegative('loan_amnt')
       - Valid
     assumptions:
-    - Values should be greater than or equal to 0
+    - loan_amnt should be a non-negative integer because it is used with np.log1p,
+      which expects non-negative values.
   loan_grade:
     code:
     - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
       - Valid
     assumptions:
-    - 'Should contain only the categories: ''A'', ''B'', ''C'', ''D'', ''E'', ''F'',
-      ''G'''
+    - loan_grade should be one of the distinct values ['A', 'B', 'C', 'D', 'E', 'F',
+      'G'] as it is one-hot encoded for categorical processing.
   loan_int_rate:
     code:
-    - - .isComplete('loan_int_rate')
+    - - .isNonNegative('loan_int_rate')
       - Valid
     assumptions:
-    - Should contain valid numerical values suitable for scaling
+    - loan_int_rate should be a non-negative fractional number, as it is used as a
+      numerical feature in the model.

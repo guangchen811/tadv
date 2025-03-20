@@ -3,33 +3,37 @@ constraints:
     code:
     - - .isComplete('Age')
       - Valid
-    - - .satisfies('Age >= 0', 'Age should be numeric and non-negative')
+    - - .satisfies('Age >= 0', 'Age should be non-negative')
       - Valid
     assumptions:
-    - Column 'Age' should be treated as numeric.
-    - Missing values in 'Age' should be filled with 0.
+    - Must be a numeric value as it is converted to numeric using pd.to_numeric.
+    - Missing values are filled with 0.
   Room Number:
     code:
     - - .isComplete('Room Number')
       - Valid
-    - - .satisfies('Room Number >= 0', 'Room Number should be numeric and non-negative')
+    - - .satisfies('Room Number >= 0', 'Room Number should be non-negative')
       - Invalid
     assumptions:
-    - Column 'Room Number' should be treated as numeric.
-    - Missing values in 'Room Number' should be filled with 0.
+    - Must be a numeric value as it is converted to numeric using pd.to_numeric.
+    - Missing values are filled with 0.
   billing_amount:
     code:
     - - .isComplete('billing_amount')
       - Invalid
+    - - .satisfies('billing_amount >= 0', 'Billing Amount should be non-negative')
+      - Invalid
     assumptions:
-    - Column 'billing_amount' should be present and used as the target variable for
-      regression.
+    - Must be a numeric value since it is the target for regression.
   id:
     code:
     - - .isComplete('id')
       - Valid
     - - .isUnique('id')
       - Valid
+    - - .satisfies('id >= 0', 'ID should be non-negative')
+      - Valid
     assumptions:
-    - Column 'id' should be present and is used to identify the rows in the dataset.
-    - Column 'id' should not be part of the features used for training the model.
+    - Must be a unique identifier since it is used to match test predictions with
+      test data.
+    - Must be integral as it is treated as an ID column.

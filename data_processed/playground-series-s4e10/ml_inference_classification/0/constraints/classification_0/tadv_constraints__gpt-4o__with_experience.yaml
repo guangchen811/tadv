@@ -1,17 +1,13 @@
 constraints:
   cb_person_default_on_file:
     code:
-    - - '.hasDistinctness([''cb_person_default_on_file''], lambda x: x < 1.0)'
-      - Valid
     - - .isComplete('cb_person_default_on_file')
       - Valid
     - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
       - Valid
     assumptions:
-    - The column 'cb_person_default_on_file' should be complete (NOT NULL).
-    - The column 'cb_person_default_on_file' should have values within ['Y', 'N'].
-    - The column 'cb_person_default_on_file' should primarily have values within this
-      range (IS IN constraint for most values).
+    - cb_person_default_on_file is complete (not null)
+    - cb_person_default_on_file should be one of ['Y', 'N']
   id:
     code:
     - - .isComplete('id')
@@ -19,52 +15,39 @@ constraints:
     - - .isUnique('id')
       - Valid
     assumptions:
-    - The column 'id' should be complete (NOT NULL).
-    - The column 'id' should have unique values.
+    - id is complete (not null)
+    - id should be unique
   loan_amnt:
     code:
-    - - '.hasMax(''loan_amnt'', lambda x: x <= 50000)'
-      - Valid
     - - .isComplete('loan_amnt')
       - Valid
     - - .isNonNegative('loan_amnt')
       - Valid
     assumptions:
-    - The column 'loan_amnt' should be complete (NOT NULL).
-    - The column 'loan_amnt' should have a minimum value constraint, as it is likely
-      non-negative.
-    - The column 'loan_amnt' should have a maximum value constraint based on observed
-      data.
+    - loan_amnt should be non-negative
+    - loan_amnt is complete (not null)
   loan_grade:
     code:
-    - - '.hasDistinctness([''loan_grade''], lambda x: x < 1.0)'
-      - Valid
     - - .isComplete('loan_grade')
       - Valid
     - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
       - Valid
     assumptions:
-    - The column 'loan_grade' should be complete (NOT NULL).
-    - The column 'loan_grade' should have values within ['A', 'B', 'C', 'D', 'E',
-      'F', 'G'].
-    - The column 'loan_grade' should primarily have values within this range (IS IN
-      constraint for most values).
+    - loan_grade is complete (not null)
+    - loan_grade should be one of ['A', 'B', 'C', 'D', 'E', 'F', 'G']
   loan_int_rate:
     code:
-    - - '.hasMax(''loan_int_rate'', lambda x: x <= 0.3)'
-      - Invalid
-    - - '.hasMean(''loan_int_rate'', lambda x: 0.05 <= x <= 0.2)'
-      - Invalid
-    - - '.hasStandardDeviation(''loan_int_rate'', lambda x: x <= 0.05)'
-      - Invalid
     - - .isComplete('loan_int_rate')
       - Valid
     - - .isNonNegative('loan_int_rate')
       - Valid
     assumptions:
-    - The column 'loan_int_rate' should be complete (NOT NULL).
-    - The column 'loan_int_rate' should have a minimum value constraint, as it is
-      likely non-negative.
-    - The column 'loan_int_rate' should have a maximum value constraint based on observed
-      data.
-    - The column 'loan_int_rate' should have mean and standard deviation constraints.
+    - loan_int_rate is complete (not null)
+    - loan_int_rate should be non-negative
+  log_loan_amnt:
+    code:
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - Derived from 'loan_amnt' using log transformation, so 'loan_amnt' should be
+      non-negative

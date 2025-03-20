@@ -6,8 +6,8 @@ constraints:
     - - .isNonNegative('cb_person_cred_hist_length')
       - Valid
     assumptions:
-    - cb_person_cred_hist_length should be complete (NOT NULL).
-    - cb_person_cred_hist_length should be non-negative.
+    - IS NON NEGATIVE
+    - NOT NULL
   cb_person_default_on_file:
     code:
     - - .isComplete('cb_person_default_on_file')
@@ -15,8 +15,8 @@ constraints:
     - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
       - Valid
     assumptions:
-    - cb_person_default_on_file should be complete (NOT NULL).
-    - cb_person_default_on_file should have values within ['Y', 'N'].
+    - IS IN ['Y', 'N']
+    - NOT NULL
   id:
     code:
     - - .isComplete('id')
@@ -24,8 +24,8 @@ constraints:
     - - .isUnique('id')
       - Valid
     assumptions:
-    - id should be complete (NOT NULL).
-    - id should be unique.
+    - UNIQUE
+    - NOT NULL
   loan_amnt:
     code:
     - - .isComplete('loan_amnt')
@@ -33,8 +33,8 @@ constraints:
     - - .isNonNegative('loan_amnt')
       - Valid
     assumptions:
-    - loan_amnt should be complete (NOT NULL).
-    - loan_amnt should be non-negative.
+    - IS NON NEGATIVE
+    - NOT NULL
   loan_grade:
     code:
     - - .isComplete('loan_grade')
@@ -42,8 +42,8 @@ constraints:
     - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
       - Valid
     assumptions:
-    - loan_grade should be complete (NOT NULL).
-    - loan_grade should have values within ['A', 'B', 'C', 'D', 'E', 'F', 'G'].
+    - IS IN ['A', 'B', 'C', 'D', 'E', 'F', 'G'] for most values
+    - NOT NULL
   loan_int_rate:
     code:
     - - .isComplete('loan_int_rate')
@@ -51,8 +51,8 @@ constraints:
     - - .isNonNegative('loan_int_rate')
       - Valid
     assumptions:
-    - loan_int_rate should be complete (NOT NULL).
-    - loan_int_rate should be non-negative.
+    - IS NON NEGATIVE
+    - NOT NULL
   loan_intent:
     code:
     - - .isComplete('loan_intent')
@@ -61,9 +61,9 @@ constraints:
         'DEBTCONSOLIDATION', 'MEDICAL', 'VENTURE'])
       - Valid
     assumptions:
-    - loan_intent should be complete (NOT NULL).
-    - loan_intent should have values within ['EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL',
-      'DEBTCONSOLIDATION', 'MEDICAL', 'VENTURE'].
+    - IS IN ['EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL', 'DEBTCONSOLIDATION', 'MEDICAL',
+      'VENTURE'] for most values
+    - NOT NULL
   loan_percent_income:
     code:
     - - .isComplete('loan_percent_income')
@@ -71,20 +71,17 @@ constraints:
     - - .isNonNegative('loan_percent_income')
       - Valid
     assumptions:
-    - loan_percent_income should be complete (NOT NULL).
-    - loan_percent_income should be non-negative.
+    - IS NON NEGATIVE
+    - NOT NULL
   person_age:
     code:
-    - - '.hasMin(''person_age'', lambda x: x >= 18)'
-      - Valid
     - - .isComplete('person_age')
       - Valid
     - - .isNonNegative('person_age')
       - Valid
     assumptions:
-    - person_age should be complete (NOT NULL).
-    - person_age should be non-negative.
-    - person_age should have a reasonable minimum value (e.g., 18).
+    - IS NON NEGATIVE
+    - NOT NULL
   person_emp_length:
     code:
     - - .isComplete('person_emp_length')
@@ -92,8 +89,8 @@ constraints:
     - - .isNonNegative('person_emp_length')
       - Valid
     assumptions:
-    - person_emp_length should be complete (NOT NULL).
-    - person_emp_length should be non-negative.
+    - IS NON NEGATIVE
+    - NOT NULL
   person_home_ownership:
     code:
     - - .isComplete('person_home_ownership')
@@ -101,9 +98,8 @@ constraints:
     - - .isContainedIn('person_home_ownership', ['OTHER', 'OWN', 'MORTGAGE', 'RENT'])
       - Valid
     assumptions:
-    - person_home_ownership should be complete (NOT NULL).
-    - person_home_ownership should have values within ['OTHER', 'OWN', 'MORTGAGE',
-      'RENT'].
+    - IS IN ['OTHER', 'OWN', 'MORTGAGE', 'RENT'] for most values
+    - NOT NULL
   person_income:
     code:
     - - .isComplete('person_income')
@@ -111,5 +107,5 @@ constraints:
     - - .isNonNegative('person_income')
       - Valid
     assumptions:
-    - person_income should be complete (NOT NULL).
-    - person_income should be non-negative.
+    - IS NON NEGATIVE
+    - NOT NULL

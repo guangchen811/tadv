@@ -1,51 +1,43 @@
 constraints:
   cb_person_cred_hist_length:
     code:
-    - - .isComplete('cb_person_cred_hist_length')
-      - Valid
     - - .isNonNegative('cb_person_cred_hist_length')
       - Valid
     assumptions:
-    - cb_person_cred_hist_length should be complete and non-negative
+    - cb_person_cred_hist_length should be non-negative as it is used in a division
+      operation.
   cb_person_default_on_file:
     code:
-    - - .isComplete('cb_person_default_on_file')
-      - Valid
-    - - .isContainedIn('cb_person_default_on_file', ['N', 'Y'])
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
       - Valid
     assumptions:
-    - cb_person_default_on_file should be complete and contained in ['N', 'Y']
+    - cb_person_default_on_file should contain values 'Y' or 'N' as it's used in one-hot
+      encoding.
   loan_amnt:
     code:
-    - - .isComplete('loan_amnt')
-      - Valid
-    - - .isNonNegative('loan_amnt')
+    - - .isPositive('loan_amnt')
       - Valid
     assumptions:
-    - loan_amnt should be complete and non-negative
+    - loan_amnt should be greater than 0 since it's used in calculations such as logarithm
+      and division.
   loan_grade:
     code:
-    - - .isComplete('loan_grade')
-      - Valid
     - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
       - Valid
     assumptions:
-    - loan_grade should be complete and contained in ['A', 'B', 'C', 'D', 'E', 'F',
-      'G']
+    - loan_grade should contain values from the set ['A', 'B', 'C', 'D', 'E', 'F',
+      'G'] as it is checked for membership in ['A', 'B'].
   loan_int_rate:
     code:
-    - - .isComplete('loan_int_rate')
-      - Valid
     - - .isNonNegative('loan_int_rate')
       - Valid
     assumptions:
-    - loan_int_rate should be complete and non-negative
+    - loan_int_rate should be non-negative because it's used in a multiplication with
+      loan_amnt.
   person_home_ownership:
     code:
-    - - .isComplete('person_home_ownership')
-      - Valid
-    - - .isContainedIn('person_home_ownership', ['RENT', 'MORTGAGE', 'OWN', 'OTHER'])
+    - - .isContainedIn('person_home_ownership', ['OWN', 'RENT', 'MORTGAGE', 'OTHER'])
       - Valid
     assumptions:
-    - person_home_ownership should be complete and contained in ['RENT', 'MORTGAGE',
-      'OWN', 'OTHER']
+    - person_home_ownership should contain values from the set ['OWN', 'RENT', 'MORTGAGE',
+      'OTHER'] because it is checked for equality with 'OWN'.

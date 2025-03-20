@@ -4,46 +4,34 @@ constraints:
     - - .isNonNegative('cb_person_cred_hist_length')
       - Valid
     assumptions:
-    - cb_person_cred_hist_length should be non-negative since it is used in the calculation
-      of cred_hist_ratio.
+    - cb_person_cred_hist_length should be non-negative
   cb_person_default_on_file:
     code:
     - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
       - Valid
     assumptions:
-    - cb_person_default_on_file should be one of ['Y', 'N'] since it is used as a
-      categorical feature in the model.
+    - cb_person_default_on_file should be one of 'Y', 'N'
   loan_amnt:
     code:
-    - - '.isGreaterThan(''loan_amnt'', ''0'', lambda x: x > 0)'
+    - - .isGreaterThan('loan_amnt', 0)
       - Invalid
-    - - .isNonNegative('loan_amnt')
-      - Valid
     assumptions:
-    - loan_amnt should be non-negative since it is used for log transformation in
-      log_loan_amnt.
-    - loan_amnt should be greater than 0 since it is used in division to calculate
-      cred_hist_ratio.
-    - loan_amnt should be greater than 0 since it is multiplied with loan_int_rate
-      in loan_amnt_int_rate.
+    - loan_amnt should be greater than 0
   loan_grade:
     code:
     - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
       - Valid
     assumptions:
-    - loan_grade should be one of ['A', 'B', 'C', 'D', 'E', 'F', 'G'] since it is
-      used to determine high_grade.
+    - loan_grade should be one of 'A', 'B', 'C', 'D', 'E', 'F', 'G'
   loan_int_rate:
     code:
-    - - .isNonNegative('loan_int_rate')
-      - Valid
+    - - .isGreaterThanOrEqualTo('loan_int_rate', 0)
+      - Invalid
     assumptions:
-    - loan_int_rate should be non-negative since it is multiplied with loan_amnt in
-      loan_amnt_int_rate.
+    - loan_int_rate should be greater than or equal to 0
   person_home_ownership:
     code:
     - - .isContainedIn('person_home_ownership', ['OWN', 'MORTGAGE', 'RENT', 'OTHER'])
       - Valid
     assumptions:
-    - person_home_ownership should be one of ['OWN', 'MORTGAGE', 'RENT', 'OTHER']
-      since it is used to determine is_home_owner.
+    - person_home_ownership should be one of 'OWN', 'MORTGAGE', 'RENT', 'OTHER'

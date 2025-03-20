@@ -1,39 +1,27 @@
 constraints:
   Admission Type:
     code:
-    - - '.hasPattern(''Admission Type'', ''Emergency'', lambda x: x > 0)'
-      - Valid
-    - - .isComplete('Admission Type')
-      - Valid
+    - - .isContainedIn('Admission Type', ['Emergency'])
+      - Invalid
     assumptions:
-    - The 'Admission Type' column should contain the value 'Emergency' for rows to
-      be included in the query result.
+    - The column 'Admission Type' should include the value 'Emergency'.
   Age:
     code:
-    - - .isComplete('Age')
-      - Valid
     - - .isGreaterThanOrEqualTo('Age', 30)
       - Invalid
     - - .isLessThanOrEqualTo('Age', 70)
       - Invalid
     assumptions:
-    - The 'Age' column should have values between 30 and 70 (inclusive) for rows to
-      be included in the query result.
+    - Values in the column 'Age' should be between 30 and 70, inclusive.
   Billing Amount:
     code:
-    - - .isComplete('Billing Amount')
-      - Valid
     - - .isGreaterThan('Billing Amount', 5000)
       - Invalid
     assumptions:
-    - The 'Billing Amount' column should have values greater than 5000 for rows to
-      be included in the query result.
+    - Values in the column 'Billing Amount' should be greater than 5000.
   Medical Condition:
     code:
-    - - '.hasPattern(''Medical Condition'', ''Asthma'', lambda x: x > 0)'
-      - Valid
-    - - .isComplete('Medical Condition')
-      - Valid
+    - - .isContainedIn('Medical Condition', ['Asthma'])
+      - Invalid
     assumptions:
-    - The 'Medical Condition' column should contain the value 'Asthma' for rows to
-      be included in the query result.
+    - The column 'Medical Condition' should include the value 'Asthma'.

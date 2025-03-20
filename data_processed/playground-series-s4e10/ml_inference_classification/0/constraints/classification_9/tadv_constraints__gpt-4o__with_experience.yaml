@@ -6,10 +6,8 @@ constraints:
     - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
       - Valid
     assumptions:
-    - The column 'cb_person_default_on_file' should be complete, suggesting a NOT
-      NULL constraint.
-    - The column 'cb_person_default_on_file' should have values from the set {'Y',
-      'N'}, suggesting an IS IN constraint.
+    - The column should not contain null values.
+    - 'The values in this column should be one of the following: [''Y'', ''N''].'
   id:
     code:
     - - .isComplete('id')
@@ -17,8 +15,8 @@ constraints:
     - - .isUnique('id')
       - Valid
     assumptions:
-    - The column 'id' should be complete, suggesting a NOT NULL constraint.
-    - The column 'id' should have unique values, suggesting a UNIQUE constraint.
+    - The column should not contain null values.
+    - Values in this column should be unique.
   loan_amnt:
     code:
     - - .isComplete('loan_amnt')
@@ -26,9 +24,8 @@ constraints:
     - - .isNonNegative('loan_amnt')
       - Valid
     assumptions:
-    - The column 'loan_amnt' should be complete, suggesting a NOT NULL constraint.
-    - The column 'loan_amnt' should have non-negative values, suggesting an IS NON
-      NEGATIVE constraint.
+    - The column should not contain null values.
+    - The values in this column should be non-negative.
   loan_grade:
     code:
     - - .isComplete('loan_grade')
@@ -36,9 +33,9 @@ constraints:
     - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
       - Valid
     assumptions:
-    - The column 'loan_grade' should be complete, suggesting a NOT NULL constraint.
-    - The column 'loan_grade' should have values from the set {'A', 'B', 'C', 'D',
-      'E', 'F', 'G'}, suggesting an IS IN constraint.
+    - The column should not contain null values.
+    - 'The values in this column should be one of the following: [''A'', ''B'', ''C'',
+      ''D'', ''E'', ''F'', ''G''].'
   loan_int_rate:
     code:
     - - .isComplete('loan_int_rate')
@@ -46,6 +43,5 @@ constraints:
     - - .isNonNegative('loan_int_rate')
       - Valid
     assumptions:
-    - The column 'loan_int_rate' should be complete, suggesting a NOT NULL constraint.
-    - The column 'loan_int_rate' should have non-negative values, suggesting an IS
-      NON NEGATIVE constraint.
+    - The column should not contain null values.
+    - The values in this column should be non-negative.

@@ -1,117 +1,91 @@
 constraints:
   cb_person_cred_hist_length:
     code:
-    - - '.satisfies(''cb_person_cred_hist_length >= 0'', ''cb_person_cred_hist_length
-        should be a numeric column'', lambda x: x == 1.0)'
+    - - .isComplete('cb_person_cred_hist_length')
+      - Valid
+    - - .isNonNegative('cb_person_cred_hist_length')
       - Valid
     assumptions:
-    - cb_person_cred_hist_length should be a numeric column
+    - should be a non-negative integer
   cb_person_default_on_file:
     code:
+    - - .isComplete('cb_person_default_on_file')
+      - Valid
     - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
       - Valid
-    - - '.satisfies(''cb_person_default_on_file.value_counts(normalize=True).iloc[0]
-        < 0.5'', ''cb_person_default_on_file should not have a dominant category with
-        less than 50% frequency'', lambda x: x == 1.0)'
-      - Invalid
     assumptions:
-    - cb_person_default_on_file should be a categorical column
-    - cb_person_default_on_file should not have a dominant category with less than
-      50% frequency
+    - 'should be one of the categories: Y, N'
   loan_amnt:
     code:
-    - - '.satisfies(''loan_amnt >= 0'', ''loan_amnt should be a numeric column'',
-        lambda x: x == 1.0)'
+    - - .isComplete('loan_amnt')
       - Valid
-    - - '.satisfies(''loan_amnt.var() > 1e-4'', ''loan_amnt should not have low variance
-        (variance should be greater than 1e-4)'', lambda x: x == 1.0)'
-      - Invalid
+    - - .isPositive('loan_amnt')
+      - Valid
     assumptions:
-    - loan_amnt should be a numeric column
-    - loan_amnt should not have low variance (variance should be greater than 1e-4)
+    - should be a positive number
   loan_grade:
     code:
+    - - .isComplete('loan_grade')
+      - Valid
     - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
       - Valid
-    - - '.satisfies(''loan_grade.value_counts(normalize=True).iloc[0] < 0.5'', ''loan_grade
-        should not have a dominant category with less than 50% frequency'', lambda
-        x: x == 1.0)'
-      - Invalid
     assumptions:
-    - loan_grade should be a categorical column
-    - loan_grade should not have a dominant category with less than 50% frequency
+    - 'should be one of the categories: A, B, C, D, E, F, G'
   loan_int_rate:
     code:
-    - - '.satisfies(''loan_int_rate >= 0'', ''loan_int_rate should be a numeric column'',
-        lambda x: x == 1.0)'
+    - - .isComplete('loan_int_rate')
       - Valid
-    - - '.satisfies(''loan_int_rate.var() > 1e-4'', ''loan_int_rate should not have
-        low variance (variance should be greater than 1e-4)'', lambda x: x == 1.0)'
-      - Invalid
+    - - .isNonNegative('loan_int_rate')
+      - Valid
     assumptions:
-    - loan_int_rate should be a numeric column
-    - loan_int_rate should not have low variance (variance should be greater than
-      1e-4)
+    - should be a non-negative number
   loan_intent:
     code:
-    - - '.hasPattern(''loan_intent'', ''EDUCATION|MEDICAL|VENTURE|PERSONAL|HOMEIMPROVEMENT|DEBTCONSOLIDATION'',
-        lambda x: x == 1.0)'
+    - - .isComplete('loan_intent')
       - Valid
-    - - '.satisfies(''loan_intent.value_counts(normalize=True).iloc[0] < 0.5'', ''loan_intent
-        should not have a dominant category with less than 50% frequency'', lambda
-        x: x == 1.0)'
-      - Invalid
+    - - .isContainedIn('loan_intent', ['EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL',
+        'DEBTCONSOLIDATION', 'MEDICAL', 'VENTURE'])
+      - Valid
     assumptions:
-    - loan_intent should be a categorical column
-    - loan_intent should not have a dominant category with less than 50% frequency
+    - 'should be one of the categories: EDUCATION, HOMEIMPROVEMENT, PERSONAL, DEBTCONSOLIDATION,
+      MEDICAL, VENTURE'
   loan_percent_income:
     code:
-    - - '.satisfies(''loan_percent_income >= 0'', ''loan_percent_income should be
-        a numeric column'', lambda x: x == 1.0)'
+    - - .isComplete('loan_percent_income')
       - Valid
-    - - '.satisfies(''loan_percent_income.var() > 1e-4'', ''loan_percent_income should
-        not have low variance (variance should be greater than 1e-4)'', lambda x:
-        x == 1.0)'
-      - Invalid
+    - - .isNonNegative('loan_percent_income')
+      - Valid
     assumptions:
-    - loan_percent_income should be a numeric column
-    - loan_percent_income should not have low variance (variance should be greater
-      than 1e-4)
+    - should be a non-negative number
   loan_status:
     code:
-    - - '.satisfies(''loan_status >= 0'', ''loan_status should be a numeric column'',
-        lambda x: x == 1.0)'
+    - - .isComplete('loan_status')
       - Valid
-    - - '.satisfies(''loan_status.var() > 1e-4'', ''loan_status should not have low
-        variance (variance should be greater than 1e-4)'', lambda x: x == 1.0)'
+    - - .isContainedIn('loan_status', [0, 1])
       - Invalid
     assumptions:
-    - loan_status should be a numeric column
-    - loan_status should not have low variance (variance should be greater than 1e-4)
+    - should be either 0 or 1
   person_age:
     code:
-    - - '.satisfies(''person_age >= 0'', ''person_age should be a numeric column'',
-        lambda x: x == 1.0)'
+    - - .isComplete('person_age')
+      - Valid
+    - - .isNonNegative('person_age')
       - Valid
     assumptions:
-    - person_age should be a numeric column
+    - should be a non-negative integer
   person_emp_length:
     code:
-    - - '.satisfies(''person_emp_length >= 0'', ''person_emp_length should be a numeric
-        column'', lambda x: x == 1.0)'
+    - - .isComplete('person_emp_length')
+      - Valid
+    - - .isNonNegative('person_emp_length')
       - Valid
     assumptions:
-    - person_emp_length should be a numeric column
+    - should be a non-negative number
   person_home_ownership:
     code:
-    - - '.satisfies(''person_home_ownership.isin(["RENT", "OWN", "MORTGAGE", "OTHER"])'',
-        ''person_home_ownership should be a categorical column'', lambda x: x == 1.0)'
-      - Invalid
-    - - '.satisfies(''person_home_ownership.value_counts(normalize=True).iloc[0] <
-        0.5'', ''person_home_ownership should not have a dominant category with less
-        than 50% frequency'', lambda x: x == 1.0)'
-      - Invalid
+    - - .isComplete('person_home_ownership')
+      - Valid
+    - - .isContainedIn('person_home_ownership', ['OTHER', 'OWN', 'MORTGAGE', 'RENT'])
+      - Valid
     assumptions:
-    - person_home_ownership should be a categorical column
-    - person_home_ownership should not have a dominant category with less than 50%
-      frequency
+    - 'should be one of the categories: OTHER, OWN, MORTGAGE, RENT'

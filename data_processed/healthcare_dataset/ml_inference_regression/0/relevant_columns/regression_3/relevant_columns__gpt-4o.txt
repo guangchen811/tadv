@@ -1,10 +1,11 @@
 Billing Amount
-Insurance Provider
-Hospital
-Room Number
+Id
 Age
-Gender
+Room Number
+Hospital
+Insurance Provider
+Medication
 Admission Type
 Medical Condition
-Medication
+Gender
 Blood Type

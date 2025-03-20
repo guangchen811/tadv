@@ -1,14 +1,16 @@
 constraints:
   cb_person_cred_hist_length:
     code:
+    - - '.hasMin(''cb_person_cred_hist_length'', lambda x: x >= 0)'
+      - Valid
     - - .isComplete('cb_person_cred_hist_length')
       - Valid
     - - .isNonNegative('cb_person_cred_hist_length')
       - Valid
     assumptions:
-    - The column should be NOT NULL because it is complete.
-    - The column should be of type Integral.
-    - The column should be non-negative as it represents credit history length.
+    - Column should be NOT NULL.
+    - Column should have a MIN value of 0.
+    - All values should be non-negative.
   cb_person_default_on_file:
     code:
     - - .isComplete('cb_person_default_on_file')
@@ -16,9 +18,8 @@ constraints:
     - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
       - Valid
     assumptions:
-    - The column should be NOT NULL because it is complete.
-    - 'The column should have values within the set: [''Y'', ''N''] based on observed
-      data.'
+    - Values should be one of 'Y', 'N'.
+    - Column should be NOT NULL.
   id:
     code:
     - - .isComplete('id')
@@ -26,18 +27,20 @@ constraints:
     - - .isUnique('id')
       - Valid
     assumptions:
-    - The column should be NOT NULL because it is complete.
-    - The column should have a UNIQUE constraint as it represents an identifier.
+    - Column should be UNIQUE.
+    - Column should be NOT NULL.
   loan_amnt:
     code:
+    - - '.hasMin(''loan_amnt'', lambda x: x >= 0)'
+      - Valid
     - - .isComplete('loan_amnt')
       - Valid
     - - .isNonNegative('loan_amnt')
       - Valid
     assumptions:
-    - The column should be NOT NULL because it is complete.
-    - The column should be of type Integral.
-    - The column should be non-negative as it represents loan amount.
+    - Column should be NOT NULL.
+    - Column should have a MIN value of 0.
+    - All values should be non-negative.
   loan_grade:
     code:
     - - .isComplete('loan_grade')
@@ -45,19 +48,20 @@ constraints:
     - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
       - Valid
     assumptions:
-    - The column should be NOT NULL because it is complete.
-    - 'The column should have values within the set: [''A'', ''B'', ''C'', ''D'',
-      ''E'', ''F'', ''G''] based on observed data.'
+    - Values should be one of 'A', 'B', 'C', 'D', 'E', 'F', 'G'.
+    - Column should be NOT NULL.
   loan_int_rate:
     code:
+    - - '.hasMin(''loan_int_rate'', lambda x: x >= 0)'
+      - Valid
     - - .isComplete('loan_int_rate')
       - Valid
     - - .isNonNegative('loan_int_rate')
       - Valid
     assumptions:
-    - The column should be NOT NULL because it is complete.
-    - The column should be of type Fractional.
-    - The column should be non-negative as it represents an interest rate.
+    - Column should be NOT NULL.
+    - Column should have a MIN value of 0.
+    - All values should be non-negative.
   loan_intent:
     code:
     - - .isComplete('loan_intent')
@@ -66,41 +70,45 @@ constraints:
         'DEBTCONSOLIDATION', 'MEDICAL', 'VENTURE'])
       - Valid
     assumptions:
-    - The column should be NOT NULL because it is complete.
-    - 'The column should have values within the set: [''EDUCATION'', ''HOMEIMPROVEMENT'',
-      ''PERSONAL'', ''DEBTCONSOLIDATION'', ''MEDICAL'', ''VENTURE''] based on observed
-      data.'
+    - Values should be one of 'EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL', 'DEBTCONSOLIDATION',
+      'MEDICAL', 'VENTURE'.
+    - Column should be NOT NULL.
   loan_percent_income:
     code:
+    - - '.hasMin(''loan_percent_income'', lambda x: x >= 0)'
+      - Valid
     - - .isComplete('loan_percent_income')
       - Valid
     - - .isNonNegative('loan_percent_income')
       - Valid
     assumptions:
-    - The column should be NOT NULL because it is complete.
-    - The column should be of type Fractional.
-    - The column should be non-negative as it represents a percentage.
+    - Column should be NOT NULL.
+    - Column should have a MIN value of 0.
+    - All values should be non-negative.
   person_age:
     code:
+    - - '.hasMin(''person_age'', lambda x: x >= 0)'
+      - Valid
     - - .isComplete('person_age')
       - Valid
     - - .isNonNegative('person_age')
       - Valid
     assumptions:
-    - The column should be NOT NULL because it is complete.
-    - The column should be of type Integral.
-    - The column should have a minimum value constraint if applicable (based on domain
-      knowledge).
+    - Column should be NOT NULL.
+    - Column should have a MIN value of 0.
+    - All values should be non-negative.
   person_emp_length:
     code:
+    - - '.hasMin(''person_emp_length'', lambda x: x >= 0)'
+      - Valid
     - - .isComplete('person_emp_length')
       - Valid
     - - .isNonNegative('person_emp_length')
       - Valid
     assumptions:
-    - The column should be NOT NULL because it is complete.
-    - The column should be of type Fractional.
-    - The column should be non-negative as it represents employment length.
+    - Column should be NOT NULL.
+    - Column should have a MIN value of 0.
+    - All values should be non-negative.
   person_home_ownership:
     code:
     - - .isComplete('person_home_ownership')
@@ -108,16 +116,17 @@ constraints:
     - - .isContainedIn('person_home_ownership', ['OTHER', 'OWN', 'MORTGAGE', 'RENT'])
       - Valid
     assumptions:
-    - The column should be NOT NULL because it is complete.
-    - 'The column should have values within the set: [''OTHER'', ''OWN'', ''MORTGAGE'',
-      ''RENT''] based on observed data.'
+    - Values should be one of 'OTHER', 'OWN', 'MORTGAGE', 'RENT'.
+    - Column should be NOT NULL.
   person_income:
     code:
+    - - '.hasMin(''person_income'', lambda x: x >= 0)'
+      - Valid
     - - .isComplete('person_income')
       - Valid
     - - .isNonNegative('person_income')
       - Valid
     assumptions:
-    - The column should be NOT NULL because it is complete.
-    - The column should be of type Integral.
-    - The column should be non-negative as it represents income.
+    - Column should be NOT NULL.
+    - Column should have a MIN value of 0.
+    - All values should be non-negative.

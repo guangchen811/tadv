@@ -1,15 +1,10 @@
 constraints:
   cb_person_cred_hist_length:
     code:
-    - - .isComplete('cb_person_cred_hist_length')
-      - Valid
     - - .isNonNegative('cb_person_cred_hist_length')
       - Valid
     assumptions:
-    - Column 'cb_person_cred_hist_length' should not contain null values as completeness
-      is 1.0.
-    - Column 'cb_person_cred_hist_length' should be non-negative as it represents
-      credit history length.
+    - The column should have non-negative values as it is used in a division operation.
   cb_person_default_on_file:
     code:
     - - .isComplete('cb_person_default_on_file')
@@ -17,28 +12,18 @@ constraints:
     - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
       - Valid
     assumptions:
-    - Column 'cb_person_default_on_file' should not contain null values as completeness
-      is 1.0.
-    - Column 'cb_person_default_on_file' should contain values in ['Y', 'N'] as these
-      are the observed categories.
-  id:
-    code:
-    - - .isComplete('id')
-      - Valid
-    - - .isUnique('id')
-      - Valid
-    assumptions:
-    - Column 'id' should not contain null values as completeness is 1.0.
-    - Column 'id' should have unique values as it is an identifier for records.
+    - The column values should be within ['Y', 'N'] based on the histogram.
+    - The column should not have null values since it is used in one-hot encoding.
   loan_amnt:
     code:
-    - - .isComplete('loan_amnt')
-      - Valid
     - - .isNonNegative('loan_amnt')
       - Valid
+    - - .satisfies('loan_amnt > 0', 'Non-zero loan amount')
+      - Valid
     assumptions:
-    - Column 'loan_amnt' should not contain null values as completeness is 1.0.
-    - Column 'loan_amnt' should be non-negative as it represents a monetary amount.
+    - The column should have non-negative values since a log transformation is applied.
+    - The column should not contain zero values because log transformation cannot
+      handle zero.
   loan_grade:
     code:
     - - .isComplete('loan_grade')
@@ -46,18 +31,16 @@ constraints:
     - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
       - Valid
     assumptions:
-    - Column 'loan_grade' should not contain null values as completeness is 1.0.
-    - Column 'loan_grade' should contain values in ['A', 'B', 'C', 'D', 'E', 'F',
-      'G'] as these are the observed categories.
+    - The column values should be within ['A', 'B', 'C', 'D', 'E', 'F', 'G'] based
+      on the histogram.
+    - The column should not have null values since it is used in one-hot encoding.
   loan_int_rate:
     code:
-    - - .isComplete('loan_int_rate')
-      - Valid
     - - .isNonNegative('loan_int_rate')
       - Valid
     assumptions:
-    - Column 'loan_int_rate' should not contain null values as completeness is 1.0.
-    - Column 'loan_int_rate' should be non-negative as interest rates cannot be negative.
+    - The column should have non-negative values as a standard deviation and mean
+      operation might be applied.
   person_home_ownership:
     code:
     - - .isComplete('person_home_ownership')
@@ -65,7 +48,6 @@ constraints:
     - - .isContainedIn('person_home_ownership', ['OWN', 'MORTGAGE', 'RENT', 'OTHER'])
       - Valid
     assumptions:
-    - Column 'person_home_ownership' should not contain null values as completeness
-      is 1.0.
-    - Column 'person_home_ownership' should contain values in ['OWN', 'MORTGAGE',
-      'RENT', 'OTHER'] as these are the observed categories.
+    - The column values should be within ['OWN', 'MORTGAGE', 'RENT', 'OTHER'] based
+      on the histogram.
+    - The column should not have null values since it is used in one-hot encoding.

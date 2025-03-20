@@ -4,53 +4,49 @@ constraints:
     - - .isContainedIn('Admission Type', ['Urgent', 'Elective', 'Emergency'])
       - Valid
     assumptions:
-    - Values should be one of ['Urgent', 'Elective', 'Emergency'].
+    - Values should be one of 'Urgent', 'Elective', or 'Emergency'.
   Age:
     code:
-    - - .isGreaterThan('Age', 0)
+    - - '.isLessThanOrEqualTo(''Age'', lambda x: x <= 100)'
       - Invalid
-    - - .isLessThanOrEqualTo('Age', 100)
-      - Invalid
+    - - .isPositive('Age')
+      - Valid
     assumptions:
     - All values should be greater than 0 and less than or equal to 100.
   Billing Amount:
     code:
-    - - '.hasApproxQuantile(''Billing Amount'', 0.95, lambda x: x < 50000)'
-      - Valid
+    - - '.hasQuantile(''Billing Amount'', 0.95, lambda x: x < 50000)'
+      - Invalid
     assumptions:
     - At least 95% of the values should be less than 50000.
   Blood Type:
     code:
-    - - .isContainedIn('Blood Type', ['A', 'B', 'C', 'D', 'A+', 'A-', 'B+', 'B-',
-        'AB+', 'AB-', 'O+', 'O-', 'Rh-null', 'Rare'])
-      - Valid
     - - .isContainedIn('Blood Type', ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+',
         'O-', 'Rh-null', 'Rare'])
       - Valid
     assumptions:
-    - Values should be one of ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-', 'Rh-null',
-      'Rare'].
-    - Values not recognized in ['A', 'B', 'C', 'D', 'A+', 'A-', 'B+', 'B-', 'AB+',
-      'AB-', 'O+', 'O-', 'Rh-null', 'Rare'] should be categorized as 'Rare'.
+    - Values should be one of 'A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-', 'Rh-null',
+      or 'Rare'.
   Gender:
     code:
     - - .isContainedIn('Gender', ['Male', 'Female'])
       - Valid
     assumptions:
-    - Values should be one of ['Male', 'Female'].
+    - Values should be either 'Male' or 'Female'.
   Medication:
     code:
-    - - .isContainedIn('Medication', ['Aspirin', 'Ibuprofen', 'Lipitor', 'Paracetamol',
-        'Penicillin'])
+    - - .isContainedIn('Medication', ['Aspirin', 'Paracetamol', 'Ibuprofen', 'Penicillin',
+        'Lipitor'])
       - Valid
     assumptions:
-    - Values should be one of ['Aspirin', 'Ibuprofen', 'Lipitor', 'Paracetamol', 'Penicillin'].
+    - Values should be one of 'Aspirin', 'Paracetamol', 'Ibuprofen', 'Penicillin',
+      or 'Lipitor'.
   Test Results:
     code:
     - - .isContainedIn('Test Results', ['Abnormal', 'Normal', 'Inconclusive'])
       - Valid
     assumptions:
-    - Values should be one of ['Abnormal', 'Normal', 'Inconclusive'].
+    - Values should be one of 'Abnormal', 'Normal', or 'Inconclusive'.
   id:
     code:
     - - .isNonNegative('id')
@@ -58,5 +54,5 @@ constraints:
     - - .isUnique('id')
       - Valid
     assumptions:
-    - All values should be unique.
-    - All values should be non-negative.
+    - Values should be unique.
+    - Values should be non-negative.

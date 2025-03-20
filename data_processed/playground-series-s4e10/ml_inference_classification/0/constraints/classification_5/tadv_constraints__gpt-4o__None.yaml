@@ -1,98 +1,83 @@
 constraints:
   cb_person_cred_hist_length:
     code:
-    - - .isComplete('cb_person_cred_hist_length')
-      - Valid
     - - .isNonNegative('cb_person_cred_hist_length')
       - Valid
     assumptions:
-    - Assumed to be a non-negative integer representing the number of years of credit
-      history.
+    - cb_person_cred_hist_length should be a non-negative integer
   cb_person_default_on_file:
     code:
-    - - .isComplete('cb_person_default_on_file')
-      - Valid
     - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
       - Valid
     assumptions:
-    - 'Assumed to be one of the categories: [''Y'', ''N''], as seen in the dataset
-      statistics and used for categorical transformation.'
+    - cb_person_default_on_file should be either 'Y' or 'N'
   id:
     code:
-    - - .isComplete('id')
-      - Valid
     - - .isUnique('id')
       - Valid
     assumptions:
-    - Assumed to be unique for each record as it is used as an identifier.
+    - id should be unique for each entry
   loan_amnt:
     code:
-    - - .isComplete('loan_amnt')
+    - - '.isGreaterThan(''loan_amnt'', ''id'', lambda x: x > 0)'
       - Valid
-    - - .isPositive('loan_amnt')
+    - - .isNonNegative('loan_amnt')
       - Valid
     assumptions:
-    - Assumed to be a positive integer, as loans are typically positive amounts.
+    - loan_amnt should be a non-negative integer
+    - loan_amnt should be greater than 0
   loan_int_rate:
     code:
-    - - .isComplete('loan_int_rate')
-      - Valid
     - - .isNonNegative('loan_int_rate')
       - Valid
+    - - .satisfies('loan_int_rate >= 0 AND loan_int_rate <= 1', 'loan_int_rate range
+        check')
+      - Invalid
     assumptions:
-    - Assumed to be a non-negative value, as interest rates cannot be negative.
+    - loan_int_rate should be a non-negative value
+    - loan_int_rate should have values between 0 and 1
   loan_intent:
     code:
-    - - .isComplete('loan_intent')
-      - Valid
     - - .isContainedIn('loan_intent', ['EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL',
         'DEBTCONSOLIDATION', 'MEDICAL', 'VENTURE'])
       - Valid
     assumptions:
-    - 'Assumed to be one of the categories: [''EDUCATION'', ''HOMEIMPROVEMENT'', ''PERSONAL'',
-      ''DEBTCONSOLIDATION'', ''MEDICAL'', ''VENTURE''], as seen in the dataset statistics
-      and used for categorical transformation.'
+    - loan_intent should be one of ['EDUCATION', 'HOMEIMPROVEMENT', 'PERSONAL', 'DEBTCONSOLIDATION',
+      'MEDICAL', 'VENTURE']
   loan_percent_income:
     code:
-    - - .isComplete('loan_percent_income')
-      - Valid
-    - - .isContainedIn('loan_percent_income', list(range(0, 101)))
-      - Invalid
     - - .isNonNegative('loan_percent_income')
       - Valid
     assumptions:
-    - Assumed to be a non-negative value representing a percentage, thus should be
-      between 0 and 100.
+    - loan_percent_income should be a non-negative value
+    - loan_percent_income should be a reasonable fraction of person_income
   person_age:
     code:
-    - - .isComplete('person_age')
+    - - '.isGreaterThan(''person_age'', ''id'', lambda x: x > 0)'
       - Valid
     - - .isNonNegative('person_age')
       - Valid
     assumptions:
-    - Assumed to be a non-negative integer, as it's used in numerical computations.
+    - person_age should be a non-negative integer
+    - person_age should be greater than 0
   person_emp_length:
     code:
-    - - .isComplete('person_emp_length')
-      - Valid
     - - .isNonNegative('person_emp_length')
       - Valid
     assumptions:
-    - Assumed to be a non-negative value since it's used in numerical computations.
+    - person_emp_length should be a non-negative value
   person_home_ownership:
     code:
-    - - .isComplete('person_home_ownership')
-      - Valid
-    - - .isContainedIn('person_home_ownership', ['OTHER', 'OWN', 'MORTGAGE', 'RENT'])
+    - - .isContainedIn('person_home_ownership', ['OWN', 'RENT', 'MORTGAGE', 'OTHER'])
       - Valid
     assumptions:
-    - 'Assumed to be one of the categories: [''OTHER'', ''OWN'', ''MORTGAGE'', ''RENT''],
-      as seen in the dataset statistics and used for categorical transformation.'
+    - person_home_ownership should be one of ['OWN', 'RENT', 'MORTGAGE', 'OTHER']
   person_income:
     code:
-    - - .isComplete('person_income')
+    - - '.isGreaterThan(''person_income'', ''id'', lambda x: x > 0)'
       - Valid
     - - .isNonNegative('person_income')
       - Valid
     assumptions:
-    - Assumed to be a non-negative integer, as it's used in numerical computations.
+    - person_income should be a non-negative integer
+    - person_income should be greater than 0

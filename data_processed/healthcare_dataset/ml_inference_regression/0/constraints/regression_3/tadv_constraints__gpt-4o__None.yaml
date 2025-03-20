@@ -1,94 +1,40 @@
 constraints:
-  Admission Type:
-    code:
-    - - '.hasPattern(''Admission Type'', ''.+'', lambda x: x == 1.0)'
-      - Valid
-    - - .isComplete('Admission Type')
-      - Valid
+  Date of Admission:
+    code: []
     assumptions:
-    - The column is treated as categorical and should be converted to integer codes.
-    - Missing values should be filled with 'NA' before conversion.
-  Age:
-    code:
-    - - .isComplete('Age')
-      - Valid
-    - - .isNonNegative('Age')
-      - Valid
+    - The column 'Date of Admission' is not used after loading the data and is dropped
+      from both train and test datasets.
+  Discharge Date:
+    code: []
     assumptions:
-    - The column should be numeric.
-    - Missing values should be filled with 0.
-  Blood Type:
-    code:
-    - - '.hasPattern(''Blood Type'', ''.+'', lambda x: x == 1.0)'
-      - Valid
-    - - .isComplete('Blood Type')
-      - Valid
+    - The column 'Discharge Date' is not used after loading the data and is dropped
+      from both train and test datasets.
+  Doctor:
+    code: []
     assumptions:
-    - The column is treated as categorical and should be converted to integer codes.
-    - Missing values should be filled with 'NA' before conversion.
-  Gender:
-    code:
-    - - '.hasPattern(''Gender'', ''.+'', lambda x: x == 1.0)'
-      - Valid
-    - - .isComplete('Gender')
-      - Valid
+    - The column 'Doctor' is not used after loading the data and is dropped from both
+      train and test datasets.
+  Name:
+    code: []
     assumptions:
-    - The column is treated as categorical and should be converted to integer codes.
-    - Missing values should be filled with 'NA' before conversion.
-  Hospital:
-    code:
-    - - '.hasPattern(''Hospital'', ''.+'', lambda x: x == 1.0)'
-      - Valid
-    - - .isComplete('Hospital')
-      - Valid
+    - The column 'Name' is not used after loading the data and is dropped from both
+      train and test datasets.
+  Test Results:
+    code: []
     assumptions:
-    - The column is treated as categorical and should be converted to integer codes.
-    - Missing values should be filled with 'NA' before conversion.
-  Insurance Provider:
-    code:
-    - - '.hasPattern(''Insurance Provider'', ''.+'', lambda x: x == 1.0)'
-      - Valid
-    - - .isComplete('Insurance Provider')
-      - Valid
-    assumptions:
-    - The column is treated as categorical and should be converted to integer codes.
-    - Missing values should be filled with 'NA' before conversion.
-  Medical Condition:
-    code:
-    - - '.hasPattern(''Medical Condition'', ''.+'', lambda x: x == 1.0)'
-      - Valid
-    - - .isComplete('Medical Condition')
-      - Valid
-    assumptions:
-    - The column is treated as categorical and should be converted to integer codes.
-    - Missing values should be filled with 'NA' before conversion.
-  Medication:
-    code:
-    - - '.hasPattern(''Medication'', ''.+'', lambda x: x == 1.0)'
-      - Valid
-    - - .isComplete('Medication')
-      - Valid
-    assumptions:
-    - The column is treated as categorical and should be converted to integer codes.
-    - Missing values should be filled with 'NA' before conversion.
-  Room Number:
-    code:
-    - - .isComplete('Room Number')
-      - Valid
-    - - .isNonNegative('Room Number')
-      - Invalid
-    assumptions:
-    - The column should be numeric.
-    - Missing values should be filled with 0.
+    - The column 'Test Results' is not used after loading the data and is dropped
+      from both train and test datasets.
   billing_amount:
     code:
+    - - '.hasMin(''billing_amount'', lambda x: isinstance(x, (int, float)))'
+      - Invalid
     - - .isComplete('billing_amount')
       - Invalid
-    - - .isNonNegative('billing_amount')
-      - Invalid
     assumptions:
-    - The column should be numeric.
-    - Missing values should be filled with 0.
+    - The column 'billing_amount' should not contain missing values as missing values
+      are filled with 0.
+    - The column 'billing_amount' should contain numeric values as it is used in numeric
+      computations and scaling.
   id:
     code:
     - - .isComplete('id')
@@ -96,4 +42,5 @@ constraints:
     - - .isUnique('id')
       - Valid
     assumptions:
-    - The column should contain unique values.
+    - The column 'id' should not contain missing values as it is used to extract 'test_ids'.
+    - The column 'id' should contain unique values as it represents unique identifiers.

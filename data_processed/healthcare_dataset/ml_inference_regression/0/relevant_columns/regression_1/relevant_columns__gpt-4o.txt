@@ -1,8 +1,11 @@
 Billing Amount
 Age
 id
-Name
-Test Results
-Doctor
-Discharge Date
-Date of Admission
+Insurance Provider
+Room Number
+Hospital
+Medication
+Admission Type
+Medical Condition
+Gender
+Blood Type

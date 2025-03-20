@@ -9,22 +9,23 @@ constraints:
     - - .isLessThanOrEqualTo('Age', 100)
       - Invalid
     assumptions:
-    - Age should be greater than 0
-    - Age should be less than or equal to 100
+    - All values should be greater than 0.
+    - All values should be less than or equal to 100.
   Billing Amount:
     code:
     - - '.hasApproxQuantile(''Billing Amount'', 0.95, lambda x: x < 50000)'
       - Valid
     assumptions:
-    - At least 95 percent of the Billing Amount should be less than 50000
+    - At least 95% of the values should be less than 50000.
   Blood Type:
     code:
-    - - .isContainedIn('Blood Type', ['A', 'B', 'C', 'D', 'A+', 'A-', 'B+', 'B-',
-        'AB+', 'AB-', 'O+', 'O-', 'Rh-null', 'Rare'])
+    - - .isContainedIn('Blood Type', ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+',
+        'O-', 'A', 'B', 'C', 'D', 'Rh-null', 'Rare'])
       - Valid
     assumptions:
-    - Blood Type should be one of ['A', 'B', 'C', 'D', 'A+', 'A-', 'B+', 'B-', 'AB+',
-      'AB-', 'O+', 'O-', 'Rh-null', 'Rare'] or categorized as 'Rare'
+    - Values should be one of ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-', 'A',
+      'B', 'C', 'D', 'Rh-null', 'Rare']. Values not in this list should be labeled
+      as 'Rare'.
   Gender:
     code: []
     assumptions: []
@@ -33,11 +34,13 @@ constraints:
     assumptions: []
   Test Results:
     code:
-    - - .isContainedIn('Test Results', expected_classes)
+    - - .satisfies('Test Results IN expected_classes', 'Expected Classes Check')
       - Invalid
     assumptions:
-    - Test Results should only contain values present in the expected classes after
-      model training
+    - Predictions should match the expected classes from the model classifier.
   id:
-    code: []
-    assumptions: []
+    code:
+    - - .isUnique('id')
+      - Valid
+    assumptions:
+    - Values should have a unique constraint to ensure no duplicates.

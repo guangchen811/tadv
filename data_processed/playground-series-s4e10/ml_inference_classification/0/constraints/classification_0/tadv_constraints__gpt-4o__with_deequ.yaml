@@ -3,38 +3,30 @@ constraints:
     code:
     - - .isComplete('cb_person_default_on_file')
       - Valid
-    - - .isContainedIn('cb_person_default_on_file', ['N', 'Y'])
+    - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
       - Valid
     assumptions:
-    - The column 'cb_person_default_on_file' should be complete, meaning no missing
-      values.
-    - The column 'cb_person_default_on_file' should only contain values from the set
-      ['N', 'Y'].
+    - cb_person_default_on_file should be either 'Y' or 'N' as these are the only
+      valid categories.
+    - cb_person_default_on_file should be complete as it's used in the model preprocessing.
   id:
     code:
-    - - .isComplete('id')
-      - Valid
     - - .isNonNegative('id')
       - Valid
     - - .isUnique('id')
       - Valid
     assumptions:
-    - The column 'id' should be complete, meaning no missing values.
-    - The column 'id' should contain unique values.
-    - The column 'id' should contain non-negative values.
+    - id should be unique as it serves as an identifier for each record.
+    - id should be non-negative since it is an identifier.
   loan_amnt:
     code:
     - - .isComplete('loan_amnt')
       - Valid
     - - .isNonNegative('loan_amnt')
       - Valid
-    - - .isPositive('loan_amnt')
-      - Valid
     assumptions:
-    - The column 'loan_amnt' should be complete, meaning no missing values.
-    - The column 'loan_amnt' should contain non-negative values.
-    - The transformation applied to 'loan_amnt' assumes that values should be positive
-      to compute log.
+    - loan_amnt should be non-negative since it's used to calculate the logarithm.
+    - loan_amnt should be complete because it's used to compute log_loan_amnt.
   loan_grade:
     code:
     - - .isComplete('loan_grade')
@@ -42,9 +34,9 @@ constraints:
     - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
       - Valid
     assumptions:
-    - The column 'loan_grade' should be complete, meaning no missing values.
-    - The column 'loan_grade' should only contain values from the set ['A', 'B', 'C',
-      'D', 'E', 'F', 'G'].
+    - loan_grade should be one of ['A', 'B', 'C', 'D', 'E', 'F', 'G'] since these
+      are the expected categories.
+    - loan_grade should be complete because it's used in the model preprocessing.
   loan_int_rate:
     code:
     - - .isComplete('loan_int_rate')
@@ -52,5 +44,6 @@ constraints:
     - - .isNonNegative('loan_int_rate')
       - Valid
     assumptions:
-    - The column 'loan_int_rate' should be complete, meaning no missing values.
-    - The column 'loan_int_rate' should contain non-negative values.
+    - loan_int_rate should be non-negative as it represents an interest rate.
+    - loan_int_rate should be complete as it is part of the numerical features for
+      the model.

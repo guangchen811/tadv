@@ -3,17 +3,18 @@ constraints:
     code:
     - - .isComplete('billing_amount')
       - Invalid
-    - - .satisfies('billing_amount >= 0', 'billing_amount should be a numeric value')
+    - - '.satisfies(''billing_amount >= 0'', ''billing_amount_non_negative'', lambda
+        x: x == 1.0)'
       - Invalid
     assumptions:
-    - billing_amount should be a numeric value
-    - billing_amount should not have missing values
+    - Should be numeric.
+    - Should not contain missing values.
   id:
     code:
-    - - '.hasUniqueness([''id''], lambda x: x == 1.0)'
-      - Valid
     - - .isComplete('id')
       - Valid
+    - - .isUnique('id')
+      - Valid
     assumptions:
-    - id should be a unique integer value
-    - id should not have missing values
+    - Should be unique.
+    - Should not contain missing values.

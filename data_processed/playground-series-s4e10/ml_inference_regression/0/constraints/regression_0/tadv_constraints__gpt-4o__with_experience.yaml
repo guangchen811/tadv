@@ -6,10 +6,8 @@ constraints:
     - - .isNonNegative('cb_person_cred_hist_length')
       - Valid
     assumptions:
-    - The column 'cb_person_cred_hist_length' should have complete data (NOT NULL
-      constraint).
-    - The column 'cb_person_cred_hist_length' is expected to be non-negative (IS NON
-      NEGATIVE constraint).
+    - NOT NULL constraint since completeness is 1.0
+    - IS NON NEGATIVE since dataType is Integral
   cb_person_default_on_file:
     code:
     - - .isComplete('cb_person_default_on_file')
@@ -17,9 +15,8 @@ constraints:
     - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
       - Valid
     assumptions:
-    - The column 'cb_person_default_on_file' should have complete data (NOT NULL constraint).
-    - The column 'cb_person_default_on_file' is expected to have values within ['Y',
-      'N'] (IS IN constraint).
+    - NOT NULL constraint since completeness is 1.0
+    - IS IN constraint with most values being ['Y', 'N']
   id:
     code:
     - - .isComplete('id')
@@ -27,8 +24,9 @@ constraints:
     - - .isUnique('id')
       - Valid
     assumptions:
-    - The column 'id' should have unique values (UNIQUE constraint).
-    - The column 'id' should have complete data (NOT NULL constraint).
+    - NOT NULL constraint since completeness is 1.0
+    - UNIQUE constraint due to high approximateNumDistinctValues relative to record
+      count
   loan_amnt:
     code:
     - - .isComplete('loan_amnt')
@@ -36,8 +34,8 @@ constraints:
     - - .isNonNegative('loan_amnt')
       - Valid
     assumptions:
-    - The column 'loan_amnt' should have complete data (NOT NULL constraint).
-    - The column 'loan_amnt' is expected to be non-negative (IS NON NEGATIVE constraint).
+    - NOT NULL constraint since completeness is 1.0
+    - IS NON NEGATIVE since dataType is Integral
   loan_grade:
     code:
     - - .isComplete('loan_grade')
@@ -45,9 +43,8 @@ constraints:
     - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
       - Valid
     assumptions:
-    - The column 'loan_grade' should have complete data (NOT NULL constraint).
-    - The column 'loan_grade' is expected to have values within ['A', 'B', 'C', 'D',
-      'E', 'F', 'G'] (IS IN constraint).
+    - NOT NULL constraint since completeness is 1.0
+    - IS IN constraint with most values being ['A', 'B', 'C', 'D', 'E', 'F', 'G']
   loan_int_rate:
     code:
     - - .isComplete('loan_int_rate')
@@ -55,15 +52,14 @@ constraints:
     - - .isNonNegative('loan_int_rate')
       - Valid
     assumptions:
-    - The column 'loan_int_rate' should have complete data (NOT NULL constraint).
-    - The column 'loan_int_rate' is expected to be non-negative (IS NON NEGATIVE constraint).
+    - NOT NULL constraint since completeness is 1.0
+    - IS NON NEGATIVE since dataType is Fractional
   person_home_ownership:
     code:
     - - .isComplete('person_home_ownership')
       - Valid
-    - - .isContainedIn('person_home_ownership', ['OWN', 'MORTGAGE', 'RENT', 'OTHER'])
+    - - .isContainedIn('person_home_ownership', ['RENT', 'MORTGAGE', 'OWN', 'OTHER'])
       - Valid
     assumptions:
-    - The column 'person_home_ownership' should have complete data (NOT NULL constraint).
-    - The column 'person_home_ownership' is expected to have values within ['OWN',
-      'MORTGAGE', 'RENT', 'OTHER'] (IS IN constraint).
+    - NOT NULL constraint since completeness is 1.0
+    - IS IN constraint with most values being ['RENT', 'MORTGAGE', 'OWN', 'OTHER']

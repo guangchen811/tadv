@@ -4,40 +4,73 @@ constraints:
     - - .isNonNegative('cb_person_cred_hist_length')
       - Valid
     assumptions:
-    - should contain non-negative values
+    - cb_person_cred_hist_length should be greater than or equal to 0 as it represents
+      a length.
   cb_person_default_on_file:
     code:
     - - .isContainedIn('cb_person_default_on_file', ['Y', 'N'])
       - Valid
     assumptions:
-    - should only contain the values 'Y' or 'N'
+    - 'cb_person_default_on_file should be one of the expected categories: [''Y'',
+      ''N''].'
+  cred_hist_ratio:
+    code:
+    - - .isNonNegative('cb_person_cred_hist_length')
+      - Valid
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    assumptions:
+    - loan_amnt should be greater than or equal to 0 to avoid division by zero in
+      cred_hist_ratio calculation.
+    - cb_person_cred_hist_length should be greater than or equal to 0 as it represents
+      a length.
   id:
     code:
     - - .isUnique('id')
       - Valid
     assumptions:
-    - should be unique or at least distinct within each dataset
+    - id should be unique across the dataset to correctly map predictions back to
+      each entry.
   loan_amnt:
     code:
-    - - .isPositive('loan_amnt')
+    - - .isNonNegative('loan_amnt')
       - Valid
     assumptions:
-    - should contain positive values
+    - loan_amnt should be greater than or equal to 0 as it represents an amount.
+  loan_amnt_int_rate:
+    code:
+    - - .isNonNegative('loan_amnt')
+      - Valid
+    - - .isNonNegative('loan_int_rate')
+      - Valid
+    assumptions:
+    - loan_amnt should be greater than or equal to 0 as it represents an amount.
+    - loan_int_rate should be greater than or equal to 0 as it represents an interest
+      rate.
   loan_grade:
     code:
     - - .isContainedIn('loan_grade', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
       - Valid
     assumptions:
-    - should only contain predefined categories (A, B, C, D, E, F, G)
+    - 'loan_grade should be one of the expected categories: [''A'', ''B'', ''C'',
+      ''D'', ''E'', ''F'', ''G''].'
   loan_int_rate:
     code:
     - - .isNonNegative('loan_int_rate')
       - Valid
     assumptions:
-    - should be a non-negative numeric value
-  person_home_ownership:
+    - loan_int_rate should be greater than or equal to 0 as it represents an interest
+      rate.
+  log_loan_amnt:
     code:
-    - - .isContainedIn('person_home_ownership', ['RENT', 'MORTGAGE', 'OWN', 'OTHER'])
+    - - .isNonNegative('loan_amnt')
       - Valid
     assumptions:
-    - should only contain predefined categories (RENT, MORTGAGE, OWN, OTHER)
+    - loan_amnt should be greater than or equal to 0 to ensure the logarithm is well-defined.
+  person_home_ownership:
+    code:
+    - - .isContainedIn('person_home_ownership', ['OWN', 'MORTGAGE', 'RENT', 'OTHER'])
+      - Valid
+    assumptions:
+    - 'person_home_ownership should be one of the expected categories: [''OWN'', ''MORTGAGE'',
+      ''RENT'', ''OTHER''].'

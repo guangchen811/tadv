@@ -176,7 +176,7 @@ poetry run python ./workflow/s2_experiments/t1_target_column_detection/run_langc
 To generate data validation rules, run the following command:
 
 ```shell
-poetry run python ./workflow/s2_experiments/t2_constraint_inference/run_deequ.py --dataset-option "all" --downstream-task-option "all" --processed-data-label "0"
+poetry run python ./workflow/s2_experiments/t2_constraint_inference/run_deequ_dv.py --dataset-option "all" --downstream-task-option "all" --processed-data-label "0"
 ```
 
 ```shell
