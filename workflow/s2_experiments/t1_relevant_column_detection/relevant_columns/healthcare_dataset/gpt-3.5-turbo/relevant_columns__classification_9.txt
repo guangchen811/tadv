@@ -4,3 +4,9 @@ billing_amount
 blood_type
 gender
 medical_condition
+admission_type
+age
+billing_amount
+blood_type
+gender
+medical_condition

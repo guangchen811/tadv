@@ -6,3 +6,13 @@ id
 Insurance Provider
 Room Number
 Test Results
+billing_amount
+Date of Admission
+Discharge Date
+Doctor
+Gender
+id
+Insurance Provider
+Medical Condition
+Room Number
+Test Results

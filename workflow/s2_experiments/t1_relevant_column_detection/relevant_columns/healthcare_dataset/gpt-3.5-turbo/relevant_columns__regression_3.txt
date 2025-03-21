@@ -4,3 +4,5 @@ Discharge Date
 Doctor
 id
 Test Results
+billing_amount
+id

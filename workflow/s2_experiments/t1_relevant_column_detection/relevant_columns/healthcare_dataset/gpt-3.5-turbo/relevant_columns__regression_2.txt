@@ -6,3 +6,10 @@ id
 length_of_stay
 Name
 Test Results
+admission_dt
+billing_amount
+discharge_dt
+Doctor
+length_of_stay
+Name
+Test Results

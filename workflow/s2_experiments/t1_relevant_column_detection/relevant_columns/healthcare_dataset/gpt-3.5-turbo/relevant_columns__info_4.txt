@@ -2,3 +2,7 @@ Billing Amount
 Blood Type
 Gender
 Medication
+Billing Amount
+Blood Type
+Gender
+Medication

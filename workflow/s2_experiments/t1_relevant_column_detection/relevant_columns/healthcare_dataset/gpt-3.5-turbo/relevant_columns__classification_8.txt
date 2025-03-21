@@ -2,3 +2,10 @@ admission_dt
 discharge_dt
 id
 length_of_stay
+Admission Type
+Blood Type
+id
+length_of_stay
+Medical Condition
+Medication
+test_results

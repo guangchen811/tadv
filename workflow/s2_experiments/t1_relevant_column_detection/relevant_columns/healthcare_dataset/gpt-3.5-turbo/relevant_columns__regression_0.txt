@@ -1,3 +1,6 @@
 Age
 billing_amount
 Room Number
+Age
+billing_amount
+Room Number

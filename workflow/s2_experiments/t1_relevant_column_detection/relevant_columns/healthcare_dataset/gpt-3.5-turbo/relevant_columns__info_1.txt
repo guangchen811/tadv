@@ -2,3 +2,7 @@ Age
 Date of Admission
 Discharge Date
 Name
+Age
+Date of Admission
+Discharge Date
+Name

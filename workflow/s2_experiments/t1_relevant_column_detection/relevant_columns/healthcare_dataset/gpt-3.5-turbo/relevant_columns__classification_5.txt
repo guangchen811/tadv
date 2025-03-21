@@ -3,3 +3,8 @@ Billing Amount
 Blood Type
 length_of_stay
 Medical Condition
+Age
+Billing Amount
+Blood Type
+length_of_stay
+Medical Condition

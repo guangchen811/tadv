@@ -2,3 +2,7 @@ Date of Admission
 Discharge Date
 Doctor
 Medical Condition
+Date of Admission
+Discharge Date
+Doctor
+Medical Condition

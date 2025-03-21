@@ -4,3 +4,8 @@ Days Stayed
 Discharge Date
 Doctor
 Medical Condition
+Age
+Date of Admission
+Discharge Date
+Doctor
+Medical Condition

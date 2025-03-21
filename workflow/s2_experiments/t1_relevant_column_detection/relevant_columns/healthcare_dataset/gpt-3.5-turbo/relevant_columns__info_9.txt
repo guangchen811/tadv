@@ -2,3 +2,7 @@ Admission Type
 Date of Admission
 Month
 Year
+Admission Type
+Date of Admission
+Month
+Year

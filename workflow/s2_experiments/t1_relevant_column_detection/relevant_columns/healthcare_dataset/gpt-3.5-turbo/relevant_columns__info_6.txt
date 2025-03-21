@@ -2,3 +2,7 @@ Admission Type
 Age
 Billing Amount
 Hospital
+Admission Type
+Age
+Billing Amount
+Hospital

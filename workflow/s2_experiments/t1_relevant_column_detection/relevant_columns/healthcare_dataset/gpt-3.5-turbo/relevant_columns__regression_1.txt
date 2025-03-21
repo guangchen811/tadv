@@ -1,3 +1,10 @@
 Age
 billing_amount
 id
+Age
+billing_amount
+Date of Admission
+Discharge Date
+Doctor
+id
+Test Results

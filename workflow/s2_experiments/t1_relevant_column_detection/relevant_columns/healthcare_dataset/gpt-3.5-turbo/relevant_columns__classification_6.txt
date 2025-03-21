@@ -2,3 +2,8 @@ admission_date
 billing_amount
 Gender
 medical_condition
+admission_date
+Age
+billing_amount
+Gender
+medical_condition

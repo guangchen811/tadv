@@ -2,3 +2,7 @@ Billing Amount
 Hospital
 Insurance Provider
 Medical Condition
+Billing Amount
+Hospital
+Insurance Provider
+Medical Condition
