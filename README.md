@@ -11,16 +11,16 @@ information, such as downstream queries and machine learning pipelines.
 
 The project consists of the following [modules](/tadv):
 
-- **[error_injection](/tadv/error_injection)** – Provides APIs for injecting errors into datasets, enabling robustness
+- **[Error Injection](/tadv/error_injection)** – Provides APIs for injecting errors into datasets, enabling robustness
   testing for validation methods.
-- **[runtime_environments](/tadv/runtime_environments)** – Defines execution environments where datasets are evaluated
+- **[Runtime Environments](/tadv/runtime_environments)** – Defines execution environments where datasets are evaluated
   in the context of downstream queries or machine learning pipelines.
-- **[llm](/tadv/llm)** – Contains classes for interacting with LLM APIs to generate data validation rules. This
+- **[LLM](/tadv/llm)** – Contains classes for interacting with LLM APIs to generate data validation rules. This
   process follows three key steps:
     1. **Target Column Detection** – Identifying relevant columns based on downstream context.
     2. **Assumption Generation** – Inferring data assumptions from provided context and dataset properties.
     3. **Rule Generation** – Producing executable validation rules to ensure data quality.
-- **[inspector](/tadv/inspector)** – Extracts dataset metadata, including schema and statistics, to aid LLMs in
+- **[Inspector](/tadv/inspector)** – Extracts dataset metadata, including schema and statistics, to aid LLMs in
   generating informed validation rules.
 
 #### Error Injection
@@ -101,6 +101,19 @@ We provide the following workflow for evaluating the data validation capabilitie
 You can find the detailed implementation in the [workflow](workflow) directory.
 
 ### Step 0: Environment Setup
+
+### Create a `.env` file
+
+To run the experiments, you need to create a `.env` file in the root directory of the project. The `.env` file should
+contain the following environment variables:
+
+```env
+HF_TOKEN=***
+OPENAI_API_KEY=***
+SPARK_VERSION=3.5
+```
+
+Please replace `***` with your own API keys.
 
 ### Install the package
 
@@ -193,13 +206,15 @@ To evaluate the performance of the scripts in the downstream tasks, run the foll
 poetry run python ./workflow/s3_evaluation/evaluation/calculate_code_performance.py --dataset-option "all" --downstream-task-option "all" --processed-data-label "0"
 ```
 
-The evaluation results will be saved in the `data_processed/<dataset>/<downstream-task>/<processed-data-label>/output_validation/` folder.
+The evaluation results will be saved in the
+`data_processed/<dataset>/<downstream-task>/<processed-data-label>/output_validation/` folder.
 
 ```shell
 poetry run python ./workflow/s3_evaluation/evaluation/validate_constraints.py --dataset-option "all" --downstream-task-option "all" --processed-data-label "0"
 ```
 
-The evaluation results will be saved in the `data_processed/<dataset>/<downstream-task>/<processed-data-label>/constraints_validation/` folder.
+The evaluation results will be saved in the
+`data_processed/<dataset>/<downstream-task>/<processed-data-label>/constraints_validation/` folder.
 
 Now, you can aggregate the evaluation results by running the following command:
 
