@@ -6,9 +6,9 @@ from tadv.error_injection.corrupts import GaussianNoise
 
 def test_gaussian_noise():
     df = pd.DataFrame({
-        'a': np.arange(10),
-        'b': np.arange(10),
-        'c': np.arange(10),
+        'a': np.arange(100),
+        'b': np.arange(100),
+        'c': np.arange(100),
     })
     noise = GaussianNoise(columns='a')
     corrupted_df = noise.transform(df)
