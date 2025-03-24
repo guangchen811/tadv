@@ -141,3 +141,5 @@ dmypy.json
 
 data_processed/*/files*/*
 data_processed/*/output*/*
+
+data/playground-series-s4e10/files/*
