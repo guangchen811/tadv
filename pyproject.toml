@@ -6,7 +6,7 @@ authors = ["Hao Chen <hao.chen@tu-berlin.de>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.9.0"
+python = "3.10.16"
 langchain = "^0.3.2"
 dspy-ai = "^2.5.3"
 pydeequ = "^1.4.0"
@@ -36,6 +36,11 @@ optional = true
 
 [tool.poetry.group.download.dependencies]
 kaggle = "^1.6.17"
+
+
+[tool.poetry.group.tfdv.dependencies]
+tensorflow = "^2.15.0"
+tensorflow-data-validation = "^1.16.1"
 
 [build-system]
 requires = ["poetry-core"]
