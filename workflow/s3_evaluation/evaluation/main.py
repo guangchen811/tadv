@@ -45,6 +45,16 @@ def results_calculation(dataset_name, downstream_task, processed_data_label):
             deequ_result[new_data_name] = ValidationResults.from_yaml(constraints_file).check_result()
             deequ_with_column_skipped_result[new_data_name] = ValidationResults.from_yaml(
                 constraints_file).check_result(column_skipped=['person_age', 'Age'])
+    tfdv_result = {}
+    tfdv_validation_results = pd.read_csv("./tfdv_results.csv")
+    tmp_res = tfdv_validation_results[(tfdv_validation_results["error_injected_label"] == int(processed_data_label)) &
+                                      (tfdv_validation_results["dataset_name"] == dataset_name) &
+                                      (tfdv_validation_results["task_type"] == downstream_task)]
+    tfdv_result["validation_results_on_clean_test_data"] = (
+        None, tmp_res[tmp_res["clean_or_corrupted"] == "clean"]["result"].values[0])
+    tfdv_result["validation_results_on_corrupted_test_data"] = (
+        None, tmp_res[tmp_res["clean_or_corrupted"] == "corrupted"]["result"].values[0])
+
     for script_constraints_dir in sorted(constraints_validation_dir.iterdir()):
         if script_constraints_dir.is_dir():
             for constraints_file_name in sorted(script_constraints_dir.iterdir()):
@@ -61,6 +71,10 @@ def results_calculation(dataset_name, downstream_task, processed_data_label):
                         new_data_name]
                 constraints_validation_dict[script_constraints_dir.name][f"{new_data_name}__deequ__column_skipped"] = \
                     deequ_with_column_skipped_result[
+                        new_data_name]
+            for new_data_name in tfdv_result.keys():
+                constraints_validation_dict[script_constraints_dir.name][f"{new_data_name}__tfdv__None"] = \
+                    tfdv_result[
                         new_data_name]
 
     constraints_result_data = []
@@ -112,7 +126,7 @@ if __name__ == "__main__":
                         help='Dataset name. Options: 0: playground-series-s4e10, 1: healthcare_dataset')
     parser.add_argument('--downstream-task-option', type=str, default="all",
                         help='Downstream task. Options: 0: ml_inference_classification, 1: ml_inference_regression, 2: sql_query, 3: webpage_generation')
-    parser.add_argument('--processed-data-label', type=str, default="0",
+    parser.add_argument('--processed-data-label', type=str, default="3",
                         help='Version Label of the processed data')
     args = parser.parse_args()
 
