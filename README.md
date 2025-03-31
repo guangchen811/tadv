@@ -11,14 +11,14 @@ information, such as downstream queries and machine learning pipelines.
 
 Here we provide the codebase for reproducing the experiments in the paper.
 
-| Section | Source Code                                                                              | Description                                     |
-|---------|------------------------------------------------------------------------------------------|-------------------------------------------------|
+| Section | Source Code                                                                              | Description                                            |
+|---------|------------------------------------------------------------------------------------------|--------------------------------------------------------|
 |
- 4.1     | [Column Access Detection](/workflow/s2_experiments/t1_column_access_detection)           | [Link](##)                                      |
+ 4.1     | [Column Access Detection](/workflow/s2_experiments/t1_column_access_detection)           | [Link](#21-column-access-detection)                    |
 |
- 4.2     | [End-to-End Data Error Impact](/workflow/s3_evaluation/evaluation)                       | [Link](#step-3-evaluation)                      |
+ 4.2     | [End-to-End Data Error Impact](/workflow/s3_evaluation/evaluation)                       | [Link](#step-3-evaluation)                             |
 |
- 4.3     | [Uncovering Implicit Data Assumptions](/workflow/s2_experiments/t2_constraint_inference) | [Link](#step-2-data-validation-rule-generation) |
+ 4.3     | [Uncovering Implicit Data Assumptions](/workflow/s2_experiments/t2_constraint_inference) | [Link](#22-end-to-end-data-validation-rule-generation) |
 
 ### Project Structure
 
