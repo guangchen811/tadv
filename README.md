@@ -7,6 +7,16 @@
 TADV is a framework for evaluating the data validation capabilities of large language models (LLMs) using contextual
 information, such as downstream queries and machine learning pipelines.
 
+## Paper Reproduction
+
+Here we provide the codebase for reproducing the experiments in the paper.
+
+| Section | Description                                                                              |
+|---------|------------------------------------------------------------------------------------------|
+| 4.1     | [Column Access Detection](/workflow/s2_experiments/t1_column_access_detection)           |
+| 4.2     | [End-to-End Data Error Impact](/workflow/s3_evaluation/evaluation)                       |
+| 4.3     | [Uncovering Implicit Data Assumptions](/workflow/s2_experiments/t2_constraint_inference) |
+
 ### Project Structure
 
 The project consists of the following [modules](/tadv):

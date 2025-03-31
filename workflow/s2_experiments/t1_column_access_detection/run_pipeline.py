@@ -1,9 +1,9 @@
 from tadv.utils import load_dotenv, get_current_folder
 
 load_dotenv()
-from workflow.s2_experiments.t1_relevant_column_detection.string_matching import run_string_matching_for_rcd, \
+from workflow.s2_experiments.t1_column_access_detection.string_matching import run_string_matching_for_rcd, \
     run_llm_for_rcd
-from workflow.s2_experiments.t1_relevant_column_detection.metrics import RelevantColumnDetectionMetric
+from workflow.s2_experiments.t1_column_access_detection.metrics import RelevantColumnDetectionMetric
 from workflow.s2_experiments.utils import load_previous_and_new_spark_data
 
 from tadv.utils import get_task_instance
