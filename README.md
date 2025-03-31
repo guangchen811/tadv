@@ -1,6 +1,7 @@
 # Task-aware Data Validation (TADV)
 
 [![codecov](https://codecov.io/github/guangchen811/tadv/graph/badge.svg?token=UC6B33P10M)](https://codecov.io/github/guangchen811/tadv)
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 ## Overview
 
