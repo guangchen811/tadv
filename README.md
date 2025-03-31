@@ -11,11 +11,14 @@ information, such as downstream queries and machine learning pipelines.
 
 Here we provide the codebase for reproducing the experiments in the paper.
 
-| Section | Description                                                                              |
-|---------|------------------------------------------------------------------------------------------|
-| 4.1     | [Column Access Detection](/workflow/s2_experiments/t1_column_access_detection)           |
-| 4.2     | [End-to-End Data Error Impact](/workflow/s3_evaluation/evaluation)                       |
-| 4.3     | [Uncovering Implicit Data Assumptions](/workflow/s2_experiments/t2_constraint_inference) |
+| Section | Source Code                                                                              | Description                                     |
+|---------|------------------------------------------------------------------------------------------|-------------------------------------------------|
+|
+ 4.1     | [Column Access Detection](/workflow/s2_experiments/t1_column_access_detection)           | [Link](##)                                      |
+|
+ 4.2     | [End-to-End Data Error Impact](/workflow/s3_evaluation/evaluation)                       | [Link](#step-3-evaluation)                      |
+|
+ 4.3     | [Uncovering Implicit Data Assumptions](/workflow/s2_experiments/t2_constraint_inference) | [Link](#step-2-data-validation-rule-generation) |
 
 ### Project Structure
 
@@ -27,7 +30,7 @@ The project consists of the following [modules](/tadv):
   in the context of downstream queries or machine learning pipelines.
 - **[LLM](/tadv/llm)** – Contains classes for interacting with LLM APIs to generate data validation rules. This
   process follows three key steps:
-    1. **Target Column Detection** – Identifying relevant columns based on downstream context.
+    1. **Column Access Detection** – Identifying relevant columns based on downstream context.
     2. **Assumption Generation** – Inferring data assumptions from provided context and dataset properties.
     3. **Rule Generation** – Producing executable validation rules to ensure data quality.
 - **[Inspector](/tadv/inspector)** – Extracts dataset metadata, including schema and statistics, to aid LLMs in
@@ -63,9 +66,9 @@ to [dspy](https://dspy-docs.vercel.app/) in the future.
 
 As shown in the following figure, we decompose the data validation task into two three sub-tasks:
 
-- Target column detection: detect the target column that needs to be validated based on the downstream queries or
+- Column access detection: detect the accessed column that needs to be validated based on the downstream queries or
   machine learning pipelines.
-- Assumption generation: generate assumptions based on the target column and the context information.
+- Assumption generation: generate assumptions based on the accessed column and the context information.
 - Rule generation: generate formal rules in the form
   of [deequ](https://github.com/awslabs/python-deequ/blob/master/pydeequ/checks.py) for evaluation.
 
@@ -102,8 +105,8 @@ The dataset is structured as follows:
     - Website generation
 - **`errors/`** – Stores error configurations used for error injection.
 - **`annotations/`** – Provides dataset annotations, including:
-    - Target columns for all scripts in the three domains
-    - Assumptions associated with the target columns
+    - Accessed columns for all scripts in the three domains
+    - Assumptions associated with the accessed columns
 
 ## Experiment Workflow
 
@@ -186,12 +189,12 @@ This command will execute the downstream scripts in `data/<dataset>/scripts/` an
 
 ### Step 2: Data Validation Rule Generation
 
-#### 2.1 Target Column Detection
+#### 2.1 Column Access Detection
 
-To detect the target column, run the following command:
+To detect the accessed column, run the following command:
 
 ```shell
-poetry run python ./workflow/s2_experiments/t1_target_column_detection/run_langchain_tcd.py --dataset-option "all" --downstream-task-option "all" --processed-data-label "0"
+poetry run python ./workflow/s2_experiments/t1_accessed_column_detection/run_langchain_tcd.py --dataset-option "all" --downstream-task-option "all" --processed-data-label "0"
 ```
 
 #### 2.2 End-to-End Data Validation Rule Generation
