@@ -12,11 +12,11 @@ information, such as downstream queries and machine learning pipelines.
 
 Here we provide the codebase for reproducing the experiments in the paper.
 
-| Section                       | Source Code                                                                              | Description                                                                    |
-|-------------------------------|------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------|
-| <div align="center">4.1</div> | [Column Access Detection](/workflow/s2_experiments/t1_column_access_detection)           | <div align="center">[⬇️](#21-column-access-detection)</div>                    |
-| <div align="center">4.2</div> | [End-to-End Data Error Impact](/workflow/s3_evaluation/evaluation)                       | <div align="center">[⬇️](#step-3-evaluation)</div>                             |
-| <div align="center">4.3</div> | [Uncovering Implicit Data Assumptions](/workflow/s2_experiments/t2_constraint_inference) | <div align="center">[⬇️](#22-end-to-end-data-validation-rule-generation)</div> |
+| Section                       | Source Code                                                                                                        | Description                                                                    |
+|-------------------------------|--------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------|
+| <div align="center">4.1</div> | <div align="center">[Column Access Detection](/workflow/s2_experiments/t1_column_access_detection)</div>           | <div align="center">[⬇️](#21-column-access-detection)</div>                    |
+| <div align="center">4.2</div> | <div align="center">[End-to-End Data Error Impact](/workflow/s3_evaluation/evaluation)</div>                       | <div align="center">[⬇️](#step-3-evaluation)</div>                             |
+| <div align="center">4.3</div> | <div align="center">[Uncovering Implicit Data Assumptions](/workflow/s2_experiments/t2_constraint_inference)</div> | <div align="center">[⬇️](#22-end-to-end-data-validation-rule-generation)</div> |
 
 ### Project Structure
 
