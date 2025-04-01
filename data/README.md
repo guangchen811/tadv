@@ -18,12 +18,12 @@ the [runtime environments](/tadv/runtime_environments) to evaluate the generated
 
 The dataset is structured as follows:
 
-- **`files/`** – Contains the source data.
-- **`scripts/`** – Includes downstream scripts spanning three domains:
+- 📁**`files/`** – Contains the source data.
+- 📁**`scripts/`** – Includes downstream scripts spanning three domains:
     - SQL queries
     - Machine learning pipelines
     - Website generation
-- **`errors/`** – Stores error configurations used for error injection.
-- **`annotations/`** – Provides dataset annotations, including:
+- 📁**`errors/`** – Stores error configurations used for error injection.
+- 📁**`annotations/`** – Provides dataset annotations, including:
     - Accessed columns for all scripts in the three domains
     - Assumptions associated with the accessed columns

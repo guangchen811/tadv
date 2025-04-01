@@ -79,7 +79,7 @@ class PythonExecutor(ExecutorBase):
 
     def _check_env_against_requirements(self):
         reqs = self.requirements_path.read_text().split("\n")
-        reqs = [req.split("==") for req in reqs if req]
+        reqs = [req.strip().split("==") for req in reqs if req.strip()]
         reqs = [tuple(req) if len(req) == 2 else req[0] for req in reqs]
         if not reqs:
             return True
