@@ -11,53 +11,53 @@ class AbstractDataQualityManager(ABC):
         """
         Convert a pandas DataFrame to a Spark DataFrame.
         """
-        pass
+        raise NotImplementedError
 
     @abstractmethod
     def analyze_on_spark_df(self, spark, spark_df, analyzers):
         """
         Perform data analysis on a Spark DataFrame.
         """
-        pass
+        raise NotImplementedError
 
     @abstractmethod
     def profile_on_spark_df(self, spark, spark_df):
         """
         Profile the data in a Spark DataFrame.
         """
-        pass
+        raise NotImplementedError
 
     @abstractmethod
     def get_suggestion_for_spark_df(self, spark, spark_df):
         """
         Generate suggestions for improving data quality for a Spark DataFrame.
         """
-        pass
+        raise NotImplementedError
 
     @abstractmethod
     def validate_suggestions(self, spark, spark_df, check):
         """
         Validate suggestions on a Spark DataFrame.
         """
-        pass
+        raise NotImplementedError
 
     @abstractmethod
     def apply_checks_from_strings(self, spark, spark_df, check_strings):
         """
         Apply validation checks provided as strings to a Spark DataFrame.
         """
-        pass
+        raise NotImplementedError
 
     @abstractmethod
     def validate_on_spark_df(self, spark, spark_df, code_list_for_constraints, return_raw=False):
         """
         Validate a Spark DataFrame against specified constraints.
         """
-        pass
+        raise NotImplementedError
 
     @abstractmethod
     def filter_constraints(self, code_list_for_constraints, spark_original_validation, spark_original_validation_df):
         """
         Filter constraints based on validation results.
         """
-        pass
+        raise NotImplementedError
