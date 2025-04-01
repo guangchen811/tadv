@@ -13,7 +13,7 @@ def test_load_py_file(resources_path):
     script = FileLoader.load_py_file(file_path)
     assert isinstance(script, str)
     assert len(script) > 0
-    assert script.startswith("#%% md")
+    assert script.startswith("# %% md")
 
     file_path_return = FileLoader.load_py_file(file_path, return_file=False)
     assert isinstance(file_path_return, Path)
@@ -30,7 +30,7 @@ def test_load_py_files(resources_path):
     assert len(scripts) == 1
     assert all([type(script) == str for script in scripts])
     assert all([len(script) > 0 for script in scripts])
-    assert all([script.startswith("#%% md") for script in scripts])
+    assert all([script.startswith("# %% md") for script in scripts])
 
     file_path_return = FileLoader.load_py_files(dir_path, return_files=True)
     assert isinstance(file_path_return, list)
