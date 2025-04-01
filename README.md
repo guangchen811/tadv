@@ -93,7 +93,9 @@ rm -r data_processed/*
 To inject errors into the dataset, run the following command:
 
 ```shell
-poetry run python ./workflow/s1_preprocessing/error_injection/main.py --dataset-option "all" --downstream-task-option "all"
+poetry run python ./workflow/s1_preprocessing/error_injection/main.py
+  --dataset-option "all"
+  --downstream-task-option "all"
 ```
 
 This command will inject errors into the dataset in `data/` folder and then save the corrupted dataset in
@@ -107,7 +109,10 @@ folder. Please make sure the name of the error injection script is started with 
 To Execute the downstream scripts, run the following command:
 
 ```shell
-poetry run python ./workflow/s1_preprocessing/scripts_execution/main.py --dataset-option "all" --downstream-task-option "all" --processed-data-label "0"
+poetry run python ./workflow/s1_preprocessing/scripts_execution/main.py
+  --dataset-option "all"
+  --downstream-task-option "all"
+  --processed-data-label "0"
 ```
 
 This command will execute the downstream scripts in `data/<dataset>/scripts/` and then save the results in the
@@ -120,7 +125,10 @@ This command will execute the downstream scripts in `data/<dataset>/scripts/` an
 To detect the accessed column, run the following command:
 
 ```shell
-poetry run python ./workflow/s2_experiments/t1_accessed_column_detection/run_langchain_tcd.py --dataset-option "all" --downstream-task-option "all" --processed-data-label "0"
+poetry run python ./workflow/s2_experiments/t1_accessed_column_detection/run_langchain_tcd.py
+  --dataset-option "all"
+  --downstream-task-option "all"
+  --processed-data-label "0"
 ```
 
 #### 2.2 End-to-End Data Validation Rule Generation
@@ -128,11 +136,17 @@ poetry run python ./workflow/s2_experiments/t1_accessed_column_detection/run_lan
 To generate data validation rules, run the following command:
 
 ```shell
-poetry run python ./workflow/s2_experiments/t2_constraint_inference/run_deequ_dv.py --dataset-option "all" --downstream-task-option "all" --processed-data-label "0"
+poetry run python ./workflow/s2_experiments/t2_constraint_inference/run_deequ_dv.py
+  --dataset-option "all"
+  --downstream-task-option "all"
+  --processed-data-label "0"
 ```
 
 ```shell
-poetry run python ./workflow/s2_experiments/t2_constraint_inference/run_langchain_tadv.py --dataset-option "all" --downstream-task-option "all" --processed-data-label "0"
+poetry run python ./workflow/s2_experiments/t2_constraint_inference/run_langchain_tadv.py
+  --dataset-option "all"
+  --downstream-task-option "all"
+  --processed-data-label "0"
 ```
 
 ### Step 3: Evaluation
@@ -142,14 +156,20 @@ poetry run python ./workflow/s2_experiments/t2_constraint_inference/run_langchai
 To evaluate the performance of the scripts in the downstream tasks, run the following command:
 
 ```shell
-poetry run python ./workflow/s3_evaluation/evaluation/calculate_code_performance.py --dataset-option "all" --downstream-task-option "all" --processed-data-label "0"
+poetry run python ./workflow/s3_evaluation/evaluation/calculate_code_performance.py
+  --dataset-option "all"
+  --downstream-task-option "all"
+  --processed-data-label "0"
 ```
 
 The evaluation results will be saved in the
 `data_processed/<dataset>/<downstream-task>/<processed-data-label>/output_validation/` folder.
 
 ```shell
-poetry run python ./workflow/s3_evaluation/evaluation/validate_constraints.py --dataset-option "all" --downstream-task-option "all" --processed-data-label "0"
+poetry run python ./workflow/s3_evaluation/evaluation/validate_constraints.py
+  --dataset-option "all"
+  --downstream-task-option "all"
+  --processed-data-label "0"
 ```
 
 The evaluation results will be saved in the
@@ -158,5 +178,8 @@ The evaluation results will be saved in the
 Now, you can aggregate the evaluation results by running the following command:
 
 ```shell
-poetry run python ./workflow/s3_evaluation/evaluation/main.py --dataset-option "all" --downstream-task-option "all" --processed-data-label "0"
+poetry run python ./workflow/s3_evaluation/evaluation/main.py
+  --dataset-option "all"
+  --downstream-task-option "all"
+  --processed-data-label "0"
 ```
