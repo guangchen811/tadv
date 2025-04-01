@@ -18,7 +18,7 @@ Here we provide the codebase for reproducing the experiments in the paper.
 | <div align="center">4.2</div> | <div align="center">[End-to-End Data Error Impact](/workflow/s3_evaluation)</div>                                  |
 | <div align="center">4.3</div> | <div align="center">[Uncovering Implicit Data Assumptions](/workflow/s2_experiments/t2_constraint_inference)</div> |
 
-### Project Structure
+## Project Structure
 
 The project consists of the following [modules](/tadv):
 
