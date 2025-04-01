@@ -8,7 +8,7 @@
 TADV is a framework for evaluating the data validation capabilities of large language models (LLMs) using contextual
 information, such as downstream queries and machine learning pipelines.
 
-## Paper Reproduction
+## Experiment Reproduction
 
 Here we provide the codebase for reproducing the experiments in the paper.
 
@@ -33,78 +33,6 @@ The project consists of the following [modules](/tadv):
     3. **Rule Generation** – Producing executable validation rules to ensure data quality.
 - **[Inspector](/tadv/inspector)** – Extracts dataset metadata, including schema and statistics, to aid LLMs in
   generating informed validation rules.
-
-#### Error Injection
-
-The error injection module is built based on [Jenga](https://github.com/schelterlabs/jenga), a library for injecting
-errors into datasets. We extend the error injection methods into more real world scenarios where we often need
-context information to fix the errors. You can find the error injection
-methods [here](/tadv/error_injection/corrupts).
-
-The following table lists the error injection methods we support:
-
-| **Type**                                                                                 | **Explanation**                                                                                               |
-|------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------|
-| [Missing categorical value](/tadv/error_injection/corrupts/categorical_value_missing.py) | Replace one or more types of categorical value with a missing value or other existing values, or delete them. |
-| [Dropping column](/tadv/error_injection/corrupts/column_dropping.py)                     | Drop one or more columns.                                                                                     |
-| [Inserting column](/tadv/error_injection/corrupts/column_inserting.py)                   | Insert one or more columns by copying existing columns or generating new columns.                             |
-| [Adding gaussian noise](/tadv/error_injection/corrupts/gaussian_noise.py)                | Add Gaussian noise to numerical values.                                                                       |
-| [Masking values](/tadv/error_injection/corrupts/masking_values.py)                       | Mask one or more values in the dataset.                                                                       |
-| [Scaling values](/tadv/error_injection/corrupts/scaling_values.py)                       | Scale numerical values by a factor.                                                                           |
-
-#### Runtime Environments
-
-The runtime environments module provides execution environments for evaluating datasets in the context of downstream.
-TODO: add more details.
-
-#### LLM
-
-Currently, we use [langchain](https://www.langchain.com/) as the tool for llm api calls. We plan to extend it
-to [dspy](https://dspy-docs.vercel.app/) in the future.
-
-As shown in the following figure, we decompose the data validation task into two three sub-tasks:
-
-- Column access detection: detect the accessed column that needs to be validated based on the downstream queries or
-  machine learning pipelines.
-- Assumption generation: generate assumptions based on the accessed column and the context information.
-- Rule generation: generate formal rules in the form
-  of [deequ](https://github.com/awslabs/python-deequ/blob/master/pydeequ/checks.py) for evaluation.
-
-The prompts during the API calls can be found [here](/tadv/llm/langchain/_prompt.py). For more details, you
-can look at the [test case](/tests/llm/langchain).
-
-TODO: add more details.
-
-#### Inspector
-
-The inspector module is designed to provide dataset information, such as schema and statistics. It is built based
-on [pydeequ](https://github.com/awslabs/python-deequ) and [pandas](https://pandas.pydata.org/). TODO: add more details.
-
-## Provided Datasets
-
-We provide two tabular datasets from Kaggle for testing the framework:
-
-- [Healthcare](https://www.kaggle.com/datasets/prasad22/healthcare-dataset)
-- [Loan Approval Prediction](https://www.kaggle.com/competitions/playground-series-s4e10)
-
-Besides, we also have a [toy dataset](/data/toy_example) for showcasing the whole workflow.
-
-These datasets are available in the [data](/data) directory. In addition to the raw data, we provide scripts that run in
-the [runtime environments](/tadv/runtime_environments) to evaluate the generated data validation rules.
-
-### Example: [Healthcare Dataset](/data/healthcare_dataset)
-
-The dataset is structured as follows:
-
-- **`files/`** – Contains the source data.
-- **`scripts/`** – Includes downstream scripts spanning three domains:
-    - SQL queries
-    - Machine learning pipelines
-    - Website generation
-- **`errors/`** – Stores error configurations used for error injection.
-- **`annotations/`** – Provides dataset annotations, including:
-    - Accessed columns for all scripts in the three domains
-    - Assumptions associated with the accessed columns
 
 ## Experiment Workflow
 
