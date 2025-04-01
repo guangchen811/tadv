@@ -85,7 +85,7 @@ We provide all the preprocessed data in the `data_processed/` folder for paper r
 results, you need to delete the existing preprocessed data first by running the following command:
 
 ```shell
-rm -rf data_processed/*
+rm -r data_processed/*
 ```
 
 #### 1.2 Errors Injection
