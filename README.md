@@ -5,14 +5,12 @@
 [![CI](https://github.com/guangchen811/tadv/actions/workflows/ci.yml/badge.svg?branch=main)](.github/workflows/ci.yml)
 [![codecov](https://codecov.io/github/guangchen811/tadv/graph/badge.svg?token=UC6B33P10M)](https://codecov.io/github/guangchen811/tadv)
 
-## Overview
-
 TADV is a framework for evaluating the data validation capabilities of large language models using contextual
 information, such as downstream queries and machine learning pipelines.
 
 ## Experiment Reproduction
 
-Here we provide the codebase for reproducing the experiments in the paper.
+Here we provide the codebase for reviewing and reproducing the experiments in the paper.
 
 | Section                       | Source Code                                                                                                       |
 |-------------------------------|-------------------------------------------------------------------------------------------------------------------|
@@ -22,7 +20,7 @@ Here we provide the codebase for reproducing the experiments in the paper.
 
 ## Project Structure
 
-The project consists of the following [modules](tadv):
+The project consists of the following modules:
 
 - **[Error Injection](tadv/error_injection)** – Provides APIs for injecting errors into datasets, enabling robustness
   testing for validation methods.
