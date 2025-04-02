@@ -1,39 +1,42 @@
 name: CI
-on: push
+on:
+  push:
+    tags:
+      - 'v*.*.*'
 
 jobs:
-    ci:
-        environment: LLM APPLICATION
-        strategy:
-            fail-fast: false
-            matrix:
-                python-version: [3.11]
-                poetry-version: [1.8.3]
-                os: [macos-latest, ubuntu-latest]
-        runs-on: ${{ matrix.os }}
-        env:
-            OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-            HF_TOKEN: ${{ secrets.HF_TOKEN }}
-        steps:
-            - uses: actions/checkout@v4
-            - uses: actions/setup-python@v4
-              with:
-                    python-version: ${{ matrix.python-version }}
-            - name: Install poetry
-              uses: abatilo/actions-poetry@v2
-              with:
-                    poetry-version: ${{ matrix.poetry-version }}
-            - name: Install dependencies
-              run: poetry install --with test
-            - name: create dotenv file
-              run: |
-                echo "OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}" > .env
-                echo "HF_TOKEN=${{ secrets.HF_TOKEN }}" >> .env
-                echo "SPARK_VERSION=3.5" >> .env
-                echo ".env file created successfully"
-            - name: Run tests
-              run: poetry run pytest --cov --cov==tadv --cov-report=xml --cov-config=.coveragerc
-            - name: Upload results to Codecov
-              uses: codecov/codecov-action@v4
-              with:
-                token: ${{ secrets.CODECOV_TOKEN }}
+  ci:
+    environment: LLM APPLICATION
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: [ 3.11 ]
+        poetry-version: [ 1.8.3 ]
+        os: [ macos-latest, ubuntu-latest ]
+    runs-on: ${{ matrix.os }}
+    env:
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install poetry
+        uses: abatilo/actions-poetry@v2
+        with:
+          poetry-version: ${{ matrix.poetry-version }}
+      - name: Install dependencies
+        run: poetry install --with test
+      - name: create dotenv file
+        run: |
+          echo "OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}" > .env
+          echo "HF_TOKEN=${{ secrets.HF_TOKEN }}" >> .env
+          echo "SPARK_VERSION=3.5" >> .env
+          echo ".env file created successfully"
+      - name: Run tests
+        run: poetry run pytest --cov --cov==tadv --cov-report=xml --cov-config=.coveragerc
+      - name: Upload results to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
