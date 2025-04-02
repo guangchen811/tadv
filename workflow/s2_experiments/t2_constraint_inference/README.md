@@ -1,11 +1,10 @@
 # Constraint Inference
 
-We run Deequ and tadv to infer constraints from the data. The results are saved in the
-`data_processed/<dataset>/<downstream-task>/<processed-data-label>/constraints_validation/` folder.
+We run **Deequ** and **TADV** to infer constraints from the data. The results are saved in the following directory
+structure:
+`data_processed/<dataset-name>/<downstream-task>/<processed-data-label>/constraints/<script>/<llm-and-strategy>` folder.
 
 <div align="center">
-
-We provide the shortcut to the examples mentioned in the paper here.
 
 | Example | Script                                                                                                                              | Constraints                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 |---------|-------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
