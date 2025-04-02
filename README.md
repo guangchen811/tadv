@@ -1,7 +1,9 @@
 # Task-aware Data Validation (TADV)
 
-[![codecov](https://codecov.io/github/guangchen811/tadv/graph/badge.svg?token=UC6B33P10M)](https://codecov.io/github/guangchen811/tadv)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+![Python](https://img.shields.io/badge/python-3.12-blue)
+[![CI](https://github.com/guangchen811/tadv/actions/workflows/ci.yml/badge.svg?branch=main)](.github/workflows/ci.yml)
+[![codecov](https://codecov.io/github/guangchen811/tadv/graph/badge.svg?token=UC6B33P10M)](https://codecov.io/github/guangchen811/tadv)
 
 ## Overview
 
@@ -12,26 +14,26 @@ information, such as downstream queries and machine learning pipelines.
 
 Here we provide the codebase for reproducing the experiments in the paper.
 
-| Section                       | Source Code                                                                                                        |
-|-------------------------------|--------------------------------------------------------------------------------------------------------------------|
-| <div align="center">4.1</div> | <div align="center">[Column Access Detection](/workflow/s2_experiments/t1_column_access_detection)</div>           |
-| <div align="center">4.2</div> | <div align="center">[End-to-End Data Error Impact](/workflow/s3_evaluation)</div>                                  |
-| <div align="center">4.3</div> | <div align="center">[Uncovering Implicit Data Assumptions](/workflow/s2_experiments/t2_constraint_inference)</div> |
+| Section                       | Source Code                                                                                                       |
+|-------------------------------|-------------------------------------------------------------------------------------------------------------------|
+| <div align="center">4.1</div> | <div align="center">[Column Access Detection](workflow/s2_experiments/t1_column_access_detection)</div>           |
+| <div align="center">4.2</div> | <div align="center">[End-to-End Data Error Impact](workflow/s3_evaluation)</div>                                  |
+| <div align="center">4.3</div> | <div align="center">[Uncovering Implicit Data Assumptions](workflow/s2_experiments/t2_constraint_inference)</div> |
 
 ## Project Structure
 
-The project consists of the following [modules](/tadv):
+The project consists of the following [modules](tadv):
 
-- **[Error Injection](/tadv/error_injection)** – Provides APIs for injecting errors into datasets, enabling robustness
+- **[Error Injection](tadv/error_injection)** – Provides APIs for injecting errors into datasets, enabling robustness
   testing for validation methods.
-- **[Runtime Environments](/tadv/runtime_environments)** – Defines execution environments where datasets are evaluated
+- **[Runtime Environments](tadv/runtime_environments)** – Defines execution environments where datasets are evaluated
   in the context of downstream queries or machine learning pipelines.
-- **[LLM](/tadv/llm)** – Contains classes for interacting with LLM APIs to generate data validation rules. This
+- **[LLM](tadv/llm)** – Contains classes for interacting with LLM APIs to generate data validation rules. This
   process follows three key steps:
     1. **Column Access Detection** – Identifying relevant columns based on downstream context.
     2. **Assumption Generation** – Inferring data assumptions from provided context and dataset properties.
     3. **Rule Generation** – Producing executable validation rules to ensure data quality.
-- **[Inspector](/tadv/inspector)** – Extracts dataset metadata, including schema and statistics, to aid LLMs in
+- **[Inspector](tadv/inspector)** – Extracts dataset metadata, including schema and statistics, to aid LLMs in
   generating informed validation rules.
 
 ## Experiment Workflow
