@@ -5,7 +5,7 @@
 
 ## Overview
 
-TADV is a framework for evaluating the data validation capabilities of large language models (LLMs) using contextual
+TADV is a framework for evaluating the data validation capabilities of large language models using contextual
 information, such as downstream queries and machine learning pipelines.
 
 ## Experiment Reproduction
@@ -63,7 +63,7 @@ the [official documentation](https://python-poetry.org/docs/).
 After installing poetry, you can install the dependencies by running the following command:
 
 ```shell
-poetry install
+poetry install --with test
 ```
 
 You can then test the installation by running the following command. It will run all the [tests](/tests) in the project.
