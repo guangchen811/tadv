@@ -5,8 +5,8 @@
 [![CI](https://github.com/guangchen811/tadv/actions/workflows/ci.yml/badge.svg?branch=main)](.github/workflows/ci.yml)
 [![codecov](https://codecov.io/github/guangchen811/tadv/graph/badge.svg?token=UC6B33P10M)](https://codecov.io/github/guangchen811/tadv)
 
-TADV is a framework for evaluating the data validation capabilities of large language models using contextual
-information, such as downstream queries and machine learning pipelines.
+TADV is a framework that leverages Language Models (LMs) to generate data validation rules based on downstream task
+context.
 
 ## Experiment Reproduction
 
