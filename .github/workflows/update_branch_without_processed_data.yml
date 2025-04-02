@@ -1,0 +1,28 @@
+name: Create Branch Without Data Processed
+on:
+  push:
+    branches: [ main ]
+jobs:
+  clean-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Required to push new branches
+      - name: Set up Git user
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Create clean branch without data_processed
+        run: |
+          git checkout -b core-only
+
+          # Remove data_processed folder
+          git rm -r --cached data_processed
+          rm -rf data_processed
+
+          # Commit and push
+          git commit -m "Create branch without data_processed"
+          git push -f origin core-only
