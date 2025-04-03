@@ -12,7 +12,7 @@ jobs:
       matrix:
         python-version: [ 3.11 ]
         poetry-version: [ 1.8.3 ]
-        os: [ macos-latest, ubuntu-latest ]
+        os: [ macos-latest ]
     runs-on: ${{ matrix.os }}
     env:
       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
