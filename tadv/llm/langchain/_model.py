@@ -27,7 +27,7 @@ class LangChainTADV(AbstractLangChainTADV):
 
     @staticmethod
     def _get_langchain_model(model_name: str):
-        get_langchain_model(model_name)
+        return get_langchain_model(model_name)
 
     @staticmethod
     def _build_prompt(task: DVTask,

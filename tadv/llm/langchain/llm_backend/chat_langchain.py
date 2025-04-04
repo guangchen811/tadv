@@ -6,7 +6,6 @@ def llm_with_lc_hf(model_name: str):
     """
     Create llm with langchain huggingface pipeline
     """
-    model_name = "microsoft/Phi-3-mini-4k-instruct"
     tokenizer = AutoTokenizer.from_pretrained(model_name)
 
     model = AutoModelForCausalLM.from_pretrained(
