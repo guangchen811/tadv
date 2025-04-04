@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
 
-class AbstractLangChainCADV(ABC):
+class AbstractLangChainTADV(ABC):
     @abstractmethod
     def single_invoke(self, input_variables: dict, num_stages: int):
         raise NotImplementedError

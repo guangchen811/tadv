@@ -1,3 +1,3 @@
-from tadv.llm.langchain._model import LangChainCADV
+from tadv.llm.langchain._model import LangChainTADV
 
-__all__ = ["LangChainCADV"]
+__all__ = ["LangChainTADV"]

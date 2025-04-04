@@ -4,21 +4,20 @@ from langchain_core.exceptions import OutputParserException
 from langchain_core.output_parsers import (CommaSeparatedListOutputParser,
                                            JsonOutputParser)
 from langchain_core.prompts import ChatPromptTemplate
-from langchain_ollama import ChatOllama
-from langchain_openai import ChatOpenAI
 
 from tadv.llm._tasks import DVTask
 from tadv.llm.langchain._prompt import (RELEVANT_COLUMN_TARGET_PROMPT,
-                                                    RULE_GENERATION_PROMPT, SYSTEM_TASK_DESCRIPTION)
-from tadv.llm.langchain.abstract import AbstractLangChainCADV
+                                        RULE_GENERATION_PROMPT, SYSTEM_TASK_DESCRIPTION)
+from tadv.llm.langchain.abstract import AbstractLangChainTADV
+from tadv.llm.langchain.llm_backend import get_langchain_model
 
 
-class LangChainCADV(AbstractLangChainCADV):
+class LangChainTADV(AbstractLangChainTADV):
     def __init__(self, model_name: str = None, downstream_task_description: str = None,
                  assumption_generation_trick: str = None,
-                 logger: object = None) -> object:
+                 logger: object = None):
         if model_name is None:
-            self.model = ChatOpenAI(model="gpt-4o-mini")
+            raise ValueError("Model name is required.")
         else:
             self.model = self._get_langchain_model(model_name)
         self.downstream_task_description = downstream_task_description
@@ -28,21 +27,7 @@ class LangChainCADV(AbstractLangChainCADV):
 
     @staticmethod
     def _get_langchain_model(model_name: str):
-        model_name_package_map = {
-            "gpt-3.5-turbo": ChatOpenAI(model="gpt-3.5-turbo"),
-            "gpt-4o-mini": ChatOpenAI(model="gpt-4o-mini"),
-            "gpt-4o": ChatOpenAI(model="gpt-4o"),
-            "gpt-4.5-preview": ChatOpenAI(model="gpt-4.5-preview"),
-            "llama3.2:1b": ChatOllama(model="llama3.2:1b"),
-            "llama3.2": ChatOllama(model="llama3.2"),
-            "llama3.2:3b": ChatOllama(model="llama3.2"),
-        }
-
-        try:
-            model_api = model_name_package_map[model_name]
-        except KeyError:
-            raise ValueError(f"Invalid model name: {model_name}")
-        return model_api
+        get_langchain_model(model_name)
 
     @staticmethod
     def _build_prompt(task: DVTask,
