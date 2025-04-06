@@ -7,7 +7,7 @@ def get_langchain_model(model_name: str):
     openai_api_model_list = ["gpt-3.5-turbo", "gpt-4o-mini", "gpt-4o", "gpt-4.5-preview"]
     if model_name in openai_api_model_list:
         model_api = ChatOpenAI(model_name=model_name, temperature=0.6)
-    elif model_name == "meta-llama/Llama-3.2-1B":
+    elif model_name == "meta-llama/Llama-2-7b-chat-hf":
         model_api = llm_with_lc_hf(model_name)
     else:
         raise ValueError(f"Model name {model_name} not supported.")

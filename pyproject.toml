@@ -24,7 +24,6 @@ langchain-ollama = "^0.3.0"
 kaggle = "^1.6.17"
 seaborn = "^0.13.2"
 langchain-huggingface = "^0.1.2"
-accelerate = "^1.6.0"
 
 [tool.poetry.group.test]
 optional = true
