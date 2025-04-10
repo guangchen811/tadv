@@ -5,16 +5,12 @@ from tadv.dq_manager.deequ._constraint_suggestion import \
     get_suggestion_for_spark_df
 from tadv.dq_manager.deequ._constraint_validation import validate_suggestions, apply_checks_from_strings, \
     validate_on_df
-from tadv.dq_manager.deequ._loading import spark_df_from_pandas_df
 from tadv.dq_manager.deequ._profiling import profile_on_spark_df
 
 
 class DeequDataQualityManager(AbstractDataQualityManager):
     def __init__(self):
         super().__init__()
-
-    def spark_df_from_pandas_df(self, pandas_df):
-        return spark_df_from_pandas_df(pandas_df)
 
     def analyze_on_spark_df(self, spark, spark_df, analyzers):
         return analyze_on_spark_df(spark, spark_df, analyzers)
