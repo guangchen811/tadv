@@ -1,6 +1,8 @@
 import great_expectations as gx
 import pandas as pd
 
+from tadv.dq_manager.deequ.wrapper import DeequDataQualityManager
+
 
 def test_gx_init():
     # Retrieve your Data Context
@@ -10,7 +12,7 @@ def test_gx_init():
     data_source_name = "my_data_source"
 
     # Add the Data Source to the Data Context
-    data_source = context.data_sources.add_pandas(name=data_source_name)
+    data_source = context.data_sources.add_spark(name=data_source_name)
 
     # Define the Data Asset name
     data_asset_name = "my_dataframe_data_asset"
@@ -32,8 +34,10 @@ def test_gx_init():
             "trip_distance": [1.0, 2.0, 3.0, 4.0, 5.0],
         }
     )
+    dq_manager = DeequDataQualityManager()
+    spark_df, _ = dq_manager.spark_df_from_pandas_df(dataframe)
     # Define the Batch Parameters
-    batch_parameters = {"dataframe": dataframe}
+    batch_parameters = {"dataframe": spark_df}
 
     expectation = gx.expectations.ExpectColumnValuesToBeBetween(
         column="passenger_count", max_value=6, min_value=1

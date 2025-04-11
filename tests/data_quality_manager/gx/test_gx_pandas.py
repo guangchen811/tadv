@@ -35,11 +35,22 @@ def test_gx_init():
     # Define the Batch Parameters
     batch_parameters = {"dataframe": dataframe}
 
+    suite_name = "my_expectation_suite"
+    suite = gx.ExpectationSuite(name=suite_name)
+    suite = context.suites.add(suite)
     expectation = gx.expectations.ExpectColumnValuesToBeBetween(
         column="passenger_count", max_value=6, min_value=1
     )
+    suite.add_expectation(expectation)
+    expectation = gx.expectations.ExpectColumnValuesToBeBetween(
+        column="trip_distance", max_value=3, min_value=1
+    )
+    suite.add_expectation(expectation)
 
     batch = batch_definition.get_batch(batch_parameters=batch_parameters)
 
-    validation_results = batch.validate(expectation)
+    validation_results = batch.validate(suite)
     print(validation_results)
+
+    # validation_results_dict = {}
+    # return ValidationResults.from_dict(validation_results_dict)
