@@ -1,6 +1,3 @@
-from tadv.utils import load_dotenv
-
-load_dotenv()
 from tadv.dq_manager import DeequDataQualityManager
 from tadv.inspector.deequ.deequ_inspector_manager import DeequInspectorManager
 from tadv.loader import FileLoader

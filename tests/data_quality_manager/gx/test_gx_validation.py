@@ -1,8 +1,5 @@
-from tadv.utils import load_dotenv
-
-load_dotenv()
-
 import pandas as pd
+
 from tadv.dq_manager import GreatExpectationsDataQualityManager
 
 

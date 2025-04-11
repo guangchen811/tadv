@@ -4,10 +4,7 @@ from collections import defaultdict
 import pandas as pd
 
 from tadv.data_models import ValidationResults
-from tadv.utils import load_dotenv, get_current_folder
-
-load_dotenv()
-
+from tadv.utils import get_current_folder
 from tadv.utils import get_project_root
 
 

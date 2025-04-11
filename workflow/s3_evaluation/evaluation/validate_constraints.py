@@ -1,7 +1,4 @@
 from tadv.data_models import Constraints
-from tadv.utils import load_dotenv
-
-load_dotenv()
 
 from tadv.dq_manager import DeequDataQualityManager
 from tadv.loader import FileLoader
@@ -68,16 +65,16 @@ def validate_on_both_test_data(suggestion_file_path, clean_test_data, corrupted_
     status_on_clean_test_data = dq_manager.validate_on_spark_df(spark_clean_test, spark_clean_test_data,
                                                                 code_list_for_constraints)
     validation_results_on_clean_test_data = dq_manager.build_validation_results(code_list_for_constraints,
-                                                                                     status_on_clean_test_data,
-                                                                                     valid_code_column_map)
+                                                                                status_on_clean_test_data,
+                                                                                valid_code_column_map)
     # Validate the constraints on the corrupted data
     spark_corrupted_test_data, spark_corrupted_test = dq_manager.spark_df_from_pandas_df(corrupted_test_data)
     status_on_corrupted_test_data = dq_manager.validate_on_spark_df(spark_corrupted_test,
                                                                     spark_corrupted_test_data,
                                                                     code_list_for_constraints)
     validation_results_on_corrupted_test_data = dq_manager.build_validation_results(code_list_for_constraints,
-                                                                                         status_on_corrupted_test_data,
-                                                                                         valid_code_column_map)
+                                                                                    status_on_corrupted_test_data,
+                                                                                    valid_code_column_map)
     spark_clean_test.sparkContext._gateway.shutdown_callback_server()
     spark_corrupted_test.sparkContext._gateway.shutdown_callback_server()
     spark_clean_test.stop()

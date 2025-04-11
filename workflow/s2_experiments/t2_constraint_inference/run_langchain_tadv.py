@@ -1,7 +1,3 @@
-from tadv.utils import load_dotenv
-
-load_dotenv()
-
 from tadv.utils import get_task_instance
 from tadv.utils import get_project_root
 from tadv.data_models import Constraints

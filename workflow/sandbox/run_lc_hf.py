@@ -1,15 +1,10 @@
-from tadv.utils import load_dotenv
-
-load_dotenv()
-from workflow.s2_experiments.utils import setup_logger
-from tadv.llm.langchain.prompts.downstream_task_prompt import SQL_QUERY_TASK_DESCRIPTION
+from tadv.dq_manager import DeequDataQualityManager
 from tadv.inspector.deequ.deequ_inspector_manager import DeequInspectorManager
 from tadv.llm.langchain import LangChainTADV
-
+from tadv.llm.langchain.prompts.downstream_task_prompt import SQL_QUERY_TASK_DESCRIPTION
 from tadv.loader import FileLoader
-
-from tadv.dq_manager import DeequDataQualityManager
 from tadv.utils import get_project_root
+from workflow.s2_experiments.utils import setup_logger
 
 logger = setup_logger("sandbox_example.log")
 

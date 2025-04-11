@@ -1,13 +1,9 @@
 import argparse
 import json
 
-from tadv.utils import load_dotenv
-
-load_dotenv()
-from workflow.s3_evaluation.evaluation.metrics_calculation.calculator import MetricsCalculation
-
 from tadv.dq_manager import DeequDataQualityManager
 from tadv.utils import get_project_root
+from workflow.s3_evaluation.evaluation.metrics_calculation.calculator import MetricsCalculation
 
 
 def evaluate(dataset_name, downstream_task, processed_data_label):

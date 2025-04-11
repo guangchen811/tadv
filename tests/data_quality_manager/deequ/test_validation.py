@@ -1,7 +1,3 @@
-from tadv.utils import load_dotenv
-
-load_dotenv()
-
 import pandas as pd
 from pydeequ.checks import *
 from pydeequ.verification import *
