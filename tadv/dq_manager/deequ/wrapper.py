@@ -1,4 +1,4 @@
-from tadv.data_models import Constraints
+from tadv.data_models import Constraints, ValidationResults
 from tadv.dq_manager.abstract_data_quality_manager import AbstractDataQualityManager
 from tadv.dq_manager.deequ._analyzing import analyze_on_spark_df
 from tadv.dq_manager.deequ._constraint_suggestion import \
@@ -30,7 +30,7 @@ class DeequDataQualityManager(AbstractDataQualityManager):
         if return_raw:
             return check_result
         status = [item['constraint_status'] if
-                                        item is not None else None for item in check_result]
+                  item is not None else None for item in check_result]
         return status
 
     def get_constraints_for_spark_df(self, spark, spark_df, spark_validation=None,
@@ -60,6 +60,16 @@ class DeequDataQualityManager(AbstractDataQualityManager):
         code_list_for_constraints = [code_list_for_constraints[i] for i in range(len(code_list_for_constraints)) if
                                      status_on_original_validation_df[i] == "Success"]
         return code_list_for_constraints
+
+    def build_validation_results(self, code_list_for_constraints, status_on_clean_test_data, valid_code_column_map):
+        code_status_map = {code_list_for_constraints[i]: status_on_clean_test_data[i] for i in
+                           range(len(code_list_for_constraints))}
+        validation_results_dict = {"results": {column: {"code": []} for column in valid_code_column_map.values()}}
+        for code, column in valid_code_column_map.items():
+            validation_results_dict["results"][column]["code"].append(
+                [code, "Passed" if code_status_map[code] == "Success" else "Failed"])
+        validation_results = ValidationResults.from_dict(validation_results_dict)
+        return validation_results
 
     def _get_suggestion_for_spark_df(self, spark, spark_df):
         return get_suggestion_for_spark_df(spark, spark_df)
