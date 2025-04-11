@@ -2,7 +2,7 @@ from tadv.utils import load_dotenv
 
 load_dotenv()
 from workflow.s2_experiments.utils import setup_logger
-from tadv.llm.langchain.downstream_task_prompt import SQL_QUERY_TASK_DESCRIPTION
+from tadv.llm.langchain.prompts.downstream_task_prompt import SQL_QUERY_TASK_DESCRIPTION
 from tadv.inspector.deequ.deequ_inspector_manager import DeequInspectorManager
 from tadv.llm.langchain import LangChainTADV
 

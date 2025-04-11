@@ -55,8 +55,8 @@ def test_filter_constraints_only_success(dq_manager):
     with patch.object(dq_manager, 'apply_checks_from_strings_on_spark_df', return_value=fake_validation_results):
         filtered = dq_manager.filter_valid_constraints(
             code_list_for_constraints=code_list,
-            spark_original_validation=None,
-            spark_original_validation_df=None
+            spark=None,
+            spark_df=None
         )
 
     # Only the first one should survive

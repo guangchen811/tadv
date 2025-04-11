@@ -1,5 +1,5 @@
 from tadv.llm.langchain import LangChainTADV
-from tadv.llm.langchain.downstream_task_prompt import SQL_QUERY_TASK_DESCRIPTION, ML_INFERENCE_TASK_DESCRIPTION, \
+from tadv.llm.langchain.prompts.downstream_task_prompt import SQL_QUERY_TASK_DESCRIPTION, ML_INFERENCE_TASK_DESCRIPTION, \
     WEB_TASK_DESCRIPTION
 
 

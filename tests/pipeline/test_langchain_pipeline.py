@@ -4,7 +4,7 @@ from tadv.utils import load_dotenv
 
 load_dotenv()
 
-from tadv.llm.langchain.downstream_task_prompt import ML_INFERENCE_TASK_DESCRIPTION
+from tadv.llm.langchain.prompts.downstream_task_prompt import ML_INFERENCE_TASK_DESCRIPTION
 from tadv.inspector.deequ.deequ_inspector_manager import DeequInspectorManager
 from tadv.llm.langchain import LangChainTADV
 from tadv.loader import FileLoader

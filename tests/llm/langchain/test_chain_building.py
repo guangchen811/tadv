@@ -2,7 +2,7 @@ from langchain_core.runnables.base import RunnableSequence
 
 from tadv.llm._tasks import DVTask
 from tadv.llm.langchain import LangChainTADV
-from tadv.llm.langchain.downstream_task_prompt import ML_INFERENCE_TASK_DESCRIPTION
+from tadv.llm.langchain.prompts.downstream_task_prompt import ML_INFERENCE_TASK_DESCRIPTION
 from tadv.utils import load_dotenv
 
 
