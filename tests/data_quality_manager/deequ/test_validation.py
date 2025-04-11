@@ -54,7 +54,7 @@ def test_validation_on_small_dataset_in_single_list(dq_manager):
         ".isNonNegative('b')"
     ]
 
-    check_result = dq_manager.apply_checks_from_strings(spark, spark_df, check_strings)
+    check_result = dq_manager.apply_checks_from_strings_on_spark_df(spark, spark_df, check_strings)
 
     assert check_result[0]["constraint_status"] == "Success"
     assert check_result[1]["constraint_status"] == "Failure"

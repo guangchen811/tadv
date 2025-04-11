@@ -52,7 +52,7 @@ def test_filter_constraints_only_success(dq_manager):
         None  # e.g., due to invalid syntax
     ]
 
-    with patch.object(dq_manager, 'apply_checks_from_strings', return_value=fake_validation_results):
+    with patch.object(dq_manager, 'apply_checks_from_strings_on_spark_df', return_value=fake_validation_results):
         filtered = dq_manager.filter_constraints(
             code_list_for_constraints=code_list,
             spark_original_validation=None,
