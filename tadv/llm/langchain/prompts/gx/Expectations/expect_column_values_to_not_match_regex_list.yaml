@@ -1,35 +1,26 @@
 Name:
-  ExpectColumnValuesToBeBetween
+  ExpectColumnValuesToNotMatchRegexList
 URL:
   https://greatexpectations.io/expectations/expect_column_values_to_not_match_regex_list/
 Description:
-  Expect the column entries to be between a minimum value and a maximum value (inclusive). ExpectColumnValuesToBeBetween is a Column Map Expectation Column Map Expectations are one of the most common types of Expectation. They are evaluated for a single column and ask a yes/no question for every row in that column. Based on the result, they then calculate the percentage of rows that gave a positive answer. If the percentage is high enough, the Expectation considers that data valid.
+  Expect the column entries to be strings that do not match any of a list of regular expressions. Matches can be anywhere in the string. ExpectColumnValuesToNotMatchRegexList is a Column Map Expectation. Column Map Expectations are one of the most common types of Expectation. They are evaluated for a single column and ask a yes/no question for every row in that column. Based on the result, they then calculate the percentage of rows that gave a positive answer. If the percentage is high enough, the Expectation considers that data valid.
 Args:
   - column:
       type: str
       description: The column name.
-  - min_value:
-      type: comparable type or None
-      description: The minimum value for a column entry.
-  - max_value:
-      type: comparable type or None
-      description: The maximum value for a column entry.
-  - strict_min:
-      type: boolean
-      description: If True, values must be strictly larger than min_value. Default=False.
-  - strict_max:
-      type: boolean
-      description: If True, values must be strictly smaller than max_value. Default=False.
+  - regex_list:
+      type: list
+      description: The list of regular expressions which the column entries should not match.
 Examples:
   Sample data:
     - column: "test"
-      value_set: [ 1, 1.3, .8, 2 ]
+      value_set: [ "aaa", "abb", "acc" ]
     - column: "test2"
-      value_set: [ 1, 7, 2.5, 3 ]
+      value_set: [ "bcc", "bdd", "abc" ]
   Passing case:
-    'ExpectColumnValuesToBeBetween(column="test",min_value=.5,max_value=2)'
+    'ExpectColumnValuesToNotMatchRegexList(column="test",regex_list=["^b.*", "^c.*"],)'
   Failing case:
-    'ExpectColumnValuesToBeBetween(column="test2",min_value=1,max_value=7,strict_min=False,strict_max=True)'
+    'ExpectColumnValuesToNotMatchRegexList(column="test2",regex_list=["^b.*", "^c.*"],)'
 Other Parameters:
   - mostly:
       type: None or a float between 0 and 1
@@ -44,10 +35,14 @@ Other Parameters:
       type: dict or None
       description: A JSON-serializable dictionary (nesting allowed) that will be included in the output without modification.
 Notes:
-  - min_value and max_value are both inclusive unless strict_min or strict_max are set to True.
-  - If min_value is None, then max_value is treated as an upper bound, and there is no minimum value checked.
-  - If max_value is None, then min_value is treated as a lower bound, and there is no maximum value checked.
+  None
 Data quality issues:
-  Numeric
+  Validity
 Related Expectations:
-  - ExpectColumnValueLengthsToBeBetween
+  - ExpectColumnValuesToMatchRegex
+  - ExpectColumnValuesToMatchRegexList
+  - ExpectColumnValuesToNotMatchRegex
+  - ExpectColumnValuesToMatchLikePattern
+  - ExpectColumnValuesToMatchLikePatternList
+  - ExpectColumnValuesToNotMatchLikePattern
+  - ExpectColumnValuesToNotMatchLikePatternList
