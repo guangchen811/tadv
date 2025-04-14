@@ -1,8 +1,7 @@
-url: https://greatexpectations.io/expectations/expect_column_values_to_not_match_regex/
 Name:
   ExpectColumnValuesToBeBetween
 URL:
-  https://greatexpectations.io/expectations/expect_column_values_to_be_between/
+  https://greatexpectations.io/expectations/expect_column_values_to_not_match_regex/
 Description:
   Expect the column entries to be between a minimum value and a maximum value (inclusive). ExpectColumnValuesToBeBetween is a Column Map Expectation Column Map Expectations are one of the most common types of Expectation. They are evaluated for a single column and ask a yes/no question for every row in that column. Based on the result, they then calculate the percentage of rows that gave a positive answer. If the percentage is high enough, the Expectation considers that data valid.
 Args:
