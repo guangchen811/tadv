@@ -53,7 +53,7 @@ class ExpectationConfig:
 
 
 if __name__ == "__main__":
-    config = ExpectationConfig.from_yaml_file("./Expectations/expect_column_distinct_values_to_equal_set.yaml")
+    config = ExpectationConfig.from_yaml_file("expectations/expect_column_distinct_values_to_equal_set.yaml")
     print(config.Name)
     print(config.Args["column"].description)
     print(config.Examples["Sample data"][0].column)
