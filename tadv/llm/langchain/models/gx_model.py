@@ -16,6 +16,7 @@ from tadv.llm.langchain.prompts.gx._prompt import (RELEVANT_COLUMN_TARGET_PROMPT
 class LangChainTADVGreatExpectationsDialect(AbstractLangChainTADV):
     def __init__(self, model_name: str = None, downstream_task_description: str = None,
                  assumption_generation_trick: str = None,
+                 expectations_text_descriptions_style: str = "Full",
                  logger: object = None):
         if model_name is None:
             raise ValueError("Model name is required.")
@@ -25,8 +26,9 @@ class LangChainTADVGreatExpectationsDialect(AbstractLangChainTADV):
         self.assumption_generation_trick = assumption_generation_trick
         self.logger = logger
         gx_config_manager = GXConfigManager()
-        expectations_text_descriptions = gx_config_manager.get_all_text_descriptions()
-        self._build_chain(downstream_task_description, assumption_generation_trick, expectations_text_descriptions)
+        self.expectations_text_descriptions = gx_config_manager.get_all_text_descriptions()
+        self._build_chain(downstream_task_description, assumption_generation_trick,
+                          expectations_text_descriptions_style)
 
     @staticmethod
     def _get_langchain_model(model_name: str):
@@ -71,7 +73,7 @@ class LangChainTADVGreatExpectationsDialect(AbstractLangChainTADV):
 
     def _build_single_chain(self, task: DVTask, downstream_task_description: str = None,
                             assumption_generation_trick: str = None,
-                            expectations_text_descriptions: str = None):
+                            expectations_text_descriptions_style: str = "Full"):
         if task == DVTask.RELEVANT_COLUMN_TARGET:
             if downstream_task_description is None:
                 raise ValueError("Downstream task description is required.")
@@ -84,6 +86,11 @@ class LangChainTADVGreatExpectationsDialect(AbstractLangChainTADV):
             parser = JsonOutputParser()
             single_chain = prompt | self.model | parser
         elif task == DVTask.RULE_GENERATION:
+            if expectations_text_descriptions_style == "Full":
+                expectations_text_descriptions = self.expectations_text_descriptions
+            else:
+                raise ValueError(
+                    f"Unknown expectations text descriptions style: {expectations_text_descriptions_style}")
             prompt = self._build_prompt(task, downstream_task_description=downstream_task_description,
                                         assumption_generation_trick=assumption_generation_trick,
                                         expectations_text_descriptions=expectations_text_descriptions)
@@ -94,7 +101,7 @@ class LangChainTADVGreatExpectationsDialect(AbstractLangChainTADV):
         return single_chain
 
     def _build_chain(self, downstream_task_description: str = None, assumption_generation_trick: str = None
-                     , expectations_text_descriptions: str = None):
+                     , expectations_text_descriptions_style: str = "Full"):
         self.relevant_column_target_chain = self._build_single_chain(
             DVTask.RELEVANT_COLUMN_TARGET, downstream_task_description=downstream_task_description
         )
@@ -102,7 +109,7 @@ class LangChainTADVGreatExpectationsDialect(AbstractLangChainTADV):
             DVTask.EXPECTATION_EXTRACTION, assumption_generation_trick=assumption_generation_trick
         )
         self.rule_generation_chain = self._build_single_chain(
-            DVTask.RULE_GENERATION, downstream_task_description, expectations_text_descriptions
+            DVTask.RULE_GENERATION, downstream_task_description, expectations_text_descriptions_style
         )
 
     def single_invoke(self, input_variables: dict, num_stages: int = 3):
@@ -164,5 +171,6 @@ class LangChainTADVGreatExpectationsDialect(AbstractLangChainTADV):
                     raise e
             except Exception as e:
                 self.logger.error("An unexpected error occurred.")
+                self.logger.error(f"Error details: {e}")
                 raise e  # Raise any other unexpected exceptions
         return relevant_columns_list, expectations, suggestions

@@ -1,6 +1,6 @@
-from tadv.data_models.expectation_config import ExpectationConfig
 from tadv.utils import get_project_root
 
+from tadv.data_models.expectation_config import ExpectationConfig
 
 class GXConfigManager:
     def __init__(self):

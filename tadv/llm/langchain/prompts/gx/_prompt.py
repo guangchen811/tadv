@@ -85,7 +85,6 @@ To help you understand the signature, here are some examples:
 ExpectColumnMeanToBeBetween(column="test",min_value=1,max_value=3)
 ExpectColumnMinToBeBetween(column="test",min_value=.5,max_value=1)
 ExpectColumnPairValuesAToBeGreaterThanB(column_A="test2",column_B="test")
-ExpectColumnQuantileValuesToBeBetween(column="test2",quantile_ranges={"quantiles": [0, .333, .667, 1],"value_ranges": [[0,1], [2,3], [3,4], [4,5]]})
 ExpectColumnSumToBeBetween(column="test2",min_value=2,max_value=6)
 ExpectColumnUniqueValueCountToBeBetween(column="test2",min_value=3,max_value=5)
 ExpectColumnValuesToBeBetween(column="test",min_value=.5,max_value=2)
