@@ -1,6 +1,6 @@
 from tadv.data_models import CodeEntry, ColumnConstraints, \
     Constraints
-from tadv.utils import get_current_folder
+from tadv.utils import get_current_folder, get_project_root
 from tadv.utils import load_dotenv
 
 load_dotenv()
@@ -28,3 +28,8 @@ def constraints_instance():
     column_constraints = ColumnConstraints(code=code_entries, assumptions=["Assumption 1", "Assumption 2"])
     constraints = Constraints(constraints={"column1": column_constraints})
     return constraints
+
+
+@pytest.fixture
+def gx_expectation_path():
+    return get_project_root() / "tadv" / "llm" / "langchain" / "prompts" / "gx" / "expectations"
