@@ -48,3 +48,25 @@ class ExpectationConfig:
             Data_quality_issues=data.get("Data quality issues"),
             Related_Expectations=data.get("Related Expectations", [])
         )
+
+    def to_text_description(self):
+        description = f"Expectation Name: {self.Name}\n"
+        description += f"Description: {self.Description}\n"
+        description += f"URL: {self.URL}\n"
+        description += "Arguments:\n"
+        for arg, param in self.Args.items():
+            description += f"  - {arg}: {param.description} (type: {param.type})\n"
+        description += "Sample Data:\n"
+        description += str(self.SampleData.head()) + "\n"
+        description += "Examples:\n"
+        for example_type, example in self.Examples.items():
+            description += f"  - {example_type}: {example}\n"
+        return description
+
+    def to_signature(self):
+        signature = f"Expectation Name: {self.Name}\n"
+        signature += f"Description: {self.Description}\n"
+        signature += "Arguments:\n"
+        for arg, param in self.Args.items():
+            signature += f"  - {arg}: {param.type}\n"
+        return signature
