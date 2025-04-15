@@ -12,7 +12,7 @@ from tadv.llm.langchain.prompts.deequ._prompt import (RELEVANT_COLUMN_TARGET_PRO
                                                       RULE_GENERATION_PROMPT, SYSTEM_TASK_DESCRIPTION)
 
 
-class LangChainTADV_DEEQU(AbstractLangChainTADV):
+class LangChainTADVDeequDialect(AbstractLangChainTADV):
     def __init__(self, model_name: str = None, downstream_task_description: str = None,
                  assumption_generation_trick: str = None,
                  logger: object = None):
