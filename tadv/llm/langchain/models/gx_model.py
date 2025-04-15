@@ -8,6 +8,7 @@ from langchain_core.prompts import ChatPromptTemplate
 from tadv.llm._tasks import DVTask
 from tadv.llm.langchain.abstract import AbstractLangChainTADV
 from tadv.llm.langchain.llm_backend import get_langchain_model
+from tadv.llm.langchain.prompts.gx._manager import GXConfigManager
 from tadv.llm.langchain.prompts.gx._prompt import (RELEVANT_COLUMN_TARGET_PROMPT,
                                                    RULE_GENERATION_PROMPT, SYSTEM_TASK_DESCRIPTION)
 
@@ -23,7 +24,9 @@ class LangChainTADV_GX(AbstractLangChainTADV):
         self.downstream_task_description = downstream_task_description
         self.assumption_generation_trick = assumption_generation_trick
         self.logger = logger
-        self._build_chain(downstream_task_description, assumption_generation_trick)
+        gx_config_manager = GXConfigManager()
+        expectations_text_descriptions = gx_config_manager.get_all_text_descriptions()
+        self._build_chain(downstream_task_description, assumption_generation_trick, expectations_text_descriptions)
 
     @staticmethod
     def _get_langchain_model(model_name: str):
@@ -32,7 +35,8 @@ class LangChainTADV_GX(AbstractLangChainTADV):
     @staticmethod
     def _build_prompt(task: DVTask,
                       downstream_task_description: str = None,
-                      assumption_generation_trick: str = None) -> ChatPromptTemplate:
+                      assumption_generation_trick: str = None,
+                      expectations_text_descriptions: str = None, ) -> ChatPromptTemplate:
         if task == DVTask.RELEVANT_COLUMN_TARGET:
             return ChatPromptTemplate(
                 [
@@ -61,11 +65,13 @@ class LangChainTADV_GX(AbstractLangChainTADV):
                     ("system", SYSTEM_TASK_DESCRIPTION),
                     ("human", RULE_GENERATION_PROMPT),
                 ],
-                partial_variables={"downstream_task_description": downstream_task_description},
+                partial_variables={"downstream_task_description": downstream_task_description,
+                                   "expectations_text_descriptions": expectations_text_descriptions},
             )
 
     def _build_single_chain(self, task: DVTask, downstream_task_description: str = None,
-                            assumption_generation_trick: str = None):
+                            assumption_generation_trick: str = None,
+                            expectations_text_descriptions: str = None):
         if task == DVTask.RELEVANT_COLUMN_TARGET:
             if downstream_task_description is None:
                 raise ValueError("Downstream task description is required.")
@@ -79,14 +85,16 @@ class LangChainTADV_GX(AbstractLangChainTADV):
             single_chain = prompt | self.model | parser
         elif task == DVTask.RULE_GENERATION:
             prompt = self._build_prompt(task, downstream_task_description=downstream_task_description,
-                                        assumption_generation_trick=assumption_generation_trick)
+                                        assumption_generation_trick=assumption_generation_trick,
+                                        expectations_text_descriptions=expectations_text_descriptions)
             parser = JsonOutputParser()
             single_chain = prompt | self.model | parser
         else:
             raise ValueError(f"Unknown task {task}")
         return single_chain
 
-    def _build_chain(self, downstream_task_description: str = None, assumption_generation_trick: str = None):
+    def _build_chain(self, downstream_task_description: str = None, assumption_generation_trick: str = None
+                     , expectations_text_descriptions: str = None):
         self.relevant_column_target_chain = self._build_single_chain(
             DVTask.RELEVANT_COLUMN_TARGET, downstream_task_description=downstream_task_description
         )
@@ -94,7 +102,7 @@ class LangChainTADV_GX(AbstractLangChainTADV):
             DVTask.EXPECTATION_EXTRACTION, assumption_generation_trick=assumption_generation_trick
         )
         self.rule_generation_chain = self._build_single_chain(
-            DVTask.RULE_GENERATION, downstream_task_description
+            DVTask.RULE_GENERATION, downstream_task_description, expectations_text_descriptions
         )
 
     def single_invoke(self, input_variables: dict, num_stages: int = 3):
