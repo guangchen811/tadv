@@ -1,12 +1,12 @@
 from langchain.prompts import ChatPromptTemplate
 
 from tadv.llm._tasks import DVTask
-from tadv.llm.langchain import LangChainTADV
+from tadv.llm.langchain import LangChainTADV_DEEQU
 from tadv.llm.langchain.prompts.downstream_task_prompt import ML_INFERENCE_TASK_DESCRIPTION
 
 
 def test_prompt_building():
-    lang_chain = LangChainTADV(model_name="gpt-4o-mini", downstream_task_description=ML_INFERENCE_TASK_DESCRIPTION)
+    lang_chain = LangChainTADV_DEEQU(model_name="gpt-4o-mini", downstream_task_description=ML_INFERENCE_TASK_DESCRIPTION)
 
     task = DVTask.RELEVANT_COLUMN_TARGET
     prompt = lang_chain._build_prompt(task)

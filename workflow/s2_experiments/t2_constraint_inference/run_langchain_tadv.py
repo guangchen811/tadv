@@ -3,7 +3,7 @@ from tadv.utils import get_project_root
 from tadv.data_models import Constraints
 from tadv.inspector.deequ.deequ_inspector_manager import DeequInspectorManager
 from tadv.dq_manager import DeequDataQualityManager
-from tadv.llm.langchain import LangChainTADV
+from tadv.llm.langchain import LangChainTADV_DEEQU
 from tadv.llm.langchain.prompts.downstream_task_prompt import ML_INFERENCE_TASK_DESCRIPTION, \
     SQL_QUERY_TASK_DESCRIPTION, WEB_TASK_DESCRIPTION
 from workflow.s2_experiments.utils import setup_logger, load_train_and_test_spark_data, load_previous_and_new_spark_data
@@ -66,8 +66,8 @@ def run_langchain_cadv(dataset_name, downstream_task, model_name, processed_data
             downstream_task_description = WEB_TASK_DESCRIPTION
         else:
             raise ValueError(f"Invalid downstream task: {downstream_task}")
-        lc = LangChainTADV(model_name=model_name, downstream_task_description=downstream_task_description,
-                           assumption_generation_trick=assumption_generation_trick, logger=logger)
+        lc = LangChainTADV_DEEQU(model_name=model_name, downstream_task_description=downstream_task_description,
+                                 assumption_generation_trick=assumption_generation_trick, logger=logger)
 
         if assumption_generation_trick == "with_deequ":
             deequ_assumptions = dq_manager.get_constraints_for_spark_df(spark_train, spark_train_df).to_string()

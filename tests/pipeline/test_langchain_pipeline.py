@@ -1,7 +1,7 @@
 from unittest.mock import Mock
 
 from tadv.inspector.deequ.deequ_inspector_manager import DeequInspectorManager
-from tadv.llm.langchain import LangChainTADV
+from tadv.llm.langchain import LangChainTADV_DEEQU
 from tadv.llm.langchain.prompts.downstream_task_prompt import ML_INFERENCE_TASK_DESCRIPTION
 from tadv.loader import FileLoader
 
@@ -24,8 +24,8 @@ def test_runnable(dq_manager, resources_path):
         "column_desc": column_desc,
         "script": scripts[0],
     }
-    lc = LangChainTADV(model_name="gpt-4o-mini", downstream_task_description=ML_INFERENCE_TASK_DESCRIPTION,
-                       assumption_generation_trick='with_experience', logger=Mock())
+    lc = LangChainTADV_DEEQU(model_name="gpt-4o-mini", downstream_task_description=ML_INFERENCE_TASK_DESCRIPTION,
+                             assumption_generation_trick='with_experience', logger=Mock())
 
     relevant_columns_list, expectations, rules = lc.invoke(
         input_variables=input_variables

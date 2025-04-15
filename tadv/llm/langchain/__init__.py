@@ -1,3 +1,3 @@
-from tadv.llm.langchain._model import LangChainTADV
+from tadv.llm.langchain.models.deequ_model import LangChainTADV_DEEQU
 
-__all__ = ["LangChainTADV"]
+__all__ = ["LangChainTADV_DEEQU"]
