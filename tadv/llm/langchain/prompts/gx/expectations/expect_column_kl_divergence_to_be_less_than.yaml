@@ -3,7 +3,7 @@ Name:
 URL:
   https://greatexpectations.io/expectations/expect_column_kl_divergence_to_be_less_than/
 Description:
-  Expect the Kulback-Leibler (KL) divergence (relative entropy) of the specified column with respect to the partition object to be lower than the provided threshold. KL divergence compares two distributions. The higher the divergence value (relative entropy), the larger the difference between the two distributions. A relative entropy of zero indicates that the data are distributed identically, when binned according to the provided partition. In many practical contexts, choosing a value between 0.5 and 1 will provide a useful test. This expectation works on both categorical and continuous partitions. See notes below for details. ExpectColumnKlDivergenceToBeLessThan is a Column Aggregate Expectation. Column Aggregate Expectations are one of the most common types of Expectation. They are evaluated for a single column, and produce an aggregate Metric, such as a mean, standard deviation, number of unique values, column type, etc. If that Metric meets the conditions you set, the Expectation considers that data valid.
+  "Expect the Kulback-Leibler (KL) divergence (relative entropy) of the specified column with respect to the partition object to be lower than the provided threshold. KL divergence compares two distributions. The higher the divergence value (relative entropy), the larger the difference between the two distributions. A relative entropy of zero indicates that the data are distributed identically, when binned according to the provided partition. In many practical contexts, choosing a value between 0.5 and 1 will provide a useful test. This expectation works on both categorical and continuous partitions. See notes below for details. ExpectColumnKlDivergenceToBeLessThan is a Column Aggregate Expectation. Column Aggregate Expectations are one of the most common types of Expectation. They are evaluated for a single column, and produce an aggregate Metric, such as a mean, standard deviation, number of unique values, column type, etc. If that Metric meets the conditions you set, the Expectation considers that data valid."
 Args:
   - column:
       type: str
@@ -12,8 +12,8 @@ Args:
       type: dict or None
       description: The expected partition object.
   - threshold:
-    type: float or None
-    description: The maximum KL divergence to for which to return success=True. If KL divergence is larger than the provided threshold, the test will return success=False.
+      type: float or None
+      description: The maximum KL divergence to for which to return success=True. If KL divergence is larger than the provided threshold, the test will return success=False.
   - internal_weight_holdout:
       type: float between 0 and 1 or None
       description: The amount of weight to split uniformly among zero-weighted partition bins. internal_weight_holdout provides a mechanisms to make the test less strict by assigning positive weights to values observed in the data for which the partition explicitly expected zero weight. With no internal_weight_holdout, any value observed in such a region will cause KL divergence to rise to +Infinity. Defaults to 0.
