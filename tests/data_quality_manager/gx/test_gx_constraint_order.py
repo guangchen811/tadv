@@ -1,7 +1,22 @@
 import great_expectations as gx
+import pandas as pd
+import pyspark
 
 
-def apply_checks_from_strings_on_spark_df(spark, spark_df, code_list_for_constraints):
+def test_apply_checks_from_strings_on_spark_df():
+    df = pd.DataFrame({"a": ["foo", "bar", "baz"], "b": [1, 2, 3], "c": [5, 6, None]})
+    spark = pyspark.sql.SparkSession.builder \
+        .appName("Test") \
+        .getOrCreate()
+    spark_df = spark.createDataFrame(df)
+    code_list_for_constraints = [
+        'ExpectColumnValuesToNotBeNull(column="a")',
+        'ExpectCompoundColumnsToBeUnique(column_list=["b", "c"])',
+        'ExpectColumnValuesToBeInSet(column="a", value_set=["foo", "bar", "baz"])',
+        'ExpectColumnToExist(column="def")',
+        'ExpectColumnValuesToNotBeNull(column="c")',
+    ]
+
     context = gx.get_context()
     data_source_name = "my_data_source"
     data_asset_name = "my_dataframe_data_asset"
@@ -15,17 +30,19 @@ def apply_checks_from_strings_on_spark_df(spark, spark_df, code_list_for_constra
     batch_parameters = {"dataframe": spark_df}
     suite = gx.ExpectationSuite(name=suite_name)
     suite = context.suites.add(suite)
+
     expectations = []
     for code in code_list_for_constraints:
         expectation = eval(f"gx.expectations.{code}")
         expectations.append(expectation)
         suite.add_expectation(expectation)
+
     batch = batch_definition.get_batch(batch_parameters=batch_parameters)
     validation_results = batch.validate(suite)
     ordered_results = [
         result for expectation in expectations
         for result in validation_results.results
-        if result.expectation_config.id == expectation.id
+        if result["expectation_config"].id == expectation.id
     ]
-    validation_results.results = ordered_results
-    return validation_results
+    for i, result in enumerate(ordered_results):
+        print(f"{i + 1}. {code_list_for_constraints[i]} -> success: {result['success']}")
