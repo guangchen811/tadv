@@ -16,3 +16,4 @@ def test_gx_constraint_filter():
     ]
     code_list_for_constraints_valid = dq_manager.filter_valid_constraints(code_list_for_constraints, spark,
                                                                            spark_df)
+    assert len(code_list_for_constraints_valid) == 3

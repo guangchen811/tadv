@@ -31,5 +31,5 @@ class GreatExpectationsDataQualityManager(AbstractDataQualityManager):
         status_on_original_validation_df = check_result_on_original_validation_df["results"]
         # remove the constraints that are not grammarly correct
         code_list_for_constraints = [code_list_for_constraints[i] for i in range(len(code_list_for_constraints)) if
-                                     status_on_original_validation_df[i] == "Success"]
+                                     status_on_original_validation_df[i]["success"] == True]
         return code_list_for_constraints
