@@ -1,4 +1,5 @@
-from tadv.dq_manager import DeequDataQualityManager
+from tadv.data_models import Constraints
+from tadv.dq_manager import GreatExpectationsDataQualityManager
 from tadv.inspector.deequ.deequ_inspector_manager import DeequInspectorManager
 from tadv.llm.langchain import LangChainTADVGreatExpectationsDialect
 from tadv.llm.langchain.prompts.downstream_task_prompt import ML_INFERENCE_TASK_DESCRIPTION
@@ -12,7 +13,7 @@ def test_gx_build_single_chain():
     lc = LangChainTADVGreatExpectationsDialect(model_name="gpt-4o-mini",
                                                downstream_task_description=ML_INFERENCE_TASK_DESCRIPTION, )
 
-    dq_manager = DeequDataQualityManager()
+    dq_manager = GreatExpectationsDataQualityManager()
     train_file_path = get_project_root() / "data" / "toy_example" / "files" / "hospitalisations_train.csv"
     train_data = FileLoader.load_csv(train_file_path, na_values=["NULL"])
     spark_train_data, spark_train = dq_manager.spark_df_from_pandas_df(train_data)
@@ -34,4 +35,14 @@ def test_gx_build_single_chain():
         num_stages=3,
         max_retries=3,
     )
-    print(suggestions)
+    code_list_for_constraints = [item for v in suggestions.values() for item in v]
+
+    # Validate the constraints on the original data to see if they are grammarly correct
+    code_list_for_constraints_valid = dq_manager.filter_valid_constraints(code_list_for_constraints, spark_train,
+                                                                          spark_train_data)
+    print("Valid constraints:")
+    print(code_list_for_constraints_valid)
+    constraints = Constraints.from_llm_output(relevant_columns_list, expectations, suggestions,
+                                              code_list_for_constraints_valid)
+    print("Constraints:")
+    print(constraints)
