@@ -21,8 +21,8 @@ class DeequDataQualityManager(AbstractDataQualityManager):
         return profile_on_spark_df(spark, spark_df)
 
     @staticmethod
-    def apply_checks_from_strings_on_spark_df(spark, spark_df, code_list_for_constraints):
-        return apply_checks_from_strings_on_spark_df(spark, spark_df, code_list_for_constraints)
+    def apply_checks_from_strings_on_spark_df(spark, spark_df, code_list_for_constraints, isolated_check=True):
+        return apply_checks_from_strings_on_spark_df(spark, spark_df, code_list_for_constraints, isolated_check)
 
     def validate_on_spark_df(self, spark, spark_df, code_list_for_constraints, return_raw=False):
         check_result = apply_checks_from_strings_on_spark_df(spark, spark_df,
