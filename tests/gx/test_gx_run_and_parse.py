@@ -46,3 +46,12 @@ def test_gx_build_single_chain():
                                               code_list_for_constraints_valid)
     print("Constraints:")
     print(constraints)
+    valid_code_column_map = constraints.get_suggestions_code_column_map(valid_only=True)
+    code_list_for_constraints = [item for item in valid_code_column_map.keys()]
+    # Validate the constraints on the clean data
+    status_on_clean_test_data = dq_manager.validate_on_spark_df(spark_train, spark_train_data,
+                                                                code_list_for_constraints)
+    validation_results_on_clean_test_data = dq_manager.build_validation_results(code_list_for_constraints,
+                                                                                status_on_clean_test_data,
+                                                                                valid_code_column_map)
+    print(validation_results_on_clean_test_data)

@@ -21,8 +21,14 @@ class GreatExpectationsDataQualityManager(AbstractDataQualityManager):
 
     def build_validation_results(self, code_list_for_constraints, status_on_clean_test_data,
                                  valid_code_column_map) -> ValidationResults:
-        raise NotImplementedError(
-            "Implement this method after finishing the implementation of suggestions generation process.")
+        code_status_map = {code_list_for_constraints[i]: status_on_clean_test_data[i] for i in
+                           range(len(code_list_for_constraints))}
+        validation_results_dict = {"results": {column: {"code": []} for column in valid_code_column_map.values()}}
+        for code, column in valid_code_column_map.items():
+            validation_results_dict["results"][column]["code"].append(
+                [code, "Passed" if code_status_map[code]["success"] == True else "Failed"])
+        validation_results = ValidationResults.from_dict(validation_results_dict)
+        return validation_results
 
     def filter_valid_constraints(self, code_list_for_constraints, spark,
                                  spark_df) -> list:
