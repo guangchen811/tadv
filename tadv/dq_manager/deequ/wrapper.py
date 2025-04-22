@@ -26,9 +26,10 @@ class DeequDataQualityManager(ConstraintSuggestingDataQualityManager):
     def apply_checks_from_strings_on_spark_df(spark, spark_df, code_list_for_constraints, isolated_check=True):
         return apply_checks_from_strings_on_spark_df(spark, spark_df, code_list_for_constraints, isolated_check)
 
-    def validate_on_spark_df(self, spark, spark_df, code_list_for_constraints, return_raw=False):
+    def validate_on_spark_df(self, spark, spark_df, code_list_for_constraints, return_raw=False, isolated_check=True):
         check_result = apply_checks_from_strings_on_spark_df(spark, spark_df,
-                                                             code_list_for_constraints)
+                                                             code_list_for_constraints=code_list_for_constraints,
+                                                             isolated_check=isolated_check)
         if return_raw:
             return check_result
         status = [item['constraint_status'] if
