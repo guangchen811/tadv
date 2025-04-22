@@ -41,16 +41,17 @@ class DeequDataQualityManager(AbstractDataQualityManager):
         suggestion = self._get_suggestion_for_spark_df(spark, spark_df)
         code_list_for_constraints = [item["code_for_constraint"] for item in suggestion]
         if spark_validation is None or spark_validation_df is None:
-            code_list_for_constraints_valid = self.filter_valid_constraints(code_list_for_constraints, spark,
-                                                                            spark_df)
+            code_list_for_constraints_valid = self.filter_valid_constraints_on_spark(code_list_for_constraints, spark,
+                                                                                     spark_df)
         else:
-            code_list_for_constraints_valid = self.filter_valid_constraints(code_list_for_constraints, spark_validation,
-                                                                            spark_validation_df)
+            code_list_for_constraints_valid = self.filter_valid_constraints_on_spark(code_list_for_constraints,
+                                                                                     spark_validation,
+                                                                                     spark_validation_df)
         constraints = Constraints.from_deequ_output(suggestion, code_list_for_constraints_valid)
         return constraints
 
-    def filter_valid_constraints(self, code_list_for_constraints, spark,
-                                 spark_df) -> list:
+    def filter_valid_constraints_on_spark(self, code_list_for_constraints, spark,
+                                          spark_df) -> list:
         check_result_on_original_validation_df = self.apply_checks_from_strings_on_spark_df(spark, spark_df,
                                                                                             code_list_for_constraints)
         status_on_original_validation_df = [item['constraint_status'] if
@@ -61,8 +62,9 @@ class DeequDataQualityManager(AbstractDataQualityManager):
                                      status_on_original_validation_df[i] == "Success"]
         return code_list_for_constraints
 
-    def build_validation_results(self, code_list_for_constraints, status_on_clean_test_data, valid_code_column_map):
-        code_status_map = {code_list_for_constraints[i]: status_on_clean_test_data[i] for i in
+    @staticmethod
+    def build_validation_results(code_list_for_constraints, status, valid_code_column_map):
+        code_status_map = {code_list_for_constraints[i]: status[i] for i in
                            range(len(code_list_for_constraints))}
         validation_results_dict = {"results": {column: {"code": []} for column in valid_code_column_map.values()}}
         for code, column in valid_code_column_map.items():
@@ -71,5 +73,6 @@ class DeequDataQualityManager(AbstractDataQualityManager):
         validation_results = ValidationResults.from_dict(validation_results_dict)
         return validation_results
 
-    def _get_suggestion_for_spark_df(self, spark, spark_df):
+    @staticmethod
+    def _get_suggestion_for_spark_df(spark, spark_df):
         return get_suggestion_for_spark_df(spark, spark_df)

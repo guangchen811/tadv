@@ -38,8 +38,8 @@ def test_gx_build_single_chain():
     code_list_for_constraints = [item for v in suggestions.values() for item in v]
 
     # Validate the constraints on the original data to see if they are grammarly correct
-    code_list_for_constraints_valid = dq_manager.filter_valid_constraints(code_list_for_constraints, spark_train,
-                                                                          spark_train_data)
+    code_list_for_constraints_valid = dq_manager.filter_valid_constraints_on_spark(code_list_for_constraints,
+                                                                                   spark_train, spark_train_data)
     print("Valid constraints:")
     print(code_list_for_constraints_valid)
     constraints = Constraints.from_llm_output(relevant_columns_list, expectations, suggestions,
