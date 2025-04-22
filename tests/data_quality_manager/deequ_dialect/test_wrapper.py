@@ -21,7 +21,7 @@ def test_get_constraints_for_spark_df(dq_manager):
     spark_df, spark = dq_manager.spark_df_from_pandas_df(df)
 
     # Run method under test
-    constraints = dq_manager.get_constraints_for_spark_df(spark, spark_df)
+    constraints = dq_manager.inference_constraints_for_spark_df(spark, spark_df)
 
     # Assertions
     assert isinstance(constraints, Constraints)

@@ -4,6 +4,8 @@ import numpy as np
 import pydeequ
 from pyspark.sql import SparkSession
 
+from tadv.data_models import Constraints
+
 
 class AbstractDataQualityManager(ABC):
     """
@@ -45,5 +47,15 @@ class AbstractDataQualityManager(ABC):
     def build_validation_results(code_list_for_constraints, status, valid_code_column_map):
         """
         Build validation results based on the constraints and their statuses.
+        """
+        raise NotImplementedError("Subclasses should implement this method.")
+
+
+class ConstraintSuggestingDataQualityManager(AbstractDataQualityManager):
+    @abstractmethod
+    def inference_constraints_for_spark_df(self, spark, spark_df, spark_validation=None,
+                                           spark_validation_df=None) -> Constraints:
+        """
+        Infer constraints for the Spark DataFrame based on the provided validation DataFrame.
         """
         raise NotImplementedError("Subclasses should implement this method.")

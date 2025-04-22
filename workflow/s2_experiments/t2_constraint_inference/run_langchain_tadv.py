@@ -70,7 +70,7 @@ def run_langchain_cadv(dataset_name, downstream_task, model_name, processed_data
                                        assumption_generation_trick=assumption_generation_trick, logger=logger)
 
         if assumption_generation_trick == "with_deequ":
-            deequ_assumptions = dq_manager.get_constraints_for_spark_df(spark_train, spark_train_df).to_string()
+            deequ_assumptions = dq_manager.inference_constraints_for_spark_df(spark_train, spark_train_df).to_string()
             input_variables = {
                 "column_desc": column_desc,
                 "script": task_instance.original_script,

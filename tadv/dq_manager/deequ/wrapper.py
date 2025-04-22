@@ -1,5 +1,5 @@
 from tadv.data_models import Constraints, ValidationResults
-from tadv.dq_manager.abstract_data_quality_manager import AbstractDataQualityManager
+from tadv.dq_manager.abstract_data_quality_manager import ConstraintSuggestingDataQualityManager
 from tadv.dq_manager.deequ._analyzing import analyze_on_spark_df
 from tadv.dq_manager.deequ._constraint_suggestion import \
     get_suggestion_for_spark_df
@@ -7,14 +7,16 @@ from tadv.dq_manager.deequ._constraint_validation import apply_checks_from_strin
 from tadv.dq_manager.deequ._profiling import profile_on_spark_df
 
 
-class DeequDataQualityManager(AbstractDataQualityManager):
+class DeequDataQualityManager(ConstraintSuggestingDataQualityManager):
     def __init__(self):
         super().__init__()
 
-    def analyze_on_spark_df(self, spark, spark_df, analyzers):
+    @staticmethod
+    def analyze_on_spark_df(spark, spark_df, analyzers):
         return analyze_on_spark_df(spark, spark_df, analyzers)
 
-    def profile_on_spark_df(self, spark, spark_df):
+    @staticmethod
+    def profile_on_spark_df(spark, spark_df):
         """
         This function is based on the profiling function from Deequ. So it couldn't be implemented by great expectations.
         """
@@ -33,8 +35,8 @@ class DeequDataQualityManager(AbstractDataQualityManager):
                   item is not None else None for item in check_result]
         return status
 
-    def get_constraints_for_spark_df(self, spark, spark_df, spark_validation=None,
-                                     spark_validation_df=None) -> Constraints:
+    def inference_constraints_for_spark_df(self, spark, spark_df, spark_validation=None,
+                                           spark_validation_df=None) -> Constraints:
         """
         This function is based on the suggestion from Deequ. So it couldn't be implemented by great expectations.
         """

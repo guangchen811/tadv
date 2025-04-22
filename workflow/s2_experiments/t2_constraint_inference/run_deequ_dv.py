@@ -39,8 +39,8 @@ def run_deequ_dv(dataset_name, downstream_task, processed_data_label):
         raise ValueError(f"Invalid downstream task: {downstream_task}")
     spark_validation, spark_validation_df = spark_train, spark_train_df
 
-    constraints = dq_manager.get_constraints_for_spark_df(spark_train, spark_train_df, spark_validation,
-                                                          spark_validation_df)
+    constraints = dq_manager.inference_constraints_for_spark_df(spark_train, spark_train_df, spark_validation,
+                                                                spark_validation_df)
     constraints.save_to_yaml(result_path)
 
     spark_train.sparkContext._gateway.shutdown_callback_server()
