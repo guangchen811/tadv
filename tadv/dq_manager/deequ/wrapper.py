@@ -1,13 +1,14 @@
 from tadv.data_models import Constraints, ValidationResults
-from tadv.dq_manager.abstract_data_quality_manager import ConstraintSuggestingDataQualityManager
+from tadv.dq_manager.abstract_data_quality_manager import AbstractDataQualityManager
 from tadv.dq_manager.deequ._analyzing import analyze_on_spark_df
 from tadv.dq_manager.deequ._constraint_suggestion import \
     get_suggestion_for_spark_df
 from tadv.dq_manager.deequ._constraint_validation import apply_checks_from_strings_on_spark_df
 from tadv.dq_manager.deequ._profiling import profile_on_spark_df
+from tadv.dq_manager.interfaces.constraint_suggestion import ConstraintSuggesting
 
 
-class DeequDataQualityManager(ConstraintSuggestingDataQualityManager):
+class DeequDataQualityManager(AbstractDataQualityManager, ConstraintSuggesting):
     def __init__(self):
         super().__init__()
 
