@@ -1,7 +1,7 @@
 from enum import Enum, auto
 
 
-class DVTask(Enum):
-    EXPECTATION_EXTRACTION = auto()
+class SequentialTADVTasks(Enum):
     COLUMN_ACCESS_DETECTION = auto()
-    RULE_GENERATION = auto()
+    EXPECTATION_EXTRACTION = auto()
+    CODE_GENERATION = auto()
