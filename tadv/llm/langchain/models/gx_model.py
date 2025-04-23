@@ -9,7 +9,7 @@ from tadv.llm.tasks import DVTask
 from tadv.llm.langchain.abstract import AbstractLangChainTADV
 from tadv.llm.langchain.llm_backend import get_langchain_model
 from tadv.llm.langchain.prompts.gx._manager import GXConfigManager
-from tadv.llm.langchain.prompts.gx._prompt import (RELEVANT_COLUMN_TARGET_PROMPT,
+from tadv.llm.langchain.prompts.gx._prompt import (COLUMN_ACCESS_DETECTION_PROMPT,
                                                    RULE_GENERATION_PROMPT, SYSTEM_TASK_DESCRIPTION)
 
 
@@ -43,7 +43,7 @@ class LangChainTADVGreatExpectationsDialect(AbstractLangChainTADV):
             return ChatPromptTemplate(
                 [
                     ("system", SYSTEM_TASK_DESCRIPTION),
-                    ("human", RELEVANT_COLUMN_TARGET_PROMPT),
+                    ("human", COLUMN_ACCESS_DETECTION_PROMPT),
                 ],
                 partial_variables={"downstream_task_description": downstream_task_description},
             )

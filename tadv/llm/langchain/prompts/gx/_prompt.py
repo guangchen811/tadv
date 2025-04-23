@@ -31,7 +31,7 @@ Output:
 Given a dataset described by name, columns with corresponding downstream code, the relevant columns and the user's assumptions. This component converts the code's assumptions and requirements into formal validation rules to ensure the data meets the code's expectations. The rules are generated in Great Expectations format.
 """)
 
-RELEVANT_COLUMN_TARGET_PROMPT = cleandoc("""You are part of the task-aware data validation system. You serve as the *Relevant Column Target* component.
+COLUMN_ACCESS_DETECTION_PROMPT = cleandoc("""You are part of the task-aware data validation system. You serve as the *Relevant Column Target* component.
 Given a dataset and the downstream code, you are asked to find the columns that are used in the code snippet. These columns are the relevant columns for the downstream task to ensure that the constraints are only applied to relevant columns.
 
 The dataset is a CSV file with the following columns:

@@ -1,5 +1,3 @@
-import importlib
-
 from langchain_core.exceptions import OutputParserException
 from langchain_core.output_parsers import (CommaSeparatedListOutputParser,
                                            JsonOutputParser)
@@ -7,8 +5,12 @@ from langchain_core.prompts import ChatPromptTemplate
 
 from tadv.llm.langchain.abstract import AbstractLangChainTADV
 from tadv.llm.langchain.llm_backend import get_langchain_model
-from tadv.llm.langchain.prompts.deequ._prompt import (RELEVANT_COLUMN_TARGET_PROMPT,
-                                                      RULE_GENERATION_PROMPT, SYSTEM_TASK_DESCRIPTION)
+from tadv.llm.langchain.prompts.deequ import (
+    COLUMN_ACCESS_DETECTION_PROMPT,
+    RULE_GENERATION_PROMPT,
+    SYSTEM_TASK_DESCRIPTION,
+    get_assumptions_prompt
+)
 from tadv.llm.tasks import DVTask
 
 
@@ -37,25 +39,12 @@ class LangChainTADVDeequDialect(AbstractLangChainTADV):
             return ChatPromptTemplate(
                 [
                     ("system", SYSTEM_TASK_DESCRIPTION),
-                    ("human", RELEVANT_COLUMN_TARGET_PROMPT),
+                    ("human", COLUMN_ACCESS_DETECTION_PROMPT),
                 ],
                 partial_variables={"downstream_task_description": downstream_task_description},
             )
         elif task == DVTask.EXPECTATION_EXTRACTION:
-            if assumption_generation_trick is None:
-                assumptions_extraction_prompt = importlib.import_module(
-                    "tadv.llm.langchain.prompts.deequ._prompt"
-                ).ASSUMPTIONS_EXTRACTION_PROMPT
-            elif assumption_generation_trick == "with_experience":
-                assumptions_extraction_prompt = importlib.import_module(
-                    "tadv.llm.langchain.prompts.deequ._prompt_with_experience"
-                ).ASSUMPTIONS_EXTRACTION_PROMPT
-            elif assumption_generation_trick == "with_deequ":
-                assumptions_extraction_prompt = importlib.import_module(
-                    "tadv.llm.langchain.prompts.deequ._prompt_with_deequ"
-                ).ASSUMPTIONS_EXTRACTION_PROMPT
-            else:
-                raise ValueError(f"Unknown assumption generation trick: {assumption_generation_trick}")
+            assumptions_extraction_prompt = get_assumptions_prompt(assumption_generation_trick)
             return ChatPromptTemplate(
                 [
                     ("system", SYSTEM_TASK_DESCRIPTION),
