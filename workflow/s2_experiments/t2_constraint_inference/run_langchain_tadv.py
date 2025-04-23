@@ -82,9 +82,8 @@ def run_langchain_cadv(dataset_name, downstream_task, model_name, processed_data
                 "script": task_instance.original_script,
             }
 
-        accessed_columns_list, expectations, suggestions = lc.invoke(
-            input_variables=input_variables, num_stages=3, max_retries=5
-        )
+        accessed_columns_list, expectations, suggestions = lc.invoke_with_retries(input_variables=input_variables,
+                                                                                  num_stages=3, max_retries=5)
 
         code_list_for_constraints = [item for v in suggestions.values() for item in v]
 

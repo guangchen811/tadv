@@ -33,8 +33,7 @@ def run_llm_for_rcd(column_desc, model_name, script_context, task_group):
     else:
         raise ValueError(f"Unknown task group: {task_group}")
     max_retries = 3
-    accessed_columns_list, expectations, suggestions = lc.invoke(
-        input_variables=input_variables, num_stages=1, max_retries=max_retries
-    )
+    accessed_columns_list, expectations, suggestions = lc.invoke_with_retries(input_variables=input_variables,
+                                                                              num_stages=1, max_retries=max_retries)
     accessed_columns_list = sorted(accessed_columns_list, key=lambda x: x.lower())
     return accessed_columns_list

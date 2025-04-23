@@ -14,7 +14,7 @@ class SequentialLangChainTADV(AbstractLangChainTADV):
     """
 
     @abstractmethod
-    def single_invoke(self, input_variables: dict, num_stages: int):
+    def invoke(self, input_variables: dict, num_stages: int):
         """
         Execute a single stage of the pipeline. Designed for retrying multiple times.
         """
@@ -28,7 +28,7 @@ class SequentialLangChainTADV(AbstractLangChainTADV):
         raise NotImplementedError
 
     @abstractmethod
-    def invoke(self, input_variables: dict, num_stages: int = 3, max_retries: int = 3):
+    def invoke_with_retries(self, input_variables: dict, num_stages: int = 3, max_retries: int = 3):
         """
         Orchestrates a linear multi-stage pipeline with retry support.
 

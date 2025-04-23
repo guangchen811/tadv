@@ -30,11 +30,8 @@ FROM hosp_df WHERE diagnosis = 'stroke'
 AND bloodtype IN ('AB negative', 'B negative')").fetch()
 generate_report(strokes_total, strokes_for_rare_bloodtypes)"""
 
-accessed_columns_list, expectations, suggestions = lc.invoke(
-    input_variables={"column_desc": column_desc, "script": context},
-    num_stages=1,
-    max_retries=1
-)
+accessed_columns_list, expectations, suggestions = lc.invoke_with_retries(
+    input_variables={"column_desc": column_desc, "script": context}, num_stages=1, max_retries=1)
 
 print("Relevant Columns List:", accessed_columns_list)
 

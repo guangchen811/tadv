@@ -96,7 +96,7 @@ class SequentialLangChainTADVDeequDialect(SequentialLangChainTADV):
             SequentialTADVTasks.CODE_GENERATION, downstream_task_description
         )
 
-    def single_invoke(self, input_variables: dict, num_stages: int = 3):
+    def invoke(self, input_variables: dict, num_stages: int = 3):
         """
         Args:
             input_variables (dict): Input variables for the pipeline.
@@ -138,14 +138,13 @@ class SequentialLangChainTADVDeequDialect(SequentialLangChainTADV):
             rules = None
         return accessed_columns_list, expectations, rules
 
-    def invoke(self, input_variables: dict, num_stages: int = 3, max_retries: int = 3):
+    def invoke_with_retries(self, input_variables: dict, num_stages: int = 3, max_retries: int = 3):
         accessed_columns_list, expectations, suggestions = None, None, None
         attempt = 0
         while attempt < max_retries:
             try:
-                accessed_columns_list, expectations, suggestions = self.single_invoke(
-                    input_variables=input_variables, num_stages=num_stages
-                )
+                accessed_columns_list, expectations, suggestions = self.invoke(input_variables=input_variables,
+                                                                               num_stages=num_stages)
                 break  # Exit the loop if successful
             except OutputParserException as e:
                 attempt += 1

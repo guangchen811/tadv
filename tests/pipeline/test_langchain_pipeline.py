@@ -27,6 +27,4 @@ def test_runnable(dq_manager, resources_path):
     lc = SequentialLangChainTADVDeequDialect(model_name="gpt-4o-mini", downstream_task_description=ML_INFERENCE_TASK_DESCRIPTION,
                                              assumption_generation_trick='with_experience', logger=Mock())
 
-    accessed_columns_list, expectations, rules = lc.invoke(
-        input_variables=input_variables
-    )
+    accessed_columns_list, expectations, rules = lc.invoke_with_retries(input_variables=input_variables)
