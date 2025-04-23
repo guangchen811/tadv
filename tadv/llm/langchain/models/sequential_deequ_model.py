@@ -45,7 +45,7 @@ class SequentialLangChainTADVDeequDialect(SequentialLangChainTADV):
                 ],
                 partial_variables={"downstream_task_description": downstream_task_description},
             )
-        elif task == SequentialTADVTasks.EXPECTATION_EXTRACTION:
+        elif task == SequentialTADVTasks.ASSUMPTION_EXTRACTION:
             assumptions_extraction_prompt = get_assumptions_prompt(assumption_generation_trick)
             return ChatPromptTemplate(
                 [
@@ -71,7 +71,7 @@ class SequentialLangChainTADVDeequDialect(SequentialLangChainTADV):
             prompt = self._build_prompt(task, downstream_task_description=downstream_task_description)
             parser = CommaSeparatedListOutputParser()
             single_chain = prompt | self.model | parser
-        elif task == SequentialTADVTasks.EXPECTATION_EXTRACTION:
+        elif task == SequentialTADVTasks.ASSUMPTION_EXTRACTION:
             prompt = self._build_prompt(task, downstream_task_description=downstream_task_description,
                                         assumption_generation_trick=assumption_generation_trick)
             parser = JsonOutputParser()
@@ -90,7 +90,7 @@ class SequentialLangChainTADVDeequDialect(SequentialLangChainTADV):
             SequentialTADVTasks.COLUMN_ACCESS_DETECTION, downstream_task_description=downstream_task_description
         )
         self.expectation_extraction_chain = self._build_single_chain(
-            SequentialTADVTasks.EXPECTATION_EXTRACTION, assumption_generation_trick=assumption_generation_trick
+            SequentialTADVTasks.ASSUMPTION_EXTRACTION, assumption_generation_trick=assumption_generation_trick
         )
         self.rule_generation_chain = self._build_single_chain(
             SequentialTADVTasks.CODE_GENERATION, downstream_task_description

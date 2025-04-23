@@ -13,7 +13,7 @@ def test_gx_prompt_building():
     assert isinstance(prompt, ChatPromptTemplate)
     assert prompt.input_variables == ["code_snippet", "columns_desc"]
 
-    task = SequentialTADVTasks.EXPECTATION_EXTRACTION
+    task = SequentialTADVTasks.ASSUMPTION_EXTRACTION
     prompt = lang_chain._build_prompt(task)
     assert isinstance(prompt, ChatPromptTemplate)
     assert prompt.input_variables == ["code_snippet", "columns_desc", "accessed_columns"]

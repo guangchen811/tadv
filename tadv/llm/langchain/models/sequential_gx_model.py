@@ -48,7 +48,7 @@ class SequentialLangChainTADVGreatExpectationsDialect(SequentialLangChainTADV):
                 ],
                 partial_variables={"downstream_task_description": downstream_task_description},
             )
-        elif task == SequentialTADVTasks.EXPECTATION_EXTRACTION:
+        elif task == SequentialTADVTasks.ASSUMPTION_EXTRACTION:
             if assumption_generation_trick is None:
                 assumptions_extraction_prompt = DEFAULT_ASSUMPTIONS_PROMPT
             else:
@@ -79,7 +79,7 @@ class SequentialLangChainTADVGreatExpectationsDialect(SequentialLangChainTADV):
             prompt = self._build_prompt(task, downstream_task_description=downstream_task_description)
             parser = CommaSeparatedListOutputParser()
             single_chain = prompt | self.model | parser
-        elif task == SequentialTADVTasks.EXPECTATION_EXTRACTION:
+        elif task == SequentialTADVTasks.ASSUMPTION_EXTRACTION:
             prompt = self._build_prompt(task, downstream_task_description=downstream_task_description,
                                         assumption_generation_trick=assumption_generation_trick)
             parser = JsonOutputParser()
@@ -105,7 +105,7 @@ class SequentialLangChainTADVGreatExpectationsDialect(SequentialLangChainTADV):
             SequentialTADVTasks.COLUMN_ACCESS_DETECTION, downstream_task_description=downstream_task_description
         )
         self.expectation_extraction_chain = self._build_single_chain(
-            SequentialTADVTasks.EXPECTATION_EXTRACTION, assumption_generation_trick=assumption_generation_trick
+            SequentialTADVTasks.ASSUMPTION_EXTRACTION, assumption_generation_trick=assumption_generation_trick
         )
         self.rule_generation_chain = self._build_single_chain(
             SequentialTADVTasks.CODE_GENERATION, downstream_task_description, expectations_text_descriptions_style

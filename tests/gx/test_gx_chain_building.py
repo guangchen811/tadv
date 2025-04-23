@@ -16,7 +16,7 @@ def test_gx_build_single_chain():
                                           downstream_task_description=ML_INFERENCE_TASK_DESCRIPTION)
     assert isinstance(chain, RunnableSequence)
 
-    expectation_extraction_task = SequentialTADVTasks.EXPECTATION_EXTRACTION
+    expectation_extraction_task = SequentialTADVTasks.ASSUMPTION_EXTRACTION
     chain = langchain._build_single_chain(expectation_extraction_task,
                                           downstream_task_description=ML_INFERENCE_TASK_DESCRIPTION, )
     assert isinstance(chain, RunnableSequence)
