@@ -1,4 +1,5 @@
 import importlib
+import logging
 
 from langchain_core.exceptions import OutputParserException
 from langchain_core.output_parsers import (CommaSeparatedListOutputParser,
@@ -17,7 +18,7 @@ class SequentialLangChainTADVGreatExpectationsDialect(SequentialLangChainTADV):
     def __init__(self, model_name: str = None, downstream_task_description: str = None,
                  assumption_generation_trick: str = None,
                  expectations_text_descriptions_style: str = "Full",
-                 logger: object = None):
+                 logger: logging.Logger = None):
         if model_name is None:
             raise ValueError("Model name is required.")
         else:

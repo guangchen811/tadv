@@ -1,3 +1,5 @@
+import logging
+
 from langchain_core.exceptions import OutputParserException
 from langchain_core.output_parsers import (CommaSeparatedListOutputParser,
                                            JsonOutputParser)
@@ -17,7 +19,7 @@ from tadv.llm.tasks import DVTask
 class SequentialLangChainTADVDeequDialect(SequentialLangChainTADV):
     def __init__(self, model_name: str = None, downstream_task_description: str = None,
                  assumption_generation_trick: str = None,
-                 logger: object = None):
+                 logger: logging.Logger = None):
         if model_name is None:
             raise ValueError("Model name is required.")
         else:
