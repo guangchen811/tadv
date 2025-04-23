@@ -2,7 +2,7 @@ from tadv.llm.langchain.prompts.sequential_deequ import _prompt_with_deequ
 from tadv.llm.langchain.prompts.sequential_deequ import _prompt_with_experience
 from tadv.llm.langchain.prompts.sequential_deequ._prompt import (
     COLUMN_ACCESS_DETECTION_PROMPT,
-    RULE_GENERATION_PROMPT,
+    CODE_GENERATION_PROMPT,
     SYSTEM_TASK_DESCRIPTION,
     ASSUMPTIONS_EXTRACTION_PROMPT as DEFAULT_ASSUMPTIONS_PROMPT,
 )

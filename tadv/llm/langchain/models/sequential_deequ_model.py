@@ -9,7 +9,7 @@ from tadv.llm.langchain.abstract import SequentialLangChainTADV
 from tadv.llm.langchain.llm_backend import get_langchain_model
 from tadv.llm.langchain.prompts.sequential_deequ import (
     COLUMN_ACCESS_DETECTION_PROMPT,
-    RULE_GENERATION_PROMPT,
+    CODE_GENERATION_PROMPT,
     SYSTEM_TASK_DESCRIPTION,
     get_assumptions_prompt
 )
@@ -58,7 +58,7 @@ class SequentialLangChainTADVDeequDialect(SequentialLangChainTADV):
             return ChatPromptTemplate(
                 [
                     ("system", SYSTEM_TASK_DESCRIPTION),
-                    ("human", RULE_GENERATION_PROMPT),
+                    ("human", CODE_GENERATION_PROMPT),
                 ],
                 partial_variables={"downstream_task_description": downstream_task_description},
             )

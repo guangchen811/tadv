@@ -1,4 +1,3 @@
-import importlib
 import logging
 
 from langchain_core.exceptions import OutputParserException
@@ -8,9 +7,10 @@ from langchain_core.prompts import ChatPromptTemplate
 
 from tadv.llm.langchain.abstract import SequentialLangChainTADV
 from tadv.llm.langchain.llm_backend import get_langchain_model
-from tadv.llm.langchain.prompts.sequential_gx._manager import GXConfigManager
-from tadv.llm.langchain.prompts.sequential_gx._prompt import (COLUMN_ACCESS_DETECTION_PROMPT,
-                                                              RULE_GENERATION_PROMPT, SYSTEM_TASK_DESCRIPTION)
+from tadv.llm.langchain.prompts.sequential_gx import (COLUMN_ACCESS_DETECTION_PROMPT,
+                                                      CODE_GENERATION_PROMPT, SYSTEM_TASK_DESCRIPTION,
+                                                      DEFAULT_ASSUMPTIONS_PROMPT)
+from tadv.llm.langchain.prompts.sequential_gx import GXConfigManager
 from tadv.llm.tasks import DVTask
 
 
@@ -50,9 +50,7 @@ class SequentialLangChainTADVGreatExpectationsDialect(SequentialLangChainTADV):
             )
         elif task == DVTask.EXPECTATION_EXTRACTION:
             if assumption_generation_trick is None:
-                assumptions_extraction_prompt = importlib.import_module(
-                    "tadv.llm.langchain.prompts.deequ._prompt"
-                ).ASSUMPTIONS_EXTRACTION_PROMPT
+                assumptions_extraction_prompt = DEFAULT_ASSUMPTIONS_PROMPT
             else:
                 raise ValueError(f"Unknown assumption generation trick: {assumption_generation_trick}")
             return ChatPromptTemplate(
@@ -66,7 +64,7 @@ class SequentialLangChainTADVGreatExpectationsDialect(SequentialLangChainTADV):
             return ChatPromptTemplate(
                 [
                     ("system", SYSTEM_TASK_DESCRIPTION),
-                    ("human", RULE_GENERATION_PROMPT),
+                    ("human", CODE_GENERATION_PROMPT),
                 ],
                 partial_variables={"downstream_task_description": downstream_task_description,
                                    "expectations_text_descriptions": expectations_text_descriptions},
