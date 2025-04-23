@@ -15,6 +15,16 @@ class SequentialLangChainTADV(AbstractLangChainTADV):
 
     @abstractmethod
     def single_invoke(self, input_variables: dict, num_stages: int):
+        """
+        Execute a single stage of the pipeline. Designed for retrying multiple times.
+        """
+        raise NotImplementedError
+
+    @abstractmethod
+    def show_prompts(self, input_variables: dict, num_stages: int):
+        """
+        Return the prompts used in the pipeline.
+        """
         raise NotImplementedError
 
     @abstractmethod
