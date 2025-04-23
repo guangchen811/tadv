@@ -1,4 +1,4 @@
-from tadv.llm.langchain import LangChainTADVDeequDialect
+from tadv.llm.langchain import SequentialLangChainTADVDeequDialect
 from tadv.llm.langchain.prompts.downstream_task_prompt import SQL_QUERY_TASK_DESCRIPTION, ML_INFERENCE_TASK_DESCRIPTION, \
     WEB_TASK_DESCRIPTION
 
@@ -25,11 +25,11 @@ def run_llm_for_rcd(column_desc, model_name, script_context, task_group):
         "script": script_context,
     }
     if task_group == 'sql_query':
-        lc = LangChainTADVDeequDialect(model_name=model_name, downstream_task_description=SQL_QUERY_TASK_DESCRIPTION)
+        lc = SequentialLangChainTADVDeequDialect(model_name=model_name, downstream_task_description=SQL_QUERY_TASK_DESCRIPTION)
     elif task_group == 'ml_inference':
-        lc = LangChainTADVDeequDialect(model_name=model_name, downstream_task_description=ML_INFERENCE_TASK_DESCRIPTION)
+        lc = SequentialLangChainTADVDeequDialect(model_name=model_name, downstream_task_description=ML_INFERENCE_TASK_DESCRIPTION)
     elif task_group == 'webpage_generation':
-        lc = LangChainTADVDeequDialect(model_name=model_name, downstream_task_description=WEB_TASK_DESCRIPTION)
+        lc = SequentialLangChainTADVDeequDialect(model_name=model_name, downstream_task_description=WEB_TASK_DESCRIPTION)
     else:
         raise ValueError(f"Unknown task group: {task_group}")
     max_retries = 3

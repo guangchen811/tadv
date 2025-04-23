@@ -1,7 +1,7 @@
 from tadv.data_models import Constraints
 from tadv.dq_manager import GreatExpectationsDataQualityManager
 from tadv.inspector.deequ.deequ_inspector_manager import DeequInspectorManager
-from tadv.llm.langchain import LangChainTADVGreatExpectationsDialect
+from tadv.llm.langchain import SequentialLangChainTADVGreatExpectationsDialect
 from tadv.llm.langchain.prompts.downstream_task_prompt import ML_INFERENCE_TASK_DESCRIPTION
 from tadv.loader import FileLoader
 from tadv.utils import load_dotenv, get_project_root
@@ -10,8 +10,8 @@ from tadv.utils import load_dotenv, get_project_root
 def test_gx_build_single_chain():
     load_dotenv()
 
-    lc = LangChainTADVGreatExpectationsDialect(model_name="gpt-4o-mini",
-                                               downstream_task_description=ML_INFERENCE_TASK_DESCRIPTION, )
+    lc = SequentialLangChainTADVGreatExpectationsDialect(model_name="gpt-4o-mini",
+                                                         downstream_task_description=ML_INFERENCE_TASK_DESCRIPTION, )
 
     dq_manager = GreatExpectationsDataQualityManager()
     train_file_path = get_project_root() / "data" / "toy_example" / "files" / "hospitalisations_train.csv"

@@ -1,4 +1,4 @@
-from tadv.llm.langchain.models.deequ_model import LangChainTADVDeequDialect
-from tadv.llm.langchain.models.gx_model import LangChainTADVGreatExpectationsDialect
+from tadv.llm.langchain.models.sequential_deequ_model import SequentialLangChainTADVDeequDialect
+from tadv.llm.langchain.models.sequential_gx_model import SequentialLangChainTADVGreatExpectationsDialect
 
-__all__ = ["LangChainTADVDeequDialect", "LangChainTADVGreatExpectationsDialect"]
+__all__ = ["SequentialLangChainTADVDeequDialect", "SequentialLangChainTADVGreatExpectationsDialect"]

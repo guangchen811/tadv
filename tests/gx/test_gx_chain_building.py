@@ -1,15 +1,15 @@
 from langchain_core.runnables.base import RunnableSequence
 
 from tadv.llm.tasks import DVTask
-from tadv.llm.langchain import LangChainTADVGreatExpectationsDialect
+from tadv.llm.langchain import SequentialLangChainTADVGreatExpectationsDialect
 from tadv.llm.langchain.prompts.downstream_task_prompt import ML_INFERENCE_TASK_DESCRIPTION
 from tadv.utils import load_dotenv
 
 
 def test_gx_build_single_chain():
     load_dotenv()
-    langchain = LangChainTADVGreatExpectationsDialect(model_name="gpt-4o-mini",
-                                                      downstream_task_description=ML_INFERENCE_TASK_DESCRIPTION)
+    langchain = SequentialLangChainTADVGreatExpectationsDialect(model_name="gpt-4o-mini",
+                                                                downstream_task_description=ML_INFERENCE_TASK_DESCRIPTION)
 
     column_access_detection = DVTask.COLUMN_ACCESS_DETECTION
     chain = langchain._build_single_chain(column_access_detection,

@@ -1,6 +1,6 @@
 from tadv.dq_manager import DeequDataQualityManager
 from tadv.inspector.deequ.deequ_inspector_manager import DeequInspectorManager
-from tadv.llm.langchain import LangChainTADVDeequDialect
+from tadv.llm.langchain import SequentialLangChainTADVDeequDialect
 from tadv.llm.langchain.prompts.downstream_task_prompt import SQL_QUERY_TASK_DESCRIPTION
 from tadv.loader import FileLoader
 from tadv.utils import get_project_root
@@ -8,9 +8,9 @@ from workflow.s2_experiments.utils import setup_logger
 
 logger = setup_logger("sandbox_example.log")
 
-lc = LangChainTADVDeequDialect(model_name="meta-llama/Llama-3.2-1B",
-                               downstream_task_description=SQL_QUERY_TASK_DESCRIPTION,
-                               assumption_generation_trick=None, logger=logger)
+lc = SequentialLangChainTADVDeequDialect(model_name="meta-llama/Llama-3.2-1B",
+                                         downstream_task_description=SQL_QUERY_TASK_DESCRIPTION,
+                                         assumption_generation_trick=None, logger=logger)
 
 dq_manager = DeequDataQualityManager()
 train_file_path = get_project_root() / "data" / "toy_example" / "files" / "hospitalisations_train.csv"

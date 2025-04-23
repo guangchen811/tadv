@@ -1,22 +1,22 @@
+import importlib
+
 from langchain_core.exceptions import OutputParserException
 from langchain_core.output_parsers import (CommaSeparatedListOutputParser,
                                            JsonOutputParser)
 from langchain_core.prompts import ChatPromptTemplate
 
-from tadv.llm.langchain.abstract import AbstractLangChainTADV
+from tadv.llm.langchain.abstract import SequentialLangChainTADV
 from tadv.llm.langchain.llm_backend import get_langchain_model
-from tadv.llm.langchain.prompts.deequ import (
-    COLUMN_ACCESS_DETECTION_PROMPT,
-    RULE_GENERATION_PROMPT,
-    SYSTEM_TASK_DESCRIPTION,
-    get_assumptions_prompt
-)
+from tadv.llm.langchain.prompts.sequential_gx._manager import GXConfigManager
+from tadv.llm.langchain.prompts.sequential_gx._prompt import (COLUMN_ACCESS_DETECTION_PROMPT,
+                                                              RULE_GENERATION_PROMPT, SYSTEM_TASK_DESCRIPTION)
 from tadv.llm.tasks import DVTask
 
 
-class LangChainTADVDeequDialect(AbstractLangChainTADV):
+class SequentialLangChainTADVGreatExpectationsDialect(SequentialLangChainTADV):
     def __init__(self, model_name: str = None, downstream_task_description: str = None,
                  assumption_generation_trick: str = None,
+                 expectations_text_descriptions_style: str = "Full",
                  logger: object = None):
         if model_name is None:
             raise ValueError("Model name is required.")
@@ -25,7 +25,10 @@ class LangChainTADVDeequDialect(AbstractLangChainTADV):
         self.downstream_task_description = downstream_task_description
         self.assumption_generation_trick = assumption_generation_trick
         self.logger = logger
-        self._build_chain(downstream_task_description, assumption_generation_trick)
+        gx_config_manager = GXConfigManager()
+        self.expectations_text_descriptions = gx_config_manager.get_all_text_descriptions()
+        self._build_chain(downstream_task_description, assumption_generation_trick,
+                          expectations_text_descriptions_style)
 
     @staticmethod
     def _get_langchain_model(model_name: str):
@@ -34,7 +37,8 @@ class LangChainTADVDeequDialect(AbstractLangChainTADV):
     @staticmethod
     def _build_prompt(task: DVTask,
                       downstream_task_description: str = None,
-                      assumption_generation_trick: str = None) -> ChatPromptTemplate:
+                      assumption_generation_trick: str = None,
+                      expectations_text_descriptions: str = None, ) -> ChatPromptTemplate:
         if task == DVTask.COLUMN_ACCESS_DETECTION:
             return ChatPromptTemplate(
                 [
@@ -44,7 +48,12 @@ class LangChainTADVDeequDialect(AbstractLangChainTADV):
                 partial_variables={"downstream_task_description": downstream_task_description},
             )
         elif task == DVTask.EXPECTATION_EXTRACTION:
-            assumptions_extraction_prompt = get_assumptions_prompt(assumption_generation_trick)
+            if assumption_generation_trick is None:
+                assumptions_extraction_prompt = importlib.import_module(
+                    "tadv.llm.langchain.prompts.deequ._prompt"
+                ).ASSUMPTIONS_EXTRACTION_PROMPT
+            else:
+                raise ValueError(f"Unknown assumption generation trick: {assumption_generation_trick}")
             return ChatPromptTemplate(
                 [
                     ("system", SYSTEM_TASK_DESCRIPTION),
@@ -58,11 +67,13 @@ class LangChainTADVDeequDialect(AbstractLangChainTADV):
                     ("system", SYSTEM_TASK_DESCRIPTION),
                     ("human", RULE_GENERATION_PROMPT),
                 ],
-                partial_variables={"downstream_task_description": downstream_task_description},
+                partial_variables={"downstream_task_description": downstream_task_description,
+                                   "expectations_text_descriptions": expectations_text_descriptions},
             )
 
     def _build_single_chain(self, task: DVTask, downstream_task_description: str = None,
-                            assumption_generation_trick: str = None):
+                            assumption_generation_trick: str = None,
+                            expectations_text_descriptions_style: str = "Full"):
         if task == DVTask.COLUMN_ACCESS_DETECTION:
             if downstream_task_description is None:
                 raise ValueError("Downstream task description is required.")
@@ -75,15 +86,22 @@ class LangChainTADVDeequDialect(AbstractLangChainTADV):
             parser = JsonOutputParser()
             single_chain = prompt | self.model | parser
         elif task == DVTask.RULE_GENERATION:
+            if expectations_text_descriptions_style == "Full":
+                expectations_text_descriptions = self.expectations_text_descriptions
+            else:
+                raise ValueError(
+                    f"Unknown expectations text descriptions style: {expectations_text_descriptions_style}")
             prompt = self._build_prompt(task, downstream_task_description=downstream_task_description,
-                                        assumption_generation_trick=assumption_generation_trick)
+                                        assumption_generation_trick=assumption_generation_trick,
+                                        expectations_text_descriptions=expectations_text_descriptions)
             parser = JsonOutputParser()
             single_chain = prompt | self.model | parser
         else:
             raise ValueError(f"Unknown task {task}")
         return single_chain
 
-    def _build_chain(self, downstream_task_description: str = None, assumption_generation_trick: str = None):
+    def _build_chain(self, downstream_task_description: str = None, assumption_generation_trick: str = None
+                     , expectations_text_descriptions_style: str = "Full"):
         self.relevant_column_target_chain = self._build_single_chain(
             DVTask.COLUMN_ACCESS_DETECTION, downstream_task_description=downstream_task_description
         )
@@ -91,7 +109,7 @@ class LangChainTADVDeequDialect(AbstractLangChainTADV):
             DVTask.EXPECTATION_EXTRACTION, assumption_generation_trick=assumption_generation_trick
         )
         self.rule_generation_chain = self._build_single_chain(
-            DVTask.RULE_GENERATION, downstream_task_description
+            DVTask.RULE_GENERATION, downstream_task_description, expectations_text_descriptions_style
         )
 
     def single_invoke(self, input_variables: dict, num_stages: int = 3):
@@ -153,5 +171,6 @@ class LangChainTADVDeequDialect(AbstractLangChainTADV):
                     raise e
             except Exception as e:
                 self.logger.error("An unexpected error occurred.")
+                self.logger.error(f"Error details: {e}")
                 raise e  # Raise any other unexpected exceptions
         return accessed_columns_list, expectations, suggestions
