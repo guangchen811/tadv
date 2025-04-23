@@ -82,7 +82,7 @@ def run_langchain_cadv(dataset_name, downstream_task, model_name, processed_data
                 "script": task_instance.original_script,
             }
 
-        relevant_columns_list, expectations, suggestions = lc.invoke(
+        accessed_columns_list, expectations, suggestions = lc.invoke(
             input_variables=input_variables, num_stages=3, max_retries=5
         )
 
@@ -92,11 +92,11 @@ def run_langchain_cadv(dataset_name, downstream_task, model_name, processed_data
         code_list_for_constraints_valid = dq_manager.filter_valid_constraints_on_spark(code_list_for_constraints,
                                                                                        spark_validation,
                                                                                        spark_validation_df)
-        constraints = Constraints.from_llm_output(relevant_columns_list, expectations, suggestions,
+        constraints = Constraints.from_llm_output(accessed_columns_list, expectations, suggestions,
                                                   code_list_for_constraints_valid)
 
         with open(relevant_columns_result_path, "w") as f:
-            f.write("\n".join(relevant_columns_list))
+            f.write("\n".join(accessed_columns_list))
         logger.info(f"Saved relevant columns to {relevant_columns_result_path}")
         constraints.save_to_yaml(constraints_result_path)
         logger.info(f"Saved constraints to {constraints_result_path}")

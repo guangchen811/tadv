@@ -5,7 +5,7 @@ from tadv.llm.langchain.prompts.downstream_task_prompt import SQL_QUERY_TASK_DES
 
 def run_string_matching_for_rcd(column_list, script_context):
     script_context = script_context.lower()
-    relevant_columns_list = []
+    accessed_columns_list = []
     for column in column_list:
         column_variations = [column,
                              column.replace("_", " "),
@@ -15,8 +15,8 @@ def run_string_matching_for_rcd(column_list, script_context):
                              ]
         column_variations_lower = [variation.lower() for variation in column_variations]
         if any([variation in script_context for variation in column_variations_lower]):
-            relevant_columns_list.append(column)
-    return relevant_columns_list
+            accessed_columns_list.append(column)
+    return accessed_columns_list
 
 
 def run_llm_for_rcd(column_desc, model_name, script_context, task_group):
@@ -33,8 +33,8 @@ def run_llm_for_rcd(column_desc, model_name, script_context, task_group):
     else:
         raise ValueError(f"Unknown task group: {task_group}")
     max_retries = 3
-    relevant_columns_list, expectations, suggestions = lc.invoke(
+    accessed_columns_list, expectations, suggestions = lc.invoke(
         input_variables=input_variables, num_stages=1, max_retries=max_retries
     )
-    relevant_columns_list = sorted(relevant_columns_list, key=lambda x: x.lower())
-    return relevant_columns_list
+    accessed_columns_list = sorted(accessed_columns_list, key=lambda x: x.lower())
+    return accessed_columns_list

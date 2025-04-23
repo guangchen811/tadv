@@ -4,7 +4,7 @@ from matplotlib import pyplot as plt
 
 from tadv.dq_manager import DeequDataQualityManager
 from tadv.utils import get_project_root, get_current_folder, get_task_instance
-from workflow.s2_experiments.t1_column_access_detection.metrics import RelevantColumnDetectionMetric
+from workflow.s2_experiments.t1_column_access_detection.metrics import ColumnAccessDetectionMetrics
 from workflow.s2_experiments.t1_column_access_detection.run_pipeline import task_group_mapping
 from workflow.s2_experiments.utils import load_previous_and_new_spark_data
 
@@ -13,7 +13,7 @@ def calculate_results(dataset_name, model_name, processed_data_label):
     """Calculates relevant column detection metrics for a given dataset and model."""
     original_data_path = get_project_root() / "data" / f"{dataset_name}"
     dq_manager = DeequDataQualityManager()
-    metric_evaluator = RelevantColumnDetectionMetric(average='macro')
+    metric_evaluator = ColumnAccessDetectionMetrics(average='macro')
 
     result_each_type = {}
 
@@ -42,11 +42,11 @@ def calculate_results(dataset_name, model_name, processed_data_label):
 
             load_dir = result_path / f"relevant_columns__{script_path.stem}.txt"
             with open(load_dir, 'r') as f:
-                relevant_columns_list = f.read().splitlines()
+                accessed_columns_list = f.read().splitlines()
 
             ground_truth = sorted(task_instance.annotations['required_columns'], key=lambda x: x.lower())
             ground_truth_vector, relevant_columns_vector = metric_evaluator.binary_vectorize(
-                column_list, ground_truth, relevant_columns_list
+                column_list, ground_truth, accessed_columns_list
             )
 
             all_ground_truth_vectors.append(ground_truth_vector)
@@ -79,7 +79,7 @@ def save_results_to_df(dataset_name_options, model_names, processed_data_label):
 
         for task_type in list(all_results[model_names[0]].keys()):
             for model_name in model_names:
-                f1_scores = RelevantColumnDetectionMetric().statistics_calculation(
+                f1_scores = ColumnAccessDetectionMetrics().statistics_calculation(
                     all_results[model_name][task_type][0],
                     all_results[model_name][task_type][1]
                 )

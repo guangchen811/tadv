@@ -5,7 +5,7 @@ from langchain_core.output_parsers import (CommaSeparatedListOutputParser,
                                            JsonOutputParser)
 from langchain_core.prompts import ChatPromptTemplate
 
-from tadv.llm._tasks import DVTask
+from tadv.llm.tasks import DVTask
 from tadv.llm.langchain.abstract import AbstractLangChainTADV
 from tadv.llm.langchain.llm_backend import get_langchain_model
 from tadv.llm.langchain.prompts.gx._manager import GXConfigManager
@@ -39,7 +39,7 @@ class LangChainTADVGreatExpectationsDialect(AbstractLangChainTADV):
                       downstream_task_description: str = None,
                       assumption_generation_trick: str = None,
                       expectations_text_descriptions: str = None, ) -> ChatPromptTemplate:
-        if task == DVTask.RELEVANT_COLUMN_TARGET:
+        if task == DVTask.COLUMN_ACCESS_DETECTION:
             return ChatPromptTemplate(
                 [
                     ("system", SYSTEM_TASK_DESCRIPTION),
@@ -74,7 +74,7 @@ class LangChainTADVGreatExpectationsDialect(AbstractLangChainTADV):
     def _build_single_chain(self, task: DVTask, downstream_task_description: str = None,
                             assumption_generation_trick: str = None,
                             expectations_text_descriptions_style: str = "Full"):
-        if task == DVTask.RELEVANT_COLUMN_TARGET:
+        if task == DVTask.COLUMN_ACCESS_DETECTION:
             if downstream_task_description is None:
                 raise ValueError("Downstream task description is required.")
             prompt = self._build_prompt(task, downstream_task_description=downstream_task_description)
@@ -103,7 +103,7 @@ class LangChainTADVGreatExpectationsDialect(AbstractLangChainTADV):
     def _build_chain(self, downstream_task_description: str = None, assumption_generation_trick: str = None
                      , expectations_text_descriptions_style: str = "Full"):
         self.relevant_column_target_chain = self._build_single_chain(
-            DVTask.RELEVANT_COLUMN_TARGET, downstream_task_description=downstream_task_description
+            DVTask.COLUMN_ACCESS_DETECTION, downstream_task_description=downstream_task_description
         )
         self.expectation_extraction_chain = self._build_single_chain(
             DVTask.EXPECTATION_EXTRACTION, assumption_generation_trick=assumption_generation_trick
@@ -118,7 +118,7 @@ class LangChainTADVGreatExpectationsDialect(AbstractLangChainTADV):
             input_variables (dict): Input variables for the pipeline.
             num_stages (int): Number of stages to run in the pipeline.
         """
-        relevant_columns_list = self.relevant_column_target_chain.invoke(
+        accessed_columns_list = self.relevant_column_target_chain.invoke(
             {
                 "code_snippet": input_variables["script"],
                 "columns_desc": input_variables["column_desc"],
@@ -130,7 +130,7 @@ class LangChainTADVGreatExpectationsDialect(AbstractLangChainTADV):
                     {
                         "code_snippet": input_variables["script"],
                         "columns_desc": input_variables["column_desc"],
-                        "relevant_columns": str(relevant_columns_list),
+                        "relevant_columns": str(accessed_columns_list),
                     }
                 )
             elif self.assumption_generation_trick == "with_deequ":
@@ -138,7 +138,7 @@ class LangChainTADVGreatExpectationsDialect(AbstractLangChainTADV):
                     {
                         "code_snippet": input_variables["script"],
                         "columns_desc": input_variables["column_desc"],
-                        "relevant_columns": relevant_columns_list,
+                        "relevant_columns": accessed_columns_list,
                         "deequ_assumptions": input_variables["deequ_assumptions"],
                     }
                 )
@@ -148,18 +148,18 @@ class LangChainTADVGreatExpectationsDialect(AbstractLangChainTADV):
             expectations = None
         if num_stages > 2:
             rules = self.rule_generation_chain.invoke(
-                {"assumptions": expectations, "relevant_columns": relevant_columns_list,
+                {"assumptions": expectations, "relevant_columns": accessed_columns_list,
                  "code_snippet": input_variables["script"]})
         else:
             rules = None
-        return relevant_columns_list, expectations, rules
+        return accessed_columns_list, expectations, rules
 
     def invoke(self, input_variables: dict, num_stages: int = 3, max_retries: int = 3):
-        relevant_columns_list, expectations, suggestions = None, None, None
+        accessed_columns_list, expectations, suggestions = None, None, None
         attempt = 0
         while attempt < max_retries:
             try:
-                relevant_columns_list, expectations, suggestions = self.single_invoke(
+                accessed_columns_list, expectations, suggestions = self.single_invoke(
                     input_variables=input_variables, num_stages=num_stages
                 )
                 break  # Exit the loop if successful
@@ -173,4 +173,4 @@ class LangChainTADVGreatExpectationsDialect(AbstractLangChainTADV):
                 self.logger.error("An unexpected error occurred.")
                 self.logger.error(f"Error details: {e}")
                 raise e  # Raise any other unexpected exceptions
-        return relevant_columns_list, expectations, suggestions
+        return accessed_columns_list, expectations, suggestions

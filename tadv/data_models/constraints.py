@@ -40,11 +40,11 @@ class Constraints:
         }
 
     @classmethod
-    def from_llm_output(cls, relevant_columns_list, expectations, suggestions, code_list_for_constraints_valid):
+    def from_llm_output(cls, accessed_columns_list, expectations, suggestions, code_list_for_constraints_valid):
         yaml_dict = {"constraints": {f"{relevant_column}": {"code": [], "assumptions": []} for relevant_column in
-                                     relevant_columns_list}}
+                                     accessed_columns_list}}
         for suggested_column, suggestions in suggestions.items():
-            if suggested_column not in relevant_columns_list:
+            if suggested_column not in accessed_columns_list:
                 continue
             for suggestion in suggestions:
                 if suggestion in code_list_for_constraints_valid:
@@ -52,7 +52,7 @@ class Constraints:
                 else:
                     yaml_dict["constraints"][suggested_column]["code"].append([suggestion, "Invalid"])
         for suggested_column, expectations in expectations.items():
-            if suggested_column not in relevant_columns_list:
+            if suggested_column not in accessed_columns_list:
                 continue
             for expectation in expectations:
                 yaml_dict["constraints"][suggested_column]["assumptions"].append(expectation)
@@ -60,9 +60,9 @@ class Constraints:
 
     @classmethod
     def from_deequ_output(cls, suggestion, code_list_for_constraints_valid):
-        relevant_columns_list = list(set([item["column_name"] for item in suggestion]))
+        accessed_columns_list = list(set([item["column_name"] for item in suggestion]))
         yaml_dict = {"constraints": {f"{relevant_column}": {"code": [], "assumptions": []} for relevant_column in
-                                     relevant_columns_list}}
+                                     accessed_columns_list}}
         for item in suggestion:
             code = item["code_for_constraint"]
             column_name = item["column_name"]

@@ -3,5 +3,5 @@ from enum import Enum, auto
 
 class DVTask(Enum):
     EXPECTATION_EXTRACTION = auto()
-    RELEVANT_COLUMN_TARGET = auto()
+    COLUMN_ACCESS_DETECTION = auto()
     RULE_GENERATION = auto()

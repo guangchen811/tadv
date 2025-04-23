@@ -1,6 +1,6 @@
 from langchain_core.runnables.base import RunnableSequence
 
-from tadv.llm._tasks import DVTask
+from tadv.llm.tasks import DVTask
 from tadv.llm.langchain import LangChainTADVGreatExpectationsDialect
 from tadv.llm.langchain.prompts.downstream_task_prompt import ML_INFERENCE_TASK_DESCRIPTION
 from tadv.utils import load_dotenv
@@ -11,8 +11,8 @@ def test_gx_build_single_chain():
     langchain = LangChainTADVGreatExpectationsDialect(model_name="gpt-4o-mini",
                                                       downstream_task_description=ML_INFERENCE_TASK_DESCRIPTION)
 
-    relevant_column_target_task = DVTask.RELEVANT_COLUMN_TARGET
-    chain = langchain._build_single_chain(relevant_column_target_task,
+    column_access_detection = DVTask.COLUMN_ACCESS_DETECTION
+    chain = langchain._build_single_chain(column_access_detection,
                                           downstream_task_description=ML_INFERENCE_TASK_DESCRIPTION)
     assert isinstance(chain, RunnableSequence)
 

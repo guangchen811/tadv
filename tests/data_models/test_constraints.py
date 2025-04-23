@@ -163,20 +163,20 @@ def test_load_from_local_yaml():
 
 
 def test_from_llm_output():
-    relevant_columns_list = ["column1", "column2"]
+    accessed_columns_list = ["column1", "column2"]
     suggestions = {
         "column1": [".hasCompleteness('column1', lambda x: x > 0.9)"],
         "column2": [".hasMax('column2', lambda x: x < 100)"],
-        "column3": [".hasMin('column3', lambda x: x > 10)"]  # Not in relevant_columns_list
+        "column3": [".hasMin('column3', lambda x: x > 10)"]  # Not in accessed_columns_list
     }
     code_list_for_constraints_valid = [".hasCompleteness('column1', lambda x: x > 0.9)"]
     expectations = {
         "column1": ["Assumption 1"],
         "column2": ["Assumption 2"],
-        "column3": ["Assumption 3"]  # Not in relevant_columns_list
+        "column3": ["Assumption 3"]  # Not in accessed_columns_list
     }
 
-    constraints = Constraints.from_llm_output(relevant_columns_list, expectations, suggestions,
+    constraints = Constraints.from_llm_output(accessed_columns_list, expectations, suggestions,
                                               code_list_for_constraints_valid)
 
     # Assert column1

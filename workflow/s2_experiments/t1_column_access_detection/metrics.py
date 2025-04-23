@@ -5,7 +5,7 @@ from sklearn.metrics import (
 )
 
 
-class RelevantColumnDetectionMetric:
+class ColumnAccessDetectionMetrics:
     """
     A class to compute metrics for multi-label classification tasks,
     such as accuracy, Hamming loss, precision, recall, and F1 score.

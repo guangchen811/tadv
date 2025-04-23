@@ -30,7 +30,7 @@ def test_gx_build_single_chain():
     AND bloodtype IN ('AB negative', 'B negative')").fetch()
     generate_report(strokes_total, strokes_for_rare_bloodtypes)"""
 
-    relevant_columns_list, expectations, suggestions = lc.invoke(
+    accessed_columns_list, expectations, suggestions = lc.invoke(
         input_variables={"column_desc": column_desc, "script": context},
         num_stages=3,
         max_retries=3,
@@ -42,7 +42,7 @@ def test_gx_build_single_chain():
                                                                                    spark_train, spark_train_data)
     print("Valid constraints:")
     print(code_list_for_constraints_valid)
-    constraints = Constraints.from_llm_output(relevant_columns_list, expectations, suggestions,
+    constraints = Constraints.from_llm_output(accessed_columns_list, expectations, suggestions,
                                               code_list_for_constraints_valid)
     print("Constraints:")
     print(constraints)

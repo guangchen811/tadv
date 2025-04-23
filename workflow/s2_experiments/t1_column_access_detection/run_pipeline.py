@@ -1,12 +1,11 @@
-from workflow.s2_experiments.t1_column_access_detection.string_matching import run_string_matching_for_rcd, \
-    run_llm_for_rcd
-from workflow.s2_experiments.t1_column_access_detection.metrics import RelevantColumnDetectionMetric
-from workflow.s2_experiments.utils import load_previous_and_new_spark_data
-
-from tadv.utils import get_task_instance
 from tadv.dq_manager import DeequDataQualityManager
 from tadv.inspector.deequ.deequ_inspector_manager import DeequInspectorManager
 from tadv.utils import get_project_root
+from tadv.utils import get_task_instance, get_current_folder
+from workflow.s2_experiments.t1_column_access_detection.metrics import ColumnAccessDetectionMetrics
+from workflow.s2_experiments.t1_column_access_detection.string_matching import run_string_matching_for_rcd, \
+    run_llm_for_rcd
+from workflow.s2_experiments.utils import load_previous_and_new_spark_data
 
 task_group_mapping = {
     'bi': 'sql_query',
@@ -34,7 +33,7 @@ def run_langchain_cadv_on_single_model(dataset_name, model_name, processed_data_
 
     column_desc = DeequInspectorManager().spark_df_to_column_desc(spark_previous_data, spark_previous)
 
-    metric_evaluator = RelevantColumnDetectionMetric(average='macro')
+    metric_evaluator = ColumnAccessDetectionMetrics(average='macro')
     result_each_type = {}
 
     result_path = get_current_folder() / "relevant_columns" / f"{dataset_name}" / f"{model_name}"
@@ -50,20 +49,20 @@ def run_langchain_cadv_on_single_model(dataset_name, model_name, processed_data_
             task_instance = get_task_instance(script_path)
 
             if model_name == "string-matching":
-                relevant_columns_list = run_string_matching_for_rcd(column_list, task_instance.original_script)
+                accessed_columns_list = run_string_matching_for_rcd(column_list, task_instance.original_script)
             else:
-                relevant_columns_list = run_llm_for_rcd(column_desc, model_name, task_instance.original_script,
+                accessed_columns_list = run_llm_for_rcd(column_desc, model_name, task_instance.original_script,
                                                         task_group_mapping[task_type])
 
             save_dir = result_path / f"relevant_columns__{script_path.stem}.txt"
             with open(save_dir, 'a') as f:
-                for column in relevant_columns_list:
+                for column in accessed_columns_list:
                     f.write(f"{column}\n")
 
             ground_truth = sorted(task_instance.annotations['required_columns'], key=lambda x: x.lower())
             ground_truth_vector, relevant_columns_vector = metric_evaluator.binary_vectorize(column_list,
                                                                                              ground_truth,
-                                                                                             relevant_columns_list)
+                                                                                             accessed_columns_list)
             all_ground_truth_vectors.append(ground_truth_vector)
             all_relevant_columns_vectors.append(relevant_columns_vector)
         result_each_type[task_type] = [all_ground_truth_vectors, all_relevant_columns_vectors]

@@ -29,7 +29,7 @@ def test_gx_build_single_chain():
     AND bloodtype IN ('AB negative', 'B negative')").fetch()
     generate_report(strokes_total, strokes_for_rare_bloodtypes)"""
 
-    relevant_columns_list, expectations, suggestions = lc.invoke(
+    accessed_columns_list, expectations, suggestions = lc.invoke(
         input_variables={"column_desc": column_desc, "script": context},
         num_stages=3,
         max_retries=3,
