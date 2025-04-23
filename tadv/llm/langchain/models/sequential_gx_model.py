@@ -103,7 +103,7 @@ class SequentialLangChainTADVGreatExpectationsDialect(SequentialLangChainTADV):
 
     def _build_chain(self, downstream_task_description: str = None, assumption_generation_trick: str = None
                      , expectations_text_descriptions_style: str = "Full"):
-        self.relevant_column_target_chain = self._build_single_chain(
+        self.column_access_detection_chain = self._build_single_chain(
             DVTask.COLUMN_ACCESS_DETECTION, downstream_task_description=downstream_task_description
         )
         self.expectation_extraction_chain = self._build_single_chain(
@@ -119,7 +119,7 @@ class SequentialLangChainTADVGreatExpectationsDialect(SequentialLangChainTADV):
             input_variables (dict): Input variables for the pipeline.
             num_stages (int): Number of stages to run in the pipeline.
         """
-        accessed_columns_list = self.relevant_column_target_chain.invoke(
+        accessed_columns_list = self.column_access_detection_chain.invoke(
             {
                 "code_snippet": input_variables["script"],
                 "columns_desc": input_variables["column_desc"],
