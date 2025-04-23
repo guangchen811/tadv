@@ -54,8 +54,8 @@ def run_langchain_cadv(dataset_name, downstream_task, model_name, processed_data
         processed_data_path = get_project_root() / "data_processed" / dataset_name / downstream_task / f"{processed_data_label}"
         constraints_result_path = processed_data_path / "constraints" / f"{script_path.stem}" / f"tadv_constraints__{model_name}__{assumption_generation_trick}.yaml"
         constraints_result_path.parent.mkdir(parents=True, exist_ok=True)
-        relevant_columns_result_path = processed_data_path / "relevant_columns" / f"{script_path.stem}" / f"relevant_columns__{model_name}.txt"
-        relevant_columns_result_path.parent.mkdir(parents=True, exist_ok=True)
+        accessed_columns_result_path = processed_data_path / "accessed_columns" / f"{script_path.stem}" / f"accessed_columns__{model_name}.txt"
+        accessed_columns_result_path.parent.mkdir(parents=True, exist_ok=True)
         task_instance = get_task_instance(script_path)
 
         if downstream_task in ["ml_inference_classification", "ml_inference_regression"]:
@@ -95,9 +95,9 @@ def run_langchain_cadv(dataset_name, downstream_task, model_name, processed_data
         constraints = Constraints.from_llm_output(accessed_columns_list, expectations, suggestions,
                                                   code_list_for_constraints_valid)
 
-        with open(relevant_columns_result_path, "w") as f:
+        with open(accessed_columns_result_path, "w") as f:
             f.write("\n".join(accessed_columns_list))
-        logger.info(f"Saved relevant columns to {relevant_columns_result_path}")
+        logger.info(f"Saved relevant columns to {accessed_columns_result_path}")
         constraints.save_to_yaml(constraints_result_path)
         logger.info(f"Saved constraints to {constraints_result_path}")
 

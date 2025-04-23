@@ -17,9 +17,9 @@ def test_prompt_building():
     task = DVTask.EXPECTATION_EXTRACTION
     prompt = lang_chain._build_prompt(task)
     assert isinstance(prompt, ChatPromptTemplate)
-    assert prompt.input_variables == ["code_snippet", "columns_desc", "relevant_columns"]
+    assert prompt.input_variables == ["code_snippet", "columns_desc", "accessed_columns"]
 
     task = DVTask.RULE_GENERATION
     prompt = lang_chain._build_prompt(task)
     assert isinstance(prompt, ChatPromptTemplate)
-    assert prompt.input_variables == ["assumptions", "code_snippet", "relevant_columns"]
+    assert prompt.input_variables == ["assumptions", "code_snippet", "accessed_columns"]

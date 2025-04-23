@@ -78,7 +78,7 @@ class AbstractProjectManager(ABC):
         pass
 
     @abstractmethod
-    def prepare_data_for_relevant_columns_detection(self, subtask_name):
+    def prepare_data_for_accessed_columns_detection(self, subtask_name):
         pass
 
     @abstractmethod

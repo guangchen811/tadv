@@ -129,7 +129,7 @@ class SequentialLangChainTADVGreatExpectationsDialect(SequentialLangChainTADV):
                     {
                         "code_snippet": input_variables["script"],
                         "columns_desc": input_variables["column_desc"],
-                        "relevant_columns": str(accessed_columns_list),
+                        "accessed_columns": str(accessed_columns_list),
                     }
                 )
             elif self.assumption_generation_trick == "with_deequ":
@@ -137,7 +137,7 @@ class SequentialLangChainTADVGreatExpectationsDialect(SequentialLangChainTADV):
                     {
                         "code_snippet": input_variables["script"],
                         "columns_desc": input_variables["column_desc"],
-                        "relevant_columns": accessed_columns_list,
+                        "accessed_columns": accessed_columns_list,
                         "deequ_assumptions": input_variables["deequ_assumptions"],
                     }
                 )
@@ -147,7 +147,7 @@ class SequentialLangChainTADVGreatExpectationsDialect(SequentialLangChainTADV):
             expectations = None
         if num_stages > 2:
             rules = self.rule_generation_chain.invoke(
-                {"assumptions": expectations, "relevant_columns": accessed_columns_list,
+                {"assumptions": expectations, "accessed_columns": accessed_columns_list,
                  "code_snippet": input_variables["script"]})
         else:
             rules = None

@@ -80,7 +80,7 @@ class ColumnAccessDetectionMetrics:
         }
         return statistics
 
-    def binary_vectorize(self, all_columns, ground_truth, relevant_columns):
+    def binary_vectorize(self, all_columns, ground_truth, accessed_columns):
         ground_truth_vector = [1 if col in ground_truth else 0 for col in all_columns]
-        relevant_columns_vector = [1 if col in relevant_columns else 0 for col in all_columns]
-        return ground_truth_vector, relevant_columns_vector
+        accessed_columns_vector = [1 if col in accessed_columns else 0 for col in all_columns]
+        return ground_truth_vector, accessed_columns_vector

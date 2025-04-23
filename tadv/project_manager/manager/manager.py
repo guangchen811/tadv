@@ -44,7 +44,7 @@ class ProjectManager(AbstractProjectManager):
     def get_corrupted_data_path(self, subtask_name, processed_data_label):
         return self.get_processed_data_path(subtask_name, processed_data_label) / "files_with_corrupted_data"
 
-    def prepare_data_for_relevant_columns_detection(self, subtask_name):
+    def prepare_data_for_accessed_columns_detection(self, subtask_name):
         pass
 
     def prepare_data_for_constraints_inference(self, subtask_name):
