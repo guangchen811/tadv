@@ -63,9 +63,6 @@ class SequentialLangChainTADVDeequDialect(SequentialLangChainTADV):
                 partial_variables={"downstream_task_description": downstream_task_description},
             )
 
-    def show_prompts(self, input_variables: dict, num_stages: int):
-        pass
-
     def _build_single_chain(self, task: SequentialTADVTasks, downstream_task_description: str = None,
                             assumption_generation_trick: str = None):
         if task == SequentialTADVTasks.COLUMN_ACCESS_DETECTION:
@@ -98,6 +95,38 @@ class SequentialLangChainTADVDeequDialect(SequentialLangChainTADV):
         self.rule_generation_chain = self._build_single_chain(
             SequentialTADVTasks.CODE_GENERATION, downstream_task_description
         )
+
+    def show_prompts(self, input_variables: dict, num_stages: int):
+        """
+        Args:
+            input_variables (dict): Input variables for the pipeline.
+            num_stages (int): Number of stages to run in the pipeline.
+        """
+        prompts = {}
+        if num_stages > 0:
+            prompts["column_access_detection"] = self.column_access_detection_chain.get_prompts()[0].invoke(
+                {
+                    "code_snippet": input_variables["script"],
+                    "columns_desc": input_variables["column_desc"],
+                }
+            ).to_string()
+        if num_stages > 1:
+            prompts["expectation_extraction"] = self.expectation_extraction_chain.get_prompts()[0].invoke(
+                {
+                    "code_snippet": input_variables["script"],
+                    "columns_desc": input_variables["column_desc"],
+                    "accessed_columns": "<|accessed_columns|>",
+                }
+            ).to_string()
+        if num_stages > 2:
+            prompts["rule_generation"] = self.rule_generation_chain.get_prompts()[0].invoke(
+                {
+                    "assumptions": "<|assumptions|>",
+                    "accessed_columns": "<|accessed_columns|>",
+                    "code_snippet": input_variables["script"],
+                }
+            ).to_string()
+        return prompts
 
     def invoke(self, input_variables: dict, num_stages: int = 3):
         """
