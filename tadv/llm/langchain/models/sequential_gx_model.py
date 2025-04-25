@@ -124,21 +124,12 @@ class SequentialLangChainTADVGreatExpectationsDialect(SequentialLangChainTADV):
             }
         )
         if num_stages > 1:
-            if self.assumption_generation_trick == "with_experience" or self.assumption_generation_trick is None:
+            if self.assumption_generation_trick is None:
                 expectations = self.expectation_extraction_chain.invoke(
                     {
                         "code_snippet": input_variables["script"],
                         "columns_desc": input_variables["column_desc"],
                         "accessed_columns": str(accessed_columns_list),
-                    }
-                )
-            elif self.assumption_generation_trick == "with_deequ":
-                expectations = self.expectation_extraction_chain.invoke(
-                    {
-                        "code_snippet": input_variables["script"],
-                        "columns_desc": input_variables["column_desc"],
-                        "accessed_columns": accessed_columns_list,
-                        "deequ_assumptions": input_variables["deequ_assumptions"],
                     }
                 )
             else:
