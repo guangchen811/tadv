@@ -6,7 +6,7 @@ from langchain_core.output_parsers import (CommaSeparatedListOutputParser,
 from langchain_core.prompts import ChatPromptTemplate
 
 from tadv.llm.langchain.abstract import SequentialLangChainTADV
-from tadv.llm.langchain.llm_backend import get_langchain_model
+from tadv.llm.langchain.llm_backend.entry import get_langchain_model
 from tadv.llm.langchain.prompts.sequential_deequ import (
     COLUMN_ACCESS_DETECTION_PROMPT,
     CODE_GENERATION_PROMPT,

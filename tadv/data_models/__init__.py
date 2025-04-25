@@ -1,4 +1,5 @@
 from tadv.data_models.constraints import CodeEntry, ColumnConstraints, Constraints
+from tadv.data_models.expectation_config import ExpectationConfig
 from tadv.data_models.validated_results import ValidationCodeEntry, ColumnValidationResults, \
     ValidationResults
 
@@ -8,5 +9,6 @@ __all__ = [
     "Constraints",
     "ValidationCodeEntry",
     "ColumnValidationResults",
-    "ValidationResults"
+    "ValidationResults",
+    "ExpectationConfig"
 ]
