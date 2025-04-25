@@ -63,6 +63,9 @@ class SequentialLangChainTADVDeequDialect(SequentialLangChainTADV):
                 partial_variables={"downstream_task_description": downstream_task_description},
             )
 
+    def show_prompts(self, input_variables: dict, num_stages: int):
+        pass
+
     def _build_single_chain(self, task: SequentialTADVTasks, downstream_task_description: str = None,
                             assumption_generation_trick: str = None):
         if task == SequentialTADVTasks.COLUMN_ACCESS_DETECTION:

@@ -70,6 +70,9 @@ class SequentialLangChainTADVGreatExpectationsDialect(SequentialLangChainTADV):
                                    "expectations_text_descriptions": expectations_text_descriptions},
             )
 
+    def show_prompts(self, input_variables: dict, num_stages: int):
+        pass
+
     def _build_single_chain(self, task: SequentialTADVTasks, downstream_task_description: str = None,
                             assumption_generation_trick: str = None,
                             expectations_text_descriptions_style: str = "Full"):
