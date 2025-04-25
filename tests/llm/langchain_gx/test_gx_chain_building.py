@@ -1,8 +1,8 @@
 from langchain_core.runnables.base import RunnableSequence
 
-from tadv.llm.tasks import SequentialTADVTasks
-from tadv.llm.langchain import SequentialLangChainTADVGreatExpectationsDialect
+from tadv.llm.langchain.models.sequential_gx_model import SequentialLangChainTADVGreatExpectationsDialect
 from tadv.llm.langchain.prompts.downstream_task_prompt import ML_INFERENCE_TASK_DESCRIPTION
+from tadv.llm.tasks import SequentialTADVTasks
 from tadv.utils import load_dotenv
 
 

@@ -3,7 +3,7 @@ from tadv.utils import get_project_root
 from tadv.data_models import Constraints
 from tadv.inspector.deequ.deequ_inspector_manager import DeequInspectorManager
 from tadv.dq_manager import DeequDataQualityManager
-from tadv.llm.langchain import SequentialLangChainTADVDeequDialect
+from tadv.llm.langchain.models.sequential_deequ_model import SequentialLangChainTADVDeequDialect
 from tadv.llm.langchain.prompts.downstream_task_prompt import ML_INFERENCE_TASK_DESCRIPTION, \
     SQL_QUERY_TASK_DESCRIPTION, WEB_TASK_DESCRIPTION
 from workflow.s2_experiments.utils import setup_logger, load_train_and_test_spark_data, load_previous_and_new_spark_data

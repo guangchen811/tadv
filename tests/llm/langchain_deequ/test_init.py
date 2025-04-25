@@ -1,6 +1,6 @@
 from langchain_openai import ChatOpenAI
 
-from tadv.llm.langchain import SequentialLangChainTADVDeequDialect
+from tadv.llm.langchain.models.sequential_deequ_model import SequentialLangChainTADVDeequDialect
 from tadv.llm.langchain.prompts.downstream_task_prompt import ML_INFERENCE_TASK_DESCRIPTION
 
 

@@ -1,6 +1,6 @@
 from tadv.dq_manager import DeequDataQualityManager
 from tadv.inspector.deequ.deequ_inspector_manager import DeequInspectorManager
-from tadv.llm.langchain import SequentialLangChainTADVDeequDialect
+from tadv.llm.langchain.models.sequential_deequ_model import SequentialLangChainTADVDeequDialect
 from tadv.llm.langchain.prompts.downstream_task_prompt import SQL_QUERY_TASK_DESCRIPTION
 from tadv.loader import FileLoader
 from tadv.utils import get_project_root

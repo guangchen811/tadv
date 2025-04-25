@@ -6,12 +6,11 @@ from tadv.loader import FileLoader
 from tadv.utils import load_dotenv, get_project_root
 
 
-def test_gx_build_single_chain():
+def test_show_prompts():
     load_dotenv()
 
     lc = SequentialLangChainTADVDeequDialect(model_name="gpt-4o-mini",
-                                             downstream_task_description=ML_INFERENCE_TASK_DESCRIPTION, )
-
+                                             downstream_task_description=ML_INFERENCE_TASK_DESCRIPTION)
     dq_manager = DeequDataQualityManager()
     train_file_path = get_project_root() / "data" / "toy_example" / "files" / "hospitalisations_train.csv"
     train_data = FileLoader.load_csv(train_file_path, na_values=["NULL"])
@@ -29,6 +28,7 @@ def test_gx_build_single_chain():
     AND bloodtype IN ('AB negative', 'B negative')").fetch()
     generate_report(strokes_total, strokes_for_rare_bloodtypes)"""
 
-    accessed_columns_list, expectations, suggestions = lc.invoke_with_retries(
-        input_variables={"column_desc": column_desc, "script": context}, num_stages=3, max_retries=3)
-    print(suggestions)
+    prompts = lc.show_prompts(
+        input_variables={"column_desc": column_desc, "script": context}, num_stages=3)
+    for prompt in prompts:
+        print(prompt)
