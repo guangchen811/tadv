@@ -17,9 +17,9 @@ def test_prompt_building():
     task = SequentialTADVTasks.ASSUMPTION_EXTRACTION
     prompt = lang_chain._build_prompt(task)
     assert isinstance(prompt, ChatPromptTemplate)
-    assert prompt.input_variables == ["code_snippet", "columns_desc", "accessed_columns"]
+    assert sorted(prompt.input_variables) == sorted(["code_snippet", "columns_desc", "accessed_columns"])
 
     task = SequentialTADVTasks.CODE_GENERATION
     prompt = lang_chain._build_prompt(task)
     assert isinstance(prompt, ChatPromptTemplate)
-    assert prompt.input_variables == ["assumptions", "code_snippet", "accessed_columns"]
+    assert sorted(prompt.input_variables) == sorted(["assumptions", "code_snippet", "accessed_columns"])

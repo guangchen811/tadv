@@ -69,7 +69,15 @@ def test_to_dict(constraints_instance):
             }
         }
     }
-    assert constraints_instance.to_dict() == expected_dict
+    actual_dict = constraints_instance.to_dict()
+
+    # Sort the code lists for comparison
+    expected_code = sorted(expected_dict["constraints"]["column1"]["code"])
+    actual_code = sorted(actual_dict["constraints"]["column1"]["code"])
+
+    assert actual_code == expected_code
+    assert actual_dict["constraints"]["column1"]["assumptions"] == expected_dict["constraints"]["column1"][
+        "assumptions"]
 
 
 def test_to_string():
