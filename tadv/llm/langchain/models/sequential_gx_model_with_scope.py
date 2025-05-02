@@ -51,6 +51,10 @@ class SequentialLangChainTADVGreatExpectationsDialect(SequentialLangChainTADV):
         elif task == SequentialTADVTasks.ASSUMPTION_EXTRACTION:
             if assumption_generation_trick is None:
                 assumptions_extraction_prompt = DEFAULT_ASSUMPTIONS_PROMPT
+            elif assumption_generation_trick == "code_with_line_numbers":
+                assumptions_extraction_prompt = DEFAULT_ASSUMPTIONS_PROMPT
+            elif assumption_generation_trick == "code_with_pygments_highlighting":
+                assumptions_extraction_prompt = DEFAULT_ASSUMPTIONS_PROMPT
             else:
                 raise ValueError(f"Unknown assumption generation trick: {assumption_generation_trick}")
             return ChatPromptTemplate(
@@ -121,8 +125,8 @@ class SequentialLangChainTADVGreatExpectationsDialect(SequentialLangChainTADV):
         code_snippet = input_variables["script"]
         if self.assumption_generation_trick == "code_with_line_numbers":
             code_snippet = self._add_line_numbers(code_snippet)
-        elif self.assumption_generation_trick == "code_without_line_numbers_and_highlighting":
-            code_snippet = self._add_pygment_highlighting(code_snippet)
+        elif self.assumption_generation_trick == "code_with_pygments_highlighting":
+            code_snippet = self._add_pygments_highlighting(code_snippet)
         if num_stages > 0:
             prompts["column_access_detection"] = self.column_access_detection_chain.get_prompts()[0].invoke(
                 {
@@ -157,8 +161,8 @@ class SequentialLangChainTADVGreatExpectationsDialect(SequentialLangChainTADV):
         code_snippet = input_variables["script"]
         if self.assumption_generation_trick == "code_with_line_numbers":
             code_snippet = self._add_line_numbers(code_snippet)
-        elif self.assumption_generation_trick == "code_without_line_numbers_and_highlighting":
-            code_snippet = self._add_pygment_highlighting(code_snippet)
+        elif self.assumption_generation_trick == "code_with_pygments_highlighting":
+            code_snippet = self._add_pygments_highlighting(code_snippet)
         accessed_columns_list = self.column_access_detection_chain.invoke(
             {
                 "code_snippet": code_snippet,
@@ -223,7 +227,7 @@ class SequentialLangChainTADVGreatExpectationsDialect(SequentialLangChainTADV):
         return code_snippet
 
     @staticmethod
-    def _add_pygment_highlighting(code_snippet: str) -> str:
+    def _add_pygments_highlighting(code_snippet: str) -> str:
         """
         Adds Pygments highlighting to the code snippet.
         Args:

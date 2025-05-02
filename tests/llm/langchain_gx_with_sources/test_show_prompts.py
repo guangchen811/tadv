@@ -8,8 +8,6 @@ from tadv.utils import load_dotenv, get_project_root
 
 def test_gx_build_single_chain():
     load_dotenv()
-    lc = SequentialLangChainTADVGreatExpectationsDialect(model_name="gpt-4o-mini",
-                                                         downstream_task_description=ML_INFERENCE_TASK_DESCRIPTION, )
     dq_manager = GreatExpectationsDataQualityManager()
     train_file_path = get_project_root() / "data" / "toy_example" / "files" / "hospitalisations_train.csv"
     train_data = FileLoader.load_csv(train_file_path, na_values=["NULL"])
@@ -26,8 +24,23 @@ def test_gx_build_single_chain():
     AND bloodtype IN ('AB negative', 'B negative')").fetch()
     generate_report(strokes_total, strokes_for_rare_bloodtypes)"""
 
+    lc = SequentialLangChainTADVGreatExpectationsDialect(model_name="gpt-4o-mini",
+                                                         downstream_task_description=ML_INFERENCE_TASK_DESCRIPTION, )
     prompts = lc.show_prompts(
         input_variables={"column_desc": column_desc, "script": context}, num_stages=3)
+
+    lc = SequentialLangChainTADVGreatExpectationsDialect(model_name="gpt-4o-mini",
+                                                         downstream_task_description=ML_INFERENCE_TASK_DESCRIPTION,
+                                                         assumption_generation_trick="code_with_line_numbers")
+    prompts = lc.show_prompts(
+        input_variables={"column_desc": column_desc, "script": context}, num_stages=3)
+
+    lc = SequentialLangChainTADVGreatExpectationsDialect(model_name="gpt-4o-mini",
+                                                         downstream_task_description=ML_INFERENCE_TASK_DESCRIPTION,
+                                                         assumption_generation_trick="code_with_pygments_highlighting")
+    prompts = lc.show_prompts(
+        input_variables={"column_desc": column_desc, "script": context}, num_stages=3)
+
     for k, v in prompts.items():
         print(f"Stage {k}:")
         print(v)
