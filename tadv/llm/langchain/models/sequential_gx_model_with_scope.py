@@ -118,17 +118,22 @@ class SequentialLangChainTADVGreatExpectationsDialect(SequentialLangChainTADV):
             num_stages (int): Number of stages to run in the pipeline.
         """
         prompts = {}
+        code_snippet = input_variables["script"]
+        if self.assumption_generation_trick == "code_with_line_numbers":
+            code_snippet = self._add_line_numbers(code_snippet)
+        elif self.assumption_generation_trick == "code_without_line_numbers_and_highlighting":
+            code_snippet = self._add_pygment_highlighting(code_snippet)
         if num_stages > 0:
             prompts["column_access_detection"] = self.column_access_detection_chain.get_prompts()[0].invoke(
                 {
-                    "code_snippet": input_variables["script"],
+                    "code_snippet": code_snippet,
                     "columns_desc": input_variables["column_desc"],
                 }
             ).to_string()
         if num_stages > 1:
             prompts["expectation_extraction"] = self.expectation_extraction_chain.get_prompts()[0].invoke(
                 {
-                    "code_snippet": input_variables["script"],
+                    "code_snippet": code_snippet,
                     "columns_desc": input_variables["column_desc"],
                     "accessed_columns": "<|accessed_columns|>",
                 }
@@ -138,7 +143,7 @@ class SequentialLangChainTADVGreatExpectationsDialect(SequentialLangChainTADV):
                 {
                     "assumptions": "<|assumptions|>",
                     "accessed_columns": "<|accessed_columns|>",
-                    "code_snippet": input_variables["script"],
+                    "code_snippet": code_snippet,
                 }
             ).to_string()
         return prompts
@@ -149,9 +154,14 @@ class SequentialLangChainTADVGreatExpectationsDialect(SequentialLangChainTADV):
             input_variables (dict): Input variables for the pipeline.
             num_stages (int): Number of stages to run in the pipeline.
         """
+        code_snippet = input_variables["script"]
+        if self.assumption_generation_trick == "code_with_line_numbers":
+            code_snippet = self._add_line_numbers(code_snippet)
+        elif self.assumption_generation_trick == "code_without_line_numbers_and_highlighting":
+            code_snippet = self._add_pygment_highlighting(code_snippet)
         accessed_columns_list = self.column_access_detection_chain.invoke(
             {
-                "code_snippet": input_variables["script"],
+                "code_snippet": code_snippet,
                 "columns_desc": input_variables["column_desc"],
             }
         )
@@ -159,7 +169,7 @@ class SequentialLangChainTADVGreatExpectationsDialect(SequentialLangChainTADV):
             if self.assumption_generation_trick is None:
                 expectations = self.expectation_extraction_chain.invoke(
                     {
-                        "code_snippet": input_variables["script"],
+                        "code_snippet": code_snippet,
                         "columns_desc": input_variables["column_desc"],
                         "accessed_columns": str(accessed_columns_list),
                     }
@@ -171,7 +181,7 @@ class SequentialLangChainTADVGreatExpectationsDialect(SequentialLangChainTADV):
         if num_stages > 2:
             rules = self.rule_generation_chain.invoke(
                 {"assumptions": expectations, "accessed_columns": accessed_columns_list,
-                 "code_snippet": input_variables["script"]})
+                 "code_snippet": code_snippet})
         else:
             rules = None
         return accessed_columns_list, expectations, rules
@@ -195,3 +205,40 @@ class SequentialLangChainTADVGreatExpectationsDialect(SequentialLangChainTADV):
                 self.logger.error(f"Error details: {e}")
                 raise e  # Raise any other unexpected exceptions
         return accessed_columns_list, expectations, suggestions
+
+    @staticmethod
+    def _add_line_numbers(code_snippet: str) -> str:
+        """
+        Adds line numbers to the code snippet.
+        Args:
+            code_snippet (str): The code snippet to add line numbers to.
+        Returns:
+            str: The code snippet with line numbers added.
+        """
+        num_lines = len(code_snippet.strip().split('\n'))
+        if num_lines > 10000:
+            raise ValueError("Code snippet has more than 10000 lines.")
+        for i, line in enumerate(code_snippet.strip().split('\n'), start=1):
+            print(f"{i:04}: {line}")
+        return code_snippet
+
+    @staticmethod
+    def _add_pygment_highlighting(code_snippet: str) -> str:
+        """
+        Adds Pygments highlighting to the code snippet.
+        Args:
+            code_snippet (str): The code snippet to add Pygments highlighting to.
+        Returns:
+            str: The code snippet with Pygments highlighting added.
+        """
+        from pygments import highlight
+        from pygments.lexers import guess_lexer
+        from pygments.formatters import TerminalFormatter
+        from pygments.util import ClassNotFound
+        try:
+            lexer = guess_lexer(code_snippet)
+        except ClassNotFound:
+            raise ValueError("Could not guess lexer for the code snippet.")
+        formatter = TerminalFormatter(linenos=True)
+        highlighted_code = highlight(code_snippet, lexer, formatter)
+        return highlighted_code
