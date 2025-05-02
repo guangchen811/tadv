@@ -22,8 +22,8 @@ def resources_path():
 @pytest.fixture
 def constraints_instance():
     code_entries = [
-        CodeEntry(suggestion="Use a non-null constraint", validity="Valid"),
-        CodeEntry(suggestion="Ensure unique values", validity="Invalid"),
+        CodeEntry(suggestion="Code 1", validity="Valid"),
+        CodeEntry(suggestion="Code 2", validity="Invalid"),
     ]
     column_constraints = ColumnConstraints(code=code_entries, assumptions=["Assumption 1", "Assumption 2"])
     constraints = Constraints(constraints={"column1": column_constraints})
@@ -33,8 +33,8 @@ def constraints_instance():
 @pytest.fixture
 def constraints_with_sources_instance():
     code_entries = [
-        CodeEntry(suggestion="Use a non-null constraint", validity="Valid"),
-        CodeEntry(suggestion="Ensure unique values", validity="Invalid"),
+        CodeEntry(suggestion="Code 1", validity="Valid"),
+        CodeEntry(suggestion="Code 2", validity="Invalid"),
     ]
     source_location = [
         SourceLocation(file="file1.py", start_line=1, end_line=2),

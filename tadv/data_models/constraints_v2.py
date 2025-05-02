@@ -97,5 +97,8 @@ class ConstraintsWithSources:
                 continue
             for expectation in expectations:
                 yaml_dict["constraints"][suggested_column]["assumptions"].append(
-                    [expectation["text"], expectation["sources"]])
+                    {"text": expectation["text"], "sources": expectation["sources"]})
         return cls.from_dict(yaml_dict)
+
+    def to_string(self):
+        return yaml.dump(self.to_dict())

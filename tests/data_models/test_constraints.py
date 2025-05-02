@@ -2,7 +2,6 @@ import oyaml as yaml
 
 from tadv.data_models import CodeEntry, ColumnConstraints, \
     Constraints
-from tadv.utils import get_project_root
 
 
 def test_from_yaml(constraints_instance, tmp_path):
@@ -63,8 +62,8 @@ def test_to_dict(constraints_instance):
         "constraints": {
             "column1": {
                 "code": [
-                    ["Ensure unique values", "Invalid"],
-                    ["Use a non-null constraint", "Valid"]
+                    ["Code 2", "Invalid"],
+                    ["Code 1", "Valid"]
                 ],
                 "assumptions": ["Assumption 1", "Assumption 2"]
             }
@@ -130,8 +129,8 @@ def test_load_from_yaml(tmp_path):
         "constraints": {
             "column1": {
                 "code": [
-                    ["Use a non-null constraint", "Valid"],
-                    ["Ensure unique values", "Invalid"]
+                    ["Code 1", "Valid"],
+                    ["Code 2", "Invalid"]
                 ],
                 "assumptions": ["Assumption 1", "Assumption 2"]
             }
@@ -148,18 +147,22 @@ def test_load_from_yaml(tmp_path):
     assert "column1" in constraints.constraints
     constraint = constraints.constraints["column1"]
     assert len(constraint.code) == 2
-    assert constraint.code[0].suggestion == "Use a non-null constraint"
+    assert constraint.code[0].suggestion == "Code 1"
     assert constraint.code[0].validity == "Valid"
     assert constraint.assumptions == ["Assumption 1", "Assumption 2"]
 
 
-def test_load_from_local_yaml():
-    project_root = get_project_root()
-    constraints = Constraints()
-    constraints._load_from_yaml(f"{project_root}/tests/resources/constraints/example_cadv_constraints.yaml")
+def test_load_from_local_yaml(constraints_instance, tmp_path):
+    # Save the constraints instance to a temporary YAML file
+    output_path = tmp_path / "constraints.yaml"
+    constraints_instance.save_to_yaml(str(output_path))
 
-    assert "person_home_ownership" in constraints.constraints
-    assert constraints.constraints["person_home_ownership"].code[0].validity == "Valid"
+    # Load the constraints from the saved YAML file
+    loaded_constraints = Constraints.from_yaml(str(output_path))
+
+    # Assert that the loaded constraints match the original instance
+    assert loaded_constraints.to_dict() == constraints_instance.to_dict()
+    assert loaded_constraints.constraints == constraints_instance.constraints
 
 
 def test_from_llm_output():
