@@ -24,6 +24,7 @@ kaggle = "^1.6.17"
 seaborn = "^0.13.2"
 langchain-huggingface = "^0.1.2"
 psutil = "^7.0.0"
+pygments = "^2.19.1"
 
 [tool.poetry.group.test]
 optional = true
