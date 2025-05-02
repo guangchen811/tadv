@@ -9,9 +9,9 @@ from tadv.data_models.constraints import CodeEntry
 
 @dataclass
 class SourceLocation:
-    file: str
     start_line: int
     end_line: int
+    file: str = "" # Optional field for file name
 
 
 @dataclass
