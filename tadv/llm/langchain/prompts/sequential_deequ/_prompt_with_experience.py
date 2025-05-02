@@ -36,6 +36,6 @@ There are some existing experience-based assumption generation rules you can use
 12. If we see a column with unique values, we should consider to suggest a corresponding UNIQUE constraint.
 13. If the ratio of approximate num distinct values in a column is close to the number of records, we should consider to suggest a corresponding UNIQUE constraint.
 
-Please generate validation rules as a JSON object with the column names as keys and a list of assumptions as values.
+Please generate the assumptions as a JSON object with the column names as keys and a list of assumptions in natural language as values.
 e.g., ```{{'column_name_1': ['assumption_1', 'assumption_2', ...], 'column_name_2': ['assumption_1', 'assumption_2', ...], ...}}```
 """)

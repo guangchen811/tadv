@@ -25,6 +25,6 @@ There are some assumptions formulated by deequ, a data validation library, you c
 Notice that deequ only considers data but not the code or the downstream task. You should add, modify, or remove assumptions based on the code and the downstream task to make them more relevant and effective.
 {deequ_assumptions}
 
-Please generate validation rules as a JSON object with the column names as keys and a list of assumptions as values.
+Please generate the assumptions as a JSON object with the column names as keys and a list of assumptions in natural language as values.
 e.g., ```{{'column_name_1': ['assumption_1', 'assumption_2', ...], 'column_name_2': ['assumption_1', 'assumption_2', ...], ...}}```
 """)
