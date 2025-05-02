@@ -14,7 +14,7 @@ def test_from_dict():
             "column1": {
                 "code": [["Code 1", "Valid"], ["Code 2", "Invalid"]],
                 "assumptions": [
-                    {"text": "Assumption 1", "sources": [{"file": "file1.py", "start_line": 1, "end_line": 2}]}
+                    {"text": "Assumption 1", "sources": [{"start_line": 1, "end_line": 2}]}
                 ]
             },
             "column2": {
@@ -30,7 +30,7 @@ def test_from_dict():
     assert len(constraints.constraints) == 2
     assert constraints.constraints["column1"].code[0].suggestion == "Code 1"
     assert constraints.constraints["column1"].assumptions[0].text == "Assumption 1"
-    assert constraints.constraints["column1"].assumptions[0].sources[0].file == "file1.py"
+    assert constraints.constraints["column1"].assumptions[0].sources[0].file == ""
     assert constraints.constraints["column2"].code[0].suggestion == "Use a unique constraint"
     assert constraints.constraints["column2"].assumptions[0].text == "Assumption 2"
     assert constraints.constraints["column2"].assumptions[0].sources[0].file == "file2.py"
@@ -104,7 +104,7 @@ def test_load_from_yaml(constraints_with_sources_instance, tmp_path):
 def test_from_llm_output():
     accessed_columns_list = ["column1", "column2"]
     expectations = {
-        "column1": [{"text": "Assumption 1", "sources": [{"file": "file1.py", "start_line": 1, "end_line": 2}]}],
+        "column1": [{"text": "Assumption 1", "sources": [{"start_line": 1, "end_line": 2}]}],
         "column2": [{"text": "Assumption 2", "sources": [{"file": "file2.py", "start_line": 3, "end_line": 4}]}]
     }
     suggestions = {
@@ -118,7 +118,7 @@ def test_from_llm_output():
     assert len(constraints.constraints) == 2
     assert constraints.constraints["column1"].code[0].suggestion == "Code 1"
     assert constraints.constraints["column1"].assumptions[0].text == "Assumption 1"
-    assert constraints.constraints["column1"].assumptions[0].sources[0].file == "file1.py"
+    assert constraints.constraints["column1"].assumptions[0].sources[0].file == ""
     assert constraints.constraints["column2"].code[0].suggestion == "Code 3"
     assert constraints.constraints["column2"].assumptions[0].text == "Assumption 2"
     assert constraints.constraints["column2"].assumptions[0].sources[0].file == "file2.py"

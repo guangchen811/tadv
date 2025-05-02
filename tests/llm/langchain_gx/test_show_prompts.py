@@ -29,5 +29,7 @@ def test_gx_build_single_chain():
 
     prompts = lc.show_prompts(
         input_variables={"column_desc": column_desc, "script": context}, num_stages=3)
-    for prompt in prompts:
-        print(prompt)
+    for k, v in prompts.items():
+        print(f"Stage {k}:")
+        print(v)
+        print("\n")

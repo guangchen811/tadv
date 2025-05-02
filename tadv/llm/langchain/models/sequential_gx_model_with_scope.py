@@ -7,10 +7,10 @@ from langchain_core.prompts import ChatPromptTemplate
 
 from tadv.llm.langchain.abstract import SequentialLangChainTADV
 from tadv.llm.langchain.llm_backend.entry import get_langchain_model
-from tadv.llm.langchain.prompts.sequential_gx import (COLUMN_ACCESS_DETECTION_PROMPT,
-                                                      CODE_GENERATION_PROMPT, SYSTEM_TASK_DESCRIPTION,
-                                                      DEFAULT_ASSUMPTIONS_PROMPT)
-from tadv.llm.langchain.prompts.sequential_gx import GXConfigManager
+from tadv.llm.langchain.prompts.sequential_gx_model_with_scope import (COLUMN_ACCESS_DETECTION_PROMPT,
+                                                                       CODE_GENERATION_PROMPT, SYSTEM_TASK_DESCRIPTION,
+                                                                       DEFAULT_ASSUMPTIONS_PROMPT)
+from tadv.llm.langchain.prompts.sequential_gx_model_with_scope import GXConfigManager
 from tadv.llm.tasks import SequentialTADVTasks
 
 
