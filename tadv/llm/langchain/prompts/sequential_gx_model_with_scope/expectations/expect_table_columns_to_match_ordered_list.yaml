@@ -1,0 +1,36 @@
+Name:
+  ExpectTableColumnsToMatchOrderedList
+URL:
+  https://greatexpectations.io/expectations/expect_table_columns_to_match_ordered_list/
+Description:
+  Expect the columns in a table to exactly match a specified list. ExpectTableColumnsToMatchOrderedList is a Batch Expectation. BatchExpectations are one of the most common types of Expectation. They are evaluated for an entire Batch, and answer a semantic question about the Batch itself.
+Args:
+  - column_list:
+      type: list of str
+      description: The column names, in the correct order.
+Examples:
+  Sample data:
+    - column: "test"
+      value_set: [ 1.00, 2.33, 4.33 ]
+    - column: "test2"
+      value_set: [ 2, 5, 0 ]
+  Passing case:
+    'ExpectTableColumnsToMatchOrderedList(column_list=["test", "test2"])'
+  Failing case:
+    'ExpectTableColumnsToMatchOrderedList(column_list=["test2", "test", "test3"])'
+Other Parameters:
+  - result_format:
+      type: str or None
+      description: Which output mode to use, BOOLEAN_ONLY, BASIC, COMPLETE, or SUMMARY.
+  - catch_exceptions:
+      type: boolean or None
+      description: If True, then catch exceptions and include them as part of the result object.
+  - meta:
+      type: dict or None
+      description: A JSON-serializable dictionary (nesting allowed) that will be included in the output without modification.
+Notes:
+  None
+Data quality issues:
+  Schema
+Related Expectations:
+  None

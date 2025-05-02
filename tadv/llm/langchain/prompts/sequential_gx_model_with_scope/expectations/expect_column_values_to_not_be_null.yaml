@@ -1,0 +1,39 @@
+Name:
+  ExpectColumnValuesToNotBeNull
+URL:
+  https://greatexpectations.io/expectations/expect_column_values_to_not_be_null/
+Description:
+  Expect the column values to not be null. To be counted as an exception, values must be explicitly null or missing, such as a NULL in PostgreSQL or an np.NaN in pandas. Empty strings don't count as null unless they have been coerced to a null type. ExpectColumnValuesToNotBeNull is a Column Map Expectation. Column Map Expectations are one of the most common types of Expectation. They are evaluated for a single column and ask a yes/no question for every row in that column. Based on the result, they then calculate the percentage of rows that gave a positive answer. If the percentage is high enough, the Expectation considers that data valid.
+Args:
+  - column:
+      type: str
+      description: The column name.
+Examples:
+  Sample data:
+    - column: "test"
+      value_set: [ NaN, True, False ]
+    - column: "test2"
+      value_set: [ "A", NaN, NaN ]
+  Passing case:
+    'ExpectColumnValuesToNotBeNull(column="test",mostly=0.66)'
+  Failing case:
+    'ExpectColumnValuesToNotBeNull(column="test2")'
+Other Parameters:
+  - mostly:
+      type: None or a float between 0 and 1
+      description: Successful if at least `mostly` fraction of values match the expectation. Default 1.
+  - result_format:
+      type: str or None
+      description: Which output mode to use, BOOLEAN_ONLY, BASIC, COMPLETE, or SUMMARY.
+  - catch_exceptions:
+      type: boolean or None
+      description: If True, then catch exceptions and include them as part of the result object.
+  - meta:
+      type: dict or None
+      description: A JSON-serializable dictionary (nesting allowed) that will be included in the output without modification.
+Notes:
+  None
+Data quality issues:
+  Completeness
+Related Expectations:
+  - ExpectColumnValuesToBeNull

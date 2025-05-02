@@ -1,0 +1,51 @@
+Name:
+  ExpectColumnSumToBeBetween
+URL:
+  https://greatexpectations.io/expectations/expect_column_sum_to_be_between/
+Description:
+  Expect the column sum to be between a minimum value and a maximum value. ExpectColumnSumToBeBetween is a Column Aggregate Expectation. Column Aggregate Expectations are one of the most common types of Expectation. They are evaluated for a single column, and produce an aggregate Metric, such as a mean, standard deviation, number of unique values, column type, etc. If that Metric meets the conditions you set, the Expectation considers that data valid.
+Args:
+  - column:
+      type: str
+      description: The column name.
+  - min_value:
+      type: comparable type or None
+      description: The minimal sum allowed.
+  - max_value:
+      type: comparable type or None
+      description: The maximal sum allowed.
+  - strict_min:
+      type: boolean
+      description: If True, the minimal sum must be strictly larger than min_value. default=False.
+  - strict_max:
+      type: boolean
+      description: If True, the maximal sum must be strictly smaller than max_value. default=False.
+Examples:
+  Sample data:
+    - column: "test"
+      value_set: [ 1, 1.3, .8, 2 ]
+    - column: "test2"
+      value_set: [ 1, 7, 2.5, 3 ]
+  Passing case:
+    'ExpectColumnSumToBeBetween(column="test",min_value=2,max_value=6)'
+  Failing case:
+    'ExpectColumnSumToBeBetween(column="test2",min_value=2,max_value=6)'
+Other Parameters:
+  - result_format:
+      type: str or None
+      description: Which output mode to use, BOOLEAN_ONLY, BASIC, COMPLETE, or SUMMARY.
+  - catch_exceptions:
+      type: boolean or None
+      description: If True, then catch exceptions and include them as part of the result object.
+  - meta:
+      type: dict or None
+      description: A JSON-serializable dictionary (nesting allowed) that will be included in the output without modification.
+Notes:
+  - min_value and max_value are both inclusive unless strict_min or strict_max are set to True.
+  - If min_value is None, then max_value is treated as an upper bound
+  - If max_value is None, then min_value is treated as a lower bound
+  - observed_value field in the result object is customized for this expectation to be a list representing the actual column sum
+Data quality issues:
+  Numeric
+Related Expectations:
+  None

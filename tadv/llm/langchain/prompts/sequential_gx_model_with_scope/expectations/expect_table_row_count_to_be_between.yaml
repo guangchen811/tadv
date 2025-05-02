@@ -1,0 +1,45 @@
+Name:
+  ExpectTableRowCountToBeBetween
+URL:
+  https://greatexpectations.io/expectations/expect_table_row_count_to_be_between/
+Description:
+  Expect the number of rows to be between two values. ExpectTableRowCountToBeBetween is a Batch Expectation. BatchExpectations are one of the most common types of Expectation. They are evaluated for an entire Batch, and answer a semantic question about the Batch itself.
+Args:
+  - min_value:
+      type: int or None
+      description: The minimum number of rows, inclusive.
+  - max_value:
+      type: int or None
+      description: The maximum number of rows, inclusive.
+  - strict_min:
+      type: boolean
+      description: If True, the row count must be strictly larger than min_value, default=False.
+  - strict_max:
+      type: boolean
+      description: If True, the row count must be strictly smaller than max_value, default=False.
+Examples:
+  Sample data:
+    - column: "test"
+      value_set: [ 1.00, 2.33, 4.33 ]
+    - column: "test2"
+      value_set: [ 2, 5, 0 ]
+  Passing case:
+    'ExpectTableRowCountToBeBetween(min_value=1,max_value=4)'
+  Failing case:
+    'ExpectTableRowCountToBeBetween(max_value=2)'
+Other Parameters:
+  - result_format:
+      type: str or None
+      description: Which output mode to use, BOOLEAN_ONLY, BASIC, COMPLETE, or SUMMARY.
+  - catch_exceptions:
+      type: boolean or None
+      description: If True, then catch exceptions and include them as part of the result object.
+  - meta:
+      type: dict or None
+      description: A JSON-serializable dictionary (nesting allowed) that will be included in the output without modification.
+Notes:
+  None
+Data quality issues:
+  Volume
+Related Expectations:
+  ExpectTableRowCountToEqual

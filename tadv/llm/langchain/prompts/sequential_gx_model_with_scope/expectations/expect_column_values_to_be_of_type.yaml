@@ -1,0 +1,42 @@
+Name:
+  ExpectColumnValuesToBeOfType
+URL:
+  https://greatexpectations.io/expectations/expect_column_values_to_be_of_type/
+Description:
+  Expect a column to contain values of a specified data type. ExpectColumnValuesToBeOfType is a Column Map Expectation for typed-column backends, and also for Pandas Datasources where the column dtype and provided type_ are unambiguous constraints (any dtype exceptobjector dtype ofobjectwith type_ specified asobject). For Pandas columns with dtype ofobjectExpectColumnValuesToBeOfType will independently check each row's type. Column Map Expectations are one of the most common types of Expectation. They are evaluated for a single column and ask a yes/no question for every row in that column. Based on the result, they then calculate the percentage of rows that gave a positive answer. If the percentage is high enough, the Expectation considers that data valid.
+Args:
+  - column:
+      type: str
+      description: The column name.
+  - type_:
+      type: str
+      description: A string representing the data type that each column should have as entries. Valid types are defined by the current backend implementation and are dynamically loaded.
+Examples:
+  Sample data:
+    - column: "test"
+      value_set: [ "12345", "abcde", "1b3d5" ]
+    - column: "test2"
+      value_set: [ 1, 2, 3 ]
+  Passing case:
+    'ExpectColumnValuesToBeOfType(column="test2",type_="NUMBER")'
+  Failing case:
+    'ExpectColumnValuesToBeOfType(column="test",type_="DOUBLE")'
+Other Parameters:
+  - mostly:
+      type: None or a float between 0 and 1
+      description: Successful if at least `mostly` fraction of values match the expectation. Default 1.
+  - result_format:
+      type: str or None
+      description: Which output mode to use, BOOLEAN_ONLY, BASIC, COMPLETE, or SUMMARY.
+  - catch_exceptions:
+      type: boolean or None
+      description: If True, then catch exceptions and include them as part of the result object.
+  - meta:
+      type: dict or None
+      description: A JSON-serializable dictionary (nesting allowed) that will be included in the output without modification.
+Notes:
+  None
+Data quality issues:
+  Schema
+Related Expectations:
+  None

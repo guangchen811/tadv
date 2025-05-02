@@ -1,0 +1,53 @@
+Name:
+  ExpectColumnValuesToBeBetween
+URL:
+  https://greatexpectations.io/expectations/expect_column_values_to_be_between/
+Description:
+  Expect the column entries to be between a minimum value and a maximum value (inclusive). ExpectColumnValuesToBeBetween is a Column Map Expectation Column Map Expectations are one of the most common types of Expectation. They are evaluated for a single column and ask a yes/no question for every row in that column. Based on the result, they then calculate the percentage of rows that gave a positive answer. If the percentage is high enough, the Expectation considers that data valid.
+Args:
+  - column:
+      type: str
+      description: The column name.
+  - min_value:
+      type: comparable type or None
+      description: The minimum value for a column entry.
+  - max_value:
+      type: comparable type or None
+      description: The maximum value for a column entry.
+  - strict_min:
+      type: boolean
+      description: If True, values must be strictly larger than min_value. Default=False.
+  - strict_max:
+      type: boolean
+      description: If True, values must be strictly smaller than max_value. Default=False.
+Examples:
+  Sample data:
+    - column: "test"
+      value_set: [ 1, 1.3, .8, 2 ]
+    - column: "test2"
+      value_set: [ 1, 7, 2.5, 3 ]
+  Passing case:
+    'ExpectColumnValuesToBeBetween(column="test",min_value=.5,max_value=2)'
+  Failing case:
+    'ExpectColumnValuesToBeBetween(column="test2",min_value=1,max_value=7,strict_min=False,strict_max=True)'
+Other Parameters:
+  - mostly:
+      type: None or a float between 0 and 1
+      description: Successful if at least `mostly` fraction of values match the expectation. Default 1.
+  - result_format:
+      type: str or None
+      description: Which output mode to use, BOOLEAN_ONLY, BASIC, COMPLETE, or SUMMARY.
+  - catch_exceptions:
+      type: boolean or None
+      description: If True, then catch exceptions and include them as part of the result object.
+  - meta:
+      type: dict or None
+      description: A JSON-serializable dictionary (nesting allowed) that will be included in the output without modification.
+Notes:
+  - min_value and max_value are both inclusive unless strict_min or strict_max are set to True.
+  - If min_value is None, then max_value is treated as an upper bound, and there is no minimum value checked.
+  - If max_value is None, then min_value is treated as a lower bound, and there is no maximum value checked.
+Data quality issues:
+  Numeric
+Related Expectations:
+  - ExpectColumnValueLengthsToBeBetween

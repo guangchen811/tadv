@@ -1,0 +1,39 @@
+Name:
+  ExpectColumnToExist
+URL:
+  https://greatexpectations.io/expectations/expect_column_to_exist/
+Description:
+  Checks for the existence of a specified column within a table. ExpectColumnToExist is a Batch Expectation. BatchExpectations are one of the most common types of Expectation. They are evaluated for an entire Batch, and answer a semantic question about the Batch itself.
+Args:
+  - column:
+      type: str
+      description: The column name.
+Examples:
+  Sample data:
+    - column: "test"
+      value_set: [ 1.00, 2.30, 4.33 ]
+    - column: "test2"
+      value_set: [ 2, 5, 0 ]
+  Passing case:
+    'ExpectColumnToExist(column="test",column_index=0)'
+  Failing case:
+    'ExpectColumnToExist(column="missing_column")'
+Other Parameters:
+  - column_index:
+      type: int or None, optional
+      description: If not None, checks the order of the columns. The expectation will fail if the column is not in location column_index (zero-indexed).
+  - result_format:
+      type: str or None
+      description: Which output mode to use, BOOLEAN_ONLY, BASIC, COMPLETE, or SUMMARY.
+  - catch_exceptions:
+      type: boolean or None
+      description: If True, then catch exceptions and include them as part of the result object.
+  - meta:
+      type: dict or None
+      description: A JSON-serializable dictionary (nesting allowed) that will be included in the output without modification.
+Notes:
+  None
+Data quality issues:
+  Schema
+Related Expectations:
+  None

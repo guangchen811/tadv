@@ -19,8 +19,31 @@ class TreeStructuredTADVTasks(Enum):
     """
     Enumeration of tasks for the Tree-Structured TADV strategy.
 
-    Unlike the sequential approach, this strategy uses a branching, hierarchical
-    structure where different types of constraints (e.g., type, completeness, uniqueness,
-    correlation) are extracted in parallel or layered flows.
+    Each enum member represents a node type in the branching constraint generation tree.
+    The structure enables parallel and modular extraction of diverse constraint types
+    across different semantic categories of data.
     """
-    pass
+
+    # Root level
+    COLUMN_CATEGORIZATION = auto()
+
+    # First-level branches (constraint categories)
+    TYPE_CONSTRAINTS = auto()
+    COMPLETENESS_CONSTRAINTS = auto()
+    VALUE_DOMAIN_CONSTRAINTS = auto()
+    UNIQUENESS_CONSTRAINTS = auto()
+    REFERENTIAL_CONSTRAINTS = auto()
+    DISTRIBUTIONAL_CONSTRAINTS = auto()
+    DERIVED_COLUMN_CONSTRAINTS = auto()
+    CONDITIONAL_CONSTRAINTS = auto()
+    SEMANTIC_CODE_CONSTRAINTS = auto()
+
+    # Leaf-level specialization (can be expanded as needed)
+    NUMERIC_RANGE_CONSTRAINTS = auto()
+    CATEGORICAL_MEMBERSHIP_CONSTRAINTS = auto()
+    MISSING_VALUE_THRESHOLD_CONSTRAINTS = auto()
+    DATE_PARSABILITY_CONSTRAINTS = auto()
+    ASSERTION_INFERRED_CONSTRAINTS = auto()
+    CROSS_COLUMN_DEPENDENCY_CONSTRAINTS = auto()
+
+    CODE_GENERATION = auto()

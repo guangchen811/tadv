@@ -1,0 +1,45 @@
+Name:
+  ExpectColumnPairValuesToBeEqual
+URL:
+  https://greatexpectations.io/expectations/expect_column_pair_values_to_be_equal/
+Description:
+  Expect the values in column A to be the same as column B. ExpectColumnPairValuesToBeEqual is a Column Pair Map Expectation. Column Pair Map Expectations are evaluated for a pair of columns and ask a yes/no question about the row-wise relationship between those two columns. Based on the result, they then calculate the percentage of rows that gave a positive answer. If the percentage is high enough, the Expectation considers that data valid.
+Args:
+  - column_A:
+      type: str
+      description: The first column name.
+  - column_B:
+      type: str
+      description: The second column name.
+Examples:
+  Sample data:
+    - column: "test"
+      value_set: [ 1, 2, 4 ]
+    - column: "test2"
+      value_set: [ 1, 2, 4 ]
+  Passing case:
+    'ExpectColumnPairValuesToBeEqual(column_A="test",column_B="test2",mostly=0.5)'
+  Failing case:
+    'ExpectColumnPairValuesToBeEqual(column_A="test",column_B="test2",mostly=1.0)'
+Other Parameters:
+  - ignore_row_if:
+      type: str
+      description: '"both_values_are_missing", "either_value_is_missing", "neither" If specified, sets the condition on which a given row is to be ignored. Default "both_values_are_missing".'
+  - mostly:
+      type: None or a float between 0 and 1
+      description: Successful if at least `mostly` fraction of values match the expectation. Default 1.
+  - result_format:
+      type: str or None
+      description: Which output mode to use, BOOLEAN_ONLY, BASIC, COMPLETE, or SUMMARY.
+  - catch_exceptions:
+      type: boolean or None
+      description: If True, then catch exceptions and include them as part of the result object.
+  - meta:
+      type: dict or None
+      description: A JSON-serializable dictionary (nesting allowed) that will be included in the output without modification.
+Notes:
+  None
+Data quality issues:
+  Validity
+Related Expectations:
+  None

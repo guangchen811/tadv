@@ -1,0 +1,46 @@
+Name:
+  ExpectCompoundColumnsToBeUnique
+URL:
+  https://greatexpectations.io/expectations/expect_compound_columns_to_be_unique/
+Description:
+  Expect the compound columns to be unique. ExpectCompoundColumnsToBeUnique is a Multicolumn Map Expectation. Multicolumn Map Expectations are evaluated for a set of columns and ask a yes/no question about the row-wise relationship between those columns. Based on the result, they then calculate the percentage of rows that gave a positive answer. If the percentage is high enough, the Expectation considers that data valid.
+Args:
+  - column_list:
+      type: tuple or list
+      description: Set of columns to be checked.
+Examples:
+  Sample data:
+    - column: "test"
+      value_set: [ 1, 2, 4 ]
+    - column: "test2"
+      value_set: [ 1, 1, 1 ]
+    - column: "test3"
+      value_set: [ 4, 7, -3 ]
+    - column: "test4"
+      value_set: [ 1, 1, 1 ]
+  Passing case:
+    'ExpectCompoundColumnsToBeUnique(column_list=["test", "test2", "test3"],)'
+  Failing case:
+    'ExpectCompoundColumnsToBeUnique(column_list=["test2", "test4"],)'
+Other Parameters:
+  - ignore_row_if:
+      type: str
+      description: '"all_values_are_missing", "any_value_is_missing", "never" If specified, sets the condition on which a given row is to be ignored. Default "never".'
+  - mostly:
+      type: None or a float between 0 and 1
+      description: Successful if at least `mostly` fraction of values match the expectation. Default 1.
+  - result_format:
+      type: str or None
+      description: Which output mode to use, BOOLEAN_ONLY, BASIC, COMPLETE, or SUMMARY.
+  - catch_exceptions:
+      type: boolean or None
+      description: If True, then catch exceptions and include them as part of the result object.
+  - meta:
+      type: dict or None
+      description: A JSON-serializable dictionary (nesting allowed) that will be included in the output without modification.
+Notes:
+  None
+Data quality issues:
+  Uniqueness
+Related Expectations:
+  None

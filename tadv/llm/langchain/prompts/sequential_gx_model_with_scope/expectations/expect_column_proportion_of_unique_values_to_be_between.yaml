@@ -1,0 +1,51 @@
+Name:
+  ExpectColumnProportionOfUniqueValuesToBeBetween
+URL:
+  https://greatexpectations.io/expectations/expect_column_proportion_of_unique_values_to_be_between/
+Description:
+  Expect the proportion of unique values to be between a minimum value and a maximum value. For example, in a column containing [1, 2, 2, 3, 3, 3, 4, 4, 4, 4], there are 4 unique values and 10 total values for a proportion of 0.4. ExpectColumnProportionOfUniqueValuesToBeBetween is a Column Aggregate Expectation. Column Aggregate Expectations are one of the most common types of Expectation. They are evaluated for a single column, and produce an aggregate Metric, such as a mean, standard deviation, number of unique values, column type, etc. If that Metric meets the conditions you set, the Expectation considers that data valid.
+Args:
+  - column:
+      type: str
+      description: The column name.
+  - min_value:
+      type: float or None
+      description: The minimum proportion of unique values (Proportions are on the range 0 to 1).
+  - max_value:
+      type: float or None
+      description: The maximum proportion of unique values (Proportions are on the range 0 to 1).
+  - strict_min:
+      type: boolean
+      description: If True, the minimum proportion of unique values must be strictly larger than min_value. default=False
+  - strict_max:
+      type: boolean
+      description: If True, the maximum proportion of unique values must be strictly smaller than max_value. default=False
+Examples:
+  Sample data:
+    - column: "test"
+      value_set: [ "aaa", "abb", "acc", "aaa" ]
+    - column: "test2"
+      value_set: [ 1, 1, 1 ,3 ]
+  Passing case:
+    'ExpectColumnProportionOfUniqueValuesToBeBetween(column="test",min_value=0,max_value=0.8)'
+  Failing case:
+    'ExpectColumnProportionOfUniqueValuesToBeBetween(column="test2",min_value=0.3,max_value=0.5,strict_min=False,strict_max=True)'
+Other Parameters:
+  - result_format:
+      type: str or None
+      description: Which output mode to use, BOOLEAN_ONLY, BASIC, COMPLETE, or SUMMARY.
+  - catch_exceptions:
+      type: boolean or None
+      description: If True, then catch exceptions and include them as part of the result object.
+  - meta:
+      type: dict or None
+      description: A JSON-serializable dictionary (nesting allowed) that will be included in the output without modification.
+Notes:
+  - min_value and max_value are both inclusive unless strict_min or strict_max are set to True.
+  - If min_value is None, then max_value is treated as an upper bound
+  - If max_value is None, then min_value is treated as a lower bound
+  - observed_value field in the result object is customized for this expectation to be a float representing the proportion of unique values in the column
+Data quality issues:
+  Uniqueness
+Related Expectations:
+  - ExpectColumnUniqueValueCountToBeBetween

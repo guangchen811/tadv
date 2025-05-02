@@ -1,0 +1,45 @@
+Name:
+  ExpectColumnQuantileValuesToBeBetween
+URL:
+  https://greatexpectations.io/expectations/expect_column_quantile_values_to_be_between/
+Description:
+  Expect the specific provided column quantiles to be between a minimum value and a maximum value. ExpectColumnQuantileValuesToBeBetween is a Column Aggregate Expectation. Column Aggregate Expectations are one of the most common types of Expectation. They are evaluated for a single column, and produce an aggregate Metric, such as a mean, standard deviation, number of unique values, column type, etc. If that Metric meets the conditions you set, the Expectation considers that data valid. ExpectColumnQuantileValuesToBeBetween can be computationally intensive for large datasets.
+Args:
+  - column:
+      type: str
+      description: The column name.
+  - quantile_ranges:
+      type: dictionary with keys 'quantiles' and 'value_ranges'
+      description: Key 'quantiles' is an increasingly ordered list of desired quantile values (floats). Key 'value_ranges' is a list of 2-value lists that specify a lower and upper bound (inclusive) for the corresponding quantile (with [min, max] ordering). The length of the 'quantiles' list and the 'value_ranges' list must be equal.
+  - allow_relative_error:
+      type: boolean or string
+      description: Whether to allow relative error in quantile communications on backends that support or require it.
+Examples:
+  Sample data:
+    - column: "test"
+      value_set: [ 1, 2, 2, 3, 3, 3, 4 ]
+  Passing case:
+    'ExpectColumnQuantileValuesToBeBetween(column="test",quantile_ranges={"quantiles": [0, .333, .667, 1],"value_ranges": [[0,1], [2,3], [3,4], [4,5]]})'
+  Failing case:
+    'ExpectColumnQuantileValuesToBeBetween(column="test2",quantile_ranges={"quantiles": [0, .333, .667, 1],"value_ranges": [[0,1], [2,3], [3,4], [4,5]]})'
+Other Parameters:
+  - result_format:
+      type: str or None
+      description: Which output mode to use, BOOLEAN_ONLY, BASIC, COMPLETE, or SUMMARY.
+  - catch_exceptions:
+      type: boolean or None
+      description: If True, then catch exceptions and include them as part of the result object.
+  - meta:
+      type: dict or None
+      description: A JSON-serializable dictionary (nesting allowed) that will be included in the output without modification.
+Notes:
+  - min_value and max_value are both inclusive.
+  - If min_value is None, then max_value is treated as an upper bound only
+  - If max_value is None, then min_value is treated as a lower bound only
+  - details.success_details field in the result object is customized for this expectation
+Data quality issues:
+  Numeric
+Related Expectations:
+  - ExpectColumnMinToBeBetween
+  - ExpectColumnMaxToBeBetween
+  - ExpectColumnMedianToBeBetween

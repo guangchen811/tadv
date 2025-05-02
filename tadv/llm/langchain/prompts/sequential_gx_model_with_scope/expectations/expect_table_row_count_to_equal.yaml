@@ -1,0 +1,36 @@
+Name:
+  ExpectTableRowCountToEqual
+URL:
+  https://greatexpectations.io/expectations/expect_table_row_count_to_equal/
+Description:
+  Expect the number of rows to equal a value. ExpectTableRowCountToEqual is a Batch Expectation. BatchExpectations are one of the most common types of Expectation. They are evaluated for an entire Batch, and answer a semantic question about the Batch itself.
+Args:
+  - value:
+      type: str
+      description: The expected number of rows.
+Examples:
+  Sample data:
+    - column: "test"
+      value_set: [ 1.00, 2.33, 4.33 ]
+    - column: "test2"
+      value_set: [ 2, 5, 0 ]
+  Passing case:
+    'ExpectTableRowCountToEqual(value=3)'
+  Failing case:
+    'ExpectTableRowCountToEqual(value=2)'
+Other Parameters:
+  - result_format:
+      type: str or None
+      description: Which output mode to use, BOOLEAN_ONLY, BASIC, COMPLETE, or SUMMARY.
+  - catch_exceptions:
+      type: boolean or None
+      description: If True, then catch exceptions and include them as part of the result object.
+  - meta:
+      type: dict or None
+      description: A JSON-serializable dictionary (nesting allowed) that will be included in the output without modification.
+Notes:
+  None
+Data quality issues:
+  Volume
+Related Expectations:
+  - ExpectTableRowCountToBeBetween
