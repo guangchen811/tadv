@@ -1,0 +1,25 @@
+constraints:
+  Test Results:
+    code:
+    - - ExpectColumnValuesToBeInSet(column='Test Results', value_set=['Abnormal',
+        'Normal', 'Inconclusive'])
+      - Invalid
+    assumptions:
+    - text: The 'Test Results' column should only contain the values 'Abnormal', 'Normal',
+        or 'Inconclusive'.
+      sources:
+      - start_line: 24
+        end_line: 24
+      - start_line: 27
+        end_line: 27
+  id:
+    code:
+    - - ExpectColumnValuesToBeUnique(column='id')
+      - Invalid
+    assumptions:
+    - text: The 'id' column should contain unique identifiers for each row.
+      sources:
+      - start_line: 28
+        end_line: 28
+      - start_line: 93
+        end_line: 93

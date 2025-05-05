@@ -1,7 +1,7 @@
 from tadv.data_models import Constraints
-from tadv.dq_manager import DeequDataQualityManager
+from tadv.dq_manager import GreatExpectationsDataQualityManager
 from tadv.inspector.deequ.deequ_inspector_manager import DeequInspectorManager
-from tadv.llm.langchain.models.sequential_deequ_model import SequentialLangChainTADVDeequDialect
+from tadv.llm.langchain.models.sequential_gx_model_with_scope import SequentialLangChainTADVGreatExpectationsDialect
 from tadv.llm.langchain.prompts.downstream_task_prompt import ML_INFERENCE_TASK_DESCRIPTION, \
     SQL_QUERY_TASK_DESCRIPTION, WEB_TASK_DESCRIPTION
 from tadv.utils import get_project_root, get_task_instance
@@ -10,7 +10,7 @@ from workflow.s2_experiments.utils import setup_logger, load_train_and_test_spar
 
 def run_langchain_tadv(dataset_name, downstream_task, model_name, processed_data_label, assumption_generation_trick,
                        single_script_name=None):
-    dq_manager = DeequDataQualityManager()
+    dq_manager = GreatExpectationsDataQualityManager()
     logger = setup_logger(get_project_root() / "logs" / "langchain_tadv.log")
     logger.info(f"Model: {model_name}")
 
@@ -51,7 +51,7 @@ def run_langchain_tadv(dataset_name, downstream_task, model_name, processed_data
         if script_path.stem.startswith("regression") and downstream_task == "ml_inference_classification":
             continue
         processed_data_path = get_project_root() / "data_processed" / dataset_name / downstream_task / f"{processed_data_label}"
-        constraints_result_path = processed_data_path / "constraints" / f"{script_path.stem}" / f"tadv_constraints__{model_name}__{assumption_generation_trick}.yaml"
+        constraints_result_path = processed_data_path / "constraints" / f"{script_path.stem}" / f"tadv_constraints_with_scope__{model_name}__{assumption_generation_trick}.yaml"
         constraints_result_path.parent.mkdir(parents=True, exist_ok=True)
         accessed_columns_result_path = processed_data_path / "accessed_columns" / f"{script_path.stem}" / f"accessed_columns__{model_name}.txt"
         accessed_columns_result_path.parent.mkdir(parents=True, exist_ok=True)
@@ -65,22 +65,15 @@ def run_langchain_tadv(dataset_name, downstream_task, model_name, processed_data
             downstream_task_description = WEB_TASK_DESCRIPTION
         else:
             raise ValueError(f"Invalid downstream task: {downstream_task}")
-        lc = SequentialLangChainTADVDeequDialect(model_name=model_name,
-                                                 downstream_task_description=downstream_task_description,
-                                                 assumption_generation_trick=assumption_generation_trick, logger=logger)
+        lc = SequentialLangChainTADVGreatExpectationsDialect(model_name=model_name,
+                                                             downstream_task_description=downstream_task_description,
+                                                             assumption_generation_trick=assumption_generation_trick,
+                                                             logger=logger)
 
-        if assumption_generation_trick == "with_deequ":
-            deequ_assumptions = dq_manager.inference_constraints_for_spark_df(spark_train, spark_train_df).to_string()
-            input_variables = {
-                "column_desc": column_desc,
-                "script": task_instance.original_script,
-                "deequ_assumptions": deequ_assumptions,
-            }
-        else:
-            input_variables = {
-                "column_desc": column_desc,
-                "script": task_instance.original_script,
-            }
+        input_variables = {
+            "column_desc": column_desc,
+            "script": task_instance.original_script,
+        }
 
         accessed_columns_list, expectations, suggestions = lc.invoke_with_retries(input_variables=input_variables,
                                                                                   num_stages=3, max_retries=5)
@@ -112,7 +105,7 @@ if __name__ == "__main__":
     dataset_name_options = ["playground-series-s4e10", "healthcare_dataset"]
     downstream_task_options = ["ml_inference_classification", "ml_inference_regression", "sql_query",
                                "webpage_generation"]
-    assumption_generation_trick_options = [None, "with_deequ", "with_experience"]
+    assumption_generation_trick_options = [None, "code_with_line_numbers", "code_with_pygments_highlighting"]
     model_name_options = ["gpt-3.5-turbo", "gpt-4o", "gpt-4.5-preview"]
 
 
@@ -124,8 +117,8 @@ if __name__ == "__main__":
         return [options_list[i] for i in indices]
 
 
-    parser = argparse.ArgumentParser(description='Run LangChain CADV')
-    parser.add_argument('--dataset-option', type=str, default="all",
+    parser = argparse.ArgumentParser(description='Run LangChain TADV')
+    parser.add_argument('--dataset-option', type=str, default="0",
                         help='Dataset name. Options: 0: playground-series-s4e10, 1: healthcare_dataset')
     parser.add_argument('--downstream-task-option', type=str, default="all",
                         help='Downstream task. Options: 0: ml_inference_classification, 1: ml_inference_regression, 2: sql_query, 3: webpage_generation')
@@ -134,9 +127,9 @@ if __name__ == "__main__":
     parser.add_argument('--processed-data-label', type=str, default="0",
                         help='Version Label of the processed data')
     parser.add_argument('--assumption-generation-trick-option', type=str, default="all",
-                        help='Assumption generation trick. Options: 0: None, 1: with_deequ, 2: with_experience')
-    parser.add_argument('--single-script-name', type=str, default="",
-                        help='Single script name to run LangChain CADV on. Leave empty to run on all scripts')
+                        help='Assumption generation trick. Options: 0: None, 1: code_with_line_numbers, 2: code_with_pygments_highlighting')
+    parser.add_argument('--single-script-name', type=str, default="classification_0",
+                        help='Single script name to Run LangChain TADV on. Leave empty to run on all scripts')
 
     args = parser.parse_args()
     for dataset_name in parse_multiple_indices(args.dataset_option, dataset_name_options):

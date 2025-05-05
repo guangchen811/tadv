@@ -124,7 +124,7 @@ if __name__ == "__main__":
         return [options_list[i] for i in indices]
 
 
-    parser = argparse.ArgumentParser(description='Run LangChain CADV')
+    parser = argparse.ArgumentParser(description='Run LangChain TADV')
     parser.add_argument('--dataset-option', type=str, default="all",
                         help='Dataset name. Options: 0: playground-series-s4e10, 1: healthcare_dataset')
     parser.add_argument('--downstream-task-option', type=str, default="all",
@@ -136,7 +136,7 @@ if __name__ == "__main__":
     parser.add_argument('--assumption-generation-trick-option', type=str, default="all",
                         help='Assumption generation trick. Options: 0: None, 1: with_deequ, 2: with_experience')
     parser.add_argument('--single-script-name', type=str, default="",
-                        help='Single script name to run LangChain CADV on. Leave empty to run on all scripts')
+                        help='Single script name to Run LangChain TADV on. Leave empty to run on all scripts')
 
     args = parser.parse_args()
     for dataset_name in parse_multiple_indices(args.dataset_option, dataset_name_options):

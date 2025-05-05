@@ -170,7 +170,9 @@ class SequentialLangChainTADVGreatExpectationsDialect(SequentialLangChainTADV):
             }
         )
         if num_stages > 1:
-            if self.assumption_generation_trick is None:
+            if (self.assumption_generation_trick is None
+                    or self.assumption_generation_trick == "code_with_line_numbers"
+                    or self.assumption_generation_trick == "code_with_pygments_highlighting"):
                 expectations = self.expectation_extraction_chain.invoke(
                     {
                         "code_snippet": code_snippet,
@@ -222,9 +224,12 @@ class SequentialLangChainTADVGreatExpectationsDialect(SequentialLangChainTADV):
         num_lines = len(code_snippet.strip().split('\n'))
         if num_lines > 10000:
             raise ValueError("Code snippet has more than 10000 lines.")
-        for i, line in enumerate(code_snippet.strip().split('\n'), start=1):
-            print(f"{i:04}: {line}")
-        return code_snippet
+
+        code_snippet_with_line_numbers = "\n".join(
+            f"{i:04}: {line}" for i, line in enumerate(code_snippet.strip().split('\n'), start=1)
+        )
+
+        return code_snippet_with_line_numbers
 
     @staticmethod
     def _add_pygments_highlighting(code_snippet: str) -> str:

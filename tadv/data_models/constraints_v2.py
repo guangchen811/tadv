@@ -11,7 +11,7 @@ from tadv.data_models.constraints import CodeEntry
 class SourceLocation:
     start_line: int
     end_line: int
-    file: str = "" # Optional field for file name
+    file: str = ""  # Optional field for file name
 
 
 @dataclass
@@ -79,6 +79,9 @@ class ConstraintsWithSources:
     def save_to_yaml(self, output_path: str):
         with open(output_path, "w") as f:
             yaml.dump(self.to_dict(), f)
+
+    def to_yaml(self):
+        return yaml.dump(self.to_dict())
 
     @classmethod
     def from_llm_output(cls, accessed_columns_list, expectations, suggestions, code_list_for_constraints_valid):

@@ -1,0 +1,69 @@
+constraints:
+  cb_person_default_on_file:
+    code:
+    - - ExpectColumnValuesToBeInSet(column='cb_person_default_on_file', value_set=['Y',
+        'N'])
+      - Valid
+    assumptions:
+    - text: The column 'cb_person_default_on_file' should only contain the values
+        'Y' or 'N'.
+      sources:
+      - start_line: 23
+        end_line: 23
+      - start_line: 24
+        end_line: 24
+      - start_line: 28
+        end_line: 28
+  id:
+    code:
+    - - ExpectColumnValuesToBeUnique(column='id')
+      - Valid
+    assumptions:
+    - text: The column 'id' should contain unique values.
+      sources:
+      - start_line: 42
+        end_line: 42
+  loan_amnt:
+    code:
+    - - ExpectColumnValuesToBeGreaterThan(column='loan_amnt', value=0)
+      - Invalid
+    assumptions:
+    - text: The column 'loan_amnt' should contain positive values only.
+      sources:
+      - start_line: 22
+        end_line: 22
+  loan_grade:
+    code:
+    - - ExpectColumnValuesToBeInSet(column='loan_grade', value_set=['A', 'B', 'C',
+        'D', 'E', 'F', 'G'])
+      - Valid
+    assumptions:
+    - text: The column 'loan_grade' should only contain the values 'A', 'B', 'C',
+        'D', 'E', 'F', or 'G'.
+      sources:
+      - start_line: 23
+        end_line: 23
+      - start_line: 24
+        end_line: 24
+      - start_line: 28
+        end_line: 28
+  loan_int_rate:
+    code:
+    - - ExpectColumnValuesToBeGreaterThanOrEqualTo(column='loan_int_rate', value=0)
+      - Invalid
+    assumptions:
+    - text: The column 'loan_int_rate' should contain non-negative values.
+      sources:
+      - start_line: 28
+        end_line: 28
+  loan_status:
+    code:
+    - - ExpectColumnValuesToBeInSet(column='loan_status', value_set=['0', '1'])
+      - Valid
+    assumptions:
+    - text: The column 'loan_status' should only contain the values '0' or '1'.
+      sources:
+      - start_line: 28
+        end_line: 28
+      - start_line: 42
+        end_line: 42
