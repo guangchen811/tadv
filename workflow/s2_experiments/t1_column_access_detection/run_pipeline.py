@@ -17,7 +17,7 @@ task_group_mapping = {
 }
 
 
-def run_langchain_cadv_on_single_model(dataset_name, model_name, processed_data_label):
+def run_langchain_tadv_on_single_model(dataset_name, model_name, processed_data_label):
     dq_manager = DeequDataQualityManager()
 
     original_data_path = get_project_root() / "data" / f"{dataset_name}"
@@ -70,11 +70,11 @@ def run_langchain_cadv_on_single_model(dataset_name, model_name, processed_data_
     return result_each_type
 
 
-def run_langchain_cadv_on_all_models(dataset_name, model_names, processed_data_label):
+def run_langchain_tadv_on_all_models(dataset_name, model_names, processed_data_label):
     result_each_model = {}
     for model_name in model_names:
         print(model_name, end=': ')
-        result_each_model[model_name] = run_langchain_cadv_on_single_model(dataset_name, model_name,
+        result_each_model[model_name] = run_langchain_tadv_on_single_model(dataset_name, model_name,
                                                                            processed_data_label)
     return result_each_model
 
@@ -86,6 +86,6 @@ if __name__ == "__main__":
     processed_data_label = '0'
 
     for dataset_name in dataset_name_options:
-        all_results = run_langchain_cadv_on_all_models(dataset_name=dataset_name,
+        all_results = run_langchain_tadv_on_all_models(dataset_name=dataset_name,
                                                        model_names=model_names,
                                                        processed_data_label=processed_data_label)

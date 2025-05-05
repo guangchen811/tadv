@@ -1,11 +1,10 @@
-from tadv.utils import get_task_instance
-from tadv.utils import get_project_root
 from tadv.data_models import Constraints
-from tadv.inspector.deequ.deequ_inspector_manager import DeequInspectorManager
 from tadv.dq_manager import DeequDataQualityManager
+from tadv.inspector.deequ.deequ_inspector_manager import DeequInspectorManager
 from tadv.llm.langchain.models.sequential_deequ_model import SequentialLangChainTADVDeequDialect
 from tadv.llm.langchain.prompts.downstream_task_prompt import ML_INFERENCE_TASK_DESCRIPTION, \
     SQL_QUERY_TASK_DESCRIPTION, WEB_TASK_DESCRIPTION
+from tadv.utils import get_project_root, get_task_instance
 from workflow.s2_experiments.utils import setup_logger, load_train_and_test_spark_data, load_previous_and_new_spark_data
 
 
@@ -66,7 +65,8 @@ def run_langchain_tadv(dataset_name, downstream_task, model_name, processed_data
             downstream_task_description = WEB_TASK_DESCRIPTION
         else:
             raise ValueError(f"Invalid downstream task: {downstream_task}")
-        lc = SequentialLangChainTADVDeequDialect(model_name=model_name, downstream_task_description=downstream_task_description,
+        lc = SequentialLangChainTADVDeequDialect(model_name=model_name,
+                                                 downstream_task_description=downstream_task_description,
                                                  assumption_generation_trick=assumption_generation_trick, logger=logger)
 
         if assumption_generation_trick == "with_deequ":
