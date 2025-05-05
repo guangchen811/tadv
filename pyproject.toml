@@ -25,6 +25,7 @@ seaborn = "^0.13.2"
 langchain-huggingface = "^0.1.2"
 psutil = "^7.0.0"
 pygments = "^2.19.1"
+gradio = "^5.29.0"
 
 [tool.poetry.group.test]
 optional = true
