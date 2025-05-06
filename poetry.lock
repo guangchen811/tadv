@@ -1459,6 +1459,24 @@ typing-extensions = ">=4.0,<5.0"
 websockets = ">=10.0,<16.0"
 
 [[package]]
+name = "gradio-highlightedcode"
+version = "0.0.4"
+description = "A variant of the Code component that supports highlighting lines of code."
+optional = false
+python-versions = ">=3.8"
+groups = ["main"]
+files = [
+    {file = "gradio_highlightedcode-0.0.4-py3-none-any.whl", hash = "sha256:53271e587505deb1a9168323aae4b5ebce0ab4dd22368caf5fa4f72568a320fc"},
+    {file = "gradio_highlightedcode-0.0.4.tar.gz", hash = "sha256:f550ef60d8fe783208fa3d112dc52cd78f6bc20193322ac8f33e7570e58982e2"},
+]
+
+[package.dependencies]
+gradio = ">=4.0,<6.0"
+
+[package.extras]
+dev = ["build", "twine"]
+
+[[package]]
 name = "great-expectations"
 version = "1.3.13"
 description = "Always know what to expect from your data."
@@ -6284,4 +6302,4 @@ cffi = ["cffi (>=1.11)"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.12,<3.13"
-content-hash = "c7a04df40d3cdc4b085abe80c61a4d4d15cdafdc473f72b8eda2da4ca547684e"
+content-hash = "fa6a285dec02e257292e10cb8859a4174ac81f3c17370cbf22175075698890f1"
