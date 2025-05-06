@@ -1,7 +1,7 @@
 from tadv.data_models import Constraints
 from tadv.dq_manager import GreatExpectationsDataQualityManager
 from tadv.inspector.deequ.deequ_inspector_manager import DeequInspectorManager
-from tadv.llm.langchain.models.sequential_gx_model_with_scope import SequentialLangChainTADVGreatExpectationsDialect
+from tadv.llm.langchain.models.sequential_gx_model_with_scope import SequentialLangChainTADVGreatExpectationsDialectWithSource
 from tadv.llm.langchain.prompts.downstream_task_prompt import ML_INFERENCE_TASK_DESCRIPTION, \
     SQL_QUERY_TASK_DESCRIPTION, WEB_TASK_DESCRIPTION
 from tadv.utils import get_project_root, get_task_instance
@@ -65,10 +65,10 @@ def run_langchain_tadv(dataset_name, downstream_task, model_name, processed_data
             downstream_task_description = WEB_TASK_DESCRIPTION
         else:
             raise ValueError(f"Invalid downstream task: {downstream_task}")
-        lc = SequentialLangChainTADVGreatExpectationsDialect(model_name=model_name,
-                                                             downstream_task_description=downstream_task_description,
-                                                             assumption_generation_trick=assumption_generation_trick,
-                                                             logger=logger)
+        lc = SequentialLangChainTADVGreatExpectationsDialectWithSource(model_name=model_name,
+                                                                       downstream_task_description=downstream_task_description,
+                                                                       assumption_generation_trick=assumption_generation_trick,
+                                                                       logger=logger)
 
         input_variables = {
             "column_desc": column_desc,

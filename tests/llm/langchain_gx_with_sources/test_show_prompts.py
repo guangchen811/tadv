@@ -1,6 +1,6 @@
 from tadv.dq_manager import GreatExpectationsDataQualityManager
 from tadv.inspector.deequ.deequ_inspector_manager import DeequInspectorManager
-from tadv.llm.langchain.models.sequential_gx_model_with_scope import SequentialLangChainTADVGreatExpectationsDialect
+from tadv.llm.langchain.models.sequential_gx_model_with_scope import SequentialLangChainTADVGreatExpectationsDialectWithSource
 from tadv.llm.langchain.prompts.downstream_task_prompt import ML_INFERENCE_TASK_DESCRIPTION
 from tadv.loader import FileLoader
 from tadv.utils import load_dotenv, get_project_root
@@ -24,20 +24,20 @@ def test_gx_build_single_chain():
     AND bloodtype IN ('AB negative', 'B negative')").fetch()
     generate_report(strokes_total, strokes_for_rare_bloodtypes)"""
 
-    lc = SequentialLangChainTADVGreatExpectationsDialect(model_name="gpt-4o-mini",
-                                                         downstream_task_description=ML_INFERENCE_TASK_DESCRIPTION, )
+    lc = SequentialLangChainTADVGreatExpectationsDialectWithSource(model_name="gpt-4o-mini",
+                                                                   downstream_task_description=ML_INFERENCE_TASK_DESCRIPTION, )
     prompts = lc.show_prompts(
         input_variables={"column_desc": column_desc, "script": context}, num_stages=3)
 
-    lc = SequentialLangChainTADVGreatExpectationsDialect(model_name="gpt-4o-mini",
-                                                         downstream_task_description=ML_INFERENCE_TASK_DESCRIPTION,
-                                                         assumption_generation_trick="code_with_line_numbers")
+    lc = SequentialLangChainTADVGreatExpectationsDialectWithSource(model_name="gpt-4o-mini",
+                                                                   downstream_task_description=ML_INFERENCE_TASK_DESCRIPTION,
+                                                                   assumption_generation_trick="code_with_line_numbers")
     prompts = lc.show_prompts(
         input_variables={"column_desc": column_desc, "script": context}, num_stages=3)
 
-    lc = SequentialLangChainTADVGreatExpectationsDialect(model_name="gpt-4o-mini",
-                                                         downstream_task_description=ML_INFERENCE_TASK_DESCRIPTION,
-                                                         assumption_generation_trick="code_with_pygments_highlighting")
+    lc = SequentialLangChainTADVGreatExpectationsDialectWithSource(model_name="gpt-4o-mini",
+                                                                   downstream_task_description=ML_INFERENCE_TASK_DESCRIPTION,
+                                                                   assumption_generation_trick="code_with_pygments_highlighting")
     prompts = lc.show_prompts(
         input_variables={"column_desc": column_desc, "script": context}, num_stages=3)
 

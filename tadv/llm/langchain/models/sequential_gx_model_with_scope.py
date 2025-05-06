@@ -14,7 +14,7 @@ from tadv.llm.langchain.prompts.sequential_gx_model_with_scope import GXConfigMa
 from tadv.llm.tasks import SequentialTADVTasks
 
 
-class SequentialLangChainTADVGreatExpectationsDialect(SequentialLangChainTADV):
+class SequentialLangChainTADVGreatExpectationsDialectWithSource(SequentialLangChainTADV):
     def __init__(self, model_name: str = None, downstream_task_description: str = None,
                  assumption_generation_trick: str = None,
                  expectations_text_descriptions_style: str = "Full",
