@@ -22,6 +22,7 @@ class ExpectationConfig:
     Other_Parameters: Dict[str, GXParameter]
     Data_quality_issues: Optional[str] = None
     Related_Expectations: Optional[List[str]] = field(default_factory=list)
+    ExpectationGroup: Optional[str] = None
 
     @staticmethod
     def from_yaml_file(filepath: str):
@@ -46,7 +47,8 @@ class ExpectationConfig:
             Other_Parameters=parse_parameter_dict(
                 {k: v for param in data["Other Parameters"] for k, v in param.items()}),
             Data_quality_issues=data.get("Data quality issues"),
-            Related_Expectations=data.get("Related Expectations", [])
+            Related_Expectations=data.get("Related Expectations", []),
+            ExpectationGroup=data.get("ExpectationGroup", None)
         )
 
     def to_text_description(self):

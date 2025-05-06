@@ -40,3 +40,5 @@ Data quality issues:
   Schema
 Related Expectations:
   None
+ExpectationGroup:
+  Single-column Categorical

@@ -43,3 +43,5 @@ Data quality issues:
   Volume
 Related Expectations:
   ExpectTableRowCountToEqual
+ExpectationGroup:
+  Volume

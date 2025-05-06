@@ -37,3 +37,5 @@ Data quality issues:
   Uniqueness
 Related Expectations:
   None
+ExpectationGroup:
+  Uniqueness

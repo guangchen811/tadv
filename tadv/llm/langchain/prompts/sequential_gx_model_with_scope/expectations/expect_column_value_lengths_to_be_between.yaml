@@ -51,3 +51,5 @@ Data quality issues:
   Validity
 Related Expectations:
   - ExpectColumnValueLengthsToEqual
+ExpectationGroup:
+  Single-column String

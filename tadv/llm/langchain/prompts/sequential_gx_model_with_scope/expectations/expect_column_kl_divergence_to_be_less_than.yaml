@@ -56,3 +56,5 @@ Data quality issues:
   Numeric
 Related Expectations:
   None
+ExpectationGroup:
+  Multi-column Numeric

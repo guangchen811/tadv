@@ -40,3 +40,5 @@ Data quality issues:
   Validity
 Related Expectations:
   - ExpectColumnValuesToNotBeInSet
+ExpectationGroup:
+  Single-column Categorical

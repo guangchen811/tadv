@@ -37,3 +37,5 @@ Data quality issues:
   Schema
 Related Expectations:
   - ExpectTableColumnCountToEqual
+ExpectationGroup:
+  Schema

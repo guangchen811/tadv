@@ -50,3 +50,5 @@ Data quality issues:
 Related Expectations:
   - ExpectColumnMedianToBeBetween
   - ExpectColumnStdevToBeBetween
+ExpectationGroup:
+  Single-column Numeric

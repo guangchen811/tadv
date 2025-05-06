@@ -46,3 +46,5 @@ Related Expectations:
   - ExpectColumnValuesToMatchLikePattern
   - ExpectColumnValuesToMatchLikePatternList
   - ExpectColumnValuesToNotMatchLikePattern
+ExpectationGroup:
+  Single-column String

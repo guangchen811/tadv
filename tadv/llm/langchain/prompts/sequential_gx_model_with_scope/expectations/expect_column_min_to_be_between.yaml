@@ -49,3 +49,5 @@ Data quality issues:
   Numeric
 Related Expectations:
   - ExpectColumnMaxToBeBetween
+ExpectationGroup:
+  Single-column Numeric

@@ -37,3 +37,5 @@ Data quality issues:
   Completeness
 Related Expectations:
   - ExpectColumnValuesToNotBeNull
+ExpectationGroup:
+  Completeness

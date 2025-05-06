@@ -46,3 +46,5 @@ Data quality issues:
   Validity
 Related Expectations:
   None
+ExpectationGroup:
+  Multi-column Categorical

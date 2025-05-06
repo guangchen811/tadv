@@ -49,3 +49,5 @@ Data quality issues:
   Uniqueness
 Related Expectations:
   - ExpectColumnUniqueValueCountToBeBetween
+ExpectationGroup:
+  Uniqueness

@@ -43,3 +43,5 @@ Related Expectations:
   - ExpectColumnMinToBeBetween
   - ExpectColumnMaxToBeBetween
   - ExpectColumnMedianToBeBetween
+ExpectationGroup:
+  Single-column Numeric

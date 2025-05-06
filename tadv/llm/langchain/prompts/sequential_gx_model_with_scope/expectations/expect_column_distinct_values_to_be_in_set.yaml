@@ -36,3 +36,5 @@ Data quality issues:
 Related Expectations:
   - ExpectColumnDistinctValuesToContainSet
   - ExpectColumnDistinctValuesToEqualSet
+ExpectationGroup:
+  Distinctness

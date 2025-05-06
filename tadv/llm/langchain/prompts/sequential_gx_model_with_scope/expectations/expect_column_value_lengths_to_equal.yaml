@@ -40,3 +40,5 @@ Data quality issues:
   Validity
 Related Expectations:
   - ExpectColumnValueLengthsToBeBetween
+ExpectationGroup:
+  Single-column String

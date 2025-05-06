@@ -34,3 +34,5 @@ Data quality issues:
   Volume
 Related Expectations:
   - ExpectTableRowCountToBeBetween
+ExpectationGroup:
+  Volume
