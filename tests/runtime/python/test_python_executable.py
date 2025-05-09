@@ -2,9 +2,12 @@ import platform
 from pathlib import Path
 from unittest.mock import MagicMock
 
+import pytest
+
 from tadv.runtime_environments import PythonExecutor
 
 
+@pytest.mark.skipif(platform.system() in ["Windows", "Linux"], reason="Skip on non-Windows/Linux systems")
 def test_get_python_executable_unix(monkeypatch):
     executor = PythonExecutor()
 
@@ -21,6 +24,7 @@ def test_get_python_executable_unix(monkeypatch):
     assert executor._get_python_executable() == expected
 
 
+@pytest.mark.skipif(platform.system() in ["Windows", "Linux"], reason="Skip on non-Windows/Linux systems")
 def test_get_python_executable_windows(monkeypatch):
     executor = PythonExecutor()
 
