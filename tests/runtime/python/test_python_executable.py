@@ -1,4 +1,8 @@
+import platform
+from pathlib import Path
 from unittest.mock import MagicMock
+
+from tadv.runtime_environments import PythonExecutor
 
 
 def test_get_python_executable_unix(monkeypatch):
@@ -30,11 +34,6 @@ def test_get_python_executable_windows(monkeypatch):
 
     expected = Path("C:/fake/env/Scripts/python.exe")
     assert executor._get_python_executable() == expected
-
-
-import platform
-from pathlib import Path
-from tadv.runtime_environments import PythonExecutor
 
 
 def test_get_pip_path_unix(monkeypatch):
