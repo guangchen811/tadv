@@ -180,11 +180,14 @@ class SequentialLangChainTADVDeequDialect(SequentialLangChainTADV):
                 break  # Exit the loop if successful
             except OutputParserException as e:
                 attempt += 1
-                self.logger.error(f"Attempt {attempt} failed with error: {e}")
+                if self.logger:
+                    self.logger.error(f"Attempt {attempt} failed with error: {e}")
                 if attempt >= max_retries:
-                    self.logger.error("All retry attempts failed.")
+                    if self.logger:
+                        self.logger.error("All retry attempts failed.")
                     raise e
             except Exception as e:
-                self.logger.error("An unexpected error occurred.")
+                if self.logger:
+                    self.logger.error(f"An unexpected error occurred: {e}")
                 raise e  # Raise any other unexpected exceptions
         return accessed_columns_list, expectations, suggestions
