@@ -24,22 +24,21 @@ def test_create_or_update_environment_behavior(tmp_path, env_exists, env_up_to_d
     if env_exists:
         pyvenv_cfg.write_text("version = 3.11")
 
-    # Mock internal methods
-    executor._create_environment = MagicMock()
-    executor._check_env_against_requirements = MagicMock(return_value=env_up_to_date)
-    executor._update_environment = MagicMock()
+    with patch.object(PythonExecutor, "_create_environment") as mock_create, \
+            patch.object(PythonExecutor, "_check_env_against_requirements", return_value=env_up_to_date) as mock_check, \
+            patch.object(PythonExecutor, "_update_environment") as mock_update:
 
-    executor._create_or_update_environment()
+        executor._create_or_update_environment()
 
-    if should_create:
-        executor._create_environment.assert_called_once()
-    else:
-        executor._create_environment.assert_not_called()
+        if should_create:
+            mock_create.assert_called_once()
+        else:
+            mock_create.assert_not_called()
 
-    if should_update:
-        executor._update_environment.assert_called_once()
-    else:
-        executor._update_environment.assert_not_called()
+        if should_update:
+            mock_update.assert_called_once()
+        else:
+            mock_update.assert_not_called()
 
 
 def test_update_environment_calls_pip_correctly():
