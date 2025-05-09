@@ -8,16 +8,6 @@
 [![CI](https://github.com/guangchen811/tadv/actions/workflows/ci.yml/badge.svg?branch=main)](.github/workflows/ci.yml)
 [![codecov](https://codecov.io/github/guangchen811/tadv/graph/badge.svg?token=UC6B33P10M)](https://codecov.io/github/guangchen811/tadv)
 
-## Table of Contents
-
-- [Experiment Reproduction](#experiment-reproduction)
-- [Project Structure](#project-structure)
-- [Experiment Workflow](#experiment-workflow)
-  - [Step 0: Environment Setup](#step-0-environment-setup)
-  - [Step 1: Preprocessing](#step-1-preprocessing)
-  - [Step 2: Data Validation Rule Generation](#step-2-data-validation-rule-generation)
-  - [Step 3: Evaluation](#step-3-evaluation)
-
 TADV is a framework that leverages Language Models to generate data validation rules based on downstream tasks.
 
 ## Experiment Reproduction
@@ -68,7 +58,8 @@ Please replace `***` with your own API keys.
 
 ### Install the package
 
-We use [poetry](https://python-poetry.org/) to manage the dependencies. The setup has been tested on macOS and Linux systems. If you are not familiar with poetry, we suggest
+We use [poetry](https://python-poetry.org/) to manage the dependencies. The setup has been tested on macOS and Linux
+systems. If you are not familiar with poetry, we suggest
 you install it with [pipx](https://pipx.pypa.io/stable/) first by following
 the [official documentation](https://python-poetry.org/docs/).
 
