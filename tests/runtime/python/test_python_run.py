@@ -1,9 +1,16 @@
+import platform
 from pathlib import Path
+
+import pytest
 
 from tadv.runtime_environments import PythonExecutor
 from tadv.utils import get_project_root
 
 
+import pandas as pd
+import textwrap
+
+@pytest.mark.skipif(platform.system() in ["Windows", "Linux"], reason="Skip on non-Windows/Linux systems")
 def test_runnable(tmp_path):
     executor = PythonExecutor()
     project_root = get_project_root()
@@ -34,6 +41,7 @@ def test_runnable(tmp_path):
     ]
 
 
+@pytest.mark.skipif(platform.system() in ["Windows", "Linux"], reason="Skip on non-Windows/Linux systems")
 def test_python_executor_handles_script_error(tmp_path):
     executor = PythonExecutor()
 
@@ -68,10 +76,8 @@ def test_python_executor_handles_script_error(tmp_path):
     assert not (output_path / "output.csv").exists()
 
 
-import pandas as pd
-import textwrap
 
-
+@pytest.mark.skipif(platform.system() in ["Windows", "Linux"], reason="Skip on non-Windows/Linux systems")
 def test_run_script_executes_python_code_successfully(tmp_path):
     from tadv.runtime_environments import PythonExecutor
 
