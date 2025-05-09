@@ -202,13 +202,13 @@ class SequentialLangChainTADVGreatExpectationsDialectWithSource(SequentialLangCh
                 break  # Exit the loop if successful
             except OutputParserException as e:
                 attempt += 1
-                self.logger.error(f"Attempt {attempt} failed with error: {e}")
+                self.logger.error(f"Attempt {attempt} failed with error: {e}") if self.logger else None
                 if attempt >= max_retries:
-                    self.logger.error("All retry attempts failed.")
+                    self.logger.error("All retry attempts failed.") if self.logger else None
                     raise e
             except Exception as e:
-                self.logger.error("An unexpected error occurred.")
-                self.logger.error(f"Error details: {e}")
+                self.logger.error("An unexpected error occurred.") if self.logger else None
+                self.logger.error(f"Error details: {e}") if self.logger else None
                 raise e  # Raise any other unexpected exceptions
         return accessed_columns_list, expectations, suggestions
 
