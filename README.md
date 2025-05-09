@@ -5,12 +5,15 @@
 [![CI](https://github.com/guangchen811/tadv/actions/workflows/ci.yml/badge.svg?branch=main)](.github/workflows/ci.yml)
 [![codecov](https://codecov.io/github/guangchen811/tadv/graph/badge.svg?token=UC6B33P10M)](https://codecov.io/github/guangchen811/tadv)
 
+> “This version of TADV reproduces the experiments from the paper *Towards Task-aware Data Validation,* presented at the
+> DEEM workshop, SIGMOD 2025.”
+
 TADV is a framework that leverages Language Models (LMs) to generate data validation rules based on downstream task
 context.
 
 ## Experiment Reproduction
 
-Here we provide the codebase for reviewing and reproducing the experiments in the paper.
+Here we provide the quick links to the experiment sections in the paper.
 
 | Section                       | Source Code                                                                                                       |
 |-------------------------------|-------------------------------------------------------------------------------------------------------------------|
