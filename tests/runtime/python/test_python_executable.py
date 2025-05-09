@@ -40,6 +40,7 @@ def test_get_python_executable_windows(monkeypatch):
     assert executor._get_python_executable() == expected
 
 
+@pytest.mark.skipif(platform.system() in ["Windows", "Linux"], reason="Skip on non-Windows/Linux systems")
 def test_get_pip_path_unix(monkeypatch):
     executor = PythonExecutor()
     executor.env_path = Path("/fake/env")
@@ -50,6 +51,7 @@ def test_get_pip_path_unix(monkeypatch):
     assert pip_path == Path("/fake/env/bin/pip")
 
 
+@pytest.mark.skipif(platform.system() in ["Windows", "Linux"], reason="Skip on non-Windows/Linux systems")
 def test_get_pip_path_windows(monkeypatch):
     executor = PythonExecutor()
     executor.env_path = Path("C:/fake/env")
