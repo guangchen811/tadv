@@ -68,12 +68,12 @@ def test_to_string(constraints_with_sources_instance):
         "    assumptions:\n"
         "    - text: Assumption 1\n"
         "      sources:\n"
-        "      - file: file1.py\n"
-        "        start_line: 1\n"
+        "      - start_line: 1\n"
         "        end_line: 2\n"
-        "      - file: file1.py\n"
-        "        start_line: 5\n"
+        "        file: file1.py\n"
+        "      - start_line: 5\n"
         "        end_line: 8\n"
+        "        file: file1.py\n"
     )
     assert constraints_with_sources_instance.to_string() == expected_string
 

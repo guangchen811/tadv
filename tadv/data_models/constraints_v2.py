@@ -104,4 +104,4 @@ class ConstraintsWithSources:
         return cls.from_dict(yaml_dict)
 
     def to_string(self):
-        return yaml.dump(self.to_dict())
+        return yaml.dump(self.to_dict(), sort_keys=False)
