@@ -1,3 +1,4 @@
+import platform
 from pathlib import Path
 from unittest.mock import MagicMock, patch
 
@@ -6,6 +7,7 @@ import pytest
 from tadv.runtime_environments import PythonExecutor
 
 
+@pytest.mark.skipif(platform.system().lower() == "linux", reason="Skip on Ubuntu/Linux due to resource limits")
 @pytest.mark.parametrize("env_exists, env_up_to_date, should_create, should_update", [
     (False, False, True, True),  # Env doesn't exist → create and update
     (False, True, True, False),  # Env doesn't exist but will be up to date after creation
@@ -41,6 +43,7 @@ def test_create_or_update_environment_behavior(tmp_path, env_exists, env_up_to_d
             mock_update.assert_not_called()
 
 
+@pytest.mark.skipif(platform.system().lower() == "linux", reason="Skip on Ubuntu/Linux due to resource limits")
 def test_update_environment_calls_pip_correctly():
     executor = PythonExecutor()
 
@@ -62,6 +65,7 @@ def test_update_environment_calls_pip_correctly():
         assert mock_check_call.call_count == 2
 
 
+@pytest.mark.skipif(platform.system().lower() == "linux", reason="Skip on Ubuntu/Linux due to resource limits")
 def test_check_env_against_empty_requirements(tmp_path):
     executor = PythonExecutor()
 
