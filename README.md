@@ -1,5 +1,5 @@
 > This version of TADV reproduces the experiments from the paper *Towards Task-aware Data Validation,* presented at the
-> DEEM workshop, SIGMOD 2025.
+> DEEM workshop, SIGMOD 2025. Please check the [paper](https://doi.org/10.1145/3735654.3735939) for more details.
 
 # Task-aware Data Validation (TADV)
 
