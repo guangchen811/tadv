@@ -2217,7 +2217,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="SFOc7zGEJPz8-jL5Kzf0" name="polished">
-    <mxGraphModel dx="920" dy="594" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="857" dy="553" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -2272,6 +2272,11 @@
               <mxPoint x="570" y="524" />
               <mxPoint x="570" y="486" />
             </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gjmMZFdDudsp9tgZlrJD-1" value="Text" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="gzRT7vxUGqYB6z1B1Y4A-17">
+          <mxGeometry x="0.1715" y="3" relative="1" as="geometry">
+            <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="gzRT7vxUGqYB6z1B1Y4A-18" value="single column numeric" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;" parent="1" vertex="1">
@@ -2381,7 +2386,7 @@
         <mxCell id="b5qfilhLuKCI9N9bbUQZ-7" value="error message" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;" parent="1" vertex="1">
           <mxGeometry x="456" y="540" width="54" height="27.5" as="geometry" />
         </mxCell>
-        <mxCell id="rvEDmQsZV9xGKomyWekZ-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="gzRT7vxUGqYB6z1B1Y4A-25" target="b5qfilhLuKCI9N9bbUQZ-7">
+        <mxCell id="rvEDmQsZV9xGKomyWekZ-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="gzRT7vxUGqYB6z1B1Y4A-25" target="b5qfilhLuKCI9N9bbUQZ-7" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="414" y="574" as="sourcePoint" />
             <mxPoint x="414" y="600" as="targetPoint" />
@@ -2390,7 +2395,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="rvEDmQsZV9xGKomyWekZ-2" value="relevant constraint type retrival" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="rvEDmQsZV9xGKomyWekZ-1">
+        <mxCell id="rvEDmQsZV9xGKomyWekZ-2" value="relevant constraint type retrival" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="rvEDmQsZV9xGKomyWekZ-1" vertex="1" connectable="0">
           <mxGeometry x="-0.3143" y="1" relative="1" as="geometry">
             <mxPoint x="11" y="14" as="offset" />
           </mxGeometry>

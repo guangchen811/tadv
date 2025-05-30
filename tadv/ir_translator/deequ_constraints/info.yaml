@@ -1,0 +1,284 @@
+hasSize:
+  description: |
+    Creates a constraint that calculates the data frame size and runs the assertion on it.
+  required:
+    - assertion
+  optional: null
+isComplete:
+  description: |
+    Creates a constraint that asserts on a column completion.
+  required:
+    - column
+  optional: null
+hasCompleteness:
+  description: |
+    Creates a constraint that asserts column completion. Uses the given history selection strategy to retrieve historical completeness values on this column from the history provider.
+  required:
+    - column
+    - assertion
+  optional: null
+areComplete:
+  description: |
+    Creates a constraint that asserts completion in combined set of columns.
+  required:
+    - columns
+  optional: null
+haveCompleteness:
+  description: |
+    Creates a constraint that asserts on completed rows in a combined set of columns.
+  required:
+    - columns
+    - assertion
+  optional: null
+areAnyComplete:
+  description: |
+    Creates a constraint that asserts any completion in the combined set of columns.
+  required:
+    - columns
+  optional: null
+haveAnyCompleteness:
+  description: |
+    Creates a constraint that asserts on any completion in the combined set of columns.
+  required:
+    - columns
+    - assertion
+  optional: null
+isUnique:
+  description: |
+    Creates a constraint that asserts on a column uniqueness.
+  required:
+    - column
+  optional: null
+hasUniqueness:
+  description: |
+    Creates a constraint that asserts any uniqueness in a single or combined set of key columns.
+    Uniqueness is the fraction of unique values of a column(s)  values that occur exactly once.
+  required:
+    - columns
+    - assertion
+  optional: null
+hasDistinctness:
+  description: |
+    Creates a constraint on the distinctness in a single or combined set of key columns. Distinctness is the fraction of distinct values of a column(s).
+  required:
+    - columns
+    - assertion
+  optional: null
+hasUniqueValueRatio:
+  description: |
+    Creates a constraint on the unique value ratio in a single or combined set of key columns.
+  required:
+    - columns
+    - assertion
+  optional: null
+hasNumberOfDistinctValues:
+  description: |
+    Creates a constraint that asserts on the number of distinct values a column has.
+  required:
+    - column
+    - assertion
+    - binningUdf
+    - maxBins
+  optional: null
+hasHistogramValues:
+  description: |
+    Creates a constraint that asserts on column's value distribution.
+  required:
+    - column
+    - assertion
+    - binningUdf
+    - maxBins
+  optional: null
+hasEntropy:
+  description: |
+    Creates a constraint that asserts on a column entropy. Entropy is a measure of the level of information contained in a message.
+  required:
+    - column
+    - assertion
+  optional: null
+hasMutualInformation:
+  description: |
+    Creates a constraint that asserts on a mutual information between two columns. Mutual Information describes how much information about one column can be inferred from another.
+  required:
+    - columnA
+    - columnB
+    - assertion
+  optional: null
+hasApproxQuantile:
+  description: |
+    Creates a constraint that asserts on an approximated quantile.
+  required:
+    - column
+    - quantile
+    - assertion
+  optional: null
+hasMinLength:
+  description: |
+    Creates a constraint that asserts on the minimum length of a string datatype column.
+  required:
+    - column
+    - assertion
+  optional: null
+hasMaxLength:
+  description: |
+    Creates a constraint that asserts on the maximum length of a string datatype column.
+  required:
+    - column
+    - assertion
+  optional: null
+hasMin:
+  description: |
+    Creates a constraint that asserts on the minimum of a column. The column is contains either a long, int or float datatype.
+  required:
+    - column
+    - assertion
+  optional: null
+hasMax:
+  description: |
+    Creates a constraint that asserts on the maximum of the column. The column contains either a long, int or float datatype.
+  required:
+    - column
+    - assertion
+  optional: null
+hasMean:
+  description: |
+    Creates a constraint that asserts on the mean of the column.
+  required:
+    - column
+    - assertion
+  optional: null
+hasSum:
+  description: |
+    Creates a constraint that asserts on the sum of the column.
+  required:
+    - column
+    - assertion
+  optional: null
+hasStandardDeviation:
+  description: |
+    Creates a constraint that asserts on the standard deviation of the column.
+  required:
+    - column
+    - assertion
+  optional: null
+hasApproxCountDistinct:
+  description: |
+    Creates a constraint that asserts on the approximate count distinct of the given column.
+  required:
+    - column
+    - assertion
+  optional: null
+hasCorrelation:
+  description: |
+    Creates a constraint that asserts on the pearson correlation between two columns.
+  required:
+    - columnA
+    - columnB
+    - assertion
+  optional: null
+satisfies:
+  description: |
+    Creates a constraint that runs the given condition on the data frame.
+  required:
+    - columnCondition
+    - constraintName
+  optional:
+    - assertion
+hasPattern:
+  description: |
+    Checks for pattern compliance. Given a column name and a regular expression, defines a Check on the average compliance of the column's values to the regular expression.
+  required:
+    - column
+    - pattern
+  optional:
+    - assertion
+    - name
+containsCreditCardNumber:
+  description: |
+    Check to run against the compliance of a column against a Credit Card pattern.
+  required:
+    - column
+  optional:
+    - assertion
+containsEmail:
+  description: |
+    Check to run against the compliance of a column against an e-mail pattern.
+  required:
+    - column
+  optional:
+    - assertion
+containsURL:
+  description: |
+    Check to run against the compliance of a column against an e-mail pattern.
+  required:
+    - column
+  optional:
+    - assertion
+containsSocialSecurityNumber:
+  description: |
+    Check to run against the compliance of a column against the Social security number pattern for the US.
+  required:
+    - column
+  optional:
+    - assertion
+hasDateType:
+  description: |
+    Check to run against the fraction of rows that conform to the given data type.
+  required:
+    - column
+    - datetype
+  optional: assertion
+isNonNegative:
+  description: |
+    Creates a constraint which asserts that a column contains no negative values.
+  required:
+    - column
+  optional:
+    - assertion
+isPositive:
+  description: |
+    Creates a constraint which asserts that a column contains no negative values and is greater than 0.
+  required:
+    - column
+  optional:
+    - assertion
+isLessThan:
+  description: |
+    Asserts that, in each row, the value of columnA is less than the value of columnB.
+  required:
+    - columnA
+    - columnB
+  optional:
+    - assertion
+isLessThanOrEqualTo:
+  description: |
+    Asserts that, in each row, the value of columnA is less than or equal to the value of columnB.
+  required:
+    - columnA
+    - columnB
+  optional:
+    - assertion
+isGreaterThan:
+  description: |
+    Asserts that, in each row, the value of columnA is greater than the value of columnB.
+  required:
+    - columnA
+    - columnB
+  optional:
+    - assertion
+isGreaterThanOrEqualTo:
+  description: |
+    Asserts that, in each row, the value of columnA is greather than or equal to the value of columnB.
+  required:
+    - columnA
+    - columnB
+  optional:
+    - assertion
+isContainedIn:
+  description: |
+    Asserts that every non-null value in a column is contained in a set of predefined values.
+  required:
+    - column
+    - allowed_values
+  optional:
+    - assertion
