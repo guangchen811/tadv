@@ -1,7 +1,7 @@
 Name:
   ExpectColumnDistinctValuesToBeInSet
 URL:
-    https://greatexpectations.io/expectations/expect_column_distinct_values_to_be_in_set/
+  https://greatexpectations.io/expectations/expect_column_distinct_values_to_be_in_set/
 Description:
   Expect the set of distinct column values to be contained by a given set. ExpectColumnDistinctValuesToBeInSet is a Column Aggregate Expectation. Column Aggregate Expectations are one of the most common types of Expectation. They are evaluated for a single column, and produce an aggregate Metric, such as a mean, standard deviation, number of unique values, column type, etc. If that Metric meets the conditions you set, the Expectation considers that data valid.
 Args:

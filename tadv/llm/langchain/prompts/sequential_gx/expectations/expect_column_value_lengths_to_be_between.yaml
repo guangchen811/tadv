@@ -32,8 +32,8 @@ Examples:
     'ExpectColumnValueLengthsToBeBetween(column="test",min_value=5,max_value=5,strict_min=True,strict_max=True)'
 Other Parameters:
   - mostly:
-        type: None or a float between 0 and 1
-        description: Successful if at least `mostly` fraction of values match the expectation. Default 1.
+      type: None or a float between 0 and 1
+      description: Successful if at least `mostly` fraction of values match the expectation. Default 1.
   - result_format:
       type: str or None
       description: Which output mode to use, BOOLEAN_ONLY, BASIC, COMPLETE, or SUMMARY.
