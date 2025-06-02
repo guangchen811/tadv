@@ -4,7 +4,7 @@ from tadv.utils import get_project_root
 
 class GXConfigManager:
     def __init__(self):
-        self.expectations_path = get_project_root() / "tadv" / "llm" / "langchain" / "prompts" / "gx" / "expectations"
+        self.expectations_path = get_project_root() / "tadv" / "ir_translator" / "gx_expectations" / "expectations"
         self.expectations = self._get_expectation_configs()
 
     def _get_expectation_configs(self):
@@ -21,5 +21,5 @@ class GXConfigManager:
 
 if __name__ == "__main__":
     gx_config_manager = GXConfigManager()
-    print(gx_config_manager.get_all_text_descriptions())
+    # print(gx_config_manager.get_all_text_descriptions())
     print(gx_config_manager.get_all_signatures())
