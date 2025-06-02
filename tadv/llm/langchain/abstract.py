@@ -40,7 +40,7 @@ class SequentialLangChainTADV(AbstractLangChainTADV):
         raise NotImplementedError
 
 
-class TreeStructuredLangChainTADV(AbstractLangChainTADV):
+class AbstractPrismaLangChainDV(AbstractLangChainTADV):
     """
     Abstract subclass for LangChain pipelines that execute tasks in a tree-structured manner.
     Designed for workflows like constraint generation that require parallel and modular processing.

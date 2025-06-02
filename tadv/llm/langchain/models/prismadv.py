@@ -5,7 +5,7 @@ from langchain_core.output_parsers import (CommaSeparatedListOutputParser,
                                            JsonOutputParser)
 from langchain_core.prompts import ChatPromptTemplate
 
-from tadv.llm.langchain.abstract import TreeStructuredLangChainTADV
+from tadv.llm.langchain.abstract import AbstractPrismaLangChainDV
 from tadv.llm.langchain.llm_backend.entry import get_langchain_model
 from tadv.llm.langchain.prompts.sequential_gx_model_with_scope import (COLUMN_ACCESS_DETECTION_PROMPT,
                                                                        CODE_GENERATION_PROMPT, SYSTEM_TASK_DESCRIPTION,
@@ -14,7 +14,7 @@ from tadv.llm.langchain.prompts.sequential_gx_model_with_scope import GXConfigMa
 from tadv.llm.tasks import SequentialTADVTasks
 
 
-class TreeStructuredTADVGreatExpectationsDialect(TreeStructuredLangChainTADV):
+class PrismaLangChainDV(AbstractPrismaLangChainDV):
     def __init__(self, model_name: str = None, downstream_task_description: str = None,
                  assumption_generation_trick: str = None,
                  expectations_text_descriptions_style: str = "Full",
