@@ -21,7 +21,7 @@ class DeequConstraint:
         return repr_
 
     @classmethod
-    def from_string(cls, input_str):
+    def from_deequ_code(cls, input_str):
         match = re.match(r"(\w+)\s*\((.*)\)", input_str.strip())
         if not match:
             raise ValueError(f"Invalid input string: {input_str}")
@@ -40,28 +40,32 @@ class DeequConstraint:
             raise ValueError("Parsed expression is not a call")
 
         kwargs = {kw.arg: ast.literal_eval(kw.value) for kw in tree.body.keywords}
-        DeequFunctionManager().get_constraint(constraint_type)
-        required_params = DeequFunctionManager().get_constraint(constraint_type).RequiredArgs.keys()
-        optional_params = DeequFunctionManager().get_constraint(constraint_type).OptionalArgs.keys()
-        missing_params = [param for param in required_params if param not in kwargs]
-        if missing_params:
-            raise ValueError(
-                f"Missing required parameters for '{constraint_type}': {', '.join(missing_params)}"
-            )
-        # Check for unexpected parameters
-        unexpected_params = [param for param in kwargs if param not in required_params and param not in optional_params]
-        if unexpected_params:
-            raise ValueError(
-                f"Unexpected parameters for '{constraint_type}': {', '.join(unexpected_params)}"
-            )
-        
-        return cls(
+        instance = cls(
             constraint_type=constraint_type,
             params=kwargs,
             hint=kwargs.pop('hint', None) if 'hint' in kwargs else None
         )
+        cls.validate_params(instance.params, instance.constraint_type)
+        return instance
 
     def to_deequ_code(self):
         hint_str = f", hint='{self.hint}'" if self.hint else ""
         params_str = ', '.join(f"{k}={repr(v)}" for k, v in self.params.items())
         return f".{self.constraint_type}({params_str}{hint_str})"
+
+    @staticmethod
+    def validate_params(params, constraint_type):
+        DeequFunctionManager().get_constraint(constraint_type)
+        required_params = DeequFunctionManager().get_constraint(constraint_type).RequiredArgs.keys()
+        optional_params = DeequFunctionManager().get_constraint(constraint_type).OptionalArgs.keys()
+        missing_params = [param for param in required_params if param not in params]
+        if missing_params:
+            raise ValueError(
+                f"Missing required parameters for '{constraint_type}': {', '.join(missing_params)}"
+            )
+        # Check for unexpected parameters
+        unexpected_params = [param for param in params if param not in required_params and param not in optional_params]
+        if unexpected_params:
+            raise ValueError(
+                f"Unexpected parameters for '{constraint_type}': {', '.join(unexpected_params)}"
+            )

@@ -5,7 +5,7 @@ from tadv.ir_translator.deequ_constraints.base_constraint import DeequConstraint
 
 def test_valid_constraint_with_hint():
     s = "isComplete(column='age', hint='no nulls')"
-    c = DeequConstraint.from_string(s)
+    c = DeequConstraint.from_deequ_code(s)
     assert c.constraint_type == "isComplete"
     assert c.params["column"] == "age"
     assert c.hint == "no nulls"
@@ -14,7 +14,7 @@ def test_valid_constraint_with_hint():
 
 def test_valid_constraint_with_hint_1():
     s = "isComplete(column=\"age\", hint='no nulls')"
-    c = DeequConstraint.from_string(s)
+    c = DeequConstraint.from_deequ_code(s)
     assert c.constraint_type == "isComplete"
     assert c.params["column"] == "age"
     assert c.hint == "no nulls"
@@ -23,7 +23,7 @@ def test_valid_constraint_with_hint_1():
 
 def test_valid_constraint_without_hint():
     s = "isComplete(column='age')"
-    c = DeequConstraint.from_string(s)
+    c = DeequConstraint.from_deequ_code(s)
     assert c.constraint_type == "isComplete"
     assert c.params["column"] == "age"
     assert c.hint is None
@@ -33,16 +33,16 @@ def test_valid_constraint_without_hint():
 def test_missing_column_raises():
     s = "isComplete(hint='no nulls')"
     with pytest.raises(ValueError):
-        DeequConstraint.from_string(s)
+        DeequConstraint.from_deequ_code(s)
 
 
 def test_unexpected_parameter_raises():
     s = "isComplete(column='age', unexpected_param='value')"
     with pytest.raises(ValueError):
-        DeequConstraint.from_string(s)
+        DeequConstraint.from_deequ_code(s)
 
 
 def test_invalid_format_raises():
     s = "invalid_call"
     with pytest.raises(ValueError, match="Invalid input string"):
-        DeequConstraint.from_string(s)
+        DeequConstraint.from_deequ_code(s)

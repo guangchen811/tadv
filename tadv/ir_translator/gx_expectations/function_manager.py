@@ -29,8 +29,18 @@ class GXFunctionManager:
         signatures_list = [expectation.to_signature() for expectation in self.info]
         return "----------\n".join(signatures_list)
 
+    def get_expectation(self, name: str) -> ExpectationSchema:
+        """
+        Returns the expectation schema for the given expectation type.
+        """
+        for schema in self.info:
+            if schema.Name == name:
+                return schema
+        raise ValueError(f"Expectation type '{name}' not found in info.")
+
 
 if __name__ == "__main__":
     gx_function_manager = GXFunctionManager()
     # print(gx_function_manager.get_all_text_descriptions())
-    print(gx_function_manager.get_all_signatures())
+    # print(gx_function_manager.get_all_signatures())
+    print(gx_function_manager.get_expectation("ExpectColumnMaxToBeBetween"))
