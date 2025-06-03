@@ -7,6 +7,7 @@ from tadv.utils import get_project_root
 class DeequFunctionManager:
     def __init__(self):
         self.info_path = get_project_root() / "tadv" / "ir_translator" / "deequ_constraints" / "info.yaml"
+        self.info = self.get_info()
 
     def get_info(self):
         """

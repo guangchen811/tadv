@@ -20,7 +20,7 @@ class GreatExpectationsDataQualityManager(AbstractDataQualityManager):
         return status
 
     def filter_valid_constraints_on_spark(self, code_list_for_constraints, spark,
-                                 spark_df) -> list:
+                                          spark_df) -> list:
         check_result_on_original_validation_df = self.apply_checks_from_strings_on_spark_df(spark, spark_df,
                                                                                             code_list_for_constraints)
         status_on_original_validation_df = check_result_on_original_validation_df["results"]

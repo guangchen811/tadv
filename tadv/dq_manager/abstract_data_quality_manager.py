@@ -4,8 +4,6 @@ import numpy as np
 import pydeequ
 from pyspark.sql import SparkSession
 
-from tadv.data_models import Constraints
-
 
 class AbstractDataQualityManager(ABC):
     """
@@ -49,5 +47,3 @@ class AbstractDataQualityManager(ABC):
         Build validation results based on the constraints and their statuses.
         """
         raise NotImplementedError("Subclasses should implement this method.")
-
-
