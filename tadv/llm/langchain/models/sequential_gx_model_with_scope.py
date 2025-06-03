@@ -5,12 +5,12 @@ from langchain_core.output_parsers import (CommaSeparatedListOutputParser,
                                            JsonOutputParser)
 from langchain_core.prompts import ChatPromptTemplate
 
+from tadv.ir_translator.gx_expectations.function_manager import GXFunctionManager
 from tadv.llm.langchain.abstract import SequentialLangChainTADV
 from tadv.llm.langchain.llm_backend.entry import get_langchain_model
 from tadv.llm.langchain.prompts.sequential_gx_model_with_scope import (COLUMN_ACCESS_DETECTION_PROMPT,
                                                                        CODE_GENERATION_PROMPT, SYSTEM_TASK_DESCRIPTION,
                                                                        DEFAULT_ASSUMPTIONS_PROMPT)
-from tadv.llm.langchain.prompts.sequential_gx_model_with_scope import GXConfigManager
 from tadv.llm.tasks import SequentialTADVTasks
 
 
@@ -26,8 +26,8 @@ class SequentialLangChainTADVGreatExpectationsDialectWithSource(SequentialLangCh
         self.downstream_task_description = downstream_task_description
         self.assumption_generation_trick = assumption_generation_trick
         self.logger = logger
-        gx_config_manager = GXConfigManager()
-        self.expectations_text_descriptions = gx_config_manager.get_all_text_descriptions()
+        gx_function_manager = GXFunctionManager()
+        self.expectations_text_descriptions = gx_function_manager.get_all_text_descriptions()
         self._build_chain(downstream_task_description, assumption_generation_trick,
                           expectations_text_descriptions_style)
 

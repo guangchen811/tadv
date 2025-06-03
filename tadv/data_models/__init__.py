@@ -1,7 +1,7 @@
 from tadv.data_models.constraints import CodeEntry, ColumnConstraints, Constraints
 from tadv.data_models.constraints_v2 import ColumnConstraintsWithSources, ConstraintsWithSources, SourceLocation, \
     AssumptionEntry
-from tadv.data_models.expectation_config import ExpectationConfig
+from tadv.data_models.expectation_schema import ExpectationSchema
 from tadv.data_models.validated_results import ValidationCodeEntry, ColumnValidationResults, \
     ValidationResults
 
@@ -16,5 +16,5 @@ __all__ = [
     "ValidationCodeEntry",
     "ColumnValidationResults",
     "ValidationResults",
-    "ExpectationConfig"
+    "ExpectationSchema"
 ]

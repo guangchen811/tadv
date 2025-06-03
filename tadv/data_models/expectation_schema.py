@@ -12,7 +12,7 @@ class GXParameter:
 
 
 @dataclass
-class ExpectationConfig:
+class ExpectationSchema:
     Name: str
     URL: str
     Description: str
@@ -34,7 +34,7 @@ class ExpectationConfig:
 
         example_data = data["Examples"]["Sample data"]
         example_df = pd.DataFrame({ex["column"]: ex["value_set"] for ex in example_data})
-        return ExpectationConfig(
+        return ExpectationSchema(
             Name=data.get("Name"),
             URL=data.get("URL"),
             Description=data.get("Description"),

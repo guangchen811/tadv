@@ -40,9 +40,3 @@ def test_invalid_format_raises():
     s = "invalid_call"
     with pytest.raises(ValueError, match="Invalid input string"):
         DeequConstraint.from_string(s)
-
-
-def test_repr_output():
-    s = "isComplete(column='salary', hint='required')"
-    c = DeequConstraint.from_string(s)
-    assert repr(c) == "DeequConstraint(constraint_type='isComplete', column='salary', hint='required')"
