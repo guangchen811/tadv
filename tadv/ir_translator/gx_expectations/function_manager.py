@@ -3,9 +3,20 @@ from tadv.utils import get_project_root
 
 
 class GXFunctionManager:
+    _instance = None
+    _initialized = False
+
+    def __new__(cls):
+        if cls._instance is None:
+            cls._instance = super(GXFunctionManager, cls).__new__(cls)
+        return cls._instance
+
     def __init__(self):
+        if self.__class__._initialized:
+            return
         self.info_path = get_project_root() / "tadv" / "ir_translator" / "gx_expectations" / "expectations"
         self.info = self._get_expectation_info()
+        self.__class__._initialized = True
 
     def _get_expectation_info(self):
         return [ExpectationSchema.from_yaml_file(config_file) for config_file in self.info_path.glob("*.yaml")]

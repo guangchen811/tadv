@@ -32,7 +32,13 @@ def test_valid_constraint_without_hint():
 
 def test_missing_column_raises():
     s = "isComplete(hint='no nulls')"
-    with pytest.raises(ValueError, match="Column must be specified"):
+    with pytest.raises(ValueError):
+        DeequConstraint.from_string(s)
+
+
+def test_unexpected_parameter_raises():
+    s = "isComplete(column='age', unexpected_param='value')"
+    with pytest.raises(ValueError):
         DeequConstraint.from_string(s)
 
 

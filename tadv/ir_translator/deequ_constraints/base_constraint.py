@@ -1,6 +1,8 @@
 import ast
 import re
 
+from tadv.ir_translator.deequ_constraints.function_manager import DeequFunctionManager
+
 
 class DeequConstraint:
     def __init__(self, constraint_type: str, params: dict, hint: str = None):
@@ -38,6 +40,21 @@ class DeequConstraint:
             raise ValueError("Parsed expression is not a call")
 
         kwargs = {kw.arg: ast.literal_eval(kw.value) for kw in tree.body.keywords}
+        DeequFunctionManager().get_constraint(constraint_type)
+        required_params = DeequFunctionManager().get_constraint(constraint_type).RequiredArgs.keys()
+        optional_params = DeequFunctionManager().get_constraint(constraint_type).OptionalArgs.keys()
+        missing_params = [param for param in required_params if param not in kwargs]
+        if missing_params:
+            raise ValueError(
+                f"Missing required parameters for '{constraint_type}': {', '.join(missing_params)}"
+            )
+        # Check for unexpected parameters
+        unexpected_params = [param for param in kwargs if param not in required_params and param not in optional_params]
+        if unexpected_params:
+            raise ValueError(
+                f"Unexpected parameters for '{constraint_type}': {', '.join(unexpected_params)}"
+            )
+        
         return cls(
             constraint_type=constraint_type,
             params=kwargs,
