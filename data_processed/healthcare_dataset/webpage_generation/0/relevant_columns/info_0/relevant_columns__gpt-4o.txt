@@ -1,4 +1,0 @@
-Medical Condition
-Medication
-Hospital
-Age

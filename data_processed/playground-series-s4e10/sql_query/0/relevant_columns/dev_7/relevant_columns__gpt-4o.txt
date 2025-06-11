@@ -1,4 +1,0 @@
-person_home_ownership
-loan_amnt
-loan_int_rate
-loan_status

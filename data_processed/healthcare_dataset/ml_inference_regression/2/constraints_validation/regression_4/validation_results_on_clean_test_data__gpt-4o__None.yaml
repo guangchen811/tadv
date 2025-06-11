@@ -1,7 +1,0 @@
-results:
-  id:
-    code:
-    - - .isComplete('id')
-      - Passed
-    - - .isUnique('id')
-      - Passed

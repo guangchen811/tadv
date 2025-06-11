@@ -1,2 +1,0 @@
-loan_intent
-person_income

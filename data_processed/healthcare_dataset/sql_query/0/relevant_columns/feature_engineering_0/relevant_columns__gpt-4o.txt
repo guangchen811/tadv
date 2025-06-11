@@ -1,3 +1,0 @@
-id
-Date of Admission
-Discharge Date

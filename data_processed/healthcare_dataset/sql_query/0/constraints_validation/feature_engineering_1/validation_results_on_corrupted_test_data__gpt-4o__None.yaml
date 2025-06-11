@@ -1,5 +1,0 @@
-results:
-  id:
-    code:
-    - - .isUnique('id')
-      - Failed

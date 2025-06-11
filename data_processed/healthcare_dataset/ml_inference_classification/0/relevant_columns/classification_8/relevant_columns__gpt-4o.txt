@@ -1,8 +1,0 @@
-id
-Date of Admission
-Discharge Date
-Billing Amount
-Medical Condition
-Medication
-Admission Type
-Test Results

@@ -1,7 +1,0 @@
-Billing Amount
-Date of Admission
-Discharge Date
-Test Results
-Doctor
-Name
-id

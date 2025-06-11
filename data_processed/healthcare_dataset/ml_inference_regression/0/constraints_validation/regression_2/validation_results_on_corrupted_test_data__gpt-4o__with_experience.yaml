@@ -1,9 +1,0 @@
-results:
-  Test Results:
-    code:
-    - - .isContainedIn('Test Results', ['Abnormal', 'Normal', 'Inconclusive'])
-      - Passed
-  id:
-    code:
-    - - .isUnique('id')
-      - Passed

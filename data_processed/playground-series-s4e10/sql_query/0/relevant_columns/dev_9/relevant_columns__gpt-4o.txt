@@ -1,4 +1,0 @@
-person_emp_length
-loan_status
-loan_amnt
-loan_int_rate

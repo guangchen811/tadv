@@ -1,7 +1,0 @@
-results:
-  person_emp_length:
-    code:
-    - - .isComplete('person_emp_length')
-      - Passed
-    - - .isNonNegative('person_emp_length')
-      - Passed
